@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Swagbucks — Play Games & Earn Rewards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1e3a8a" />
+  <meta name="description" content="Complete simple games and surveys, then redeem for cash or gift cards." />
+
+  <style>
+    :root{
+      --bg1:#0f172a; --bg2:#1e3a8a; --bg3:#111827;
+      --accent:#2563eb; --accent2:#1d4ed8; --gold:#facc15; --fine:#9ca3af;
+      --maxw:720px; --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:#fff; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      background:linear-gradient(135deg,var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+      display:flex; align-items:center; justify-content:center; padding:16px;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+      padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
+    }
+
+    /* floating orbs */
+    .orb{position:fixed; border-radius:50%; filter:blur(0.2px); pointer-events:none; opacity:.6}
+    .o1{top:6vh; left:4vw; width:60px; height:60px; background:rgba(59,130,246,.12); animation:pulse 2.2s infinite}
+    .o2{top:16vh; right:6vw; width:48px; height:48px; background:rgba(34,197,94,.10); animation:bounce 2.4s infinite}
+    .o3{bottom:18vh; left:6vw; width:44px; height:44px; background:rgba(37,99,235,.10); animation:ping 2.6s infinite}
+    .o4{bottom:8vh; right:6vw; width:72px; height:72px; background:rgba(234,179,8,.10); animation:pulse 2.2s infinite}
+    @keyframes pulse{0%,100%{opacity:.75}50%{opacity:.35}}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18%)}}
+    @keyframes ping{0%{transform:scale(1);opacity:.8}75%,100%{transform:scale(2);opacity:0}}
+
+    .card{
+      width:100%; max-width:var(--maxw); text-align:center; padding:28px 18px;
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius); box-shadow:0 25px 60px rgba(0,0,0,.35);
+      backdrop-filter:saturate(140%) blur(6px); animation:fadeln .5s ease-out both;
+    }
+    @keyframes fadeln{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)}}
+
+    .logo{width:96px; height:96px; border-radius:20px; object-fit:cover; margin:8px auto 18px; display:block; box-shadow:0 10px 20px rgba(0,0,0,.25)}
+    h1{font-size:28px; line-height:1.15; margin:0 0 8px; letter-spacing:-.01em; font-weight:800}
+    .lead{color:#cbd5e1; margin:0 auto 14px; max-width:48ch; font-size:16px}
+
+    /* progress */
+    .progress{height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; margin:16px auto 18px; max-width:420px}
+    .progress>i{display:block; height:100%; width:84%; background:linear-gradient(90deg,#fde047,#f59e0b);}
+
+    .status{font-size:13px; color:var(--fine); margin-bottom:8px; min-height:18px}
+
+    .steps{list-style:none; padding:0; margin:8px auto 18px; max-width:560px}
+    .steps li{font-weight:700; font-size:15px; color:#e5e7eb; margin:8px 0}
+    .steps em{color:var(--gold); font-style:italic; font-weight:800}
+
+    .cta{
+      appearance:none; border:0; border-radius:12px; padding:16px 22px; cursor:pointer;
+      background:linear-gradient(135deg,var(--accent) 0%, var(--accent2) 100%); color:#fff;
+      font-weight:800; font-size:18px; width:min(420px,90%); box-shadow:0 22px 28px rgba(0,0,0,.28);
+      transition:transform .15s ease, filter .15s ease; animation:pulse 2.2s infinite;
+    }
+    .cta:hover{transform:translateY(-2px)}
+    .cta:active{transform:scale(.98)}
+    .cta:focus-visible{outline:2px solid #93c5fd; outline-offset:3px}
+
+    .fine{color:#9ca3af; font-size:12px; margin-top:10px}
+    .trust{font-size:12px; color:#a3e635; margin-top:10px}
+
+    /* ultra-small width handling inspired by SB2 behavior */
+    @media (max-width:330px){
+      .logo{width:80px;height:80px}
+      h1{font-size:24px}
+      .cta{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating background accents -->
+  <span class="orb o1" aria-hidden="true"></span>
+  <span class="orb o2" aria-hidden="true"></span>
+  <span class="orb o3" aria-hidden="true"></span>
+  <span class="orb o4" aria-hidden="true"></span>
+
+  <main class="card" role="main">
+    <img src="swag.png" alt="Swagbucks logo" class="logo" />
+
+    <h1>Play. Earn. Repeat.</h1
+
+    <div class="progress" aria-label="Setup progress"><i></i></div>
+    <div id="status" class="status" aria-live="polite">Checking device…</div>
+
+    <ol class="steps">
+      <li>1) Tap <strong>Start Earning</strong></li>
+      <li>2) Download & create your account</li>
+      <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
+      <li>4) Request payout anytime & keep playing</li>
+    </ol>
+
+    <button class="cta" aria-label="Start Earning with Swagbucks" id="go">Start Earning</button>
+    <div class="trust">Verified partner • Free to join</div>
+    <p class="fine">Participation required. Rewards depend on completing offers and/or game challenges. Results vary.</p>
+  </main>
+
+  <script>
+    (function(){
+      const link = "https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=126.1-pics-vid-swag1897-bc821";
+      const st = document.getElementById('status');
+      const steps = ["Checking device…","Routing to offer…","Ready!"];
+      let i = 0; const tick = () => { st.textContent = steps[i]; i = Math.min(i+1, steps.length-1); };
+      tick(); setTimeout(tick, 700); setTimeout(tick, 1400);
+
+      document.getElementById('go').addEventListener('click', function(){
+        // Open in a new tab; keep lightweight tracking safe
+        window.open(link, "_blank", "noopener,noreferrer");
+      }, {passive:true});
+    })();
+  </script>
+</body>
+</html>

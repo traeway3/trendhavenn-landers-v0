@@ -33,6 +33,25 @@
             align-items: center;
             justify-content: center;
         }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+
+        .page-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
 
         /* --- Animations --- */
         @keyframes cardFloat {
@@ -43,12 +62,10 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        @keyframes slideDown {
-            from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
-        }
-        @keyframes shine {
-            to { background-position: 200% center; }
+        @keyframes buttonPulse {
+            0% { transform: scale(1); box-shadow: 0 10px 30px #1d1d1f4d, 0 5px 15px #1d1d1f33; }
+            50% { transform: scale(1.02); box-shadow: 0 12px 35px #1d1d1f66, 0 6px 18px #1d1d1f4d; }
+            100% { transform: scale(1); box-shadow: 0 10px 30px #1d1d1f4d, 0 5px 15px #1d1d1f33; }
         }
 
         /* --- Main Card Layout --- */
@@ -57,7 +74,6 @@
             border-radius: 24px;
             padding: 1.5rem;
             position: relative;
-            z-index: 2;
             backdrop-filter: blur(10px);
             border: 1px solid #1d1d1f33;
             max-width: 450px;
@@ -154,7 +170,7 @@
             width: 100%;
             cursor: pointer;
             margin: 1rem auto;
-            box-shadow: 0 10px 30px #1d1d1f4d, 0 5px 15px #1d1d1f33;
+            animation: buttonPulse 2s infinite;
             transition: all 0.3s ease;
             text-decoration: none;
             text-align: center;
@@ -176,7 +192,7 @@
         /* --- Pop-up Notifications --- */
         .notification {
             position: fixed;
-            top: 20px;
+            top: 150px; /* Adjusted position to avoid covering the logo */
             left: 50%;
             transform: translateX(-50%) translateY(-100%);
             background: rgba(255, 255, 255, 0.95);
@@ -220,39 +236,43 @@
             color: #666;
             font-size: 13px;
         }
-
+        
     </style>
 </head>
 <body>
-    <div class="reward-card">
-        <div class="app-logo-container">
-            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBwgnCAcHBwgICAgHCAgIChwICAgICggIChAKCAgIChEICggICggJCggICw0IDAwMDA0QDAwMDAwQEBAEBBAUFBgYGBgYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHB//AABEIAJgAmAMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQIEAwUG/8QAFhABAQEAAAAAAAAAAAAAAAAAAAECEf/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EABkRAQEBAQEBAAAAAAAAAAAAAAABAhESYf/aAAwDAQACEQMRAD8A98AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVpXpFWlelLSAqAAAAAAAAAAAAAAAAAAAAAAAAAAAAVtXTbKrW1dNsAoAAAAAAAAAAAAAAAAAAAAAAAAAAAGsXpFXs3jXjRjRQAoAAAAAAAAAAAAAAAAAAAAAAAAAAVtXTbKrW1dNsAoAAAAAAAAA0i9IqrXpYtQA0i9IqrW1dNsAoAAAAAAAAAAAANBje9rWjGN63WjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//Z" alt="Apple Logo" class="app-logo">
-            <h1 class="main-headline">Claim Your $750 Apple Pay Reward</h1>
-        </div>
-        <div class="amount" id="amount">$750</div>
-        <div class="amount-subtext">deposited to you</div>
-        <div class="instructions-container">
-            <div class="instruction-item">
-                <span class="number">1</span>
-                <span>Click the Button Below</span>
+    <div id="particles-js"></div>
+    <div class="page-container">
+        <div class="reward-card">
+            <div class="app-logo-container">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBwgnCAcHBwgICAgHCAgIChwICAgICggIChAKCAgIChEICggICggJCggICw0IDAwMDA0QDAwMDAwQEBAEBBAUFBgYGBgYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHB//AABEIAJgAmAMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQIEAwUG/8QAFhABAQEAAAAAAAAAAAAAAAAAAAECEf/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EABkRAQEBAQEBAAAAAAAAAAAAAAABAhESYf/aAAwDAQACEQMRAD8A98AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVpXpFWlelLSAqAAAAAAAAAAAAAAAAAAAAAAAAAAAAVtXTbKrW1dNsAoAAAAAAAAAAAAAAAAAAAAAAAAAAAGsXpFXs3jXjRjRQAoAAAAAAAAAAAAAAAAAAAAAAAAAAVtXTbKrW1dNsAoAAAAAAAAA0i9IqrXpYtQA0i9IqrW1dNsAoAAAAAAAAAAAANBje9rWjGN63WjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//Z" alt="Apple Logo" class="app-logo">
+                <h1 class="main-headline">Claim Your $750 Apple Pay Reward</h1>
             </div>
-            <div class="instruction-item">
-                <span class="number">2</span>
-                <span>Enter Your Email & Info</span>
+            <div class="amount" id="amount">$750</div>
+            <div class="amount-subtext">deposited to you</div>
+            <div class="instructions-container">
+                <div class="instruction-item">
+                    <span class="number">1</span>
+                    <span>Click the Button Below</span>
+                </div>
+                <div class="instruction-item">
+                    <span class="number">2</span>
+                    <span>Enter Your Email & Info</span>
+                </div>
+                <div class="instruction-item">
+                    <span class="number">3</span>
+                    <span class="underline">Complete Recommended Deals</span>
+                </div>
+                <div class="instruction-item">
+                    <span class="number">4</span>
+                    <span>Claim Reward & Repeat</span>
+                </div>
             </div>
-            <div class="instruction-item">
-                <span class="number">3</span>
-                <span class="underline">Complete Recommended Deals</span>
+            <div class="button-container">
+                <a href="/api/redirect" id="claimButton" class="claim-button">Get Yours →</a>
             </div>
-            <div class="instruction-item">
-                <span class="number">4</span>
-                <span>Claim Reward & Repeat</span>
-            </div>
-        </div>
-        <div class="button-container">
-            <a href="/api/redirect" id="claimButton" class="claim-button">Get Yours →</a>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         const CTA_BUTTON = document.getElementById('claimButton');
         const NAMES = [
@@ -309,6 +329,41 @@
             };
             window.requestAnimationFrame(step);
         }
+
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#1d1d1f' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#1d1d1f',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
 
         window.addEventListener('load', function() {
             const amountElement = document.getElementById('amount');

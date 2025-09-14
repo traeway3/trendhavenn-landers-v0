@@ -31,7 +31,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px; /* Reduced overall padding to bring content up */
+            padding: 10px;
         }
         
         #particles-js {
@@ -51,7 +51,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            padding-top: 50px; /* Added padding to make space for notifications */
+            padding-top: 50px;
             padding-bottom: 20px;
         }
 
@@ -159,7 +159,7 @@
             text-underline-offset: 2px;
         }
         .step-3-text {
-            white-space: nowrap; /* Ensures this text stays on one line */
+            white-space: nowrap;
         }
 
         /* --- CTA Button --- */
@@ -186,11 +186,15 @@
         }
 
         /* --- Pop-up Notifications --- */
-        .notification {
-            position: fixed;
-            top: 20px; /* Aligned to the very top of the page */
+        .notification-container {
+            position: absolute;
+            top: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        .notification {
+            position: relative;
             background: rgba(255, 255, 255, 0.95);
             padding: 15px 20px;
             border-radius: 12px;
@@ -200,15 +204,17 @@
             gap: 12px;
             font-size: 14px;
             color: #1d1d1f;
-            z-index: 1000;
             backdrop-filter: blur(10px);
             border: 1px solid #1d1d1f33;
-            transition: transform 0.3s ease-out;
             max-width: 320px;
             width: calc(100% - 2rem);
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
         }
         .notification.show {
-            transform: translateX(-50%) translateY(0);
+            transform: translateY(0);
+            opacity: 1;
         }
         .notification-icon {
             width: 24px;
@@ -232,11 +238,11 @@
             color: #666;
             font-size: 13px;
         }
-        
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
+    <div class="notification-container"></div>
     <div class="page-container">
         <div class="reward-card">
             <div class="app-logo-container">
@@ -277,6 +283,7 @@
             'Megan T.', 'Zachary M.', 'Rachel D.', 'Matthew W.', 'Stephanie R.',
             'Joshua K.', 'Danielle P.', 'Nathan S.', 'Kayla L.', 'Jonathan G.'
         ];
+        const NOTIFICATION_CONTAINER = document.querySelector('.notification-container');
 
         function createNameNotification() {
             const notification = document.createElement('div');
@@ -289,7 +296,7 @@
                     <div class="notification-text"><span class="name">${randomName}</span> claimed $750!</div>
                 </div>
             `;
-            document.body.appendChild(notification);
+            NOTIFICATION_CONTAINER.appendChild(notification);
 
             setTimeout(() => {
                 notification.classList.add('show');
@@ -299,7 +306,7 @@
                 notification.classList.remove('show');
                 setTimeout(() => {
                     notification.remove();
-                }, 300);
+                }, 500); // Wait for the transition to finish before removing
             }, 5000);
         }
 
@@ -370,3 +377,8 @@
     </script>
 </body>
 </html>
+}
+
+{
+type: uploaded file
+fileName: image_624c9c.png

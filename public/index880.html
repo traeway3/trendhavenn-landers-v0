@@ -27,11 +27,11 @@
             padding: 20px;
         }
 
-        /* Ensure the body is a flex container for centering the card */
         body {
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 10px; /* Reduced overall padding to bring content up */
         }
         
         #particles-js {
@@ -51,6 +51,8 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            padding-top: 50px; /* Added padding to make space for notifications */
+            padding-bottom: 20px;
         }
 
         /* --- Animations --- */
@@ -156,6 +158,9 @@
             text-decoration-thickness: 2px;
             text-underline-offset: 2px;
         }
+        .step-3-text {
+            white-space: nowrap; /* Ensures this text stays on one line */
+        }
 
         /* --- CTA Button --- */
         .claim-button {
@@ -180,21 +185,12 @@
             box-shadow: 0 15px 40px #1d1d1f66, 0 8px 20px #1d1d1f4d;
         }
 
-        /* --- Trust Badge (simplified) --- */
-        .trust-badge {
-            width: 100%;
-            height: auto;
-            margin-top: 0.5rem;
-            border-radius: 12px;
-            opacity: 0.9;
-        }
-
         /* --- Pop-up Notifications --- */
         .notification {
             position: fixed;
-            top: 150px; /* Adjusted position to avoid covering the logo */
+            top: 20px; /* Aligned to the very top of the page */
             left: 50%;
-            transform: translateX(-50%) translateY(-100%);
+            transform: translateX(-50%) translateY(0);
             background: rgba(255, 255, 255, 0.95);
             padding: 15px 20px;
             border-radius: 12px;
@@ -244,7 +240,7 @@
     <div class="page-container">
         <div class="reward-card">
             <div class="app-logo-container">
-                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBwgnCAcHBwgICAgHCAgIChwICAgICggIChAKCAgIChEICggICggJCggICw0IDAwMDA0QDAwMDAwQEBAEBBAUFBgYGBgYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHBwYHB//AABEIAJgAmAMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQIEAwUG/8QAFhABAQEAAAAAAAAAAAAAAAAAAAECEf/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EABkRAQEBAQEBAAAAAAAAAAAAAAABAhESYf/aAAwDAQACEQMRAD8A98AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVpXpFWlelLSAqAAAAAAAAAAAAAAAAAAAAAAAAAAAAVtXTbKrW1dNsAoAAAAAAAAAAAAAAAAAAAAAAAAAAAGsXpFXs3jXjRjRQAoAAAAAAAAAAAAAAAAAAAAAAAAAAVtXTbKrW1dNsAoAAAAAAAAA0i9IqrXpYtQA0i9IqrW1dNsAoAAAAAAAAAAAANBje9rWjGN63WjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAABpFetWlWlXpQAoAAAAAAAAAAAAAAAAAAAAAAAAAAGjWM7uWjGM7uWjQBmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//Z" alt="Apple Logo" class="app-logo">
+                <img src="/applelogo.jpg" alt="Apple Logo" class="app-logo">
                 <h1 class="main-headline">Claim Your $750 Apple Pay Reward</h1>
             </div>
             <div class="amount" id="amount">$750</div>
@@ -260,7 +256,7 @@
                 </div>
                 <div class="instruction-item">
                     <span class="number">3</span>
-                    <span class="underline">Complete Recommended Deals</span>
+                    <span class="underline step-3-text">Complete Recommended Deals</span>
                 </div>
                 <div class="instruction-item">
                     <span class="number">4</span>

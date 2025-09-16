@@ -27,12 +27,12 @@
     }
 
     /* floating orbs */
-    .orb{position:fixed; border-radius:50%; filter:blur(0.2px); pointer-events:none; opacity:.6}
-    .o1{top:6vh; left:4vw; width:60px; height:60px; background:rgba(59,130,246,.12); animation:pulse 2.2s infinite}
-    .o2{top:16vh; right:6vw; width:48px; height:48px; background:rgba(34,197,94,.10); animation:bounce 2.4s infinite}
-    .o3{bottom:18vh; left:6vw; width:44px; height:44px; background:rgba(37,99,235,.10); animation:ping 2.6s infinite}
-    .o4{bottom:8vh; right:6vw; width:72px; height:72px; background:rgba(234,179,8,.10); animation:pulse 2.2s infinite}
-    @keyframes pulse{0%,100%{opacity:.75}50%{opacity:.35}}
+    .orb{position:fixed; border-radius:50%; filter:blur(0.2px); pointer-events:none; opacity:.8}
+    .o1{top:6vh; left:4vw; width:60px; height:60px; background:rgba(59,130,246,.18); animation:pulse 2.2s infinite}
+    .o2{top:16vh; right:6vw; width:48px; height:48px; background:rgba(34,197,94,.16); animation:bounce 2.4s infinite}
+    .o3{bottom:18vh; left:6vw; width:44px; height:44px; background:rgba(37,99,235,.16); animation:ping 2.6s infinite}
+    .o4{bottom:8vh; right:6vw; width:72px; height:72px; background:rgba(234,179,8,.16); animation:pulse 2.2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18%)}}
     @keyframes ping{0%{transform:scale(1);opacity:.8}75%,100%{transform:scale(2);opacity:0}}
     
@@ -114,7 +114,7 @@
     /* Social Proof Notification */
     .notification {
         position: fixed;
-        top: 20px;
+        top: 50px; /* Adjusted to be higher */
         left: 50%;
         transform: translateX(-50%) translateY(-150%);
         background: rgba(255, 255, 255, 0.95);
@@ -197,11 +197,11 @@
     <button class="cta" aria-label="Start Earning with Swagbucks" id="go">Start Earning Now</button>
     <div class="trust-container">
       <span class="trust-symbol">
-        <img src="https://static.wixstatic.com/media/2b083c_df61b0d2d34a40879c882a937a098801~mv2.png" alt="TikTok verified" class="trust-logo" />
+        <img src="verifiedbytt.png" alt="TikTok verified" class="trust-logo" />
         Verified by TikTok
       </span>
       <span class="trust-symbol">
-        <img src="https://assets.website-files.com/62fe09d5718a3818e38d3876/6308477d9f78326e0339d1b0_verified.svg" alt="Secure" class="trust-logo" />
+        <img src="securelogo.png" alt="Secure" class="trust-logo" />
         Secure & Confidential
       </span>
     </div>

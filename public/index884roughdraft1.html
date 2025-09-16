@@ -23,6 +23,7 @@
       overflow-x:hidden;
       padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
       padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
+      position: relative; /* Added for notifications */
     }
 
     /* floating orbs */
@@ -34,7 +35,7 @@
     @keyframes pulse{0%,100%{opacity:.75}50%{opacity:.35}}
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18%)}}
     @keyframes ping{0%{transform:scale(1);opacity:.8}75%,100%{transform:scale(2);opacity:0}}
-
+    
     .card{
       width:100%; max-width:var(--maxw); text-align:center; padding:28px 18px;
       background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
@@ -56,6 +57,28 @@
     .steps{list-style:none; padding:0; margin:8px auto 18px; max-width:560px}
     .steps li{font-weight:700; font-size:15px; color:#e5e7eb; margin:8px 0}
     .steps em{color:var(--gold); font-style:italic; font-weight:800}
+    
+    .pro-tip {
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 8px;
+        padding: 12px;
+        margin: 12px 0;
+        font-size: 14px;
+        color: #e5e7eb;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .pro-tip .icon {
+        color: var(--gold);
+        font-size: 24px;
+        line-height: 1;
+    }
+    .pro-tip .text {
+        font-weight: 500;
+    }
 
     .cta{
       appearance:none; border:0; border-radius:12px; padding:16px 22px; cursor:pointer;
@@ -67,8 +90,74 @@
     .cta:active{transform:scale(.98)}
     .cta:focus-visible{outline:2px solid #93c5fd; outline-offset:3px}
 
+    .trust-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .trust-container .trust-symbol {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #a3e635;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .trust-container .trust-logo {
+        width: 18px;
+        height: 18px;
+    }
     .fine{color:#9ca3af; font-size:12px; margin-top:10px}
-    .trust{font-size:12px; color:#a3e635; margin-top:10px}
+
+    /* Social Proof Notification */
+    .notification {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-150%);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 15px 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        color: #1d1d1f;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0,0,0,0.1);
+        transition: transform 0.5s ease-out;
+        max-width: 320px;
+        width: calc(100% - 2rem);
+    }
+    .notification.show {
+        transform: translateX(-50%) translateY(0);
+    }
+    .notification-icon {
+        background: #007bff;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+    }
+    .notification-content {
+        flex: 1;
+    }
+    .notification-title {
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+    .notification-text {
+        color: #666;
+        font-size: 13px;
+    }
 
     /* ultra-small width handling inspired by SB2 behavior */
     @media (max-width:330px){
@@ -79,7 +168,6 @@
   </style>
 </head>
 <body>
-  <!-- Floating background accents -->
   <span class="orb o1" aria-hidden="true"></span>
   <span class="orb o2" aria-hidden="true"></span>
   <span class="orb o3" aria-hidden="true"></span>
@@ -88,35 +176,94 @@
   <main class="card" role="main">
     <img src="swag.png" alt="Swagbucks logo" class="logo" />
 
-    <h1>Play. Earn. Repeat.</h1
+    <h1>Start Earning up to $250/Day!</h1>
 
     <div class="progress" aria-label="Setup progress"><i></i></div>
     <div id="status" class="status" aria-live="polite">Checking device…</div>
 
     <ol class="steps">
-      <li>1) Tap <strong>Start Earning</strong></li>
+      <li>1) Tap <strong>Start Earning Now</strong></li>
       <li>2) Download & create your account</li>
-      <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
+      <li>
+        3) Complete at least **2-5** games to start earning
+        <div class="pro-tip">
+            <span class="icon">💡</span>
+            <span class="text">Pro Tip: All in-app purchases are **fully reimbursed** & multiplies your earnings!</span>
+        </div>
+      </li>
       <li>4) Request payout anytime & keep playing</li>
     </ol>
-
-    <button class="cta" aria-label="Start Earning with Swagbucks" id="go">Start Earning</button>
-    <div class="trust">Verified partner • Free to join</div>
+    
+    <button class="cta" aria-label="Start Earning with Swagbucks" id="go">Start Earning Now</button>
+    <div class="trust-container">
+      <span class="trust-symbol">
+        <img src="https://static.wixstatic.com/media/2b083c_df61b0d2d34a40879c882a937a098801~mv2.png" alt="TikTok verified" class="trust-logo" />
+        Verified by TikTok
+      </span>
+      <span class="trust-symbol">
+        <img src="https://assets.website-files.com/62fe09d5718a3818e38d3876/6308477d9f78326e0339d1b0_verified.svg" alt="Secure" class="trust-logo" />
+        Secure & Confidential
+      </span>
+    </div>
     <p class="fine">Participation required. Rewards depend on completing offers and/or game challenges. Results vary.</p>
   </main>
 
   <script>
     (function(){
-      const link = "https://offerlnks.com/aff_c?offer_id=1897&aff_id=27696&source=130-new-clothes-swag1897-bc861";
-      const st = document.getElementById('status');
-      const steps = ["Checking device…","Routing to offer…","Ready!"];
-      let i = 0; const tick = () => { st.textContent = steps[i]; i = Math.min(i+1, steps.length-1); };
-      tick(); setTimeout(tick, 700); setTimeout(tick, 1400);
+      const redirectLink = "/api/redirect";
+      const statusElement = document.getElementById('status');
+      const steps = ["Checking device…", "Routing to offer…", "Ready to start!"];
+      let stepIndex = 0;
+      const tick = () => { 
+        statusElement.textContent = steps[stepIndex]; 
+        stepIndex = Math.min(stepIndex + 1, steps.length - 1); 
+      };
+      tick(); 
+      setTimeout(tick, 700); 
+      setTimeout(tick, 1400);
 
-      document.getElementById('go').addEventListener('click', function(){
-        // Open in a new tab; keep lightweight tracking safe
-        window.open(link, "_blank", "noopener,noreferrer");
+      const CTA_BUTTON = document.getElementById('go');
+      CTA_BUTTON.addEventListener('click', function(){
+        window.open(redirectLink, "_blank", "noopener,noreferrer");
       }, {passive:true});
+
+      // Social proof notification
+      const NAMES = [
+          'Abigail G.', 'Jessica K.', 'Michael R.', 'Sarah M.', 'John D.',
+          'Tyler K.', 'Lauren P.', 'Justin S.', 'Brittany L.', 'Andrew G.'
+      ];
+      function createNotification() {
+          const notification = document.createElement('div');
+          notification.className = 'notification';
+          const randomName = NAMES[Math.floor(Math.random() * NAMES.length)];
+          notification.innerHTML = `
+              <div class="notification-icon">💰</div>
+              <div class="notification-content">
+                  <div class="notification-title">New Reward Claimed</div>
+                  <div class="notification-text"><span class="name">${randomName}</span> just earned $250!</div>
+              </div>
+          `;
+          document.body.appendChild(notification);
+          setTimeout(() => {
+              notification.classList.add('show');
+          }, 100);
+          setTimeout(() => {
+              notification.classList.remove('show');
+              setTimeout(() => {
+                  notification.remove();
+              }, 500);
+          }, 5000);
+      }
+      function startNotifications() {
+          setTimeout(() => {
+              createNotification();
+              setInterval(() => {
+                  createNotification();
+              }, 10000 + Math.random() * 5000);
+          }, 3000);
+      }
+      window.addEventListener('load', startNotifications);
+
     })();
   </script>
 </body>

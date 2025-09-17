@@ -90,17 +90,6 @@
             text-align: center;
         }
 
-        /* Added primary and secondary sections for better mobile layout */
-        .primary-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .secondary-section {
-            border-top: 1px solid #1d1d1f1a;
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
         /* --- Header & Logo --- */
         .app-logo-container {
             margin-bottom: 1rem;
@@ -131,23 +120,8 @@
             margin-bottom: 1rem;
             line-height: 1.3;
         }
-        .amount {
-            /* Reduced amount size for better mobile viewport usage */
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #1d1d1f;
-            animation: amountPulse 2s infinite;
-            margin-bottom: 0.25rem;
-        }
-        .amount-subtext {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: #1d1d1f;
-            opacity: 0.8;
-        }
 
-        /* Updated countdown timer to neutral colors that match the theme */
+        /* --- Countdown Timer --- */
         .countdown-container {
             background: rgba(29, 29, 31, 0.05);
             border: 1px solid rgba(29, 29, 31, 0.1);
@@ -170,27 +144,24 @@
             color: #1d1d1f;
         }
 
-        .security-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #f0f9ff;
-            border: 1px solid #0ea5e9;
-            border-radius: 12px;
-            padding: 0.75rem;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #0369a1;
+        .amount {
+            /* Reduced amount size for better mobile viewport usage */
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            animation: amountPulse 2s infinite;
+            margin-bottom: 0.25rem;
         }
-        .security-icon {
-            width: 20px;
-            height: 20px;
+        .amount-subtext {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            opacity: 0.8;
         }
 
-        /* Added compact security badge for CTA area */
-        .security-badge-compact {
+        /* --- Security Badge --- */
+        .security-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -204,30 +175,29 @@
             color: #0369a1;
         }
 
-        .security-badge-compact .security-icon {
+        .security-icon {
             width: 16px;
             height: 16px;
         }
 
         /* --- Instructions & Steps --- */
         .instructions-container {
-            margin: 1rem auto;
+            margin: 1.5rem auto 1rem;
             padding: 1rem;
             background: #1d1d1f0d;
             border-radius: 16px;
             border: 1px solid #1d1d1f1a;
         }
-        /* Reverted to centered layout for visual harmony with the card design */
+        
         .instruction-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            padding: 16px 0;
+            gap: 12px;
+            padding: 12px 0;
             font-size: 0.95rem;
             color: #1d1d1f;
             font-weight: 500;
-            text-align: center;
+            text-align: left;
         }
         .instruction-item:not(:last-child) {
             border-bottom: 1px solid #1d1d1f0d;
@@ -245,12 +215,11 @@
             font-weight: 700;
             box-shadow: 0 2px 8px rgba(29, 29, 31, 0.2);
             flex-shrink: 0;
-            margin-bottom: 4px;
         }
         /* Simplified instruction text layout for better readability */
         .instruction-text {
             line-height: 1.4;
-            max-width: 280px;
+            flex: 1;
         }
         .emphasis {
             font-weight: 700;
@@ -341,72 +310,60 @@
     <div id="particles-js"></div>
     <div class="page-container">
         <div class="reward-card">
-            <!-- Primary section with essential elements above the fold -->
-            <div class="primary-section">
-                <div class="app-logo-container">
-                    <img src="/placeholder.svg?height=60&width=80" alt="Apple Pay Logo" class="app-logo">
-                    <h1 class="main-headline">Unlock Your Apple Pay Reward</h1>
-                    <p class="sub-headline">Earn up to $750 by completing simple deals and offers</p>
-                </div>
-                
-                <div class="amount" id="amount">$750</div>
-                <div class="amount-subtext">potential reward</div>
-                
-                <!-- Compact security badge placed near CTA for immediate trust -->
-                <div class="security-badge-compact">
-                    <svg class="security-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                    </svg>
-                    Secure & Confidential
-                </div>
-                
-                <!-- CTA button moved to primary section for above-the-fold visibility -->
-                <div class="button-container">
-                    <a href="/api/redirect" id="claimButton" class="claim-button">Start Earning Now →</a>
-                </div>
+            <!-- Unified layout following optimal conversion flow: Headline > Urgency > Reward > CTA > Instructions -->
+            <div class="app-logo-container">
+                <img src="/placeholder.svg?height=60&width=80" alt="Apple Pay Logo" class="app-logo">
+                <h1 class="main-headline">Unlock Your Apple Pay Reward</h1>
+                <p class="sub-headline">Earn up to $750 by completing simple deals and offers</p>
+            </div>
+            
+            <!-- Moved countdown timer before reward amount to create urgency -->
+            <div class="countdown-container">
+                <div class="countdown-title">⏰ Limited Time Offer Expires In:</div>
+                <div class="countdown-timer" id="countdown">23:59:45</div>
+            </div>
+            
+            <div class="amount" id="amount">$750</div>
+            <div class="amount-subtext">potential reward</div>
+            
+            <!-- Single security badge placed near CTA for trust -->
+            <div class="security-badge">
+                <svg class="security-icon" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+                Secure & Confidential
+            </div>
+            
+            <!-- CTA button positioned after urgency and reward for optimal conversion -->
+            <div class="button-container">
+                <a href="/api/redirect" id="claimButton" class="claim-button">Start Earning Now →</a>
             </div>
 
-            <!-- Secondary section with supporting information below the fold -->
-            <div class="secondary-section">
-                <div class="countdown-container">
-                    <div class="countdown-title">⏰ Limited Time Offer Expires In:</div>
-                    <div class="countdown-timer" id="countdown">23:59:45</div>
-                </div>
-                
-                <div class="instructions-container">
-                    <div class="instruction-item">
-                        <span class="number">1</span>
-                        <div class="instruction-text">
-                            <!-- Updated text to reference button above -->
-                            <span class="emphasis">Click the Button</span> above to get started
-                        </div>
-                    </div>
-                    <div class="instruction-item">
-                        <span class="number">2</span>
-                        <div class="instruction-text">
-                            <span class="emphasis">Enter Your Email</span> and basic information
-                        </div>
-                    </div>
-                    <div class="instruction-item">
-                        <span class="number">3</span>
-                        <div class="instruction-text">
-                            <span class="emphasis underline">Complete Deals</span> from our trusted partners
-                        </div>
-                    </div>
-                    <div class="instruction-item">
-                        <span class="number">4</span>
-                        <div class="instruction-text">
-                            <span class="emphasis">Claim Your Reward</span> and repeat for more earnings
-                        </div>
+            <!-- Instructions moved below CTA with improved horizontal layout -->
+            <div class="instructions-container">
+                <div class="instruction-item">
+                    <span class="number">1</span>
+                    <div class="instruction-text">
+                        <span class="emphasis">Click the Button</span> above to get started
                     </div>
                 </div>
-
-                <!-- Full security badge repeated for users who scroll -->
-                <div class="security-badge">
-                    <svg class="security-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                    </svg>
-                    Secure & Confidential Process
+                <div class="instruction-item">
+                    <span class="number">2</span>
+                    <div class="instruction-text">
+                        <span class="emphasis">Enter Your Email</span> and basic information
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <span class="number">3</span>
+                    <div class="instruction-text">
+                        <span class="emphasis underline">Complete Deals</span> from our trusted partners
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <span class="number">4</span>
+                    <div class="instruction-text">
+                        <span class="emphasis">Claim Your Reward</span> and repeat for more earnings
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { DM_Sans } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import { Analytics } from '@vercel/analytics/react';
 
 const dmSans = DM_Sans({
   subsets: ["latin"],

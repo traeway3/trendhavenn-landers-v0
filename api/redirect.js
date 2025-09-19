@@ -1,5 +1,5 @@
 // This is your affiliate link. It is securely stored on your server and not exposed to the public.
-const AFFILIATE_LINK = "https://rewarduplevel.com/aff_c?offer_id=2594&aff_id=27696&source=index88718";
+const AFFILIATE_LINK = "https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=index887";
 
 // This function handles the redirect when a user visits the /api/redirect endpoint.
 export default function (req, res) {

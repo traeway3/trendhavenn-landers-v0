@@ -19,157 +19,211 @@
     html,body{height:100%}
     body{
       margin:0; color:#fff; font-family:'Poppins', ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      background:linear-gradient(to bottom, #581c87 0%, #0f172a 100%);
-      display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
-      overflow-x:hidden; padding-bottom:30px;
+      background:linear-gradient(135deg,var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+      display:flex; align-items:center; justify-content:center; padding:16px;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+      padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
     }
-    .main{
-      width:100%; max-width:var(--maxw);
-      display:flex; flex-direction:column; align-items:center;
-      position:relative; z-index:1;
+
+    /* floating orbs */
+    .orb{position:fixed; border-radius:50%; filter:blur(0.2px); pointer-events:none; opacity:.6}
+    .o1{top:6vh; left:4vw; width:60px; height:60px; background:rgba(107, 44, 145, .12); animation:pulse 2.2s infinite}
+    .o2{top:16vh; right:6vw; width:48px; height:48px; background:rgba(34,197,94,.10); animation:bounce 2.4s infinite}
+    .o3{bottom:18vh; left:6vw; width:44px; height:44px; background:rgba(59,130,246,.10); animation:ping 2.6s infinite}
+    .o4{bottom:8vh; right:6vw; width:72px; height:72px; background:rgba(234,179,8,.10); animation:pulse 2.2s infinite}
+    @keyframes pulse{0%,100%{opacity:.75}50%{opacity:.35}}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18%)}}
+    @keyframes ping{0%{transform:scale(1);opacity:.8}75%,100%{transform:scale(2);opacity:0}}
+
+    .card{
+      width:100%; max-width:var(--maxw); text-align:center; padding:28px 18px;
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius); box-shadow:0 25px 60px rgba(0,0,0,.35);
+      backdrop-filter:saturate(140%) blur(6px); animation:fadeIn .5s ease-out both;
     }
-    .head{
-      width:100%; padding:20px 20px 0; display:flex; flex-direction:column; align-items:center; text-align:center;
+    @keyframes fadeIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)}}
+
+    .logo{width:96px; height:96px; border-radius:20px; object-fit:cover; margin:8px auto 18px; display:block; box-shadow:0 10px 20px rgba(0,0,0,.25)}
+    h1{font-size:28px; line-height:1.15; margin:0 0 8px; letter-spacing:-.01em; font-weight:800}
+    .lead{color:#cbd5e1; margin:0 auto 14px; max-width:48ch; font-size:16px}
+
+    /* progress */
+    .progress{height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; margin:16px auto 18px; max-width:420px}
+    .progress>i{display:block; height:100%; width:84%; background:linear-gradient(90deg,#fde047,#f59e0b);}
+    
+    .status{font-size:13px; color:var(--fine); margin-bottom:8px; min-height:18px}
+    
+    .steps{list-style:none; padding:0; margin:8px auto 18px; max-width:560px}
+    .steps li{font-weight:700; font-size:15px; color:#e5e7eb; margin:8px 0}
+    .steps em{color:var(--gold); font-style:italic; font-weight:800}
+
+    .cta {
+        appearance: none;
+        border: 0;
+        border-radius: 12px;
+        padding: 16px 22px;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+        color: #fff;
+        font-weight: 800;
+        font-size: 18px;
+        width: min(420px, 90%);
+        box-shadow: 0 22px 28px rgba(0,0,0,.28);
+        transition: transform .15s ease, filter .15s ease;
     }
-    .head h1{
-      font-size:3.5em; font-weight:800; text-shadow:2px 2px 4px rgba(0,0,0,.3); line-height:1.1; margin:0 0 10px;
-      background:linear-gradient(to right, #fff, #facc15); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    .cta:hover{transform:translateY(-2px)}
+    .cta:active{transform:scale(.98)}
+    .cta:focus-visible{outline:2px solid #93c5fd; outline-offset:3px}
+    .cta-pulse { animation: pulse 2.2s infinite; }
+
+    .country-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
     }
-    .head p.sub{
-      font-size:1.2em; max-width:500px; line-height:1.4; opacity:1;
-      animation:slide-in-up 1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      animation-delay:.5s;
+
+    .country-btn {
+      width: 100%;
+      padding: 14px 22px;
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
-    @keyframes slide-in-up{from{opacity:0; transform:translateY(20px)}to{opacity:1; transform:translateY(0)}}
-    .badge{
-      background:rgba(0,0,0,.3); padding:5px 15px; border-radius:50px; font-size:.9em;
-      display:flex; align-items:center; gap:8px; margin-top:15px;
+    .country-btn:hover {
+      background: rgba(255,255,255,0.2);
     }
-    .content{
-      width:90%; max-width:500px; margin-top:20px;
-      display:flex; flex-direction:column; align-items:center;
+    .country-btn.selected {
+      border-color: var(--gold);
+      box-shadow: 0 0 8px rgba(252, 211, 77, 0.5);
     }
-    .step-list{
-      background:var(--bg3); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius);
-      padding:20px; width:100%; display:flex; flex-direction:column; gap:20px;
-      animation:fade-in 1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      animation-delay:1s;
+
+    .fine{color:#9ca3af; font-size:12px; margin-top:10px}
+    .trust{font-size:12px; color:#a3e635; margin-top:10px}
+    
+    .hidden {
+      display: none;
     }
-    @keyframes fade-in{from{opacity:0}to{opacity:1}}
-    .step{
-      display:flex; align-items:center; gap:15px;
+
+    /* Transition styles */
+    .transition-fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-    .step .icon{
-      background:var(--accent); width:45px; height:45px; border-radius:50%;
-      display:flex; justify-content:center; align-items:center; font-weight:700;
-      font-size:1.2em; border:2px solid #fff;
+
+    .transition-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-    .step .text-main{
-      font-weight:600; font-size:1.1em;
+
+    /* ultra-small width handling inspired by SB2 behavior */
+    @media (max-width:330px){
+      .logo{width:80px;height:80px}
+      h1{font-size:24px}
+      .cta{font-size:16px}
     }
-    .step .text-sub{
-      font-size:.9em; opacity:.8;
-    }
-    .faq{
-      background:var(--bg3); border-radius:var(--radius); margin-top:20px;
-      width:100%; padding:20px;
-      animation:fade-in 1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      animation-delay:1.5s;
-    }
-    .faq h3{
-      font-weight:700; font-size:1.4em; margin-bottom:15px;
-    }
-    .faq p{
-      font-size:.9em; line-height:1.5; opacity:.8; margin:0;
-    }
-    .faq p:not(:last-child){margin-bottom:10px}
-    .cta{
-      margin-top:25px; width:100%;
-      animation:pulse 1.5s infinite;
-    }
-    .cta a{
-      display:block; width:100%; padding:20px; background:var(--gold); color:#111;
-      font-size:1.6em; font-weight:800; text-align:center; border-radius:10px;
-      text-decoration:none; box-shadow:0 5px 15px rgba(250,204,21,.4);
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .cta a:active{transform:translateY(2px); box-shadow:0 3px 10px rgba(250,204,21,.3)}
-    @keyframes pulse{
-      0%,100%{transform:scale(1)}
-      50%{transform:scale(1.02)}
-    }
-    .trust-logos{
-      display:flex; justify-content:center; align-items:center; gap:20px; margin-top:25px;
-      animation:fade-in 1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      animation-delay:1.8s;
-    }
-    .trust-logos img{
-      height:25px; filter:grayscale(100%); opacity:.5;
-    }
-    .notice{
-      font-size:.8em; opacity:.6; text-align:center; margin-top:20px;
-    }
-    @keyframes move-bg{
-      from{background-position:0 0}
-      to{background-position:100% 0}
-    }
-    .hidden{display:none}
   </style>
 </head>
 <body>
-  <div class="main">
-    <div class="head">
-      <h1>Earn Up To $150 A Day</h1>
-      <p class="sub">Play fun games & tasks to earn real cash rewards!</p>
+  <span class="orb o1" aria-hidden="true"></span>
+  <span class="orb o2" aria-hidden="true"></span>
+  <span class="orb o3" aria-hidden="true"></span>
+  <span class="orb o4" aria-hidden="true"></span>
+
+  <main class="card" role="main">
+    <img src="playful3.png" alt="Playful Rewards logo" class="logo" />
+
+    <h1>Earn Up To $150 A Day!</h1>
+    <p class="lead">Complete fun games & tasks for real cash rewards!</p>
+
+    <div class="progress" aria-label="Setup progress"><i></i></div>
+    <div id="status" class="status" aria-live="polite">Checking device…</div>
+    
+    <div id="cta-container">
+      <div id="country-selection">
+        <ol class="steps">
+          <li>1) Click <strong>Start Earning</strong></li>
+          <li>2) Download & create your account</li>
+          <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
+          <li>4) Request payout anytime & keep playing</li>
+        </ol>
+        <div class="country-buttons">
+          <button class="country-btn" data-country="US">United States</button>
+          <button class="country-btn" data-country="CA">Canada</button>
+        </div>
+      </div>
+      <div id="final-cta" class="hidden">
+        <ol class="steps">
+          <li>1) Click <strong>Start Earning</strong></li>
+          <li>2) Download & create your account</li>
+          <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
+          <li>4) Request payout anytime & keep playing</li>
+        </ol>
+        <button class="cta cta-pulse" aria-label="Start Earning with Playful Rewards" id="go">Start Earning</button>
+      </div>
     </div>
-
-    <div class="content">
-      <div class="step-list">
-        <div class="step">
-          <div class="icon">1</div>
-          <div>
-            <div class="text-main">Click "Get Started"</div>
-            <div class="text-sub">Instantly get rerouted to your app store.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">2</div>
-          <div>
-            <div class="text-main">Download & Create Account</div>
-            <div class="text-sub">Join thousands of users earning cash daily.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="icon">3</div>
-          <div>
-            <div class="text-main">Play, Earn, & Cash Out!</div>
-            <div class="text-sub">Enjoy the games and withdraw your earnings whenever you want.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cta">
-        <a id="go" href="/api/redirect">Get Started Now</a>
-      </div>
-
-      <div class="trust-logos">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Zelle_logo.svg/1200px-Zelle_logo.svg.png" alt="Zelle">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png" alt="PayPal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Cash_App_Logo.png/800px-Cash_App_Logo.png" alt="Cash App">
-      </div>
-
-      <p class="notice">
-        By continuing, you agree to our Terms of Use and Privacy Policy. You must be 18 years or older.
-      </p>
-
-    </div>
-  </div>
+    
+    <div class="trust">Verified partner • Free to join</div>
+    <p class="fine">Participation required. Rewards depend on completing offers and/or game challenges. Results vary.</p>
+  </main>
 
   <script>
-    // The previous country selection logic has been removed as per the user's request.
-    // The CTA button href is now static and points to the secure redirect endpoint.
-    // No further JavaScript is needed to handle the button click.
-  </script>
+    (function(){
+      const links = {
+        US: "/api/redirect",
+        CA: "/api/redirect"
+      };
 
+      const st = document.getElementById('status');
+      const countryButtons = document.querySelectorAll('.country-btn');
+      const countrySelection = document.getElementById('country-selection');
+      const finalCta = document.getElementById('final-cta');
+      const goButton = document.getElementById('go');
+
+      const steps = ["Checking device…","Routing to offer…","Ready!"];
+      let i = 0;
+      const tick = () => {
+        st.textContent = steps[i];
+        if (i < steps.length - 1) {
+          i++;
+          setTimeout(tick, 700);
+        }
+      };
+      tick();
+
+      countryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          countryButtons.forEach(btn => btn.classList.remove('selected'));
+          this.classList.add('selected');
+          const countryCode = this.getAttribute('data-country');
+          goButton.setAttribute('data-link', links[countryCode]);
+          
+          // Apply a smooth transition
+          countrySelection.classList.add('transition-fade-out');
+          setTimeout(() => {
+            countrySelection.classList.add('hidden');
+            finalCta.classList.remove('hidden');
+            finalCta.classList.add('transition-fade-in');
+          }, 500); // Match this timeout with the CSS transition duration
+        });
+      });
+
+      goButton.addEventListener('click', function(){
+        const link = this.getAttribute('data-link');
+        if (link) {
+          window.open(link, "_blank", "noopener,noreferrer");
+        }
+      }, {passive:true});
+    })();
+  </script>
 </body>
 </html>

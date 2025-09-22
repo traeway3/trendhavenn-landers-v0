@@ -566,9 +566,9 @@
                 const country = data.country_name;
                 
                 if (country === 'United States') {
-                    document.getElementById('usBtn').style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                    document.getElementById('usBtn').style.background = 'linear-gradient(135deg, #9333ea 0%, #7c3aed 100%)';
                 } else if (country === 'Canada') {
-                    document.getElementById('caBtn').style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                    document.getElementById('caBtn').style.background = 'linear-gradient(135deg, #9333ea 0%, #7c3aed 100%)';
                 }
             } catch (error) {
                 console.log('Country detection failed, using default');
@@ -587,10 +587,33 @@
             window.open('/api/redirect', '_blank');
         }
 
-        // Initialize country detection on page load
-        document.addEventListener('DOMContentLoaded', () => {
+        // Update people online counter
+        function updatePeopleOnline() {
+            peopleOnline += Math.floor(Math.random() * 3) + 1;
+            document.getElementById('peopleOnline').textContent = peopleOnline.toLocaleString();
+        }
+
+        // Update money paid out counter
+        function updateMoneyPaidOut() {
+            const amounts = [847, 923, 789, 856, 978, 812, 934, 898, 867, 945, 823, 901];
+            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
+            moneyPaidOut += randomAmount;
+            document.getElementById('moneyPaidOut').textContent = '$' + moneyPaidOut.toLocaleString();
+        }
+
+        // Initialize the app
+        function init() {
             detectCountry();
-        });
+            
+            // Update people online every 3 seconds
+            setInterval(updatePeopleOnline, 3000);
+            
+            // Update money paid out every 2 seconds
+            setInterval(updateMoneyPaidOut, 2000);
+        }
+
+        // Start the app when page loads
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>

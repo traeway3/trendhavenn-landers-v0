@@ -59,7 +59,6 @@
             padding: 30px 20px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transition: opacity 0.5s ease-in-out;
             position: relative;
             z-index: 1;
         }
@@ -67,21 +66,34 @@
         .header-content {
             padding: 0 20px 20px 20px;
         }
-
+        
         .page {
             display: none;
             flex-direction: column;
             align-items: center;
-            animation: fadeIn 0.5s ease-in-out;
         }
 
         .page.active {
             display: flex;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* --- Transitions --- */
+        .page.active.fade-out {
+            animation: fadeOutScaleDown 0.5s forwards;
+        }
+
+        .page.active.fade-in {
+            animation: fadeInScaleUp 0.5s forwards;
+        }
+
+        @keyframes fadeOutScaleDown {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.9); }
+        }
+
+        @keyframes fadeInScaleUp {
+            from { opacity: 0; transform: scale(1.1); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .logo-img {
@@ -160,10 +172,10 @@
         }
         
         .trust-badge.ssl img {
-            width: 40px;
-            height: 40px;
+            width: 50px; /* Increased size */
+            height: 50px; /* Increased size */
         }
-
+        
         .trust-badge.tiktok {
             background-color: rgba(0, 0, 0, 0.05);
             padding: 8px 12px;
@@ -171,9 +183,10 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
-        .verified-icon {
-            color: #007AFF;
-            font-size: 1.2em;
+        .trust-badge.tiktok img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
         }
 
         .social-proof {
@@ -297,15 +310,16 @@
                 <button class="device-btn" id="android-button">Android</button>
             </div>
             <div class="trust-badge tiktok">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="verified-icon" viewBox="0 0 16 16">
-                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                </svg>
+                <img src="https://img.funnelish.com/88366/923727/1731514737-download.png" alt="Verified Badge">
                 <span>Verified</span>
             </div>
         </div>
 
         <div id="main-offer-page" class="page">
-            <h1 class="animated-amount"><span>$0</span></h1>
+            <div class="header-content">
+                <img src="applelogo.png" alt="Apple Logo" class="logo-img">
+                <h1 class="main-headline">Unlock Your <span class="animated-amount"><span>$0</span></span> Apple Reward</h1>
+            </div>
             <h2>Follow these simple steps to get your reward:</h2>
             <div class="steps">
                 <ol>
@@ -358,7 +372,7 @@
         function handlePageLoad() {
             const amount = document.querySelector('.animated-amount span');
             if (amount) {
-                animateValue(amount, 0, 750, 1500); 
+                animateValue(amount, 0, 750, 2500); // Slower animation
             }
             
             updateSocialProof();
@@ -376,11 +390,14 @@
         function showMainPage() {
             const splashScreen = document.getElementById('splash-screen');
             const mainOfferPage = document.getElementById('main-offer-page');
+
+            splashScreen.classList.add('fade-out');
             
-            splashScreen.classList.remove('active');
             setTimeout(() => {
+                splashScreen.classList.remove('active', 'fade-out');
                 splashScreen.style.display = 'none';
-                mainOfferPage.classList.add('active');
+
+                mainOfferPage.classList.add('active', 'fade-in');
             }, 500);
         }
         

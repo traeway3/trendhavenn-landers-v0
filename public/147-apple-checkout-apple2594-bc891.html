@@ -40,7 +40,6 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            overflow: hidden;
         }
 
         #particles-js {
@@ -311,7 +310,7 @@
             </div>
             <div class="trust-badge tiktok">
                 <img src="https://img.funnelish.com/88366/923727/1731514737-download.png" alt="Verified Badge">
-                <span>Verified</span>
+                <span>Verified by TikTok</span>
             </div>
         </div>
 
@@ -368,13 +367,9 @@
             };
             window.requestAnimationFrame(step);
         }
-        
+
         function handlePageLoad() {
-            const amount = document.querySelector('.animated-amount span');
-            if (amount) {
-                animateValue(amount, 0, 750, 2500); // Slower animation
-            }
-            
+            // Start animations on page load
             updateSocialProof();
             setInterval(updateSocialProof, 5000);
         }
@@ -398,6 +393,10 @@
                 splashScreen.style.display = 'none';
 
                 mainOfferPage.classList.add('active', 'fade-in');
+                const amount = document.querySelector('.animated-amount span');
+                if (amount) {
+                    animateValue(amount, 0, 750, 2500); // Slower animation
+                }
             }, 500);
         }
         
@@ -446,3 +445,4 @@
     </script>
 </body>
 </html>
+}

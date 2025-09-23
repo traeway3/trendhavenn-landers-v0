@@ -200,14 +200,14 @@
       list-style: none;
       padding: 0;
       margin: 8px auto 18px;
-      max-width: 560px
-    }
-
-    .steps li {
+      max-width: 560px;
       font-weight: 700;
       font-size: 15px;
       color: #e5e7eb;
-      margin: 8px 0
+    }
+
+    .steps li {
+      margin: 8px 0;
     }
 
     .steps em {
@@ -349,7 +349,6 @@
         <div class="country-buttons">
           <button class="country-btn" data-country="US">United States</button>
           <button class="country-btn" data-country="CA">Canada</button>
-          <button class="country-btn" data-country="UK">United Kingdom</button>
         </div>
       </div>
       <div id="final-cta" class="hidden">
@@ -371,8 +370,7 @@
     (function(){
       const links = {
         US: "/api/redirect?country=us",
-        CA: "/api/redirect?country=ca",
-        UK: "/api/redirect?country=uk"
+        CA: "/api/redirect?country=ca"
       };
 
       const st = document.getElementById('status');

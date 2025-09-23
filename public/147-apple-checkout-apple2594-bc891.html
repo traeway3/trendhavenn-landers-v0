@@ -35,7 +35,7 @@
             color: var(--apple-text);
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Changed to flex-start to keep header on top */
+            align-items: center;
             min-height: 100vh;
             text-align: center;
             padding: 20px;
@@ -62,19 +62,10 @@
             transition: opacity 0.5s ease-in-out;
             position: relative;
             z-index: 1;
-            margin-top: 100px; /* Offset for the fixed header */
         }
         
         .header-content {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            z-index: 2;
-            text-align: center;
+            padding: 0 20px 20px 20px;
         }
 
         .page {
@@ -97,9 +88,6 @@
             width: 80px;
             height: auto;
             margin-bottom: 10px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
         
         .animated-amount {
@@ -170,10 +158,22 @@
             font-weight: 500;
             color: #888;
         }
+        
+        .trust-badge.ssl img {
+            width: 40px;
+            height: 40px;
+        }
 
-        .trust-badge img {
-            height: 40px; /* Increased size */
-            width: 40px; /* Increased size */
+        .trust-badge.tiktok {
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .verified-icon {
+            color: #007AFF;
+            font-size: 1.2em;
         }
 
         .social-proof {
@@ -199,10 +199,11 @@
             max-width: 300px;
             border: 1px solid rgba(0,0,0,0.1);
         }
-
+        
         .social-proof img {
             width: 20px;
             height: 20px;
+            border-radius: 4px;
         }
 
         @keyframes slideInDown {
@@ -214,10 +215,6 @@
                 top: 20px;
                 opacity: 1;
             }
-        }
-        
-        .timer-container {
-            display: none;
         }
         
         .steps {
@@ -239,6 +236,10 @@
             padding-left: 35px;
             position: relative;
             line-height: 1.4;
+        }
+        
+        .steps strong {
+            font-weight: 700;
         }
 
         .steps li::before {
@@ -283,21 +284,23 @@
 </head>
 <body oncopy="return false;">
     <div id="particles-js"></div>
-    <div class="header-content">
-        <img src="applelogo.png" alt="Apple Logo" class="logo-img">
-        <h1 class="main-headline">Unlock Your $750 Apple Reward</h1>
-    </div>
-
+    
     <div class="container">
         <div id="splash-screen" class="page active">
+            <div class="header-content">
+                <img src="applelogo.png" alt="Apple Logo" class="logo-img">
+                <h1 class="main-headline">Unlock Your $750 Apple Reward</h1>
+            </div>
             <h2>Select your device to continue:</h2>
             <div class="device-selection">
                 <button class="device-btn" id="ios-button">iPhone / iOS</button>
                 <button class="device-btn" id="android-button">Android</button>
             </div>
-            <div class="trust-badge">
-                <img src="https://www.tiktok.com/favicon.ico" alt="TikTok">
-                <span>Verified by TikTok</span>
+            <div class="trust-badge tiktok">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="verified-icon" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                <span>Verified</span>
             </div>
         </div>
 
@@ -312,14 +315,14 @@
                 </ol>
             </div>
             <button id="cta-button" class="cta-button">CLAIM NOW</button>
-            <div class="trust-badge" style="margin-top: 25px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <div class="trust-badge ssl" style="margin-top: 25px;">
                 <img src="ssllogo.png" alt="SSL Secured">
             </div>
         </div>
     </div>
 
     <div class="social-proof" id="social-proof-alert" style="opacity: 0;">
-        <img src="applelogo.png" alt="Apple">
+        <img src="applelogo.png" alt="Apple Logo">
         <div><span id="random-name"></span> claimed their reward!</div>
     </div>
 
@@ -351,7 +354,7 @@
             };
             window.requestAnimationFrame(step);
         }
-
+        
         function handlePageLoad() {
             const amount = document.querySelector('.animated-amount span');
             if (amount) {

@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
             --apple-bg: #f5f5f7;
@@ -34,7 +35,7 @@
             color: var(--apple-text);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Changed to flex-start to keep header on top */
             min-height: 100vh;
             text-align: center;
             padding: 20px;
@@ -61,6 +62,19 @@
             transition: opacity 0.5s ease-in-out;
             position: relative;
             z-index: 1;
+            margin-top: 100px; /* Offset for the fixed header */
+        }
+        
+        .header-content {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            z-index: 2;
+            text-align: center;
         }
 
         .page {
@@ -82,7 +96,10 @@
         .logo-img {
             width: 80px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .animated-amount {
@@ -90,6 +107,13 @@
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 10px;
+        }
+        
+        .main-headline {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 25px;
         }
 
         h1 {
@@ -148,7 +172,8 @@
         }
 
         .trust-badge img {
-            height: 20px;
+            height: 40px; /* Increased size */
+            width: 40px; /* Increased size */
         }
 
         .social-proof {
@@ -192,11 +217,11 @@
         }
         
         .timer-container {
-            display: none; /* Removed as per request */
+            display: none;
         }
         
         .steps {
-            text-align: center; /* Centered as per request */
+            text-align: center;
             margin-bottom: 25px;
             width: 100%;
         }
@@ -218,7 +243,7 @@
 
         .steps li::before {
             content: counter(my-awesome-counter);
-            background-color: #1d1d1f; /* Changed to black as per request */
+            background-color: #1d1d1f;
             color: white;
             font-weight: 700;
             border-radius: 50%;
@@ -258,11 +283,13 @@
 </head>
 <body oncopy="return false;">
     <div id="particles-js"></div>
+    <div class="header-content">
+        <img src="applelogo.png" alt="Apple Logo" class="logo-img">
+        <h1 class="main-headline">Unlock Your $750 Apple Reward</h1>
+    </div>
 
     <div class="container">
         <div id="splash-screen" class="page active">
-            <img src="applelogo.png" alt="Apple Logo" class="logo-img">
-            <h1>Unlock Your $750 Apple Reward</h1>
             <h2>Select your device to continue:</h2>
             <div class="device-selection">
                 <button class="device-btn" id="ios-button">iPhone / iOS</button>
@@ -280,12 +307,12 @@
             <div class="steps">
                 <ol>
                     <li>Tap the button below.</li>
-                    <li>Complete 2-3 offers to verify your account. **(This is important!)**</li>
+                    <li>Complete 2-3 offers to verify your account. <strong>(This is important!)</strong></li>
                     <li>Claim your $750 Apple Reward.</li>
                 </ol>
             </div>
             <button id="cta-button" class="cta-button">CLAIM NOW</button>
-            <div class="trust-badge" style="margin-top: 25px;">
+            <div class="trust-badge" style="margin-top: 25px; display: flex; align-items: center; justify-content: center; gap: 8px;">
                 <img src="ssllogo.png" alt="SSL Secured">
             </div>
         </div>
@@ -293,10 +320,9 @@
 
     <div class="social-proof" id="social-proof-alert" style="opacity: 0;">
         <img src="applelogo.png" alt="Apple">
-        <div><span id="random-name"></span> just claimed their reward!</div>
+        <div><span id="random-name"></span> claimed their reward!</div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         const NAMES = ["Emily M.", "James P.", "Sophia L.", "David T.", "Chloe R.", "Daniel S.", "Olivia B.", "William H."];
 
@@ -326,6 +352,16 @@
             window.requestAnimationFrame(step);
         }
 
+        function handlePageLoad() {
+            const amount = document.querySelector('.animated-amount span');
+            if (amount) {
+                animateValue(amount, 0, 750, 1500); 
+            }
+            
+            updateSocialProof();
+            setInterval(updateSocialProof, 5000);
+        }
+
         document.getElementById('ios-button').addEventListener('click', function() {
             showMainPage();
         });
@@ -342,21 +378,15 @@
             setTimeout(() => {
                 splashScreen.style.display = 'none';
                 mainOfferPage.classList.add('active');
-                
-                // Start animations once the main page is visible
-                const amount = document.querySelector('.animated-amount span');
-                animateValue(amount, 0, 750, 1500); 
-                
-                updateSocialProof();
-                setInterval(updateSocialProof, 5000);
-
-            }, 500); // Wait for the fade-out to finish
+            }, 500);
         }
-
-        // UPDATE THIS LINE WITH YOUR ACTUAL CTA LINK
+        
         document.getElementById('cta-button').addEventListener('click', function() {
+            // UPDATE THIS LINE WITH YOUR ACTUAL CTA LINK
             window.location.href = '#'; 
         });
+        
+        window.addEventListener('DOMContentLoaded', handlePageLoad);
 
         // Dynamic particle background
         particlesJS('particles-js', {

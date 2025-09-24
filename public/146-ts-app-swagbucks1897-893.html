@@ -10,27 +10,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* CHANGED: Updated accent colors to vibrant green for higher contrast */
     :root {
       --bg1: #1b1c31;
       --bg2: #0f152e;
       --bg3: #1b1c31;
-      --accent: #00FF88;      /* Vibrant Green */
-      --accent2: #00E670;     /* Darker Vibrant Green */
+      --accent: #00FF88;
+      --accent2: #00E670;
       --blue: #1c5087;
       --fine: #9ca3af;
       --maxw: 720px;
       --radius: 16px;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-    }
-
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
       color: #fff;
@@ -39,9 +31,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* FIXED: Changed from 'center' to 'flex-start' to prevent content from being cut off at the top on smaller screens. */
       justify-content: flex-start; 
-      padding: 32px 16px; /* Added more top/bottom padding */
+      padding: 32px 16px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
@@ -50,235 +41,45 @@
       padding-left: env(safe-area-inset-left);
       padding-right: env(safe-area-inset-right);
     }
-
-    /* Floating orbs */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(0.2px);
-      pointer-events: none;
-      opacity: .6;
-    }
-
+    .orb { position: fixed; border-radius: 50%; filter: blur(0.2px); pointer-events: none; opacity: .6; }
     .o1 { top: 6vh; left: 4vw; width: 60px; height: 60px; background: rgba(0, 255, 136, .08); animation: pulse 2.2s infinite; }
     .o2 { top: 16vh; right: 6vw; width: 48px; height: 48px; background: rgba(0, 230, 112, .07); animation: bounce 2.4s infinite; }
     .o3 { bottom: 18vh; left: 6vw; width: 44px; height: 44px; background: rgba(28, 80, 135, .10); animation: ping 2.6s infinite; }
     .o4 { bottom: 8vh; right: 6vw; width: 72px; height: 72px; background: rgba(121, 142, 165, .10); animation: pulse 2.2s infinite; }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: .75 }
-      50% { transform: scale(1.05); opacity: .35 }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0) }
-      50% { transform: translateY(-18%) }
-    }
-
-    @keyframes ping {
-      0% { transform: scale(1); opacity: .8 }
-      75%, 100% { transform: scale(2); opacity: 0 }
-    }
-
-    .card {
-      width: 100%;
-      max-width: var(--maxw);
-      text-align: center;
-      padding: 28px 18px;
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: var(--radius);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, .35);
-      backdrop-filter: saturate(140%) blur(6px);
-      animation: fadeIn .5s ease-out both;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px) }
-      to { opacity: 1; transform: translateY(0) }
-    }
-
-    .logo {
-      width: 96px;
-      height: 96px;
-      border-radius: 20px;
-      object-fit: cover;
-      margin: 8px auto 18px;
-      display: block;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, .25)
-    }
-
-    h1 {
-      font-size: 28px;
-      line-height: 1.15;
-      margin: 0 0 8px;
-      letter-spacing: -.01em;
-      font-weight: 800
-    }
-
-    .lead {
-      color: #cbd5e1;
-      margin: 0 auto 14px;
-      max-width: 48ch;
-      font-size: 16px
-    }
-    
-    .stats-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 24px;
-        padding-top: 16px;
-        margin-bottom: 16px;
-        border-top: 1px solid rgba(0, 255, 136, 0.2);
-    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: .75 } 50% { transform: scale(1.05); opacity: .35 } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-18%) } }
+    @keyframes ping { 0% { transform: scale(1); opacity: .8 } 75%, 100% { transform: scale(2); opacity: 0 } }
+    .card { width: 100%; max-width: var(--maxw); text-align: center; padding: 28px 18px; background: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .08); border-radius: var(--radius); box-shadow: 0 25px 60px rgba(0, 0, 0, .35); backdrop-filter: saturate(140%) blur(6px); animation: fadeIn .5s ease-out both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+    .logo { width: 96px; height: 96px; border-radius: 20px; object-fit: cover; margin: 8px auto 18px; display: block; box-shadow: 0 10px 20px rgba(0, 0, 0, .25) }
+    h1 { font-size: 28px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -.01em; font-weight: 800 }
+    .lead { color: #cbd5e1; margin: 0 auto 14px; max-width: 48ch; font-size: 16px }
+    .stats-container { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 24px; padding-top: 16px; margin-bottom: 16px; border-top: 1px solid rgba(0, 255, 136, 0.2); }
     .stat-item { text-align: center; }
     .stat-value { color: var(--accent); font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
     .stat-label { color: rgba(255, 255, 255, 0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; margin-top: 2px; }
     .stat-divider { width: 1px; height: 30px; background: rgba(0, 255, 136, 0.2); }
-
-    .progress {
-      height: 8px;
-      background: rgba(255, 255, 255, .08);
-      border-radius: 999px;
-      overflow: hidden;
-      margin: 16px auto 18px;
-      max-width: 420px
-    }
-
-    .progress>i {
-      display: block;
-      height: 100%;
-      width: 84%;
-      background: linear-gradient(90deg, var(--accent), var(--blue));
-    }
-
-    .status {
-      font-size: 13px;
-      color: var(--fine);
-      margin-bottom: 8px;
-      min-height: 18px
-    }
-
-    .steps {
-      list-style: none;
-      padding: 0;
-      margin: 8px auto 18px;
-      max-width: 560px;
-      font-weight: 700;
-      font-size: 15px;
-      color: #e5e7eb;
-    }
-
-    .steps li {
-      margin: 8px 0;
-    }
-
-    .steps em {
-      color: var(--fine);
-      font-style: italic;
-      font-weight: 800;
-    }
-
-    .cta {
-      appearance: none;
-      border: 0;
-      border-radius: 12px;
-      padding: 16px 22px;
-      cursor: pointer;
-      background: var(--accent);
-      color: #000;
-      font-weight: 800;
-      font-size: 18px;
-      width: min(420px, 90%);
-      box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    
-    .cta:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 30px rgba(0, 255, 136, 0.5);
-    }
-    
-    .cta:active {
-      transform: scale(.98)
-    }
-
-    .cta:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px
-    }
-    
-    .cta-pulse {
-        animation: pulse 2s infinite;
-    }
-
-    .country-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    
-    .country-btn {
-      width: 100%;
-      padding: 14px 22px;
-      border-radius: 12px;
-      border: 2px solid rgba(0, 255, 136, 0.2);
-      background: rgba(0, 255, 136, 0.05);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .country-btn:hover {
-      background: rgba(0, 255, 136, 0.15);
-      border-color: var(--accent);
-    }
-
-    .country-btn.selected {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #000;
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
-    }
-
-    .fine {
-      color: #9ca3af;
-      font-size: 12px;
-      margin-top: 10px
-    }
-
-    .trust {
-      font-size: 12px;
-      color: #a3e635;
-      margin-top: 10px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .transition-fade-out {
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-
-    .transition-fade-in {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-
-    @media (max-width:330px) {
-      .logo { width: 80px; height: 80px }
-      h1 { font-size: 24px }
-      .cta { font-size: 16px }
-    }
+    .progress { height: 8px; background: rgba(255, 255, 255, .08); border-radius: 999px; overflow: hidden; margin: 16px auto 18px; max-width: 420px }
+    .progress>i { display: block; height: 100%; width: 84%; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+    .status { font-size: 13px; color: var(--fine); margin-bottom: 8px; min-height: 18px }
+    .steps { list-style: none; padding: 0; margin: 8px auto 18px; max-width: 560px; font-weight: 700; font-size: 15px; color: #e5e7eb; }
+    .steps li { margin: 8px 0; }
+    .steps em { color: var(--fine); font-style: italic; font-weight: 800; }
+    .cta { appearance: none; border: 0; border-radius: 12px; padding: 16px 22px; cursor: pointer; background: var(--accent); color: #000; font-weight: 800; font-size: 18px; width: min(420px, 90%); box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4); transition: transform .15s ease, box-shadow .15s ease; }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0, 255, 136, 0.5); }
+    .cta:active { transform: scale(.98) }
+    .cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px }
+    .cta-pulse { animation: pulse 2s infinite; }
+    .country-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+    .country-btn { width: 100%; padding: 14px 22px; border-radius: 12px; border: 2px solid rgba(0, 255, 136, 0.2); background: rgba(0, 255, 136, 0.05); color: white; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s ease; }
+    .country-btn:hover { background: rgba(0, 255, 136, 0.15); border-color: var(--accent); }
+    .country-btn.selected { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); }
+    .fine { color: #9ca3af; font-size: 12px; margin-top: 10px }
+    .trust { font-size: 12px; color: #a3e635; margin-top: 10px; }
+    .hidden { display: none; }
+    .transition-fade-out { opacity: 0; transform: translateY(-20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    .transition-fade-in { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    @media (max-width:330px) { .logo { width: 80px; height: 80px } h1 { font-size: 24px } .cta { font-size: 16px } }
   </style>
 </head>
 <body>
@@ -289,34 +90,21 @@
 
   <main class="card" role="main">
     <img src="swag.png" alt="Swagbucks logo" class="logo" />
-
     <h1>Earn Up To $250/Day</h1>
     <p class="lead">Playing Your Favorite Games.</p>
-    
     <div class="stats-container">
-        <div class="stat-item">
-            <div class="stat-value">50K+</div>
-            <div class="stat-label">Active Gamers</div>
-        </div>
+        <div class="stat-item"> <div class="stat-value">50K+</div> <div class="stat-label">Active Gamers</div> </div>
         <div class="stat-divider"></div>
-        <div class="stat-item">
-            <div class="stat-value">$150</div>
-            <div class="stat-label">Avg. Payout Today</div>
-        </div>
+        <div class="stat-item"> <div class="stat-value">$150</div> <div class="stat-label">Avg. Payout Today</div> </div>
         <div class="stat-divider"></div>
-        <div class="stat-item">
-            <div class="stat-value">5 Min</div>
-            <div class="stat-label">Quick Start</div>
-        </div>
+        <div class="stat-item"> <div class="stat-value">5 Min</div> <div class="stat-label">Quick Start</div> </div>
     </div>
-
     <div class="progress" aria-label="Setup progress"><i></i></div>
     <div id="status" class="status" aria-live="polite">Checking device…</div>
-
     <div id="cta-container">
       <div id="country-selection">
         <ol class="steps">
-          <li>1) Click Start Earning</li>
+          <li id="step1-country"></li> 
           <li>2) Download & create your account</li>
           <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
           <li>4) Request payout anytime & keep playing</li>
@@ -328,7 +116,7 @@
       </div>
       <div id="final-cta" class="hidden">
         <ol class="steps">
-          <li>1) Click Start Earning</li>
+          <li id="step1-final"></li>
           <li>2) Download & create your account</li>
           <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
           <li>4) Request payout anytime & keep playing</li>
@@ -336,34 +124,33 @@
         <button class="cta cta-pulse" aria-label="Start Earning with Swagbucks" id="go">Start Earning</button>
       </div>
     </div>
-
     <div class="trust">Verified partner • Free to join</div>
     <p class="fine">Participation required. Rewards depend on completing offers and/or game challenges. Results vary.</p>
   </main>
 
   <script>
     (function(){
-      const links = {
-        US: "/api/redirect?country=us",
-        CA: "/api/redirect?country=ca"
-      };
-
+      const links = { US: "/api/redirect?country=us", CA: "/api/redirect?country=ca" };
       const st = document.getElementById('status');
       const countryButtons = document.querySelectorAll('.country-btn');
       const countrySelection = document.getElementById('country-selection');
       const finalCta = document.getElementById('final-cta');
       const goButton = document.getElementById('go');
+      // NEW CODE: Get references to the step elements
+      const step1Country = document.getElementById('step1-country');
+      const step1Final = document.getElementById('step1-final');
 
       const steps = ["Checking device…", "Routing to offer…", "Ready!"];
       let i = 0;
       const tick = () => {
         st.textContent = steps[i];
-        if (i < steps.length - 1) {
-          i++;
-          setTimeout(tick, 700);
-        }
+        if (i < steps.length - 1) { i++; setTimeout(tick, 700); }
       };
       tick();
+
+      // NEW CODE: Set the initial text for the steps
+      step1Country.textContent = '1) Select your country below';
+      step1Final.textContent = '1) Click "Start Earning" below';
 
       countryButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -371,7 +158,6 @@
           this.classList.add('selected');
           const countryCode = this.getAttribute('data-country');
           goButton.setAttribute('data-link', links[countryCode]);
-
           countrySelection.classList.add('transition-fade-out');
           setTimeout(() => {
             countrySelection.classList.add('hidden');
@@ -383,12 +169,8 @@
 
       goButton.addEventListener('click', function() {
         const link = this.getAttribute('data-link');
-        if (link) {
-          window.open(link, "_blank", "noopener,noreferrer");
-        }
-      }, {
-        passive: true
-      });
+        if (link) { window.open(link, "_blank", "noopener,noreferrer"); }
+      }, { passive: true });
     })();
   </script>
 </body>

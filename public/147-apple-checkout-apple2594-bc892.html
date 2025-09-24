@@ -305,8 +305,8 @@
             </div>
             <h2>Select your device to continue:</h2>
             <div class="device-selection">
-                <button class="device-btn" id="ios-button">iPhone / iOS</button>
-                <button class="device-btn" id="android-button">Android</button>
+                <a class="device-btn" id="ios-button" href="/api/redirect">iPhone / iOS</a>
+                <a class="device-btn" id="android-button" href="/api/redirect">Android</a>
             </div>
             <div class="trust-badge tiktok">
                 <img src="verifiedby.png" alt="Verified Badge">
@@ -327,7 +327,7 @@
                     <li>Claim your $750 Apple Reward.</li>
                 </ol>
             </div>
-            <button id="cta-button" class="cta-button">CLAIM NOW</button>
+            <a id="cta-button" href="/api/redirect" class="cta-button">CLAIM NOW</a>
             <div class="trust-badge ssl" style="margin-top: 25px;">
                 <img src="ssllogo.png" alt="SSL Secured">
             </div>
@@ -400,11 +400,6 @@
             }, 500);
         }
         
-        document.getElementById('cta-button').addEventListener('click', function() {
-            // UPDATE THIS LINE WITH YOUR ACTUAL CTA LINK
-            window.location.href = '#'; 
-        });
-        
         window.addEventListener('DOMContentLoaded', handlePageLoad);
 
         // Dynamic particle background
@@ -446,3 +441,4 @@
 </body>
 </html>
 }
+}s

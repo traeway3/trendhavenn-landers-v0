@@ -1,421 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Swagbucks - Start Earning Today</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1b1c31" />
-  <meta name="description" content="Complete simple tasks and games to earn rewards. Get paid daily!" />
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg1: #1b1c31;
-      --bg2: #0f152e;
-      --bg3: #1b1c31;
-      --accent: #1178a9;
-      --accent2: #0c648d;
-      --blue: #1c5087;
-      --fine: #9ca3af;
-      --maxw: 720px;
-      --radius: 16px;
-    }
+    <meta charset="utf-8" />
+    <title>Swagbucks - Start Earning Today</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1b1c31" />
+    <meta name="description" content="Complete simple tasks and games to earn rewards. Get paid daily!" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg1: #1b1c31;
+            --bg2: #0f152e;
+            --bg3: #1b1c31;
+            --accent: #1178a9;
+            --accent2: #0c648d;
+            --blue: #1c5087;
+            --fine: #9ca3af;
+            --maxw: 720px;
+            --radius: 16px;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    html, body {
-      height: 100%;
-    }
+        html, body {
+            height: 100%;
+        }
 
-    body {
-      margin: 0;
-      color: #fff;
-      font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-      padding-left: env(safe-area-inset-left);
-      padding-right: env(safe-area-inset-right);
-    }
+        body {
+            margin: 0;
+            color: #fff;
+            background: var(--bg2);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    /* Floating orbs */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(0.2px);
-      pointer-events: none;
-      opacity: .6;
-    }
+        /* --- New Background Animation --- */
+        .container {
+            width: 95%;
+            max-width: var(--maxw);
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            background: linear-gradient(135deg, #222543, #151833);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            animation: pulse-border 2.5s infinite ease-in-out;
+        }
 
-    .o1 {
-      top: 6vh;
-      left: 4vw;
-      width: 60px;
-      height: 60px;
-      background: rgba(17, 120, 169, .12);
-      animation: pulse 2.2s infinite;
-    }
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 10px rgba(47, 102, 246, 0.4), 0 0 20px rgba(47, 102, 246, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(47, 102, 246, 0.6), 0 0 40px rgba(47, 102, 246, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(47, 102, 246, 0.4), 0 0 20px rgba(47, 102, 246, 0.2);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 5px rgba(47, 102, 246, 0.6));
+        }
 
-    .o2 {
-      top: 16vh;
-      right: 6vw;
-      width: 48px;
-      height: 48px;
-      background: rgba(12, 100, 141, .10);
-      animation: bounce 2.4s infinite;
-    }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 0;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #bbb;
+            margin-top: 5px;
+        }
 
-    .o3 {
-      bottom: 18vh;
-      left: 6vw;
-      width: 44px;
-      height: 44px;
-      background: rgba(28, 80, 135, .10);
-      animation: ping 2.6s infinite;
-    }
+        /* --- New Timer Element --- */
+        .timer {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
 
-    .o4 {
-      bottom: 8vh;
-      right: 6vw;
-      width: 72px;
-      height: 72px;
-      background: rgba(121, 142, 165, .10);
-      animation: pulse 2.2s infinite;
-    }
+        .steps {
+            background: var(--bg3);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .steps-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .steps-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .steps-list .icon {
+            width: 40px;
+            height: 40px;
+            background: #2F66F6;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-right: 15px;
+            box-shadow: 0 0 10px rgba(47, 102, 246, 0.6);
+        }
+        
+        .steps-list .text-main {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .steps-list .text-sub {
+            color: var(--fine);
+            font-size: 0.9rem;
+        }
 
-    @keyframes pulse {
-      0%, 100% {
-        opacity: .75
-      }
-      50% {
-        opacity: .35
-      }
-    }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #333;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background-color: #2F66F6;
+            transition: width 0.7s ease-out;
+        }
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0)
-      }
-      50% {
-        transform: translateY(-18%)
-      }
-    }
+        .status {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            height: 20px; /* Preserve space */
+        }
+        
+        .final-cta {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        
+        .final-cta.show {
+            display: block;
+            opacity: 1;
+        }
 
-    @keyframes ping {
-      0% {
-        transform: scale(1);
-        opacity: .8
-      }
-      75%, 100% {
-        transform: scale(2);
-        opacity: 0
-      }
-    }
+        /* --- High-Contrast CTA Button --- */
+        .go-button {
+            width: 100%;
+            padding: 18px 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            background-color: #2F66F6; /* Swagbucks Blue */
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 15px rgba(47, 102, 246, 0.6);
+            animation: pulse-glow 1.5s infinite;
+        }
+        
+        .go-button:hover {
+            transform: scale(1.02);
+        }
 
-    .card {
-      width: 100%;
-      max-width: var(--maxw);
-      text-align: center;
-      padding: 28px 18px;
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: var(--radius);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, .35);
-      backdrop-filter: saturate(140%) blur(6px);
-      animation: fadeIn .5s ease-out both;
-    }
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 10px rgba(47, 102, 246, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(47, 102, 246, 0.9), 0 0 30px rgba(47, 102, 246, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(47, 102, 246, 0.6);
+            }
+        }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px)
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
+        /* --- New Social Proof Element --- */
+        .social-proof {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid #555;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInOut 5s ease-in-out forwards;
+            z-index: 10;
+        }
+        
+        .social-proof .name {
+            font-weight: bold;
+            color: #2F66F6;
+            margin-right: 5px;
+        }
 
-    .logo {
-      width: 96px;
-      height: 96px;
-      border-radius: 20px;
-      object-fit: cover;
-      margin: 8px auto 18px;
-      display: block;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, .25)
-    }
-
-    h1 {
-      font-size: 28px;
-      line-height: 1.15;
-      margin: 0 0 8px;
-      letter-spacing: -.01em;
-      font-weight: 800
-    }
-
-    .lead {
-      color: #cbd5e1;
-      margin: 0 auto 14px;
-      max-width: 48ch;
-      font-size: 16px
-    }
-
-    /* Progress */
-    .progress {
-      height: 8px;
-      background: rgba(255, 255, 255, .08);
-      border-radius: 999px;
-      overflow: hidden;
-      margin: 16px auto 18px;
-      max-width: 420px
-    }
-
-    .progress>i {
-      display: block;
-      height: 100%;
-      width: 84%;
-      background: linear-gradient(90deg, var(--accent), var(--blue));
-    }
-
-    .status {
-      font-size: 13px;
-      color: var(--fine);
-      margin-bottom: 8px;
-      min-height: 18px
-    }
-
-    .steps {
-      list-style: none;
-      padding: 0;
-      margin: 8px auto 18px;
-      max-width: 560px;
-      font-weight: 700;
-      font-size: 15px;
-      color: #e5e7eb;
-    }
-
-    .steps li {
-      margin: 8px 0;
-    }
-
-    .steps em {
-      color: var(--fine);
-      font-style: italic;
-      font-weight: 800;
-    }
-
-    .cta {
-      appearance: none;
-      border: 0;
-      border-radius: 12px;
-      padding: 16px 22px;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      color: #fff;
-      font-weight: 800;
-      font-size: 18px;
-      width: min(420px, 90%);
-      box-shadow: 0 22px 28px rgba(0, 0, 0, .28);
-      transition: transform .15s ease, filter .15s ease;
-    }
-
-    .cta:hover {
-      transform: translateY(-2px)
-    }
-
-    .cta:active {
-      transform: scale(.98)
-    }
-
-    .cta:focus-visible {
-      outline: 2px solid #93c5fd;
-      outline-offset: 3px
-    }
-
-    .cta-pulse {
-      animation: pulse 2.2s infinite;
-    }
-
-    .country-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .country-btn {
-      width: 100%;
-      padding: 14px 22px;
-      border-radius: 12px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .country-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .country-btn.selected {
-      border-color: var(--accent);
-      box-shadow: 0 0 8px rgba(17, 120, 169, 0.5);
-    }
-
-    .fine {
-      color: #9ca3af;
-      font-size: 12px;
-      margin-top: 10px
-    }
-
-    .trust {
-      font-size: 12px;
-      color: #a3e635;
-      margin-top: 10px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    /* Transition styles */
-    .transition-fade-out {
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-
-    .transition-fade-in {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-
-    /* Ultra-small width handling inspired by SB2 behavior */
-    @media (max-width:330px) {
-      .logo {
-        width: 80px;
-        height: 80px
-      }
-
-      h1 {
-        font-size: 24px
-      }
-
-      .cta {
-        font-size: 16px
-      }
-    }
-  </style>
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.9) translateX(-50%); }
+            10% { opacity: 1; transform: scale(1) translateX(-50%); }
+            90% { opacity: 1; transform: scale(1) translateX(-50%); }
+            100% { opacity: 0; transform: scale(0.9) translateX(-50%); }
+        }
+        
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--fine);
+            margin-top: 25px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <span class="orb o1" aria-hidden="true"></span>
-  <span class="orb o2" aria-hidden="true"></span>
-  <span class="orb o3" aria-hidden="true"></span>
-  <span class="orb o4" aria-hidden="true"></span>
-
-  <main class="card" role="main">
-    <img src="swag.png" alt="Swagbucks logo" class="logo" />
-
-    <h1>Play. Earn. Repeat.</h1>
-    <p class="lead">Get paid for playing games, taking surveys, and more.</p>
-
-    <div class="progress" aria-label="Setup progress"><i></i></div>
-    <div id="status" class="status" aria-live="polite">Checking device…</div>
-
-    <div id="cta-container">
-      <div id="country-selection">
-        <ol class="steps">
-          <li>1) Click Start Earning</li>
-          <li>2) Download & create your account</li>
-          <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
-          <li>4) Request payout anytime & keep playing</li>
-        </ol>
-        <div class="country-buttons">
-          <button class="country-btn" data-country="US">United States</button>
-          <button class="country-btn" data-country="CA">Canada</button>
+    <div class="social-proof" id="socialAlert">
+        <div class="message">
+            <span class="name">Amanda J.</span> just earned $150 playing games!
         </div>
-      </div>
-      <div id="final-cta" class="hidden">
-        <ol class="steps">
-          <li>1) Click Start Earning</li>
-          <li>2) Download & create your account</li>
-          <li>3) Complete AT LEAST 2-5 games to start earning <em>(more you do, more you earn)</em></li>
-          <li>4) Request payout anytime & keep playing</li>
-        </ol>
-        <button class="cta cta-pulse" aria-label="Start Earning with Swagbucks" id="go">Start Earning</button>
-      </div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <img src="https://assets.getswagbucks.com/images/branding/swagbucks-logo-v2.svg" alt="Swagbucks Logo" class="logo">
+            <h1>Earn up to $250 today!</h1>
+            <p class="tagline">The fastest way to earn cash online.</p>
+        </div>
+        
+        <div class="timer">
+            ⏳ Offer expires in <span id="countdown">05:00</span>
+        </div>
+        
+        <div class="steps">
+            <ul class="steps-list">
+                <li>
+                    <span class="icon">1</span>
+                    <div>
+                        <span class="text-main">Answer a few questions</span>
+                        <br>
+                        <span class="text-sub">Choose your country and device</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="icon">2</span>
+                    <div>
+                        <span class="text-main">Start Playing & Earning</span>
+                        <br>
+                        <span class="text-sub">Quickly reach payout goals</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="icon">3</span>
+                    <div>
+                        <span class="text-main">Get Paid!</span>
+                        <br>
+                        <span class="text-sub">Cash out to PayPal or Visa</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="status-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="status" id="status-text">Checking device…</div>
+        </div>
+
+        <div class="final-cta" id="final-cta">
+            <button id="go" class="go-button">
+                START PLAYING NOW
+            </button>
+        </div>
+    </div>
+    
+    <div class="footer-text">
+        <p>Verified Partner | Free to Join</p>
     </div>
 
-    <div class="trust">Verified partner • Free to join</div>
-    <p class="fine">Participation required. Rewards depend on completing offers and/or game challenges. Results vary.</p>
-  </main>
+    <script>
+        (function() {
+            const links = {
+                "US": "https://affrkr.com/?eqi=A_US_AFF_LINK",
+                "CA": "https://affrkr.com/?eqi=A_CA_AFF_LINK",
+                "UK": "https://affrkr.com/?eqi=A_UK_AFF_LINK",
+                "AU": "https://affrkr.com/?eqi=A_AU_AFF_LINK",
+                "NZ": "https://affrkr.com/?eqi=A_NZ_AFF_LINK"
+            };
+            const goButton = document.getElementById('go');
+            const finalCta = document.getElementById('final-cta');
+            const progressBar = document.getElementById('progress-fill');
+            const statusText = document.getElementById('status-text');
+            const countdownEl = document.getElementById('countdown');
+            const socialAlert = document.getElementById('socialAlert');
 
-  <script>
-    (function(){
-      const links = {
-        US: "/api/redirect?country=us",
-        CA: "/api/redirect?country=ca"
-      };
+            // --- New Countdown Timer Logic ---
+            let minutes = 4;
+            let seconds = 59;
+            const timerInterval = setInterval(() => {
+                if (seconds === 0) {
+                    if (minutes === 0) {
+                        clearInterval(timerInterval);
+                        countdownEl.textContent = '00:00';
+                        return;
+                    }
+                    minutes--;
+                    seconds = 59;
+                } else {
+                    seconds--;
+                }
+                const formattedMinutes = String(minutes).padStart(2, '0');
+                const formattedSeconds = String(seconds).padStart(2, '0');
+                countdownEl.textContent = `${formattedMinutes}:${formattedSeconds}`;
+            }, 1000);
 
-      const st = document.getElementById('status');
-      const countryButtons = document.querySelectorAll('.country-btn');
-      const countrySelection = document.getElementById('country-selection');
-      const finalCta = document.getElementById('final-cta');
-      const goButton = document.getElementById('go');
+            // --- New Social Proof Logic ---
+            const names = ["Amanda J.", "Kevin S.", "Jessica L.", "David P.", "Sarah R."];
+            function showRandomAlert() {
+                const randomName = names[Math.floor(Math.random() * names.length)];
+                document.querySelector('#socialAlert .name').textContent = randomName;
+                socialAlert.style.display = 'flex';
+                setTimeout(() => {
+                    socialAlert.style.display = 'none';
+                }, 4000);
+            }
+            setInterval(showRandomAlert, 8000);
+            setTimeout(showRandomAlert, 2000); // Show first alert after a delay
 
-      const steps = ["Checking device…", "Routing to offer…", "Ready!"];
-      let i = 0;
-      const tick = () => {
-        st.textContent = steps[i];
-        if (i < steps.length - 1) {
-          i++;
-          setTimeout(tick, 700);
-        }
-      };
-      tick();
+            // Current progress steps logic (kept)
+            const steps = [
+                { text: "Checking device...", duration: 700, progress: 30 },
+                { text: "Finding best offer...", duration: 900, progress: 60 },
+                { text: "Almost there...", duration: 600, progress: 90 },
+                { text: "Ready! Click below to start", duration: 500, progress: 100 }
+            ];
+            let currentStep = 0;
 
-      countryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          countryButtons.forEach(btn => btn.classList.remove('selected'));
-          this.classList.add('selected');
-          const countryCode = this.getAttribute('data-country');
-          goButton.setAttribute('data-link', links[countryCode]);
+            function runProgress() {
+                if (currentStep < steps.length) {
+                    const step = steps[currentStep];
+                    statusText.textContent = step.text;
+                    progressBar.style.width = step.progress + '%';
+                    currentStep++;
+                    if (currentStep === steps.length) {
+                        setTimeout(() => {
+                            finalCta.style.display = 'block';
+                            setTimeout(() => {
+                                finalCta.classList.add('show');
+                            }, 50);
+                        }, step.duration);
+                    } else {
+                        setTimeout(runProgress, step.duration);
+                    }
+                }
+            }
 
-          // Apply a smooth transition
-          countrySelection.classList.add('transition-fade-out');
-          setTimeout(() => {
-            countrySelection.classList.add('hidden');
-            finalCta.classList.remove('hidden');
-            finalCta.classList.add('transition-fade-in');
-          }, 500); // Match this timeout with the CSS transition duration
-        });
-      });
+            runProgress();
 
-      goButton.addEventListener('click', function() {
-        const link = this.getAttribute('data-link');
-        if (link) {
-          window.open(link, "_blank", "noopener,noreferrer");
-        }
-      }, {
-        passive: true
-      });
-    })();
-  </script>
+            // --- Secure Redirect Logic (Updated) ---
+            goButton.addEventListener('click', function() {
+                // The CTA link now points to a secure, server-side redirect endpoint
+                // and should be handled by the server to pass the correct affiliate link
+                window.location.href = '/api/redirect';
+            });
+        })();
+    </script>
 </body>
 </html>

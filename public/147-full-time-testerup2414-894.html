@@ -16,7 +16,7 @@
       --accent-red: #DB1C15;
       --accent-red-dark: #b81711;
       --accent-green: #00ff88;
-      --radius: 12px;
+      --radius: 16px;
     }
 
     * {
@@ -25,16 +25,12 @@
       padding: 0;
     }
 
-    html, body {
-      height: 100%;
-    }
-
     body {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-light);
       text-align: center;
-      padding: 1.5rem 1rem;
+      padding: 2rem 1rem;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -44,13 +40,13 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.75rem; /* Increased gap for better spacing */
     }
 
     .header .logo {
-      max-width: 180px;
+      max-width: 220px; /* Made logo slightly larger */
       height: auto;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
 
     .header h1 {
@@ -62,7 +58,7 @@
     .header p {
       color: var(--text-med);
       font-size: 1.1rem;
-      margin-top: 0.25rem;
+      margin-top: 0.5rem;
     }
 
     .stats-bar {
@@ -93,15 +89,15 @@
     .steps-guide {
       background-color: var(--bg-med);
       border-radius: var(--radius);
-      padding: 1.25rem;
+      padding: 1.5rem; /* Increased padding */
       text-align: left;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .steps-guide h2 {
         text-align: center;
-        margin-bottom: 1rem;
-        font-size: 1.25rem;
+        margin-bottom: 1.25rem;
+        font-size: 1.3rem;
     }
 
     .steps-guide ol {
@@ -109,14 +105,14 @@
       padding-left: 0;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
     }
 
     .steps-guide li {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 0.95rem;
+      gap: 1rem;
+      font-size: 1rem;
     }
     
     .steps-guide li .step-number {
@@ -124,8 +120,8 @@
       color: white;
       font-weight: 700;
       border-radius: 50%;
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -133,37 +129,62 @@
     }
 
     .steps-guide .pro-tip {
-        margin-top: 1rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        font-size: 0.9rem;
-        color: var(--text-med);
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: var(--text-med);
+      background-color: rgba(0, 255, 136, 0.05); /* Subtle green background */
+      border-radius: 12px;
     }
 
     .steps-guide .pro-tip b {
-        color: var(--accent-green);
+      color: var(--accent-green);
     }
-
+    
     .cta-flow {
-        min-height: 150px; /* Reserve space to prevent layout shift */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     
     .status-text {
       color: var(--text-med);
-      margin-bottom: 1rem;
-      height: 24px; /* Prevent layout shift */
+      margin-bottom: 1.25rem;
+      height: 24px;
       font-weight: 600;
     }
     
-    #country-selection .btn-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        width: 100%;
+    /* NEW STYLES FOR DEVICE SELECTION */
+    #device-selection .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .btn-device {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .btn-device:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-green);
+    }
+    
+    .btn-device svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
     }
 
     .btn {
@@ -178,21 +199,22 @@
       cursor: pointer;
       transition: all 0.2s ease-in-out;
     }
+    
+    /* BUG FIX & ANIMATION REWORK */
+    .cta-stage {
+      width: 100%;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
 
-    .btn-country {
-      background-color: #333;
-      color: var(--text-light);
-      border: 1px solid #555;
+    .cta-stage.hidden {
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      position: absolute;
     }
     
-    .btn-country:hover {
-        background-color: #444;
-    }
-
-    #final-cta {
-        width: 100%;
-    }
-
     .btn-primary {
       background-color: var(--accent-red);
       color: #fff;
@@ -205,23 +227,9 @@
     }
     
     .footer-text {
-        font-size: 0.85rem;
-        color: var(--text-med);
-        margin-top: 1rem;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .transition-fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease-out;
-    }
-
-    .transition-fade-in {
-      opacity: 1;
-      transition: opacity 0.5s ease-in;
+      font-size: 0.85rem;
+      color: var(--text-med);
+      margin-top: 1rem;
     }
 
     @keyframes pulse {
@@ -235,42 +243,24 @@
 
   <div class="container">
     <header class="header">
-      <img src="https://i.ibb.co/6P01K0q/testerup-logo-white.png" alt="TesterUp Logo" class="logo">
+      <img src="https://i.ibb.co/68q6d15/testrrrlogo.png" alt="TesterUp Logo" class="logo">
       <h1>Get Paid To Test Games</h1>
       <p>Earn up to $250/day from your phone.</p>
     </header>
 
     <section class="stats-bar">
-      <div class="stat">
-        <strong>50K+</strong>
-        <span>Active Testers</span>
-      </div>
-      <div class="stat">
-        <strong>$280.50</strong>
-        <span>Avg. Payout Today</span>
-      </div>
-      <div class="stat">
-        <strong>5 Min</strong>
-        <span>Quick Start</span>
-      </div>
+      <div class="stat"><strong>50K+</strong><span>Active Testers</span></div>
+      <div class="stat"><strong>$280.50</strong><span>Avg. Payout Today</span></div>
+      <div class="stat"><strong>5 Min</strong><span>Quick Start</span></div>
     </section>
 
     <main>
       <section class="steps-guide">
         <h2>How It Works</h2>
         <ol>
-          <li>
-            <span class="step-number">1</span>
-            <span>Select your country & download the TesterUp app.</span>
-          </li>
-          <li>
-            <span class="step-number">2</span>
-            <span>Test 1-3 new games to start earning rewards.</span>
-          </li>
-          <li>
-            <span class="step-number">3</span>
-            <span>Cash out instantly and repeat anytime!</span>
-          </li>
+          <li><span class="step-number">1</span><span>Select your device & download the app.</span></li>
+          <li><span class="step-number">2</span><span>Test 1-3 new games to start earning rewards.</span></li>
+          <li><span class="step-number">3</span><span>Cash out instantly and repeat anytime!</span></li>
         </ol>
         <p class="pro-tip">💡 <b>Pro Tip:</b> All in-app purchases are <b>fully reimbursed</b> & multiply your earnings!</p>
       </section>
@@ -278,15 +268,21 @@
       <section class="cta-flow">
         <p class="status-text" id="status-text"></p>
 
-        <div id="country-selection" style="width:100%;">
+        <div id="device-selection" class="cta-stage">
           <div class="btn-group">
-            <button class="btn btn-country" data-country="us">United States</button>
-            <button class="btn btn-country" data-country="ca">Canada</button>
+            <button class="btn btn-device" data-device="ios">
+              <svg viewBox="0 0 24 24"><path d="M17.25 2.25h-10.5c-1.5 0-2.25.75-2.25 2.25v15c0 1.5.75 2.25 2.25 2.25h10.5c1.5 0 2.25-.75 2.25-2.25v-15c0-1.5-.75-2.25-2.25-2.25zm-5.25 18c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm5.25-3.75h-10.5v-12h10.5v12z"></path></svg>
+              <span>iPhone / iOS</span>
+            </button>
+            <button class="btn btn-device" data-device="android">
+              <svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-8c-.83 0-1.5.67-1.5 1.5v6c0 .83.67 1.5 1.5 1.5S5 18.33 5 17.5v-6c0-.83-.67-1.5-1.5-1.5zm17 0c-.83 0-1.5.67-1.5 1.5v6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-6c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 3.23 12.95 3 12 3c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"></path></svg>
+              <span>Android</span>
+            </button>
           </div>
         </div>
-
-        <div id="final-cta" class="hidden">
-           <a href="/api/redirect" id="go-button" class="btn btn-primary">Start Earning Now</a>
+        
+        <div id="final-cta" class="cta-stage hidden">
+          <a href="/api/redirect" id="go-button" class="btn btn-primary">Start Earning Now</a>
           <p class="footer-text">🛡️ Verified & Secure</p>
         </div>
       </section>
@@ -297,18 +293,15 @@
   <script>
     (() => {
       const statusText = document.getElementById('status-text');
-      const countrySelection = document.getElementById('country-selection');
-      const countryButtons = document.querySelectorAll('.btn-country');
+      // UPDATED selectors
+      const deviceSelection = document.getElementById('device-selection');
+      const deviceButtons = document.querySelectorAll('.btn-device');
       const finalCta = document.getElementById('final-cta');
       const goButton = document.getElementById('go-button');
 
-      // --- Offer Link Configuration ---
-      // Your server-side script at /api/redirect will handle sending the user
-      // to the correct offer based on the query parameter.
       const redirectBaseUrl = '/api/redirect';
 
-      // Animate status text
-      const statuses = ["Checking device...", "Verifying location...", "Ready!"];
+      const statuses = ["Checking device...", "Verifying compatibility...", "Ready!"];
       let i = 0;
       const tick = () => {
         if (statusText) {
@@ -321,23 +314,17 @@
       };
       tick();
 
-      // Handle country button clicks
-      countryButtons.forEach(button => {
+      deviceButtons.forEach(button => {
         button.addEventListener('click', function() {
-          const countryCode = this.getAttribute('data-country');
-          
-          // Set the final redirect URL with the country parameter
-          goButton.href = `${redirectBaseUrl}?country=${countryCode}`;
+          const deviceCode = this.getAttribute('data-device');
+          goButton.href = `${redirectBaseUrl}?device=${deviceCode}`;
 
-          // Animate the transition
-          countrySelection.classList.add('transition-fade-out');
+          // BUG FIX & ANIMATION REWORK: Use classes to handle transitions
+          deviceSelection.classList.add('hidden');
           
           setTimeout(() => {
-            countrySelection.classList.add('hidden');
             finalCta.classList.remove('hidden');
-            finalCta.style.opacity = '0'; // Start transparent for fade-in
-            finalCta.classList.add('transition-fade-in');
-          }, 500); // Wait for fade-out to finish
+          }, 50); // Small timeout allows the opacity transition to fire correctly
         });
       });
     })();

@@ -6,128 +6,111 @@
     <title>TesterUp | Earn Rewards Daily</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg1: #1a1a1a;
-            --bg2: #121212;
-            --card-bg: rgba(30, 30, 30, 0.8);
-            --text-light: #f5f5f5;
-            --text-med: #a0a0a0;
+            --bg-light: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-dark: #1c1c1e;
+            --text-med: #6b7280;
             --accent-red: #DB1C15;
             --accent-red-dark: #b81711;
-            --accent-green: #00ff88;
+            --border-light: #e5e7eb;
             --radius-lg: 24px;
             --radius-md: 16px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
-            color: var(--text-light);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 1rem;
-            overflow: hidden;
-            position: relative;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(40px);
-            pointer-events: none;
-            opacity: 0.15;
-        }
-        .o1 { top: 10vh; left: 10vw; width: 150px; height: 150px; background: var(--accent-red); animation: pulse 4s infinite alternate; }
-        .o2 { bottom: 15vh; right: 5vw; width: 200px; height: 200px; background: var(--accent-green); animation: pulse 5s infinite alternate-reverse; }
 
         .container {
             width: 100%;
             max-width: 420px;
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
             padding: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
             text-align: center;
             animation: fadeIn 0.5s ease-out;
         }
 
-        .logo {
-            max-width: 180px;
-            height: auto;
-            margin-bottom: 1rem;
+        .logo { max-width: 180px; height: auto; margin-bottom: 1.5rem; }
+        
+        .progress-bar-container {
+            width: 100%;
+            background-color: var(--border-light);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
         }
-
+        .progress-bar {
+            width: 0%;
+            height: 12px;
+            background-color: var(--accent-red);
+            border-radius: 8px;
+            transition: width 0.1s linear;
+        }
+        
         h1 {
             font-size: clamp(1.75rem, 5vw, 2rem);
             font-weight: 800;
             line-height: 1.2;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .steps-guide {
-            text-align: left;
-            margin: 1.5rem 0;
-        }
-
-        .steps-guide ol {
+        .quick-start { text-align: left; }
+        .quick-start ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 1rem;
         }
-
-        .steps-guide li {
+        .quick-start li {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            font-weight: 500;
         }
-
-        .step-number {
-            background-color: var(--accent-red);
-            color: white;
-            font-weight: 700;
-            border-radius: 50%;
+        .checkmark {
             width: 24px;
             height: 24px;
+            background-color: #e8f5e9;
+            color: #4caf50;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 700;
             flex-shrink: 0;
         }
-        
-        .cta-flow {
-            margin-top: 1rem;
-            min-height: 110px; /* Prevent layout shift */
-        }
-        
+
+        .cta-flow { margin-top: 2rem; min-height: 120px; }
         .status-text {
-          color: var(--text-med);
-          margin-bottom: 1rem;
-          height: 22px;
-          font-weight: 600;
-          font-size: 0.9rem;
+            color: var(--text-med);
+            margin-bottom: 1rem;
+            height: 22px;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         #device-selection .btn-group {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            width: 100%;
         }
-        
         .btn {
             display: inline-flex;
             align-items: center;
@@ -143,18 +126,12 @@
             cursor: pointer;
             transition: all 0.2s ease-in-out;
         }
-
         .btn-device {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-light);
+            background-color: #f8f8f8;
+            border: 2px solid var(--border-light);
+            color: var(--text-dark);
         }
-
-        .btn-device:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent-green);
-        }
-        
+        .btn-device:hover { border-color: var(--accent-red); }
         .btn-device svg { width: 24px; height: 24px; fill: currentColor; }
 
         .cta-stage {
@@ -163,7 +140,6 @@
             transform: translateY(0);
             transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
-
         .cta-stage.hidden {
             opacity: 0;
             transform: translateY(10px);
@@ -179,69 +155,38 @@
             color: #fff;
             animation: pulse-red 1.5s infinite;
         }
-
         .btn-primary:hover {
             background-color: var(--accent-red-dark);
             animation-play-state: paused;
         }
         
-        .footer-text {
-            font-size: 0.8rem;
-            color: var(--text-med);
-            margin-top: 1rem;
-        }
+        .footer-text { font-size: 0.8rem; color: var(--text-med); margin-top: 1rem; }
 
-        /* NEW DYNAMIC ELEMENT: Social Proof Alert */
-        .payout-alert {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            color: var(--text-light);
-            padding: 12px 18px;
-            border-radius: var(--radius-md);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            transition: bottom 0.5s ease-in-out;
-            z-index: 100;
-        }
-        .payout-alert.show {
-            bottom: 20px;
-        }
-        .alert-icon { color: var(--accent-green); font-size: 1.2rem; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse-red { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(219, 28, 21, 0.7); } 70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(219, 28, 21, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(219, 28, 21, 0); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.15; } 50% { transform: scale(1.2); opacity: 0.25; } }
     </style>
 </head>
 <body>
-    <div class="orb o1"></div>
-    <div class="orb o2"></div>
-
     <div class="container">
         <header>
             <img src="https://i.ibb.co/VvzVb0z/testrrrlogo.png" alt="TesterUp Logo" class="logo">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
             <h1>Get Paid To Test Games</h1>
         </header>
 
         <main>
-            <section class="steps-guide">
-                <ol>
-                    <li><span class="step-number">1</span><span>Select your device to download the app.</span></li>
-                    <li><span class="step-number">2</span><span>Test 1-3 new games to start earning.</span></li>
-                    <li><span class="step-number">3</span><span>Cash out instantly! Purchases reimbursed.</span></li>
-                </ol>
+            <section class="quick-start">
+                <ul>
+                    <li><span class="checkmark">✓</span><span>Select Your Device Below</span></li>
+                    <li><span class="checkmark">✓</span><span>Test 1-3 New Games to Start Earning</span></li>
+                    <li><span class="checkmark">✓</span><span>Cash Out Instantly & Repeat!</span></li>
+                </ul>
             </section>
 
             <section class="cta-flow">
                 <p class="status-text" id="status-text"></p>
-                
                 <div id="device-selection" class="cta-stage">
                     <div class="btn-group">
                         <button class="btn btn-device" data-device="ios">
@@ -254,7 +199,6 @@
                         </button>
                     </div>
                 </div>
-                
                 <div id="final-cta" class="cta-stage hidden">
                     <a href="/api/redirect" id="go-button" class="btn btn-primary">Start Earning Now</a>
                     <p class="footer-text">🛡️ Verified & Secure</p>
@@ -263,36 +207,39 @@
         </main>
     </div>
 
-    <div class="payout-alert" id="payout-alert">
-        <span class="alert-icon">💰</span>
-        <span id="alert-text"></span>
-    </div>
-
     <script>
     (() => {
+        const progressBar = document.getElementById('progress-bar');
         const statusText = document.getElementById('status-text');
         const deviceSelection = document.getElementById('device-selection');
         const deviceButtons = document.querySelectorAll('.btn-device');
         const finalCta = document.getElementById('final-cta');
         const goButton = document.getElementById('go-button');
-        const payoutAlert = document.getElementById('payout-alert');
-        const alertText = document.getElementById('alert-text');
-
         const redirectBaseUrl = '/api/redirect';
 
-        const statuses = ["Verifying device...", "Checking compatibility...", "Ready!"];
-        let i = 0;
-        const tick = () => {
-            if (statusText) {
-                statusText.textContent = statuses[i];
-                if (i < statuses.length - 1) {
-                    i++;
-                    setTimeout(tick, 900);
-                }
+        // Animate Progress Bar
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 5;
+            progressBar.style.width = progress + '%';
+            if (progress >= 100) {
+                clearInterval(interval);
+                
+                // Animate Status Text after progress bar finishes
+                const statuses = ["Checking device...", "Verifying compatibility...", "Ready!"];
+                let i = 0;
+                const tick = () => {
+                    statusText.textContent = statuses[i];
+                    if (i < statuses.length - 1) {
+                        i++;
+                        setTimeout(tick, 900);
+                    }
+                };
+                tick();
             }
-        };
-        tick();
+        }, 50);
 
+        // Handle Device Selection
         deviceButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const deviceCode = this.getAttribute('data-device');
@@ -301,27 +248,6 @@
                 setTimeout(() => { finalCta.classList.remove('hidden'); }, 50);
             });
         });
-
-        // --- Social Proof Alert Logic ---
-        const names = ["Abigail G.", "Ethan S.", "Chloe M.", "Liam B.", "Zoe P."];
-        const amounts = [150, 200, 250, 300];
-        
-        function showPayoutAlert() {
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-            alertText.textContent = `${randomName} just earned $${randomAmount}!`;
-            
-            payoutAlert.classList.add('show');
-            setTimeout(() => {
-                payoutAlert.classList.remove('show');
-            }, 4000); // Alert stays for 4 seconds
-        }
-
-        setTimeout(() => {
-            showPayoutAlert();
-            setInterval(showPayoutAlert, 7000); // Show a new alert every 7 seconds
-        }, 3000); // Show first alert after 3 seconds
-
     })();
     </script>
 </body>

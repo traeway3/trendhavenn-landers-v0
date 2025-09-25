@@ -66,9 +66,9 @@
     .progress>i { display: block; height: 100%; width: 84%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
     .status { font-size: 13px; color: var(--text-lead); margin-bottom: 8px; min-height: 18px }
     .steps { list-style: none; padding: 0; margin: 8px auto 18px; max-width: 560px; font-weight: 700; font-size: 15px; color: var(--text-lead); text-align: left; }
-    .steps li { margin: 8px 0; display: flex; align-items: flex-start; }
+    .steps li { margin: 12px 0; line-height: 1.4; }
     .steps li:before { content: '✓'; color: var(--accent); margin-right: 10px; font-weight: 800; }
-    .steps em { color: #6b7280; font-style: normal; font-weight: 800; }
+    .steps em { display: block; color: #6b7280; font-style: normal; font-weight: 800; padding-left: 28px; font-size: 0.9em; }
     .cta { appearance: none; border: 0; border-radius: 12px; padding: 16px 22px; cursor: pointer; background: var(--accent); color: #fff; font-weight: 800; font-size: 18px; width: min(420px, 90%); box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4); transition: transform .15s ease, box-shadow .15s ease; }
     .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(124, 58, 237, 0.5); }
     .cta:active { transform: scale(.98) }
@@ -76,8 +76,8 @@
     .cta-pulse { animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
     .country-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-    .country-btn { width: 100%; padding: 14px 22px; border-radius: 12px; border: 2px solid #e5e7eb; background: #f9fafb; color: var(--text-main); font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s ease; }
-    .country-btn:hover { background: #f3f4f6; border-color: var(--accent-light); }
+    .country-btn { width: 100%; padding: 14px 22px; border-radius: 12px; border: 2px solid var(--accent-light); background: #f9fafb; color: var(--accent); font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s ease; }
+    .country-btn:hover { background: #f3f4f6; border-color: var(--accent); }
     .country-btn.selected { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 15px rgba(124, 58, 237, 0.4); }
     .fine { color: var(--text-light); font-size: 12px; margin-top: 10px }
     .trust { font-size: 12px; color: #16a34a; margin-top: 10px; }

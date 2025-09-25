@@ -130,12 +130,9 @@
 
   <script>
     (function(){
-      // CRITICAL FIX: Links MUST point to a server-side redirect endpoint.
-      // Direct affiliate links are a security vulnerability.
-      const links = { 
-        US: "/api/redirect?offer=playful&country=us", 
-        CA: "/api/redirect?offer=playful&country=ca" 
-      };
+      // Per user command, this now uses a direct link.
+      const finalLink = "https://rewarduplevel.com/aff_c?offer_id=2691&aff_id=27696&source=index894";
+
       const st = document.getElementById('status');
       const countryButtons = document.querySelectorAll('.country-btn');
       const countrySelection = document.getElementById('country-selection');
@@ -159,8 +156,8 @@
         button.addEventListener('click', function() {
           countryButtons.forEach(btn => btn.classList.remove('selected'));
           this.classList.add('selected');
-          const countryCode = this.getAttribute('data-country');
-          goButton.setAttribute('data-link', links[countryCode]);
+          // Set the same final link regardless of country selection
+          goButton.setAttribute('data-link', finalLink);
           countrySelection.classList.add('transition-fade-out');
           setTimeout(() => {
             countrySelection.classList.add('hidden');
@@ -173,7 +170,6 @@
       goButton.addEventListener('click', function() {
         const link = this.getAttribute('data-link');
         if (link) { 
-            // Using location.href for a cleaner redirect.
             window.location.href = link;
         }
       }, { passive: true });

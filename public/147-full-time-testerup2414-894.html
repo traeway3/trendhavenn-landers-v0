@@ -2,253 +2,215 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>TesterUp | Earn Rewards Daily</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TesterUp Rewards</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-light: #f4f6f9;
-            --card-bg: #ffffff;
-            --text-dark: #1c1c1e;
-            --text-med: #6b7280;
-            --accent-red: #DB1C15;
-            --accent-red-dark: #b81711;
-            --border-light: #e5e7eb;
-            --radius-lg: 24px;
-            --radius-md: 16px;
+            --background-color: #f4f6f9;
+            --card-background: #ffffff;
+            --primary-text: #1a1a1a;
+            --secondary-text: #6b7280;
+            --cta-background: #22c55e;
+            --cta-text: #ffffff;
+            --cta-hover: #16a34a;
+            --border-color: #e5e7eb;
+            --accent-color: #3b82f6;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: var(--background-color);
+            color: var(--primary-text);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 1rem;
-            -webkit-font-smoothing: antialiased;
+            padding: 20px;
         }
-
-        .container {
+        .card {
+            background-color: var(--card-background);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            padding: 32px;
             width: 100%;
-            max-width: 420px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
             text-align: center;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .logo { max-width: 180px; height: auto; margin-bottom: 1.5rem; }
-        
-        .progress-bar-container {
-            width: 100%;
-            background-color: var(--border-light);
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
             overflow: hidden;
         }
-        .progress-bar {
-            width: 0%;
-            height: 12px;
-            background-color: var(--accent-red);
-            border-radius: 8px;
-            transition: width 0.1s linear;
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 16px;
         }
-        
         h1 {
-            font-size: clamp(1.75rem, 5vw, 2rem);
+            font-size: 28px;
             font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
+            margin-bottom: 4px;
         }
-
-        .quick-start { text-align: left; }
-        .quick-start ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .sub-headline {
+            font-size: 16px;
+            color: var(--secondary-text);
+            margin-bottom: 24px;
         }
-        .quick-start li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1rem;
+        .pre-qualifier p {
+            font-size: 16px;
             font-weight: 500;
+            margin-bottom: 16px;
         }
-        .checkmark {
-            width: 24px;
-            height: 24px;
-            background-color: #e8f5e9;
-            color: #4caf50;
-            border-radius: 50%;
+        .device-buttons {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .cta-flow { margin-top: 2rem; min-height: 120px; }
-        .status-text {
-            color: var(--text-med);
-            margin-bottom: 1rem;
-            height: 22px;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        #device-selection .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             gap: 12px;
+            margin-bottom: 24px;
+        }
+        .device-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background-color: var(--card-background);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .device-btn:hover {
+            background-color: #f9fafb;
+            border-color: var(--accent-color);
+        }
+        .final-step {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .progress-container {
             width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
+            background-color: var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .progress-bar {
+            width: 0;
+            height: 12px;
+            background-color: var(--accent-color);
+            border-radius: 8px;
+            animation: fill-progress 1.5s ease-out forwards;
+        }
+        @keyframes fill-progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        .instructions {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .instructions li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .instructions .icon {
+            color: var(--cta-background);
+            font-size: 20px;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+        .pro-tip {
+            background-color: #eff6ff;
+            color: #1e40af;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .pro-tip .highlight {
+            font-weight: 700;
+        }
+        .cta-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background-color: var(--cta-background);
+            color: var(--cta-text);
+            border-radius: 12px;
+            font-size: 18px;
             font-weight: 700;
             text-decoration: none;
-            border-radius: var(--radius-md);
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
+            transition: background-color 0.2s ease;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
         }
-        .btn-device {
-            background-color: #f8f8f8;
-            border: 2px solid var(--border-light);
-            color: var(--text-dark);
+        .cta-btn:hover {
+            background-color: var(--cta-hover);
         }
-        .btn-device:hover { border-color: var(--accent-red); }
-        .btn-device svg { width: 24px; height: 24px; fill: currentColor; }
-
-        .cta-stage {
-            width: 100%;
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        .footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--secondary-text);
         }
-        .cta-stage.hidden {
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-            position: absolute;
-            left: 0;
-            right: 0;
-            padding: 0 2rem;
+        .hidden {
+            display: none;
         }
-
-        .btn-primary {
-            background-color: var(--accent-red);
-            color: #fff;
-            animation: pulse-red 1.5s infinite;
-        }
-        .btn-primary:hover {
-            background-color: var(--accent-red-dark);
-            animation-play-state: paused;
-        }
-        
-        .footer-text { font-size: 0.8rem; color: var(--text-med); margin-top: 1rem; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse-red { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(219, 28, 21, 0.7); } 70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(219, 28, 21, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(219, 28, 21, 0); } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="https://i.ibb.co/VvzVb0z/testrrrlogo.png" alt="TesterUp Logo" class="logo">
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progress-bar"></div>
+
+    <div class="card">
+        <img src="testrrrlogo.png" alt="TesterUp Logo" class="logo">
+        <h1>Earn Up To $300/Day</h1>
+        <p class="sub-headline">Test Apps & Get Paid</p>
+
+        <div class="pre-qualifier" id="pre-qualifier">
+            <p>Select Your Device:</p>
+            <div class="device-buttons">
+                <button class="device-btn" data-choice="ios"> iOS</button>
+                <button class="device-btn" data-choice="android">Android</button>
             </div>
-            <h1>Get Paid To Test Games</h1>
-        </header>
+        </div>
 
-        <main>
-            <section class="quick-start">
-                <ul>
-                    <li><span class="checkmark">✓</span><span>Select Your Device Below</span></li>
-                    <li><span class="checkmark">✓</span><span>Test 1-3 New Games to Start Earning</span></li>
-                    <li><span class="checkmark">✓</span><span>Cash Out Instantly & Repeat!</span></li>
-                </ul>
-            </section>
-
-            <section class="cta-flow">
-                <p class="status-text" id="status-text"></p>
-                <div id="device-selection" class="cta-stage">
-                    <div class="btn-group">
-                        <button class="btn btn-device" data-device="ios">
-                            <svg viewBox="0 0 24 24"><path d="M17.25 2.25h-10.5c-1.5 0-2.25.75-2.25 2.25v15c0 1.5.75 2.25 2.25 2.25h10.5c1.5 0 2.25-.75 2.25-2.25v-15c0-1.5-.75-2.25-2.25-2.25zm-5.25 18c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm5.25-3.75h-10.5v-12h10.5v12z"></path></svg>
-                            <span>iPhone / iOS</span>
-                        </button>
-                        <button class="btn btn-device" data-device="android">
-                            <svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-8c-.83 0-1.5.67-1.5 1.5v6c0 .83.67 1.5 1.5 1.5S5 18.33 5 17.5v-6c0-.83-.67-1.5-1.5-1.5zm17 0c-.83 0-1.5.67-1.5 1.5v6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-6c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 3.23 12.95 3 12 3c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"></path></svg>
-                            <span>Android</span>
-                        </button>
-                    </div>
-                </div>
-                <div id="final-cta" class="cta-stage hidden">
-                    <a href="/api/redirect" id="go-button" class="btn btn-primary">Start Earning Now</a>
-                    <p class="footer-text">🛡️ Verified & Secure</p>
-                </div>
-            </section>
-        </main>
+        <div class="final-step hidden" id="final-step">
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+            <ul class="instructions">
+                <li><span class="icon">✓</span> Download TesterUp App</li>
+                <li><span class="icon">✓</span> Play & Test New Games</li>
+                <li><span class="icon">✓</span> Cash Out Instantly</li>
+            </ul>
+            <div class="pro-tip">
+                💡 Pro tip: Make in-app purchases on games to earn faster <span class="highlight">(They reimburse you for anything you spend!)</span>
+            </div>
+            <a href="/api/redirect" class="cta-btn">START EARNING</a>
+        </div>
+        
+        <div class="footer">
+            🛡️ Verified & Secure
+        </div>
     </div>
 
     <script>
-    (() => {
-        const progressBar = document.getElementById('progress-bar');
-        const statusText = document.getElementById('status-text');
-        const deviceSelection = document.getElementById('device-selection');
-        const deviceButtons = document.querySelectorAll('.btn-device');
-        const finalCta = document.getElementById('final-cta');
-        const goButton = document.getElementById('go-button');
-        const redirectBaseUrl = '/api/redirect';
+        document.addEventListener('DOMContentLoaded', () => {
+            const deviceButtons = document.querySelectorAll('.device-btn');
+            const preQualifier = document.getElementById('pre-qualifier');
+            const finalStep = document.getElementById('final-step');
 
-        // Animate Progress Bar
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 5;
-            progressBar.style.width = progress + '%';
-            if (progress >= 100) {
-                clearInterval(interval);
-                
-                // Animate Status Text after progress bar finishes
-                const statuses = ["Checking device...", "Verifying compatibility...", "Ready!"];
-                let i = 0;
-                const tick = () => {
-                    statusText.textContent = statuses[i];
-                    if (i < statuses.length - 1) {
-                        i++;
-                        setTimeout(tick, 900);
-                    }
-                };
-                tick();
-            }
-        }, 50);
-
-        // Handle Device Selection
-        deviceButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const deviceCode = this.getAttribute('data-device');
-                goButton.href = `${redirectBaseUrl}?device=${deviceCode}`;
-                deviceSelection.classList.add('hidden');
-                setTimeout(() => { finalCta.classList.remove('hidden'); }, 50);
+            deviceButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    preQualifier.classList.add('hidden');
+                    finalStep.classList.remove('hidden');
+                });
             });
         });
-    })();
     </script>
+
 </body>
 </html>

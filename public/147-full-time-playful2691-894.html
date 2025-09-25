@@ -1,237 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Playful Rewards - Get Paid to Play</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* New Playful Rewards Light Theme Palette */
-            --background-color: #f3e8ff; /* Light purple background */
-            --card-background: #ffffff;
-            --primary-text: #1f2937;
-            --secondary-text: #6b7280;
-            --cta-background: #8b5cf6; /* Main Purple CTA */
-            --cta-text: #ffffff;
-            --cta-hover: #7c3aed;
-            --border-color: #e5e7eb;
-            --accent-color: #a78bfa; /* Lighter Purple Accent */
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--background-color) 0%, #ede9fe 100%);
-            color: var(--primary-text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .card {
-            background-color: var(--card-background);
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            padding: 32px;
-            width: 100%;
-            max-width: 420px;
-            text-align: center;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        .logo {
-            width: 120px; /* Adjusted size for the new logo */
-            height: auto;
-            margin-bottom: 24px;
-            border-radius: 20px;
-        }
-        h1 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-        .sub-headline {
-            font-size: 16px;
-            color: var(--secondary-text);
-            margin-bottom: 24px;
-        }
-        .pre-qualifier p {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-        .device-buttons {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        .device-btn {
-            flex: 1;
-            padding: 14px;
-            border-radius: 12px;
-            border: 2px solid var(--border-color);
-            background-color: var(--card-background);
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .device-btn:hover, .device-btn:focus {
-            background-color: #f9fafb;
-            border-color: var(--cta-background);
-            outline: none;
-        }
-        .final-step {
-            transition: opacity 0.5s ease-in-out;
-        }
-        .progress-header {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--secondary-text);
-            margin-bottom: 8px;
-        }
-        .progress-container {
-            width: 100%;
-            background-color: var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-        .progress-bar {
-            width: 0;
-            height: 12px;
-            background: linear-gradient(90deg, var(--accent-color), var(--cta-background));
-            border-radius: 8px;
-            animation: fill-progress 1.5s ease-out forwards;
-        }
-        @keyframes fill-progress {
-            from { width: 0%; }
-            to { width: 100%; }
-        }
-        .instructions {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 24px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 24px;
-        }
-        .instructions li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            font-size: 15px;
-            font-weight: 500;
-        }
-        .instructions .icon {
-            color: var(--cta-background);
-            font-size: 20px;
-            margin-right: 12px;
-            font-weight: bold;
-        }
-        .pro-tip {
-            background-color: #f5f3ff; /* Light purple background for tip */
-            color: #5b21b6; /* Darker purple text */
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 13px;
-            line-height: 1.5;
-            text-align: left;
-            margin-bottom: 24px;
-        }
-        .pro-tip .highlight {
-            font-weight: 700;
-        }
-        .cta-btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: var(--cta-background);
-            color: var(--cta-text);
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
-            animation: pulse-purple 2s infinite;
-        }
-        @keyframes pulse-purple {
-            0% { transform: scale(1); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4); }
-            50% { transform: scale(1.03); box-shadow: 0 6px 25px rgba(139, 92, 246, 0.6); }
-            100% { transform: scale(1); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4); }
-        }
-        .cta-btn:hover {
-            background-color: var(--cta-hover);
-            transform: translateY(-2px);
-            animation-play-state: paused;
-        }
-        .footer {
-            margin-top: 24px;
-            font-size: 12px;
-            color: var(--secondary-text);
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <title>Playful Rewards - Start Earning Today</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f3f4f6" />
+  <meta name="description" content="Complete simple tasks and games to earn rewards. Get paid daily!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg1: #f9fafb;
+      --bg2: #f3f4f6;
+      --card-bg: #ffffff;
+      --text-main: #111827;
+      --text-lead: #4b5563;
+      --text-light: #9ca3af;
+      --accent: #7c3aed; /* Purple from logo */
+      --accent-light: #a78bfa;
+      --maxw: 720px;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--text-main);
+      font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; 
+      padding: 32px 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+    .card {
+      width: 100%;
+      max-width: var(--maxw);
+      text-align: center;
+      padding: 28px 18px;
+      background: var(--card-bg);
+      border: 1px solid #e5e7eb;
+      border-radius: var(--radius);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+      animation: fadeIn .5s ease-out both;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+    .logo { width: 96px; height: 96px; border-radius: 20px; object-fit: cover; margin: 8px auto 18px; display: block; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07); }
+    h1 { font-size: 28px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -.01em; font-weight: 800; color: var(--text-main); }
+    .lead { color: var(--text-lead); margin: 0 auto 14px; max-width: 48ch; font-size: 16px; }
+    .stats-container { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 24px; padding-top: 16px; margin-bottom: 16px; border-top: 1px solid #e5e7eb; }
+    .stat-item { text-align: center; }
+    .stat-value { color: var(--accent); font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+    .stat-label { color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; margin-top: 2px; }
+    .stat-divider { width: 1px; height: 30px; background: #e5e7eb; }
+    .progress { height: 8px; background: #e5e7eb; border-radius: 999px; overflow: hidden; margin: 16px auto 18px; max-width: 420px }
+    .progress>i { display: block; height: 100%; width: 84%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+    .status { font-size: 13px; color: var(--text-lead); margin-bottom: 8px; min-height: 18px }
+    .steps { list-style: none; padding: 0; margin: 8px auto 18px; max-width: 560px; font-weight: 700; font-size: 15px; color: var(--text-lead); text-align: left; }
+    .steps li { margin: 8px 0; display: flex; align-items: flex-start; }
+    .steps li:before { content: '✓'; color: var(--accent); margin-right: 10px; font-weight: 800; }
+    .steps em { color: #6b7280; font-style: normal; font-weight: 800; }
+    .cta { appearance: none; border: 0; border-radius: 12px; padding: 16px 22px; cursor: pointer; background: var(--accent); color: #fff; font-weight: 800; font-size: 18px; width: min(420px, 90%); box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4); transition: transform .15s ease, box-shadow .15s ease; }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(124, 58, 237, 0.5); }
+    .cta:active { transform: scale(.98) }
+    .cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px }
+    .cta-pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+    .country-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+    .country-btn { width: 100%; padding: 14px 22px; border-radius: 12px; border: 2px solid #e5e7eb; background: #f9fafb; color: var(--text-main); font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s ease; }
+    .country-btn:hover { background: #f3f4f6; border-color: var(--accent-light); }
+    .country-btn.selected { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 15px rgba(124, 58, 237, 0.4); }
+    .fine { color: var(--text-light); font-size: 12px; margin-top: 10px }
+    .trust { font-size: 12px; color: #16a34a; margin-top: 10px; }
+    .hidden { display: none; }
+    .transition-fade-out { opacity: 0; transform: translateY(-20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    .transition-fade-in { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    @media (max-width:330px) { .logo { width: 80px; height: 80px } h1 { font-size: 24px } .cta { font-size: 16px } }
+  </style>
 </head>
 <body>
-
-    <div class="card">
-        <img src="playful3.png" alt="Playful Rewards Logo" class="logo">
-        <h1>Get Paid To Play Games</h1>
-        <p class="sub-headline">Earn Up To $250 Daily</p>
-
-        <div class="pre-qualifier" id="pre-qualifier">
-            <p>Select Your Device:</p>
-            <div class="device-buttons">
-                <button class="device-btn" data-choice="ios"> iOS</button>
-                <button class="device-btn" data-choice="android">Android</button>
-            </div>
-        </div>
-
-        <div class="final-step hidden" id="final-step">
-            <p class="progress-header">Reward Progress</p>
-            <div class="progress-container">
-                <div class="progress-bar"></div>
-            </div>
-            <ul class="instructions">
-                <li><span class="icon">✓</span> Download the Playful app</li>
-                <li><span class="icon">✓</span> Play &amp; Test New Games</li>
-                <li><span class="icon">✓</span> Cash Out Instantly</li>
-            </ul>
-            <div class="pro-tip">
-                💡 Pro tip: Make in-app purchases on games to earn faster <span class="highlight">(They reimburse you for anything you spend!)</span>
-            </div>
-            <a href="/api/redirect" class="cta-btn">START EARNING</a>
-        </div>
-        
-        <div class="footer">
-            🛡️ Verified & Secure
-        </div>
+  <main class="card" role="main">
+    <img src="playful3.png" alt="Playful Rewards Logo" class="logo" />
+    <h1>Earn Cash Playing Fun Games</h1>
+    <p class="lead">Get paid real money to play your favorite mobile games.</p>
+    <div class="stats-container">
+        <div class="stat-item"> <div class="stat-value">100K+</div> <div class="stat-label">Active Players</div> </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"> <div class="stat-value">$125</div> <div class="stat-label">Avg. Payout</div> </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"> <div class="stat-value">3 Min</div> <div class="stat-label">Quick Start</div> </div>
     </div>
+    <div class="progress" aria-label="Setup progress"><i></i></div>
+    <div id="status" class="status" aria-live="polite">Checking device…</div>
+    <div id="cta-container">
+      <div id="country-selection">
+        <ul class="steps">
+          <li id="step1-country"></li> 
+          <li>Download & create your account</li>
+          <li>Complete 2-5 games to start earning <em>(more you play, more you earn!)</em></li>
+          <li>Request payout anytime & keep playing</li>
+        </ul>
+        <div class="country-buttons">
+          <button class="country-btn" data-country="US">United States</button>
+          <button class="country-btn" data-country="CA">Canada</button>
+        </div>
+      </div>
+      <div id="final-cta" class="hidden">
+        <ul class="steps">
+          <li id="step1-final"></li>
+          <li>Download & create your account</li>
+          <li>Complete 2-5 games to start earning <em>(more you play, more you earn!)</em></li>
+          <li>Request payout anytime & keep playing</li>
+        </ul>
+        <button class="cta cta-pulse" aria-label="Start Playing with Playful Rewards" id="go">START PLAYING</button>
+      </div>
+    </div>
+    <div class="trust">✓ Verified Partner • Free to Join</div>
+    <p class="fine">Participation required. Rewards depend on completing offers and/or game challenges. Results vary.</p>
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const deviceButtons = document.querySelectorAll('.device-btn');
-            const preQualifier = document.getElementById('pre-qualifier');
-            const finalStep = document.getElementById('final-step');
+  <script>
+    (function(){
+      // CRITICAL FIX: Links MUST point to a server-side redirect endpoint.
+      // Direct affiliate links are a security vulnerability.
+      const links = { 
+        US: "/api/redirect?offer=playful&country=us", 
+        CA: "/api/redirect?offer=playful&country=ca" 
+      };
+      const st = document.getElementById('status');
+      const countryButtons = document.querySelectorAll('.country-btn');
+      const countrySelection = document.getElementById('country-selection');
+      const finalCta = document.getElementById('final-cta');
+      const goButton = document.getElementById('go');
+      const step1Country = document.getElementById('step1-country');
+      const step1Final = document.getElementById('step1-final');
 
-            deviceButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    preQualifier.classList.add('hidden');
-                    finalStep.classList.remove('hidden');
-                });
-            });
+      const steps = ["Checking device…", "Routing to offer…", "Ready!"];
+      let i = 0;
+      const tick = () => {
+        st.textContent = steps[i];
+        if (i < steps.length - 1) { i++; setTimeout(tick, 700); }
+      };
+      tick();
+      
+      step1Country.textContent = 'Select your country below';
+      step1Final.textContent = 'Click "Start Playing" below';
+
+      countryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          countryButtons.forEach(btn => btn.classList.remove('selected'));
+          this.classList.add('selected');
+          const countryCode = this.getAttribute('data-country');
+          goButton.setAttribute('data-link', links[countryCode]);
+          countrySelection.classList.add('transition-fade-out');
+          setTimeout(() => {
+            countrySelection.classList.add('hidden');
+            finalCta.classList.remove('hidden');
+            finalCta.classList.add('transition-fade-in');
+          }, 500);
         });
-    </script>
+      });
 
+      goButton.addEventListener('click', function() {
+        const link = this.getAttribute('data-link');
+        if (link) { 
+            // Using location.href for a cleaner redirect.
+            window.location.href = link;
+        }
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>

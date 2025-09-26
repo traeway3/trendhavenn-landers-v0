@@ -9,14 +9,12 @@
 
         :root {
             --swag-blue: #005A8D;
-            --swag-gold: #FFC928;
             --cta-blue: #3686E5;
             --cta-hover: #2a6cb5;
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --light-text: #555;
             --white: #ffffff;
-            --success-green: #28a745;
         }
 
         * {
@@ -33,7 +31,7 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
 
         .container {
@@ -55,30 +53,30 @@
         }
 
         .header {
-            padding: 20px;
+            padding: 15px 15px 10px;
         }
 
         .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
+            max-width: 120px;
+            margin-bottom: 10px;
         }
 
         .headline {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--dark-text);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .sub-headline {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--light-text);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .progress-bar-container {
             width: 90%;
-            margin: 0 auto 10px;
+            margin: 0 auto 8px;
             background-color: #e0e0e0;
             border-radius: 20px;
         }
@@ -86,7 +84,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, #4CAF50, #81C784);
+            background: linear-gradient(90deg, var(--swag-blue), var(--cta-blue));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -94,7 +92,7 @@
         .progress-text {
             font-size: 0.8rem;
             color: var(--light-text);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             min-height: 1.2em; /* Reserve space for text */
         }
 
@@ -103,34 +101,45 @@
         }
 
         .quick-start-guide {
-            list-style: none;
+            list-style-type: none;
             text-align: left;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            padding-left: 5px;
         }
 
         .quick-start-guide li {
             display: flex;
-            align-items: center;
-            font-size: 0.95rem;
+            align-items: flex-start;
+            font-size: 0.9rem;
             color: var(--dark-text);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            counter-increment: step-counter;
         }
 
         .quick-start-guide li::before {
-            content: '✓';
-            color: var(--success-green);
+            content: counter(step-counter);
+            background-color: var(--cta-blue);
+            color: var(--white);
             font-weight: 700;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             margin-right: 10px;
-            font-size: 1.2rem;
+            font-size: 0.8rem;
+            line-height: 1;
         }
         
         .pro-tip {
             background-color: var(--light-gray);
             border-radius: 8px;
             padding: 10px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-align: left;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .cta-button {
@@ -163,7 +172,7 @@
         .social-proof {
             display: flex;
             justify-content: space-around;
-            padding: 20px;
+            padding: 15px;
             background-color: var(--light-gray);
         }
 
@@ -174,26 +183,29 @@
         }
 
         .proof-metric {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--swag-blue);
         }
         
         .proof-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--light-text);
         }
 
         .trust-badge {
-            margin-top: 15px;
+            margin-top: 10px;
             font-size: 0.8rem;
             color: var(--light-text);
         }
         
         .activity-alert {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             left: 20px;
+            right: 20px;
+            margin: 0 auto;
+            max-width: 360px;
             background-color: rgba(0,0,0,0.75);
             color: var(--white);
             padding: 12px 18px;
@@ -201,9 +213,10 @@
             font-size: 0.85rem;
             z-index: 1000;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(-20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            pointer-events: none;
         }
         
         .activity-alert.show {
@@ -227,11 +240,11 @@
         </div>
 
         <div class="main-content">
-             <ul class="quick-start-guide">
+             <ol class="quick-start-guide">
                 <li>Download & Sign Up: Create your free account.</li>
                 <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
                 <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
-            </ul>
+            </ol>
             
             <div class="pro-tip">
                 💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!

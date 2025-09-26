@@ -2,210 +2,319 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-    <title>Claim Your Swagbucks Bonus</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Claim Your Bonus</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
         :root {
-            --text-main: #1a202c;
-            --text-sub: #4a5568;
-            --brand-blue: #2F66F6;
-            --brand-blue-dark: #2553D8;
-            --shadow-color: rgba(47, 102, 246, 0.25);
-            --shadow-color-glow: rgba(47, 102, 246, 0.4);
+            --swag-blue: #005A8D;
+            --swag-gold: #FFC928;
+            --cta-blue: #3686E5;
+            --cta-hover: #2a6cb5;
+            --light-gray: #f0f2f5;
+            --dark-text: #333;
+            --light-text: #555;
+            --white: #ffffff;
+            --success-green: #28a745;
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
-            height: 100%;
-        }
-
         body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--light-gray);
             display: flex;
             justify-content: center;
-            align-items: center;
-            color: var(--text-main);
-            background: linear-gradient(-45deg, #e7f0ff, #f8f0ff, #e7f0ff, #f8f0ff);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
             width: 100%;
-            max-width: 420px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 28px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .swagbucks-logo {
-            max-width: 160px;
-            margin-bottom: 24px;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .main-headline {
-            font-size: 28px;
-            font-weight: 800;
-            line-height: 1.3;
-            margin: 0 0 12px 0;
-        }
-
-        .social-proof {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-sub);
-            margin-bottom: 24px;
-        }
-        
-        .quick-start-guide {
-            list-style: none;
-            padding: 0;
-            margin: 24px 0;
-            text-align: left;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .header {
+            padding: 20px;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+        }
+
+        .sub-headline {
+            font-size: 1rem;
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            width: 90%;
+            margin: 0 auto 10px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 12px;
+            background: linear-gradient(90deg, #4CAF50, #81C784);
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 20px;
+            min-height: 1.2em; /* Reserve space for text */
+        }
+
+        .main-content {
+            padding: 0 20px 20px;
+        }
+
+        .quick-start-guide {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 20px;
         }
 
         .quick-start-guide li {
             display: flex;
             align-items: center;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .quick-start-guide .step-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background-color: var(--brand-blue);
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-        
-        .rewards-section {
-            margin: 32px 0 24px 0;
-        }
-
-        .rewards-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-sub);
+            font-size: 0.95rem;
+            color: var(--dark-text);
             margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .reward-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 24px;
-            filter: grayscale(100%);
-            opacity: 0.5;
+        .quick-start-guide li::before {
+            content: '✓';
+            color: var(--success-green);
+            font-weight: 700;
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
-
-        .reward-logos img {
-            max-height: 22px;
+        
+        .pro-tip {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.85rem;
+            text-align: left;
+            margin-bottom: 20px;
         }
 
         .cta-button {
             display: block;
-            background: linear-gradient(to bottom, var(--brand-blue), var(--brand-blue-dark));
-            color: white;
-            padding: 18px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 25px var(--shadow-color);
-            border: none;
             width: 100%;
+            padding: 15px;
+            background-color: var(--cta-blue);
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
             cursor: pointer;
-            animation: ctaGlow 2.5s infinite ease-in-out;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 2s infinite;
         }
         
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px var(--shadow-color-glow);
-        }
-
-        @keyframes ctaGlow {
-            0% { box-shadow: 0 8px 25px var(--shadow-color); }
-            50% { box-shadow: 0 10px 30px var(--shadow-color-glow); }
-            100% { box-shadow: 0 8px 25px var(--shadow-color); }
+            background-color: var(--cta-hover);
+            transform: scale(1.02);
         }
         
-        .footer-trust {
-            margin-top: 24px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #a0aec0;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); }
+        }
+
+        .social-proof {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: var(--light-gray);
+        }
+
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .proof-metric {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--swag-blue);
+        }
+        
+        .proof-label {
+            font-size: 0.75rem;
+            color: var(--light-text);
+        }
+
+        .trust-badge {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+        
+        .activity-alert {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0,0,0,0.75);
+            color: var(--white);
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .activity-alert.show {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="swag.png" alt="Swagbucks Logo" class="swagbucks-logo">
+        <div class="header">
+            <img src="swag.png" alt="Swagbucks Logo" class="logo">
+            <h1 class="headline">Claim Your $100 Swagbucks Bonus</h1>
+            <p class="sub-headline">Redeem for gift cards from Amazon, Target, and more!</p>
+            
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="progressText" class="progress-text">Verifying device...</p>
+        </div>
 
-        <h1 class="main-headline">Turn Swagbucks Points Into Shopping Sprees</h1>
-        <p class="social-proof">✅ Join 50 Million+ members earning daily rewards.</p>
+        <div class="main-content">
+             <ul class="quick-start-guide">
+                <li>Download & Sign Up: Create your free account.</li>
+                <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
+                <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
+            </ul>
+            
+            <div class="pro-tip">
+                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+            </div>
+            
+            <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=148-its-a-swagbucks1897-897" class="cta-button">START EARNING NOW</a>
+            
+            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+        </div>
 
-        <ol class="quick-start-guide">
-            <li><span class="step-number">1</span> Sign Up Free & Claim Your $10 Bonus</li>
-            <li><span class="step-number">2</span> Take Surveys & Play New Games</li>
-            <li><span class="step-number">3</span> Cash Out for Gift Cards Instantly</li>
-        </ol>
-
-        <div class="rewards-section">
-            <p class="rewards-title">Cash Out With</p>
-            <div class="reward-logos">
-                <img src="paypalllogo.png" alt="PayPal">
-                <img src="amzonllogo.png" alt="Amazon">
-                <img src="victoriascretlogo.png" alt="Victoria's Secret">
-                <img src="sephoralogooo.png" alt="Sephora">
+        <div class="social-proof">
+            <div class="proof-item">
+                <span class="proof-metric">50K+</span>
+                <span class="proof-label">Daily Users</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">$10M+</span>
+                <span class="proof-label">Paid Out</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">5 Min</span>
+                <span class="proof-label">Signup</span>
             </div>
         </div>
-        
-        <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=148-its-a-swagbucks1897-897" id="goButton" class="cta-button">START EARNING NOW</a>
-        
-        <p class="footer-trust">🛡️ Verified by TikTok & Secure</p>
     </div>
+    
+    <div id="activityAlert" class="activity-alert"></div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Progress Bar Animation ---
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            const progressSteps = [
+                { text: 'Checking for offers...', width: '50%' },
+                { text: 'Success! Your spot is reserved!', width: '100%' }
+            ];
+            
+            setTimeout(() => {
+                progressBar.style.width = '25%';
+            }, 100);
+
+            let currentStep = 0;
+            const progressInterval = setInterval(() => {
+                if (currentStep < progressSteps.length) {
+                    progressText.innerText = progressSteps[currentStep].text;
+                    progressBar.style.width = progressSteps[currentStep].width;
+                    currentStep++;
+                } else {
+                    clearInterval(progressInterval);
+                }
+            }, 1500);
+
+            // --- Live Activity Alerts ---
+            const activityAlert = document.getElementById('activityAlert');
+            const alerts = [
+                "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
+                "Mike from Florida just cashed out $50 via PayPal.",
+                "Sarah from California just earned $10 from a survey.",
+                "David from New York just got a $50 Walmart Gift Card.",
+                "Emily from Ohio just completed a gaming offer for $30."
+            ];
+
+            let alertIndex = 0;
+            
+            const showAlert = () => {
+                activityAlert.innerText = alerts[alertIndex];
+                activityAlert.classList.add('show');
+                
+                setTimeout(() => {
+                    activityAlert.classList.remove('show');
+                }, 4000); // Alert visible for 4 seconds
+
+                alertIndex = (alertIndex + 1) % alerts.length;
+            };
+            
+            // Show first alert after 3 seconds, then every 6 seconds
+            setTimeout(() => {
+                showAlert();
+                setInterval(showAlert, 6000);
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

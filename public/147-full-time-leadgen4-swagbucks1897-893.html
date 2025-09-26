@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Swagbucks - Your Cozy Side Hustle</title>
+    <title>Swagbucks - Your Favorite Side Hustle</title>
     <meta name="description" content="The perfect side-hustle to earn rewards from your phone.">
     <meta name="theme-color" content="#F8F7F4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +15,8 @@
             --card-bg-color: #FFFFFF;
             --text-main: #2c3e50;
             --text-sub: #7f8c8d;
-            --accent-color: #A0D4C4;
-            --accent-color-dark: #8EBFB0;
+            --accent-color: #5A87F8; /* New blue accent color */
+            --accent-color-dark: #4A77E8;
             --border-color: #ecf0f1;
             --shadow-color: rgba(44, 62, 80, 0.1);
         }
@@ -39,9 +39,9 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            -webkit-user-select: none; /* Safari */
-            -ms-user-select: none; /* IE 10+ */
-            user-select: none; /* Standard syntax */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         .card {
@@ -50,13 +50,13 @@
             max-width: 400px;
             padding: 24px 28px;
             border-radius: 24px;
-            box-shadow: 0 10px 25px var(--shadow-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
             text-align: center;
             overflow: hidden;
         }
         
         .logo {
-            max-height: 35px;
+            max-height: 45px; /* Enlarged logo */
             margin-bottom: 16px;
         }
 
@@ -171,23 +171,49 @@
             border-radius: 12px;
             cursor: pointer;
             transition: background-color 0.2s ease-in-out;
+            animation: pulse 2s infinite; /* Pulsing CTA */
         }
 
         .final-cta-btn:hover {
             background-color: var(--accent-color-dark);
-        }
-
-        .hidden {
-            display: none !important;
+            animation-play-state: paused;
         }
         
-        .transition-fade-out {
-            animation: fadeOut 0.5s forwards;
+        .stats-bar {
+            border-top: 1px solid var(--border-color);
+            margin-top: 24px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
         }
 
-        .transition-fade-in {
-            animation: fadeIn 0.5s forwards;
+        .stat h3 {
+            margin: 0 0 4px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
         }
+
+        .stat p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .pro-tip {
+            margin-top: 24px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: left;
+            color: var(--text-sub);
+        }
+
+        .hidden { display: none !important; }
+        .transition-fade-out { animation: fadeOut 0.5s forwards; }
+        .transition-fade-in { animation: fadeIn 0.5s forwards; }
 
         @keyframes fadeOut {
             from { opacity: 1; transform: scale(1); }
@@ -197,6 +223,12 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(90, 135, 248, 0.4); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(90, 135, 248, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(90, 135, 248, 0); }
         }
     </style>
 </head>
@@ -218,6 +250,21 @@
                 <button class="country-btn" data-country="US">United States</button>
                 <button class="country-btn" data-country="CA">Canada</button>
             </div>
+            
+            <div class="stats-bar">
+                <div class="stat">
+                    <h3>50K+</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat">
+                    <h3>$150</h3>
+                    <p>Avg. Payout</p>
+                </div>
+                <div class="stat">
+                    <h3>5 Min</h3>
+                    <p>Quick Start</p>
+                </div>
+            </div>
         </div>
 
         <div id="final-cta" class="hidden">
@@ -229,6 +276,9 @@
             <p id="status-text">Initializing...</p>
             <p class="step-text">FINAL STEP: Download the app</p>
             <a href="#" id="go-button" class="final-cta-btn">Start Earning Now</a>
+            <div class="pro-tip">
+                💡 <strong>Pro Tip:</strong> In-app purchases are fully reimbursed & boost your earnings!
+            </div>
         </div>
     </div>
 

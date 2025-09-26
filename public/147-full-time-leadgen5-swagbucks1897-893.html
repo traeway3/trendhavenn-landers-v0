@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Swagbucks - Your Favorite Side Hustle</title>
+    <meta name="description" content="The perfect side-hustle to earn rewards from your phone.">
+    <meta name="theme-color" content="#F8F7F4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F8F7F4;
+            --card-bg-color: #FFFFFF;
+            --text-main: #2c3e50;
+            --text-sub: #7f8c8d;
+            --accent-color: #5A87F8; /* New blue accent color */
+            --accent-color-dark: #4A77E8;
+            --border-color: #ecf0f1;
+            --shadow-color: rgba(44, 62, 80, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            height: 100%;
+        }
+        
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            width: 100%;
+            max-width: 400px;
+            padding: 24px 28px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .logo {
+            max-height: 45px; /* Enlarged logo */
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 8px;
+        }
+
+        .quick-start-guide {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .quick-start-guide li {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+        
+        .quick-start-guide li:last-child {
+            margin-bottom: 0;
+        }
+
+        .quick-start-guide .icon {
+            color: var(--accent-color);
+            margin-right: 12px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .step-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 24px 0 16px;
+        }
+
+        .country-buttons {
+            display: grid;
+            gap: 12px;
+        }
+
+        .country-btn {
+            width: 100%;
+            padding: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .country-btn:hover {
+            border-color: var(--accent-color-dark);
+            background-color: #fcfcfc;
+        }
+
+        .country-btn.selected {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            margin: 16px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+            transition: width 2s ease-out;
+        }
+        
+        .progress-bar.loaded {
+            width: 100%;
+        }
+        
+        #status-text {
+            color: var(--text-sub);
+            height: 24px;
+            margin-bottom: 16px;
+        }
+
+        .final-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            animation: pulse 2s infinite; /* Pulsing CTA */
+        }
+
+        .final-cta-btn:hover {
+            background-color: var(--accent-color-dark);
+            animation-play-state: paused;
+        }
+        
+        .stats-bar {
+            border-top: 1px solid var(--border-color);
+            margin-top: 24px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat h3 {
+            margin: 0 0 4px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .pro-tip {
+            margin-top: 24px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: left;
+            color: var(--text-sub);
+        }
+
+        .hidden { display: none !important; }
+        .transition-fade-out { animation: fadeOut 0.5s forwards; }
+        .transition-fade-in { animation: fadeIn 0.5s forwards; }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(90, 135, 248, 0.4); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(90, 135, 248, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(90, 135, 248, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div id="country-selection">
+            <img src="swag.png" alt="Swagbucks Logo" class="logo">
+            <h1>Your New Favorite Side-Hustle</h1>
+            
+            <ul class="quick-start-guide">
+                <li><span class="icon">✓</span> Download the Swagbucks app</li>
+                <li><span class="icon">✓</span> Play games to earn rewards</li>
+                <li><span class="icon">✓</span> Cash out anytime!</li>
+            </ul>
+
+            <p class="step-text">Select your country to begin</p>
+            <div class="country-buttons">
+                <button class="country-btn" data-country="US">United States</button>
+                <button class="country-btn" data-country="CA">Canada</button>
+            </div>
+            
+            <div class="stats-bar">
+                <div class="stat">
+                    <h3>50K+</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat">
+                    <h3>$150</h3>
+                    <p>Avg. Payout</p>
+                </div>
+                <div class="stat">
+                    <h3>5 Min</h3>
+                    <p>Quick Start</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="final-cta" class="hidden">
+            <img src="swag.png" alt="Swagbucks Logo" class="logo">
+            <h1>Almost there...</h1>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <p id="status-text">Initializing...</p>
+            <p class="step-text">FINAL STEP: Download the app</p>
+            <a href="#" id="go-button" class="final-cta-btn">Start Earning Now</a>
+            <div class="pro-tip">
+                💡 <strong>Pro Tip:</strong> In-app purchases are fully reimbursed & boost your earnings!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            const countrySelection = document.getElementById('country-selection');
+            const finalCta = document.getElementById('final-cta');
+            const countryButtons = document.querySelectorAll('.country-btn');
+            const goButton = document.getElementById('go-button');
+            const progressBar = document.getElementById('progress-bar');
+            const statusText = document.getElementById('status-text');
+
+            const finalLink = 'https://uplevelrewarded.com/aff_c?offer_id=1897&aff_id=27696&source=147-full-time-leadgen4-swagbucks1897-893';
+            goButton.href = finalLink;
+            
+            const statusMessages = ["Connecting to server...", "Verifying location...", "Success! Redirecting..."];
+
+            countryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    countryButtons.forEach(btn => btn.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    countrySelection.classList.add('transition-fade-out');
+                    setTimeout(() => {
+                        countrySelection.classList.add('hidden');
+                        finalCta.classList.remove('hidden');
+                        finalCta.classList.add('transition-fade-in');
+
+                        setTimeout(() => progressBar.classList.add('loaded'), 100);
+
+                        let i = 0;
+                        const cycleStatus = () => {
+                            if (i < statusMessages.length) {
+                                statusText.textContent = statusMessages[i];
+                                i++;
+                                setTimeout(cycleStatus, 700);
+                            }
+                        };
+                        cycleStatus();
+
+                    }, 500);
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

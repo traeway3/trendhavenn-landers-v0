@@ -10,13 +10,12 @@
     <style>
         :root {
             --bg-color: #ffffff;
-            --card-bg-color: #ffffff;
             --text-main: #1a202c;
             --text-sub: #4a5568;
             --brand-blue: #2F66F6;
             --brand-blue-dark: #2553D8;
-            --border-color: #e2e8f0;
             --shadow-color: rgba(47, 102, 246, 0.25);
+            --shadow-color-glow: rgba(47, 102, 246, 0.4);
         }
 
         * {
@@ -45,35 +44,28 @@
             text-align: center;
         }
 
-        .swagbucks-logo {
-            max-width: 160px;
-            margin-bottom: 24px;
-        }
-        
-        .main-headline {
-            font-size: 28px;
-            font-weight: 800;
-            line-height: 1.3;
-            margin: 0 0 12px 0;
+        /* --- Animation Classes --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.6s ease-out forwards;
         }
 
-        .social-proof {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-sub);
-            margin-bottom: 24px;
+        .swagbucks-logo { max-width: 160px; margin-bottom: 24px; animation-delay: 0.1s; }
+        .main-headline { font-size: 28px; font-weight: 800; line-height: 1.3; margin: 0 0 12px 0; animation-delay: 0.2s; }
+        .social-proof { font-size: 16px; font-weight: 600; color: var(--text-sub); margin-bottom: 24px; animation-delay: 0.3s; }
+        .quick-start-guide { list-style: none; padding: 0; margin: 24px 0; text-align: left; display: flex; flex-direction: column; gap: 16px; animation-delay: 0.4s; }
+        .rewards-section { margin: 32px 0 24px 0; animation-delay: 0.5s; }
+        .cta-button { animation-delay: 0.6s; }
+        .footer-trust { margin-top: 24px; font-size: 13px; font-weight: 600; color: #a0aec0; animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .quick-start-guide {
-            list-style: none;
-            padding: 0;
-            margin: 24px 0;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
         .quick-start-guide li {
             display: flex;
             align-items: center;
@@ -96,10 +88,6 @@
             flex-shrink: 0;
         }
         
-        .rewards-section {
-            margin: 32px 0 24px 0;
-        }
-
         .rewards-title {
             font-size: 12px;
             font-weight: 600;
@@ -136,36 +124,36 @@
             border: none;
             width: 100%;
             cursor: pointer;
+            animation: ctaGlow 2s infinite ease-in-out, fadeInUp 0.6s ease-out forwards;
         }
         
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px var(--shadow-color);
+            box-shadow: 0 12px 30px var(--shadow-color-glow);
         }
-        
-        .footer-trust {
-            margin-top: 24px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #a0aec0;
+
+        @keyframes ctaGlow {
+            0% { box-shadow: 0 8px 25px var(--shadow-color); }
+            50% { box-shadow: 0 10px 30px var(--shadow-color-glow); }
+            100% { box-shadow: 0 8px 25px var(--shadow-color); }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="swag.png" alt="Swagbucks Logo" class="swagbucks-logo">
+        <img src="swag.png" alt="Swagbucks Logo" class="swagbucks-logo fade-in-up">
 
-        <h1 class="main-headline">Turn Swagbucks Points Into Shopping Sprees</h1>
-        <p class="social-proof">✅ Join 50 Million+ members earning daily rewards.</p>
+        <h1 class="main-headline fade-in-up">Turn Swagbucks Points Into Shopping Sprees</h1>
+        <p class="social-proof fade-in-up">✅ Join 50 Million+ members earning daily rewards.</p>
 
-        <ol class="quick-start-guide">
+        <ol class="quick-start-guide fade-in-up">
             <li><span class="step-number">1</span> Sign Up Free & Claim Your $10 Bonus</li>
             <li><span class="step-number">2</span> Take Surveys & Play New Games</li>
             <li><span class="step-number">3</span> Cash Out for Gift Cards Instantly</li>
         </ol>
 
-        <div class="rewards-section">
+        <div class="rewards-section fade-in-up">
             <p class="rewards-title">Cash Out With</p>
             <div class="reward-logos">
                 <img src="paypalllogo.png" alt="PayPal">
@@ -177,7 +165,7 @@
         
         <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=148-its-a-swagbucks1897-897" id="goButton" class="cta-button">START EARNING NOW</a>
         
-        <p class="footer-trust">🛡️ Verified by TikTok & Secure</p>
+        <p class="footer-trust fade-in-up">🛡️ Verified by TikTok & Secure</p>
     </div>
 
 </body>

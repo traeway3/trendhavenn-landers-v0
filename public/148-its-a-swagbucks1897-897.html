@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <title>Claim Your Swagbucks Bonus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg-color: #ffffff;
+            --text-main: #1d2a3f;
+            --text-sub: #6c7a8e;
+            --brand-blue: #2F66F6;
+            --cta-green: #2ecc71;
+            --cta-green-dark: #27ae60;
+            --border-color: #e8edf3;
+            --shadow-color: rgba(44, 62, 80, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100%;
+            color: var(--text-main);
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            width: 100%;
+            max-width: 400px;
+            padding: 28px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .swagbucks-logo {
+            max-width: 180px;
+            margin-bottom: 15px;
+        }
+        
+        .rewards-section {
+            margin-bottom: 20px;
+        }
+
+        .rewards-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reward-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+
+        .reward-logos img {
+            max-height: 20px;
+        }
+
+        .main-headline {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0 0 8px 0;
+        }
+
+        .sub-headline {
+            font-size: 15px;
+            color: var(--text-sub);
+            margin: 0 0 20px 0;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat-item .stat-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--brand-blue);
+        }
+
+        .stat-item .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-sub);
+            text-transform: uppercase;
+        }
+
+        .quick-start-guide {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .quick-start-guide li {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .quick-start-guide li:not(:last-child) {
+            margin-bottom: 12px;
+        }
+
+        .quick-start-guide li::before {
+            content: '✓';
+            color: var(--cta-green);
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        
+        .pro-tip {
+            background-color: #f0f5ff;
+            border-left: 4px solid var(--brand-blue);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 14px;
+            margin: 25px 0;
+            color: #3b527a;
+        }
+        
+        .country-selection p {
+            font-weight: 600;
+            margin: 0 0 15px 0;
+        }
+
+        .country-btn {
+            background-color: var(--card-bg-color);
+            border: 2px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 10px;
+        }
+
+        .country-btn:hover {
+            border-color: var(--brand-blue);
+        }
+
+        .final-cta {
+            text-align: center;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            background-color: var(--border-color);
+            border-radius: 20px;
+            height: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--brand-blue);
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .progress-bar.loaded {
+            width: 100%;
+        }
+
+        .status-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-sub);
+            height: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: block;
+            background-color: var(--cta-green);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: background-color 0.2s ease;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--cta-green-dark);
+        }
+        
+        .footer-trust {
+            margin-top: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <img src="https://assets.website-files.com/6230a62562615403a493cf27/6230a625626154173293cf48_Swagbucks-logo.svg" alt="Swagbucks Logo" class="swagbucks-logo">
+
+        <div class="rewards-section">
+            <p class="rewards-title">CASH OUT WITH</p>
+            <div class="reward-logos">
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_e82d8c36531d2797825cfcd029f63529?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="PayPal">
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_7cc0d39e2402120e6a8d79435b5463e2?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="Amazon">
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_97711ca54109786cf88b907474d20478?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="Victoria's Secret">
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_5b3671217e9975791a877d46535c873f?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="Sephora">
+            </div>
+        </div>
+
+        <h1 class="main-headline">Turn Swagbucks Points Into Shopping Sprees</h1>
+        <p class="sub-headline">The #1 App for Earning Gift Cards from Brands You Love.</p>
+
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">50M+</div>
+                <div class="stat-label">Members</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$10K+</div>
+                <div class="stat-label">Paid Daily</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$10</div>
+                <div class="stat-label">Sign Up Bonus</div>
+            </div>
+        </div>
+
+        <ul class="quick-start-guide">
+            <li>Sign Up Free in Seconds</li>
+            <li>Take Surveys & Play Games</li>
+            <li>Cash Out Instantly</li>
+        </ul>
+
+        <div class="pro-tip">
+            💡 <strong>Pro Tip:</strong> New members can cash out their first $10 gift card in less than a day.
+        </div>
+        
+        <div id="countrySelection" class="country-selection">
+            <p>Select your country to begin</p>
+            <button class="country-btn">United States</button>
+            <button class="country-btn">Canada</button>
+        </div>
+
+        <div id="finalCta" class="final-cta hidden">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="status-text" id="statusText">Checking eligibility...</p>
+            <a href="#" id="goButton" class="cta-button">CLAIM YOUR $10 BONUS NOW</a>
+        </div>
+        
+        <p class="footer-trust">🛡️ Verified by TikTok</p>
+
+    </div>
+
+    <script>
+        (function() {
+            const countrySelection = document.getElementById('countrySelection');
+            const finalCta = document.getElementById('finalCta');
+            const countryButtons = countrySelection.querySelectorAll('.country-btn');
+            const progressBar = document.getElementById('progressBar');
+            const statusText = document.getElementById('statusText');
+            const goButton = document.getElementById('goButton');
+
+            // IMPORTANT: Replace with your actual affiliate link
+            const finalLink = 'https://www.swagbucks.com/'; 
+            goButton.href = finalLink;
+            
+            const statusMessages = ["Checking eligibility...", "Verifying device...", "Success!"];
+
+            countryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    countrySelection.style.display = 'none';
+                    finalCta.classList.remove('hidden');
+
+                    setTimeout(() => progressBar.classList.add('loaded'), 100);
+
+                    let i = 0;
+                    const cycleStatus = () => {
+                        if (i < statusMessages.length) {
+                            statusText.textContent = statusMessages[i];
+                            i++;
+                            setTimeout(cycleStatus, 900);
+                        }
+                    };
+                    cycleStatus();
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f4f6f9;
             --card-bg-color: #ffffff;
             --text-main: #1d2a3f;
             --text-sub: #6c7a8e;
@@ -33,7 +32,7 @@
             margin: 0;
             padding: 20px;
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
+            background: radial-gradient(circle at top, hsl(210, 100%, 99%), hsl(330, 100%, 99%));
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -216,17 +215,19 @@
             display: block;
             background-color: var(--cta-green);
             color: white;
-            padding: 18px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             font-size: 18px;
-            transition: background-color 0.2s ease;
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+            animation: pulse 1.75s infinite;
         }
         
         .cta-button:hover {
             background-color: var(--cta-green-dark);
+            transform: scale(1.02);
         }
         
         .footer-trust {
@@ -239,20 +240,26 @@
         .hidden {
             display: none;
         }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 6px 18px rgba(46, 204, 113, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3); }
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <img src="https://assets.website-files.com/6230a62562615403a493cf27/6230a625626154173293cf48_Swagbucks-logo.svg" alt="Swagbucks Logo" class="swagbucks-logo">
+        <img src="swag.png" alt="Swagbucks Logo" class="swagbucks-logo">
 
         <div class="rewards-section">
             <p class="rewards-title">CASH OUT WITH</p>
             <div class="reward-logos">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_e82d8c36531d2797825cfcd029f63529?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="PayPal">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_7cc0d39e2402120e6a8d79435b5463e2?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="Amazon">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_97711ca54109786cf88b907474d20478?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="Victoria's Secret">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-vod-uploads/v1_5b3671217e9975791a877d46535c873f?Expires=1727464010&GoogleAccessId=gemini-vod-prod-sa%40gemini-project-414815.iam.gserviceaccount.com&Signature=kX0o9K9v9Jp5B3%2FK9Yd%2BfUoJ1x0zT3tI12E8D3v98M5k6e83U4UeH2s84bQo0H3c02sY3iXW5Y5lXoX3E85rB0p29r%2B8w6s213hXgWv3f4vU4e0k5e5p4j5v6k7w8t9z%2BA2B4C6D8E0F2G4H6I8J0K2L4M6N8O0P2Q4R6S8T0U2V4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z2A4B6C8D0E2F4G6H8I0J2K4L6M8N0O2P4Q6R8S0T2U4W6X8Y0Z%3D%3D" alt="Sephora">
+                <img src="paypalllogo.png" alt="PayPal">
+                <img src="amzonllogo.png" alt="Amazon">
+                <img src="victoriascretlogo.png" alt="Victoria's Secret">
+                <img src="sephoralogooo.png" alt="Sephora">
             </div>
         </div>
 
@@ -311,8 +318,8 @@
             const statusText = document.getElementById('statusText');
             const goButton = document.getElementById('goButton');
 
-            // IMPORTANT: Replace with your actual affiliate link
-            const finalLink = 'https://www.swagbucks.com/'; 
+            // Final affiliate link
+            const finalLink = 'https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=148-its-a-swagbucks1897-897'; 
             goButton.href = finalLink;
             
             const statusMessages = ["Checking eligibility...", "Verifying device...", "Success!"];

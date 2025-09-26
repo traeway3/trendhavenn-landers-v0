@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #ffffff;
             --text-main: #1a202c;
             --text-sub: #4a5568;
             --brand-blue: #2F66F6;
@@ -31,41 +30,70 @@
             margin: 0;
             padding: 20px;
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             color: var(--text-main);
+            background: linear-gradient(-45deg, #e7f0ff, #f8f0ff, #e7f0ff, #f8f0ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
             width: 100%;
             max-width: 420px;
             text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 28px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         }
 
-        /* --- Animation Classes --- */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 0.6s ease-out forwards;
+        .swagbucks-logo {
+            max-width: 160px;
+            margin-bottom: 24px;
+            animation: float 4s ease-in-out infinite;
         }
 
-        .swagbucks-logo { max-width: 160px; margin-bottom: 24px; animation-delay: 0.1s; }
-        .main-headline { font-size: 28px; font-weight: 800; line-height: 1.3; margin: 0 0 12px 0; animation-delay: 0.2s; }
-        .social-proof { font-size: 16px; font-weight: 600; color: var(--text-sub); margin-bottom: 24px; animation-delay: 0.3s; }
-        .quick-start-guide { list-style: none; padding: 0; margin: 24px 0; text-align: left; display: flex; flex-direction: column; gap: 16px; animation-delay: 0.4s; }
-        .rewards-section { margin: 32px 0 24px 0; animation-delay: 0.5s; }
-        .cta-button { animation-delay: 0.6s; }
-        .footer-trust { margin-top: 24px; font-size: 13px; font-weight: 600; color: #a0aec0; animation-delay: 0.7s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
         }
         
+        .main-headline {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin: 0 0 12px 0;
+        }
+
+        .social-proof {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+        }
+        
+        .quick-start-guide {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
         .quick-start-guide li {
             display: flex;
             align-items: center;
@@ -88,6 +116,10 @@
             flex-shrink: 0;
         }
         
+        .rewards-section {
+            margin: 32px 0 24px 0;
+        }
+
         .rewards-title {
             font-size: 12px;
             font-weight: 600;
@@ -124,7 +156,7 @@
             border: none;
             width: 100%;
             cursor: pointer;
-            animation: ctaGlow 2s infinite ease-in-out, fadeInUp 0.6s ease-out forwards;
+            animation: ctaGlow 2.5s infinite ease-in-out;
         }
         
         .cta-button:hover {
@@ -137,23 +169,30 @@
             50% { box-shadow: 0 10px 30px var(--shadow-color-glow); }
             100% { box-shadow: 0 8px 25px var(--shadow-color); }
         }
+        
+        .footer-trust {
+            margin-top: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #a0aec0;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="swag.png" alt="Swagbucks Logo" class="swagbucks-logo fade-in-up">
+        <img src="swag.png" alt="Swagbucks Logo" class="swagbucks-logo">
 
-        <h1 class="main-headline fade-in-up">Turn Swagbucks Points Into Shopping Sprees</h1>
-        <p class="social-proof fade-in-up">✅ Join 50 Million+ members earning daily rewards.</p>
+        <h1 class="main-headline">Turn Swagbucks Points Into Shopping Sprees</h1>
+        <p class="social-proof">✅ Join 50 Million+ members earning daily rewards.</p>
 
-        <ol class="quick-start-guide fade-in-up">
+        <ol class="quick-start-guide">
             <li><span class="step-number">1</span> Sign Up Free & Claim Your $10 Bonus</li>
             <li><span class="step-number">2</span> Take Surveys & Play New Games</li>
             <li><span class="step-number">3</span> Cash Out for Gift Cards Instantly</li>
         </ol>
 
-        <div class="rewards-section fade-in-up">
+        <div class="rewards-section">
             <p class="rewards-title">Cash Out With</p>
             <div class="reward-logos">
                 <img src="paypalllogo.png" alt="PayPal">
@@ -165,7 +204,7 @@
         
         <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=148-its-a-swagbucks1897-897" id="goButton" class="cta-button">START EARNING NOW</a>
         
-        <p class="footer-trust fade-in-up">🛡️ Verified by TikTok & Secure</p>
+        <p class="footer-trust">🛡️ Verified by TikTok & Secure</p>
     </div>
 
 </body>

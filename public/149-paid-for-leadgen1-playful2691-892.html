@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Claim Your Bonus</title>
+    <title>Claim Your Payout</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --swag-blue: #005A8D;
-            --cta-blue: #3686E5;
-            --cta-hover: #2a6cb5;
+            --playful-purple: #7918e9; /* Main theme color from logo */
+            --cta-purple: #8f3eef; /* Lighter shade for gradients/hovers */
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --light-text: #555;
@@ -57,7 +56,7 @@
         }
 
         .logo {
-            max-width: 120px;
+            max-width: 150px; /* Adjusted for playful logo shape */
             margin-bottom: 10px;
         }
 
@@ -84,7 +83,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--swag-blue), var(--cta-blue));
+            background: linear-gradient(90deg, var(--playful-purple), var(--cta-purple));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -93,7 +92,7 @@
             font-size: 0.8rem;
             color: var(--light-text);
             margin-bottom: 15px;
-            min-height: 1.2em; /* Reserve space for text */
+            min-height: 1.2em;
         }
 
         .main-content {
@@ -118,7 +117,7 @@
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--cta-blue);
+            background-color: var(--cta-purple);
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -146,7 +145,7 @@
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--cta-blue);
+            background-color: var(--playful-purple);
             color: var(--white);
             font-size: 1.1rem;
             font-weight: 700;
@@ -159,14 +158,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-hover);
+            background-color: var(--cta-purple);
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(121, 24, 233, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(121, 24, 233, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(121, 24, 233, 0); }
         }
 
         .social-proof {
@@ -185,7 +184,7 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--swag-blue);
+            color: var(--playful-purple);
         }
         
         .proof-label {
@@ -229,9 +228,9 @@
 
     <div class="container">
         <div class="header">
-            <img src="swag.png" alt="Swagbucks Logo" class="logo">
-            <h1 class="headline">Claim Your $100 Swagbucks Bonus</h1>
-            <p class="sub-headline">Redeem for gift cards from Amazon, Target, and more!</p>
+            <img src="playful3.png" alt="Playful Rewards Logo" class="logo">
+            <h1 class="headline">Claim Your $100 Gaming Payout</h1>
+            <p class="sub-headline">Get paid to play games & cash out today!</p>
             
             <div class="progress-bar-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -242,12 +241,12 @@
         <div class="main-content">
              <ol class="quick-start-guide">
                 <li>Download & Sign Up: Create your free account.</li>
-                <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
+                <li>Earn Points: Play new games & complete levels.</li>
                 <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
             </ol>
             
             <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+                💡 <b>Pro-Tip:</b> Reach level 10 in your first game to unlock a bonus chest!
             </div>
             
             <a href="https://uplevelrewarded.com/aff_c?offer_id=2691&aff_id=27696&source=149-paid-for-leadgen1-playful2691-892" class="cta-button">START EARNING NOW</a>
@@ -258,7 +257,7 @@
         <div class="social-proof">
             <div class="proof-item">
                 <span class="proof-metric">50K+</span>
-                <span class="proof-label">Daily Users</span>
+                <span class="proof-label">Daily Players</span>
             </div>
             <div class="proof-item">
                 <span class="proof-metric">$10M+</span>
@@ -303,10 +302,10 @@
             const activityAlert = document.getElementById('activityAlert');
             const alerts = [
                 "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
-                "Mike from Florida just cashed out $50 via PayPal.",
-                "Sarah from California just earned $10 from a survey.",
+                "Mike from Florida just cashed out $50 from playing Coin Master.",
+                "Sarah from California just earned $10 from a gaming offer.",
                 "David from New York just got a $50 Walmart Gift Card.",
-                "Emily from Ohio just completed a gaming offer for $30."
+                "Emily from Ohio just completed a level for a $30 bonus."
             ];
 
             let alertIndex = 0;

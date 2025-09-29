@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Become a Paid Tester</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --tester-navy: #1a233b; /* Dark navy from TesterUp branding */
+            --tester-red: #ff4757;   /* Vibrant red for CTA */
+            --cta-hover: #e03c4a;
+            --light-gray: #f0f2f5;
+            --dark-text: #333;
+            --light-text: #555;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .header {
+            padding: 15px 15px 10px;
+        }
+
+        .logo {
+            max-width: 100px; /* Adjusted for square logo */
+            margin-bottom: 10px;
+        }
+
+        .headline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+        }
+
+        .sub-headline {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-container {
+            width: 90%;
+            margin: 0 auto 8px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 12px;
+            background: linear-gradient(90deg, var(--tester-navy), var(--tester-red));
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+            min-height: 1.2em;
+        }
+
+        .main-content {
+            padding: 0 20px 20px;
+        }
+
+        .quick-start-guide {
+            list-style-type: none;
+            text-align: left;
+            margin-bottom: 15px;
+            padding-left: 5px;
+        }
+
+        .quick-start-guide li {
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+            counter-increment: step-counter;
+        }
+
+        .quick-start-guide li::before {
+            content: counter(step-counter);
+            background-color: var(--tester-red);
+            color: var(--white);
+            font-weight: 700;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.8rem;
+            line-height: 1;
+        }
+        
+        .pro-tip {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.8rem;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--tester-red);
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--cta-hover);
+            transform: scale(1.02);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+        }
+
+        .social-proof {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: var(--tester-navy);
+        }
+
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .proof-metric {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .proof-label {
+            font-size: 0.7rem;
+            color: var(--light-gray);
+        }
+
+        .trust-badge {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+        
+        .activity-alert {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            margin: 0 auto;
+            max-width: 360px;
+            background-color: rgba(0,0,0,0.75);
+            color: var(--white);
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+        
+        .activity-alert.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img src="testerlogo2.png" alt="TesterUp Logo" class="logo">
+            <h1 class="headline">Become a Paid Tester & Earn Up To $700</h1>
+            <p class="sub-headline">Get paid to test new games, apps, and products from home.</p>
+            
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="progressText" class="progress-text">Verifying device...</p>
+        </div>
+
+        <div class="main-content">
+             <ol class="quick-start-guide">
+                <li>Sign Up as a Tester: Create your free account.</li>
+                <li>Choose Your Tests: Play games, take surveys, and review products.</li>
+                <li>Get Paid: Cash out your earnings via PayPal.</li>
+            </ol>
+            
+            <div class="pro-tip">
+                💡 <b>Pro-Tip:</b> Complete your profile survey accurately to unlock higher-paying premium tests!
+            </div>
+            
+            <a href="https://rewardorbit.com/r/eyJ0IjoidGVzdGVydXAtYSIsInUiOiI2OGJhOTc1MmY5ZWJjYjg1NjRlZDQ3MmEiLCJ0cyI6MTc1OTEwOTk5Mzc4NCwicHJvdmlkZXIiOiJ0ZXN0ZXJ1cCIsImR1YWxTeXN0ZW0iOnRydWV9?s2=146-ts-app-sales3-testerupcpia-887" class="cta-button">START TESTING NOW</a>
+            
+            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+        </div>
+
+        <div class="social-proof">
+            <div class="proof-item">
+                <span class="proof-metric">50K+</span>
+                <span class="proof-label">Active Testers</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">$10M+</span>
+                <span class="proof-label">Paid Out</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">5 Min</span>
+                <span class="proof-label">Signup</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="activityAlert" class="activity-alert"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Progress Bar Animation ---
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            const progressSteps = [
+                { text: 'Checking for available tests...', width: '50%' },
+                { text: 'Success! Your spot is confirmed!', width: '100%' }
+            ];
+            
+            setTimeout(() => {
+                progressBar.style.width = '25%';
+            }, 100);
+
+            let currentStep = 0;
+            const progressInterval = setInterval(() => {
+                if (currentStep < progressSteps.length) {
+                    progressText.innerText = progressSteps[currentStep].text;
+                    progressBar.style.width = progressSteps[currentStep].width;
+                    currentStep++;
+                } else {
+                    clearInterval(progressInterval);
+                }
+            }, 1500);
+
+            // --- Live Activity Alerts ---
+            const activityAlert = document.getElementById('activityAlert');
+            const alerts = [
+                "Jennifer from Texas just got paid $25 for a game test.",
+                "Mike from Florida just cashed out $50 via PayPal.",
+                "Sarah from California just earned $15 for a product review.",
+                "David from New York just got paid $30 for testing an app.",
+                "Emily from Ohio just completed a survey for $10."
+            ];
+
+            let alertIndex = 0;
+            
+            const showAlert = () => {
+                activityAlert.innerText = alerts[alertIndex];
+                activityAlert.classList.add('show');
+                
+                setTimeout(() => {
+                    activityAlert.classList.remove('show');
+                }, 4000); // Alert visible for 4 seconds
+
+                alertIndex = (alertIndex + 1) % alerts.length;
+            };
+            
+            // Show first alert after 3 seconds, then every 6 seconds
+            setTimeout(() => {
+                showAlert();
+                setInterval(showAlert, 6000);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

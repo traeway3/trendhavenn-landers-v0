@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>$750 Apple Pay Reward</title>
+    <title>$750 Apple Pay Bonus</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
 
         :root {
-            --bg-dark: #0F0F1A;
-            --bg-card: #1C1C2E;
+            --bg-dark: #000000;
+            --bg-card: #1C1C1E;
             --text-primary: #FFFFFF;
             --text-secondary: #A0A0B0;
             --apple-blue: #007AFF;
@@ -19,6 +19,7 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-dark);
+            background: radial-gradient(ellipse at center, rgba(0, 122, 255, 0.15) 0%, rgba(0,0,0,0) 70%), #000;
             color: var(--text-primary);
             margin: 0;
             display: flex;
@@ -26,91 +27,112 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            padding: 15px;
         }
 
         .container {
             width: 100%;
             max-width: 400px;
-            padding: 20px;
+            background-color: var(--bg-card);
+            border-radius: 24px;
+            padding: 25px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100vh;
-            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
-            width: 70px;
+            width: 60px;
             height: auto;
-            margin: 20px auto 25px;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+            margin: 0 auto 20px;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)); }
         }
 
         h1 {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
-            margin: 0 0 20px 0;
+            margin: 0 0 10px 0;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
         }
 
-        .instructions {
-            list-style: none;
-            padding: 0;
-            margin: 0 auto 30px;
-            text-align: left;
-            max-width: 300px;
+        .progress-container {
+            margin-bottom: 25px;
         }
 
-        .instructions li {
-            font-size: 17px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .instructions li::before {
-            content: '✓';
+        .progress-text {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
             color: var(--apple-blue);
-            font-weight: bold;
-            margin-right: 12px;
-            font-size: 22px;
-        }
-        .instructions li strong {
-            color: #FFD700;
+            height: 20px;
         }
 
-        .location-question {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
-        .location-button {
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #5856D6, var(--apple-blue));
+            border-radius: 4px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .instructions { list-style: none; padding: 0; margin: 0 0 25px 0; text-align: left; }
+        .instructions li { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; }
+        .instructions li::before { content: '✓'; color: var(--apple-blue); margin-right: 10px; font-size: 20px; }
+        .instructions li strong { color: #FFD700; font-weight: 700; }
+
+        .cta-button {
             display: block;
             width: 100%;
-            background: linear-gradient(135deg, var(--apple-blue), #5856D6);
+            background-color: var(--apple-blue);
             color: var(--text-primary);
-            padding: 18px;
+            padding: 16px;
             border: none;
             border-radius: 12px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 20px rgba(0, 122, 255, 0.3);
-            transition: transform 0.1s ease;
-        }
-        .location-button:active {
-            transform: scale(0.98);
+            transition: transform 0.1s ease, background-color 0.2s;
+            animation: pulse 2s infinite;
         }
 
-        .footer {
-            width: 100%;
-            padding: 15px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.4); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(0, 122, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 122, 255, 0); }
         }
         
+        .cta-button:active { transform: scale(0.98); animation: none; }
+        
+        .footer {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
         .verified-badge {
             display: flex;
             align-items: center;
@@ -119,100 +141,78 @@
             font-size: 14px;
             font-weight: 700;
             color: var(--verified-green);
-            margin-bottom: 15px;
         }
 
-        .verified-badge svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--verified-green);
-        }
-
-        .social-proof-bar {
-            display: flex;
-            justify-content: space-around;
-            background-color: rgba(0,0,0,0.2);
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .proof-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .proof-value {
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .proof-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
+        .verified-badge svg { width: 16px; height: 16px; fill: var(--verified-green); }
 
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div>
-            <img src="applelogo2.png" alt="Apple Logo" class="logo">
-            <h1>Follow the steps below!</h1>
-            <ul class="instructions">
-                <li>Click button below</li>
-                <li>Enter email & info</li>
-                <li>Complete deals <strong>(IMPORTANT)</strong></li>
-                <li>Claim your reward!</li>
-            </ul>
+        <img src="applelogo2.png" alt="Apple Logo" class="logo">
+        <h1>Claim Your $750 Apple Pay Bonus</h1>
+        <p class="subtitle">Redeem for deals, rewards, and more!</p>
+
+        <div class="progress-container">
+            <p id="progress-text" class="progress-text"></p>
+            <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
         </div>
 
-        <div>
-            <p class="location-question">Where are you located?</p>
-            <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696" class="location-button">United States</a>
-            <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696" class="location-button">Canada</a>
-        </div>
+        <ul class="instructions">
+            <li>Answer a few questions</li>
+            <li>Enter your Info</li>
+            <li>Play Games / Complete Deals <strong>(IMPORTANT)</strong></li>
+            <li>Claim your Bonus</li>
+        </ul>
 
+        <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696" class="cta-button">Claim Now</a>
+        
         <div class="footer">
-            <div class="verified-badge">
+             <div class="verified-badge">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.25,12c0,5.66-4.59,10.25-10.25,10.25S1.75,17.66,1.75,12,6.34,1.75,12,1.75,22.25,6.34,22.25,12Zm-9.06-3.3a.75.75,0,0,0-1,1.2l2.3,2.44-3.8,3.71a.75.75,0,0,0,1,1.12l4.25-4.16a.75.75,0,0,0,0-1.12Z"></path></svg>
                 Verified by TikTok
-            </div>
-            <div class="social-proof-bar">
-                <div class="proof-item">
-                    <span class="proof-value" id="paid-out">$764,857</span>
-                    <span class="proof-label">Total Paid Out</span>
-                </div>
-                <div class="proof-item">
-                    <span class="proof-value" id="people-online">4,584</span>
-                    <span class="proof-label">People Online</span>
-                </div>
-                <div class="proof-item">
-                    <span class="proof-value">86%</span>
-                    <span class="proof-label">Users Completing</span>
-                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Fake data updates to create a sense of live activity
-        const paidOutEl = document.getElementById('paid-out');
-        const peopleOnlineEl = document.getElementById('people-online');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const ctaButton = document.querySelector('.cta-button');
 
-        let paidOut = 764857;
-        let peopleOnline = 4584;
+        const steps = [
+            { text: "Success! Your spot is created!", width: "25%" },
+            { text: "Verifying your device...", width: "50%" },
+            { text: "Checking for offers...", width: "75%" },
+            { text: "Your bonus is ready!", width: "100%" }
+        ];
 
-        setInterval(() => {
-            paidOut += Math.floor(Math.random() * 5) + 1;
-            paidOutEl.textContent = '$' + paidOut.toLocaleString();
-        }, 1500);
+        let currentStep = 0;
 
-        setInterval(() => {
-            const variation = Math.floor(Math.random() * 10) - 5;
-            peopleOnline = Math.max(4500, peopleOnline + variation);
-            peopleOnlineEl.textContent = peopleOnline.toLocaleString();
-        }, 2000);
+        function runProgress() {
+            if (currentStep < steps.length) {
+                const step = steps[currentStep];
+                progressText.innerText = step.text;
+                progressBar.style.width = step.width;
+                currentStep++;
+                setTimeout(runProgress, 1200);
+            } else {
+                progressText.innerText = "Claim Your Bonus Below!";
+            }
+        }
+        
+        ctaButton.style.display = 'none';
+
+        setTimeout(() => {
+            runProgress();
+             setTimeout(() => {
+                ctaButton.style.display = 'block';
+            }, steps.length * 1200);
+        }, 500);
+
     </script>
 </body>
 </html>

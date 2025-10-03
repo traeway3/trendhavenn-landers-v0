@@ -3,136 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>$750 Apple Pay Bonus</title>
+    <title>$750 Apple Pay Reward</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
 
         :root {
-            --background-color: #121212;
-            --text-color: #FFFFFF;
-            --primary-color: #007AFF;
-            --card-background: #1C1C1E;
-            --verified-text: #28a745;
+            --bg-dark: #0F0F1A;
+            --bg-card: #1C1C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0B0;
+            --apple-blue: #007AFF;
+            --verified-green: #28a745;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             margin: 0;
-            padding: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow: hidden; /* Prevents scrolling */
+            overflow: hidden;
         }
 
         .container {
             width: 100%;
             max-width: 400px;
-            background-color: var(--card-background);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            padding: 20px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: calc(100vh - 40px); /* Full viewport height minus padding */
-            max-height: 600px;
+            height: 100vh;
+            box-sizing: border-box;
         }
 
         .logo {
-            width: 60px;
+            width: 70px;
             height: auto;
-            margin: 0 auto 15px auto;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+            margin: 20px auto 25px;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
         }
 
         h1 {
-            font-size: 24px;
-            font-weight: 900;
-            margin: 0 0 15px 0;
-            line-height: 1.2;
+            font-size: 26px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
         }
 
-        .urgency-bar {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-bottom: 20px;
-            background-color: rgba(0,0,0,0.2);
-            padding: 8px;
-            border-radius: 10px;
-        }
-
-        .timer-container, .verified-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        #timer {
-            font-size: 16px;
-            font-weight: 700;
-            color: #FFD700; /* Gold color for urgency */
-        }
-
-        .verified-badge {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--verified-text);
-        }
-        
-        .verified-badge svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--verified-text);
-        }
-
-        .checklist {
-            text-align: left;
-            margin: 0 auto 20px auto;
-            padding: 0 10px;
-        }
-
-        .checklist h2 {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 0 0 15px 0;
-            text-align: center;
-        }
-
-        .checklist ul {
+        .instructions {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0 auto 30px;
+            text-align: left;
+            max-width: 300px;
         }
 
-        .checklist li {
-            font-size: 16px;
-            margin-bottom: 12px;
+        .instructions li {
+            font-size: 17px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
 
-        .checklist li::before {
+        .instructions li::before {
             content: '✓';
-            color: var(--primary-color);
+            color: var(--apple-blue);
             font-weight: bold;
-            margin-right: 10px;
-            font-size: 20px;
+            margin-right: 12px;
+            font-size: 22px;
+        }
+        .instructions li strong {
+            color: #FFD700;
         }
 
-        .cta-button {
+        .location-question {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .location-button {
             display: block;
             width: 100%;
-            background-color: var(--primary-color);
-            color: var(--text-color);
+            background: linear-gradient(135deg, var(--apple-blue), #5856D6);
+            color: var(--text-primary);
             padding: 18px;
             border: none;
             border-radius: 12px;
@@ -140,32 +97,58 @@
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
-            transition: transform 0.1s ease, background-color 0.2s;
-            margin-top: auto; /* Pushes button to the bottom */
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0, 122, 255, 0.3);
+            transition: transform 0.1s ease;
+        }
+        .location-button:active {
+            transform: scale(0.98);
         }
 
-        .cta-button:active {
-            transform: scale(0.97);
+        .footer {
+            width: 100%;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .social-proof {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: #2C2C2E;
-            padding: 12px 18px;
-            border-radius: 10px;
+        
+        .verified-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             font-size: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
+            font-weight: 700;
+            color: var(--verified-green);
+            margin-bottom: 15px;
         }
 
-        .social-proof.show {
-            opacity: 1;
-            transform: translateY(0);
+        .verified-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--verified-green);
+        }
+
+        .social-proof-bar {
+            display: flex;
+            justify-content: space-around;
+            background-color: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .proof-value {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .proof-label {
+            font-size: 12px;
+            color: var(--text-secondary);
         }
 
     </style>
@@ -174,75 +157,62 @@
 
     <div class="container">
         <div>
-            <img src="https://i.imgur.com/your-apple-logo.png" alt="Apple Logo" class="logo">
-            <h1>Welcome to the $750 Apple Pay Bonus Program</h1>
-        </div>
-
-        <div class="urgency-bar">
-            <div class="timer-container">
-                <span>Offer reserved for:</span>
-                <span id="timer">05:00</span>
-            </div>
-            <div class="verified-container">
-                <span class="verified-badge">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.25,12c0,5.66-4.59,10.25-10.25,10.25S1.75,17.66,1.75,12,6.34,1.75,12,1.75,22.25,6.34,22.25,12Zm-9.06-3.3a.75.75,0,0,0-1,1.2l2.3,2.44-3.8,3.71a.75.75,0,0,0,1,1.12l4.25-4.16a.75.75,0,0,0,0-1.12Z"></path></svg>
-                    Verified by TikTok
-                </span>
-            </div>
-        </div>
-
-        <div class="checklist">
-            <h2>How to Claim?</h2>
-            <ul>
-                <li>Answer a few questions</li>
-                <li>Enter your Info</li>
-                <li>Play Games / Complete Deals</li>
-                <li>Claim your Bonus</li>
+            <img src="applelogo2.png" alt="Apple Logo" class="logo">
+            <h1>Follow the steps below!</h1>
+            <ul class="instructions">
+                <li>Click button below</li>
+                <li>Enter email & info</li>
+                <li>Complete deals <strong>(IMPORTANT)</strong></li>
+                <li>Claim your reward!</li>
             </ul>
         </div>
 
-        <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696" class="cta-button">Claim Now</a>
+        <div>
+            <p class="location-question">Where are you located?</p>
+            <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696" class="location-button">United States</a>
+            <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696" class="location-button">Canada</a>
+        </div>
+
+        <div class="footer">
+            <div class="verified-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.25,12c0,5.66-4.59,10.25-10.25,10.25S1.75,17.66,1.75,12,6.34,1.75,12,1.75,22.25,6.34,22.25,12Zm-9.06-3.3a.75.75,0,0,0-1,1.2l2.3,2.44-3.8,3.71a.75.75,0,0,0,1,1.12l4.25-4.16a.75.75,0,0,0,0-1.12Z"></path></svg>
+                Verified by TikTok
+            </div>
+            <div class="social-proof-bar">
+                <div class="proof-item">
+                    <span class="proof-value" id="paid-out">$764,857</span>
+                    <span class="proof-label">Total Paid Out</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value" id="people-online">4,584</span>
+                    <span class="proof-label">People Online</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">86%</span>
+                    <span class="proof-label">Users Completing</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="social-proof-popup" class="social-proof"></div>
-
     <script>
-        // --- URGENCY TIMER ---
-        const timerElement = document.getElementById('timer');
-        let timeLeft = 300; // 5 minutes in seconds
+        // Fake data updates to create a sense of live activity
+        const paidOutEl = document.getElementById('paid-out');
+        const peopleOnlineEl = document.getElementById('people-online');
 
-        const timerInterval = setInterval(() => {
-            timeLeft--;
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                timerElement.textContent = "Expired";
-            }
-        }, 1000);
+        let paidOut = 764857;
+        let peopleOnline = 4584;
 
-        // --- SOCIAL PROOF ---
-        const socialProofPopup = document.getElementById('social-proof-popup');
-        const names = ["Liam G.", "Olivia M.", "Noah S.", "Emma L.", "James B.", "Ava W.", "William J."];
-        const amounts = [45, 20, 100, 75, 50];
+        setInterval(() => {
+            paidOut += Math.floor(Math.random() * 5) + 1;
+            paidOutEl.textContent = '$' + paidOut.toLocaleString();
+        }, 1500);
 
-        function showSocialProof() {
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-            socialProofPopup.innerHTML = `<strong>${randomName}</strong> just claimed $${randomAmount} via Apple Pay`;
-            socialProofPopup.classList.add('show');
-
-            setTimeout(() => {
-                socialProofPopup.classList.remove('show');
-            }, 4000);
-        }
-
-        setTimeout(() => {
-            showSocialProof();
-            setInterval(showSocialProof, 6000);
-        }, 2500);
-
+        setInterval(() => {
+            const variation = Math.floor(Math.random() * 10) - 5;
+            peopleOnline = Math.max(4500, peopleOnline + variation);
+            peopleOnlineEl.textContent = peopleOnline.toLocaleString();
+        }, 2000);
     </script>
 </body>
 </html>

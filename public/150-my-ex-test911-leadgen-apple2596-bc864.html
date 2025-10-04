@@ -57,12 +57,12 @@
         }
 
         .header {
-            padding: 25px 20px 10px; /* Spacing Reduced */
+            padding: 25px 20px 10px;
         }
 
         .logo {
             max-width: 140px; 
-            margin-bottom: 15px; /* Spacing Reduced */
+            margin-bottom: 15px;
         }
 
         .headline {
@@ -76,11 +76,10 @@
         .sub-headline {
             font-size: 1rem;
             color: var(--text-medium);
-            margin-bottom: 15px; /* Spacing Reduced */
+            margin-bottom: 15px;
             padding: 0 5px;
         }
         
-        /* Progress Bar Styles Re-introduced */
         .progress-bar-container {
             width: 90%;
             margin: 0 auto 8px;
@@ -106,17 +105,15 @@
         .quick-start-guide {
             list-style-type: none;
             text-align: left;
-            margin: 0 auto 15px; /* Spacing Reduced */
+            margin: 0 auto 15px;
             padding: 0 25px;
         }
-
+        
+        /* CHANGE 3: Overhauled Quick Start Guide CSS for perfect alignment */
         .quick-start-guide li {
-            /* Formatting Fixed */
             display: flex;
             align-items: flex-start; 
-            font-size: 0.9rem;
-            color: var(--text-medium);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             counter-increment: step-counter;
         }
 
@@ -136,13 +133,26 @@
             font-size: 0.8rem;
             margin-top: 2px;
         }
-        .quick-start-guide b {
+
+        .guide-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .guide-title {
+            font-weight: 700;
+            font-size: 0.95rem;
             color: var(--text-light);
-            margin-right: 5px;
+        }
+
+        .guide-desc {
+            font-size: 0.9rem;
+            color: var(--text-medium);
         }
 
         .main-content {
-            padding: 15px 20px 20px; /* Spacing Reduced */
+            padding: 15px 20px 20px;
         }
 
         .gating-question {
@@ -211,32 +221,6 @@
         .proof-metric { font-size: 1.1rem; font-weight: 700; }
         .proof-label { font-size: 0.75rem; text-transform: uppercase; }
         
-        .activity-alert {
-            position: fixed;
-            top: 15px;
-            left: 20px;
-            right: 20px;
-            margin: 0 auto;
-            max-width: 380px;
-            background-color: rgba(30,30,30,0.9);
-            backdrop-filter: blur(5px);
-            color: var(--text-light);
-            padding: 12px 18px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            pointer-events: none;
-        }
-        
-        .activity-alert.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
@@ -255,9 +239,24 @@
         </div>
             
         <ol class="quick-start-guide">
-            <li><b>Answer Questions:</b> Confirm your eligibility.</li>
-            <li><b>Complete Deals:</b> Finish the required sponsor deals.</li>
-            <li><b>Get Paid:</b> Receive your $750 via Apple Pay.</li>
+             <li>
+                <div class="guide-text">
+                    <span class="guide-title">Answer Questions</span>
+                    <span class="guide-desc">Confirm your eligibility.</span>
+                </div>
+            </li>
+            <li>
+                <div class="guide-text">
+                    <span class="guide-title">Complete Deals</span>
+                    <span class="guide-desc">Finish the required sponsor deals.</span>
+                </div>
+            </li>
+            <li>
+                <div class="guide-text">
+                    <span class="guide-title">Get Paid</span>
+                    <span class="guide-desc">Receive your $750 via Apple Pay.</span>
+                </div>
+            </li>
         </ol>
 
         <div class="main-content">
@@ -280,7 +279,7 @@
                 <span class="proof-label">Active Users</span>
             </div>
             <div class="proof-item">
-                <span class="proof-metric">$10M+</span>
+                <span class="proof-metric" id="payoutCounter">$10,142,534</span>
                 <span class="proof-label">Paid Out</span>
             </div>
             <div class="proof-item">
@@ -290,8 +289,6 @@
         </div>
     </div>
     
-    <div id="activityAlert" class="activity-alert"></div>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const progressBar = document.getElementById('progressBar');
@@ -306,40 +303,30 @@
 
             // --- Gating Logic ---
             window.showFinalCTA = function() {
-                // Complete progress bar and update text
                 progressBar.style.width = '100%';
                 progressText.innerText = 'Success! Your spot is reserved!';
-                
                 document.getElementById('gatingContainer').style.display = 'none';
                 document.getElementById('finalCta').style.display = 'block';
             }
 
-            // --- Live Activity Alerts ---
-            const activityAlert = document.getElementById('activityAlert');
-            const alerts = [
-                "Jennifer from TX just claimed a $750 Apple Pay reward.",
-                "Mike from FL just cashed out via Apple Pay.",
-                "Sarah from CA just qualified for the $750 bonus.",
-                "David from NY just redeemed his reward.",
-                "Emily from OH just completed the final step."
-            ];
-            let alertIndex = 0;
-            
-            const showAlert = () => {
-                activityAlert.innerText = alerts[alertIndex];
-                activityAlert.classList.add('show');
-                
-                setTimeout(() => {
-                    activityAlert.classList.remove('show');
-                }, 4000); 
+            // CHANGE 2: Dynamic Payout Counter Logic ---
+            const payoutElement = document.getElementById('payoutCounter');
+            const initialPayout = 10142534; // Starting value
+            let currentPayout = localStorage.getItem('dynamicPayout') ? parseInt(localStorage.getItem('dynamicPayout')) : initialPayout;
 
-                alertIndex = (alertIndex + 1) % alerts.length;
+            const formatPayout = (value) => '$' + value.toLocaleString('en-US');
+
+            const updatePayout = () => {
+                const increment = Math.floor(Math.random() * 25) + 3;
+                currentPayout += increment;
+                payoutElement.innerText = formatPayout(currentPayout);
+                localStorage.setItem('dynamicPayout', currentPayout);
             };
             
-            setTimeout(() => {
-                showAlert();
-                setInterval(showAlert, 7000); 
-            }, 3500);
+            payoutElement.innerText = formatPayout(currentPayout); // Set initial value on load
+            setInterval(updatePayout, 2500); // Update every 2.5 seconds
+            
+            // CHANGE 1: Pop-up alert logic has been removed.
         });
     </script>
 </body>

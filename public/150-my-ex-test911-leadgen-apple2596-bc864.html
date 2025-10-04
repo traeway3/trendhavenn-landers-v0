@@ -8,13 +8,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --background-dark: #000000; /* Darker background */
-            --container-dark: #1c1c1e; /* Apple's dark grey */
+            --background-dark: #000000;
+            --container-dark: #1c1c1e;
             --primary-white: #ffffff;
             --primary-white-hover: #f5f5f7;
             --button-text-dark: #000000;
             --text-light: #ffffff;
-            --text-medium: #8e8e93; /* Apple's medium grey */
+            --text-medium: #8e8e93;
             --text-dark: #636366;
             --border-color: #3a3a3c;
         }
@@ -48,8 +48,7 @@
             display: flex;
             flex-direction: column;
             animation: fadeIn 0.6s ease-out;
-            /* CHANGE 4: Pushing container down to accommodate notification per user request */
-            margin-top: 70px; 
+            margin-top: 70px;
         }
         
         @keyframes fadeIn {
@@ -58,13 +57,12 @@
         }
 
         .header {
-            padding: 25px 20px 15px;
+            padding: 25px 20px 10px; /* Spacing Reduced */
         }
 
         .logo {
-            /* CHANGE 2: Updated logo styling */
             max-width: 140px; 
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Spacing Reduced */
         }
 
         .headline {
@@ -78,21 +76,44 @@
         .sub-headline {
             font-size: 1rem;
             color: var(--text-medium);
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Spacing Reduced */
+            padding: 0 5px;
         }
         
-        /* CHANGE 3: Styling for the new Quick Start Guide */
+        /* Progress Bar Styles Re-introduced */
+        .progress-bar-container {
+            width: 90%;
+            margin: 0 auto 8px;
+            background-color: var(--border-color);
+            border-radius: 20px;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 10px;
+            background: linear-gradient(90deg, #f0f0f0, #ffffff);
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            min-height: 1.2em;
+            margin-bottom: 15px;
+        }
+
         .quick-start-guide {
             list-style-type: none;
             text-align: left;
-            margin: 0 auto 20px;
-            padding: 0 10px;
-            max-width: 90%;
+            margin: 0 auto 15px; /* Spacing Reduced */
+            padding: 0 25px;
         }
 
         .quick-start-guide li {
+            /* Formatting Fixed */
             display: flex;
-            align-items: center;
+            align-items: flex-start; 
             font-size: 0.9rem;
             color: var(--text-medium);
             margin-bottom: 8px;
@@ -113,6 +134,7 @@
             justify-content: center;
             margin-right: 12px;
             font-size: 0.8rem;
+            margin-top: 2px;
         }
         .quick-start-guide b {
             color: var(--text-light);
@@ -120,7 +142,7 @@
         }
 
         .main-content {
-            padding: 20px;
+            padding: 15px 20px 20px; /* Spacing Reduced */
         }
 
         .gating-question {
@@ -130,7 +152,6 @@
             margin-bottom: 15px;
         }
         
-        /* CHANGE 1: Styling for monochrome buttons */
         .gating-buttons button {
             width: 100%;
             padding: 16px;
@@ -157,7 +178,7 @@
         }
 
         .final-cta {
-            display: none; /* Hidden by default */
+            display: none;
             width: 100%;
             padding: 16px;
             background-color: var(--primary-white);
@@ -185,16 +206,14 @@
             border-top: 1px solid var(--border-color);
         }
 
-        .proof-item, .proof-metric, .proof-label {
-            color: var(--text-medium); /* Unified social proof color */
-        }
-        
+        .proof-item { display: flex; flex-direction: column; }
+        .proof-metric, .proof-label { color: var(--text-medium); }
         .proof-metric { font-size: 1.1rem; font-weight: 700; }
         .proof-label { font-size: 0.75rem; text-transform: uppercase; }
         
         .activity-alert {
             position: fixed;
-            top: 15px; /* Adjusted position */
+            top: 15px;
             left: 20px;
             right: 20px;
             margin: 0 auto;
@@ -227,7 +246,12 @@
             <img src="applepaylogo5.png" alt="Apple Pay Logo" class="logo">
             
             <h1 class="headline">Unlock up to $750 in Payouts</h1>
-            <p class="sub-headline">The official Apple Pay Bonus Program is now open.</p>
+            <p class="sub-headline">Prove them wrong. The official Apple Pay Bonus Program is now open.</p>
+
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="progressText" class="progress-text">Verifying eligibility...</p>
         </div>
             
         <ol class="quick-start-guide">
@@ -245,7 +269,7 @@
                 </div>
             </div>
             
-            <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696&source=150-my-ex-test911-leadgen-apple2596-bc864" id="finalCta" class="final-cta">
+            <a href="https://rewarduplevel.com/aff_c?offer_id=2596&aff_id=27696&source=150-my-ex-test911-leadgen-apple2596-bc864" id="finalCta" class="final-cta">
                 Claim Your $750
             </a>
         </div>
@@ -270,8 +294,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            // --- Progress Bar Animation Logic ---
+            setTimeout(() => { progressBar.style.width = '30%'; }, 100);
+            setTimeout(() => { 
+                progressBar.style.width = '75%'; 
+                progressText.innerText = 'Checking for available spots...';
+            }, 1500);
+
             // --- Gating Logic ---
             window.showFinalCTA = function() {
+                // Complete progress bar and update text
+                progressBar.style.width = '100%';
+                progressText.innerText = 'Success! Your spot is reserved!';
+                
                 document.getElementById('gatingContainer').style.display = 'none';
                 document.getElementById('finalCta').style.display = 'block';
             }

@@ -3,216 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>$750 Apple Pay Bonus</title>
+    <title>Claim Your Reward</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --bg-dark: #000000;
-            --bg-card: #1C1C1E;
-            --text-primary: #FFFFFF;
-            --text-secondary: #A0A0B0;
-            --apple-blue: #007AFF;
-            --verified-green: #28a745;
+            --background-dark: #121212;
+            --container-dark: #1e1e1e;
+            --primary-blue: #007aff;
+            --primary-blue-hover: #0056b3;
+            --text-light: #ffffff;
+            --text-medium: #b0b0b0;
+            --text-dark: #8e8e93;
+            --border-color: #3a3a3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-dark);
-            background: radial-gradient(ellipse at center, rgba(0, 122, 255, 0.15) 0%, rgba(0,0,0,0) 70%), #000;
-            color: var(--text-primary);
-            margin: 0;
+            background-color: var(--background-dark);
+            color: var(--text-light);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            overflow: hidden;
-            padding: 15px;
+            padding: 20px;
         }
 
         .container {
+            background-color: var(--container-dark);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            max-width: 420px;
             width: 100%;
-            max-width: 400px;
-            background-color: var(--bg-card);
-            border-radius: 24px;
-            padding: 25px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.5s ease-out;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.6s ease-out;
         }
-
+        
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .header {
+            padding: 25px 20px 15px;
+        }
+
         .logo {
-            width: 60px;
-            height: auto;
-            margin: 0 auto 20px;
-            animation: logoGlow 3s ease-in-out infinite;
-        }
-        
-        @keyframes logoGlow {
-            0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)); }
-            50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)); }
+            max-width: 100px;
+            margin-bottom: 20px;
         }
 
-        h1 {
-            font-size: 24px;
-            font-weight: 800;
-            margin: 0 0 10px 0;
-        }
-        
-        .subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
+        .headline {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.2;
+            margin-bottom: 8px;
         }
 
-        .progress-container {
-            margin-bottom: 25px;
+        .sub-headline {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            width: 90%;
+            margin: 0 auto 10px;
+            background-color: var(--border-color);
+            border-radius: 20px;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 10px;
+            background: linear-gradient(90deg, #007aff, #00c6ff);
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
         }
 
         .progress-text {
-            font-size: 16px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            min-height: 1.2em;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .gating-question {
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--apple-blue);
-            height: 20px;
+            color: var(--text-light);
+            margin-bottom: 15px;
         }
 
-        .progress-bar-bg {
+        .gating-buttons button {
             width: 100%;
-            height: 8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #5856D6, var(--apple-blue));
-            border-radius: 4px;
-            transition: width 0.5s ease-in-out;
-        }
-
-        .instructions { list-style: none; padding: 0; margin: 0 0 25px 0; text-align: left; }
-        .instructions li { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; }
-        .instructions li::before { content: '✓'; color: var(--apple-blue); margin-right: 10px; font-size: 20px; }
-        .instructions li strong { color: #FFD700; font-weight: 700; }
-
-        .cta-button {
-            display: block;
-            width: 100%;
-            background-color: var(--apple-blue);
-            color: var(--text-primary);
             padding: 16px;
-            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 1px solid var(--primary-blue);
             border-radius: 12px;
-            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .gating-buttons .yes-btn {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        .gating-buttons .yes-btn:hover {
+            background-color: var(--primary-blue-hover);
+        }
+
+        .gating-buttons .no-btn {
+            background-color: transparent;
+            color: var(--primary-blue);
+        }
+
+        .final-cta {
+            display: none; /* Hidden by default */
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            font-size: 1.3rem;
             font-weight: 700;
             text-decoration: none;
+            border-radius: 12px;
+            border: none;
             cursor: pointer;
-            transition: transform 0.1s ease, background-color 0.2s;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.4); }
-            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(0, 122, 255, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 122, 255, 0); }
-        }
-        
-        .cta-button:active { transform: scale(0.98); animation: none; }
-        
-        .footer {
-            margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 15px;
+            0% { box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(0, 122, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 122, 255, 0); }
         }
 
-        .verified-badge {
+        .social-proof {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--verified-green);
+            justify-content: space-around;
+            padding: 20px;
+            background-color: rgba(0,0,0,0.2);
+            border-top: 1px solid var(--border-color);
         }
 
-        .verified-badge svg { width: 16px; height: 16px; fill: var(--verified-green); }
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+        }
 
+        .proof-metric {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        
+        .proof-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-dark);
+        }
+        
+        .activity-alert {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            margin: 0 auto;
+            max-width: 380px;
+            background-color: rgba(30,30,30,0.9);
+            backdrop-filter: blur(5px);
+            color: var(--text-light);
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+        
+        .activity-alert.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="applelogo2.png" alt="Apple Logo" class="logo">
-        <h1>Claim Your $750 Apple Pay Bonus</h1>
-        <p class="subtitle">Redeem for deals, rewards, and more!</p>
-
-        <div class="progress-container">
-            <p id="progress-text" class="progress-text"></p>
-            <div class="progress-bar-bg">
-                <div id="progress-bar" class="progress-bar-fill"></div>
+        <div class="header">
+            <img src="applepaylogo.png" alt="Apple Pay Logo" class="logo">
+            
+            <h1 class="headline">Unlock up to $750 in Payouts</h1>
+            <p class="sub-headline">The official Apple Pay Bonus Program is now open.</p>
+            
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
             </div>
+            <p id="progressText" class="progress-text">Verifying eligibility...</p>
         </div>
 
-        <ul class="instructions">
-            <li>Answer a few questions</li>
-            <li>Enter your Info</li>
-            <li>Play Games / Complete Deals <strong>(IMPORTANT)</strong></li>
-            <li>Claim your Bonus</li>
-        </ul>
+        <div class="main-content">
+            <div id="gatingContainer">
+                <p class="gating-question">Do you currently use Apple Pay?</p>
+                <div class="gating-buttons">
+                    <button class="yes-btn" onclick="showFinalCTA()">Yes</button>
+                    <button class="no-btn">No</button>
+                </div>
+            </div>
+            
+            <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696&source=150-my-ex-test911-leadgen-apple2596-bc864" id="finalCta" class="final-cta">
+                Claim Your $750
+            </a>
+        </div>
 
-        <a href="https://uplevelrewarded.com/aff_c?offer_id=2596&aff_id=27696" class="cta-button">Claim Now</a>
-        
-        <div class="footer">
-             <div class="verified-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.25,12c0,5.66-4.59,10.25-10.25,10.25S1.75,17.66,1.75,12,6.34,1.75,12,1.75,22.25,6.34,22.25,12Zm-9.06-3.3a.75.75,0,0,0-1,1.2l2.3,2.44-3.8,3.71a.75.75,0,0,0,1,1.12l4.25-4.16a.75.75,0,0,0,0-1.12Z"></path></svg>
-                Verified by TikTok
+        <div class="social-proof">
+            <div class="proof-item">
+                <span class="proof-metric">50K+</span>
+                <span class="proof-label">Active Users</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">$10M+</span>
+                <span class="proof-label">Paid Out</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">2 Min</span>
+                <span class="proof-label">To Qualify</span>
             </div>
         </div>
     </div>
+    
+    <div id="activityAlert" class="activity-alert"></div>
 
     <script>
-        const progressText = document.getElementById('progress-text');
-        const progressBar = document.getElementById('progress-bar');
-        const ctaButton = document.querySelector('.cta-button');
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Progress Bar Animation ---
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            setTimeout(() => { progressBar.style.width = '30%'; }, 100);
+            setTimeout(() => { 
+                progressBar.style.width = '75%'; 
+                progressText.innerText = 'Checking for available spots...';
+            }, 1500);
 
-        const steps = [
-            { text: "Success! Your spot is created!", width: "25%" },
-            { text: "Verifying your device...", width: "50%" },
-            { text: "Checking for offers...", width: "75%" },
-            { text: "Your bonus is ready!", width: "100%" }
-        ];
+            // --- Gating Logic ---
+            window.showFinalCTA = function() {
+                // Complete progress bar and update text
+                progressBar.style.width = '100%';
+                progressText.innerText = 'Success! Your spot is reserved!';
 
-        let currentStep = 0;
-
-        function runProgress() {
-            if (currentStep < steps.length) {
-                const step = steps[currentStep];
-                progressText.innerText = step.text;
-                progressBar.style.width = step.width;
-                currentStep++;
-                setTimeout(runProgress, 1200);
-            } else {
-                progressText.innerText = "Claim Your Bonus Below!";
+                // Hide gating and show final CTA
+                document.getElementById('gatingContainer').style.display = 'none';
+                document.getElementById('finalCta').style.display = 'block';
             }
-        }
-        
-        ctaButton.style.display = 'none';
 
-        setTimeout(() => {
-            runProgress();
-             setTimeout(() => {
-                ctaButton.style.display = 'block';
-            }, steps.length * 1200);
-        }, 500);
+            // --- Live Activity Alerts ---
+            const activityAlert = document.getElementById('activityAlert');
+            const alerts = [
+                "Jennifer from TX just claimed a $750 Apple Pay reward.",
+                "Mike from FL just cashed out via Apple Pay.",
+                "Sarah from CA just qualified for the $750 bonus.",
+                "David from NY just redeemed his reward.",
+                "Emily from OH just completed the final step."
+            ];
+            let alertIndex = 0;
+            
+            const showAlert = () => {
+                activityAlert.innerText = alerts[alertIndex];
+                activityAlert.classList.add('show');
+                
+                setTimeout(() => {
+                    activityAlert.classList.remove('show');
+                }, 4000); 
 
+                alertIndex = (alertIndex + 1) % alerts.length;
+            };
+            
+            setTimeout(() => {
+                showAlert();
+                setInterval(showAlert, 7000); 
+            }, 3500);
+        });
     </script>
 </body>
 </html>

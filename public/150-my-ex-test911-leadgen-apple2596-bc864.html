@@ -48,7 +48,7 @@
             display: flex;
             flex-direction: column;
             animation: fadeIn 0.6s ease-out;
-            margin-top: 70px;
+            /* CHANGE 2: Removed top margin */
         }
         
         @keyframes fadeIn {
@@ -109,7 +109,6 @@
             padding: 0 25px;
         }
         
-        /* CHANGE 3: Overhauled Quick Start Guide CSS for perfect alignment */
         .quick-start-guide li {
             display: flex;
             align-items: flex-start; 
@@ -154,41 +153,12 @@
         .main-content {
             padding: 15px 20px 20px;
         }
-
-        .gating-question {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-light);
-            margin-bottom: 15px;
-        }
         
-        .gating-buttons button {
-            width: 100%;
-            padding: 16px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: 2px solid var(--primary-white);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .gating-buttons .yes-btn {
-            background-color: var(--primary-white);
-            color: var(--button-text-dark);
-            margin-bottom: 10px;
-        }
-        .gating-buttons .yes-btn:hover {
-            background-color: var(--primary-white-hover);
-        }
-
-        .gating-buttons .no-btn {
-            background-color: transparent;
-            color: var(--primary-white);
-        }
+        /* CHANGE 1: Gating question removed */
 
         .final-cta {
-            display: none;
+            /* CHANGE 1: CTA is now visible by default */
+            display: block; 
             width: 100%;
             padding: 16px;
             background-color: var(--primary-white);
@@ -239,7 +209,7 @@
         </div>
             
         <ol class="quick-start-guide">
-             <li>
+            <li>
                 <div class="guide-text">
                     <span class="guide-title">Answer Questions</span>
                     <span class="guide-desc">Confirm your eligibility.</span>
@@ -260,15 +230,7 @@
         </ol>
 
         <div class="main-content">
-            <div id="gatingContainer">
-                <p class="gating-question">Do you currently use Apple Pay?</p>
-                <div class="gating-buttons">
-                    <button class="yes-btn" onclick="showFinalCTA()">Yes, I Do</button>
-                    <button class="no-btn">No, I Don't</button>
-                </div>
-            </div>
-            
-            <a href="https://rewarduplevel.com/aff_c?offer_id=2596&aff_id=27696&source=150-my-ex-test911-leadgen-apple2596-bc864" id="finalCta" class="final-cta">
+             <a href="https://rewarduplevel.com/aff_c?offer_id=2596&aff_id=27696&source=150-my-ex-test911-leadgen-apple2596-bc864" id="finalCta" class="final-cta">
                 Claim Your $750
             </a>
         </div>
@@ -300,18 +262,16 @@
                 progressBar.style.width = '75%'; 
                 progressText.innerText = 'Checking for available spots...';
             }, 1500);
-
-            // --- Gating Logic ---
-            window.showFinalCTA = function() {
-                progressBar.style.width = '100%';
+            setTimeout(() => { 
+                progressBar.style.width = '100%'; 
                 progressText.innerText = 'Success! Your spot is reserved!';
-                document.getElementById('gatingContainer').style.display = 'none';
-                document.getElementById('finalCta').style.display = 'block';
-            }
+            }, 3000);
 
-            // CHANGE 2: Dynamic Payout Counter Logic ---
+            // --- Gating Logic Removed ---
+
+            // --- Dynamic Payout Counter Logic ---
             const payoutElement = document.getElementById('payoutCounter');
-            const initialPayout = 10142534; // Starting value
+            const initialPayout = 10142534;
             let currentPayout = localStorage.getItem('dynamicPayout') ? parseInt(localStorage.getItem('dynamicPayout')) : initialPayout;
 
             const formatPayout = (value) => '$' + value.toLocaleString('en-US');
@@ -323,10 +283,8 @@
                 localStorage.setItem('dynamicPayout', currentPayout);
             };
             
-            payoutElement.innerText = formatPayout(currentPayout); // Set initial value on load
-            setInterval(updatePayout, 2500); // Update every 2.5 seconds
-            
-            // CHANGE 1: Pop-up alert logic has been removed.
+            payoutElement.innerText = formatPayout(currentPayout);
+            setInterval(updatePayout, 2500);
         });
     </script>
 </body>

@@ -8,15 +8,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --tester-navy: #2a2c3f; /* Dark navy from logo */
-            --tester-red: #d93b3b;   /* Red from logo */
+            --tester-navy: #2a2c3f;
+            --tester-red: #d93b3b;
             --cta-hover: #b83232;
             --light-gray: #f2f3f7;
             --dark-text: #1a1a1a;
             --light-text: #555;
             --white: #ffffff;
-            --checkmark-bg: #e4f8f0;
-            --checkmark-icon: #27ae60;
         }
 
         * {
@@ -33,7 +31,7 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding: 20px 15px;
+            padding: 15px;
         }
 
         .container {
@@ -44,6 +42,8 @@
             width: 100%;
             text-align: center;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
             animation: fadeIn 0.5s ease-in-out;
         }
         
@@ -53,60 +53,61 @@
         }
 
         .header {
-            padding: 20px 20px 15px;
+            padding: 15px 20px 10px;
         }
 
         .logo {
-            max-width: 90px;
-            margin-bottom: 15px;
+            max-width: 75px;
+            margin-bottom: 10px;
         }
 
         .headline {
-            font-size: 1.5rem;
+            font-size: 1.35rem; /* Reduced font size */
             font-weight: 700;
             color: var(--dark-text);
             line-height: 1.3;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .sub-headline {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--light-text);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .progress-bar-container {
             width: 100%;
-            margin: 0 auto 8px;
-            background-color: #e0e0e0;
+            margin: 0 auto 5px;
+            background-color: #e9e9e9;
             border-radius: 20px;
-            height: 10px;
+            height: 8px;
         }
         
         .progress-bar {
             width: 0%;
-            height: 10px;
+            height: 8px;
             background: linear-gradient(90deg, var(--tester-navy), var(--tester-red));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
 
         .progress-text {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             color: var(--light-text);
-            margin-bottom: 15px;
-            min-height: 1.2em;
+            margin-bottom: 10px;
+            min-height: 1.1em;
         }
 
         .main-content {
-            padding: 0 20px 25px;
+            padding: 0 20px 15px; /* Reduced padding */
         }
 
         .quick-start-guide {
             list-style-type: none;
             text-align: left;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            counter-reset: step-counter;
         }
 
         .quick-start-guide li {
@@ -114,36 +115,47 @@
             align-items: center;
             font-size: 0.9rem;
             color: var(--dark-text);
-            margin-bottom: 10px;
-            background-color: var(--light-gray);
-            padding: 12px;
-            border-radius: 8px;
+            margin-bottom: 8px;
+            padding-left: 30px; /* Space for the number */
+            position: relative;
         }
         
-        .quick-start-guide li .icon {
-            color: var(--checkmark-icon);
+        .quick-start-guide li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            background-color: var(--tester-red);
+            color: var(--white);
             font-weight: 700;
-            margin-right: 12px;
-            font-size: 1.2rem;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
         }
         
         .pro-tip {
             background-color: var(--light-gray);
             border-left: 4px solid var(--tester-red);
             border-radius: 4px;
-            padding: 12px;
+            padding: 10px;
             font-size: 0.8rem;
             text-align: left;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .cta-button {
             display: block;
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background-color: var(--tester-red);
             color: var(--white);
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
             text-decoration: none;
             border-radius: 12px;
@@ -151,19 +163,14 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 15px rgba(217, 59, 59, 0.3);
-            animation: pulse 2s infinite;
-            margin-bottom: 15px;
-        }
-        
-        .cta-button:hover {
-            background-color: var(--cta-hover);
-            transform: scale(1.02);
+            animation: pulse 1.8s infinite;
+            margin-bottom: 10px;
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 4px 15px rgba(217, 59, 59, 0.3); }
-            70% { box-shadow: 0 4px 25px rgba(217, 59, 59, 0); }
-            100% { box-shadow: 0 4px 15px rgba(217, 59, 59, 0); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
 
         .trust-badge {
@@ -179,7 +186,33 @@
             width: 16px;
             height: 16px;
             margin-right: 6px;
-            color: #1DA1F2; /* Twitter/Social Blue */
+            color: #1DA1F2;
+        }
+        
+        .social-proof {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: var(--tester-navy);
+            margin-top: 15px;
+        }
+
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .proof-metric {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .proof-label {
+            font-size: 0.65rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
         }
 
     </style>
@@ -199,11 +232,11 @@
         </div>
 
         <div class="main-content">
-             <ul class="quick-start-guide">
-                <li><span class="icon">✓</span> <strong>Download:</strong> Get the free Testerup app.</li>
-                <li><span class="icon">✓</span> <strong>Play:</strong> Test new games to earn rewards.</li>
-                <li><span class="icon">✓</span> <strong>Get Paid:</strong> Cash out for your next shopping haul.</li>
-            </ul>
+             <ol class="quick-start-guide">
+                <li><strong>Download:</strong> Get the free Testerup app.</li>
+                <li><strong>Play:</strong> Test new games to earn rewards.</li>
+                <li><strong>Get Paid:</strong> Cash out for your next shopping haul.</li>
+            </ol>
             
             <div class="pro-tip">
                 💡 <b>Pro tip:</b> In-app purchases are fully reimbursed & multiply your earnings!
@@ -214,6 +247,21 @@
             <div class="trust-badge">
                 <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 1.1c-4.9,0-8.9,4-8.9,8.9s4,8.9,8.9,8.9s8.9-4,8.9-8.9S14.9,1.1,10,1.1z M8.1,13.8l-3.3-3.3l1.2-1.2l2.1,2.1 l4.9-4.9l1.2,1.2L8.1,13.8z"></path></svg>
                 <span>Verified by TikTok</span>
+            </div>
+        </div>
+        
+        <div class="social-proof">
+            <div class="proof-item">
+                <span class="proof-metric">50K+</span>
+                <span class="proof-label">Active Testers</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">$10M+</span>
+                <span class="proof-label">Paid Out</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">5 Min</span>
+                <span class="proof-label">Signup</span>
             </div>
         </div>
     </div>

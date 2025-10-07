@@ -21,7 +21,6 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            /* Removed overflow: hidden to allow natural scrolling if needed */
         }
 
         body {
@@ -33,7 +32,6 @@
             align-items: center;
             padding-bottom: 70px;
             box-sizing: border-box;
-            /* Added user-select: none to prevent text copying */
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -47,7 +45,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden; /* Contains particles without disabling body scroll */
+            overflow: hidden;
         }
 
         .particle {
@@ -86,18 +84,16 @@
 
         /* Updated guide alignment */
         .guide {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin: 0 auto;
+            text-align: center; /* This will center the inline-flex steps */
+            margin: 0 auto 30px;
             max-width: 340px;
         }
 
         .step {
-            display: flex;
+            display: inline-flex; /* Make step container shrink-to-fit content */
             align-items: center;
-            width: 100%;
+            width: auto; /* Allow container to shrink */
+            margin-bottom: 15px;
         }
 
         .step-number {
@@ -155,7 +151,6 @@
             background-color: var(--button-hover-bg);
         }
 
-        /* Updated status indicator with spinner */
         #status-indicator {
             display: none;
             align-items: center;
@@ -185,7 +180,6 @@
             width: 100%;
         }
         
-        /* Updated final CTA style */
         .final-cta {
             background: linear-gradient(135deg, #5a5a5a 0%, #3a3a3a 100%);
             border: 1px solid rgba(128, 128, 128, 0.3);

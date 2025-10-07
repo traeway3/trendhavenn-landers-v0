@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Testerup | Get Paid to Test</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --brand-red: #cc292f;
+            --cta-red-hover: #a82126;
+            --brand-dark-blue: #232a3f;
+            --light-gray: #f0f2f5;
+            --dark-text: #333;
+            --light-text: #555;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .header {
+            padding: 15px 15px 10px;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .headline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .sub-headline {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-container {
+            width: 90%;
+            margin: 0 auto 8px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 12px;
+            background: linear-gradient(90deg, var(--brand-dark-blue), var(--brand-red)); /* CHANGED */
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+            min-height: 1.2em;
+        }
+
+        .main-content {
+            padding: 0 20px 20px;
+        }
+
+        .quick-start-guide {
+            list-style-type: none;
+            text-align: left;
+            margin-bottom: 20px;
+            padding-left: 5px;
+        }
+
+        .quick-start-guide li {
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+            counter-increment: step-counter;
+        }
+
+        .quick-start-guide li::before {
+            content: counter(step-counter);
+            background-color: var(--brand-red);
+            color: var(--white);
+            font-weight: 700;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 0.8rem;
+            line-height: 1;
+        }
+        
+        .pro-tip {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.8rem;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--brand-red);
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--cta-red-hover);
+            transform: scale(1.02);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(204, 41, 47, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0); }
+        }
+
+        .social-proof {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: var(--light-gray);
+        }
+
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .proof-metric {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--brand-dark-blue);
+        }
+        
+        .proof-label {
+            font-size: 0.7rem;
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .trust-badge {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+        
+        .activity-alert {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            margin: 0 auto;
+            max-width: 360px;
+            background-color: rgba(0,0,0,0.75);
+            color: var(--white);
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+        
+        .activity-alert.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img src="testrrrlogo.png" alt="Testerup Logo" class="logo">
+            <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
+            <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
+            
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="progressText" class="progress-text">Verifying device...</p>
+        </div>
+
+        <div class="main-content">
+             <ol class="quick-start-guide">
+                <li>Discover and download from 250+ new apps.</li>
+                <li>Play games & complete tasks to earn cash.</li>
+                <li>Cash out instantly via PayPal & gift cards.</li>
+            </ol>
+            
+            <div class="pro-tip">
+                💡 <b>Pro-Tip:</b> Complete your first gaming offer today to unlock an instant $10 welcome bonus!
+            </div>
+            
+            <a href="https://rewarduplevel.com/aff_c?offer_id=2414&aff_id=27696&source=154-still-depend-test926-leadgen-testerup2414-bc903" class="cta-button">GET MY BAG</a>
+            
+            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+        </div>
+
+        <div class="social-proof">
+            <div class="proof-item">
+                <span class="proof-metric">250+</span>
+                <span class="proof-label">New Offers</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">$5M+</span>
+                <span class="proof-label">Paid to Testers</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">$125</span>
+                <span class="proof-label">Avg. Payout</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="activityAlert" class="activity-alert"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Progress Bar Animation ---
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            const progressSteps = [
+                { text: 'Checking for offers...', width: '50%' },
+                { text: 'Success! Your spot is reserved!', width: '100%' }
+            ];
+            
+            setTimeout(() => {
+                progressBar.style.width = '25%';
+            }, 100);
+
+            let currentStep = 0;
+            const progressInterval = setInterval(() => {
+                if (currentStep < progressSteps.length) {
+                    progressText.innerText = progressSteps[currentStep].text;
+                    progressBar.style.width = progressSteps[currentStep].width;
+                    currentStep++;
+                } else {
+                    clearInterval(progressInterval);
+                }
+            }, 1500);
+
+            // --- Live Activity Alerts ---
+            const activityAlert = document.getElementById('activityAlert');
+            const alerts = [
+                "Jennifer from Texas just earned $45 testing Coin Master.",
+                "Mike from Florida just cashed out $80 via PayPal.",
+                "Sarah from California just earned $25 playing Match Masters.",
+                "David from New York just got a $50 Amazon Gift Card.",
+                "Emily from Ohio just completed a gaming offer for $60.",
+                "Chris from Arizona just redeemed points for a $25 Starbucks Card.",
+                "Megan from Illinois just earned $35 testing a new puzzle game.",
+                "Alex from Georgia cashed out $110 directly to their bank account."
+            ];
+
+            let alertIndex = 0;
+            
+            const showAlert = () => {
+                activityAlert.innerText = alerts[alertIndex];
+                activityAlert.classList.add('show');
+                
+                setTimeout(() => {
+                    activityAlert.classList.remove('show');
+                }, 4000);
+
+                alertIndex = (alertIndex + 1) % alerts.length;
+            };
+            
+            setTimeout(() => {
+                showAlert();
+                setInterval(showAlert, 8500);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

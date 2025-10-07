@@ -8,10 +8,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --brand-red: #cc292f; /* Testerup Red */
-            --brand-dark-blue: #232a3f; /* Testerup Dark Blue */
-            --cta-blue: #3686E5; /* Original CTA Blue for contrast */
-            --cta-hover: #2a6cb5;
+            --brand-red: #cc292f;
+            --cta-red-hover: #a82126;
+            --brand-dark-blue: #232a3f;
+            --cta-accent-blue: #3686E5;
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --light-text: #555;
@@ -58,7 +58,7 @@
         }
 
         .logo {
-            max-width: 150px; /* Adjusted for new logo */
+            max-width: 150px;
             margin-bottom: 10px;
         }
 
@@ -86,7 +86,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-dark-blue), var(--cta-blue)); /* Updated gradient */
+            background: linear-gradient(90deg, var(--brand-dark-blue), var(--cta-accent-blue));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -105,7 +105,7 @@
         .quick-start-guide {
             list-style-type: none;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px; /* Increased margin */
             padding-left: 5px;
         }
 
@@ -114,13 +114,13 @@
             align-items: flex-start;
             font-size: 0.9rem;
             color: var(--dark-text);
-            margin-bottom: 8px;
+            margin-bottom: 10px; /* Increased margin */
             counter-increment: step-counter;
         }
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--cta-blue);
+            background-color: var(--brand-red); /* CHANGED */
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -130,7 +130,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 12px; /* Increased margin */
             font-size: 0.8rem;
             line-height: 1;
         }
@@ -141,14 +141,14 @@
             padding: 10px;
             font-size: 0.8rem;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px; /* Increased margin */
         }
 
         .cta-button {
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--cta-blue);
+            background-color: var(--brand-red); /* CHANGED */
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -161,14 +161,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-hover);
+            background-color: var(--cta-red-hover); /* CHANGED */
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0.7); } /* CHANGED */
+            70% { box-shadow: 0 0 0 10px rgba(204, 41, 47, 0); } /* CHANGED */
+            100% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0); } /* CHANGED */
         }
 
         .social-proof {
@@ -187,12 +187,13 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--brand-dark-blue); /* Updated color */
+            color: var(--brand-dark-blue);
         }
         
         .proof-label {
             font-size: 0.7rem;
             color: var(--light-text);
+            font-weight: 600; /* CHANGED */
         }
 
         .trust-badge {
@@ -203,7 +204,7 @@
         
         .activity-alert {
             position: fixed;
-            top: 20px;
+            bottom: 20px; /* CHANGED */
             left: 20px;
             right: 20px;
             margin: 0 auto;
@@ -215,7 +216,7 @@
             font-size: 0.85rem;
             z-index: 1000;
             opacity: 0;
-            transform: translateY(-20px);
+            transform: translateY(20px); /* CHANGED */
             transition: opacity 0.5s ease, transform 0.5s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             pointer-events: none;
@@ -223,7 +224,7 @@
         
         .activity-alert.show {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0); /* CHANGED */
         }
     </style>
 </head>
@@ -243,16 +244,16 @@
 
         <div class="main-content">
              <ol class="quick-start-guide">
-                <li><b>Discover Offers:</b> Choose from hundreds of new games and apps.</li>
-                <li><b>Play & Test:</b> Complete gaming tasks to earn rewards.</li>
-                <li><b>Get Paid:</b> Cash out your earnings via PayPal or gift cards.</li>
+                <li>Discover and download from 250+ new apps.</li>
+                <li>Play games & complete tasks to earn cash.</li>
+                <li>Cash out instantly via PayPal & gift cards.</li>
             </ol>
             
             <div class="pro-tip">
                 💡 <b>Pro-Tip:</b> Complete your first gaming offer today to unlock an instant $10 welcome bonus!
             </div>
             
-            <a href="https://uplevelrewarded.com/aff_c?offer_id=2414&aff_id=27696&source=154-still-depend-test918-leadgen-testerup2414-bc865" class="cta-button">GET MY BAG</a>
+            <a href="[INSERT_TESTERUP_OFFER_LINK_HERE]" class="cta-button">GET MY BAG</a>
             
             <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>
@@ -308,7 +309,10 @@
                 "Mike from Florida just cashed out $80 via PayPal.",
                 "Sarah from California just earned $25 playing Match Masters.",
                 "David from New York just got a $50 Amazon Gift Card.",
-                "Emily from Ohio just completed a gaming offer for $60."
+                "Emily from Ohio just completed a gaming offer for $60.",
+                "Chris from Arizona just redeemed points for a $25 Starbucks Card.",
+                "Megan from Illinois just earned $35 testing a new puzzle game.",
+                "Alex from Georgia cashed out $110 directly to their bank account."
             ];
 
             let alertIndex = 0;
@@ -319,15 +323,14 @@
                 
                 setTimeout(() => {
                     activityAlert.classList.remove('show');
-                }, 4000); // Alert visible for 4 seconds
+                }, 4000);
 
                 alertIndex = (alertIndex + 1) % alerts.length;
             };
             
-            // Show first alert after 3 seconds, then every 6 seconds
             setTimeout(() => {
                 showAlert();
-                setInterval(showAlert, 6000);
+                setInterval(showAlert, 8500); // CHANGED
             }, 3000);
         });
     </script>

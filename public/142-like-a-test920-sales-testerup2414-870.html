@@ -32,6 +32,15 @@
             align-items: flex-start;
             min-height: 100vh;
             padding: 15px;
+            /* --- CONTENT PROTECTION ADDED --- */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* IE/Edge */
+            user-select: none;         /* Standard */
+        }
+        
+        img {
+            pointer-events: none;
         }
 
         .container {
@@ -85,7 +94,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-dark-blue), var(--brand-red)); /* CHANGED */
+            background: linear-gradient(90deg, var(--brand-dark-blue), var(--brand-red));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -232,8 +241,8 @@
     <div class="container">
         <div class="header">
             <img src="testrrrlogo.png" alt="Testerup Logo" class="logo">
-            <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
-            <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
+            <h1 class="headline">Turn Your Phone Into a Second Paycheck.</h1>
+            <p class="sub-headline">Earn up to $125 daily for testing new games & apps.</p>
             
             <div class="progress-bar-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -252,7 +261,7 @@
                 💡 <b>Pro-Tip:</b> Complete your first gaming offer today to unlock an instant $10 welcome bonus!
             </div>
             
-            <a href="https://rewardorbit.com/r/eyJ0IjoidGVzdGVydXAtYSIsInUiOiI2OGJhOTc1MmY5ZWJjYjg1NjRlZDQ3MmEiLCJ0cyI6MTc1OTgwOTQ1MDUyNSwicHJvdmlkZXIiOiJ0ZXN0ZXJ1cCIsImR1YWxTeXN0ZW0iOnRydWV9?s2=142-like-a-test920-sales-testerup2414-870" class="cta-button">GET MY BAG</a>
+            <a href="https://rewardorbit.com/r/eyJ0IjoidGVzdGVydXAtYSIsInUiOiI2OGJhOTc1MmY5ZWJjYjg1NjRlZDQ3MmEiLCJ0cyI6MTc1OTgwOTQ1MDUyNSwicHJvdmlkZXIiOiJ0ZXN0ZXJ1cCIsImR1YWxTeXN0ZW0iOnRydWV9?s2=142-like-a-test920-sales-testerup2414-870" class="cta-button">START EARNING NOW</a>
             
             <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>

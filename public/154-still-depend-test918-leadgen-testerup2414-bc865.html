@@ -11,7 +11,6 @@
             --brand-red: #cc292f;
             --cta-red-hover: #a82126;
             --brand-dark-blue: #232a3f;
-            --cta-accent-blue: #3686E5;
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --light-text: #555;
@@ -86,7 +85,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-dark-blue), var(--cta-accent-blue));
+            background: linear-gradient(90deg, var(--brand-dark-blue), var(--brand-red)); /* CHANGED */
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -105,7 +104,7 @@
         .quick-start-guide {
             list-style-type: none;
             text-align: left;
-            margin-bottom: 20px; /* Increased margin */
+            margin-bottom: 20px;
             padding-left: 5px;
         }
 
@@ -114,13 +113,13 @@
             align-items: flex-start;
             font-size: 0.9rem;
             color: var(--dark-text);
-            margin-bottom: 10px; /* Increased margin */
+            margin-bottom: 10px;
             counter-increment: step-counter;
         }
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--brand-red); /* CHANGED */
+            background-color: var(--brand-red);
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -130,7 +129,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px; /* Increased margin */
+            margin-right: 12px;
             font-size: 0.8rem;
             line-height: 1;
         }
@@ -141,14 +140,14 @@
             padding: 10px;
             font-size: 0.8rem;
             text-align: left;
-            margin-bottom: 20px; /* Increased margin */
+            margin-bottom: 20px;
         }
 
         .cta-button {
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--brand-red); /* CHANGED */
+            background-color: var(--brand-red);
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -161,14 +160,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-red-hover); /* CHANGED */
+            background-color: var(--cta-red-hover);
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0.7); } /* CHANGED */
-            70% { box-shadow: 0 0 0 10px rgba(204, 41, 47, 0); } /* CHANGED */
-            100% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0); } /* CHANGED */
+            0% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(204, 41, 47, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0); }
         }
 
         .social-proof {
@@ -193,7 +192,7 @@
         .proof-label {
             font-size: 0.7rem;
             color: var(--light-text);
-            font-weight: 600; /* CHANGED */
+            font-weight: 600;
         }
 
         .trust-badge {
@@ -204,7 +203,7 @@
         
         .activity-alert {
             position: fixed;
-            bottom: 20px; /* CHANGED */
+            bottom: 20px;
             left: 20px;
             right: 20px;
             margin: 0 auto;
@@ -216,7 +215,7 @@
             font-size: 0.85rem;
             z-index: 1000;
             opacity: 0;
-            transform: translateY(20px); /* CHANGED */
+            transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             pointer-events: none;
@@ -224,7 +223,7 @@
         
         .activity-alert.show {
             opacity: 1;
-            transform: translateY(0); /* CHANGED */
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -253,7 +252,7 @@
                 💡 <b>Pro-Tip:</b> Complete your first gaming offer today to unlock an instant $10 welcome bonus!
             </div>
             
-            <a href="[INSERT_TESTERUP_OFFER_LINK_HERE]" class="cta-button">GET MY BAG</a>
+            <a href="https://rewarduplevel.com/aff_c?offer_id=2414&aff_id=27696&source=154-still-depend-test918-leadgen-testerup2414-bc865" class="cta-button">GET MY BAG</a>
             
             <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>
@@ -330,7 +329,7 @@
             
             setTimeout(() => {
                 showAlert();
-                setInterval(showAlert, 8500); // CHANGED
+                setInterval(showAlert, 8500);
             }, 3000);
         });
     </script>

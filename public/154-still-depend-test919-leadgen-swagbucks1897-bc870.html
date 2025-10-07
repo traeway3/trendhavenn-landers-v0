@@ -8,7 +8,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --swag-blue: #005A8D;
+            /* === COLOR SCHEME UPDATED FOR SWAGBUCKS === */
+            --brand-blue: #005A8D;
             --cta-blue: #3686E5;
             --cta-hover: #2a6cb5;
             --light-gray: #f0f2f5;
@@ -57,7 +58,7 @@
         }
 
         .logo {
-            max-width: 120px;
+            max-width: 120px; /* Adjusted for Swagbucks logo */
             margin-bottom: 10px;
         }
 
@@ -85,7 +86,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--swag-blue), var(--cta-blue));
+            background: linear-gradient(90deg, var(--brand-blue), var(--cta-blue)); /* CHANGED */
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -104,7 +105,7 @@
         .quick-start-guide {
             list-style-type: none;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             padding-left: 5px;
         }
 
@@ -113,13 +114,13 @@
             align-items: flex-start;
             font-size: 0.9rem;
             color: var(--dark-text);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             counter-increment: step-counter;
         }
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--cta-blue);
+            background-color: var(--cta-blue); /* CHANGED */
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -129,7 +130,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 12px;
             font-size: 0.8rem;
             line-height: 1;
         }
@@ -140,14 +141,14 @@
             padding: 10px;
             font-size: 0.8rem;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .cta-button {
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--cta-blue);
+            background-color: var(--cta-blue); /* CHANGED */
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -160,14 +161,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-hover);
+            background-color: var(--cta-hover); /* CHANGED */
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); } /* CHANGED */
+            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); } /* CHANGED */
+            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); } /* CHANGED */
         }
 
         .social-proof {
@@ -186,12 +187,13 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--swag-blue);
+            color: var(--brand-blue); /* CHANGED */
         }
         
         .proof-label {
             font-size: 0.7rem;
             color: var(--light-text);
+            font-weight: 600;
         }
 
         .trust-badge {
@@ -202,7 +204,7 @@
         
         .activity-alert {
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             left: 20px;
             right: 20px;
             margin: 0 auto;
@@ -214,7 +216,7 @@
             font-size: 0.85rem;
             z-index: 1000;
             opacity: 0;
-            transform: translateY(-20px);
+            transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             pointer-events: none;
@@ -232,7 +234,7 @@
         <div class="header">
             <img src="swag.png" alt="Swagbucks Logo" class="logo">
             <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
-            <p class="sub-headline">Fund your next shopping haul with cash & gift cards from Swagbucks.</p>
+            <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
             
             <div class="progress-bar-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -300,7 +302,7 @@
                 }
             }, 1500);
 
-            // --- Live Activity Alerts ---
+            // --- LIVE ACTIVITY ALERTS UPDATED FOR SWAGBUCKS ---
             const activityAlert = document.getElementById('activityAlert');
             const alerts = [
                 "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
@@ -318,15 +320,14 @@
                 
                 setTimeout(() => {
                     activityAlert.classList.remove('show');
-                }, 4000); // Alert visible for 4 seconds
+                }, 4000);
 
                 alertIndex = (alertIndex + 1) % alerts.length;
             };
             
-            // Show first alert after 3 seconds, then every 6 seconds
             setTimeout(() => {
                 showAlert();
-                setInterval(showAlert, 6000);
+                setInterval(showAlert, 8500);
             }, 3000);
         });
     </script>

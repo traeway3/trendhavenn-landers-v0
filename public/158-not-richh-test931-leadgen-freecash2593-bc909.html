@@ -8,7 +8,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            /* === COLOR SCHEME FOR FREECASH === */
             --brand-green: #29CC74;
             --cta-green-hover: #21a35d;
             --dark-bg-primary: #121212;
@@ -60,6 +59,8 @@
         .logo {
             max-width: 180px;
             margin-bottom: 15px;
+            /* === LOGO ROUNDED === */
+            border-radius: 16px;
         }
 
         .headline {
@@ -114,8 +115,7 @@
             align-items: flex-start;
             font-size: 0.9rem;
             color: var(--text-light);
-            margin-bottom: 10px;
-            counter-increment: step-counter;
+            margin-bottom: 12px;
         }
 
         .quick-start-guide li::before {
@@ -124,23 +124,31 @@
             color: var(--dark-bg-primary);
             font-weight: 700;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            min-width: 20px;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             margin-right: 12px;
             font-size: 0.8rem;
             line-height: 1;
+            counter-increment: step-counter;
         }
         
+        .quick-start-guide strong {
+            display: block;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 2px;
+        }
+
         .objection-handler {
             background-color: var(--dark-bg-primary);
             border-radius: 8px;
             padding: 15px;
             text-align: left;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .objection-handler p {
@@ -257,17 +265,17 @@
 
         <div class="main-content">
              <ol class="quick-start-guide">
-                <li><b>Choose an Offer:</b> Pick from thousands of games, apps, and surveys.</li>
-                <li><b>Complete the Task:</b> Most tasks take just 5-10 minutes.</li>
-                <li><b>Get Paid Instantly:</b> Cashout with PayPal, crypto, gift cards & more.</li>
+                <li><strong>Choose Your Offer</strong> from thousands of games, apps, and surveys.</li>
+                <li><strong>Complete Your Task</strong> in as little as 5-10 minutes.</li>
+                <li><strong>Get Paid Instantly</strong> via PayPal, crypto, gift cards, and more.</li>
             </ol>
+            
+            <a href="https://rewarduplevel.com/aff_c?offer_id=2593&aff_id=27696&source=158-not-richh-test931-leadgen-freecash2593-bc909" class="cta-button">START LIVING</a>
             
             <div class="objection-handler">
                 <p>✅ <b>Is it actually free?</b> Yes. You'll never be asked to deposit or pay for anything.</p>
                 <p>✅ <b>How fast can I cash out?</b> The average user cashes out in under 17 minutes.</p>
             </div>
-            
-            <a href="https://rewarduplevel.com/aff_c?offer_id=2593&aff_id=27696&source=158-not-richh-test931-leadgen-freecash2593-bc909" class="cta-button">START LIVING</a>
 
             <img src="trustpilot-logo7.png" alt="Trustpilot Logo" class="trustpilot-logo">
         </div>

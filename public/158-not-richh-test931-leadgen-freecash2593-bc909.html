@@ -106,9 +106,10 @@
             list-style-type: none;
             text-align: left;
             margin-bottom: 20px;
-            padding-left: 5px;
+            padding-left: 0;
         }
-
+        
+        /* === CSS FIX APPLIED HERE === */
         .quick-start-guide li {
             display: flex;
             align-items: flex-start;
@@ -136,12 +137,6 @@
             counter-increment: step-counter;
         }
         
-        /* === CSS BUG FIX APPLIED HERE === */
-        .quick-start-guide strong {
-            font-weight: 700;
-            color: var(--text-light);
-        }
-
         .objection-handler {
             background-color: var(--dark-bg-primary);
             border-radius: 8px;
@@ -264,9 +259,9 @@
 
         <div class="main-content">
              <ol class="quick-start-guide">
-                <li><strong>Choose Your Offer</strong> from thousands of games, apps, and surveys.</li>
-                <li><strong>Complete Your Task</strong> in as little as 5-10 minutes.</li>
-                <li><strong>Get Paid Instantly</strong> via PayPal, crypto, gift cards, and more.</li>
+                <li><div><strong>Choose Your Offer</strong> from thousands of games, apps, and surveys.</div></li>
+                <li><div><strong>Complete Your Task</strong> in as little as 5-10 minutes.</div></li>
+                <li><div><strong>Get Paid Instantly</strong> via PayPal, crypto, gift cards, and more.</div></li>
             </ol>
             
             <a href="https://rewarduplevel.com/aff_c?offer_id=2593&aff_id=27696&source=158-not-richh-test931-leadgen-freecash2593-bc909" class="cta-button">START LIVING</a>

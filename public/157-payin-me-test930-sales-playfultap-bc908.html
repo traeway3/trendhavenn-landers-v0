@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Testerup | Get Paid to Test</title>
+    <title>Playful Rewards | Get Paid to Play</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --brand-red: #cc292f;
-            --cta-red-hover: #a82126;
-            --brand-dark-blue: #232a3f;
+            /* === COLOR SCHEME UPDATED FOR PLAYFUL REWARDS === */
+            --brand-purple: #7F56D9;
+            --brand-purple-dark: #53389E;
+            --cta-purple-hover: #6941C6;
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --light-text: #555;
@@ -57,12 +58,11 @@
         }
 
         .logo {
-            max-width: 150px;
+            max-width: 120px; /* Adjusted for new logo */
             margin-bottom: 10px;
         }
 
         .headline {
-            /* === FONT SIZE ADJUSTED FOR SINGLE LINE === */
             font-size: 1.3rem; 
             font-weight: 700;
             color: var(--dark-text);
@@ -86,7 +86,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-dark-blue), var(--brand-red));
+            background: linear-gradient(90deg, var(--brand-purple-dark), var(--brand-purple));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -120,7 +120,7 @@
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--brand-red);
+            background-color: var(--brand-purple);
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -148,7 +148,7 @@
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--brand-red);
+            background-color: var(--brand-purple);
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -161,14 +161,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-red-hover);
+            background-color: var(--cta-purple-hover);
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(204, 41, 47, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(127, 86, 217, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0); }
         }
 
         .social-proof {
@@ -187,7 +187,7 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--brand-dark-blue);
+            color: var(--brand-purple-dark);
         }
         
         .proof-label {
@@ -232,9 +232,9 @@
 
     <div class="container">
         <div class="header">
-            <img src="testrrrlogo.png" alt="Testerup Logo" class="logo">
-            <h1 class="headline">He Asked If It Was a "Real Job."</h1>
-            <p class="sub-headline">I Showed Him My $613 Paycheck From My Phone.</p>
+            <img src="playful3.png" alt="Playful Rewards Logo" class="logo">
+            <h1 class="headline">Turn Your Game Time Into Real Money.</h1>
+            <p class="sub-headline">Earn major rewards, like this recent $836 deposit.</p>
             
             <div class="progress-bar-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -244,32 +244,32 @@
 
         <div class="main-content">
              <ol class="quick-start-guide">
-                <li>Discover and download from 250+ new apps.</li>
-                <li>Play games & complete tasks to earn cash.</li>
-                <li>Cash out instantly via PayPal & gift cards.</li>
+                <li>Discover & play from hundreds of new games.</li>
+                <li>Earn points for the time you spend playing.</li>
+                <li>Redeem your points for PayPal & gift cards.</li>
             </ol>
             
             <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Complete your first gaming offer today to unlock an instant $10 welcome bonus!
+                💡 <b>Pro-Tip:</b> Complete your first game to unlock a 5,000 point welcome bonus!
             </div>
             
-            <a href="https://rewardorbit.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidSI6IjY4YmE5NzUyZjllYmNiODU2NGVkNDcyYSIsInRzIjoxNzYwMDQwODUxMzc5LCJ0aWt0b2siOjEsInMiOiIxNTctcGF5aW4tbWUtdGVzdDkzMC1zYWxlcy1wbGF5ZnVsdGFwLWJjOTA4In0" class="cta-button">GET MY FIRST PAYCHECK</a>
+            <a href="https://rewardorbit.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidSI6IjY4YmE5NzUyZjllYmNiODU2NGVkNDcyYSIsInRzIjoxNzYwMDQxMDA1NjEzLCJ0aWt0b2siOjEsInMiOiIxNTctcGF5aW4tbWUtdGVzdDkzMC1zYWxlcy1wbGF5ZnVsdGFwLWJjOTA4In0" class="cta-button">START EARNING REWARDS</a>
             
             <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>
 
         <div class="social-proof">
             <div class="proof-item">
-                <span class="proof-metric">250+</span>
-                <span class="proof-label">New Offers</span>
+                <span class="proof-metric">500+</span>
+                <span class="proof-label">Games</span>
             </div>
             <div class="proof-item">
-                <span class="proof-metric">$5M+</span>
-                <span class="proof-label">Paid to Testers</span>
+                <span class="proof-metric">$1M+</span>
+                <span class="proof-label">Paid Out</span>
             </div>
             <div class="proof-item">
-                <span class="proof-metric">$125</span>
-                <span class="proof-label">Avg. Payout</span>
+                <span class="proof-metric">10K+</span>
+                <span class="proof-label">Daily Players</span>
             </div>
         </div>
     </div>
@@ -302,13 +302,13 @@
                 }
             }, 1500);
 
-            // --- LIVE ACTIVITY ALERTS UPDATED FOR SCENT MATCH ---
+            // --- LIVE ACTIVITY ALERTS UPDATED FOR PLAYFUL REWARDS ---
             const activityAlert = document.getElementById('activityAlert');
             const alerts = [
-                "Jennifer from Texas just received a $93 deposit for scrolling her FYP.",
-                "Mike from Florida just got his first paycheck of $80 via PayPal.",
-                "Sarah from California earned $25 testing a new app.",
-                "David from New York just completed an offer for a $50 Amazon Gift Card.",
+                "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
+                "Mike from Florida just cashed out $50 via PayPal for playing Coin Master.",
+                "Sarah from California just earned 10,000 points.",
+                "David from New York just unlocked a new game reward.",
                 "Emily from Ohio just cashed out $60 from her earnings."
             ];
 

@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Claim Your Bonus</title>
+    <title>Swagbucks | Live Like You Want</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            /* === COLOR SCHEME UPDATED FOR SWAGBUCKS === */
-            --brand-blue: #005A8D;
+            --swag-blue: #005A8D;
             --cta-blue: #3686E5;
             --cta-hover: #2a6cb5;
             --light-gray: #f0f2f5;
@@ -58,7 +57,8 @@
         }
 
         .logo {
-            max-width: 120px; /* Adjusted for Swagbucks logo */
+            /* === LOGO RESIZED === */
+            max-width: 100px;
             margin-bottom: 10px;
         }
 
@@ -86,7 +86,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-blue), var(--cta-blue)); /* CHANGED */
+            background: linear-gradient(90deg, var(--swag-blue), var(--cta-blue));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -120,7 +120,7 @@
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--cta-blue); /* CHANGED */
+            background-color: var(--cta-blue);
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -130,25 +130,34 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
+            margin-right: 10px;
             font-size: 0.8rem;
             line-height: 1;
         }
         
-        .pro-tip {
+        .objection-handler {
             background-color: var(--light-gray);
             border-radius: 8px;
-            padding: 10px;
-            font-size: 0.8rem;
+            padding: 15px;
+            font-size: 0.85rem;
             text-align: left;
-            margin-bottom: 20px;
+            margin-top: 20px; /* Added margin-top for spacing */
+            line-height: 1.5;
+        }
+        
+        .objection-handler p:first-child {
+            margin-bottom: 10px;
+        }
+        
+        .objection-handler b {
+             color: var(--swag-blue);
         }
 
         .cta-button {
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--cta-blue); /* CHANGED */
+            background-color: var(--cta-blue);
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -161,14 +170,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-hover); /* CHANGED */
+            background-color: var(--cta-hover);
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); } /* CHANGED */
-            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); } /* CHANGED */
-            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); } /* CHANGED */
+            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); }
         }
 
         .social-proof {
@@ -187,18 +196,11 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--brand-blue); /* CHANGED */
+            color: var(--swag-blue);
         }
         
         .proof-label {
             font-size: 0.7rem;
-            color: var(--light-text);
-            font-weight: 600;
-        }
-
-        .trust-badge {
-            margin-top: 10px;
-            font-size: 0.8rem;
             color: var(--light-text);
         }
         
@@ -233,8 +235,8 @@
     <div class="container">
         <div class="header">
             <img src="swag.png" alt="Swagbucks Logo" class="logo">
-            <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
-            <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
+            <h1 class="headline">You Don't Have to Be Rich to Live Like It.</h1>
+            <p class="sub-headline">Fund your lifestyle with rewards like this $672 deposit.</p>
             
             <div class="progress-bar-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -249,13 +251,12 @@
                 <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
             </ol>
             
-            <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+            <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=158-not-richh-test938-leadgen-swagbucks1897-bc910-1" class="cta-button">START LIVING</a>
+
+            <div class="objection-handler">
+                <p>✅ <b>Is it legit?</b> Yes. Swagbucks has paid out over $500 Million to its members.</p>
+                <p>✅ <b>How do I get paid?</b> Earn "SB" points and redeem them for PayPal cash or gift cards.</p>
             </div>
-            
-            <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=154-still-depend-test937-leadgen-swagbucks1897-bc910" class="cta-button">GET MY BAG</a>
-            
-            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>
 
         <div class="social-proof">
@@ -302,7 +303,7 @@
                 }
             }, 1500);
 
-            // --- LIVE ACTIVITY ALERTS UPDATED FOR SWAGBUCKS ---
+            // --- Live Activity Alerts ---
             const activityAlert = document.getElementById('activityAlert');
             const alerts = [
                 "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
@@ -327,7 +328,7 @@
             
             setTimeout(() => {
                 showAlert();
-                setInterval(showAlert, 8500);
+                setInterval(showAlert, 6000);
             }, 3000);
         });
     </script>

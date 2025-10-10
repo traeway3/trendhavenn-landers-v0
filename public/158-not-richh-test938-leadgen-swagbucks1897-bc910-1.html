@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Claim Your Bonus</title>
+    <title>Swagbucks | Live Like You Want</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -66,6 +66,7 @@
             font-weight: 700;
             color: var(--dark-text);
             margin-bottom: 5px;
+            line-height: 1.3;
         }
 
         .sub-headline {
@@ -93,7 +94,7 @@
             font-size: 0.8rem;
             color: var(--light-text);
             margin-bottom: 15px;
-            min-height: 1.2em; /* Reserve space for text */
+            min-height: 1.2em;
         }
 
         .main-content {
@@ -103,7 +104,7 @@
         .quick-start-guide {
             list-style-type: none;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             padding-left: 5px;
         }
 
@@ -112,7 +113,7 @@
             align-items: flex-start;
             font-size: 0.9rem;
             color: var(--dark-text);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             counter-increment: step-counter;
         }
 
@@ -133,13 +134,22 @@
             line-height: 1;
         }
         
-        .pro-tip {
+        .objection-handler {
             background-color: var(--light-gray);
             border-radius: 8px;
-            padding: 10px;
-            font-size: 0.8rem;
+            padding: 15px;
+            font-size: 0.85rem;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .objection-handler p:first-child {
+            margin-bottom: 10px;
+        }
+        
+        .objection-handler b {
+             color: var(--swag-blue);
         }
 
         .cta-button {
@@ -148,7 +158,7 @@
             padding: 15px;
             background-color: var(--cta-blue);
             color: var(--white);
-            font-size: 1.1rem;
+            font-size: 1.2rem; /* Increased size */
             font-weight: 700;
             text-decoration: none;
             border-radius: 12px;
@@ -192,16 +202,11 @@
             font-size: 0.7rem;
             color: var(--light-text);
         }
-
-        .trust-badge {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: var(--light-text);
-        }
         
         .activity-alert {
+            /* === POSITION CHANGED TO BOTTOM === */
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             left: 20px;
             right: 20px;
             margin: 0 auto;
@@ -213,7 +218,7 @@
             font-size: 0.85rem;
             z-index: 1000;
             opacity: 0;
-            transform: translateY(-20px);
+            transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             pointer-events: none;
@@ -230,8 +235,8 @@
     <div class="container">
         <div class="header">
             <img src="swag.png" alt="Swagbucks Logo" class="logo">
-            <h1 class="headline">Claim Your $100 Swagbucks Bonus</h1>
-            <p class="sub-headline">Redeem for gift cards from Amazon, Target, and more!</p>
+            <h1 class="headline">You Don't Have to Be Rich to Live Like It.</h1>
+            <p class="sub-headline">Fund your lifestyle with rewards like this $672 deposit.</p>
             
             <div class="progress-bar-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -246,13 +251,12 @@
                 <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
             </ol>
             
-            <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+            <div class="objection-handler">
+                <p>✅ <b>Is it legit?</b> Yes. Swagbucks has paid out over $500 Million to its members.</p>
+                <p>✅ <b>How do I get paid?</b> Earn "SB" points and redeem them for PayPal cash or gift cards.</p>
             </div>
             
-            <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=158-not-richh-test938-leadgen-swagbucks1897-bc910-1" class="cta-button">START EARNING NOW</a>
-            
-            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+            <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=158-not-richh-test938-leadgen-swagbucks1897-bc910-1" class="cta-button">START LIVING</a>
         </div>
 
         <div class="social-proof">
@@ -317,12 +321,11 @@
                 
                 setTimeout(() => {
                     activityAlert.classList.remove('show');
-                }, 4000); // Alert visible for 4 seconds
+                }, 4000);
 
                 alertIndex = (alertIndex + 1) % alerts.length;
             };
             
-            // Show first alert after 3 seconds, then every 6 seconds
             setTimeout(() => {
                 showAlert();
                 setInterval(showAlert, 6000);

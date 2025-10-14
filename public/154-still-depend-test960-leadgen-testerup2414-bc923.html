@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Claim Your Bonus</title>
+    <title>Testerup | Get Paid to Test</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            /* === COLOR SCHEME UPDATED FOR SWAGBUCKS === */
-            --brand-blue: #005A8D;
-            --cta-blue: #3686E5;
-            --cta-hover: #2a6cb5;
+            --brand-red: #cc292f;
+            --cta-red-hover: #a82126;
+            --brand-dark-blue: #232a3f;
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --light-text: #555;
@@ -58,7 +57,7 @@
         }
 
         .logo {
-            max-width: 120px; /* Adjusted for Swagbucks logo */
+            max-width: 150px;
             margin-bottom: 10px;
         }
 
@@ -86,7 +85,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-blue), var(--cta-blue)); /* CHANGED */
+            background: linear-gradient(90deg, var(--brand-dark-blue), var(--brand-red)); /* CHANGED */
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -120,7 +119,7 @@
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--cta-blue); /* CHANGED */
+            background-color: var(--brand-red);
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -148,7 +147,7 @@
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--cta-blue); /* CHANGED */
+            background-color: var(--brand-red);
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -161,14 +160,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-hover); /* CHANGED */
+            background-color: var(--cta-red-hover);
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); } /* CHANGED */
-            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); } /* CHANGED */
-            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); } /* CHANGED */
+            0% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(204, 41, 47, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(204, 41, 47, 0); }
         }
 
         .social-proof {
@@ -187,7 +186,7 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--brand-blue); /* CHANGED */
+            color: var(--brand-dark-blue);
         }
         
         .proof-label {
@@ -232,7 +231,7 @@
 
     <div class="container">
         <div class="header">
-            <img src="swag.png" alt="Swagbucks Logo" class="logo">
+            <img src="testrrrlogo.png" alt="Testerup Logo" class="logo">
             <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
             <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
             
@@ -244,32 +243,32 @@
 
         <div class="main-content">
              <ol class="quick-start-guide">
-                <li>Download & Sign Up: Create your free account.</li>
-                <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
-                <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
+                <li>Discover and download from 250+ new apps.</li>
+                <li>Play games & complete tasks to earn cash.</li>
+                <li>Cash out instantly via PayPal & gift cards.</li>
             </ol>
             
             <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+                💡 <b>Pro-Tip:</b> Complete your first gaming offer today to unlock an instant $10 welcome bonus!
             </div>
             
-            <a href="https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=154-still-depend-test960-leadgen-swagbucks1897-bc923" class="cta-button">GET MY BAG</a>
+            <a href="https://rewarduplevel.com/aff_c?offer_id=2414&aff_id=27696&source=154-still-depend-test960-leadgen-testerup2414-bc923" class="cta-button">GET MY BAG</a>
             
             <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>
 
         <div class="social-proof">
             <div class="proof-item">
-                <span class="proof-metric">50K+</span>
-                <span class="proof-label">Daily Users</span>
+                <span class="proof-metric">250+</span>
+                <span class="proof-label">New Offers</span>
             </div>
             <div class="proof-item">
-                <span class="proof-metric">$10M+</span>
-                <span class="proof-label">Paid Out</span>
+                <span class="proof-metric">$5M+</span>
+                <span class="proof-label">Paid to Testers</span>
             </div>
             <div class="proof-item">
-                <span class="proof-metric">5 Min</span>
-                <span class="proof-label">Signup</span>
+                <span class="proof-metric">$125</span>
+                <span class="proof-label">Avg. Payout</span>
             </div>
         </div>
     </div>
@@ -302,14 +301,17 @@
                 }
             }, 1500);
 
-            // --- LIVE ACTIVITY ALERTS UPDATED FOR SWAGBUCKS ---
+            // --- Live Activity Alerts ---
             const activityAlert = document.getElementById('activityAlert');
             const alerts = [
-                "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
-                "Mike from Florida just cashed out $50 via PayPal.",
-                "Sarah from California just earned $10 from a survey.",
-                "David from New York just got a $50 Walmart Gift Card.",
-                "Emily from Ohio just completed a gaming offer for $30."
+                "Jennifer from Texas just earned $45 testing Coin Master.",
+                "Mike from Florida just cashed out $80 via PayPal.",
+                "Sarah from California just earned $25 playing Match Masters.",
+                "David from New York just got a $50 Amazon Gift Card.",
+                "Emily from Ohio just completed a gaming offer for $60.",
+                "Chris from Arizona just redeemed points for a $25 Starbucks Card.",
+                "Megan from Illinois just earned $35 testing a new puzzle game.",
+                "Alex from Georgia cashed out $110 directly to their bank account."
             ];
 
             let alertIndex = 0;

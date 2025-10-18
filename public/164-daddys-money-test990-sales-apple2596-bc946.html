@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Claim Your Reward</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+        :root {
+            --background-color: #121212;
+            --primary-text: #FFFFFF;
+            --secondary-text: #b3b3b3;
+            --button-bg: #2d2d2d;
+            --button-hover-bg: #3a3a3a;
+            --trust-badge-color: #2E8B57;
+            --font-family: 'Roboto', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 70px;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .background-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 25s infinite linear;
+            filter: blur(1.5px);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-top: 2vh;
+            z-index: 1;
+        }
+
+        .logo {
+            max-width: 160px;
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        /* FIXED guide alignment to match competitor examples */
+        .guide {
+            text-align: left; /* Ensure container is left-aligned */
+            margin: 0 auto 30px;
+            max-width: 340px;
+        }
+
+        .step {
+            display: flex; /* Use flex for proper alignment */
+            align-items: center;
+            width: 100%; /* Ensure full width for consistent alignment */
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            min-width: 30px;
+            height: 30px;
+            background-color: var(--button-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-right: 15px;
+        }
+
+        .step-text {
+            font-size: 1.05rem;
+            margin: 0;
+            text-align: left;
+        }
+        
+        .step-text strong {
+            font-weight: 700;
+            color: #ffdd57;
+        }
+
+        #interactive-gate {
+            margin-top: 35px;
+        }
+
+        .location-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: block;
+            background-color: var(--button-bg);
+            color: var(--primary-text);
+            padding: 16px;
+            margin: 10px auto;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        #status-indicator {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 30px 0;
+            gap: 10px;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--primary-text);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #final-cta-container {
+            display: none;
+            margin-top: 35px;
+            width: 100%;
+        }
+        
+        .final-cta {
+            background: linear-gradient(135deg, #5a5a5a 0%, #3a3a3a 100%);
+            border: 1px solid rgba(128, 128, 128, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .final-cta:hover {
+            background: linear-gradient(135deg, #6a6a6a 0%, #4a4a4a 100%);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
+        }
+
+        .verified-badge {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            margin-top: 25px;
+            font-weight: 500;
+        }
+        
+        .verified-badge span {
+            color: var(--trust-badge-color);
+            font-weight: bold;
+            font-size: 1.1em;
+            vertical-align: middle;
+        }
+
+        .social-proof-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #1F1F1F;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 5px;
+            border-top: 1px solid #333;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        .proof-item { text-align: center; flex: 1; }
+        .proof-number { display: block; font-size: 1.1rem; font-weight: 900; }
+        .proof-label { display: block; font-size: 0.7rem; color: var(--secondary-text); text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    
+    <div class="background-wrap" id="background-wrap"></div>
+
+    <div class="container">
+        <img src="applepaylogo5.png" alt="Apple Pay Logo" class="logo">
+
+        <h1 class="headline">Follow the steps below!</h1>
+
+        <div class="guide">
+            <div class="step">
+                <div class="step-number">1</div>
+                <p class="step-text">Answer a few quick questions</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <p class="step-text">Register with your email</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <p class="step-text">Complete the required deals <strong>(IMPORTANT)</strong></p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <p class="step-text">Receive your $750 Apple Pay Reward!</p>
+            </div>
+        </div>
+
+        <div id="interactive-gate">
+            <p class="location-question">Where are you located?</p>
+            <button class="btn location-btn">United States</button>
+            <button class="btn location-btn">Canada</button>
+        </div>
+        
+        <div id="status-indicator">
+            <div class="spinner"></div>
+            <span>Verifying your location...</span>
+        </div>
+
+        <div id="final-cta-container">
+            <a href="https://rewarduplevel.com/aff_c?offer_id=2596&aff_id=27696&source=164-daddys-money-test990-sales-apple2596-bc946" class="btn final-cta">Claim Reward Now!</a>
+        </div>
+        
+        <p class="verified-badge"><span>✓</span> Verified By TikTok</p>
+    </div>
+
+    <div class="social-proof-bar">
+        <div class="proof-item">
+            <span class="proof-number" id="paid-out">$764,833</span>
+            <span class="proof-label">Total Paid Out</span>
+        </div>
+        <div class="proof-item">
+            <span class="proof-number" id="people-online">4,583</span>
+            <span class="proof-label">People Online</span>
+        </div>
+        <div class="proof-item">
+            <span class="proof-number" id="users-completing">86%</span>
+            <span class="proof-label">Users Completing</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dynamic Background
+            const bgWrap = document.getElementById('background-wrap');
+            const particleCount = 30;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 15 + 15}s`;
+                particle.style.animationDelay = `${Math.random() * -25}s`;
+                bgWrap.appendChild(particle);
+            }
+
+            // Social Proof Bar
+            const paidOutEl = document.getElementById('paid-out');
+            const peopleOnlineEl = document.getElementById('people-online');
+            let paidOutBase = 764833;
+            let peopleOnlineBase = 4583;
+
+            function formatCurrency(n) { return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+            function updateMetrics() {
+                paidOutBase += Math.floor(Math.random() * 25) + 1;
+                paidOutEl.textContent = formatCurrency(paidOutBase);
+                const onlineFluctuation = Math.floor(Math.random() * 20) - 10;
+                peopleOnlineEl.textContent = (peopleOnlineBase + onlineFluctuation).toString();
+            }
+            updateMetrics();
+            setInterval(updateMetrics, 2800);
+
+            // Interactive Gate Logic
+            const interactiveGate = document.getElementById('interactive-gate');
+            const statusIndicator = document.getElementById('status-indicator');
+            const finalCtaContainer = document.getElementById('final-cta-container');
+            const locationButtons = document.querySelectorAll('.location-btn');
+
+            locationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    interactiveGate.style.display = 'none';
+                    statusIndicator.style.display = 'flex'; // Use flex to show spinner and text
+
+                    setTimeout(() => {
+                        statusIndicator.style.display = 'none';
+                        finalCtaContainer.style.display = 'block';
+                    }, 1500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -87,6 +87,47 @@
         .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-duration: 24s; animation-delay: -6s; }
 
 
+        /* --- MODIFICATION 3: Bat Animation --- */
+        .bat {
+            position: absolute;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2a2a2a; /* Dark grey silhouette */
+            opacity: 0.15; /* Low opacity */
+            z-index: -1; /* Same level as particles */
+            animation: fly 20s linear infinite;
+        }
+
+        /* Keyframe animation for horizontal flight */
+        @keyframes fly {
+            from { left: -10%; }
+            to { left: 110%; }
+        }
+
+        /* Vary bats for a more natural effect */
+        .bat-1 {
+            top: 10%;
+            animation-duration: 18s;
+            animation-delay: -2s;
+        }
+        .bat-2 {
+            top: 20%;
+            animation-duration: 22s;
+            animation-delay: -10s;
+        }
+        .bat-3 {
+            top: 35%;
+            animation-duration: 15s;
+            animation-delay: -5s;
+        }
+        .bat-4 {
+            top: 50%;
+            animation-duration: 25s;
+            animation-delay: -15s;
+        }
+        /* --- End Bat Animation --- */
+
+
         /* --- Content Card --- */
         
         .content-card {
@@ -231,10 +272,9 @@
         /* --- Verifying Spinner (Hidden) --- */
         
         #spinner-container {
-            /* Hidden by default */
+            /* MODIFICATION 1: Set to display: none; by default */
             display: none; 
-            /* Flex for easy centering */
-            display: flex;
+            /* Flex properties for when JS makes it visible */
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -326,6 +366,11 @@
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
+
+        <div class="bat bat-1">~</div>
+        <div class="bat bat-2">~</div>
+        <div class="bat bat-3">~</div>
+        <div class="bat bat-4">~</div>
     </div>
 
     <main class="content-card">
@@ -334,6 +379,7 @@
              alt="Amazon Logo" 
              width="90" 
              class="logo-img">
+        
         <h1>Follow the Steps for Your Halloween Treat!</h1>
 
         <div class="steps-guide">
@@ -384,7 +430,9 @@
             </a>
         </div>
 
-    </main> <footer class="social-proof-bar">
+    </main> 
+    
+    <footer class="social-proof-bar">
         <div class="proof-item">
             <div class="proof-number" id="paid-out">$765,753</div>
             <div class="proof-label">TOTAL PAID OUT</div>
@@ -424,14 +472,15 @@
                 // We use 'flex' as defined in the CSS
                 spinnerContainer.style.display = 'flex'; 
 
-                // 3. Wait for 1.4 seconds (1400ms)
+                // 3. Wait for 1 second (1000ms)
+                // MODIFICATION 2: Changed delay from 1400 to 1000
                 setTimeout(() => {
                     // 4. Hide the spinner
                     spinnerContainer.style.display = 'none';
                     
                     // 5. Reveal the Final CTA button
                     ctaContainer.style.display = 'block';
-                }, 1400); 
+                }, 1000); 
             }
 
             // Attach event listeners to both location buttons

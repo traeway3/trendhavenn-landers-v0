@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Claim Your Amazon Reward</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+        :root {
+            --background-color: #0d0d0d; /* Slightly darker base */
+            --primary-text: #FFFFFF;
+            --secondary-text: #b3b3b3;
+            --button-bg: #404040; /* Darker button base */
+            --button-hover-bg: #505050;
+            --halloween-orange: #FF7518; /* Halloween Orange */
+            --halloween-orange-hover: #E66A15;
+            --trust-badge-color: #FFA500; /* Orange for checkmark */
+            --font-family: 'Roboto', sans-serif;
+            --particle-color: rgba(255, 117, 24, 0.08); /* Faint orange particles */
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 70px;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .background-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            /* Optional: Add a subtle dark gradient */
+             background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(13,13,13,1) 100%);
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--particle-color);
+            animation: float 35s infinite linear; /* Slower float */
+            filter: blur(2px); /* Slightly more blur */
+            opacity: 0; /* Start invisible */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) scale(0.8); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(0.4); opacity: 0; }
+        }
+
+        /* Subtle web/bat element - Example using pseudo-element */
+         body::before {
+             content: '';
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+              /* Example: Use a faint SVG web or gradient */
+              /* background-image: url('data:image/svg+xml,...'); */
+              /* background: radial-gradient(circle at top left, rgba(255,117,24,0.05) 0%, transparent 30%),
+                          radial-gradient(circle at bottom right, rgba(255,117,24,0.05) 0%, transparent 30%); */
+             opacity: 0.1;
+             pointer-events: none;
+             z-index: -1;
+         }
+
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-top: 2vh;
+            z-index: 1;
+        }
+
+        .logo {
+            max-width: 100px; /* Adjusted size for this logo */
+            margin-bottom: 25px;
+        }
+
+        .headline {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .guide {
+            text-align: left;
+            margin: 0 auto 30px;
+            max-width: 340px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            min-width: 30px;
+            height: 30px;
+            background-color: var(--button-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-right: 15px;
+        }
+
+        .step-text {
+            font-size: 1.05rem;
+            margin: 0;
+            text-align: left;
+        }
+
+        .step-text strong {
+            font-weight: 700;
+            color: #ffdd57; /* Keep yellow for IMPORTANT */
+        }
+
+        #interactive-gate {
+            margin-top: 35px;
+        }
+
+        .location-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: block;
+            background-color: var(--button-bg); /* Default dark grey */
+            color: var(--primary-text);
+            padding: 16px;
+            margin: 10px auto;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .location-btn {
+             background: linear-gradient(135deg, var(--halloween-orange) 0%, var(--halloween-orange-hover) 100%);
+             box-shadow: 0 5px 15px rgba(255, 117, 24, 0.2);
+        }
+
+        .location-btn:hover {
+             background: linear-gradient(135deg, var(--halloween-orange-hover) 0%, var(--halloween-orange) 100%);
+             box-shadow: 0 8px 20px rgba(255, 117, 24, 0.3);
+        }
+
+
+        #status-indicator {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 30px 0;
+            gap: 10px;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--halloween-orange); /* Spinner uses orange */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #final-cta-container {
+            display: none;
+            margin-top: 35px;
+            width: 100%;
+        }
+
+        .final-cta {
+             background: linear-gradient(135deg, var(--halloween-orange) 0%, var(--halloween-orange-hover) 100%);
+             box-shadow: 0 10px 25px rgba(255, 117, 24, 0.3);
+             animation: pulse-orange 2s infinite;
+        }
+
+        .final-cta:hover {
+             background: linear-gradient(135deg, var(--halloween-orange-hover) 0%, var(--halloween-orange) 100%);
+             animation: none;
+             box-shadow: 0 15px 30px rgba(255, 117, 24, 0.4);
+        }
+
+        @keyframes pulse-orange {
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(255, 117, 24, 0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 15px 30px rgba(255, 117, 24, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(255, 117, 24, 0.3); }
+        }
+
+        .verified-badge {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            margin-top: 25px;
+            font-weight: 500;
+        }
+
+        .verified-badge span {
+            color: var(--trust-badge-color);
+            font-weight: bold;
+            font-size: 1.1em;
+            vertical-align: middle;
+        }
+
+        .social-proof-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #1F1F1F; /* Keep dark bar */
+            /* background-color: var(--halloween-orange); */ /* Optional: Orange bar - test readability */
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 5px;
+            border-top: 1px solid #333;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        .proof-item { text-align: center; flex: 1; }
+        .proof-number { display: block; font-size: 1.1rem; font-weight: 900; color: var(--primary-text); }
+        .proof-label { display: block; font-size: 0.7rem; color: var(--secondary-text); text-transform: uppercase; }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-wrap" id="background-wrap"></div>
+
+    <div class="container">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABR0LkeAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfoChgQDwzYv8S/AAAEyElEQVR42u3dS2hbVRzG8WeytDXZprHTwQ7SNIqg2uLQRnERhFwUiqio6CLowkGoKDoogp2IbRdBcSgKIhdiEaRCwYWLK4hLF3QRF0HFxYWg2tTSJq0222Yajcn9IZe0adpzk/tD/f9Acn4P7jkn5/C6EwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6vT49Xo/vX6xXn/Nzc3+8/n5+b+WlpY+h+PxejV+fn7+7/j4+O8bWlr++f7+f5j+vT5fX1+vP+v19xO/V69fq1arv1rtdvsH6/X7t3p7O+x+67X79v+L9b7W6+16vX3+6PWa/f0f3N3d7ff7d+/w+/3m5ubn9e3t/fXz8/v29ub0Pfw/gHSP/sHz8+v19vZm3+9/fNn/u83/f3R3d3/8/X//4/f7+4enp9fp8fHp9fb2+vj3+/v7+4eHB37/1ev/H3z9+vP5+fH3O/r+F/rH6+16/fn8+PsF+qf36z/1er1+/X5/v9/f3t72++3p6fG3/frt9/vb25u/P3z9p+u1+8fX/evX+fn5/f39+35/f3p6+r2/X/63+3n9/f7+/vP5+f5+f52eHu/v78/NzX5/f//09HT/6e3t7e/v7+e/37+/f57+X2u1++W+1utX+fn5/R9+9f3+c31f/tPrP/6p/9Tr+7v+/n5+fv4P3+//9f7+Xq93enra/4v36//S6+3x8fHz8+vv4+7u7u/vf3x8fP+8vb39+/vf+vv79/a8/1Pud/9Hb8bXf9Tr+/X6c3p6vr8/Pz+/f//9/v9arXbfXy73p/t+/fz8+/7+/u9f6PUP+4/6/f1v/b7X6/X+fr8/v/+3v3/3+vv4H7/X9/vH/eP09PT09HS/33/fr7+f//6x+5f7X38/Pz9/f/1/v1//vL6/f95/3H8+X/9XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4DX+AQ8V4L9D1453AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI1LTEwLTI0VDAwOjE1OjEyKzAwOjAwv45h8wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNS0xMC0yNFQwMDoxNToxMiswMDowMPc0yqsAAAAASUVORK5CYII=" alt="Amazon Logo" class="logo">
+
+
+        <h1 class="headline">Follow the steps below!</h1>
+
+        <div class="guide">
+            <div class="step">
+                <div class="step-number">1</div>
+                <p class="step-text">Click button below</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <p class="step-text">Enter email & info</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <p class="step-text">Complete deals <strong>(IMPORTANT)</strong></p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <p class="step-text">Claim reward!</p>
+            </div>
+        </div>
+
+        <div id="interactive-gate">
+            <p class="location-question">Where are you located?</p>
+            <button class="btn location-btn">United States</button>
+            <button class="btn location-btn">Canada</button>
+        </div>
+
+        <div id="status-indicator">
+            <div class="spinner"></div>
+            <span>Verifying your location...</span>
+        </div>
+
+        <div id="final-cta-container">
+            <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=CAMPAIGN" class="btn final-cta">Claim Reward!</a>
+        </div>
+
+        <p class="verified-badge"><span>✓</span> Verified By TikTok</p>
+    </div>
+
+    <div class="social-proof-bar">
+        <div class="proof-item">
+            <span class="proof-number" id="paid-out">$764,833</span>
+            <span class="proof-label">Total Paid Out</span>
+        </div>
+        <div class="proof-item">
+            <span class="proof-number" id="people-online">4,583</span>
+            <span class="proof-label">People Online</span>
+        </div>
+        <div class="proof-item">
+            <span class="proof-number" id="users-completing">86%</span>
+            <span class="proof-label">Users Completing</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dynamic Background Particles
+            const bgWrap = document.getElementById('background-wrap');
+            const particleCount = 25; // Fewer particles for a cleaner look
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 6 + 1.5; // Slightly smaller range
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 20 + 25}s`; // Slower duration
+                particle.style.animationDelay = `${Math.random() * -45}s`; // Longer negative delay
+                bgWrap.appendChild(particle);
+            }
+
+            // Social Proof Bar Logic
+            const paidOutEl = document.getElementById('paid-out');
+            const peopleOnlineEl = document.getElementById('people-online');
+            let paidOutBase = 764833;
+            let peopleOnlineBase = 4583;
+
+            function formatCurrency(n) { return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+            function updateMetrics() {
+                paidOutBase += Math.floor(Math.random() * 25) + 1;
+                paidOutEl.textContent = formatCurrency(paidOutBase);
+                const onlineFluctuation = Math.floor(Math.random() * 20) - 10;
+                peopleOnlineEl.textContent = (peopleOnlineBase + onlineFluctuation).toString();
+            }
+            updateMetrics(); // Initial call
+            setInterval(updateMetrics, 3100); // Slightly adjusted interval
+
+            // Interactive Gate Logic
+            const interactiveGate = document.getElementById('interactive-gate');
+            const statusIndicator = document.getElementById('status-indicator');
+            const finalCtaContainer = document.getElementById('final-cta-container');
+            const locationButtons = document.querySelectorAll('.location-btn');
+
+            locationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    interactiveGate.style.display = 'none';
+                    statusIndicator.style.display = 'flex';
+
+                    setTimeout(() => {
+                        statusIndicator.style.display = 'none';
+                        finalCtaContainer.style.display = 'block';
+                    }, 1400); // Slightly faster transition
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amazon Halloween Offer</title>
-    <style>
-        /* Import Google Font 'Roboto'  */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
+    <style>
         /* --- Base & Background Styles --- */
 
         * {
@@ -18,23 +20,26 @@
 
         html, body {
             width: 100%;
-            height: 100%;
+            /* Ensure content starts at the top */
+            height: 100%; 
         }
 
         body {
-            font-family: 'Roboto', sans-serif; /*  */
-            background-color: #0d0d0d; /* [cite: 12] */
-            color: #FFFFFF; /*  */
+            font-family: 'Roboto', sans-serif;
+            /* Dark base color */
+            background-color: #0d0d0d; 
+            color: #FFFFFF;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: flex-start; /* Aligns card to the top */
             padding: 20px;
-            padding-bottom: 100px; /* Space for the sticky footer */
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            /* Space for the sticky footer */
+            padding-bottom: 100px; 
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* --- Particle Animation [cite: 14] --- */
+        /* --- New Blurred Particle Animation --- */
         
         .particles {
             position: fixed;
@@ -43,285 +48,271 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1; /* Behind all content */
+            /* Behind all content */
+            z-index: -1; 
         }
 
         .particle {
             position: absolute;
-            background-color: #FF7518; /* [cite: 21] */
+            /* Start from the bottom */
+            bottom: -20px; 
+            background-color: rgba(255, 117, 24, 0.08); /* Low-opacity orange */
             border-radius: 50%;
-            opacity: 0;
-            animation: drift 15s infinite linear;
-            width: 4px;
-            height: 4px;
+            /* Add blur effect */
+            filter: blur(2px); 
+            animation: drift-up 20s infinite linear;
         }
 
-        .particle:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: -3s; }
-        .particle:nth-child(2) { left: 30%; animation-duration: 15s; animation-delay: -5s; }
-        .particle:nth-child(3) { left: 50%; animation-duration: 10s; animation-delay: -1s; }
-        .particle:nth-child(4) { left: 70%; animation-duration: 18s; animation-delay: -7s; }
-        .particle:nth-child(5) { left: 90%; animation-duration: 13s; animation-delay: -2s; }
-        .particle:nth-child(6) { left: 20%; animation-duration: 16s; animation-delay: -8s; }
-        .particle:nth-child(7) { left: 60%; animation-duration: 11s; animation-delay: -4s; }
-        .particle:nth-child(8) { left: 80%; animation-duration: 14s; animation-delay: -6s; }
-
-        /* [cite: 14] Subtle drifting animation */
-        @keyframes drift {
-            0% {
-                transform: translateY(100vh);
-                opacity: 0;
+        /* Define upward-drifting animation */
+        @keyframes drift-up {
+            from {
+                transform: translateY(0);
+                opacity: 0.8;
             }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px);
+            to {
+                /* Move up past the top of the viewport */
+                transform: translateY(-110vh); 
                 opacity: 0;
             }
         }
 
-        /* --- Content Card [cite: 10, 16] --- */
+        /* Vary particle size, position, and animation */
+        .particle:nth-child(1) { width: 3px; height: 3px; left: 10%; animation-duration: 18s; animation-delay: -3s; }
+        .particle:nth-child(2) { width: 5px; height: 5px; left: 30%; animation-duration: 22s; animation-delay: -5s; }
+        .particle:nth-child(3) { width: 4px; height: 4px; left: 50%; animation-duration: 20s; animation-delay: -1s; }
+        .particle:nth-child(4) { width: 3px; height: 3px; left: 70%; animation-duration: 25s; animation-delay: -7s; }
+        .particle:nth-child(5) { width: 5px; height: 5px; left: 90%; animation-duration: 19s; animation-delay: -2s; }
+        .particle:nth-child(6) { width: 4px; height: 4px; left: 20%; animation-duration: 23s; animation-delay: -8s; }
+        .particle:nth-child(7) { width: 3px; height: 3px; left: 60%; animation-duration: 21s; animation-delay: -4s; }
+        .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-duration: 24s; animation-delay: -6s; }
 
-        .container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            /* [cite: 11] Ensure content is high on the page */
-            align-items: flex-start; 
-            min-height: calc(100vh - 100px); /* Fill screen above footer */
-        }
+
+        /* --- Content Card --- */
         
         .content-card {
-            background-color: #1a1a1a; /* [cite: 17] */
-            border-radius: 16px; /* [cite: 17] */
-            /* [cite: 18] Subtle floating effect */
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            /* Floating effect shadow */
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); 
-            max-width: 400px; /* [cite: 19] */
+            max-width: 400px;
             width: 100%;
-            padding: 24px; /* [cite: 19] */
+            padding: 24px;
             text-align: center;
-            margin-top: 2vh; /* Small top margin */
+            /* Small top margin to push it down from the edge */
+            margin-top: 2vh; 
             position: relative;
             z-index: 10;
-            overflow: hidden; /* Contains elements */
         }
 
-        /* --- Card Content Elements [cite: 23] --- */
+        /* --- Card Content Elements --- */
 
-        .logo {
-            margin-bottom: 20px; /* [cite: 27] */
-        }
-
-        .logo img {
-            width: 90px; /* [cite: 27] */
+        /* Logo (as requested) */
+        .logo-img {
+            display: block;
+            margin: 0 auto 20px;
+            width: 90px;
             height: auto;
         }
 
+        /* Headline */
         h1 {
-            font-size: 1.6rem; /* [cite: 30] */
-            font-weight: 700; /* [cite: 30] */
+            font-size: 1.6rem;
+            font-weight: 700;
             color: #FFFFFF;
-            margin-bottom: 25px; /* [cite: 31] */
+            margin-bottom: 25px;
+            text-align: center;
         }
 
-        /* --- Steps Guide [cite: 33] --- */
+        /* --- New Quick Start Guide (Numbers) --- */
+        
         .steps-guide {
-            margin-bottom: 30px; /* [cite: 48] */
-            text-align: left; /* Aligns text within the centered block */
+            /* Center the block and set max-width */
+            margin: 0 auto 30px; 
+            max-width: 340px;
+            /* Align text inside the block */
+            text-align: left; 
         }
 
         .step-item {
             display: flex;
             align-items: center;
-            /* [cite: 48] Vertical space between steps */
-            margin-bottom: 20px; 
+            margin-bottom: 20px;
         }
-
+        
         .step-item:last-child {
             margin-bottom: 0;
         }
 
-        .step-icon {
-            color: #FF7518; /* [cite: 36] Halloween Orange */
-            font-size: 24px; /* [cite: 37] */
-            min-width: 40px; /* Spacing */
+        .step-number {
+            min-width: 30px;
+            height: 30px;
+            background-color: #2d2d2d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
             margin-right: 15px;
         }
-
-        .step-icon svg {
-            width: 24px; /* [cite: 37] */
-            height: 24px;
-            fill: currentColor;
-        }
-
-        .step-text .step-title {
+        
+        .step-title {
             font-weight: 700;
-            font-size: 1.1rem; /* [cite: 39] */
-            color: #FFFFFF; /* [cite: 39] */
-        }
-
-        .step-text .step-description {
-            font-size: 0.9rem; /* [cite: 40] */
-            color: #b3b3b3; /* [cite: 40] Muted grey */
-        }
-        
-        /* [cite: 45] Emphasis for "required deals" */
-        .step-text .step-description b {
-            color: #d1d1d1; 
-            font-weight: 700;
-        }
-
-        /* --- Interactive Gate [cite: 50] --- */
-        
-        /* [cite: 64] Container for elements to be hidden */
-        .location-gate, .trust-badge, .spinner-container, .cta-container {
-            /*  Smooth transition for fade in/out */
-            transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, max-height 0.4s ease-in-out, margin 0.4s;
-            max-height: 1000px; /* Set a large max-height for transition */
-            opacity: 1;
-            visibility: visible;
-            overflow: hidden;
-        }
-        
-        /* Class to hide elements */
-        .hidden {
-            opacity: 0;
-            visibility: hidden;
-            max-height: 0;
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        .location-question {
-            font-size: 1.2rem; /* [cite: 52] */
-            font-weight: 700; /* [cite: 52] */
+            font-size: 1.1rem;
             color: #FFFFFF;
-            margin-bottom: 15px; /* [cite: 52] */
+            display: block;
         }
 
-        /* --- Buttons [cite: 53] --- */
+        .step-description {
+            font-size: 0.9rem;
+            color: #b3b3b3;
+            display: block;
+        }
         
-        .btn {
+        /* Bold styling for "required deals" */
+        .step-description b {
+            font-weight: 700;
+            color: #d1d1d1;
+        }
+
+        /* --- Interactive Gate --- */
+        
+        .location-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* --- Button Styling --- */
+        
+        .btn-location {
             display: block;
             width: 100%;
             padding: 15px;
             border: none;
-            border-radius: 10px; /* [cite: 55] */
-            background-color: #FF7518; /* [cite: 55] Halloween orange */
-            color: #FFFFFF; /* [cite: 56] */
-            font-weight: 700; /* [cite: 56] */
-            font-size: 1.1rem; /* [cite: 56] */
+            border-radius: 10px;
+            background-color: #FF7518; /* Halloween orange */
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             text-decoration: none;
-            /* [cite: 55] Subtle inset shadow for depth */
-            box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.25);
+            /* Inset shadow for depth */
+            box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.25); 
             transition: background-color 0.3s ease;
+            margin-bottom: 10px; /* Stacked button margin */
+        }
+        
+        /* Remove margin from the last button in a group */
+        .btn-location:last-of-type {
+            margin-bottom: 0;
         }
 
-        .btn:hover {
-            background-color: #E66A15; /* [cite: 56] Hover color */
+        .btn-location:hover {
+            background-color: #E66A15; /* Hover color */
         }
 
-        .btn-location {
-            margin-bottom: 10px; /* [cite: 54] Margin between buttons */
+        /* --- Trust Badge --- */
+        
+        #trust-badge {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #b3b3b3;
         }
 
-        /* --- Trust Badge [cite: 59] --- */
-        .trust-badge {
-            margin-top: 20px; /* [cite: 60] */
-            font-size: 0.9rem; /* [cite: 62] */
-            color: #b3b3b3; /* [cite: 62] */
-        }
-
-        .trust-badge .icon {
-            color: #FFA500; /* [cite: 62] Muted orange checkmark */
+        #trust-badge .icon {
+            color: #FFA500; /* Muted orange checkmark */
             font-weight: 700;
         }
 
-        /* --- Verifying Spinner [cite: 66] --- */
-        .spinner-container {
+        /* --- Verifying Spinner (Hidden) --- */
+        
+        #spinner-container {
+            /* Hidden by default */
+            display: none; 
+            /* Flex for easy centering */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 20px 0;
-            font-size: 1.1rem; /*  */
-            font-weight: 700; /*  */
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
-
+        
         .spinner {
             width: 30px;
             height: 30px;
             border: 4px solid rgba(255, 255, 255, 0.2);
-            border-top-color: #FF7518; /*  Halloween orange */
+            border-top-color: #FF7518; /* Orange spinner */
             border-radius: 50%;
-            margin: 0 auto 15px;
+            margin-bottom: 15px; /* Space between spinner and text */
             animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* --- Final CTA Button [cite: 69] --- */
+        /* --- Final CTA Button (Hidden) --- */
+        
+        #cta-container {
+            /* Hidden by default */
+            display: none; 
+        }
         
         .btn-cta {
-            /*  Pulsing glow animation */
-            animation: pulse 1.5s infinite; 
+            /* Pulsing glow animation */
+            animation: pulse-glow 1.5s infinite;
         }
 
-        /*  Keyframes for the pulsing orange glow */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 117, 24, 0.7), 
-                            inset 0 -3px 4px rgba(0, 0, 0, 0.25);
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: inset 0 -3px 4px rgba(0,0,0,0.25), 
+                            0 0 0 0 rgba(255, 117, 24, 0.7);
             }
             70% {
-                box-shadow: 0 0 0 10px rgba(255, 117, 24, 0), 
-                            inset 0 -3px 4px rgba(0, 0, 0, 0.25);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 117, 24, 0), 
-                            inset 0 -3px 4px rgba(0, 0, 0, 0.25);
+                box-shadow: inset 0 -3px 4px rgba(0,0,0,0.25), 
+                            0 0 0 10px rgba(255, 117, 24, 0);
             }
         }
 
-        /* --- Sticky Footer Social Proof [cite: 75] --- */
+        /* --- Sticky Footer Social Proof --- */
 
         .social-proof-bar {
-            position: fixed; /*  */
-            bottom: 0; /*  */
+            position: fixed;
+            bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #1F1F1F; /*  */
-            border-top: 1px solid #333; /*  */
-            padding: 12px 10px; /*  */
+            background-color: #1F1F1F;
+            border-top: 1px solid #333;
+            padding: 12px 10px;
             display: flex;
             justify-content: space-around;
-            align-items: center;
             text-align: center;
             z-index: 100;
         }
 
         .proof-item {
-            flex: 1; /* [cite: 79] Evenly spaced columns */
+            flex: 1; /* Evenly spaced columns */
         }
 
         .proof-number {
             font-weight: 700;
-            font-size: 1.1rem; /* [cite: 83] */
-            color: #FFFFFF; /* [cite: 83] */
+            font-size: 1.1rem;
+            color: #FFFFFF;
         }
 
         .proof-label {
-            font-size: 0.7rem; /* [cite: 83] */
-            color: #b3b3b3; /* [cite: 83] */
-            text-transform: uppercase; /* [cite: 83] */
+            font-size: 0.7rem;
+            color: #b3b3b3;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
     </style>
 </head>
 <body>
@@ -337,121 +328,124 @@
         <div class="particle"></div>
     </div>
 
-    <main class="container">
-        
-        <article class="content-card">
+    <main class="content-card">
 
-            <div class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" fill="#FFFFFF">
-                  <path d="M685.8 814.8c-8.4 0-16.8-2.3-24.1-6.8-51.1-31.2-82.6-84.7-82.6-143.2 0-63.5 36.5-120.9 92.4-150 22.1-11.5 46.9-14.8 70.3-11.1 27.2 4.4 52.1 19.8 69.8 42.6 15.6 20 24.1 44.9 24.1 71.3 0 28.7-10.8 55.1-30.8 76.2-22.1 23.3-51.1 38.7-83.3 43.1-6.1 0.8-12.2 1.2-18.4 1.2-4.1 0-8.2-0.2-12.3-0.6l0.1 0zM316.5 812.6c-43.3 0-82.2-16-112.1-41.9-31.9-27.9-52.9-66.9-59.5-109.9-0.5-3.3-0.8-6.6-0.8-10 0-26.6 6.8-51.3 19.1-72.3 15.6-26.6 38.7-47.5 66.9-60.3 31.2-14.5 66.2-19.1 100.2-13.8 30.6 4.7 58.6 19.8 80.2 41.9 21.6 22.1 35.8 50.4 41.1 81.3 0.6 3.6 0.9 7.2 0.9 10.8 0 24.3-5.9 47.9-16.8 68.9-13.8 26.6-35.1 47.5-61.7 60.3-27.9 13.4-58.6 19.1-90.1 19.1-8.2 0-16.5-0.8-24.7-2.3l-2.6-0.6zM937.5 500c0 243.8-198.7 442.5-442.5 442.5S52.5 743.8 52.5 500 251.2 57.5 500 57.5 937.5 251.2 937.5 500zM500 0C223.9 0 0 223.9 0 500s223.9 500 500 500 500-223.9 500-500S776.1 0 500 0zM833.3 804.1c-29-3.3-53.6-18.1-69.8-40.2-16.2-22.1-24.1-49.3-24.1-78.5 0-50.4 27.2-96.6 69.8-125 47.5-31.9 106.9-31.9 153.2-1.2 51.1 33.5 83.3 89.4 83.3 150.8 0 65.3-34.3 123.9-90.1 154.5-24.1 13.2-50.4 20-77.6 20-11.7 0-23.3-1.5-34.7-4.4zM861.5 765.4c17-12.2 28.1-29.6 32.8-49.6 7.4-31.9-1.2-64.7-22.7-89.4-18.4-20.6-43.9-32.8-71.7-32.8-14 0-27.9 2.8-40.8 8.1-31.2 12.8-54.4 39.5-63.5 71.7-5.9 20 0.6 40.8 12.3 58.1 14.5 21.3 38 34.3 64.1 35.8 2.3 0.1 4.6 0.2 6.8 0.2 26.6 0 50.9-9.9 69.8-27.2l12.9 25.1zM500 864.2c-54.4 0-105.6-13.2-149.3-37.4-46-25.5-83.3-61.7-106.9-105.6-25.5-46-39.5-100.2-39.5-156.6 0-51.1 11.5-99.4 33.5-142 23.3-44.7 56.9-81.9 98.2-108.7 44.7-28.7 96.6-44.7 150.8-46.1 55.6-1.5 109.9 10.8 158.8 35.8 46 23.3 84.7 57.8 110.1 101.4 26.6 46 41.1 98.9 42.6 153.2 0.5 19.8-0.8 39.5-3.6 58.6-4.7 30.6-15.6 59.5-31.9 85.5-18.4 29.6-42.6 54.4-71.1 72.3-30.6 19.1-64.7 31.9-100.2 37.4-12.8 1.9-25.7 3.1-38.7 3.1l0.8-0.2z"/>
-                  <path d="M502.6 828.9c54.7 0 108.4-13.4 154.5-39.5 31.9-18.4 59.5-43.3 79.6-73.5 20-30.2 32.8-64.7 37.4-101.4 5.3-41.9 0.6-84.7-13.8-125-15.6-42.6-41.1-80.2-74.1-108.7-36.5-30.6-81.9-50.4-130-58.1-47.5-7.4-95.2-3.6-139.9 10-41.9 12.8-80.2 35.1-110.1 64.1-30.6 30.6-52.9 67.8-63.5 108.7-13.2 51.1-13.2 106.9 0 157.8 12.3 47.5 36.5 90.1 69.8 122.8 35.1 33.5 78.5 56.9 126.2 68.9 15.7 4 31.9 7.1 48.4 9.1l-0.8 0z" fill="#FF7518"/>
-                </svg>
+        <img src="amazonlogo_white.png" 
+             alt="Amazon Logo" 
+             width="90" 
+             class="logo-img">
+        <h1>Follow the Steps for Your Halloween Treat!</h1>
+
+        <div class="steps-guide">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <span class="step-title">Step 1: Qualify</span>
+              <span class="step-description">Click below & confirm your location.</span>
             </div>
-
-            <h1>Follow the Steps for Your Halloween Treat!</h1> <div class="steps-guide">
-                <div class="step-item">
-                    <div class="step-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9c-.83 0-1.5-.67-1.5-1.5S9.17 8 10 8s1.5.67 1.5 1.5S10.83 11 10 11zm4 0c-.83 0-1.5-.67-1.5-1.5S13.17 8 14 8s1.5.67 1.5 1.5S14.83 11 14 11zm0 4c-1.83 0-3.41-1.12-4.1-2.73-.19-.44.05-.95.49-.14.35.09.7.14 1.01.14 1.83 0 3.41-1.12 4.1-2.73.19-.44-.05-.95-.49-.14-.35.09-.7.14-1.01.14-1.66 0-3.1-1.04-3.76-2.5C9.69 8.01 10.76 7 12 7c1.24 0 2.31 1.01 2.87 2.33.66 1.46-0.23 3.09-1.83 3.59-.3.09-.54.34-.54.65s.24.56.54.65c1.6.5 2.49 2.13 1.83 3.59C14.31 18.99 13.24 20 12 20c-1.24 0-2.31-1.01-2.87-2.33-.66-1.46.23-3.09 1.83-3.59.3-.09.54-.34.54-.65s-.24-.56-.54-.65c-1.6-.5-2.49-2.13-1.83-3.59C9.69 8.01 10.76 7 12 7c1.24 0 2.31 1.01 2.87 2.33.66 1.46-0.23 3.09-1.83 3.59-.3.09-.54.34-.54-.65s.24.56.54.65c1.6.5 2.49 2.13 1.83 3.59C14.31 18.99 13.24 20 12 20c-1.24 0-2.31-1.01-2.87-2.33-.66-1.46.23-3.09 1.83-3.59.3-.09.54-.34.54-.65s-.24-.56-.54-.65c-1.6-.5-2.49-2.13-1.83-3.59C9.69 8.01 10.76 7 12 7z" fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zM8.5 12.5c0 .828-.672 1.5-1.5 1.5s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5 1.5.672 1.5 1.5zm7 0c0 .828-.672 1.5-1.5 1.5s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5 1.5.672 1.5 1.5zM12 18c-2.481 0-4.5-2.019-4.5-4.5h9c0 2.481-2.019 4.5-4.5 4.5z"/></svg>
-                    </div>
-                    <div class="step-text">
-                        <div class="step-title">Step 1: Qualify</div> <div class="step-description">Click below & confirm your location.</div> </div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9c-.83 0-1.5-.67-1.5-1.5S9.17 8 10 8s1.5.67 1.5 1.5S10.83 11 10 11zm4 0c-.83 0-1.5-.67-1.5-1.5S13.17 8 14 8s1.5.67 1.5 1.5S14.83 11 14 11zm-4 4c-1.83 0-3.41-1.12-4.1-2.73-.19-.44.05-.95.49-.14.35.09.7.14 1.01.14 1.83 0 3.41 1.12 4.1-2.73.19-.44-.05-.95-.49-.14-.35.09-.7.14-1.01.14z" fill-rule="evenodd" clip-rule="evenodd" d="M21.23 14.15c.44-1.16.24-2.4-.11-3.48-.41-1.22-1.28-2.37-2.6-3.1-.73-.4-1.5-.7-2.35-.85C14.93 6.27 13.43 6 12 6s-2.93.27-4.17.72c-.85.15-1.62.45-2.35.85-1.32.73-2.19 1.88-2.6 3.1-.35 1.08-.55 2.32-.11 3.48.5 1.3 1.48 2.38 2.8 3.1.73.4 1.5.7 2.35.85C9.07 18.53 10.57 18.8 12 18.8s2.93-.27 4.17-.72c.85-.15 1.62-.45 2.35-.85 1.32-.73 2.19-1.88 2.6-3.1zM12 4c1.3 0 2.5.17 3.59.5C17.29 4.97 18.6 5.6 19.6 6.4c1.47 1.17 2.48 2.8 2.91 4.54.2 1.05.15 2.13-.1 3.12-.32 1.25-.97 2.45-2.09 3.42-1.15.99-2.5 1.6-3.9 1.88-1.18.23-2.41.34-3.65.34s-2.47-.11-3.65-.34c-1.4-.28-2.75-.89-3.9-1.88-1.12-.97-1.77-2.17-2.09-3.42-.25-.99-.3-2.07-.1-3.12.43-1.74 1.44-3.37 2.91-4.54 1-.8 2.31-1.43 3.91-1.9C9.5 4.17 10.7 4 12 4zM9 4.5c0-1 .5-1.5 1.5-1.5h3c1 0 1.5.5 1.5 1.5v2c0 .5-.5 1-1 1h-4c-.5 0-1-.5-1-1v-2z"/></svg>
-                    </div>
-                    <div class="step-text">
-                        <div class="step-title">Step 2: Participate</div> <div class="step-description">Enter info & complete <b>required deals</b>.</div> </div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-icon">
-                        <svg viewBox="0 0 24 24"><path d="M21.28 10.79C20.5 8.01 18.6 5.37 15.63 4.29 14.16 3.76 12.56 3.5 11 3.5c-1.53 0-3.1.25-4.59.77-2.93 1.06-4.83 3.65-5.63 6.43C.04 12.3.02 13.8 1.04 15.36c.72 1.1 1.74 1.98 2.96 2.56 1.48.7 3.1.98 4.77.77 1.3-.16 2.53-.7 3.6-1.5.2-.14.46-.04.56.17l.02.02c.1.2.01.46-.17.56-1.2.86-2.58 1.44-4.04 1.63-2.04.28-4.1-.03-5.9-1-1.5-.8-2.7-2-3.46-3.45C-.91 14.28-.86 12.3.06 10.19c.9-2.07 2.5-4.3 5.03-5.3 1.7-.68 3.5-.99 5.33-.99 1.87 0 3.7.32 5.43 1.01 2.53 1 4.14 3.2 5.04 5.28.82 1.9.88 3.82.16 5.63-.5 1.28-1.3 2.4-2.3 3.27-.2.17-.18.48.04.63l.02.02c.2.14.5.1.63-.09 1.1-1 1.98-2.2 2.5-3.58.74-1.92.68-3.9-.1-5.76z M12 11.5c-1.3 0-2.5-.4-3.5-1.1-.18-.13-.44-.06-.55.14l-.02.02c-.1.18-.04.44.14.55C9.2 11.7 10.5 12.1 11.8 12.1c1.3 0 2.6-.4 3.7-1.1.18-.1.25-.37.14-.55l-.02-.02c-.1-.18-.37-.25-.55-.14C14.1 11.1 13 11.5 12 11.5zm0 4c-1.3 0-2.5-.4-3.5-1.1-.18-.13-.44-.06-.55.14l-.02.02c-.1.18-.04.44.14.55.9.6 2.2 1 3.5 1s2.6-.4 3.7-1.1c.18-.1.25-.37.14-.55l-.02-.02c-.1-.18-.37-.25-.55-.14C14.1 15.1 13 15.5 12 15.5z"/></svg>
-                    </div>
-                    <div class="step-text">
-                        <div class="step-title">Step 3: Claim Reward!</div> <div class="step-description">Receive your Amazon credit balance.</div> </div>
-                </div>
-
-            </div> <div class="location-gate" id="location-gate">
-                <h2 class="location-question">Where are you located?</h2> <button class="btn btn-location" id="btn-us">United States</button> <button class="btn btn-location" id="btn-ca">Canada</button> </div>
-
-            <div class="trust-badge" id="trust-badge">
-                <span class="icon">✓</span> Verified By TikTok </div>
-
-            <div class="spinner-container hidden" id="spinner-container">
-                <div class="spinner"></div>
-                Verifying your location... </div>
-
-            <div class="cta-container hidden" id="cta-container">
-                <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=CAMPAIGN" 
-                   class="btn btn-cta">
-                    Claim Halloween Reward! </a>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <span class="step-title">Step 2: Participate</span>
+              <span class="step-description">Enter info & complete <b>required deals</b>.</span>
             </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <span class="step-title">Step 3: Claim Reward!</span>
+              <span class="step-description">Receive your Amazon credit balance.</span>
+            </div>
+          </div>
+        </div>
 
-        </article> </main>
+        <div id="location-gate">
+            <h2 class="location-question">Where are you located?</h2>
+            
+            <button class="btn-location" id="btn-us">United States</button>
+            <button class="btn-location" id="btn-ca">Canada</button>
+        </div>
 
-    <footer class="social-proof-bar">
+        <div id="trust-badge">
+            <span class="icon">✓</span> 
+            <span>Verified By TikTok</span>
+        </div>
+
+        <div id="spinner-container">
+            <div class="spinner"></div>
+            <span>Verifying your location...</span>
+        </div>
+
+        <div id="cta-container">
+            <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=CAMPAIGN" 
+               class="btn-location btn-cta">
+                Claim Halloween Reward!
+            </a>
+        </div>
+
+    </main> <footer class="social-proof-bar">
         <div class="proof-item">
-            <div class="proof-number" id="paid-out">$765,753</div> 
+            <div class="proof-number" id="paid-out">$765,753</div>
             <div class="proof-label">TOTAL PAID OUT</div>
         </div>
         <div class="proof-item">
-             <div class="proof-number" id="people-online">4,587</div>
+            <div class="proof-number" id="people-online">4,587</div>
             <div class="proof-label">PEOPLE ONLINE</div>
         </div>
         <div class="proof-item">
-            <div class="proof-number">86%</div> <div class="proof-label">USERS COMPLETING</div>
+            <div class="proof-number">86%</div>
+            <div class="proof-label">USERS COMPLETING</div>
         </div>
     </footer>
 
 
     <script>
+        // Wait for the document to be fully loaded
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- Interactive Gate Logic [cite: 89] ---
+            // --- Interactive Gate Logic ---
             
-            // Select DOM elements
+            // Select all necessary elements
             const locationGate = document.getElementById('location-gate');
             const trustBadge = document.getElementById('trust-badge');
             const spinnerContainer = document.getElementById('spinner-container');
             const ctaContainer = document.getElementById('cta-container');
-            
-            // Select buttons
             const btnUS = document.getElementById('btn-us');
             const btnCA = document.getElementById('btn-ca');
 
-            // [cite: 64] Function to handle the button click
+            // Function to handle the button click
             function startVerification() {
-                // 1. Hide the location gate and trust badge [cite: 64]
-                locationGate.classList.add('hidden');
-                trustBadge.classList.add('hidden');
+                // 1. Hide the location gate and trust badge
+                locationGate.style.display = 'none';
+                trustBadge.style.display = 'none';
                 
-                // 2. Show the "Verifying" spinner [cite: 65]
-                spinnerContainer.classList.remove('hidden');
+                // 2. Show the "Verifying" spinner
+                // We use 'flex' as defined in the CSS
+                spinnerContainer.style.display = 'flex'; 
 
-                // 3. Wait for 1.4 seconds [cite: 65]
+                // 3. Wait for 1.4 seconds (1400ms)
                 setTimeout(() => {
-                    // 4. Hide the spinner [cite: 65]
-                    spinnerContainer.classList.add('hidden');
+                    // 4. Hide the spinner
+                    spinnerContainer.style.display = 'none';
                     
-                    // 5. Reveal the Final CTA button [cite: 65]
-                    ctaContainer.classList.remove('hidden');
-                }, 1400); // 1.4 seconds
+                    // 5. Reveal the Final CTA button
+                    ctaContainer.style.display = 'block';
+                }, 1400); 
             }
 
-            // Attach event listeners to both buttons
+            // Attach event listeners to both location buttons
             btnUS.addEventListener('click', startVerification);
             btnCA.addEventListener('click', startVerification);
 
 
-            // --- Dynamic Social Proof Logic  ---
+            // --- Dynamic Social Proof Logic ---
 
             // Select number elements
             const paidOutEl = document.getElementById('paid-out');
             const onlineEl = document.getElementById('people-online');
 
-            // [cite: 80, 81] Initial values
+            // Set initial values from the HTML
             let paidOutValue = 765753;
             let onlineValue = 4587;
 
@@ -460,18 +454,19 @@
                 return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             }
 
-            //  Update numbers every 3 seconds
+            // Update numbers every 3 seconds
             setInterval(() => {
-                // Update "Total Paid Out"
-                paidOutValue += Math.floor(Math.random() * 5) + 1; // Increase by 1-5
+                // Update "Total Paid Out" by a random amount (1-5)
+                paidOutValue += Math.floor(Math.random() * 5) + 1; 
                 paidOutEl.textContent = '$' + formatNumber(paidOutValue);
                 
-                // Update "People Online"
-                let onlineChange = Math.floor(Math.random() * 5) - 2; // Change by -2 to +2
+                // Update "People Online" by a random amount (-2 to +2)
+                let onlineChange = Math.floor(Math.random() * 5) - 2; 
                 onlineValue += onlineChange;
-                // Keep it realistic, don't let it drop too low
+                
+                // Keep the online number from dropping too low
                 if (onlineValue < 4500) {
-                    onlineValue = 4500 + Math.floor(Math.random() * 10);
+                    onlineValue = 4510 + Math.floor(Math.random() * 10);
                 }
                 onlineEl.textContent = formatNumber(onlineValue);
 

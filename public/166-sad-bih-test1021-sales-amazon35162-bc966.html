@@ -39,7 +39,7 @@
             position: relative;
         }
 
-        /* --- New Blurred Particle Animation --- */
+        /* --- Blurred Particle Animation --- */
         
         .particles {
             position: fixed;
@@ -87,45 +87,42 @@
         .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-duration: 24s; animation-delay: -6s; }
 
 
-        /* --- MODIFICATION: Bat Animation --- */
-        .bat {
-            position: absolute;
-            font-size: 22px;
-            font-weight: bold;
-            color: #444444; /* MODIFICATION: Changed from #2a2a2a */
-            opacity: 0.3; /* MODIFICATION: Changed from 0.15 */
-            z-index: -1; /* Same level as particles */
-            animation: fly 20s linear infinite;
+        /* --- MODIFICATION: Pumpkin Animation --- */
+        
+        /* Bat CSS and @keyframes fly removed */
+        
+        /* New Pumpkin CSS */
+        .pumpkin {
+            position: absolute; [cite: 125]
+            font-size: 20px; [cite: 126]
+            opacity: 0; /* Start invisible */ [cite: 127]
+            animation: float-pumpkin 25s infinite linear; [cite: 128]
+            z-index: -1; /* Same level as particles */ [cite: 129]
+            user-select: none; /* Prevent selection */ [cite: 130]
+            -webkit-user-select: none; [cite: 131]
         }
 
-        /* Keyframe animation for horizontal flight */
-        @keyframes fly {
-            from { left: -10%; }
-            to { left: 110%; }
+        @keyframes float-pumpkin {
+            0% {
+                transform: translateY(0vh) translateX(0px) rotate(0deg); /* Start at bottom */ [cite: 135]
+                opacity: 0; [cite: 136]
+            }
+            10%, 90% {
+                opacity: 0.2; /* Fade in/out, keep subtle */ [cite: 139]
+            }
+            100% {
+                /* Float up past top, add slight sway and rotation */
+                transform: translateY(-110vh) translateX(15px) rotate(15deg); [cite: 143]
+                opacity: 0; [cite: 144]
+            }
         }
 
-        /* Vary bats for a more natural effect */
-        .bat-1 {
-            top: 10%;
-            animation-duration: 18s;
-            animation-delay: -2s;
-        }
-        .bat-2 {
-            top: 20%;
-            animation-duration: 22s;
-            animation-delay: -10s;
-        }
-        .bat-3 {
-            top: 35%;
-            animation-duration: 15s;
-            animation-delay: -5s;
-        }
-        .bat-4 {
-            top: 50%;
-            animation-duration: 25s;
-            animation-delay: -15s;
-        }
-        /* --- End Bat Animation --- */
+        /* Position pumpkins and vary animation */ [cite: 147]
+        .pumpkin-1 { left: 15%; animation-duration: 28s; animation-delay: -5s; transform: rotate(-10deg); } [cite: 148]
+        .pumpkin-2 { left: 40%; animation-duration: 22s; animation-delay: -12s; transform: rotate(5deg); } [cite: 149]
+        .pumpkin-3 { left: 65%; animation-duration: 30s; animation-delay: -2s; transform: rotate(-5deg); } [cite: 150]
+        .pumpkin-4 { left: 85%; animation-duration: 25s; animation-delay: -8s; transform: rotate(10deg); } [cite: 151]
+        /* --- End Pumpkin Animation --- */
 
 
         /* --- Content Card --- */
@@ -367,10 +364,10 @@
         <div class="particle"></div>
         <div class="particle"></div>
 
-        <div class="bat bat-1">~</div>
-        <div class="bat bat-2">~</div>
-        <div class="bat bat-3">~</div>
-        <div class="bat bat-4">~</div>
+        <div class="pumpkin pumpkin-1">🎃</div> [cite: 120]
+        <div class="pumpkin pumpkin-2">🎃</div> [cite: 121]
+        <div class="pumpkin pumpkin-3">🎃</div> [cite: 122]
+        <div class="pumpkin pumpkin-4">🎃</div> [cite: 123]
     </div>
 
     <main class="content-card">
@@ -436,6 +433,7 @@
         <div class="proof-item">
             <div class="proof-number" id="paid-out">$765,753</div>
             <div class="proof-label">TOTAL PAID OUT</div>
+        }
         </div>
         <div class="proof-item">
             <div class="proof-number" id="people-online">4,587</div>
@@ -473,7 +471,7 @@
                 spinnerContainer.style.display = 'flex'; 
 
                 // 3. Wait for 0.7 seconds (700ms)
-                // MODIFICATION: Changed delay from 1000 to 700
+                // Timer remains 700ms as requested
                 setTimeout(() => {
                     // 4. Hide the spinner
                     spinnerContainer.style.display = 'none';

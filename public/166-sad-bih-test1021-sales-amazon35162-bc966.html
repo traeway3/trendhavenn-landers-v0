@@ -2,384 +2,501 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Claim Your Amazon Reward</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amazon Halloween Reward</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
-
-        :root {
-            --background-color: #0d0d0d; /* Slightly darker base */
-            --primary-text: #FFFFFF;
-            --secondary-text: #b3b3b3;
-            --button-bg: #404040; /* Darker button base */
-            --button-hover-bg: #505050;
-            --halloween-orange: #FF7518; /* Halloween Orange */
-            --halloween-orange-hover: #E66A15;
-            --trust-badge-color: #FFA500; /* Orange for checkmark */
-            --font-family: 'Roboto', sans-serif;
-            --particle-color: rgba(255, 117, 24, 0.08); /* Faint orange particles */
-        }
-
-        html, body {
-            height: 100%;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--background-color);
-            color: var(--primary-text);
-            font-family: var(--font-family);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 70px;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 80px;
         }
 
-        .background-wrap {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            /* Optional: Add a subtle dark gradient */
-             background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(13,13,13,1) 100%);
-        }
-
+        /* Animated background particles */
         .particle {
             position: absolute;
             border-radius: 50%;
-            background: var(--particle-color);
-            animation: float 35s infinite linear; /* Slower float */
-            filter: blur(2px); /* Slightly more blur */
-            opacity: 0; /* Start invisible */
+            background: rgba(255, 117, 24, 0.08);
+            filter: blur(40px);
+            animation: float linear infinite;
+            pointer-events: none;
         }
 
         @keyframes float {
-            0% { transform: translateY(110vh) scale(0.8); opacity: 0; }
-            10%, 90% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(0.4); opacity: 0; }
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
         }
 
-        /* Subtle web/bat element - Example using pseudo-element */
-         body::before {
-             content: '';
-             position: fixed;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-              /* Example: Use a faint SVG web or gradient */
-              /* background-image: url('data:image/svg+xml,...'); */
-              /* background: radial-gradient(circle at top left, rgba(255,117,24,0.05) 0%, transparent 30%),
-                          radial-gradient(circle at bottom right, rgba(255,117,24,0.05) 0%, transparent 30%); */
-             opacity: 0.1;
-             pointer-events: none;
-             z-index: -1;
-         }
+        .particle:nth-child(1) {
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-duration: 15s;
+            animation-delay: 0s;
+        }
 
+        .particle:nth-child(2) {
+            left: 30%;
+            width: 100px;
+            height: 100px;
+            animation-duration: 18s;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(3) {
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            animation-duration: 20s;
+            animation-delay: 6s;
+        }
+
+        .particle:nth-child(4) {
+            left: 70%;
+            width: 90px;
+            height: 90px;
+            animation-duration: 16s;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(5) {
+            left: 85%;
+            width: 70px;
+            height: 70px;
+            animation-duration: 19s;
+            animation-delay: 5s;
+        }
 
         .container {
-            width: 100%;
             max-width: 420px;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            margin-top: 2vh;
+            margin: 0 auto;
+            padding: 40px 20px 20px;
+            position: relative;
             z-index: 1;
         }
 
         .logo {
-            max-width: 100px; /* Adjusted size for this logo */
-            margin-bottom: 25px;
+            display: block;
+            width: 100px;
+            height: auto;
+            margin: 0 auto 30px;
         }
 
-        .headline {
+        h1 {
+            text-align: center;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 30px;
+            color: #ffffff;
         }
 
-        .guide {
-            text-align: left;
-            margin: 0 auto 30px;
-            max-width: 340px;
+        .steps {
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
         }
 
         .step {
             display: flex;
             align-items: center;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .step-number {
-            min-width: 30px;
-            height: 30px;
-            background-color: var(--button-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
             font-size: 1rem;
-            margin-right: 15px;
-        }
-
-        .step-text {
-            font-size: 1.05rem;
-            margin: 0;
+            line-height: 1.6;
+            margin-bottom: 16px;
             text-align: left;
         }
 
-        .step-text strong {
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            background: #2d2d2d;
+            border-radius: 50%;
             font-weight: 700;
-            color: #ffdd57; /* Keep yellow for IMPORTANT */
+            margin-right: 16px;
+            color: #ffffff;
         }
 
-        #interactive-gate {
-            margin-top: 35px;
+        .step-text {
+            flex: 1;
         }
 
-        .location-question {
+        .step-highlight {
+            color: #ffdd57;
+            font-weight: 700;
+        }
+
+        .question {
+            text-align: center;
             font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 24px;
+            color: #ffffff;
+        }
+
+        .button-container {
+            margin-bottom: 16px;
+        }
+
+        .country-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .btn {
-            display: block;
-            background-color: var(--button-bg); /* Default dark grey */
-            color: var(--primary-text);
-            padding: 16px;
-            margin: 10px auto;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
             width: 100%;
-            box-sizing: border-box;
+            padding: 18px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
-        .btn:hover {
-            background-color: var(--button-hover-bg);
+        .btn-country {
+            background: linear-gradient(135deg, #FF7518 0%, #E66A15 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(255, 117, 24, 0.3);
         }
 
-        .location-btn {
-             background: linear-gradient(135deg, var(--halloween-orange) 0%, var(--halloween-orange-hover) 100%);
-             box-shadow: 0 5px 15px rgba(255, 117, 24, 0.2);
+        .btn-country:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 117, 24, 0.4);
         }
 
-        .location-btn:hover {
-             background: linear-gradient(135deg, var(--halloween-orange-hover) 0%, var(--halloween-orange) 100%);
-             box-shadow: 0 8px 20px rgba(255, 117, 24, 0.3);
+        .btn-country:active {
+            transform: translateY(0);
         }
 
+        .btn-start {
+            background: linear-gradient(135deg, #FF7518 0%, #E66A15 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(255, 117, 24, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-        #status-indicator {
-            display: none;
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+
+        .btn-start:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(255, 117, 24, 0.5);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .verification {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .verification-text {
+            display: flex;
             align-items: center;
             justify-content: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #b3b3b3;
+        }
+
+        .checkmark {
+            width: 16px;
+            height: 16px;
+            color: #FFA500;
+        }
+
+        .verifying-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .verifying-text {
             font-size: 1.1rem;
-            font-weight: 700;
-            margin: 30px 0;
-            gap: 10px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .spinner {
             width: 24px;
             height: 24px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: var(--halloween-orange); /* Spinner uses orange */
+            border: 3px solid rgba(255, 117, 24, 0.2);
+            border-top-color: #FF7518;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        #final-cta-container {
-            display: none;
-            margin-top: 35px;
-            width: 100%;
-        }
-
-        .final-cta {
-             background: linear-gradient(135deg, var(--halloween-orange) 0%, var(--halloween-orange-hover) 100%);
-             box-shadow: 0 10px 25px rgba(255, 117, 24, 0.3);
-             animation: pulse-orange 2s infinite;
-        }
-
-        .final-cta:hover {
-             background: linear-gradient(135deg, var(--halloween-orange-hover) 0%, var(--halloween-orange) 100%);
-             animation: none;
-             box-shadow: 0 15px 30px rgba(255, 117, 24, 0.4);
-        }
-
-        @keyframes pulse-orange {
-            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(255, 117, 24, 0.3); }
-            50% { transform: scale(1.03); box-shadow: 0 15px 30px rgba(255, 117, 24, 0.4); }
-            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(255, 117, 24, 0.3); }
-        }
-
-        .verified-badge {
-            font-size: 0.9rem;
-            color: var(--secondary-text);
-            margin-top: 25px;
-            font-weight: 500;
-        }
-
-        .verified-badge span {
-            color: var(--trust-badge-color);
-            font-weight: bold;
-            font-size: 1.1em;
-            vertical-align: middle;
-        }
-
+        /* Sticky footer bar */
         .social-proof-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #1F1F1F; /* Keep dark bar */
-            /* background-color: var(--halloween-orange); */ /* Optional: Orange bar - test readability */
+            background: #1F1F1F;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-around;
-            padding: 12px 5px;
-            border-top: 1px solid #333;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-            z-index: 2;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 100;
         }
-        .proof-item { text-align: center; flex: 1; }
-        .proof-number { display: block; font-size: 1.1rem; font-weight: 900; color: var(--primary-text); }
-        .proof-label { display: block; font-size: 0.7rem; color: var(--secondary-text); text-transform: uppercase; }
 
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            text-align: center;
+        }
+
+        .proof-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .proof-label {
+            font-size: 0.7rem;
+            color: #b3b3b3;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            .question {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 16px 20px;
+            }
+
+            .proof-number {
+                font-size: 1rem;
+            }
+
+            .proof-label {
+                font-size: 0.65rem;
+            }
+
+            .step {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding-top: 60px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="background-wrap" id="background-wrap"></div>
+    <!-- Animated background particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
 
     <div class="container">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABR0LkeAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfoChgQDwzYv8S/AAAEyElEQVR42u3dS2hbVRzG8WeytDXZprHTwQ7SNIqg2uLQRnERhFwUiqio6CLowkGoKDoogp2IbRdBcSgKIhdiEaRCwYWLK4hLF3QRF0HFxYWg2tTSJq0222Yajcn9IZe0adpzk/tD/f9Acn4P7jkn5/C6EwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6vT49Xo/vX6xXn/Nzc3+8/n5+b+WlpY+h+PxejV+fn7+7/j4+O8bWlr++f7+f5j+vT5fX1+vP+v19xO/V69fq1arv1rtdvsH6/X7t3p7O+x+67X79v+L9b7W6+16vX3+6PWa/f0f3N3d7ff7d+/w+/3m5ubn9e3t/fXz8/v29ub0Pfw/gHSP/sHz8+v19vZm3+9/fNn/u83/f3R3d3/8/X//4/f7+4enp9fp8fHp9fb2+vj3+/v7+4eHB37/1ev/H3z9+vP5+fH3O/r+F/rH6+16/fn8+PsF+qf36z/1er1+/X5/v9/f3t72++3p6fG3/frt9/vb25u/P3z9p+u1+8fX/evX+fn5/f39+35/f3p6+r2/X/63+3n9/f7+/vP5+f5+f52eHu/v78/NzX5/f//09HT/6e3t7e/v7+e/37+/f57+X2u1++W+1utX+fn5/R9+9f3+c31f/tPrP/6p/9Tr+7v+/n5+fv4P3+//9f7+Xq93enra/4v36//S6+3x8fHz8+vv4+7u7u/vf3x8fP+8vb39+/vf+vv79/a8/1Pud/9Hb8bXf9Tr+/X6c3p6vr8/Pz+/f//9/v9arXbfXy73p/t+/fz8+/7+/u9f6PUP+4/6/f1v/b7X6/X+fr8/v/+3v3/3+vv4H7/X9/vH/eP09PT09HS/33/fr7+f//6x+5f7X38/Pz9/f/1/v1//vL6/f95/3H8+X/9XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4DX+AQ8V4L9D1453AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI1LTEwLTI0VDAwOjE1OjEyKzAwOjAwv45h8wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNS0xMC0yNFQwMDoxNToxMiswMDowMPc0yqsAAAAASUVORK5CYII=" alt="Amazon Logo" class="logo">
+        <!-- Logo -->
+        <img src="amazonlogo_white.png" alt="Amazon Logo" class="logo">
 
+        <!-- Headline -->
+        <h1>Follow the steps below!</h1>
 
-        <h1 class="headline">Follow the steps below!</h1>
-
-        <div class="guide">
+        <!-- Quick Start Guide -->
+        <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
-                <p class="step-text">Click button below</p>
+                <div class="step-text">Click button below</div>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
-                <p class="step-text">Enter email & info</p>
+                <div class="step-text">Enter email & info</div>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
-                <p class="step-text">Complete deals <strong>(IMPORTANT)</strong></p>
+                <div class="step-text">Complete deals <span class="step-highlight">(IMPORTANT)</span></div>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
-                <p class="step-text">Claim reward!</p>
+                <div class="step-text">Claim reward!</div>
             </div>
         </div>
 
-        <div id="interactive-gate">
-            <p class="location-question">Where are you located?</p>
-            <button class="btn location-btn">United States</button>
-            <button class="btn location-btn">Canada</button>
+        <!-- Location Question -->
+        <h2 class="question">Where are you located?</h2>
+
+        <!-- Interactive Button Container -->
+        <div class="button-container">
+            <!-- Location Buttons (Initially Visible) -->
+            <div id="countryButtons" class="country-buttons">
+                <button class="btn btn-country" onclick="handleLocationClick()">
+                    United States
+                </button>
+                <button class="btn btn-country" onclick="handleLocationClick()">
+                    Canada
+                </button>
+            </div>
+
+            <!-- Verifying State (Hidden Initially) -->
+            <div id="verifyingState" class="verifying-container hidden">
+                <div class="verifying-text">
+                    <div class="spinner"></div>
+                    Verifying your location...
+                </div>
+            </div>
+
+            <!-- Final CTA Button (Hidden Initially) -->
+            <div id="startButton" class="hidden">
+                <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=CAMPAIGN" style="text-decoration: none;">
+                    <button class="btn btn-start">
+                        Claim Reward!
+                    </button>
+                </a>
+            </div>
         </div>
 
-        <div id="status-indicator">
-            <div class="spinner"></div>
-            <span>Verifying your location...</span>
+        <!-- Trust Badge -->
+        <div class="verification">
+            <div class="verification-text">
+                <svg class="checkmark" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Verified By TikTok
+            </div>
         </div>
-
-        <div id="final-cta-container">
-            <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=CAMPAIGN" class="btn final-cta">Claim Reward!</a>
-        </div>
-
-        <p class="verified-badge"><span>✓</span> Verified By TikTok</p>
     </div>
 
+    <!-- Sticky Social Proof Footer Bar -->
     <div class="social-proof-bar">
         <div class="proof-item">
-            <span class="proof-number" id="paid-out">$764,833</span>
-            <span class="proof-label">Total Paid Out</span>
+            <div class="proof-number" id="totalPaid">$765,753</div>
+            <div class="proof-label">Total Paid Out</div>
         </div>
         <div class="proof-item">
-            <span class="proof-number" id="people-online">4,583</span>
-            <span class="proof-label">People Online</span>
+            <div class="proof-number" id="peopleOnline">4,587</div>
+            <div class="proof-label">People Online</div>
         </div>
         <div class="proof-item">
-            <span class="proof-number" id="users-completing">86%</span>
-            <span class="proof-label">Users Completing</span>
+            <div class="proof-number" id="usersCompleting">86%</div>
+            <div class="proof-label">Users Completing</div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dynamic Background Particles
-            const bgWrap = document.getElementById('background-wrap');
-            const particleCount = 25; // Fewer particles for a cleaner look
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const size = Math.random() * 6 + 1.5; // Slightly smaller range
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 20 + 25}s`; // Slower duration
-                particle.style.animationDelay = `${Math.random() * -45}s`; // Longer negative delay
-                bgWrap.appendChild(particle);
-            }
+        // Handle location button click
+        function handleLocationClick() {
+            // Hide country buttons
+            document.getElementById('countryButtons').classList.add('hidden');
 
-            // Social Proof Bar Logic
-            const paidOutEl = document.getElementById('paid-out');
-            const peopleOnlineEl = document.getElementById('people-online');
-            let paidOutBase = 764833;
-            let peopleOnlineBase = 4583;
+            // Show verifying state
+            document.getElementById('verifyingState').classList.remove('hidden');
 
-            function formatCurrency(n) { return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-            function updateMetrics() {
-                paidOutBase += Math.floor(Math.random() * 25) + 1;
-                paidOutEl.textContent = formatCurrency(paidOutBase);
-                const onlineFluctuation = Math.floor(Math.random() * 20) - 10;
-                peopleOnlineEl.textContent = (peopleOnlineBase + onlineFluctuation).toString();
-            }
-            updateMetrics(); // Initial call
-            setInterval(updateMetrics, 3100); // Slightly adjusted interval
+            // After 1.5 seconds, hide verifying and show CTA
+            setTimeout(() => {
+                document.getElementById('verifyingState').classList.add('hidden');
+                document.getElementById('startButton').classList.remove('hidden');
+            }, 1500);
+        }
 
-            // Interactive Gate Logic
-            const interactiveGate = document.getElementById('interactive-gate');
-            const statusIndicator = document.getElementById('status-indicator');
-            const finalCtaContainer = document.getElementById('final-cta-container');
-            const locationButtons = document.querySelectorAll('.location-btn');
+        // Animate social proof numbers
+        function animateNumbers() {
+            // Total Paid Out - increment by random amount
+            const totalPaidEl = document.getElementById('totalPaid');
+            let currentPaid = 765753;
 
-            locationButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    interactiveGate.style.display = 'none';
-                    statusIndicator.style.display = 'flex';
+            setInterval(() => {
+                currentPaid += Math.floor(Math.random() * 50) + 10;
+                totalPaidEl.textContent = '$' + currentPaid.toLocaleString();
+            }, 3000);
 
-                    setTimeout(() => {
-                        statusIndicator.style.display = 'none';
-                        finalCtaContainer.style.display = 'block';
-                    }, 1400); // Slightly faster transition
-                });
-            });
+            // People Online - fluctuate slightly
+            const peopleOnlineEl = document.getElementById('peopleOnline');
+            let currentOnline = 4587;
+
+            setInterval(() => {
+                const change = Math.floor(Math.random() * 10) - 5;
+                currentOnline = Math.max(4580, Math.min(4600, currentOnline + change));
+                peopleOnlineEl.textContent = currentOnline.toLocaleString();
+            }, 3500);
+
+            // Users Completing - stay around 86%
+            const usersCompletingEl = document.getElementById('usersCompleting');
+            let currentPercent = 86;
+
+            setInterval(() => {
+                const change = Math.random() < 0.5 ? 0 : (Math.random() < 0.5 ? 1 : -1);
+                currentPercent = Math.max(85, Math.min(87, currentPercent + change));
+                usersCompletingEl.textContent = currentPercent + '%';
+            }, 4000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            animateNumbers();
         });
     </script>
 </body>

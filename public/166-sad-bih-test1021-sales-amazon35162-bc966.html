@@ -87,13 +87,13 @@
         .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-duration: 24s; animation-delay: -6s; }
 
 
-        /* --- MODIFICATION 3: Bat Animation --- */
+        /* --- MODIFICATION: Bat Animation --- */
         .bat {
             position: absolute;
             font-size: 22px;
             font-weight: bold;
-            color: #2a2a2a; /* Dark grey silhouette */
-            opacity: 0.15; /* Low opacity */
+            color: #444444; /* MODIFICATION: Changed from #2a2a2a */
+            opacity: 0.3; /* MODIFICATION: Changed from 0.15 */
             z-index: -1; /* Same level as particles */
             animation: fly 20s linear infinite;
         }
@@ -272,7 +272,7 @@
         /* --- Verifying Spinner (Hidden) --- */
         
         #spinner-container {
-            /* MODIFICATION 1: Set to display: none; by default */
+            /* Set to display: none; by default */
             display: none; 
             /* Flex properties for when JS makes it visible */
             flex-direction: column;
@@ -472,15 +472,15 @@
                 // We use 'flex' as defined in the CSS
                 spinnerContainer.style.display = 'flex'; 
 
-                // 3. Wait for 1 second (1000ms)
-                // MODIFICATION 2: Changed delay from 1400 to 1000
+                // 3. Wait for 0.7 seconds (700ms)
+                // MODIFICATION: Changed delay from 1000 to 700
                 setTimeout(() => {
                     // 4. Hide the spinner
                     spinnerContainer.style.display = 'none';
                     
                     // 5. Reveal the Final CTA button
                     ctaContainer.style.display = 'block';
-                }, 1000); 
+                }, 700); 
             }
 
             // Attach event listeners to both location buttons

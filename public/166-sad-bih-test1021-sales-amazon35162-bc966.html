@@ -93,35 +93,37 @@
         
         /* New Pumpkin CSS */
         .pumpkin {
-            position: absolute; [cite: 125]
-            font-size: 20px; [cite: 126]
-            opacity: 0; /* Start invisible */ [cite: 127]
-            animation: float-pumpkin 25s infinite linear; [cite: 128]
-            z-index: -1; /* Same level as particles */ [cite: 129]
-            user-select: none; /* Prevent selection */ [cite: 130]
-            -webkit-user-select: none; [cite: 131]
+            position: absolute;
+            /* FIX 1: Start pumpkins below the viewport */
+            bottom: -40px; 
+            font-size: 20px;
+            opacity: 0; /* Start invisible */
+            animation: float-pumpkin 25s infinite linear;
+            z-index: -1; /* Same level as particles */
+            user-select: none; /* Prevent selection */
+            -webkit-user-select: none;
         }
 
         @keyframes float-pumpkin {
             0% {
-                transform: translateY(0vh) translateX(0px) rotate(0deg); /* Start at bottom */ [cite: 135]
-                opacity: 0; [cite: 136]
+                transform: translateY(0vh) translateX(0px) rotate(0deg); /* Start at bottom */
+                opacity: 0;
             }
             10%, 90% {
-                opacity: 0.2; /* Fade in/out, keep subtle */ [cite: 139]
+                opacity: 0.2; /* Fade in/out, keep subtle */
             }
             100% {
                 /* Float up past top, add slight sway and rotation */
-                transform: translateY(-110vh) translateX(15px) rotate(15deg); [cite: 143]
-                opacity: 0; [cite: 144]
+                transform: translateY(-110vh) translateX(15px) rotate(15deg);
+                opacity: 0;
             }
         }
 
-        /* Position pumpkins and vary animation */ [cite: 147]
-        .pumpkin-1 { left: 15%; animation-duration: 28s; animation-delay: -5s; transform: rotate(-10deg); } [cite: 148]
-        .pumpkin-2 { left: 40%; animation-duration: 22s; animation-delay: -12s; transform: rotate(5deg); } [cite: 149]
-        .pumpkin-3 { left: 65%; animation-duration: 30s; animation-delay: -2s; transform: rotate(-5deg); } [cite: 150]
-        .pumpkin-4 { left: 85%; animation-duration: 25s; animation-delay: -8s; transform: rotate(10deg); } [cite: 151]
+        /* Position pumpkins and vary animation */
+        .pumpkin-1 { left: 15%; animation-duration: 28s; animation-delay: -5s; transform: rotate(-10deg); }
+        .pumpkin-2 { left: 40%; animation-duration: 22s; animation-delay: -12s; transform: rotate(5deg); }
+        .pumpkin-3 { left: 65%; animation-duration: 30s; animation-delay: -2s; transform: rotate(-5deg); }
+        .pumpkin-4 { left: 85%; animation-duration: 25s; animation-delay: -8s; transform: rotate(10deg); }
         /* --- End Pumpkin Animation --- */
 
 
@@ -237,6 +239,8 @@
             font-size: 1.1rem;
             cursor: pointer;
             text-decoration: none;
+            /* FIX 2: Center button text */
+            text-align: center;
             /* Inset shadow for depth */
             box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.25); 
             transition: background-color 0.3s ease;
@@ -364,10 +368,10 @@
         <div class="particle"></div>
         <div class="particle"></div>
 
-        <div class="pumpkin pumpkin-1">🎃</div> [cite: 120]
-        <div class="pumpkin pumpkin-2">🎃</div> [cite: 121]
-        <div class="pumpkin pumpkin-3">🎃</div> [cite: 122]
-        <div class="pumpkin pumpkin-4">🎃</div> [cite: 123]
+        <div class="pumpkin pumpkin-1">🎃</div>
+        <div class="pumpkin pumpkin-2">🎃</div>
+        <div class="pumpkin pumpkin-3">🎃</div>
+        <div class="pumpkin pumpkin-4">🎃</div>
     </div>
 
     <main class="content-card">
@@ -433,7 +437,6 @@
         <div class="proof-item">
             <div class="proof-number" id="paid-out">$765,753</div>
             <div class="proof-label">TOTAL PAID OUT</div>
-        }
         </div>
         <div class="proof-item">
             <div class="proof-number" id="people-online">4,587</div>

@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Amazon Halloween Reward</title>
+    <title>Amazon Halloween Rewards</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,120 +15,68 @@
         }
 
         body {
-            font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
-            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            background: radial-gradient(circle at center, #0d0d0d 0%, #000000 100%);
+            color: #FFFFFF;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
             padding-bottom: 80px;
         }
 
-        /* Animated background particles */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 117, 24, 0.08);
-            filter: blur(40px);
-            animation: float linear infinite;
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
             pointer-events: none;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) scale(1);
-                opacity: 0;
-            }
-        }
-
-        .particle:nth-child(1) {
-            left: 10%;
-            width: 80px;
-            height: 80px;
-            animation-duration: 15s;
-            animation-delay: 0s;
-        }
-
-        .particle:nth-child(2) {
-            left: 30%;
-            width: 100px;
-            height: 100px;
-            animation-duration: 18s;
-            animation-delay: 3s;
-        }
-
-        .particle:nth-child(3) {
-            left: 50%;
-            width: 60px;
-            height: 60px;
-            animation-duration: 20s;
-            animation-delay: 6s;
-        }
-
-        .particle:nth-child(4) {
-            left: 70%;
-            width: 90px;
-            height: 90px;
-            animation-duration: 16s;
-            animation-delay: 2s;
-        }
-
-        .particle:nth-child(5) {
-            left: 85%;
-            width: 70px;
-            height: 70px;
-            animation-duration: 19s;
-            animation-delay: 5s;
-        }
-
         .container {
-            max-width: 420px;
-            margin: 0 auto;
-            padding: 40px 20px 20px;
             position: relative;
             z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: calc(100vh - 80px);
+            padding: 20px 15px;
+        }
+
+        .content {
+            max-width: 420px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .logo {
-            display: block;
-            width: 100px;
-            height: auto;
-            margin: 0 auto 30px;
+            margin-bottom: 25px;
         }
 
-        h1 {
-            text-align: center;
+        .logo svg {
+            display: block;
+        }
+
+        .headline {
             font-size: 1.5rem;
             font-weight: 700;
+            text-align: center;
             margin-bottom: 30px;
-            color: #ffffff;
+            color: #FFFFFF;
         }
 
-        .steps {
-            background: rgba(20, 20, 20, 0.6);
-            border-radius: 16px;
-            padding: 24px 20px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
+        .quick-start {
+            width: 100%;
+            margin-bottom: 30px;
         }
 
         .step {
             display: flex;
             align-items: center;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 16px;
-            text-align: left;
+            margin-bottom: 15px;
         }
 
         .step:last-child {
@@ -137,78 +84,155 @@
         }
 
         .step-number {
+            width: 30px;
+            height: 30px;
+            background: #2d2d2d;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
-            background: #2d2d2d;
-            border-radius: 50%;
             font-weight: 700;
-            margin-right: 16px;
-            color: #ffffff;
+            color: #FFFFFF;
+            flex-shrink: 0;
+            margin-right: 15px;
         }
 
         .step-text {
-            flex: 1;
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: #FFFFFF;
         }
 
-        .step-highlight {
-            color: #ffdd57;
+        .step-text .important {
             font-weight: 700;
+            color: #ffdd57;
         }
 
-        .question {
+        .location-gate {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .location-question {
             text-align: center;
             font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 24px;
-            color: #ffffff;
+            color: #FFFFFF;
+            margin-bottom: 15px;
         }
 
-        .button-container {
-            margin-bottom: 16px;
-        }
-
-        .country-buttons {
+        .location-buttons {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
+            width: 100%;
         }
 
-        .btn {
+        .location-btn {
             width: 100%;
-            padding: 18px 24px;
-            border: none;
-            border-radius: 50px;
+            padding: 16px 24px;
             font-size: 1.1rem;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .btn-country {
+            color: #FFFFFF;
             background: linear-gradient(135deg, #FF7518 0%, #E66A15 100%);
-            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 117, 24, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: 'Roboto', sans-serif;
         }
 
-        .btn-country:hover {
+        .location-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255, 117, 24, 0.4);
         }
 
-        .btn-country:active {
+        .location-btn:active {
             transform: translateY(0);
         }
 
-        .btn-start {
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #b3b3b3;
+        }
+
+        .checkmark {
+            color: #FFA500;
+            font-weight: 700;
+        }
+
+        .badge-text {
+            font-weight: 400;
+        }
+
+        .verifying-indicator {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #FF7518;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .verifying-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .final-cta {
+            width: 100%;
+            margin-bottom: 25px;
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFFFFF;
             background: linear-gradient(135deg, #FF7518 0%, #E66A15 100%);
-            color: #ffffff;
-            box-shadow: 0 4px 20px rgba(255, 117, 24, 0.4);
+            border: none;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 117, 24, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             animation: pulse 2s ease-in-out infinite;
+            font-family: 'Roboto', sans-serif;
         }
 
         @keyframes pulse {
@@ -220,115 +244,74 @@
             }
         }
 
-        .btn-start:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(255, 117, 24, 0.5);
+        .cta-button:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(255, 117, 24, 0.4);
         }
 
-        .hidden {
-            display: none !important;
+        .cta-button:active {
+            transform: translateY(0) scale(1);
         }
 
-        .verification {
-            text-align: center;
-            margin-top: 12px;
-        }
-
-        .verification-text {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            color: #b3b3b3;
-        }
-
-        .checkmark {
-            width: 16px;
-            height: 16px;
-            color: #FFA500;
-        }
-
-        .verifying-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .verifying-text {
-            font-size: 1.1rem;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .spinner {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255, 117, 24, 0.2);
-            border-top-color: #FF7518;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Sticky footer bar */
         .social-proof-bar {
             position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
+            width: 100%;
             background: #1F1F1F;
-            padding: 16px 20px;
+            border-top: 1px solid #333;
+            padding: 12px 15px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
             z-index: 100;
         }
 
-        .proof-item {
+        .proof-column {
             display: flex;
             flex-direction: column;
             align-items: center;
-            flex: 1;
             text-align: center;
         }
 
         .proof-number {
             font-size: 1.1rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #FFFFFF;
             margin-bottom: 4px;
         }
 
         .proof-label {
             font-size: 0.7rem;
-            color: #b3b3b3;
             text-transform: uppercase;
+            color: #b3b3b3;
             letter-spacing: 0.5px;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 380px) {
-            h1 {
+        .fade-out {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .headline {
                 font-size: 1.3rem;
             }
 
-            .question {
-                font-size: 1.1rem;
+            .step-text {
+                font-size: 0.95rem;
             }
 
-            .btn {
+            .location-btn,
+            .cta-button {
                 font-size: 1rem;
-                padding: 16px 20px;
+                padding: 14px 20px;
             }
 
             .proof-number {
@@ -338,166 +321,195 @@
             .proof-label {
                 font-size: 0.65rem;
             }
-
-            .step {
-                font-size: 0.95rem;
-            }
         }
 
         @media (min-width: 768px) {
             .container {
-                padding-top: 60px;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated background particles -->
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
+    <canvas id="particles"></canvas>
 
     <div class="container">
-        <!-- Logo -->
-        <img src="amazonlogo_white.png" alt="Amazon Logo" class="logo">
-
-        <!-- Headline -->
-        <h1>Follow the steps below!</h1>
-
-        <!-- Quick Start Guide -->
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-text">Click button below</div>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-text">Enter email & info</div>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-text">Complete deals <span class="step-highlight">(IMPORTANT)</span></div>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-text">Claim reward!</div>
-            </div>
-        </div>
-
-        <!-- Location Question -->
-        <h2 class="question">Where are you located?</h2>
-
-        <!-- Interactive Button Container -->
-        <div class="button-container">
-            <!-- Location Buttons (Initially Visible) -->
-            <div id="countryButtons" class="country-buttons">
-                <button class="btn btn-country" onclick="handleLocationClick()">
-                    United States
-                </button>
-                <button class="btn btn-country" onclick="handleLocationClick()">
-                    Canada
-                </button>
+        <div class="content">
+            <div class="logo">
+                <svg width="100" height="30" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M35 20c-8 3-16 4-24 1-1-1-1-1 0-1 7 1 15 0 23-2 1 0 2 1 1 2z" fill="#FF9900"/>
+                    <path d="M37 18c-1 1-3 0-2-1 2-3 5-8 2-8-4 0-7 5-8 8 0 1-1 1-1 0-1-4 0-9 1-13 0-1 1-1 1 0l-1 3c2-3 5-4 7-3 3 1 2 6 1 9 0 3 1 4 2 4 1 0 2-1 2-1 1 0 0 1-1 2z" fill="#FFFFFF"/>
+                    <path d="M28 15c0 4-2 8-6 8-3 0-5-2-5-6 0-4 2-8 6-8 3 0 5 3 5 6zm-9 0c0 3 1 5 3 5s4-3 4-6c0-2-1-4-3-4s-4 2-4 5z" fill="#FFFFFF"/>
+                    <path d="M58 15c0 4-2 8-6 8-3 0-5-2-5-6 0-4 2-8 6-8 3 0 5 3 5 6zm-9 0c0 3 1 5 3 5s4-3 4-6c0-2-1-4-3-4s-4 2-4 5z" fill="#FFFFFF"/>
+                    <path d="M71 15c0 4-2 8-6 8-3 0-5-2-5-6 0-4 2-8 6-8 3 0 5 3 5 6zm-9 0c0 3 1 5 3 5s4-3 4-6c0-2-1-4-3-4s-4 2-4 5z" fill="#FFFFFF"/>
+                    <path d="M44 18c-1 1-3 0-2-1 2-3 5-8 2-8-4 0-7 5-8 8 0 1-1 1-1 0-1-4 0-9 1-13 0-1 1-1 1 0l-1 3c2-3 5-4 7-3 3 1 2 6 1 9 0 3 1 4 2 4 1 0 2-1 2-1 1 0 0 1-1 2z" fill="#FFFFFF"/>
+                </svg>
             </div>
 
-            <!-- Verifying State (Hidden Initially) -->
-            <div id="verifyingState" class="verifying-container hidden">
-                <div class="verifying-text">
-                    <div class="spinner"></div>
-                    Verifying your location...
+            <h1 class="headline">Follow the steps below!</h1>
+
+            <div class="quick-start">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Click button below</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Enter email & info</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Complete deals <span class="important">(IMPORTANT)</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Claim reward!</div>
                 </div>
             </div>
 
-            <!-- Final CTA Button (Hidden Initially) -->
-            <div id="startButton" class="hidden">
-                <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=CAMPAIGN" style="text-decoration: none;">
-                    <button class="btn btn-start">
-                        Claim Reward!
-                    </button>
+            <div id="locationGate" class="location-gate">
+                <div class="location-question">Where are you located?</div>
+                <div class="location-buttons">
+                    <button class="location-btn" onclick="handleLocationClick()">United States</button>
+                    <button class="location-btn" onclick="handleLocationClick()">Canada</button>
+                </div>
+            </div>
+
+            <div id="verifyingIndicator" class="verifying-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <div class="verifying-text">Verifying your location...</div>
+            </div>
+
+            <div id="finalCTA" class="final-cta" style="display: none;">
+                <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=CAMPAIGN" class="cta-button">
+                    Claim Reward!
                 </a>
             </div>
-        </div>
 
-        <!-- Trust Badge -->
-        <div class="verification">
-            <div class="verification-text">
-                <svg class="checkmark" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                Verified By TikTok
+            <div class="trust-badge">
+                <span class="checkmark">✓</span>
+                <span class="badge-text">Verified By TikTok</span>
             </div>
         </div>
     </div>
 
-    <!-- Sticky Social Proof Footer Bar -->
     <div class="social-proof-bar">
-        <div class="proof-item">
+        <div class="proof-column">
             <div class="proof-number" id="totalPaid">$765,753</div>
-            <div class="proof-label">Total Paid Out</div>
+            <div class="proof-label">TOTAL PAID OUT</div>
         </div>
-        <div class="proof-item">
+        <div class="proof-column">
             <div class="proof-number" id="peopleOnline">4,587</div>
-            <div class="proof-label">People Online</div>
+            <div class="proof-label">PEOPLE ONLINE</div>
         </div>
-        <div class="proof-item">
-            <div class="proof-number" id="usersCompleting">86%</div>
-            <div class="proof-label">Users Completing</div>
+        <div class="proof-column">
+            <div class="proof-number">86%</div>
+            <div class="proof-label">USERS COMPLETING</div>
         </div>
     </div>
 
     <script>
-        // Handle location button click
-        function handleLocationClick() {
-            // Hide country buttons
-            document.getElementById('countryButtons').classList.add('hidden');
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
 
-            // Show verifying state
-            document.getElementById('verifyingState').classList.remove('hidden');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            // After 1.5 seconds, hide verifying and show CTA
-            setTimeout(() => {
-                document.getElementById('verifyingState').classList.add('hidden');
-                document.getElementById('startButton').classList.remove('hidden');
-            }, 1500);
+        const particles = [];
+        const particleCount = 50;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.radius = Math.random() * 3 + 1;
+                this.speed = Math.random() * 0.5 + 0.2;
+                this.opacity = Math.random() * 0.08;
+            }
+
+            update() {
+                this.y -= this.speed;
+
+                if (this.y + this.radius < 0) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 117, 24, ${this.opacity})`;
+                ctx.filter = 'blur(2px)';
+                ctx.fill();
+                ctx.filter = 'none';
+            }
         }
 
-        // Animate social proof numbers
-        function animateNumbers() {
-            // Total Paid Out - increment by random amount
-            const totalPaidEl = document.getElementById('totalPaid');
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        function handleLocationClick() {
+            const locationGate = document.getElementById('locationGate');
+            const verifyingIndicator = document.getElementById('verifyingIndicator');
+            const finalCTA = document.getElementById('finalCTA');
+
+            locationGate.classList.add('fade-out');
+
+            setTimeout(() => {
+                locationGate.style.display = 'none';
+                verifyingIndicator.style.display = 'flex';
+
+                setTimeout(() => {
+                    verifyingIndicator.style.display = 'none';
+                    finalCTA.style.display = 'block';
+                }, 1400);
+            }, 300);
+        }
+
+        function updateSocialProof() {
+            const totalPaidElement = document.getElementById('totalPaid');
+            const peopleOnlineElement = document.getElementById('peopleOnline');
+
             let currentPaid = 765753;
-
-            setInterval(() => {
-                currentPaid += Math.floor(Math.random() * 50) + 10;
-                totalPaidEl.textContent = '$' + currentPaid.toLocaleString();
-            }, 3000);
-
-            // People Online - fluctuate slightly
-            const peopleOnlineEl = document.getElementById('peopleOnline');
             let currentOnline = 4587;
 
             setInterval(() => {
-                const change = Math.floor(Math.random() * 10) - 5;
-                currentOnline = Math.max(4580, Math.min(4600, currentOnline + change));
-                peopleOnlineEl.textContent = currentOnline.toLocaleString();
-            }, 3500);
+                const paidIncrease = Math.floor(Math.random() * 50) + 10;
+                currentPaid += paidIncrease;
+                totalPaidElement.textContent = `$${currentPaid.toLocaleString()}`;
 
-            // Users Completing - stay around 86%
-            const usersCompletingEl = document.getElementById('usersCompleting');
-            let currentPercent = 86;
-
-            setInterval(() => {
-                const change = Math.random() < 0.5 ? 0 : (Math.random() < 0.5 ? 1 : -1);
-                currentPercent = Math.max(85, Math.min(87, currentPercent + change));
-                usersCompletingEl.textContent = currentPercent + '%';
-            }, 4000);
+                const onlineChange = Math.floor(Math.random() * 20) - 5;
+                currentOnline += onlineChange;
+                if (currentOnline < 4500) currentOnline = 4500;
+                if (currentOnline > 5000) currentOnline = 5000;
+                peopleOnlineElement.textContent = currentOnline.toLocaleString();
+            }, 2500);
         }
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            animateNumbers();
-        });
+        updateSocialProof();
     </script>
 </body>
 </html>

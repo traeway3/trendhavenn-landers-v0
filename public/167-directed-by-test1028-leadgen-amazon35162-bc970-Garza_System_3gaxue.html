@@ -24,8 +24,10 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #0d0d0d; /* Dark theme */
-            color: #FFFFFF; /* White text */
+            /* MODIFICATION: Light theme */
+            background-color: #f9fafb; 
+            /* MODIFICATION: Dark text */
+            color: #111827; 
             display: flex;
             justify-content: center;
             align-items: flex-start; /* Aligns content to the top */
@@ -43,7 +45,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1; 
+            z-index: 0; /* Behind content */
         }
 
         .pumpkin {
@@ -52,9 +54,11 @@
             font-size: 20px;
             opacity: 0; /* Start invisible */
             animation: float-pumpkin 25s infinite linear;
-            z-index: -1;
+            z-index: 0;
             user-select: none;
             -webkit-user-select: none;
+            /* MODIFICATION: Slightly darker orange for light bg */
+            color: rgba(255, 117, 24, 0.7); 
         }
 
         @keyframes float-pumpkin {
@@ -63,7 +67,8 @@
                 opacity: 0;
             }
             10%, 90% {
-                opacity: 0.2; /* Subtle opacity */
+                 /* MODIFICATION: Lower opacity on light bg */
+                opacity: 0.15;
             }
             100% {
                 transform: translateY(-110vh) translateX(15px) rotate(15deg); /* Float up */
@@ -83,6 +88,8 @@
             max-width: 400px; /* Mobile-first max-width */
             width: 100%;
             text-align: center; /* Center-aligns children */
+            position: relative; /* Ensure content is above background */
+            z-index: 1;
         }
 
         /* --- Logo --- */
@@ -97,17 +104,48 @@
         h1 {
             font-size: 1.6rem;
             font-weight: 700;
-            color: #FFFFFF;
-            margin-bottom: 25px;
+            /* MODIFICATION: Dark text */
+            color: #111827; 
+            margin-bottom: 15px; /* Reduced margin before progress bar */
             text-align: center;
         }
+
+        /* --- MODIFICATION: Progress Bar --- */
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e5e7eb; /* Light grey background */
+            border-radius: 5px;
+            height: 10px;
+            margin-bottom: 30px; /* Space before steps */
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            width: 0%; /* Start empty */
+            height: 100%;
+            background-color: #FF7518; /* Halloween orange */
+            border-radius: 5px;
+            /* Animation applied via JS */
+            transition: width 1.8s ease-out; 
+        }
+        
+        /* Optional: Text changing with progress bar */
+        .progress-text {
+            font-size: 0.8rem;
+            color: #6b7280; /* Muted text */
+            margin-top: -25px; /* Position above bar */
+            margin-bottom: 30px;
+            height: 1em; /* Prevent layout shift */
+        }
+
 
         /* --- Quick Start Guide --- */
         
         .steps-guide {
+            /* MODIFICATION: Ensure centering */
             margin: 0 auto 30px; 
-            max-width: 340px;
-            text-align: left; /* Overrides parent center-align */
+            max-width: 340px; 
+            text-align: left; 
         }
 
         .step-item {
@@ -123,25 +161,28 @@
         .step-number {
             min-width: 30px;
             height: 30px;
-            background-color: #2d2d2d; /* Dark grey circle */
+            /* MODIFICATION: Light bg, dark text */
+            background-color: #e5e7eb; 
+            color: #111827;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: white;
             margin-right: 15px;
         }
         
         .step-text {
             font-size: 1.05rem;
-            color: #FFFFFF;
+             /* MODIFICATION: Dark text */
+            color: #374151;
         }
 
         /* Style for "(important!)" */
         .step-text b {
             font-weight: 700;
-            color: #ffdd57; /* Bold yellow */
+            /* MODIFICATION: Orange on light theme */
+            color: #D97706; 
         }
 
         /* --- Final CTA Button --- */
@@ -159,46 +200,50 @@
             cursor: pointer;
             text-decoration: none;
             text-align: center;
-            box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.25);
-            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 117, 24, 0.3); /* Softer shadow */
+            transition: background-color 0.3s ease, transform 0.1s ease;
             margin-top: 5px;
-            margin-bottom: 20px;
-            animation: pulse-glow 1.5s infinite;
+            margin-bottom: 15px; /* Space before security text */
+            /* Removed pulse animation for cleaner look on light theme */
         }
 
         .btn-cta:hover {
             background-color: #E66A15;
         }
         
-        /* CTA Pulse Animation */
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: inset 0 -3px 4px rgba(0,0,0,0.25), 
-                            0 0 0 0 rgba(255, 117, 24, 0.7);
-            }
-            70% {
-                box-shadow: inset 0 -3px 4px rgba(0,0,0,0.25), 
-                            0 0 0 10px rgba(255, 117, 24, 0);
-            }
+        .btn-cta:active {
+             transform: scale(0.98); /* Press effect */
+        }
+
+
+        /* --- MODIFICATION: Security Text --- */
+        .security-text {
+            font-size: 0.8rem;
+            color: #6b7280; /* Muted grey */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px; /* Space between icon and text */
+            margin-bottom: 15px; /* Space before trust badge */
         }
 
         /* --- Trust Badge --- */
         
         .trust-badge {
             font-size: 0.9rem;
-            color: #b3b3b3; /* Muted grey */
+            color: #6b7280; /* Muted grey */
             margin-bottom: 10px;
         }
 
         .trust-badge .icon {
-            color: #FFA500; /* Muted orange checkmark */
+            color: #F59E0B; /* Muted orange/yellow checkmark */
             font-weight: 700;
         }
 
         /* --- Social Proof Line --- */
         .social-proof-line {
             font-size: 0.9rem;
-            color: #FFFFFF;
+            color: #374151; /* Dark text */
         }
 
     </style>
@@ -206,7 +251,6 @@
 <body>
 
     <div class="particles">
-        
         <div class="pumpkin pumpkin-1">🎃</div>
         <div class="pumpkin pumpkin-2">🎃</div>
         <div class="pumpkin pumpkin-3">🎃</div>
@@ -215,12 +259,17 @@
 
     <main>
 
-        <img src="amazonlogo_white.png" 
+        <img src="amazonlogo_black_on_clear.png" 
              alt="Amazon Logo" 
              width="90" 
              class="logo-img">
         
         <h1>Follow the steps for your Halloween Treat!</h1>
+        
+        <div class="progress-text" id="progress-text">Checking eligibility...</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
 
         <div class="steps-guide">
           <div class="step-item">
@@ -241,11 +290,15 @@
           </div>
         </div>
 
-        <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=167-directed-by-test1028-leadgen-amazon35162-bc970-Garza_System_3gaxue" 
+        <a href="YOUR_AFFILIATE_LINK_HERE" 
            class="btn-cta">
             Claim Now!
         </a>
         
+        <div class="security-text">
+            <span>🔒</span> <span>Secure & Verified Offer</span>
+        </div>
+
         <div class="trust-badge">
             <span class="icon">✓</span> 
             <span>Verified By TikTok</span>
@@ -258,24 +311,30 @@
     </main> 
     
     <script>
-        // Wait for the document to be fully loaded
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- Dynamic Social Proof Logic ---
+            // --- Progress Bar Animation ---
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            // Start animation shortly after page load
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+                // Change text after a short delay
+                setTimeout(() => {
+                     progressText.textContent = 'Success! You qualify.';
+                }, 800); // Adjust timing as needed
+            }, 100); // Small delay to ensure rendering
 
-            // Select number element
+            // --- Dynamic Social Proof Logic ---
             const onlineCountEl = document.getElementById('online-count');
 
-            // Update number every 2.5 seconds
             setInterval(() => {
-                // Generate a random number between 350 and 450
                 const min = 350;
                 const max = 450;
                 const randomCount = Math.floor(Math.random() * (max - min + 1)) + min;
-                
-                // Update the text content
                 onlineCountEl.textContent = randomCount;
-            }, 2500); // 2500ms = 2.5 seconds
+            }, 2500); 
 
         });
     </script>

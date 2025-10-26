@@ -3,341 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon Halloween Offer</title>
-    
+    <title>Get Your $1370 Amazon Halloween Treat!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- Base & Background Styles --- */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%; 
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            /* MODIFICATION: Light theme */
-            background-color: #f9fafb; 
-            /* MODIFICATION: Dark text */
-            color: #111827; 
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Aligns content to the top */
-            padding: 20px;
-            overflow-x: hidden;
-            position: relative;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #FFFFFF;
+            color: #111827;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Background Animation (Pumpkins) --- */
-        
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0; /* Behind content */
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .pumpkin {
-            position: absolute;
-            bottom: -40px; /* Start off-screen */
-            font-size: 20px;
-            opacity: 0; /* Start invisible */
-            animation: float-pumpkin 25s infinite linear;
-            z-index: 0;
-            user-select: none;
-            -webkit-user-select: none;
-            /* MODIFICATION: Slightly darker orange for light bg */
-            color: rgba(255, 117, 24, 0.7); 
-        }
-
-        @keyframes float-pumpkin {
-            0% {
-                transform: translateY(0vh) translateX(0px) rotate(0deg);
-                opacity: 0;
-            }
-            10%, 90% {
-                 /* MODIFICATION: Lower opacity on light bg */
-                opacity: 0.15;
-            }
-            100% {
-                transform: translateY(-110vh) translateX(15px) rotate(15deg); /* Float up */
-                opacity: 0;
-            }
-        }
-
-        /* Position pumpkins and vary animation */
-        .pumpkin-1 { left: 15%; animation-duration: 28s; animation-delay: -5s; transform: rotate(-10deg); }
-        .pumpkin-2 { left: 40%; animation-duration: 22s; animation-delay: -12s; transform: rotate(5deg); }
-        .pumpkin-3 { left: 65%; animation-duration: 30s; animation-delay: -2s; transform: rotate(-5deg); }
-        .pumpkin-4 { left: 85%; animation-duration: 25s; animation-delay: -8s; transform: rotate(10deg); }
-
-        /* --- Main Content Container --- */
-        
-        main {
-            max-width: 400px; /* Mobile-first max-width */
-            width: 100%;
-            text-align: center; /* Center-aligns children */
-            position: relative; /* Ensure content is above background */
-            z-index: 1;
-        }
-
-        /* --- Logo --- */
-        .logo-img {
+        .logo {
             display: block;
-            margin: 2vh auto 20px; /* Centered */
-            width: 90px;
+            margin: 4vh auto 20px;
+            width: 80px;
             height: auto;
         }
 
-        /* --- Headline --- */
-        h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            /* MODIFICATION: Dark text */
-            color: #111827; 
-            margin-bottom: 15px; /* Reduced margin before progress bar */
+        .headline {
             text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- MODIFICATION: Progress Bar --- */
-        .progress-bar-container {
-            width: 100%;
-            background-color: #e5e7eb; /* Light grey background */
-            border-radius: 5px;
-            height: 10px;
-            margin-bottom: 30px; /* Space before steps */
-            overflow: hidden;
+        .steps-container {
+            margin-bottom: 25px;
         }
 
-        .progress-bar-fill {
-            width: 0%; /* Start empty */
-            height: 100%;
-            background-color: #FF7518; /* Halloween orange */
-            border-radius: 5px;
-            /* Animation applied via JS */
-            transition: width 1.8s ease-out; 
-        }
-        
-        /* Optional: Text changing with progress bar */
-        .progress-text {
-            font-size: 0.8rem;
-            color: #6b7280; /* Muted text */
-            margin-top: -25px; /* Position above bar */
-            margin-bottom: 30px;
-            height: 1em; /* Prevent layout shift */
-        }
-
-
-        /* --- Quick Start Guide --- */
-        
-        .steps-guide {
-            /* MODIFICATION: Ensure centering */
-            margin: 0 auto 30px; 
-            max-width: 340px; 
-            text-align: left; 
-        }
-
-        .step-item {
+        .step-card {
+            background: #FFFFFF;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .step-item:last-child {
-            margin-bottom: 0;
+            align-items: flex-start;
+            gap: 14px;
         }
 
         .step-number {
-            min-width: 30px;
-            height: 30px;
-            /* MODIFICATION: Light bg, dark text */
-            background-color: #e5e7eb; 
-            color: #111827;
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background-color: #FF7518;
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            margin-right: 15px;
-        }
-        
-        .step-text {
-            font-size: 1.05rem;
-             /* MODIFICATION: Dark text */
-            color: #374151;
+            font-size: 0.95rem;
         }
 
-        /* Style for "(important!)" */
-        .step-text b {
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1rem;
             font-weight: 700;
-            /* MODIFICATION: Orange on light theme */
-            color: #D97706; 
+            color: #111827;
+            margin-bottom: 4px;
         }
 
-        /* --- Final CTA Button --- */
-        
-        .btn-cta {
+        .step-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .cta-button {
             display: block;
             width: 100%;
+            background-color: #FF7518;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
             padding: 15px;
             border: none;
             border-radius: 10px;
-            background-color: #FF7518; /* Halloween orange */
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            text-decoration: none;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(255, 117, 24, 0.3); /* Softer shadow */
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            margin-top: 5px;
-            margin-bottom: 15px; /* Space before security text */
-            /* Removed pulse animation for cleaner look on light theme */
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 25px;
+            box-shadow: 0 4px 12px rgba(255, 117, 24, 0.3);
         }
 
-        .btn-cta:hover {
+        .cta-button:hover {
             background-color: #E66A15;
-        }
-        
-        .btn-cta:active {
-             transform: scale(0.98); /* Press effect */
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(255, 117, 24, 0.4);
         }
 
+        .cta-button:active {
+            transform: scale(0.98);
+        }
 
-        /* --- MODIFICATION: Security Text --- */
-        .security-text {
-            font-size: 0.8rem;
-            color: #6b7280; /* Muted grey */
+        .social-proof {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        #online-count {
+            font-weight: 600;
+            color: #FF7518;
+        }
+
+        .bonus-section {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .bonus-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #FF7518;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .bonus-text {
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 25px;
+            padding: 15px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .trust-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 5px; /* Space between icon and text */
-            margin-bottom: 15px; /* Space before trust badge */
+            gap: 4px;
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-weight: 500;
         }
 
-        /* --- Trust Badge --- */
-        
-        .trust-badge {
+        .trust-icon {
             font-size: 0.9rem;
-            color: #6b7280; /* Muted grey */
-            margin-bottom: 10px;
         }
 
-        .trust-badge .icon {
-            color: #F59E0B; /* Muted orange/yellow checkmark */
-            font-weight: 700;
+        @media (max-width: 380px) {
+            .headline {
+                font-size: 1.75rem;
+            }
+            
+            .container {
+                padding: 0 16px;
+            }
         }
-
-        /* --- Social Proof Line --- */
-        .social-proof-line {
-            font-size: 0.9rem;
-            color: #374151; /* Dark text */
-        }
-
     </style>
 </head>
 <body>
+    <div class="container">
+        <svg class="logo" viewBox="0 0 603 182" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M374.017 142.478C338.778 168.923 287.417 182.999 243.121 182.999C183.34 182.999 129.566 160.91 89.0667 124.171C85.8424 121.299 88.7134 117.324 92.5844 119.549C136.073 143.581 189.492 157.657 244.579 157.657C280.172 157.657 319.317 150.548 355.265 135.723C361.201 133.143 366.081 139.252 374.017 142.478Z" fill="#FF9900"/>
+            <path d="M388.953 125.629C384.728 120.297 361.555 123.169 350.739 124.525C347.514 124.879 347.16 122.007 350.031 119.843C368.243 107.614 398.476 111.235 401.701 115.21C404.926 119.185 401.347 149.546 384.374 163.268C381.857 165.432 379.34 164.43 380.342 161.558C383.567 152.772 393.178 130.961 388.953 125.629Z" fill="#FF9900"/>
+            <path d="M348.576 20.5733V8.69806C348.576 6.88806 349.933 5.88539 351.644 5.88539H407.283C409.348 5.88539 410.705 6.88806 410.705 8.69806V18.7633C410.705 20.5733 409.348 23.0913 406.572 27.4213L378.339 70.0487C390.663 69.6947 403.342 71.5047 414.512 77.5113C416.931 78.868 417.933 80.678 418.287 82.488V95.0307C418.287 96.8407 416.223 99.0047 414.158 97.9327C395.592 88.4387 370.876 87.4367 350.385 98.2887C348.576 99.3607 346.157 97.2887 346.157 95.3847V83.206C346.157 81.042 346.157 77.1573 348.93 73.182L381.519 24.5493H351.644C349.579 24.5493 348.576 23.5467 348.576 21.7367V20.5733Z" fill="black"/>
+            <path d="M124.332 101.037H107.359C105.649 101.037 104.292 99.7127 104.292 98.2567V8.69806C104.292 6.88806 105.649 5.88539 107.359 5.88539H123.33C125.041 5.88539 126.398 6.88806 126.398 8.69806V18.7633C126.398 20.5733 126.398 20.5733 127.046 20.5733C131.625 10.508 139.207 4.50139 149.669 4.50139C160.131 4.50139 166.421 10.508 171.354 20.5733C175.933 10.508 185.19 4.50139 195.298 4.50139C202.526 4.50139 210.462 7.37339 215.395 13.38C221.331 20.2193 220.329 30.2847 220.329 38.4473L220.329 97.9327C220.329 99.7427 218.972 101.037 217.261 101.037H200.288C198.578 101.037 197.221 99.7427 197.221 97.9327V47.9413C197.221 44.3207 197.575 35.5753 196.927 32.3487C195.986 26.6967 192.761 24.8867 187.828 24.8867C183.603 24.8867 179.024 27.7587 177.313 32.3487C175.603 36.9387 175.957 45.3233 175.957 47.9413V97.9327C175.957 99.7427 174.6 101.037 172.889 101.037H155.916C154.206 101.037 152.849 99.7427 152.849 97.9327V47.9413C152.849 38.0933 154.56 24.5327 143.744 24.5327C132.927 24.5327 133.281 37.7393 133.281 47.9413V97.9327C133.281 99.7427 131.924 101.037 130.214 101.037H124.332Z" fill="black"/>
+            <path d="M455.001 4.50139C479.363 4.50139 492.395 24.5327 492.395 50.8133C492.395 76.3853 478.007 96.0627 455.001 96.0627C431.349 96.0627 418.671 76.0313 418.671 50.1053C418.671 23.8247 431.703 4.50139 455.001 4.50139ZM455.355 21.3827C442.677 21.3827 441.675 38.8013 441.675 48.6493C441.675 58.4973 441.321 78.5287 454.647 78.5287C467.619 78.5287 468.621 59.8533 468.621 49.6513C468.621 43.6447 468.267 35.8367 465.796 30.1847C463.731 25.2407 460.152 21.3827 455.355 21.3827Z" fill="black"/>
+            <path d="M527.984 101.037H511.011C509.301 101.037 507.944 99.7427 507.944 97.9327V8.69806C507.944 6.88806 509.301 5.88539 511.011 5.88539H527.63C529.34 5.88539 530.697 6.88806 530.697 8.69806V20.2193C530.697 20.2193 530.697 20.2193 531.345 20.2193C536.278 9.70006 543.152 4.50139 553.614 4.50139C561.196 4.50139 568.778 7.37339 573.357 15.19C577.582 22.6487 577.582 34.5233 577.582 43.2687V98.2887C577.582 100.099 576.225 101.037 574.515 101.037H557.542C555.832 101.037 554.475 100.099 554.475 98.2887V48.6493C554.475 38.0933 555.477 24.5327 544.66 24.5327C540.435 24.5327 536.632 27.4047 534.567 31.6407C531.991 37.2927 531.699 42.9447 531.699 48.6493V97.9327C531.699 99.7427 530.342 101.037 528.632 101.037H527.984Z" fill="black"/>
+            <path d="M299.389 56.3333C299.389 63.0873 299.743 68.7393 296.164 74.7453C293.293 79.6893 288.714 82.5613 283.781 82.5613C277.137 82.5613 273.204 77.6173 273.204 70.1587C273.204 55.3313 286.59 52.4593 299.389 52.4593V56.3333ZM316.362 100.681C315.006 101.683 313.295 101.683 311.939 100.681C306.652 95.7373 305.65 93.5733 302.779 89.5987C292.671 99.3147 285.443 102.187 272.411 102.187C256.793 102.187 244.469 92.1213 244.469 72.4447C244.469 56.6873 253.726 46.2673 266.404 41.3233C277.575 37.3487 292.671 36.7007 299.389 35.6987V33.5347C299.389 29.5607 299.743 24.9707 297.324 21.7433C295.26 18.8713 291.327 17.5153 287.746 17.5153C281.102 17.5153 275.461 20.7413 273.912 27.4953C273.558 29.3053 272.201 31.1153 270.491 31.1153L254.019 29.6593C252.309 29.3053 250.598 27.8493 251.306 24.9707C255.531 6.29539 272.504 0.288727 287.954 0.288727C295.89 0.288727 306.706 2.45273 313.704 8.45939C322.607 15.9173 321.959 26.3373 321.959 37.1893V62.4073C321.959 71.1527 325.538 74.7453 328.763 79.3353C330.119 81.1453 330.473 83.3093 328.763 84.6653C324.892 87.8927 318.248 93.5733 314.377 96.8007L316.362 100.681Z" fill="black"/>
+            <path d="M54.5133 56.3333C54.5133 63.0873 54.8673 68.7393 51.2887 74.7453C48.4177 79.6893 43.8387 82.5613 38.9057 82.5613C32.2617 82.5613 28.3287 77.6173 28.3287 70.1587C28.3287 55.3313 41.7147 52.4593 54.5133 52.4593V56.3333ZM71.4867 100.681C70.1307 101.683 68.4197 101.683 67.0637 100.681C61.7767 95.7373 60.7747 93.5733 57.9037 89.5987C47.7957 99.3147 40.5677 102.187 27.5357 102.187C11.9177 102.187 -0.405945 92.1213 -0.405945 72.4447C-0.405945 56.6873 8.85072 46.2673 21.5287 41.3233C32.6997 37.3487 47.7957 36.7007 54.5133 35.6987V33.5347C54.5133 29.5607 54.8673 24.9707 52.4487 21.7433C50.3847 18.8713 46.4517 17.5153 42.8707 17.5153C36.2267 17.5153 30.5857 20.7413 29.0367 27.4953C28.6827 29.3053 27.3257 31.1153 25.6157 31.1153L9.14372 29.6593C7.43372 29.3053 5.72272 27.8493 6.43072 24.9707C10.6557 6.29539 27.6287 0.288727 43.0787 0.288727C51.0147 0.288727 61.8307 2.45273 68.8287 8.45939C77.7317 15.9173 77.0837 26.3373 77.0837 37.1893V62.4073C77.0837 71.1527 80.6627 74.7453 83.8877 79.3353C85.2437 81.1453 85.5977 83.3093 83.8877 84.6653C80.0167 87.8927 73.3727 93.5733 69.5017 96.8007L71.4867 100.681Z" fill="black"/>
+        </svg>
 
-    <div class="particles">
-        <div class="pumpkin pumpkin-1">🎃</div>
-        <div class="pumpkin pumpkin-2">🎃</div>
-        <div class="pumpkin pumpkin-3">🎃</div>
-        <div class="pumpkin pumpkin-4">🎃</div>
+        <h1 class="headline">Get Your $1370 Amazon Halloween Treat!</h1>
+
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Sign Up Quick</div>
+                    <div class="step-description">Enter basic details to get started.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Complete Deals</div>
+                    <div class="step-description">Finish required deals mentioned <strong>(important!)</strong>.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Get Credit!</div>
+                    <div class="step-description">Receive your $1370 Amazon credit.</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=167-directed-by-test1028-leadgen-amazon35162-bc970-Garza_System_3gaxue" class="cta-button">
+            Claim Halloween Treat!
+        </a>
+
+        <div class="social-proof">
+            <span id="online-count">423</span>+ people claimed this treat today!
+        </div>
+
+        <div class="bonus-section">
+            <div class="bonus-label">BONUS OFFER</div>
+            <div class="bonus-text">Complete 5 deals within 24 hours to unlock an extra $250 bonus!</div>
+        </div>
+
+        <div class="trust-badges">
+            <div class="trust-item">
+                <span class="trust-icon">🔒</span>
+                <span>100% Secure</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">💰</span>
+                <span>$8M+ Paid Out</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">👥</span>
+                <span>50k+ Users</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">⭐</span>
+                <span>4.7 Rating</span>
+            </div>
+        </div>
     </div>
 
-    <main>
-
-        <img src="amazonlogo_black_on_clear.png" 
-             alt="Amazon Logo" 
-             width="90" 
-             class="logo-img">
-        
-        <h1>Follow the steps for your Halloween Treat!</h1>
-        
-        <div class="progress-text" id="progress-text">Checking eligibility...</div>
-        <div class="progress-bar-container">
-            <div class="progress-bar-fill" id="progress-bar"></div>
-        </div>
-
-        <div class="steps-guide">
-          <div class="step-item">
-            <div class="step-number">1</div>
-            <span class="step-text">Answer the questions below</span>
-          </div>
-          <div class="step-item">
-            <div class="step-number">2</div>
-            <span class="step-text">Enter basic details</span>
-          </div>
-          <div class="step-item">
-            <div class="step-number">3</div>
-            <span class="step-text">Complete 3-5 deals <b>(important!)</b></span>
-          </div>
-          <div class="step-item">
-            <div class="step-number">4</div>
-            <span class="step-text">Get your credit and repeat anytime!</span>
-          </div>
-        </div>
-
-        <a href="YOUR_AFFILIATE_LINK_HERE" 
-           class="btn-cta">
-            Claim Now!
-        </a>
-        
-        <div class="security-text">
-            <span>🔒</span> <span>Secure & Verified Offer</span>
-        </div>
-
-        <div class="trust-badge">
-            <span class="icon">✓</span> 
-            <span>Verified By TikTok</span>
-        </div>
-
-        <div class="social-proof-line">
-            <span id="online-count">371</span> people completing offers right now.
-        </div>
-
-    </main> 
-    
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        function updateOnlineCount() {
+            const countElement = document.getElementById('online-count');
+            const minCount = 380;
+            const maxCount = 480;
+            const randomCount = Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
+            countElement.textContent = randomCount;
+        }
 
-            // --- Progress Bar Animation ---
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
-            
-            // Start animation shortly after page load
-            setTimeout(() => {
-                progressBar.style.width = '100%';
-                // Change text after a short delay
-                setTimeout(() => {
-                     progressText.textContent = 'Success! You qualify.';
-                }, 800); // Adjust timing as needed
-            }, 100); // Small delay to ensure rendering
+        setInterval(updateOnlineCount, 4000);
 
-            // --- Dynamic Social Proof Logic ---
-            const onlineCountEl = document.getElementById('online-count');
-
-            setInterval(() => {
-                const min = 350;
-                const max = 450;
-                const randomCount = Math.floor(Math.random() * (max - min + 1)) + min;
-                onlineCountEl.textContent = randomCount;
-            }, 2500); 
-
-        });
+        updateOnlineCount();
     </script>
-
 </body>
 </html>

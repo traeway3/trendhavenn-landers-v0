@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Your $750 Amazon Halloween Treat!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #FFFFFF;
+            color: #111827;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /*  Updated logo CSS for image tag with larger width */
+        .logo {
+            display: block;
+            margin: 4vh auto 20px;
+            width: 120px;
+            height: auto;
+        }
+
+        .headline {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .steps-container {
+            margin-bottom: 25px;
+        }
+
+        .step-card {
+            background: #FFFFFF;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background-color: #FF7518;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .step-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        /*  Added continuous pulse-glow animation to CTA button */
+        .cta-button {
+            display: block;
+            width: 100%;
+            background-color: #FF7518;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 25px;
+            box-shadow: 0 4px 12px rgba(255, 117, 24, 0.3);
+            animation: pulse-glow-light 1.8s infinite ease-in-out;
+        }
+
+        .cta-button:hover {
+            background-color: #E66A15;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(255, 117, 24, 0.4);
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        /*  Added keyframes for CTA button pulse-glow animation */
+        @keyframes pulse-glow-light {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(255, 117, 24, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 6px 18px rgba(255, 117, 24, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .social-proof {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        #online-count {
+            font-weight: 600;
+            color: #FF7518;
+        }
+
+        .bonus-section {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .bonus-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #FF7518;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .bonus-text {
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 25px;
+            padding: 15px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .trust-icon {
+            font-size: 0.9rem;
+        }
+
+        /*  Added particles container and pumpkin animation styles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .pumpkin {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                bottom: -10%;
+                opacity: 0.15;
+            }
+            50% {
+                opacity: 0.25;
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+            }
+        }
+
+        .pumpkin-1 {
+            left: 10%;
+            animation-duration: 25s;
+            animation-delay: -5s;
+            transform: rotate(-15deg);
+        }
+
+        .pumpkin-2 {
+            left: 30%;
+            animation-duration: 30s;
+            animation-delay: -10s;
+            transform: rotate(10deg);
+        }
+
+        .pumpkin-3 {
+            left: 50%;
+            animation-duration: 28s;
+            animation-delay: -2s;
+            transform: rotate(-8deg);
+        }
+
+        .pumpkin-4 {
+            left: 85%;
+            animation-duration: 32s;
+            animation-delay: -18s;
+            transform: rotate(12deg);
+        }
+
+        /*  Added CSS for two new pumpkin elements */
+        .pumpkin-5 {
+            left: 5%;
+            animation-duration: 26s;
+            animation-delay: -15s;
+            transform: rotate(8deg);
+        }
+
+        .pumpkin-6 {
+            left: 75%;
+            animation-duration: 29s;
+            animation-delay: -10s;
+            transform: rotate(-12deg);
+        }
+
+        @media (max-width: 380px) {
+            .headline {
+                font-size: 1.75rem;
+            }
+            
+            .container {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--  Added particles container with 6 floating pumpkins -->
+    <div class="particles">
+        <div class="pumpkin pumpkin-1">🎃</div>
+        <div class="pumpkin pumpkin-2">🎃</div>
+        <div class="pumpkin pumpkin-3">🎃</div>
+        <div class="pumpkin pumpkin-4">🎃</div>
+        <div class="pumpkin pumpkin-5">🎃</div>
+        <div class="pumpkin pumpkin-6">🎃</div>
+    </div>
+
+    <div class="container">
+        <!--  Replaced SVG logo with image tag -->
+        <img src="amazonlogofull.png" alt="Amazon Logo" class="logo">
+
+        <h1 class="headline">Get Your $750 Amazon Halloween Treat!</h1>
+
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Register for Access</div>
+                    <div class="step-description">Enter your details to join the Halloween Treat programme.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Complete Partner Activities</div>
+                    <div class="step-description">Engage with recommended partner offers – each step progresses your reward!</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Receive Your Amazon Credit</div>
+                    <div class="step-description">Reach the goal & get the $750 credit sent to your Amazon balance!</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://buenohoodies.com/aff_c?offer_id=1761274035162&s1=t1&s2=168-rich-girl-test1042-leadgen-amazon35162-bc973" class="cta-button">
+            Claim Halloween Treat!
+        </a>
+
+        <div class="social-proof">
+            <span id="online-count">423</span>+ people claimed this treat today!
+        </div>
+
+        <div class="bonus-section">
+            <div class="bonus-label">BONUS OFFER</div>
+            <div class="bonus-text">Complete 5 deals within 24 hours to unlock an extra $250 bonus!</div>
+        </div>
+
+        <div class="trust-badges">
+            <div class="trust-item">
+                <span class="trust-icon">🔒</span>
+                <span>100% Secure</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">💰</span>
+                <span>$8M+ Paid Out</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">👥</span>
+                <span>50k+ Users</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">⭐</span>
+                <span>4.7 Rating</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateOnlineCount() {
+            const countElement = document.getElementById('online-count');
+            const minCount = 380;
+            const maxCount = 480;
+            const randomCount = Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
+            countElement.textContent = randomCount;
+        }
+
+        setInterval(updateOnlineCount, 4000);
+
+        updateOnlineCount();
+    </script>
+</body>
+</html>

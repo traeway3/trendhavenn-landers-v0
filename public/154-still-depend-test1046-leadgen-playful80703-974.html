@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Claim Your Bonus</title>
+    <title>Playful Rewards | Get Your Bag</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            /* === COLOR SCHEME UPDATED FOR SWAGBUCKS === */
-            --brand-blue: #005A8D;
-            --cta-blue: #3686E5;
-            --cta-hover: #2a6cb5;
+            /* === COLOR SCHEME UPDATED FOR PLAYFUL REWARDS === */
+            --brand-purple: #7F56D9;
+            --brand-purple-dark: #53389E;
+            --cta-purple-hover: #6941C6;
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --light-text: #555;
@@ -58,7 +58,7 @@
         }
 
         .logo {
-            max-width: 120px; /* Adjusted for Swagbucks logo */
+            max-width: 120px; /* Sized for new logo */
             margin-bottom: 10px;
         }
 
@@ -86,7 +86,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-blue), var(--cta-blue)); /* CHANGED */
+            background: linear-gradient(90deg, var(--brand-purple-dark), var(--brand-purple)); /* CHANGED */
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -120,7 +120,7 @@
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--cta-blue); /* CHANGED */
+            background-color: var(--brand-purple); /* CHANGED */
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -148,7 +148,7 @@
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--cta-blue); /* CHANGED */
+            background-color: var(--brand-purple); /* CHANGED */
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -161,14 +161,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-hover); /* CHANGED */
+            background-color: var(--cta-purple-hover); /* CHANGED */
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); } /* CHANGED */
-            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); } /* CHANGED */
-            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); } /* CHANGED */
+            0% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0.7); } /* CHANGED */
+            70% { box-shadow: 0 0 0 10px rgba(127, 86, 217, 0); } /* CHANGED */
+            100% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0); } /* CHANGED */
         }
 
         .social-proof {
@@ -187,7 +187,7 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--brand-blue); /* CHANGED */
+            color: var(--brand-purple-dark); /* CHANGED */
         }
         
         .proof-label {
@@ -232,7 +232,7 @@
 
     <div class="container">
         <div class="header">
-            <img src="swag.png" alt="Swagbucks Logo" class="logo">
+            <img src="playful3.png" alt="Playful Rewards Logo" class="logo">
             <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
             <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
             
@@ -244,13 +244,13 @@
 
         <div class="main-content">
              <ol class="quick-start-guide">
-                <li>Download & Sign Up: Create your free account.</li>
-                <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
-                <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
+                <li>Discover & play from hundreds of new games.</li>
+                <li>Earn points for the time you spend playing.</li>
+                <li>Redeem your points for PayPal & gift cards.</li>
             </ol>
             
             <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+                💡 <b>Pro-Tip:</b> Start your first game today to unlock a 5,000 point welcome bonus!
             </div>
             
             <a href="https://buenohoodies.com/aff_c?offer_id=1761185380703&s1=t1&s2=154-still-depend-test1046-leadgen-playful80703-974" class="cta-button">GET MY BAG</a>
@@ -260,16 +260,16 @@
 
         <div class="social-proof">
             <div class="proof-item">
-                <span class="proof-metric">50K+</span>
-                <span class="proof-label">Daily Users</span>
+                <span class="proof-metric">500+</span>
+                <span class="proof-label">New Games</span>
             </div>
             <div class="proof-item">
-                <span class="proof-metric">$10M+</span>
+                <span class="proof-metric">$1M+</span>
                 <span class="proof-label">Paid Out</span>
             </div>
             <div class="proof-item">
-                <span class="proof-metric">5 Min</span>
-                <span class="proof-label">Signup</span>
+                <span class="proof-metric">10K+</span>
+                <span class="proof-label">Daily Players</span>
             </div>
         </div>
     </div>
@@ -302,7 +302,7 @@
                 }
             }, 1500);
 
-            // --- LIVE ACTIVITY ALERTS UPDATED FOR SWAGBUCKS ---
+            // --- Live Activity Alerts (Unchanged) ---
             const activityAlert = document.getElementById('activityAlert');
             const alerts = [
                 "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",

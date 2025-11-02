@@ -58,7 +58,8 @@
         }
 
         .logo {
-            max-width: 120px; /* Sized for new logo */
+            /* === LOGO RESIZED === */
+            max-width: 100px; 
             margin-bottom: 10px;
         }
 
@@ -86,7 +87,7 @@
         .progress-bar {
             width: 0%;
             height: 12px;
-            background: linear-gradient(90deg, var(--brand-purple-dark), var(--brand-purple)); /* CHANGED */
+            background: linear-gradient(90deg, var(--brand-purple-dark), var(--brand-purple));
             border-radius: 20px;
             transition: width 1.5s ease-in-out;
         }
@@ -120,7 +121,7 @@
 
         .quick-start-guide li::before {
             content: counter(step-counter);
-            background-color: var(--brand-purple); /* CHANGED */
+            background-color: var(--brand-purple);
             color: var(--white);
             font-weight: 700;
             border-radius: 50%;
@@ -148,7 +149,7 @@
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: var(--brand-purple); /* CHANGED */
+            background-color: var(--brand-purple);
             color: var(--white);
             font-size: 1.2rem;
             font-weight: 700;
@@ -161,14 +162,14 @@
         }
         
         .cta-button:hover {
-            background-color: var(--cta-purple-hover); /* CHANGED */
+            background-color: var(--cta-purple-hover);
             transform: scale(1.02);
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0.7); } /* CHANGED */
-            70% { box-shadow: 0 0 0 10px rgba(127, 86, 217, 0); } /* CHANGED */
-            100% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0); } /* CHANGED */
+            0% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(127, 86, 217, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0); }
         }
 
         .social-proof {
@@ -187,7 +188,7 @@
         .proof-metric {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--brand-purple-dark); /* CHANGED */
+            color: var(--brand-purple-dark);
         }
         
         .proof-label {

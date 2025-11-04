@@ -41,6 +41,8 @@
             padding-bottom: 85px;
             padding-left: env(safe-area-inset-left);
             padding-right: env(safe-area-inset-right);
+            /* FIX 2: Prevent horizontal scroll */
+            max-width: 100vw;
         }
 
         .intro-rust-font {
@@ -179,6 +181,10 @@
             margin-bottom: 1rem;
             font-weight: 700;
             letter-spacing: -0.005em;
+            /* FIX 3: Added flex properties to make text wrap correctly */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         @media (min-width: 640px) {
@@ -191,6 +197,12 @@
             font-style: italic;
             color: #fde047;
             font-weight: 800;
+        }
+        
+        /* FIX 3: Added new selector for step text formatting */
+        .step > span {
+            flex: 1;
+            text-align: left;
         }
 
         .question {
@@ -383,7 +395,7 @@
     <div class="floating-bg floating-3"></div>
     <div class="floating-bg floating-4"></div>
 
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAYAAAAmQ2g9AAAgAElEQVR4nOy9d5wkVXnm+b/bVd1jT8/MaHevNzsLKIqgIu4VqCAkBEIjQAkhhBB6J3RI6B16h0AJIYTQIYBAERQRXFDEve/uzszsvec6qrrz/XHcmZl5Vd17q3tmZvZ+v/w8lZl5VV1nZl7fe8+jYoxRjGIMYxQzmI0M5lAMvJnBHAwGYwRjGAMxhiGMIQxhCEMSgkEQgCAIyEAIBiIYhGAQhiAYRGEIRYjCJAqSCB6sJ4pSKUomGJ6iGJGiGJGiJApRKUolKJZiSZYkSZZkSZZiWZJlWZKlWZKlWJIlWZZkSZYiWZIlWZLlf/iVWJalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWZalWZZlWFileBagRemoved...gAAAABJRU5ErkJggg==" alt="Logo" class="logo">
+    <img src="playful3.png" alt="Logo" class="logo">
 
     <h1 class="title intro-rust-medium">Stop Depending on Others. <br>Get Your Own Bag.</h1>
 
@@ -396,7 +408,7 @@
     <div class="step-number">2</div>
     <span>Play your first few games to earn points.</span>
     </div>
-    <div class="step intro-rust-bold">
+    <div classs="step intro-rust-bold">
     <div class="step-number">3</div>
     <span>Redeem your points for cash &amp; gift cards!</span>
     </div>
@@ -433,7 +445,7 @@
             </div>
             <div class="stat-item">
                 <div id="peopleOnline" class="stat-value stat-blue intro-rust-bold">4,588</div>
-                <div class="stat-label intro-rust-medium">People Online</div>
+                <div class_label="stat-label intro-rust-medium">People Online</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value stat-yellow intro-rust-bold">86%</div>

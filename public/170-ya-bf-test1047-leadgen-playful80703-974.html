@@ -1,335 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#581c87">
     <title>Playful Rewards | Get Your Bag</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
         :root {
-            /* === COLOR SCHEME UPDATED FOR PLAYFUL REWARDS === */
             --brand-purple: #7F56D9;
             --brand-purple-dark: #53389E;
             --cta-purple-hover: #6941C6;
-            --light-gray: #f0f2f5;
-            --dark-text: #333;
-            --light-text: #555;
-            --white: #ffffff;
+            --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--light-gray);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: manipulation;
+            font-family: var(--font-family);
             min-height: 100vh;
-            padding: 15px;
-        }
-
-        .container {
-            background-color: var(--white);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            overflow: hidden;
+            background: linear-gradient(135deg, #111827 0%, #581c87 50%, #111827 100%);
+            color: white;
             display: flex;
             flex-direction: column;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .header {
-            padding: 15px 15px 10px;
-        }
-
-        .logo {
-            /* === LOGO RESIZED === */
-            max-width: 100px; 
-            margin-bottom: 10px;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: 70px; /* Space for social proof bar */
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
         }
 
-        .headline {
-            font-size: 1.4rem;
+        .intro-rust-font {
+            font-family: var(--font-family);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .intro-rust-medium {
+            font-family: var(--font-family);
             font-weight: 700;
-            color: var(--dark-text);
-            margin-bottom: 5px;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .intro-rust-bold {
+            font-family: var(--font-family);
+            font-weight: 800;
+            letter-spacing: -0.015em;
             line-height: 1.3;
         }
 
-        .sub-headline {
-            font-size: 0.9rem;
-            color: var(--light-text);
-            margin-bottom: 15px;
+        .background-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
         }
 
-        .progress-bar-container {
-            width: 90%;
-            margin: 0 auto 8px;
-            background-color: #e0e0e0;
-            border-radius: 20px;
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 25s infinite linear;
+            filter: blur(1.5px);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+        }
+
+        .logo {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 1rem;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .headline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding: 0 1rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .steps {
+            text-align: left;
+            margin: 0 auto 2rem;
+            max-width: 340px;
+            padding: 0 1rem;
         }
         
-        .progress-bar {
-            width: 0%;
-            height: 12px;
-            background: linear-gradient(90deg, var(--brand-purple-dark), var(--brand-purple));
-            border-radius: 20px;
-            transition: width 1.5s ease-in-out;
-        }
-
-        .progress-text {
-            font-size: 0.8rem;
-            color: var(--light-text);
-            margin-bottom: 15px;
-            min-height: 1.2em;
-        }
-
-        .main-content {
-            padding: 0 20px 20px;
-        }
-
-        .quick-start-guide {
-            list-style-type: none;
-            text-align: left;
-            margin-bottom: 20px;
-            padding-left: 5px;
-        }
-
-        .quick-start-guide li {
+        .step {
             display: flex;
             align-items: flex-start;
-            font-size: 0.9rem;
-            color: var(--dark-text);
-            margin-bottom: 10px;
-            counter-increment: step-counter;
-        }
-
-        .quick-start-guide li::before {
-            content: counter(step-counter);
-            background-color: var(--brand-purple);
-            color: var(--white);
+            font-size: 1rem;
+            color: #d1d5db;
+            line-height: 1.5;
+            margin-bottom: 1rem;
             font-weight: 700;
+            letter-spacing: -0.005em;
+        }
+        
+        .step-number {
+            min-width: 24px;
+            height: 24px;
+            background-color: rgba(255,255,255,0.1);
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            min-width: 20px;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
             margin-right: 12px;
-            font-size: 0.8rem;
-            line-height: 1;
-        }
-        
-        .pro-tip {
-            background-color: var(--light-gray);
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 0.8rem;
-            text-align: left;
-            margin-bottom: 20px;
+            margin-top: 2px;
         }
 
-        .cta-button {
-            display: block;
+        .button-container {
             width: 100%;
-            padding: 15px;
-            background-color: var(--brand-purple);
-            color: var(--white);
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 12px;
+            max-width: 24rem;
+            padding: 0 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: all 0.2s ease;
+            font-size: 1.125rem;
+            min-height: 3.5rem;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-purple-dark) 100%);
+            color: white;
             animation: pulse 2s infinite;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        
-        .cta-button:hover {
-            background-color: var(--cta-purple-hover);
-            transform: scale(1.02);
+
+        .btn-start:active {
+            background: linear-gradient(135deg, var(--brand-purple-dark) 0%, var(--brand-purple-dark) 100%);
+            transform: scale(0.95);
         }
-        
+
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(127, 86, 217, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(127, 86, 217, 0); }
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 15px 30px rgba(127, 86, 217, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
         }
 
-        .social-proof {
+        .verification {
             display: flex;
-            justify-content: space-around;
-            padding: 15px;
-            background-color: var(--light-gray);
-        }
-
-        .proof-item {
-            display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
 
-        .proof-metric {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--brand-purple-dark);
-        }
-        
-        .proof-label {
-            font-size: 0.7rem;
-            color: var(--light-text);
-            font-weight: 600;
+        .verification-icon {
+            width: 1rem;
+            height: 1rem;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
         }
 
-        .trust-badge {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: var(--light-text);
+        .verification-text {
+            font-size: 0.875rem;
+            color: #d1d5db;
         }
         
-        .activity-alert {
+        .checkmark {
+            width: 0.625rem;
+            height: 0.625rem;
+            fill: white;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, rgba(107, 33, 168, 0.5) 0%, rgba(88, 28, 135, 0.5) 100%);
+            backdrop-filter: blur(8px);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            width: 100%;
+            max-width: 24rem;
+            margin: 0 1rem 1rem 1rem;
+            border: 1px solid rgba(147, 51, 234, 0.3);
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            margin: 0 auto;
-            max-width: 360px;
-            background-color: rgba(0,0,0,0.75);
-            color: var(--white);
-            padding: 12px 18px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            pointer-events: none;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
         }
-        
-        .activity-alert.show {
-            opacity: 1;
-            transform: translateY(0);
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
         }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .stat-green { color: #4ade80; }
+        .stat-blue { color: #60a5fa; }
+        .stat-yellow { color: #facc15; }
+
     </style>
 </head>
 <body>
+    <div class="background-wrap" id="background-wrap"></div>
 
-    <div class="container">
-        <div class="header">
-            <img src="playful3.png" alt="Playful Rewards Logo" class="logo">
-            <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
-            <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
-            
-            <div class="progress-bar-container">
-                <div id="progressBar" class="progress-bar"></div>
-            </div>
-            <p id="progressText" class="progress-text">Verifying device...</p>
+    <img src="playful3.png" alt="Logo" class="logo">
+
+    <h1 class="headline intro-rust-medium">Stop Depending on Others. <br>Get Your Own Bag.</h1>
+
+    <div class="steps">
+        <div class="step intro-rust-bold">
+            <div class="step-number">1</div>
+            <span>Download the app &amp; create your free account.</span>
         </div>
-
-        <div class="main-content">
-             <ol class="quick-start-guide">
-                <li>Discover & play from hundreds of new games.</li>
-                <li>Earn points for the time you spend playing.</li>
-                <li>Redeem your points for PayPal & gift cards.</li>
-            </ol>
-            
-            <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Start your first game today to unlock a 5,000 point welcome bonus!
-            </div>
-            
-            <a href="https://buenohoodies.com/aff_c?offer_id=1761185380703&s1=t1&s2=170-ya-bf-test1047-leadgen-playful80703-974" class="cta-button">GET MY BAG</a>
-            
-            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+        <div class="step intro-rust-bold">
+            <div class="step-number">2</div>
+            <span>Play your first few games to earn points.</span>
         </div>
+        <div class="step intro-rust-bold">
+            <div class="step-number">3</div>
+            <span>Redeem your points for cash &amp; gift cards!</span>
+        </div>
+    </div>
 
-        <div class="social-proof">
-            <div class="proof-item">
-                <span class="proof-metric">500+</span>
-                <span class="proof-label">New Games</span>
+    <div class="button-container">
+        <a href="https://buenohoodies.com/aff_c?offer_id=1761185380703&s1=t1&s2=170-ya-bf-test1047-leadgen-playful80703-974" class="btn btn-start intro-rust-font">GET MY BAG</a>
+    </div>
+
+    <div class="verification">
+        <div class="verification-icon">
+            <svg class="checkmark" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+        </div>
+        <p class="verification-text">Verified By TikTok</p>
+    </div>
+
+    <div class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div id="moneyPaidOut" class="stat-value stat-green intro-rust-bold">$1,000,000+</div>
+                <div class="stat-label intro-rust-medium">Total Paid Out</div>
             </div>
-            <div class="proof-item">
-                <span class="proof-metric">$1M+</span>
-                <span class="proof-label">Paid Out</span>
+            <div class="stat-item">
+                <div id="peopleOnline" class="stat-value stat-blue intro-rust-bold">4,588</div>
+                <div class="stat-label intro-rust-medium">People Online</div>
             </div>
-            <div class="proof-item">
-                <span class="proof-metric">10K+</span>
-                <span class="proof-label">Daily Players</span>
+            <div class="stat-item">
+                <div class="stat-value stat-yellow intro-rust-bold">86%</div>
+                <div class="stat-label intro-rust-medium">Users Completing</div>
             </div>
         </div>
     </div>
-    
-    <div id="activityAlert" class="activity-alert"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Progress Bar Animation ---
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dynamic Background
+            const bgWrap = document.getElementById('background-wrap');
+            const particleCount = 30;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 15 + 15}s`;
+                particle.style.animationDelay = `${Math.random() * -25}s`;
+                bgWrap.appendChild(particle);
+            }
             
-            const progressSteps = [
-                { text: 'Checking for offers...', width: '50%' },
-                { text: 'Success! Your spot is reserved!', width: '100%' }
-            ];
+            // State variables
+            let peopleOnline = 4582;
+            let moneyPaidOut = 1000000;
             
-            setTimeout(() => {
-                progressBar.style.width = '25%';
-            }, 100);
+            const peopleOnlineEl = document.getElementById('peopleOnline');
+            const moneyPaidOutEl = document.getElementById('moneyPaidOut');
 
-            let currentStep = 0;
-            const progressInterval = setInterval(() => {
-                if (currentStep < progressSteps.length) {
-                    progressText.innerText = progressSteps[currentStep].text;
-                    progressBar.style.width = progressSteps[currentStep].width;
-                    currentStep++;
-                } else {
-                    clearInterval(progressInterval);
-                }
-            }, 1500);
+            // Update people online counter
+            function updatePeopleOnline() {
+                peopleOnline += Math.floor(Math.random() * 11) - 5; // Fluctuate more
+                if (peopleOnline < 4000) peopleOnline = 4000;
+                peopleOnlineEl.textContent = peopleOnline.toLocaleString();
+            }
 
-            // --- Live Activity Alerts (Unchanged) ---
-            const activityAlert = document.getElementById('activityAlert');
-            const alerts = [
-                "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
-                "Mike from Florida just cashed out $50 via PayPal.",
-                "Sarah from California just earned $10 from a survey.",
-                "David from New York just got a $50 Walmart Gift Card.",
-                "Emily from Ohio just completed a gaming offer for $30."
-            ];
+            // Update money paid out counter
+            function updateMoneyPaidOut() {
+                moneyPaidOut += Math.floor(Math.random() * 25) + 1;
+                moneyPaidOutEl.textContent = '$' + moneyPaidOut.toLocaleString() + '+';
+            }
 
-            let alertIndex = 0;
-            
-            const showAlert = () => {
-                activityAlert.innerText = alerts[alertIndex];
-                activityAlert.classList.add('show');
+            // Initialize the app
+            function init() {
+                // Update people online every 3 seconds
+                setInterval(updatePeopleOnline, 2800);
                 
-                setTimeout(() => {
-                    activityAlert.classList.remove('show');
-                }, 4000);
+                // Update money paid out every 2 seconds
+                setInterval(updateMoneyPaidOut, 2100);
+            }
 
-                alertIndex = (alertIndex + 1) % alerts.length;
-            };
-            
-            setTimeout(() => {
-                showAlert();
-                setInterval(showAlert, 8500);
-            }, 3000);
+            init();
         });
     </script>
 </body>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesco Cost of Living Support Programme</title>
+    
+    <style>
+        /* 1. Body and Container Styling */
+        * {
+            box-sizing: border-box;
+        }
+        body, h1, h2, h3, p {
+            margin: 0;
+            padding: 0;
+        }
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+        
+        body {
+            background-color: #f9fafb; /* [cite: 14] */
+            font-family: Roboto, sans-serif; /* [cite: 17] */
+            color: #111827; /* [cite: 18] */
+        }
+        .container {
+            max-width: 420px; /* [cite: 19] */
+            margin: 0 auto; /* [cite: 19] */
+            padding: 20px; /* [cite: 19] */
+            text-align: center;
+        }
+
+        /* 2. Logo Styling */
+        .logo {
+            display: block; /* [cite: 24] */
+            width: 120px; /* [cite: 24] */
+            height: auto; /* [cite: 24] */
+            margin: 0 auto 20px; /* [cite: 24] */
+        }
+
+        /* 3. Headlines Styling */
+        h1 {
+            font-size: 1.8rem; /* [cite: 29] */
+            font-weight: 700; /* [cite: 30] */
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.2rem; /* [cite: 30] */
+            font-weight: 400; /* [cite: 30] */
+            margin-bottom: 10px;
+        }
+        .scarcity {
+            font-size: 0.9rem; /* [cite: 30] */
+            color: #6b7280; /* [cite: 30] */
+            margin-bottom: 20px; /* [cite: 31] */
+        }
+
+        /* 4. Countdown Timer Styling */
+        .timer-box {
+            border: 2px solid #e5e7eb; /* [cite: 34] */
+            border-radius: 8px; /* [cite: 34] */
+            padding: 8px; /* [cite: 34] */
+            display: inline-block; /* [cite: 34] */
+            margin-bottom: 15px; /* [cite: 34] */
+            font-size: 0.9rem; /* [cite: 34] */
+            font-weight: 700; /* [cite: 34] */
+        }
+        #timer {
+            color: #D9534F; /* [cite: 35] */
+        }
+
+        /* 5. CTA Button Styling */
+        .cta-button {
+            display: block; /* [cite: 44] */
+            width: 100%; /* [cite: 44] */
+            background-color: #00539F; /* [cite: 45] (Tesco Blue) */
+            color: white; /* [cite: 45] */
+            padding: 15px; /* [cite: 45] */
+            text-decoration: none; /* [cite: 45] */
+            text-align: center; /* [cite: 45] */
+            font-size: 1.2rem; /* [cite: 45] */
+            font-weight: 700; /* [cite: 46] */
+            border-radius: 8px; /* [cite: 46] */
+            margin-bottom: 10px; /* [cite: 46] */
+            transition: background-color 0.3s; /* [cite: 46] */
+        }
+        .cta-button:hover {
+            background-color: #00427F; /* [cite: 47] */
+        }
+
+        /* 6. Trust Badges Styling */
+        .trust-badges {
+            display: flex; /* [cite: 51] */
+            justify-content: center; /* [cite: 51] */
+            gap: 20px; /* [cite: 51] */
+            font-size: 0.8rem; /* [cite: 51] */
+            color: #6b7280; /* [cite: 51] */
+            margin-bottom: 25px; /* [cite: 51] */
+        }
+
+        /* 7. "How It Works" Section Styling */
+        h3 {
+            font-size: 1.3rem; /* [cite: 54] */
+            font-weight: 700; /* [cite: 54] */
+            margin-bottom: 15px; /* [cite: 54] */
+        }
+        .progress-container {
+            width: 100%; /* [cite: 58] */
+            background-color: #e5e7eb; /* [cite: 59] */
+            border-radius: 5px; /* [cite: 59] */
+            height: 10px; /* [cite: 59] */
+            margin-bottom: 20px; /* [cite: 60] */
+            overflow: hidden; /* [cite: 60] */
+        }
+        .progress-bar-fill {
+            width: 33%; /* [cite: 61] (Starting point) */
+            height: 100%; /* [cite: 61] */
+            background-color: #00539F; /* [cite: 62] */
+            border-radius: 5px; /* [cite: 62] */
+            transition: width 1.5s ease-out; /* [cite: 62] */
+        }
+        .step-item {
+            display: flex; /* [cite: 65] */
+            align-items: flex-start; /* [cite: 65] */
+            margin-bottom: 15px; /* [cite: 65] */
+            text-align: left; /* [cite: 65] */
+        }
+        .step-number {
+            min-width: 24px; /* [cite: 66] */
+            height: 24px; /* [cite: 66] */
+            background-color: #00539F; /* [cite: 67] */
+            color: white; /* [cite: 67] */
+            border-radius: 50%; /* [cite: 67] */
+            display: flex; /* [cite: 67] */
+            align-items: center; /* [cite: 67] */
+            justify-content: center; /* [cite: 67] */
+            font-weight: 700; /* [cite: 67] */
+            margin-right: 12px; /* [cite: 67] */
+            flex-shrink: 0;
+        }
+        .step-title {
+            color: #111827; /* [cite: 68] */
+            font-weight: 700; /* [cite: 69] */
+        }
+        .step-desc {
+            color: #6b7280; /* [cite: 69] */
+            font-size: 0.9rem; /* [cite: 69] */
+        }
+
+        /* 8. Testimonials Section Styling */
+        .testimonial-headline {
+            font-size: 1.3rem; /* [cite: 78] */
+            font-weight: 700; /* [cite: 77] */
+            margin-top: 30px; /* [cite: 78] */
+            margin-bottom: 15px; /* [cite: 78] */
+        }
+        .testimonial-card {
+            background-color: white; /* [cite: 81] */
+            border: 1px solid #e5e7eb; /* [cite: 81] */
+            border-radius: 8px; /* [cite: 82] */
+            padding: 12px; /* [cite: 83] */
+            margin-bottom: 10px; /* [cite: 83] */
+            text-align: left; /* [cite: 83] */
+        }
+        .stars {
+            margin-bottom: 5px;
+            color: #f59e0b; /* Star color */
+        }
+        .testimonial-quote {
+            font-size: 0.9rem;
+            color: #111827;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #6b7280;
+        }
+
+        /* 9. Bottom CTA Styling */
+        .cta-bottom {
+            margin-top: 20px; /* [cite: 101] */
+        }
+
+        /* 10. Footer Trust Line Styling */
+        .footer-trust {
+            text-align: center; /* [cite: 104] */
+            font-size: 0.8rem; /* [cite: 104] */
+            color: #6b7280; /* [cite: 104] */
+            margin-top: 15px; /* [cite: 104] */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <img src="tscologo.png" alt="Tesco Logo" class="logo"> <h1>Tesco Cost of Living Support Programme</h1> <h2>Receive Your £750 Grocery Support in 3 Easy Steps</h2> <p class="scarcity">Hurry! Over 2,500 UK families have already joined today.</p> <div class="timer-box"> Offer ends in: <span id="timer">10:00</span>
+        </div>
+
+        <a href="https://www.bcdxmn8trk.com/GGJ772/37CZBSR/?sub1=t1&sub2=tesco" class="cta-button"> Check Your Eligibility </a>
+
+        <div class="trust-badges"> <span>SSL Secure</span> <span>Securely Encrypted</span> </div>
+
+        <h3>How It Works</h3> <div class="progress-container"> <div class="progress-bar-fill" id="progress-bar"></div> </div>
+
+        <div class="step-guide">
+            <div class="step-item"> <div class="step-number">1</div> <div class="step-text">
+                    <div class="step-title">Register for Access</div> <div class="step-desc">Create your free programme account.</div> </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    <div class="step-title">Complete Partner Activities</div> <div class="step-desc">Engage with recommended partner offers each step progresses your reward!</div> </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    <div class="step-title">Receive Your Tesco Credit</div> <div class="step-desc">Reach the goal & get the £750 credit sent for your Tesco shopping!</div> </div>
+            </div>
+        </div>
+
+        <h3 class="testimonial-headline">Trusted by Real Users</h3> <div class="testimonial-card"> <div class="stars">⭐️⭐️⭐️⭐️⭐️</div> <p class="testimonial-quote">"I wish I could do it again..."</p> <p class="testimonial-author">Sarah M., Manchester</p> </div>
+        <div class="testimonial-card">
+            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+            <p class="testimonial-quote">"Super simple process..."</p> <p class="testimonial-author">Mike R., London</p> </div>
+        <div class="testimonial-card">
+            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+            <p class="testimonial-quote">"Took me about 15 minutes..."</p> <p class="testimonial-author">Jessica L., Birmingham</p> </div>
+
+        <a href="https://www.bcdxmn8trk.com/GGJ772/37CZBSR/?sub1=t1&sub2=tesco" class="cta-button cta-bottom"> Check Eligibility Now </a>
+
+        <p class="footer-trust">&#128274; Your information is protected with 256-bit encryption</p> </div>
+
+    <script>
+        // [cite: 36]
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            
+            var interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "00:00";
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var tenMinutes = 60 * 10 - 1; // Start at 09:59
+            var display = document.querySelector('#timer');
+            if (display) {
+                startTimer(tenMinutes, display);
+            }
+        };
+    </script>
+</body>
+</html>

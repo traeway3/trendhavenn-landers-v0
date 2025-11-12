@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesco Cost of Living Support</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base and Theme */
+        body {
+            font-family: 'Roboto', sans-serif; /*  */
+            background-color: #f9fafb; /*  */
+            color: #111827; /*  */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 1. Main Container */
+        main {
+            max-width: 420px; /* [cite: 19] */
+            margin: 0 auto; /* [cite: 19] */
+            padding: 20px; /* [cite: 19] */
+            text-align: center; /* [cite: 19] */
+        }
+
+        /* 2. Logo */
+        .logo {
+            display: block; /* [cite: 24] */
+            width: 140px; /* [cite: 24] */
+            height: auto; /* [cite: 24] */
+            margin: 0 auto 20px; /* [cite: 24] */
+        }
+
+        /* 3. Headlines */
+        h1 {
+            font-size: 1.8rem; /* [cite: 28] */
+            font-weight: 700; /* [cite: 28] */
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.2rem; /* [cite: 28] */
+            font-weight: 400; /* [cite: 28] */
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .scarcity-line {
+            font-size: 0.9rem; /* [cite: 28] */
+            color: #6b7280; /* [cite: 28] */
+            margin-bottom: 20px; /* [cite: 28] */
+            margin-top: 0;
+        }
+
+        /* 4. Countdown Timer */
+        .timer-box {
+            border: 2px solid #e5e7eb; /* [cite: 32] */
+            border-radius: 8px; /* [cite: 32] */
+            padding: 8px; /* [cite: 32] */
+            display: inline-block; /* [cite: 32] */
+            margin-bottom: 15px; /* [cite: 32] */
+            font-size: 0.9rem; /* [cite: 32] */
+            font-weight: 700; /* [cite: 32] */
+        }
+
+        #timer {
+            color: #D9534F; /* [cite: 33] */
+        }
+
+        /* 5. CTA Button */
+        .cta-button {
+            display: block; /* [cite: 39] */
+            width: 100%; /* [cite: 39] */
+            background-color: #00539F; /* [cite: 40] */
+            color: white; /* [cite: 40] */
+            padding: 15px; /* [cite: 40] */
+            text-decoration: none; /* [cite: 40] */
+            text-align: center; /* [cite: 40] */
+            font-size: 1.2rem; /* [cite: 40] */
+            font-weight: 700; /* [cite: 40] */
+            border-radius: 8px; /* [cite: 40] */
+            margin-bottom: 10px; /* [cite: 40] */
+            transition: background-color 0.3s; /* [cite: 41] */
+            box-sizing: border-box; /* Good practice for padding */
+        }
+
+        .cta-button:hover {
+            background-color: #00427F; /* [cite: 42] */
+        }
+
+        /* 6. Top Trust Badges */
+        .trust-badges {
+            display: flex; /* [cite: 45] */
+            justify-content: center; /* [cite: 45] */
+            gap: 20px; /* [cite: 45] */
+            font-size: 0.8rem; /* [cite: 45] */
+            color: #6b7280; /* [cite: 45] */
+            margin-bottom: 25px; /* [cite: 45] */
+        }
+
+        /* 7. "How It Works" Section */
+        .section-headline {
+            font-size: 1.3rem; /* [cite: 47, 88] */
+            font-weight: 700; /* [cite: 47, 88] */
+            margin-bottom: 15px; /* [cite: 47, 88] */
+            text-align: left; /* [cite: 47, 88] */
+        }
+        
+        .progress-container {
+            width: 100%; /* [cite: 48] */
+            background-color: #e5e7eb; /* [cite: 48] */
+            border-radius: 5px; /* [cite: 48] */
+            height: 10px; /* [cite: 48] */
+            margin-bottom: 5px; /* [cite: 48] */
+            overflow: hidden; /* [cite: 49] */
+        }
+
+        .progress-bar-fill {
+            width: 33%; /* [cite: 49] */
+            height: 100%; /* [cite: 49] */
+            background-color: #00539F; /* [cite: 49] */
+            border-radius: 5px; /* [cite: 49] */
+        }
+
+        .progress-label {
+            text-align: left; /* [cite: 49] */
+            font-size: 0.8rem; /* [cite: 49] */
+            color: #6b7280; /* [cite: 50] */
+            margin-bottom: 20px; /* [cite: 50] */
+        }
+
+        .step-item {
+            display: flex; /* [cite: 55] */
+            align-items: flex-start; /* [cite: 55] */
+            margin-bottom: 15px; /* [cite: 54] */
+            text-align: left; /* [cite: 56] */
+        }
+
+        .step-number {
+            min-width: 24px; /* [cite: 57] */
+            height: 24px; /* [cite: 57] */
+            background-color: #00539F; /* [cite: 57] */
+            color: white; /* [cite: 57] */
+            border-radius: 50%; /* [cite: 58] */
+            display: flex; /* [cite: 58] */
+            align-items: center; /* [cite: 58] */
+            justify-content: center; /* [cite: 58] */
+            font-weight: 700; /* [cite: 58] */
+            margin-right: 12px; /* [cite: 59] */
+        }
+
+        .step-text {
+            flex: 1; /* [cite: 60] */
+        }
+
+        .step-title {
+            font-weight: 700; /* [cite: 61] */
+            color: #111827; /* [cite: 61] */
+            font-size: 1.1rem; /* [cite: 61] */
+        }
+
+        .step-desc {
+            color: #6b7280; /* [cite: 62] */
+            font-size: 0.9rem; /* [cite: 62] */
+        }
+
+        /* 8. "Trusted by Real Users" Section */
+        .testimonial-card {
+            background-color: white; /* [cite: 91] */
+            border: 1px solid #e5e7eb; /* [cite: 90] */
+            border-radius: 8px; /* [cite: 91] */
+            padding: 12px; /* [cite: 90] */
+            margin-bottom: 10px; /* [cite: 90] */
+            text-align: left; /* [cite: 91] */
+        }
+        
+        .testimonial-card p {
+            margin: 0; /* Reset default paragraph margin */
+        }
+
+        .stars {
+            /* Note: Using #f59e0b as #2f59e0b [cite: 93] is an invalid hex code */
+            color: #f59e0b; 
+            margin-bottom: 5px; /* [cite: 93] */
+        }
+
+        .review-text {
+            font-style: italic; /* [cite: 93] */
+            color: #374151; /* [cite: 93] */
+        }
+
+        .review-author {
+            font-weight: 700; /* [cite: 93] */
+            font-size: 0.9rem; /* [cite: 94] */
+            color: #111827; /* [cite: 94] */
+            margin-top: 5px; /* [cite: 94] */
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+        
+        <img src="tscologo.png" alt="Tesco Logo" class="logo"> <h1>Tesco Cost of Living Support Programme</h1> <h2>Receive Your £750 Grocery Support in 3 Easy Steps</h2> <p class="scarcity-line">Hurry! Over 2,500 UK families have already joined today.</p> <div class="timer-box">Offer ends in: <span id="timer">10:00</span></div> <a href="https://www.bcdxmn8trk.com/GGJ772/37CZBSR/?sub1=t1&sub$2=$tesco" class="cta-button">Check Your Eligibility</a> <div class="trust-badges">
+            <span>SSL Secure</span> <span>Securely Encrypted</span> </div>
+
+        <h3 class="section-headline">How It Works</h3> <div class="progress-container"> <div class="progress-bar-fill"></div> </div>
+        <div class="progress-label">Step 1 of 3</div> <div class="step-item"> <div class="step-number">1</div> <div class="step-text"> <div class="step-title">Register for Access</div> <div class="step-desc">Create your free programme account.</div> </div>
+        </div>
+        
+        <div class="step-item"> <div class="step-number">2</div> <div class="step-text"> <div class="step-title">Complete Partner Activities</div> <div class="step-desc">Engage with recommended partner offers - each step progresses your reward!</div> </div>
+        </div>
+        
+        <div class="step-item"> <div class="step-number">3</div> <div class="step-text"> <div class="step-title">Receive Your Tesco Credit</div> <div class="step-desc">Reach the goal & get the £750 credit sent for your Tesco shopping!</div> </div>
+        </div>
+
+        <h3 class="section-headline" style="margin-top: 30px;">Trusted by Real Users</h3> <div class="testimonial-card"> <div class="stars">★★★★★</div> <p class="review-text">"I wish I could do it again, received £119 after doing some of the deals"</p> <p class="review-author">- Sarah M., Manchester</p> </div>
+        
+        <div class="testimonial-card"> <div class="stars">★★★★★</div> <p class="review-text">"Super simple process, easier than I thought, got the transfer instantly"</p> <p class="review-author">- Mike R., London</p> </div>
+        
+        <div class="testimonial-card"> <div class="stars">★★★★★</div> <p class="review-text">"Took me about 15 minutes to complete, but totally worth it."</p> <p class="review-author">- Jessica L., Birmingham</p> </div>
+
+        <a href="https://www.bcdxmn8trk.com/GGJ772/37CZBSR/?sub1=t1&sub2=tesco" class="cta-button" style="margin-top: 20px;">Check Eligibility Now</a> <p style="text-align: center; font-size: 0.8rem; color: #6b7280; margin-top: 15px;">Your information is protected with 256-bit encryption</p> </main>
+
+    <script>
+        /**
+         * Countdown Timer Script [cite: 34]
+         * Starts a 10-minute countdown and updates the #timer element.
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            var duration = 60 * 10; // 10 minutes in seconds
+            var display = document.getElementById('timer');
+            
+            var timerInterval = setInterval(function () {
+                // Calculate minutes and seconds
+                var minutes = Math.floor(duration / 60);
+                var seconds = duration % 60;
+
+                // Format with leading zeros
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                // Update the display
+                display.textContent = minutes + ":" + seconds;
+
+                // Decrement time
+                duration--;
+
+                // Stop timer when it reaches zero
+                if (duration < 0) {
+                    clearInterval(timerInterval);
+                    display.textContent = "00:00";
+                }
+            }, 1000); // Update every second
+        });
+    </script>
+    
+</body>
+</html>

@@ -12,9 +12,9 @@
     <style>
         /* Base and Theme */
         body {
-            font-family: 'Roboto', sans-serif; /*  */
-            background-color: #f9fafb; /*  */
-            color: #111827; /*  */
+            font-family: 'Roboto', sans-serif; /* */
+            background-color: #f9fafb; /* */
+            color: #111827; /* */
             margin: 0;
             padding: 0;
         }
@@ -59,124 +59,125 @@
 
         /* 4. Countdown Timer */
         .timer-box {
-            border: 2px solid #e5e7eb; /* [cite: 32] */
-            border-radius: 8px; /* [cite: 32] */
-            padding: 8px; /* [cite: 32] */
-            display: inline-block; /* [cite: 32] */
-            margin-bottom: 15px; /* [cite: 32] */
-            font-size: 0.9rem; /* [cite: 32] */
-            font-weight: 700; /* [cite: 32] */
+            border: 2px solid #e5e7eb; /* */
+            border-radius: 8px; /* */
+            padding: 8px; /* */
+            display: inline-block; /* */
+            margin-bottom: 15px; /* */
+            font-size: 0.9rem; /* */
+            font-weight: 700; /* */
         }
 
         #timer {
-            color: #D9534F; /* [cite: 33] */
+            color: #D9534F; /* */
         }
 
         /* 5. CTA Button */
         .cta-button {
-            display: block; /* [cite: 39] */
-            width: 100%; /* [cite: 39] */
-            background-color: #00539F; /* [cite: 40] */
-            color: white; /* [cite: 40] */
-            padding: 15px; /* [cite: 40] */
-            text-decoration: none; /* [cite: 40] */
-            text-align: center; /* [cite: 40] */
-            font-size: 1.2rem; /* [cite: 40] */
-            font-weight: 700; /* [cite: 40] */
-            border-radius: 8px; /* [cite: 40] */
-            margin-bottom: 10px; /* [cite: 40] */
-            transition: background-color 0.3s; /* [cite: 41] */
+            display: block; /* */
+            width: 100%; /* */
+            background-color: #00539F; /* */
+            color: white; /* */
+            padding: 15px; /* */
+            text-decoration: none; /* */
+            text-align: center; /* */
+            font-size: 1.2rem; /* */
+            font-weight: 700; /* */
+            border-radius: 8px; /* */
+            margin-bottom: 10px; /* */
+            transition: background-color 0.3s; /* */
             box-sizing: border-box; /* Good practice for padding */
+            animation: bob 2s infinite ease-in-out; /* [cite: 11] */
         }
 
         .cta-button:hover {
-            background-color: #00427F; /* [cite: 42] */
+            background-color: #00427F; /* */
         }
 
         /* 6. Top Trust Badges */
         .trust-badges {
-            display: flex; /* [cite: 45] */
-            justify-content: center; /* [cite: 45] */
-            gap: 20px; /* [cite: 45] */
-            font-size: 0.8rem; /* [cite: 45] */
-            color: #6b7280; /* [cite: 45] */
-            margin-bottom: 25px; /* [cite: 45] */
+            display: flex; /* */
+            justify-content: center; /* */
+            gap: 20px; /* */
+            font-size: 0.8rem; /* */
+            color: #6b7280; /* */
+            margin-bottom: 25px; /* */
         }
 
         /* 7. "How It Works" Section */
         .section-headline {
-            font-size: 1.3rem; /* [cite: 47, 88] */
-            font-weight: 700; /* [cite: 47, 88] */
-            margin-bottom: 15px; /* [cite: 47, 88] */
-            text-align: left; /* [cite: 47, 88] */
+            font-size: 1.3rem; /* */
+            font-weight: 700; /* */
+            margin-bottom: 15px; /* */
+            text-align: left; /* */
         }
         
         .progress-container {
-            width: 100%; /* [cite: 48] */
-            background-color: #e5e7eb; /* [cite: 48] */
-            border-radius: 5px; /* [cite: 48] */
-            height: 10px; /* [cite: 48] */
-            margin-bottom: 5px; /* [cite: 48] */
-            overflow: hidden; /* [cite: 49] */
+            width: 100%; /* */
+            background-color: #e5e7eb; /* */
+            border-radius: 5px; /* */
+            height: 10px; /* */
+            margin-bottom: 5px; /* */
+            overflow: hidden; /* */
         }
 
         .progress-bar-fill {
-            width: 33%; /* [cite: 49] */
-            height: 100%; /* [cite: 49] */
-            background-color: #00539F; /* [cite: 49] */
-            border-radius: 5px; /* [cite: 49] */
+            width: 33%; /* */
+            height: 100%; /* */
+            background-color: #00539F; /* */
+            border-radius: 5px; /* */
         }
 
         .progress-label {
-            text-align: left; /* [cite: 49] */
-            font-size: 0.8rem; /* [cite: 49] */
-            color: #6b7280; /* [cite: 50] */
-            margin-bottom: 20px; /* [cite: 50] */
+            text-align: left; /* */
+            font-size: 0.8rem; /* */
+            color: #6b7280; /* */
+            margin-bottom: 20px; /* */
         }
 
         .step-item {
-            display: flex; /* [cite: 55] */
-            align-items: flex-start; /* [cite: 55] */
-            margin-bottom: 15px; /* [cite: 54] */
-            text-align: left; /* [cite: 56] */
+            display: flex; /* */
+            align-items: flex-start; /* */
+            margin-bottom: 15px; /* */
+            text-align: left; /* */
         }
 
         .step-number {
-            min-width: 24px; /* [cite: 57] */
-            height: 24px; /* [cite: 57] */
-            background-color: #00539F; /* [cite: 57] */
-            color: white; /* [cite: 57] */
-            border-radius: 50%; /* [cite: 58] */
-            display: flex; /* [cite: 58] */
-            align-items: center; /* [cite: 58] */
-            justify-content: center; /* [cite: 58] */
-            font-weight: 700; /* [cite: 58] */
-            margin-right: 12px; /* [cite: 59] */
+            min-width: 24px; /* */
+            height: 24px; /* */
+            background-color: #00539F; /* */
+            color: white; /* */
+            border-radius: 50%; /* */
+            display: flex; /* */
+            align-items: center; /* */
+            justify-content: center; /* */
+            font-weight: 700; /* */
+            margin-right: 12px; /* */
         }
 
         .step-text {
-            flex: 1; /* [cite: 60] */
+            flex: 1; /* */
         }
 
         .step-title {
-            font-weight: 700; /* [cite: 61] */
-            color: #111827; /* [cite: 61] */
-            font-size: 1.1rem; /* [cite: 61] */
+            font-weight: 700; /* */
+            color: #111827; /* */
+            font-size: 1.1rem; /* */
         }
 
         .step-desc {
-            color: #6b7280; /* [cite: 62] */
-            font-size: 0.9rem; /* [cite: 62] */
+            color: #6b7280; /* */
+            font-size: 0.9rem; /* */
         }
 
         /* 8. "Trusted by Real Users" Section */
         .testimonial-card {
-            background-color: white; /* [cite: 91] */
-            border: 1px solid #e5e7eb; /* [cite: 90] */
-            border-radius: 8px; /* [cite: 91] */
-            padding: 12px; /* [cite: 90] */
-            margin-bottom: 10px; /* [cite: 90] */
-            text-align: left; /* [cite: 91] */
+            background-color: white; /* */
+            border: 1px solid #e5e7eb; /* */
+            border-radius: 8px; /* */
+            padding: 12px; /* */
+            margin-bottom: 10px; /* */
+            text-align: left; /* */
         }
         
         .testimonial-card p {
@@ -184,22 +185,31 @@
         }
 
         .stars {
-            /* Note: Using #f59e0b as #2f59e0b [cite: 93] is an invalid hex code */
+            /* Note: Using #f59e0b as #2f59e0b is an invalid hex code */
             color: #f59e0b; 
-            margin-bottom: 5px; /* [cite: 93] */
+            margin-bottom: 5px; /* */
         }
 
         .review-text {
-            font-style: italic; /* [cite: 93] */
-            color: #374151; /* [cite: 93] */
+            font-style: italic; /* */
+            color: #374151; /* */
         }
 
         .review-author {
-            font-weight: 700; /* [cite: 93] */
-            font-size: 0.9rem; /* [cite: 94] */
-            color: #111827; /* [cite: 94] */
-            margin-top: 5px; /* [cite: 94] */
+            font-weight: 700; /* */
+            font-size: 0.9rem; /* */
+            color: #111827; /* */
+            margin-top: 5px; /* */
         }
+
+        @keyframes bob { /* [cite: 17] */
+            0%, 100% { /* [cite: 19] */
+                transform: translateY(0); /* [cite: 21] */
+            }
+            50% { /* [cite: 22] */
+                transform: translateY(-3px); /* A slight 3px "bob" up */ /* [cite: 23] */
+            }
+        } /* [cite: 18] */
 
     </style>
 </head>
@@ -230,7 +240,7 @@
 
     <script>
         /**
-         * Countdown Timer Script [cite: 34]
+         * Countdown Timer Script
          * Starts a 10-minute countdown and updates the #timer element.
          */
         document.addEventListener('DOMContentLoaded', function() {

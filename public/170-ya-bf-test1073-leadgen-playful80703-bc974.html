@@ -933,6 +933,29 @@
             fill: white;
         }
     </style>
+<script>
+(function(w, d, n, u, p) {
+try {
+if /TikTok/i.test(n)) {
+// This is the TikTok in-app browser.
+// Check if we've already tried to break out.
+if (w.location.search.indexOf(p) === -1) {
+// We have NOT tried to break out yet.
+// Build the new URL with the breakout parameter.
+var newUrl = u + (u.indexOf('?') > -1 ? '&' : '?') + p;
+// Force the reload to the new URL.
+// This reload is what breaks out of the in-app browser.
+w.location.href = newUrl;
+}
+// If we HAVE tried to break out (param exists), we do nothing
+// and let the page load normally in the native browser.
+}
+} catch (e) {
+// In case of any error, just let the page load.
+console.warn('TikTok breakout script failed:', e);
+}
+})(window, document, navigator.userAgent, window.location.href, 'breakout=true');
+</script>
 </head>
 <body>
     <div class="floating-bg floating-1"></div>
@@ -954,7 +977,7 @@
 
     <div class="button-container">
         <div id="startButton" class="start-button-container">
-            <a href="https://buenohoodies.com/aff_c?offer_id=1761185380703&s1=t1&s2=170-ya-bf-test1073-leadgen-playful80703-bc974" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
+            <a href="/go-playful" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
                GET MY BAG
             </a>
         </div>

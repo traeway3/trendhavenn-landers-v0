@@ -1064,5 +1064,23 @@
         // Start the app when page loads: Kept as-is
         document.addEventListener('DOMContentLoaded', init);
     </script>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function() { [cite: 12]
+      // Find the CTA button by its unique href attribute [cite: 13]
+      var ctaButton = document.querySelector('a[href="/go-playful"]'); [cite: 14]
+      if (ctaButton) { [cite: 15]
+        // Add a click listener to the button [cite: 16]
+        ctaButton.addEventListener('click', function() { [cite: 17]
+          // Fire the TikTok "Complete Registration" event [cite: 18]
+          try { [cite: 19]
+            ttq.track('Complete Registration'); [cite: 20]
+          } catch (e) { [cite: 21]
+            console.warn('TikTok event tracking failed:', e); [cite: 22]
+          }
+        }); [cite: 23]
+      } else { [cite: 25]
+        console.warn('CTA button with href="/go-playful" not found.'); [cite: 26]
+      } [cite: 27]
+    }); [cite: 28]
+</script>
 </body></html>

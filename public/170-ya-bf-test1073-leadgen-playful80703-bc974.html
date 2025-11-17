@@ -1065,50 +1065,52 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Find the CTA button by its unique href attribute
-  var ctaButton = document.querySelector('a[href="/go-playful"]');
-  if (ctaButton) {
-    // Add a click listener to the button
-    ctaButton.addEventListener('click', function(event) {
-      // 1. PREVENT the default redirect immediately
-      event.preventDefault();
-      var redirectUrl = ctaButton.href;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find the CTA button by its unique href attribute
+        var ctaButton = document.querySelector('a[href="/go-playful"]');
+        
+        if (ctaButton) {
+            // Add a click listener to the button
+            ctaButton.addEventListener('click', function(event) {
+                // 1. PREVENT the default redirect immediately
+                event.preventDefault(); 
+                
+                var redirectUrl = ctaButton.href;
 
-      // 2. CREATE a function to handle the redirect
-      function doRedirect() {
-        window.location.href = redirectUrl;
-      }
+                // 2. CREATE a function to handle the redirect
+                function doRedirect() {
+                    window.location.href = redirectUrl;
+                }
 
-      // 3. FIRE the event with a callback
-      try {
-        // Check if ttq is loaded
-        if (typeof ttq === 'object' && ttq !== null && typeof ttq.track === 'function') {
-          ttq.track('Complete Registration', {}, function() {
-            // This callback runs AFTER the pixel fires
-            doRedirect();
-          });
+                // 3. FIRE the event with a callback
+                try {
+                    // Check if ttq is loaded
+                    if (typeof ttq === 'object' && ttq !== null && typeof ttq.track === 'function') {
+                        
+                        ttq.track('CompleteRegistration', {}, function() {
+                            // This callback runs AFTER the pixel fires
+                            doRedirect();
+                        });
 
-          // 4. As a safety, if the callback fails or takes too long
-          // (e.g., if an adblocker blocks Tik Tok),
-          // redirect after 1 second anyway.
-          setTimeout(doRedirect, 1000);
+                        // 4. As a safety, if the callback fails or takes too long
+                        // (e.g., if an adblocker blocks TikTok),
+                        // redirect after 1 second anyway.
+                        setTimeout(doRedirect, 1000); 
 
+                    } else {
+                        // ttq is not loaded, just redirect.
+                        console.warn('ttq object not found. Redirecting immediately.');
+                        doRedirect();
+                    }
+                } catch (e) {
+                    // If ttq fails for any other reason, just redirect immediately.
+                    console.warn('TikTok event tracking failed:', e);
+                    doRedirect();
+                }
+            });
         } else {
-          // ttq is not loaded, just redirect.
-          console.warn('ttq object not found. Redirecting immediately.');
-          doRedirect();
+            console.warn('CTA button with href="/go-playful" not found.');
         }
-
-      } catch (e) {
-        // If ttq fails for any other reason, just redirect immediately.
-        console.warn('Tik Tok event tracking failed:', e);
-        doRedirect();
-      }
     });
-  } else {
-    console.warn('CTA button with href="/go-playful" not found.');
-  }
-});
 </script>
 </body></html>

@@ -1065,38 +1065,50 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 <script>
-document.addEventListener('DOMContentLoaded', function() { [cite: 15]
-// Find the CTA button by its unique href attribute [cite: 16]
-var ctaButton = document.querySelector('a[href="/go-playful"]'); [cite: 17]
-if (ctaButton) { [cite: 18]
-// Add a click listener to the button [cite: 19]
-ctaButton.addEventListener('click', function(event) { [cite: 20]
-// 1. PREVENT the default redirect immediately [cite: 21]
-event.preventDefault(); [cite: 22]
-var redirectUrl = ctaButton.href; [cite: 23]
-// 2. CREATE a function to handle the redirect [cite: 24]
-function doRedirect() { [cite: 25]
-window.location.href = redirectUrl; [cite: 27]
-} [cite: 26]
-// 3. FIRE the event with a callback [cite: 28]
-try { [cite: 29]
-ttq.track('Complete Registration', {}, function() { [cite: 30]
-// This callback runs AFTER the pixel fires [cite: 32]
-doRedirect(); [cite: 33]
-}); [cite: 31]
-// 4. As a safety, if the callback fails or takes too long, [cite: 34]
-// (e.g., if an adblocker blocks Tik Tok), [cite: 35]
-// redirect after 1 second anyway. [cite: 36]
-setTimeout(doRedirect, 1000); [cite: 37]
-} catch (e) { [cite: 38]
-// If ttq fails, just redirect immediately. [cite: 39]
-console.warn('TikTok event tracking failed:', e); [cite: 40]
-doRedirect(); [cite: 41]
-} [cite: 42]
-}); [cite: 43]
-} else { [cite: 44]
-console.warn('CTA button with href="/go-playful" not found.'); [cite: 45]
-} [cite: 46]
-}); [cite: 47]
+document.addEventListener('DOMContentLoaded', function() {
+  // Find the CTA button by its unique href attribute
+  var ctaButton = document.querySelector('a[href="/go-playful"]');
+  if (ctaButton) {
+    // Add a click listener to the button
+    ctaButton.addEventListener('click', function(event) {
+      // 1. PREVENT the default redirect immediately
+      event.preventDefault();
+      var redirectUrl = ctaButton.href;
+
+      // 2. CREATE a function to handle the redirect
+      function doRedirect() {
+        window.location.href = redirectUrl;
+      }
+
+      // 3. FIRE the event with a callback
+      try {
+        // Check if ttq is loaded
+        if (typeof ttq === 'object' && ttq !== null && typeof ttq.track === 'function') {
+          ttq.track('Complete Registration', {}, function() {
+            // This callback runs AFTER the pixel fires
+            doRedirect();
+          });
+
+          // 4. As a safety, if the callback fails or takes too long
+          // (e.g., if an adblocker blocks Tik Tok),
+          // redirect after 1 second anyway.
+          setTimeout(doRedirect, 1000);
+
+        } else {
+          // ttq is not loaded, just redirect.
+          console.warn('ttq object not found. Redirecting immediately.');
+          doRedirect();
+        }
+
+      } catch (e) {
+        // If ttq fails for any other reason, just redirect immediately.
+        console.warn('Tik Tok event tracking failed:', e);
+        doRedirect();
+      }
+    });
+  } else {
+    console.warn('CTA button with href="/go-playful" not found.');
+  }
+});
 </script>
 </body></html>

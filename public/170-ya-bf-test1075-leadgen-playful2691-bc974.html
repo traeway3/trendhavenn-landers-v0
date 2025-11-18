@@ -262,19 +262,68 @@
           src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
           unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
-
-        .intro-rust-font {
-            font-family: 'Inter', sans-serif;
+        /* cyrillic-ext */
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+          unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
         }
-
-        .intro-rust-medium {
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
+        /* cyrillic */
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
+          unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
         }
-
-        .intro-rust-bold {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
+        /* greek-ext */
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
+          unicode-range: U+1F00-1FFF;
+        }
+        /* greek */
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
+          unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+        }
+        /* vietnamese */
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
+          unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+        }
+        /* latin-ext */
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        /* latin */
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+          src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
 
         * {
@@ -284,140 +333,141 @@
         }
 
         body {
-            background: #0f0f0f;
-            color: #fff;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #581c87, #7e22ce);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px;
-            min-height: 100vh;
-            overflow-x: hidden;
+            padding: 25px 20px 20px 20px;
             position: relative;
+            overflow-x: hidden;
+            color: white;
         }
 
+        .intro-rust-font {
+            font-family: 'Inter', sans-serif;
+        }
+        .intro-rust-medium {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+        .intro-rust-bold {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Floating Background Elements */
         .floating-bg {
             position: fixed;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.3;
             pointer-events: none;
+            filter: blur(40px);
+            animation: float 20s infinite ease-in-out;
             z-index: 0;
         }
 
         .floating-1 {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: 10%;
-            left: 10%;
-            animation: float1 20s ease-in-out infinite;
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            animation-duration: 25s;
         }
 
         .floating-2 {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            top: 60%;
-            right: 10%;
-            animation: float2 18s ease-in-out infinite;
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            right: -150px;
+            animation-duration: 30s;
+            animation-delay: 5s;
         }
 
         .floating-3 {
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            bottom: 10%;
-            left: 15%;
-            animation: float3 22s ease-in-out infinite;
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            left: -125px;
+            animation-duration: 20s;
+            animation-delay: 10s;
         }
 
         .floating-4 {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            top: 40%;
-            left: 50%;
-            animation: float4 15s ease-in-out infinite;
+            width: 350px;
+            height: 350px;
+            top: 20%;
+            right: -175px;
+            animation-duration: 22s;
+            animation-delay: 15s;
         }
 
-        @keyframes float1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -40px) scale(1.05); }
-            66% { transform: translate(-20px, 30px) scale(0.95); }
-        }
-
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-30px, 30px) scale(0.95); }
-            66% { transform: translate(40px, -20px) scale(1.05); }
-        }
-
-        @keyframes float3 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(40px, 30px) scale(1.05); }
-            66% { transform: translate(-30px, -40px) scale(0.95); }
-        }
-
-        @keyframes float4 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, -30px) scale(0.95); }
-            66% { transform: translate(30px, 20px) scale(1.05); }
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, -50px) scale(1.05);
+            }
+            50% {
+                transform: translate(-30px, 30px) scale(0.95);
+            }
+            75% {
+                transform: translate(40px, 40px) scale(1.02);
+            }
         }
 
         .logo {
-            width: 180px;
-            height: auto;
+            width: 120px;
+            margin-bottom: 30px;
             z-index: 1;
-            filter: brightness(0.95) drop-shadow(0 4px 15px rgba(0,0,0,0.5));
-            margin-bottom: 10px;
-            margin-top: 5px;
+            animation: fadeInScale 0.5s ease-out;
         }
 
         .title {
-            font-size: clamp(26px, 4.5vw, 38px);
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 800;
             text-align: center;
+            line-height: 1.3;
+            color: white;
+            max-width: 90%;
+            margin-bottom: 16px;
             z-index: 1;
-            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(255,255,255,0.1);
-            margin-bottom: 12px;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
+            animation: fadeInUp 0.5s ease-out 0.2s both;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .sub-headline {
-            font-size: clamp(14px, 2.3vw, 16px);
+            font-size: 16px;
             text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 35px;
             z-index: 1;
-            color: rgba(255, 255, 255, 0.65);
-            margin-bottom: 20px;
-            font-weight: 400;
-            line-height: 1.4;
+            animation: fadeInUp 0.5s ease-out 0.4s both;
+            padding: 0 10px;
         }
 
         .steps {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 18px 15px;
-            max-width: 95%;
-            width: 100%;
-            z-index: 1;
-            position: relative;
-            margin-bottom: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 25px 20px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 35px;
+            z-index: 1;
+            animation: fadeInUp 0.5s ease-out 0.6s both;
         }
 
         .step {
-            font-size: clamp(13px, 2.3vw, 15px);
-            margin-bottom: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
+            color: white;
+            font-size: 14px;
             line-height: 1.5;
+            margin-bottom: 15px;
+            padding-left: 0;
+            opacity: 0.95;
         }
 
         .step:last-child {
@@ -425,308 +475,376 @@
         }
 
         .step-highlight {
-            background: linear-gradient(135deg, #ffd700, #ffab00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
+            color: #fbbf24;
+            font-weight: 500;
         }
 
         .button-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-            margin-bottom: 22px;
             width: 100%;
+            max-width: 350px;
+            margin-bottom: 30px;
+            z-index: 1;
+            animation: fadeInUp 0.5s ease-out 0.8s both;
         }
 
         .start-button-container {
-            text-align: center;
-            width: 100%;
-            max-width: 380px;
+            transition: all 0.3s ease;
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 17px 35px;
-            border: none;
-            border-radius: 50px;
+            display: block;
+            width: 100%;
+            padding: 18px 35px;
             font-size: 18px;
             font-weight: 700;
+            border-radius: 60px;
             cursor: pointer;
+            border: none;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 30px rgba(102, 126, 234, 0.4);
             text-transform: uppercase;
-            letter-spacing: 0.02em;
-            width: 100%;
-            line-height: 1.4;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn:hover {
+        .btn-start {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #451a03;
+            box-shadow: 0 4px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-start:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(102, 126, 234, 0.55);
+            box-shadow: 0 6px 35px rgba(251, 191, 36, 0.5);
         }
 
-        .btn:active {
+        .btn-start:active {
             transform: translateY(0);
-            box-shadow: 0 4px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Pulse animation for button */
+        .btn-start::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn-start:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .verification {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 30px;
             z-index: 1;
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 10px 20px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fadeInUp 0.5s ease-out 1s both;
         }
 
         .verification-icon {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
+            background: #10b981;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
         }
 
         .checkmark {
-            width: 14px;
-            height: 14px;
-            color: #0f0f0f;
+            width: 12px;
+            height: 12px;
+            color: white;
         }
 
         .verification-text {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
         }
 
         .stats {
-            z-index: 1;
             width: 100%;
-            margin-top: auto;
-            padding-top: 15px;
+            max-width: 400px;
+            z-index: 1;
+            animation: fadeInUp 0.5s ease-out 1.2s both;
         }
 
         .stats-container {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
-            padding: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
         }
 
         .stat-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 15px 10px;
             text-align: center;
-            flex: 1;
         }
 
         .stat-value {
-            font-size: clamp(18px, 3.5vw, 26px);
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .stat-green {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #10b981;
         }
 
         .stat-blue {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #3b82f6;
         }
 
         .stat-yellow {
-            background: linear-gradient(135deg, #ffd700 0%, #ffab00 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fbbf24;
         }
 
         .stat-label {
-            font-size: clamp(10px, 2vw, 12px);
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.7);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.5px;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 12px;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-
-            .logo {
-                width: 150px;
-            }
-
-            .steps {
-                padding: 15px 12px;
-            }
-
-            .btn {
-                padding: 15px 30px;
-                font-size: 16px;
-            }
-
-            .stats-container {
-                padding: 15px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @media (max-width: 390px) {
-            .logo {
-                width: 130px;
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
             }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 25px rgba(251, 191, 36, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 35px rgba(251, 191, 36, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 25px rgba(251, 191, 36, 0.4);
+            }
+        }
+
+        .btn-start {
+            animation: pulse 2s infinite;
+        }
+
+        /* Media Queries */
+        @media (max-width: 380px) {
             .title {
                 font-size: 24px;
             }
-
+            
             .sub-headline {
-                font-size: 13px;
+                font-size: 14px;
             }
-
-            .step {
-                font-size: 12px;
-            }
-
-            .btn {
-                padding: 14px 25px;
-                font-size: 15px;
-            }
-
+            
             .stat-value {
+                font-size: 16px;
+            }
+            
+            .btn {
+                font-size: 16px;
+                padding: 16px 30px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .title {
+                font-size: 32px;
+            }
+            
+            .sub-headline {
                 font-size: 18px;
             }
+            
+            .step {
+                font-size: 16px;
+            }
+        }
 
-            .stat-label {
-                font-size: 9px;
+        /* Loading Spinner (hidden by default) */
+        .spinner {
+            display: none;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
         }
     </style>
     <!-- Enhanced TikTok In-App Browser Kicker Script -->
     <script>
         (function() {
+            'use strict';
+            
             // Multiple detection methods for TikTok in-app browser
-            var isTikTok = false;
-            
-            // Method 1: User Agent detection
-            if (/TikTok/i.test(navigator.userAgent) || 
-                /BytedanceWebview/i.test(navigator.userAgent) || 
-                /musical_ly/i.test(navigator.userAgent)) {
-                isTikTok = true;
+            function detectTikTokBrowser() {
+                const ua = navigator.userAgent || '';
+                const platform = navigator.platform || '';
+                
+                // Method 1: Direct UserAgent checks (case-insensitive)
+                const uaChecks = [
+                    /tiktok/i,
+                    /musical_ly/i,
+                    /musically/i,
+                    /bytedance/i,
+                    /trill/i
+                ];
+                
+                if (uaChecks.some(check => check.test(ua))) {
+                    return true;
+                }
+                
+                // Method 2: Check for TikTok-specific WebView patterns
+                const webViewPatterns = [
+                    /bytedwebview/i,
+                    /ttwebview/i
+                ];
+                
+                if (webViewPatterns.some(pattern => pattern.test(ua))) {
+                    return true;
+                }
+                
+                // Method 3: Check window properties that TikTok might inject
+                if (typeof window !== 'undefined') {
+                    const suspiciousProps = [
+                        'TikTokWebView',
+                        'tiktok',
+                        '__TIKTOK__',
+                        'BytedanceWebview',
+                        'ttBridge'
+                    ];
+                    
+                    for (const prop of suspiciousProps) {
+                        if (prop in window) {
+                            return true;
+                        }
+                    }
+                }
+                
+                // Method 4: Check for specific TikTok JavaScript bridge
+                if (typeof window.webkit !== 'undefined' && 
+                    window.webkit.messageHandlers && 
+                    (window.webkit.messageHandlers.TikTokJSBridge || 
+                     window.webkit.messageHandlers.JSBridge)) {
+                    return true;
+                }
+                
+                // Method 5: Check document referrer for TikTok domains
+                if (document.referrer) {
+                    const tikTokDomains = [
+                        'tiktok.com',
+                        'tiktokv.com',
+                        'tiktokcdn.com',
+                        'musical.ly',
+                        'muscdn.com'
+                    ];
+                    
+                    if (tikTokDomains.some(domain => document.referrer.includes(domain))) {
+                        return true;
+                    }
+                }
+                
+                return false;
             }
             
-            // Method 2: Check for TikTok-specific window properties
-            if (!isTikTok && window.tt && window.tt.miniProgram) {
-                isTikTok = true;
-            }
-            
-            // Method 3: Check for specific webkit message handlers
-            if (!isTikTok && window.webkit && window.webkit.messageHandlers && 
-                (window.webkit.messageHandlers.TikTokJSBridge || 
-                 window.webkit.messageHandlers.ToutiaoJSBridge)) {
-                isTikTok = true;
-            }
-            
-            // If TikTok detected, force open in native browser
-            if (isTikTok) {
+            // Force open in external browser
+            function forceExternalBrowser() {
+                const currentUrl = window.location.href;
+                
                 // Method 1: Intent URL for Android
-                var intentUrl = 'intent://' + window.location.href.replace(/^https?:\/\//, '') + 
-                               '#Intent;scheme=https;package=com.android.chrome;end';
+                const androidIntent = 'intent://' + 
+                    window.location.host + 
+                    window.location.pathname + 
+                    window.location.search + 
+                    '#Intent;scheme=https;package=com.android.chrome;end';
                 
-                // Method 2: Universal link patterns
-                var universalLinks = [
-                    'googlechrome://navigate?url=' + encodeURIComponent(window.location.href),
-                    'firefox://open-url?url=' + encodeURIComponent(window.location.href),
-                    'microsoft-edge:' + window.location.href
-                ];
+                // Method 2: Universal deep linking
+                const universalLink = 'https://external.link?' + encodeURIComponent(currentUrl);
                 
-                // Try multiple methods
-                var methods = [
-                    // Primary method: window.open with _system target
-                    function() { 
-                        window.open(window.location.href, '_system');
-                        return true;
-                    },
-                    // Fallback 1: Location replace with x-callback-url
-                    function() {
-                        window.location.replace('x-web-search://?url=' + encodeURIComponent(window.location.href));
-                        return true;
-                    },
-                    // Fallback 2: Android intent
-                    function() {
-                        window.location.href = intentUrl;
-                        return true;
-                    },
-                    // Fallback 3: Try universal links
-                    function() {
-                        for (var i = 0; i < universalLinks.length; i++) {
-                            window.location.href = universalLinks[i];
-                        }
-                        return true;
-                    },
-                    // Fallback 4: Display instructions to user
-                    function() {
-                        var message = 'Please open this page in your browser:\n\n' +
-                                    '1. Tap the three dots (...) in the top right\n' +
-                                    '2. Select "Open in browser"\n' +
-                                    '3. Or copy this link: ' + window.location.href;
-                        
-                        // Create overlay with instructions
-                        var overlay = document.createElement('div');
-                        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;' +
-                                               'background:rgba(0,0,0,0.95);color:white;z-index:999999;' +
-                                               'display:flex;align-items:center;justify-content:center;' +
-                                               'padding:20px;text-align:center;font-family:sans-serif;';
-                        overlay.innerHTML = '<div style="max-width:400px;">' +
-                                          '<h2 style="margin-bottom:20px;">Open in Browser Required</h2>' +
-                                          '<p style="line-height:1.6;margin-bottom:20px;">' + 
-                                          message.replace(/\n/g, '<br>') + '</p>' +
-                                          '<button onclick="navigator.clipboard.writeText(\'' + 
-                                          window.location.href + '\');this.textContent=\'Copied!\';" ' +
-                                          'style="background:white;color:black;border:none;' +
-                                          'padding:12px 24px;border-radius:6px;font-size:16px;' +
-                                          'cursor:pointer;">Copy Link</button></div>';
-                        document.body.appendChild(overlay);
-                        return false;
-                    }
-                ];
-                
-                // Execute methods sequentially with small delays
-                var tryMethod = function(index) {
-                    if (index < methods.length) {
-                        var success = methods[index]();
-                        if (success && index < methods.length - 1) {
-                            // If not the last method, wait and try next if still here
+                // Method 3: Add parameter and reload
+                if (!window.location.search.includes('ext_browser=1')) {
+                    const separator = window.location.search ? '&' : '?';
+                    const newUrl = currentUrl + separator + 'ext_browser=1';
+                    
+                    // Try multiple methods to break out
+                    try {
+                        // Try Android intent first
+                        if (/android/i.test(navigator.userAgent)) {
+                            window.location.href = androidIntent;
+                            
+                            // Fallback to parameter method after delay
                             setTimeout(function() {
-                                if (document.hasFocus()) {
-                                    tryMethod(index + 1);
-                                }
-                            }, 500);
+                                window.location.replace(newUrl);
+                            }, 100);
+                        } else {
+                            // For iOS or unknown, use parameter method
+                            window.location.replace(newUrl);
                         }
+                    } catch (e) {
+                        // Ultimate fallback
+                        window.top.location.href = newUrl;
                     }
-                };
-                
-                // Start trying methods
-                tryMethod(0);
+                }
+            }
+            
+            // Execute detection and redirection
+            try {
+                if (detectTikTokBrowser()) {
+                    // Log detection for debugging (remove in production)
+                    console.log('TikTok browser detected, forcing external browser');
+                    
+                    // Immediate execution
+                    forceExternalBrowser();
+                    
+                    // Also try on DOM ready as backup
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', forceExternalBrowser);
+                    }
+                }
+            } catch (error) {
+                // Silently fail to not break the page
+                console.error('Browser detection script error:', error);
             }
         })();
     </script>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Claim Your Bonus</title>
+    
+    <!-- Aggressive Anti-Frame Headers via Meta Tags -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --brand-blue: #005A8D;
+            --cta-blue: #3686E5;
+            --cta-hover: #2a6cb5;
+            --light-gray: #f0f2f5;
+            --dark-text: #333;
+            --light-text: #555;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .header {
+            padding: 15px 15px 10px;
+        }
+
+        .logo {
+            max-width: 120px;
+            margin-bottom: 10px;
+        }
+
+        .headline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .sub-headline {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-container {
+            width: 90%;
+            margin: 0 auto 8px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 12px;
+            background: linear-gradient(90deg, var(--brand-blue), var(--cta-blue));
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+            min-height: 1.2em;
+        }
+
+        .main-content {
+            padding: 0 20px 20px;
+        }
+
+        .quick-start-guide {
+            list-style-type: none;
+            text-align: left;
+            margin-bottom: 20px;
+            padding-left: 5px;
+        }
+
+        .quick-start-guide li {
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+            counter-increment: step-counter;
+        }
+
+        .quick-start-guide li::before {
+            content: counter(step-counter);
+            background-color: var(--cta-blue);
+            color: var(--white);
+            font-weight: 700;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 0.8rem;
+            line-height: 1;
+        }
+        
+        .pro-tip {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.8rem;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--cta-blue);
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--cta-hover);
+            transform: scale(1.02);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(54, 134, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0); }
+        }
+
+        .social-proof {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: var(--light-gray);
+        }
+
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .proof-metric {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--brand-blue);
+        }
+        
+        .proof-label {
+            font-size: 0.7rem;
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .trust-badge {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+        
+        .activity-alert {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            margin: 0 auto;
+            max-width: 360px;
+            background-color: rgba(0,0,0,0.75);
+            color: var(--white);
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+        
+        .activity-alert.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Browser Fallback Overlay */
+        .browser-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .browser-overlay.active {
+            display: flex;
+        }
+
+        .browser-message {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .browser-message h2 {
+            color: var(--dark-text);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .browser-message p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .copy-link-btn {
+            background-color: var(--cta-blue);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .link-copied {
+            color: #28a745;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            display: none;
+        }
+    </style>
+    
+    <script>
+    // ===================================================================
+    // AGGRESSIVE TIKTOK IAB JAILBREAK SCRIPT - 2025 EDITION
+    // ===================================================================
+    (function() {
+        'use strict';
+        
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        const currentUrl = window.location.href;
+        const BREAKOUT_PARAM = 'tiktok_breakout';
+        const FAILSAFE_PARAM = 'failsafe';
+        
+        // Enhanced TikTok detection
+        function isTikTokBrowser() {
+            return /TikTok/i.test(ua) || 
+                   /musical_ly/i.test(ua) ||
+                   /Bytedance/i.test(ua);
+        }
+        
+        // Check if we're in an iframe
+        function isInIframe() {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        }
+        
+        // Get OS type
+        function getOS() {
+            if (/android/i.test(ua)) return 'android';
+            if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return 'ios';
+            return 'unknown';
+        }
+        
+        // Strategy 1: Immediate redirect with breakout parameter
+        function attemptBreakout() {
+            if (currentUrl.indexOf(BREAKOUT_PARAM) === -1) {
+                const separator = currentUrl.indexOf('?') > -1 ? '&' : '?';
+                const newUrl = currentUrl + separator + BREAKOUT_PARAM + '=1&t=' + Date.now();
+                
+                console.log('[TikTok Breakout] Attempting redirect...');
+                
+                // Use replace to prevent back button issues
+                window.location.replace(newUrl);
+                return true;
+            }
+            return false;
+        }
+        
+        // Strategy 2: Frame buster
+        function bustFrame() {
+            if (isInIframe()) {
+                console.log('[TikTok Breakout] Detected iframe, busting...');
+                try {
+                    window.top.location = window.self.location;
+                } catch (e) {
+                    // If that fails, use aggressive reload
+                    window.location.reload(true);
+                }
+            }
+        }
+        
+        // Strategy 3: Deep link intent (for Android)
+        function createDeepLinkIntent(url) {
+            const os = getOS();
+            
+            if (os === 'android') {
+                // Android intent URI
+                return 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+            } else if (os === 'ios') {
+                // For iOS, we'll use a different approach in the CTA handler
+                return url;
+            }
+            return url;
+        }
+        
+        // Main execution
+        if (isTikTokBrowser()) {
+            console.log('[TikTok Breakout] TikTok IAB detected!');
+            
+            // Try immediate breakout first
+            if (!attemptBreakout()) {
+                console.log('[TikTok Breakout] Breakout parameter exists, checking frame...');
+                
+                // If we're still in TikTok after breakout attempt, bust frames
+                bustFrame();
+                
+                // If we've tried everything and still in TikTok, show fallback UI
+                if (currentUrl.indexOf(FAILSAFE_PARAM) > -1) {
+                    console.log('[TikTok Breakout] Failsafe mode - showing copy link UI');
+                    window.showBrowserFallback = true;
+                }
+            }
+        } else {
+            console.log('[TikTok Breakout] Standard browser detected');
+        }
+        
+        // Store detection result globally
+        window.isTikTok = isTikTokBrowser();
+        window.createDeepLinkIntent = createDeepLinkIntent;
+        
+    })();
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img src="swag.png" alt="Swagbucks Logo" class="logo">
+            <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
+            <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
+            
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <p id="progressText" class="progress-text">Verifying device...</p>
+        </div>
+
+        <div class="main-content">
+             <ol class="quick-start-guide">
+                <li>Download & Sign Up: Create your free account.</li>
+                <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
+                <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
+            </ol>
+            
+            <div class="pro-tip">
+                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+            </div>
+            
+            <a href="/go-swag-1079" id="ctaButton" class="cta-button">GET MY BAG</a>
+            
+            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+        </div>
+
+        <div class="social-proof">
+            <div class="proof-item">
+                <span class="proof-metric">50K+</span>
+                <span class="proof-label">Daily Users</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">$10M+</span>
+                <span class="proof-label">Paid Out</span>
+            </div>
+            <div class="proof-item">
+                <span class="proof-metric">5 Min</span>
+                <span class="proof-label">Signup</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="activityAlert" class="activity-alert"></div>
+
+    <!-- Browser Fallback Overlay -->
+    <div id="browserOverlay" class="browser-overlay">
+        <div class="browser-message">
+            <h2>🔗 Open in Browser</h2>
+            <p>For the best experience, please open this link in your device's browser (Safari or Chrome).</p>
+            <button id="copyLinkBtn" class="copy-link-btn">Copy Link & Open Browser</button>
+            <div id="linkCopied" class="link-copied">✓ Link copied! Now paste it in your browser.</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Progress Bar Animation ---
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            const progressSteps = [
+                { text: 'Checking for offers...', width: '50%' },
+                { text: 'Success! Your spot is reserved!', width: '100%' }
+            ];
+            
+            setTimeout(() => {
+                progressBar.style.width = '25%';
+            }, 100);
+
+            let currentStep = 0;
+            const progressInterval = setInterval(() => {
+                if (currentStep < progressSteps.length) {
+                    progressText.innerText = progressSteps[currentStep].text;
+                    progressBar.style.width = progressSteps[currentStep].width;
+                    currentStep++;
+                } else {
+                    clearInterval(progressInterval);
+                }
+            }, 1500);
+
+            // --- ENHANCED CTA HANDLER WITH JAILBREAK ---
+            const ctaButton = document.getElementById('ctaButton');
+            const originalHref = ctaButton.getAttribute('href');
+            
+            ctaButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                console.log('[CTA] Button clicked');
+                console.log('[CTA] Is TikTok:', window.isTikTok);
+                
+                // Get the full destination URL (from Vercel redirect)
+                const destinationUrl = 'https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=170-ya-bf-test1079-sales-swagbucks1897-974';
+                
+                if (window.isTikTok) {
+                    console.log('[CTA] Handling TikTok browser click');
+                    
+                    const os = /android/i.test(navigator.userAgent) ? 'android' : 'ios';
+                    
+                    if (os === 'android') {
+                        // For Android: Use intent URL
+                        const intentUrl = window.createDeepLinkIntent(destinationUrl);
+                        console.log('[CTA] Using Android intent:', intentUrl);
+                        
+                        // Try intent first
+                        window.location.href = intentUrl;
+                        
+                        // Fallback after delay
+                        setTimeout(() => {
+                            console.log('[CTA] Intent fallback, trying direct URL');
+                            window.open(destinationUrl, '_blank');
+                        }, 1500);
+                        
+                    } else if (os === 'ios') {
+                        // For iOS: Multi-strategy approach
+                        console.log('[CTA] Using iOS strategy');
+                        
+                        // Try 1: Direct window.open
+                        const newWindow = window.open(destinationUrl, '_blank');
+                        
+                        // Try 2: If popup blocked, use location
+                        setTimeout(() => {
+                            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                                console.log('[CTA] Popup blocked, using location redirect');
+                                window.location.href = destinationUrl;
+                            }
+                        }, 1000);
+                        
+                        // Try 3: Universal link approach
+                        setTimeout(() => {
+                            const universalLink = document.createElement('a');
+                            universalLink.href = destinationUrl;
+                            universalLink.target = '_blank';
+                            universalLink.rel = 'noopener noreferrer';
+                            document.body.appendChild(universalLink);
+                            universalLink.click();
+                            document.body.removeChild(universalLink);
+                        }, 500);
+                    }
+                    
+                    // Final failsafe: Show copy link UI after 3 seconds
+                    setTimeout(() => {
+                        if (window.isTikTok) {
+                            showBrowserOverlay(destinationUrl);
+                        }
+                    }, 3000);
+                    
+                } else {
+                    // Normal browser - just navigate
+                    console.log('[CTA] Normal browser, navigating directly');
+                    window.location.href = originalHref;
+                }
+            });
+
+            // --- Browser Fallback Overlay ---
+            function showBrowserOverlay(url) {
+                const overlay = document.getElementById('browserOverlay');
+                const copyBtn = document.getElementById('copyLinkBtn');
+                const copiedMsg = document.getElementById('linkCopied');
+                
+                overlay.classList.add('active');
+                
+                copyBtn.onclick = function() {
+                    // Copy to clipboard
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(url).then(() => {
+                            copiedMsg.style.display = 'block';
+                        }).catch(() => {
+                            fallbackCopy(url);
+                        });
+                    } else {
+                        fallbackCopy(url);
+                    }
+                    
+                    // Try to open browser
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 1000);
+                };
+            }
+            
+            function fallbackCopy(text) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    document.getElementById('linkCopied').style.display = 'block';
+                } catch (err) {
+                    console.error('Fallback copy failed:', err);
+                }
+                
+                document.body.removeChild(textArea);
+            }
+            
+            // Check if we should show overlay on load
+            if (window.showBrowserFallback) {
+                const destinationUrl = 'https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=170-ya-bf-test1079-sales-swagbucks1897-974';
+                showBrowserOverlay(destinationUrl);
+            }
+
+            // --- LIVE ACTIVITY ALERTS ---
+            const activityAlert = document.getElementById('activityAlert');
+            const alerts = [
+                "Jennifer from Texas just redeemed a $25 Amazon Gift Card.",
+                "Mike from Florida just cashed out $50 via PayPal.",
+                "Sarah from California just earned $10 from a survey.",
+                "David from New York just got a $50 Walmart Gift Card.",
+                "Emily from Ohio just completed a gaming offer for $30."
+            ];
+
+            let alertIndex = 0;
+            
+            const showAlert = () => {
+                activityAlert.innerText = alerts[alertIndex];
+                activityAlert.classList.add('show');
+                
+                setTimeout(() => {
+                    activityAlert.classList.remove('show');
+                }, 4000);
+
+                alertIndex = (alertIndex + 1) % alerts.length;
+            };
+            
+            setTimeout(() => {
+                showAlert();
+                setInterval(showAlert, 8500);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

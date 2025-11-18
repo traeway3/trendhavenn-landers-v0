@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TikTok - More Options</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .desktop-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #000;
+        }
+
+        .iphone-container {
+            width: 430px;
+            height: 932px;
+            border: 3px solid #1a1a1a;
+            border-radius: 55px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .app-screen {
+            width: 100%;
+            height: 100%;
+            background: #161823;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Mobile-first: full screen */
+        @media (max-width: 430px) {
+            .desktop-wrapper {
+                display: block;
+            }
+            .iphone-container {
+                width: 100vw;
+                height: 100vh;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
+
+        /* Scrollbar styling */
+        .app-screen::-webkit-scrollbar {
+            display: none;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #161823;
+            padding: 16px 0 12px 0;
+            border-bottom: 0.5px solid #2F3343;
+        }
+
+        .header-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-align: center;
+            letter-spacing: -0.3px;
+        }
+
+        .settings-list {
+            padding: 0;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 16px;
+            border-bottom: 0.5px solid #2F3343;
+            background: #161823;
+            transition: background 0.15s ease;
+        }
+
+        .setting-item:active {
+            background: #1a1d2b;
+        }
+
+        .setting-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 14px;
+            flex-shrink: 0;
+            color: #FFFFFF;
+        }
+
+        .setting-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .setting-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 4px;
+            letter-spacing: -0.2px;
+        }
+
+        .setting-subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            color: #8A8B91;
+            line-height: 1.4;
+            letter-spacing: -0.1px;
+        }
+
+        .setting-action {
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 51px;
+            height: 31px;
+            background: #383B46;
+            border-radius: 15.5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #25F4EE;
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 27px;
+            height: 27px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-knob {
+            transform: translateX(20px);
+        }
+
+        /* Chevron */
+        .chevron-right {
+            width: 20px;
+            height: 20px;
+            color: #5A5B63;
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop-wrapper">
+        <div class="iphone-container">
+            <div class="app-screen">
+                <!-- Header -->
+                <div class="header">
+                    <div class="header-title">More options</div>
+                </div>
+
+                <!-- Settings List -->
+                <div class="settings-list">
+                    <!-- 1. Allow reuse of content -->
+                    <div class="setting-item">
+                        <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                            <polyline points="16 6 12 2 8 6"/>
+                            <line x1="12" y1="2" x2="12" y2="15"/>
+                        </svg>
+                        <div class="setting-content">
+                            <div class="setting-title">Allow reuse of content</div>
+                            <div class="setting-subtitle">Duet, Stitch, stickers, and add to Story</div>
+                        </div>
+                        <div class="setting-action">
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Content disclosure and ads -->
+                    <div class="setting-item">
+                        <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="9" y1="13" x2="15" y2="13"/>
+                            <line x1="9" y1="17" x2="15" y2="17"/>
+                        </svg>
+                        <div class="setting-content">
+                            <div class="setting-title">Content disclosure and ads</div>
+                            <div class="setting-subtitle">Add this label to tell viewers your content was generated or edited with AI. Learn more</div>
+                        </div>
+                        <div class="setting-action">
+                            <svg class="chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 3. Watch videos & earn money [HERO ITEM] -->
+                    <div class="setting-item">
+                        <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10 8 16 12 10 16 10 8"/>
+                        </svg>
+                        <div class="setting-content">
+                            <div class="setting-title">Watch videos & earn money</div>
+                            <div class="setting-subtitle">Enable this option to start earning money by watching TikTok videos daily. Learn more</div>
+                        </div>
+                        <div class="setting-action">
+                            <div class="toggle-switch" id="heroToggle" onclick="toggleSwitch(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Identify similar products -->
+                    <div class="setting-item">
+                        <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <div class="setting-content">
+                            <div class="setting-title">Identify similar products</div>
+                            <div class="setting-subtitle">Allow items similar to the ones in your videos to be identified so users can shop for them in TikTok Shop. Learn more</div>
+                        </div>
+                        <div class="setting-action">
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Allow high-quality uploads -->
+                    <div class="setting-item">
+                        <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"/>
+                            <polyline points="5 12 12 5 19 12"/>
+                        </svg>
+                        <div class="setting-content">
+                            <div class="setting-title">Allow high-quality uploads</div>
+                            <div class="setting-subtitle">Higher quality videos may take longer to process.</div>
+                        </div>
+                        <div class="setting-action">
+                            <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Save to device -->
+                    <div class="setting-item">
+                        <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <div class="setting-content">
+                            <div class="setting-title">Save to device</div>
+                            <div class="setting-subtitle">Your post will be saved to device, unless a violation of Community Guideline is found.</div>
+                        </div>
+                        <div class="setting-action">
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        // Prevent scrolling bounce on iOS
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.closest('.app-screen')) {
+                return;
+            }
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>

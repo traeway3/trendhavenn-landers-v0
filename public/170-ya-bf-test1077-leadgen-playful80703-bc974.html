@@ -933,33 +933,67 @@
             fill: white;
         }
     </style>
-    <script>
-        !function (w, d, t) {
-            w.TiktokAnalyticsObject=t;var
-            ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var
-            i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return
-            e},ttq.load=function(e,n){var
-            r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new
-            Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+<script>
+    (function() {
+        try {
+            // Multiple detection methods for TikTok in-app browser
+            var ua = navigator.userAgent || '';
+            var isTikTok = false;
             
-            ttq.load('D4D59H3C77U50IDUA3TG');
-            ttq.page();
-        }(window, document, 'ttq');
-    </script>
-    <script>
-        (function(w, d, n, u, p) {
-            try {
-                if (/TikTok/i.test(n)) {
-                    if (w.location.search.indexOf(p) === -1) {
-                        var newUrl = u + (u.indexOf('?') > -1 ? '&' : '?') + p;
-                        w.location.href = newUrl;
-                    }
-                }
-            } catch (e) {
-                console.warn('TikTok breakout script failed:', e);
+            // Method 1: Check UserAgent for TikTok
+            if (/TikTok/i.test(ua) || /Musical\.ly/i.test(ua) || /BytedanceWebview/i.test(ua)) {
+                isTikTok = true;
             }
-        })(window, document, navigator.userAgent, window.location.href, 'breakout=true');
-    </script>
+            
+            // Method 2: Check for TikTok-specific window properties
+            if (!isTikTok && window.ToutiaoJSBridge) {
+                isTikTok = true;
+            }
+            
+            // Method 3: Check for ByteDance WebView
+            if (!isTikTok && window.byted_acrawler) {
+                isTikTok = true;
+            }
+            
+            // Method 4: Check webkit message handlers
+            if (!isTikTok && window.webkit && window.webkit.messageHandlers) {
+                var handlers = window.webkit.messageHandlers;
+                if (handlers.ToutiaoJSBridge || handlers.TikTokJSBridge) {
+                    isTikTok = true;
+                }
+            }
+            
+            // If TikTok detected, force external browser
+            if (isTikTok) {
+                // Try multiple methods to open in external browser
+                var currentUrl = window.location.href;
+                
+                // Method A: Use intent URL for Android
+                if (/android/i.test(ua)) {
+                    var intentUrl = 'intent://' + window.location.host + window.location.pathname + window.location.search + 
+                                   '#Intent;scheme=https;package=com.android.chrome;end';
+                    window.location.href = intentUrl;
+                    
+                    // Fallback: Try regular HTTPS after delay
+                    setTimeout(function() {
+                        window.location.href = currentUrl + (currentUrl.indexOf('?') > -1 ? '&' : '?') + 'external=1';
+                    }, 500);
+                }
+                // Method B: For iOS, try to open Safari
+                else if (/iPhone|iPad|iPod/i.test(ua)) {
+                    // Add parameter and reload to trigger Safari
+                    window.location.href = currentUrl + (currentUrl.indexOf('?') > -1 ? '&' : '?') + 'external=1';
+                }
+                // Method C: Generic fallback
+                else {
+                    window.location.href = currentUrl + (currentUrl.indexOf('?') > -1 ? '&' : '?') + 'external=1';
+                }
+            }
+        } catch (e) {
+            console.warn('TikTok kicker script error:', e);
+        }
+    })();
+</script>
 </head>
 <body>
     <div class="floating-bg floating-1"></div>
@@ -981,7 +1015,7 @@
 
     <div class="button-container">
         <div id="startButton" class="start-button-container">
-            <a href="/go-playful-1074" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
+            <a href="/go-playful-1077" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
                GET MY BAG
             </a>
         </div>
@@ -1048,58 +1082,4 @@
         // Start the app when page loads: Kept as-is
         document.addEventListener('DOMContentLoaded', init);
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Find the CTA button by its new unique href attribute
-            var ctaButton = document.querySelector('a[href="/go-playful-1074"]');
-            
-            if (ctaButton) {
-                // Add a click listener to the button
-                ctaButton.addEventListener('click', function(event) {
-                    // 1. PREVENT the default redirect immediately
-                    event.preventDefault(); 
-                    
-                    var redirectUrl = ctaButton.href;
-                    var hasRedirected = false;
-
-                    // 2. CREATE a function to handle the redirect
-                    function doRedirect() {
-                        if (!hasRedirected) {
-                            hasRedirected = true;
-                            window.location.href = redirectUrl;
-                        }
-                    }
-
-                    // 3. FIRE the event with a callback
-                    try {
-                        // Check if ttq is loaded
-                        if (typeof ttq === 'object' && ttq !== null && typeof ttq.track === 'function') {
-                            
-                            ttq.track('CompleteRegistration', {}, function() {
-                                // This callback runs AFTER the pixel fires
-                                doRedirect();
-                            });
-
-                            // 4. As a safety, if the callback fails or takes too long
-                            // (e.g., if an adblocker blocks TikTok),
-                            // redirect after 1 second anyway.
-                            setTimeout(doRedirect, 1000); 
-
-                        } else {
-                            // ttq is not loaded, just redirect.
-                            console.warn('ttq object not found. Redirecting immediately.');
-                            doRedirect();
-                        }
-                    } catch (e) {
-                        // If ttq fails for any other reason, just redirect immediately.
-                        console.warn('TikTok event tracking failed:', e);
-                        doRedirect();
-                    }
-                });
-            } else {
-                console.warn('CTA button with href="/go-playful-1074" not found.');
-            }
-        });
-    </script>
-
 </body></html>

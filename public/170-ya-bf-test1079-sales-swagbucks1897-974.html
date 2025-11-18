@@ -490,7 +490,7 @@
                 console.log('[CTA] Is TikTok:', window.isTikTok);
                 
                 // Get the full destination URL (from Vercel redirect)
-                const destinationUrl = 'https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=170-ya-bf-test1079-sales-swagbucks1897-974';
+                const destinationUrl = window.location.origin + ctaButton.getAttribute('href');
                 
                 if (window.isTikTok) {
                     console.log('[CTA] Handling TikTok browser click');
@@ -599,7 +599,7 @@
             
             // Check if we should show overlay on load
             if (window.showBrowserFallback) {
-                const destinationUrl = 'https://rewarduplevel.com/aff_c?offer_id=1897&aff_id=27696&source=170-ya-bf-test1079-sales-swagbucks1897-974';
+                const destinationUrl = window.location.origin + ctaButton.getAttribute('href');
                 showBrowserOverlay(destinationUrl);
             }
 

@@ -932,108 +932,6 @@
             height: 0.625rem;
             fill: white;
         }
-        /* TikTok Browser Overlay */
-.browser-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 9999;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    animation: fadeIn 0.3s ease-in;
-}
-
-.browser-overlay.active {
-    display: flex;
-}
-
-.browser-overlay-content {
-    text-align: center;
-    max-width: 500px;
-}
-
-.browser-overlay-icon {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
-}
-
-.browser-overlay-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #ffffff;
-}
-
-.browser-overlay-text {
-    font-size: 1rem;
-    color: #d1d5db;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-}
-
-.browser-overlay-steps {
-    text-align: left;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    margin-bottom: 2rem;
-}
-
-.browser-overlay-step {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    color: #e5e7eb;
-}
-
-.browser-overlay-step:last-child {
-    margin-bottom: 0;
-}
-
-.browser-overlay-step-number {
-    background: #10b981;
-    color: white;
-    border-radius: 50%;
-    width: 1.5rem;
-    height: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.875rem;
-    flex-shrink: 0;
-    margin-right: 0.75rem;
-}
-
-.browser-overlay-button {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    width: 100%;
-    max-width: 300px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
         /* Hidden utility class */
 .hidden {
     display: none !important;
@@ -1050,11 +948,6 @@
     animation: fadeInUp 0.5s ease-out;
 }
     </style>
-    <script>
-    // TikTok User Agent Detection
-    window.isTikTok = /TikTok|musical_ly|Bytedance/i.test(navigator.userAgent);
-    console.log('TikTok detected:', window.isTikTok);
-</script>
 </head>
 <body>
     <div class="floating-bg floating-1"></div>
@@ -1090,7 +983,7 @@
     
     <!-- Final CTA (hidden initially) -->
     <div id="startButton" class="start-button-container hidden">
-        <a href="/go-playful-1080" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
+        <a href="/go-playful-1081" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
            GET MY BAG
         </a>
     </div>
@@ -1156,75 +1049,7 @@
 
         // Start the app when page loads: Kept as-is
         document.addEventListener('DOMContentLoaded', init);
-        // TikTok Jailbreak Handler for CTA Button
-document.addEventListener('DOMContentLoaded', function() {
-    var ctaLink = document.querySelector('#startButton a');
-    
-    if (ctaLink && window.isTikTok) {
-        ctaLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            var destinationUrl = window.location.origin + this.getAttribute('href');
-            var isAndroid = /android/i.test(navigator.userAgent);
-            var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-            
-            // Attempt 1: Intent schemes (Android)
-            if (isAndroid) {
-                var intentUrl = 'intent://' + 
-                    window.location.host + 
-                    this.getAttribute('href') + 
-                    window.location.search +
-                    '#Intent;scheme=https;action=android.intent.action.VIEW;end';
-                
-                window.location.href = intentUrl;
-                
-                // Fallback after 1 second
-                setTimeout(function() {
-                    window.location.href = destinationUrl;
-                }, 1000);
-            }
-            // Attempt 2: Universal links (iOS)
-            else if (isIOS) {
-                window.location.href = destinationUrl;
-            }
-            // Generic fallback
-            else {
-                window.location.href = destinationUrl;
-            }
-            
-            // Show overlay as final fallback after 2 seconds
-            setTimeout(function() {
-                var overlay = document.getElementById('browserOverlay');
-                if (overlay) {
-                    overlay.classList.add('active');
-                }
-            }, 2000);
-        });
-    }
-});
     </script>
-    <!-- TikTok Browser Overlay -->
-<div id="browserOverlay" class="browser-overlay">
-    <div class="browser-overlay-content">
-        <div class="browser-overlay-icon">🌐</div>
-        <h2 class="browser-overlay-title">Open in Your Browser</h2>
-        <p class="browser-overlay-text">
-            For the best experience, please open this page in your default browser (Safari, Chrome, etc.)
-        </p>
-        <div class="browser-overlay-steps">
-            <div class="browser-overlay-step">
-                <span class="browser-overlay-step-number">1</span>
-                <span>Tap the three dots (...) in the top right corner</span>
-            </div>
-            <div class="browser-overlay-step">
-                <span class="browser-overlay-step-number">2</span>
-                <span>Select "Open in Browser" or "Open in Safari"</span>
-            </div>
-            <div class="browser-overlay-step">
-                <span class="browser-overlay-step-number">3</span>
-                <span>Continue from there to access all features</span>
-            </div>
-        </div>
         <button class="browser-overlay-button" onclick="document.getElementById('browserOverlay').classList.remove('active');">
             I Understand
         </button>

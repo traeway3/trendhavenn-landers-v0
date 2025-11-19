@@ -1035,6 +1035,11 @@
     }
 }
     </style>
+    <script>
+    // TikTok User Agent Detection
+    window.isTikTok = /TikTok|musical_ly|Bytedance/i.test(navigator.userAgent);
+    console.log('TikTok detected:', window.isTikTok);
+</script>
 </head>
 <body>
     <div class="floating-bg floating-1"></div>

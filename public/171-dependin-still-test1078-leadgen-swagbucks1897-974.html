@@ -375,26 +375,27 @@
                 alertIndex = (alertIndex + 1) % alerts.length;
             };
             
-            setTimeout(() => {
+setTimeout(() => {
                 showAlert();
                 setInterval(showAlert, 8500);
             }, 3000);
+
+            // --- Country Gate Logic ---
+            document.querySelectorAll('.country-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const country = this.getAttribute('data-country');
+                    
+                    // Hide country gate
+                    document.getElementById('countryGate').classList.add('hidden');
+                    
+                    // Show CTA button
+                    document.querySelector('.cta-button').classList.remove('hidden');
+                    
+                    // Optional: Store selection for analytics
+                    console.log('User selected country:', country);
+                });
+            });
         });
     </script>
-    // Country Gate Logic
-document.querySelectorAll('.country-button').forEach(button => {
-    button.addEventListener('click', function() {
-        const country = this.getAttribute('data-country');
-        
-        // Hide country gate
-        document.getElementById('countryGate').classList.add('hidden');
-        
-        // Show CTA button
-        document.querySelector('.cta-button').classList.remove('hidden');
-        
-        // Optional: Store selection for analytics
-        console.log('User selected country:', country);
-    });
-});
 </body>
 </html>

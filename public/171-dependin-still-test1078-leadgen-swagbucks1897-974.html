@@ -226,79 +226,49 @@
             opacity: 1;
             transform: translateY(0);
         }
+        .hidden {
+    display: none !important;
+}
+
+#countryGate {
+    margin-bottom: 20px;
+}
+
+.country-gate-headline {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 15px;
+}
+
+.country-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.country-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--cta-blue);
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.country-button:hover {
+    background-color: var(--cta-hover);
+    transform: scale(1.02);
+}
     </style>
-    <script>
-    (function() {
-        // Enhanced TikTok In-App Browser Detection & Kicker
-        function detectAndKickTikTok() {
-            var isTikTok = false;
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            
-            // Method 1: User Agent detection (multiple patterns)
-            if (/TikTok/i.test(ua) || 
-                /Musical.ly/i.test(ua) || 
-                /BytedanceWebview/i.test(ua) ||
-                /aweme/i.test(ua)) {
-                isTikTok = true;
-            }
-            
-            // Method 2: Check for TikTok-specific window properties
-            if (window.TikTokWebView || 
-                window.bytedance || 
-                window.tiktok ||
-                (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.TikTokJSBridge)) {
-                isTikTok = true;
-            }
-            
-            // Method 3: Check for specific WebView characteristics
-            if (!isTikTok && window.webkit && window.webkit.messageHandlers) {
-                var handlers = Object.keys(window.webkit.messageHandlers);
-                if (handlers.some(function(h) { return /tiktok|bytedance|aweme/i.test(h); })) {
-                    isTikTok = true;
-                }
-            }
-            
-            // Method 4: Check document referrer for TikTok domains
-            if (document.referrer && /tiktok\.com|musical\.ly/i.test(document.referrer)) {
-                isTikTok = true;
-            }
-            
-            // If TikTok detected, force open in external browser
-            if (isTikTok) {
-                var currentUrl = window.location.href;
-                
-                // Try multiple methods to break out
-                // Method 1: Intent URL for Android
-                if (/android/i.test(ua)) {
-                    window.location.href = 'intent:' + currentUrl + '#Intent;end';
-                }
-                
-                // Method 2: Universal fallback
-                var a = document.createElement('a');
-                a.href = currentUrl;
-                a.target = '_blank';
-                a.rel = 'noreferrer noopener';
-                
-                // Add instruction overlay
-                var overlay = document.createElement('div');
-                overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
-                overlay.innerHTML = '<div style="background:white;padding:30px;border-radius:15px;text-align:center;max-width:320px;"><h2 style="margin:0 0 15px;font-size:20px;">Please Open in Browser</h2><p style="margin:0 0 20px;font-size:14px;">For the best experience, please tap the menu (⋯) and select "Open in Browser"</p><button onclick="window.location.reload();" style="background:#3686E5;color:white;border:none;padding:12px 30px;border-radius:8px;font-size:16px;cursor:pointer;">Try Again</button></div>';
-                document.body.appendChild(overlay);
-                
-                // Attempt to trigger external browser
-                setTimeout(function() {
-                    a.click();
-                }, 100);
-            }
-        }
-        
-        // Run detection immediately and on load
-        detectAndKickTikTok();
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', detectAndKickTikTok);
-        }
-    })();
-    </script>
 </head>
 <body>
 
@@ -325,7 +295,15 @@
                 💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
             </div>
             
-            <a href="/go-swag-1078" class="cta-button">GET MY BAG</a>
+            <div id="countryGate">
+    <p class="country-gate-headline">Where are you located?</p>
+    <div class="country-buttons">
+        <button class="country-button" data-country="us">🇺🇸 United States</button>
+        <button class="country-button" data-country="uk">🇬🇧 United Kingdom</button>
+    </div>
+</div>
+
+<a href="https://glctrk.org/aff_c?offer_id=1897&aff_id=27696&source=171-dependin-still-test1085-leadgen-swagbucks1897-974" class="cta-button hidden">GET MY BAG</a>
             
             <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>
@@ -403,5 +381,20 @@
             }, 3000);
         });
     </script>
+    // Country Gate Logic
+document.querySelectorAll('.country-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const country = this.getAttribute('data-country');
+        
+        // Hide country gate
+        document.getElementById('countryGate').classList.add('hidden');
+        
+        // Show CTA button
+        document.querySelector('.cta-button').classList.remove('hidden');
+        
+        // Optional: Store selection for analytics
+        console.log('User selected country:', country);
+    });
+});
 </body>
 </html>

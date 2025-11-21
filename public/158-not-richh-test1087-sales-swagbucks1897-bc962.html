@@ -170,7 +170,11 @@
         }
         
         .cta-button:hover {
-            .hidden {
+    background-color: var(--cta-hover);
+    transform: scale(1.02);
+}
+
+.hidden {
     display: none !important;
 }
 
@@ -209,8 +213,6 @@
 .country-btn:last-child {
     margin-bottom: 0;
 }
-            background-color: var(--cta-hover);
-            transform: scale(1.02);
         }
         
         @keyframes pulse {
@@ -290,7 +292,7 @@
                 <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
             </ol>
             
-            <a <div id="countryGate" class="country-gate">
+            <div id="countryGate" class="country-gate">
     <h3>Where are you located?</h3>
     <button class="country-btn" data-country="us">🇺🇸 United States</button>
     <button class="country-btn" data-country="uk">🇬🇧 United Kingdom</button>

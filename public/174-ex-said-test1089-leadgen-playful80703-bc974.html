@@ -683,22 +683,22 @@
 
 .logo {
     width: 8rem;
-    height: 8rem;
+    height: auto;
     border-radius: 1rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    object-fit: cover;
     margin-bottom: 1rem;
     margin-top: 2rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
     max-width: 100px;
+    max-height: 150px;
 }
 
 @media (min-width: 640px) {
     .logo {
         width: 10rem;
-        height: 10rem;
+        height: auto;
         margin-bottom: 1rem;
         margin-top: 2.5rem;
     }
@@ -969,21 +969,8 @@
     </div>
 
 <div class="button-container">
-    <!-- Country Selection Gate (shown first) -->
-    <div id="countryGate" class="country-gate">
-        <h2 class="question intro-rust-bold">Which region do you reside in?</h2>
-        <div class="country-buttons">
-            <button class="btn btn-country intro-rust-font" data-country="US">
-                🇺🇸 United States
-            </button>
-            <button class="btn btn-country intro-rust-font" data-country="UK">
-                🇬🇧 United Kingdom
-            </button>
-        </div>
-    </div>
-    
-    <!-- Final CTA (hidden initially) -->
-    <div id="startButton" class="start-button-container hidden">
+    <!-- Final CTA (shown immediately) -->
+    <div id="startButton" class="start-button-container">
         <a href="https://buenohoodies.com/aff_c?offer_id=1761185380703&s1=t1&s2=174-ex-said-test1089-leadgen-playful80703-bc974" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
            GET MY BAG
         </a>
@@ -1051,43 +1038,4 @@
         // Start the app when page loads: Kept as-is
         document.addEventListener('DOMContentLoaded', init);
     </script>
-    <script>
-// Country Selection Gate Logic
-document.addEventListener('DOMContentLoaded', function() {
-    const countryGate = document.getElementById('countryGate');
-    const startButton = document.getElementById('startButton');
-    const countryButtons = document.querySelectorAll('.btn-country');
-    
-    // Ensure initial state: show gate, hide CTA
-    countryGate.classList.remove('hidden');
-    startButton.classList.add('hidden');
-    
-    // Handle country selection
-    countryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const selectedCountry = this.getAttribute('data-country');
-            console.log('Country selected:', selectedCountry);
-            
-            // Hide the country gate
-            countryGate.style.opacity = '0';
-            countryGate.style.transform = 'translateY(-1rem)';
-            
-            // After fade-out animation, hide gate and show CTA
-            setTimeout(() => {
-                countryGate.classList.add('hidden');
-                startButton.classList.remove('hidden');
-                startButton.classList.add('fade-in-cta');
-                
-                // Optional: Trigger social proof updates
-                if (typeof updatePeopleOnline === 'function') {
-                    updatePeopleOnline();
-                }
-                if (typeof updateMoneyPaidOut === 'function') {
-                    updateMoneyPaidOut();
-                }
-            }, 300);
-        });
-    });
-});
-</script>
 </body></html>

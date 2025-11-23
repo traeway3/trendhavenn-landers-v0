@@ -161,31 +161,56 @@
             position: relative;
         }
 
-        .step {
-    font-size: 1.05rem;
-    margin-bottom: 0.75rem;
-    color: #e0e0e0;
-    font-weight: 500;
-    line-height: 1.6;
+        /* Step Item Container */
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
 }
 
-        .step:last-child {
-            margin-bottom: 0;
-        }
+.step-item:last-child {
+    margin-bottom: 0;
+}
 
-        @media (min-width: 640px) {
-            .step {
-                font-size: 1rem;
-            }
-        }
+/* Gradient Number Badge */
+.step-number {
+    background: linear-gradient(135deg, #fe2c55 0%, #00f2ea 100%);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(254, 44, 85, 0.4);
+}
 
-        .step-highlight {
-            background: linear-gradient(90deg, #fe2c55 0%, #00f2ea 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-        }
+/* Step Text */
+.step-text {
+    color: #e0e0e0;
+    font-weight: 500;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    padding-top: 2px;
+}
+
+@media (min-width: 640px) {
+    .step-text {
+        font-size: 1rem;
+    }
+}
+
+.step-highlight {
+    background: linear-gradient(90deg, #fe2c55 0%, #00f2ea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}
 
         /* Button container */
         .button-container {
@@ -422,12 +447,23 @@
     <!-- Section Title for Steps -->
     <h2 class="sub-headline" style="font-weight: 700; text-align: center; margin-bottom: 1rem;">How It Works:</h2>
 
-    <!-- Steps -->
-    <div class="steps">
-        <p class="step">1. Click the button below to activate the reward portal.</p>
-        <p class="step">2. Create your free account to unlock the TikTok task list.</p>
-        <p class="step">3. Search for 'TikTok' in the app and start watching to earn.</p>
+<!-- Steps -->
+<div class="steps">
+    <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-text">Click the button below to activate the reward portal.</div>
     </div>
+    
+    <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-text">Create your free account to unlock the TikTok task list.</div>
+    </div>
+    
+    <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-text">Search for 'TikTok' in the app and start watching to earn.</div>
+    </div>
+</div>
 
     <!-- Button Container with preserved logic -->
     <div class="button-container">

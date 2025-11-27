@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Claim Your Bonus</title>
+    <title>Play & Earn</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -276,7 +276,7 @@
         <div class="header">
             <img src="swag.png" alt="Swagbucks Logo" class="logo">
             <h1 class="headline">Stop Depending on Others. <br>Get Your Own Bag.</h1>
-            <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
+            <p class="sub-headline">Earn up to $16/hr playing top chart games like Solitaire & Clash Royale from your phone.</p>
             
             <div class="progress-bar-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -295,15 +295,15 @@
                 💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
             </div>
             
-            <div id="countryGate">
-    <p class="country-gate-headline">Where are you located?</p>
-    <div class="country-buttons">
-        <button class="country-button" data-country="us">🇺🇸 United States</button>
-        <button class="country-button" data-country="uk">🇬🇧 United Kingdom</button>
-    </div>
-</div>
+            <div id="deviceGate">
+                <p class="country-gate-headline">What type of device do you use?</p>
+                <div class="country-buttons">
+                    <button class="country-button" onclick="selectDevice('iOS')">🍎 iPhone / iPad</button>
+                    <button class="country-button" onclick="selectDevice('Android')">🤖 Android</button>
+                </div>
+            </div>
 
-<a href="https://gloffers.org/aff_c?offer_id=1897&aff_id=27696&source=171-dependin-still-test1086-leadgen-swagbucks1897-974" class="cta-button hidden">GET MY BAG</a>
+            <a href="https://trkfy.org/aff_c?offer_id=1897&aff_id=27696&source=174-ex-said-test1095-leadgen-swagbucks1897-bc974" class="cta-button hidden">GET MY BAG</a>
             
             <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
         </div>
@@ -375,27 +375,23 @@
                 alertIndex = (alertIndex + 1) % alerts.length;
             };
             
-setTimeout(() => {
+            setTimeout(() => {
                 showAlert();
                 setInterval(showAlert, 8500);
             }, 3000);
-
-            // --- Country Gate Logic ---
-            document.querySelectorAll('.country-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const country = this.getAttribute('data-country');
-                    
-                    // Hide country gate
-                    document.getElementById('countryGate').classList.add('hidden');
-                    
-                    // Show CTA button
-                    document.querySelector('.cta-button').classList.remove('hidden');
-                    
-                    // Optional: Store selection for analytics
-                    console.log('User selected country:', country);
-                });
-            });
         });
+
+        // --- Device Gate Logic ---
+        function selectDevice(device) {
+            // Hide device gate
+            document.getElementById('deviceGate').classList.add('hidden');
+            
+            // Show CTA button
+            document.querySelector('.cta-button').classList.remove('hidden');
+            
+            // Optional: Store selection for analytics
+            console.log('User selected device:', device);
+        }
     </script>
 </body>
 </html>

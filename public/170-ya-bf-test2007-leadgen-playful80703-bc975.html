@@ -6,6 +6,26 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#581c87">
     <title>Create Beautiful Landing Page with Smooth Transitions</title>
+
+    <script>
+(function() {
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if (isTikTok) {
+    var currentUrl = window.location.href;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isAndroid = /android/i.test(ua);
+    if (isIOS) {
+      window.location.href = 'x-safari-' + currentUrl;
+      setTimeout(function() { window.location.href = currentUrl; }, 25);
+    } else if (isAndroid) {
+      var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+      window.location.href = intent;
+      setTimeout(function() { window.location.href = currentUrl; }, 25);
+    }
+  }
+})();
+</script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -942,8 +962,8 @@
 
     <img src="playful3.png" alt="Logo" class="logo">
 
-    <h1 class="title intro-rust-medium">Stop Depending on Others. Get Your Own Bag.</h1>
-    <p class="sub-headline">Get paid for testing the newest games & apps from your phone.</p>
+    <h1 class="title intro-rust-medium">Stop Depending on Others.</h1>
+    <p class="sub-headline">Turn your screen time into real rewards. Play games, earn cash, and fund your own lifestyle.</p>
 
     <div class="steps">
         <p class="step intro-rust-bold">1. Click the button below.</p>
@@ -953,12 +973,12 @@
     </div>
 
     <div class="button-container">
-        <div id="startButton" class="start-button-container">
-            <a href="https://buenohoodies.com/aff_c?offer_id=1761185380703&s1=t1&s2=170-ya-bf-test1070-leadgen-playful80703-bc974" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
-               GET MY BAG
-            </a>
-        </div>
-    </div>
+  <div id="startButton" class="start-button-container">
+    <a href="https://buenohoodies.com/aff_c?offer_id=1761185380703&s1=t1&s2=170-ya-bf-test2007-leadgen-playful80703-bc975" class="btn btn-start intro-rust-font" style="text-decoration: none; display: block; text-align: center;">
+      Start Earning Now
+    </a>
+  </div>
+</div>
 
     <div class="verification">
         <div class="verification-icon">

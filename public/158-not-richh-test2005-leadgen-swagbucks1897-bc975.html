@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Swagbucks | Live Like You Want</title>
+    <script>
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+      if (isTikTok) {
+        var currentUrl = window.location.href;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        var isAndroid = /android/i.test(ua);
+        if (isIOS) {
+          // For iOS, try to open in Safari
+          window.location.href = 'x-safari-' + currentUrl;
+          setTimeout(function() {
+            window.location.href = currentUrl;
+          }, 25);
+        } else if (isAndroid) {
+          // For Android, use intent to open in default browser
+          var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+          window.location.href = intent;
+          setTimeout(function() {
+            window.location.href = currentUrl;
+          }, 25);
+        }
+      }
+    })();
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -170,49 +195,9 @@
         }
         
         .cta-button:hover {
-    background-color: var(--cta-hover);
-    transform: scale(1.02);
-}
-
-.hidden {
-    display: none !important;
-}
-
-.country-gate {
-    margin-bottom: 20px;
-}
-
-.country-gate h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--dark-text);
-    margin-bottom: 15px;
-}
-
-.country-btn {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    background-color: var(--cta-blue);
-    color: var(--white);
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 10px;
-}
-
-.country-btn:hover {
-    background-color: var(--cta-hover);
-    transform: scale(1.02);
-}
-
-.country-btn:last-child {
-    margin-bottom: 0;
-}
+            background-color: var(--cta-hover);
+            transform: scale(1.02);
+        }
         
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(54, 134, 229, 0.7); }
@@ -290,14 +275,8 @@
                 <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
                 <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
             </ol>
-            
-            <div id="countryGate" class="country-gate">
-    <h3>Where are you located?</h3>
-    <button class="country-btn" data-country="us">🇺🇸 United States</button>
-    <button class="country-btn" data-country="uk">🇬🇧 United Kingdom</button>
-</div>
 
-<a href="https://glctrk.org/aff_c?offer_id=1897&aff_id=27696&source=158-not-richh-test2005-leadgen-swagbucks1897-bc975.html" class="cta-button hidden">START LIVING</a>
+            <a href="https://glctrk.org/aff_c?offer_id=1897&aff_id=27696&source=158-not-richh-test2005-leadgen-swagbucks1897-bc975.html" class="cta-button">START LIVING</a>
 
             <div class="objection-handler">
                 <p>✅ <b>Is it legit?</b> Yes. Swagbucks has paid out over $500 Million to its members.</p>
@@ -325,17 +304,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Country Gate Logic ---
-const countryGate = document.getElementById('countryGate');
-const ctaButton = document.querySelector('.cta-button');
-const countryButtons = document.querySelectorAll('.country-btn');
-
-countryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        countryGate.classList.add('hidden');
-        ctaButton.classList.remove('hidden');
-    });
-});
             // --- Progress Bar Animation ---
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');

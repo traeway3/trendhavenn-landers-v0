@@ -9,6 +9,37 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+
+    <!-- TikTok Browser Redirect Script -->
+<script>
+(function() {
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  
+  if (isTikTok) {
+    var currentUrl = window.location.href;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isAndroid = /android/i.test(ua);
+    
+    if (isIOS) {
+      // For iOS, try to open in Safari
+      window.location.href = 'x-safari-' + currentUrl;
+      setTimeout(function() {
+        window.location.href = currentUrl;
+      }, 25);
+    } else if (isAndroid) {
+      // For Android, use intent to open in default browser
+      var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+      window.location.href = intent;
+      setTimeout(function() {
+        window.location.href = currentUrl;
+      }, 25);
+    }
+  }
+})();
+</script>
+<!-- TikTok Browser Redirect Script End -->
+    
     <style>
         /* cyrillic-ext */
         @font-face {

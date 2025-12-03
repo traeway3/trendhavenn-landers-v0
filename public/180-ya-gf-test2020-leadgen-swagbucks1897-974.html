@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+      if (isTikTok) {
+        var currentUrl = window.location.href;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        var isAndroid = /android/i.test(ua);
+        if (isIOS) {
+          window.location.href = 'x-safari-' + currentUrl;
+          setTimeout(function() { window.location.href = currentUrl; }, 25);
+        } else if (isAndroid) {
+          var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+          window.location.href = intent;
+          setTimeout(function() { window.location.href = currentUrl; }, 25);
+        }
+      }
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Claim Your Bonus</title>
@@ -81,6 +100,7 @@
             margin: 0 auto 8px;
             background-color: #e0e0e0;
             border-radius: 20px;
+            display: none;
         }
         
         .progress-bar {
@@ -96,10 +116,86 @@
             color: var(--light-text);
             margin-bottom: 15px;
             min-height: 1.2em;
+            display: none;
         }
 
         .main-content {
             padding: 0 20px 20px;
+        }
+
+        /* === AGE GATE STYLES === */
+        #age-gate {
+            padding: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .age-gate-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 20px;
+        }
+
+        .age-gate-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .age-gate-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .age-gate-btn-yes {
+            background-color: var(--cta-blue);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(54, 134, 229, 0.3);
+        }
+
+        .age-gate-btn-yes:hover {
+            background-color: var(--cta-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(54, 134, 229, 0.4);
+        }
+
+        .age-gate-btn-no {
+            background-color: var(--white);
+            color: var(--dark-text);
+            border: 2px solid #ddd;
+        }
+
+        .age-gate-btn-no:hover {
+            border-color: var(--cta-blue);
+            background-color: #f8f9fa;
+        }
+
+        .age-gate-btn svg {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .age-gate-note {
+            font-size: 0.75rem;
+            color: var(--light-text);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* === FINAL OFFER SECTION === */
+        #final-offer {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
         }
 
         .quick-start-guide {
@@ -236,26 +332,46 @@
             <h1 class="headline">Get Paid To Play Games & Take Surveys</h1>
             <p class="sub-headline">Stop depending on others. Start earning your own bag directly from your phone.</p>
             
-            <div class="progress-bar-container">
+            <div class="progress-bar-container" id="progressBarContainer">
                 <div id="progressBar" class="progress-bar"></div>
             </div>
             <p id="progressText" class="progress-text">Verifying device...</p>
         </div>
 
         <div class="main-content">
-             <ol class="quick-start-guide">
-                <li>Download & Sign Up: Create your free account.</li>
-                <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
-                <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
-            </ol>
-            
-            <div class="pro-tip">
-                💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+            <!-- AGE GATE -->
+            <div id="age-gate">
+                <p class="age-gate-question">Are you over 18 years old?</p>
+                <div class="age-gate-buttons">
+                    <button class="age-gate-btn age-gate-btn-yes" id="btnYes">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Yes, I'm over 18
+                    </button>
+                    <button class="age-gate-btn age-gate-btn-no" id="btnNo">
+                        No, I'm under 18
+                    </button>
+                    <p class="age-gate-note">We have special offers available for you!</p>
+                </div>
             </div>
-            
-            <a href="https://glctrk.org/aff_c?offer_id=1897&aff_id=27696&source=180-ya-gf-test2020-leadgen-swagbucks1897-974" class="cta-button">GET MY BAG</a>
-            
-            <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+
+            <!-- FINAL OFFER (Hidden initially) -->
+            <div id="final-offer">
+                <ol class="quick-start-guide">
+                    <li>Download & Sign Up: Create your free account.</li>
+                    <li>Earn "SB" Points: Complete surveys, play games, and shop online.</li>
+                    <li>Cash Out: Redeem points for gift cards or PayPal cash.</li>
+                </ol>
+                
+                <div class="pro-tip">
+                    💡 <b>Pro-Tip:</b> Finish your first 5 surveys to unlock a $5 instant bonus!
+                </div>
+                
+                <a href="https://glctrk.org/aff_c?offer_id=1897&aff_id=27696&source=180-ya-gf-test2020-leadgen-swagbucks1897-974" class="cta-button">GET MY BAG</a>
+                
+                <p class="trust-badge">🛡️ Secure & Verified Payouts</p>
+            </div>
         </div>
 
         <div class="social-proof">
@@ -278,29 +394,45 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Progress Bar Animation ---
+            // Get elements
+            const ageGate = document.getElementById('age-gate');
+            const finalOffer = document.getElementById('final-offer');
+            const progressBarContainer = document.getElementById('progressBarContainer');
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
-            
-            const progressSteps = [
-                { text: 'Checking for offers...', width: '50%' },
-                { text: 'Success! Your spot is reserved!', width: '100%' }
-            ];
-            
-            setTimeout(() => {
-                progressBar.style.width = '25%';
-            }, 100);
+            const btnYes = document.getElementById('btnYes');
+            const btnNo = document.getElementById('btnNo');
 
-            let currentStep = 0;
-            const progressInterval = setInterval(() => {
-                if (currentStep < progressSteps.length) {
-                    progressText.innerText = progressSteps[currentStep].text;
-                    progressBar.style.width = progressSteps[currentStep].width;
-                    currentStep++;
-                } else {
-                    clearInterval(progressInterval);
-                }
-            }, 1500);
+            // Function to handle age gate interaction
+            const handleAgeGateClick = () => {
+                // Hide age gate
+                ageGate.style.display = 'none';
+                
+                // Show progress bar elements
+                progressBarContainer.style.display = 'block';
+                progressText.style.display = 'block';
+                
+                // Start progress bar animation
+                progressText.innerText = 'Verifying eligibility...';
+                
+                setTimeout(() => {
+                    progressBar.style.width = '50%';
+                }, 100);
+
+                setTimeout(() => {
+                    progressText.innerText = 'Success! Your spot is reserved!';
+                    progressBar.style.width = '100%';
+                }, 1500);
+
+                // Show final offer after progress completes
+                setTimeout(() => {
+                    finalOffer.style.display = 'block';
+                }, 3000);
+            };
+
+            // Add event listeners to both buttons
+            btnYes.addEventListener('click', handleAgeGateClick);
+            btnNo.addEventListener('click', handleAgeGateClick);
 
             // --- LIVE ACTIVITY ALERTS UPDATED FOR SWAGBUCKS ---
             const activityAlert = document.getElementById('activityAlert');

@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- 1. CRITICAL FUNCTIONALITY (Safe Script - Ad Blockers usually ignore this) -->
-
-    <meta charset="UTF-8" />
+    <script>
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+      
+      if (isTikTok) {
+        var currentUrl = window.location.href;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        var isAndroid = /android/i.test(ua);
+        
+        if (isIOS) {
+          window.location.href = 'x-safari-' + currentUrl;
+          setTimeout(function() {
+            window.location.href = currentUrl;
+          }, 25);
+        } else if (isAndroid) {
+          var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+          window.location.href = intent;
+          setTimeout(function() {
+            window.location.href = currentUrl;
+          }, 25);
+        }
+      }
+    })();
+    </script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playful Rewards</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -555,7 +578,7 @@
         </p>
 
         <!-- S2 DEFAULT TO STATIC_LOAD to catch blocked users -->
-        <a href="https://get.yourdealfinds.com/click" class="cta-button">
+        <a href="https://affrkr.com/?TTT=WSNuqhjavcBn2ef4fI49JMYeOSl1JcQ4vQJDRoz7h5U%3d&s1=playful-spk2035" class="cta-button">
           START EARNING NOW
         </a>
 

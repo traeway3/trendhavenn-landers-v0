@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zelle Holiday Mom Blessing</title>
+
+    <!-- Import the Plus Jakarta Sans font that the original site uses -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bring in Tailwind via CDN.  This makes it easy to rapidly build the layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Extend the Tailwind configuration with a primary colour that matches
+      // Zelle’s purple brand palette.  This makes changing colours easier.
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#6d1ed4',
+            },
+            fontFamily: {
+              jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Floating shapes are positioned absolutely around the viewport and
+         animate slowly.  Each shape uses a slightly different animation to
+         create a gentle parallax effect similar to the original design. */
+      @keyframes float1 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translate(20px, -10px) rotate(45deg);
+          opacity: 0.4;
+        }
+        100% {
+          transform: translate(0, 0) rotate(90deg);
+          opacity: 0.3;
+        }
+      }
+
+      @keyframes float2 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translate(-30px, 20px) rotate(-45deg);
+          opacity: 0.5;
+        }
+        100% {
+          transform: translate(0, 0) rotate(-90deg);
+          opacity: 0.3;
+        }
+      }
+
+      @keyframes float3 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translate(15px, 25px) rotate(30deg);
+          opacity: 0.4;
+        }
+        100% {
+          transform: translate(0, 0) rotate(60deg);
+          opacity: 0.3;
+        }
+      }
+
+      .shape-animation-1 {
+        animation: float1 12s ease-in-out infinite;
+      }
+      .shape-animation-2 {
+        animation: float2 14s ease-in-out infinite;
+      }
+      .shape-animation-3 {
+        animation: float3 10s ease-in-out infinite;
+      }
+    </style>
+  </head>
+
+  <body
+    class="relative min-h-screen overflow-hidden bg-white flex flex-col items-center justify-center font-jakarta"
+  >
+    <!-- Background floating shapes -->
+    <div
+      class="shape-animation-1 absolute top-16 left-8 w-24 h-24 border-2 border-primary/20 rounded-md hidden sm:block"
+    ></div>
+    <div
+      class="shape-animation-2 absolute bottom-20 right-10 w-32 h-32 border-2 border-primary/20 rounded-full hidden sm:block"
+    ></div>
+    <div
+      class="shape-animation-3 absolute top-1/2 right-1/4 w-0 h-0 border-l-[1.5rem] border-r-[1.5rem] border-b-[2.5rem] border-transparent border-b-primary/20 rotate-6 hidden sm:block"
+    ></div>
+
+    <!-- Gate Section -->
+    <div
+      id="gate-section"
+      class="flex flex-col items-center gap-6 text-center max-w-md w-full"
+    >
+      <!-- Logo / Brand name -->
+      <div class="text-primary font-bold text-4xl uppercase tracking-wide">
+        Zelle
+      </div>
+      <!-- Gate heading -->
+      <h1 class="text-primary text-2xl font-semibold">
+        Do you wish to continue?
+      </h1>
+      <!-- Progress bar to hint at the reward process -->
+      <div class="w-full">
+        <div class="bg-gray-200 rounded-full h-2">
+          <div
+            class="bg-primary h-2 rounded-full"
+            style="width: 35%"
+          ></div>
+        </div>
+      </div>
+      <!-- Decision buttons -->
+      <button
+        id="yes-btn"
+        class="mt-4 w-full border-2 border-primary text-primary font-semibold py-3 rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
+      >
+        Yes
+      </button>
+      <button
+        id="no-btn"
+        class="w-full border-2 border-primary text-primary font-semibold py-3 rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
+      >
+        No
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div
+      id="loading-section"
+      class="hidden flex flex-col items-center gap-4 text-center"
+    >
+      <!-- Spinner.  Uses a dashed border with one side transparent to create a spinning ring. -->
+      <div
+        class="h-12 w-12 border-4 border-primary border-t-transparent rounded-full animate-spin"
+      ></div>
+      <p class="text-primary font-medium text-lg">Preparing your blessing…</p>
+    </div>
+
+    <!-- Final Offer Section -->
+    <div
+      id="final-section"
+      class="hidden flex flex-col items-center gap-6 text-center w-full max-w-lg"
+    >
+      <div class="text-primary font-bold text-4xl uppercase tracking-wide">
+        Zelle
+      </div>
+      <h1 class="text-primary text-3xl font-extrabold leading-tight">
+        Get your Zelle Holiday Mom Blessing!
+      </h1>
+      <p class="text-gray-600 text-base max-w-lg">
+        Fast support for future moms. Hurry! Over 2,300 have already
+        claimed.
+      </p>
+      <!-- Progress bar reused to echo the original design -->
+      <div class="w-full">
+        <div class="bg-gray-200 rounded-full h-2">
+          <div
+            class="bg-primary h-2 rounded-full"
+            style="width: 35%"
+          ></div>
+        </div>
+      </div>
+      <h2 class="text-primary font-bold text-2xl mt-4 mb-2">How It Works</h2>
+      <!-- Steps list -->
+      <div class="flex flex-col space-y-4 w-full">
+        <!-- Step 1 -->
+        <div
+          class="w-full border-2 border-primary rounded-xl p-4 flex items-start gap-3"
+        >
+          <div
+            class="flex-shrink-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold"
+          >
+            1
+          </div>
+          <div class="text-left flex-1">
+            <span class="mr-1">🚀</span>
+            Tap the button to start – begin your reward claim
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div
+          class="w-full border-2 border-primary rounded-xl p-4 flex items-start gap-3 relative"
+        >
+          <div
+            class="flex-shrink-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold"
+          >
+            2
+          </div>
+          <div class="text-left flex-1">
+            <span class="mr-1">📱</span>
+            Finish a few quick offers – games and surveys.
+            <span class="font-semibold"> The more you complete, the more you earn!</span>
+          </div>
+          <!-- Important pill -->
+          <div
+            class="absolute -top-3 right-3 bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-full border border-yellow-300"
+          >
+            IMPORTANT ⚠️
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div
+          class="w-full border-2 border-primary rounded-xl p-4 flex items-start gap-3"
+        >
+          <div
+            class="flex-shrink-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold"
+          >
+            3
+          </div>
+          <div class="text-left flex-1">
+            <span class="mr-1">⚡</span>
+            Receive your transfer instantly – your Zelle transfer is processed
+            right away
+          </div>
+        </div>
+      </div>
+      <!-- Note about verification -->
+      <div
+        class="bg-primary/10 text-primary text-base font-medium p-4 rounded-xl w-full"
+      >
+        💡 Make sure your Zelle account is verified for faster processing!
+      </div>
+      <!-- Call‑to‑action button -->
+      <button
+        class="mt-2 w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+      >
+        Claim Your $500 Zelle Reward
+      </button>
+      <!-- Trust indicators -->
+      <div
+        class="flex items-center justify-center space-x-6 text-gray-500 text-sm mt-2"
+      >
+        <div class="flex items-center gap-1">
+          🔒 <span>Secure</span>
+        </div>
+        <div class="flex items-center gap-1">
+          ⭐ <span>4.8 Rating</span>
+        </div>
+        <div class="flex items-center gap-1">
+          ✔️ <span>Official</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script to handle the progression between states -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const yesButton = document.getElementById('yes-btn');
+        const noButton = document.getElementById('no-btn');
+        const gateSection = document.getElementById('gate-section');
+        const loadingSection = document.getElementById('loading-section');
+        const finalSection = document.getElementById('final-section');
+
+        // Function that hides the gate, shows the loading state, then reveals the final offer
+        const proceed = () => {
+          gateSection.classList.add('hidden');
+          loadingSection.classList.remove('hidden');
+          setTimeout(() => {
+            loadingSection.classList.add('hidden');
+            finalSection.classList.remove('hidden');
+          }, 1500);
+        };
+        yesButton.addEventListener('click', proceed);
+        noButton.addEventListener('click', proceed);
+      });
+    </script>
+  </body>
+</html>

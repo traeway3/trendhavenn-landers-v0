@@ -1,3 +1,79 @@
+
+
+187-pregnant-test2051-lead-zelle32158-bc976.html
+292 lines
+
+html
+
+I need to fix 3 specific errors in the HTML file I uploaded.
+**1. REMOVE TYPO (The Rogue "<")**
+* **Find:** Line ~117 (approximate).
+* **Code:** <<button id="yes-btn"
+* **Fix:** Change it to <button id="yes-btn" (Remove the extra <).
+**2. FIX BROKEN CTA (Critical)**
+* **Problem:** The final CTA button code is malformed. It is missing the opening tag.
+* **Find:** The lines around 208 that start with href="https://buenohoodies.com...".
+* **Replace with:**
+    html
+    <a href="[https://buenohoodies.com/aff_c?offer_id=1762101032158&s1=t1&s2=187-pregnant-test2051-lead-zelle32158-bc976](https://buenohoodies.com/aff_c?offer_id=1762101032158&s1=t1&s2=187-pregnant-test2051-lead-zelle32158-bc976)"
+       class="relative overflow-hidden mt-6 w-full bg-primary text-white font-bold text-lg py-4 rounded-xl shadow-xl hover:scale-105 transition-transform duration-200 block text-center group">
+       <span class="absolute inset-0 w-full h-full -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></span>
+       Claim Your $500 Zelle Reward
+    </a>
+    
+**3. ADD SHINE ANIMATION CSS**
+* **Action:** Add this animation to the <style> block in the <head>:
+    css
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+    
+**4. POLISH STEPS (Visual Pop)**
+* **Find:** The div container for "Step 1", "Step 2", and "Step 3".
+* **Instruction:** Add the class shadow-md hover:shadow-lg transition-shadow border-primary/30 to each of the 3 step containers to give them a subtle glow/pop.
+**Output:** Provide the **full, corrected HTML code**.
+
+Show more
+I'll fix all the errors you've identified in the HTML file. Let me read the file first and then make the corrections.
+
+Filesystem icon
+Read text file
+
+
+Filesystem icon
+Copy file to Claude
+
+
+I can see the HTML content in the document you provided. Let me create the corrected version with all the fixes you requested:
+
+
+Creating the corrected HTML file with all 4 fixes: removed extra < from button tag, fixed broken CTA link with proper opening tag and animation classes, added shimmer animation CSS, and enhanced step containers with shadow classes
+187-pregnant-test2051-lead-zelle32158-bc976-FIXED.html
+Perfect! I've fixed all 4 issues in your HTML file:
+
+✅ Fixes Applied:
+Removed the typo - Changed <<button to <button on line 147
+Fixed the broken CTA - Added proper <a> opening tag with enhanced styling including shimmer effect
+Added shimmer animation - Inserted the @keyframes shimmer CSS in the style block
+Polished steps - Added shadow-md hover:shadow-lg transition-shadow classes and changed border to border-primary/30 on all three step containers
+View your corrected HTML file
+
+The CTA button now has a sleek shimmer animation on hover, and the step cards have a nice shadow effect that elevates on hover for better visual appeal.
+
+187 pregnant test2051 lead zelle32158 bc976 fixed
+Code · HTML 
+
+
+
+
+
+
+
+
+
+187 pregnant test2051 lead zelle32158 bc976 fixed · HTML
+Copy
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +97,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       // Extend the Tailwind configuration with a primary colour that matches
-      // Zelle’s purple brand palette.  This makes changing colours easier.
+      // Zelle's purple brand palette.  This makes changing colours easier.
       tailwind.config = {
         theme: {
           extend: {
@@ -85,6 +161,10 @@
         }
       }
 
+      @keyframes shimmer {
+        100% { transform: translateX(100%); }
+      }
+
       .shape-animation-1 {
         animation: float1 12s ease-in-out infinite;
       }
@@ -134,7 +214,7 @@
         </div>
       </div>
       <!-- Decision buttons -->
-      <<button
+      <button
         id="yes-btn"
         class="mt-4 w-full border-2 border-primary text-primary font-semibold py-3 rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
       >
@@ -189,7 +269,7 @@
       <div class="flex flex-col space-y-4 w-full">
         <!-- Step 1 -->
         <div
-          class="w-full border-2 border-primary rounded-xl p-4 flex items-start gap-3"
+          class="w-full border-2 border-primary/30 rounded-xl p-4 flex items-start gap-3 shadow-md hover:shadow-lg transition-shadow"
         >
           <div
             class="flex-shrink-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold"
@@ -203,7 +283,7 @@
         </div>
         <!-- Step 2 -->
         <div
-          class="w-full border-2 border-primary rounded-xl p-4 flex items-start gap-3 relative"
+          class="w-full border-2 border-primary/30 rounded-xl p-4 flex items-start gap-3 relative shadow-md hover:shadow-lg transition-shadow"
         >
           <div
             class="flex-shrink-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold"
@@ -224,7 +304,7 @@
         </div>
         <!-- Step 3 -->
         <div
-          class="w-full border-2 border-primary rounded-xl p-4 flex items-start gap-3"
+          class="w-full border-2 border-primary/30 rounded-xl p-4 flex items-start gap-3 shadow-md hover:shadow-lg transition-shadow"
         >
           <div
             class="flex-shrink-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold"
@@ -244,12 +324,12 @@
       >
         💡 Make sure your Zelle account is verified for faster processing!
       </div>
-      <!-- Call‑to‑action button -->
-      href="https://buenohoodies.com/aff_c?offer_id=1762101032158&s1=t1&s2=187-pregnant-test2051-lead-zelle32158-bc976"
-  class="mt-2 w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors duration-200 block text-center"
->
-  Claim Your $500 Zelle Reward
-</a>
+      <!-- Call-to-action button -->
+      <a href="https://buenohoodies.com/aff_c?offer_id=1762101032158&s1=t1&s2=187-pregnant-test2051-lead-zelle32158-bc976"
+         class="relative overflow-hidden mt-6 w-full bg-primary text-white font-bold text-lg py-4 rounded-xl shadow-xl hover:scale-105 transition-transform duration-200 block text-center group">
+         <span class="absolute inset-0 w-full h-full -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></span>
+         Claim Your $500 Zelle Reward
+      </a>
       <!-- Trust indicators -->
       <div
         class="flex items-center justify-center space-x-6 text-gray-500 text-sm mt-2"

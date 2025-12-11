@@ -1,41 +1,25 @@
-<!--
-  Optimised bridge page for the Freecash offer.
-
-  This landing page follows the “bridge page playbook” outlined by the user:
-  • All of the critical conversion elements (headline, sub‑headline, trust row,
-    social proof and call‑to‑action button) sit above the fold on a mobile
-    device. The wrapper uses `min-height:100vh` and flexbox to centre the
-    content so that no scrolling is required to see and act on the offer.
-  • The colour palette and typography match Freecash’s brand: a rich green
-    (#1fdb73) on a dark background with white text. A modern sans‑serif font
-    (Inter) is loaded from Google Fonts.
-  • A quantifiable hook (“Earn Real Cash Every Day”) anchors the page. A
-    sign‑up bonus notice, star rating and statistics row build trust, while a
-    simple ticker conveys live payouts to boost social proof.
-  • A single pulsating call‑to‑action button draws the eye and links
-    directly to the official Freecash website. It uses a subtle shine and
-    pulse animation to stand out without overwhelming the user.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Earn Real Cash – Freecash</title>
-  <!-- Load Inter font → light weight and modern to match Freecash branding -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freecash – Earn Real Rewards</title>
+  <!--
+    This bridge page implements a simple age‑verification gate followed by
+    a high‑impact call to action for the Freecash offer.  The design takes
+    cues from the supplied competitor page – dark backgrounds with neon‑green
+    highlights – while simplifying the layout so the entire flow fits on a
+    mobile screen without scrolling.  All styles and interactivity are
+    included in this single document.
+  -->
   <style>
     :root {
-      --primary: #1fdb73;          /* Freecash primary green */
-      --dark-bg: #1a1b1f;         /* dark background for entire page */
-      --panel-bg: #26292f;        /* slightly lighter panel background */
-      --text-main: #ffffff;       /* primary text colour */
-      --text-muted: #95989f;      /* muted text for secondary copy */
+      /* Colour palette based on Freecash branding */
+      --bg-dark: #0b0d10;
+      --panel-dark: #14171c;
+      --brand-green: #1fdb73;
+      --text-white: #ffffff;
+      --text-muted: #99a2b3;
     }
 
     * {
@@ -45,238 +29,186 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--dark-bg);
-      color: var(--text-main);
+      font-family: Inter, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      padding: 15px;
+      padding: 20px 12px;
     }
 
-    /* The main container that holds all elements. Using a fixed max-width
-       ensures a mobile‑friendly layout. A box‑shadow adds subtle depth. */
-    .card {
+    .wrapper {
       width: 100%;
-      max-width: 480px;
-      background: linear-gradient(180deg, var(--dark-bg) 0%, #0f1014 100%);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      max-width: 420px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      position: relative;
-      overflow: hidden;
+      align-items: stretch;
     }
 
-    /* Small badge at the top to label the app. Uses the primary colour and
-       includes a glowing dot. */
-    .badge {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--primary);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--primary);
+    /* Shared card styling */
+    .card {
+      background: var(--panel-dark);
+      border-radius: 16px;
+      padding: 24px 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
     }
 
-    /* Main headline with an inline slanted highlight block to draw the eye. */
+    /* Headline with highlighted amount */
     .headline {
-      font-size: 34px;
-      line-height: 1.2;
+      font-size: 32px;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 12px;
     }
-    .headline .highlight {
-      background: var(--primary);
-      color: var(--dark-bg);
-      padding: 0 6px;
-      border-radius: 4px;
+    .headline .amount {
+      background: var(--brand-green);
+      color: #0b0d10;
+      padding: 2px 8px;
+      border-radius: 6px;
       transform: rotate(-2deg);
       display: inline-block;
     }
 
-    /* Sub‑headline to describe the offer. Uses muted text colour. */
-    .subheadline {
+    .subtext {
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.45;
       color: var(--text-muted);
-      font-weight: 400;
+      margin-bottom: 20px;
     }
 
-    /* Sign‑up bonus banner with a coloured border and emoji icon. */
-    .sign-bonus {
-      background: var(--panel-bg);
-      border-left: 4px solid var(--primary);
-      border-radius: 8px;
-      padding: 12px 14px;
+    /* Social proof row */
+    .stats-row {
       display: flex;
-      align-items: center;
+      justify-content: space-between;
       gap: 10px;
+      margin-bottom: 20px;
     }
-    .sign-bonus .emoji {
-      font-size: 22px;
+
+    .stat {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
     }
-    .sign-bonus .sb-text .title {
+    .stat-value {
+      font-size: 16px;
       font-weight: 700;
-      font-size: 14px;
-      color: var(--text-main);
+      margin-bottom: 4px;
+      color: var(--brand-green);
     }
-    .sign-bonus .sb-text .subtitle {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--primary);
+    .stat-label {
+      font-size: 10px;
       text-transform: uppercase;
+      color: var(--text-muted);
       letter-spacing: 0.5px;
     }
 
-    /* Star rating row. Each star uses the primary colour; the last star
-       is muted to illustrate the fractional rating. */
-    .rating {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 14px;
-      font-weight: 500;
+    /* Age gate section */
+    .age-gate {
+      text-align: center;
     }
-    .rating svg {
-      width: 16px;
-      height: 16px;
+    .age-question {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
     }
-    .rating .full {
-      fill: var(--primary);
-    }
-    .rating .half {
-      fill: var(--text-muted);
-    }
-    .rating .rate-num {
-      margin-left: 6px;
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 400;
-    }
-
-    /* Statistics row showing quick proof points. Uses a subtle translucent
-       panel and a blurred background to stand out on the dark page. */
-    .stats {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-    }
-    .stat {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      backdrop-filter: blur(4px);
-    }
-    .stat svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      fill: var(--primary);
-    }
-    .stat .val {
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--text-main);
-    }
-    .stat .lbl {
-      font-size: 9px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 0.3px;
-    }
-
-    /* Ticker for live payouts. The inner container scrolls vertically through
-       several messages, creating the impression of a live feed. */
-    .ticker {
-      position: relative;
-      width: 100%;
-      height: 22px;
-      overflow: hidden;
-      margin-top: 8px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 8px;
-      padding-left: 6px;
-      display: flex;
-      align-items: center;
-    }
-    .ticker .inner {
+    .age-options {
       display: flex;
       flex-direction: column;
-      animation: scrollTicker 8s linear infinite;
+      gap: 12px;
     }
-    .ticker .inner div {
-      font-size: 12px;
-      color: var(--primary);
-      line-height: 22px;
+    .age-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--brand-green);
+      color: #0b0d10;
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 8px;
+      padding: 14px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
     }
-    @keyframes scrollTicker {
-      0% {
-        transform: translateY(0);
-      }
-      25% {
-        transform: translateY(-100%);
-      }
-      50% {
-        transform: translateY(-200%);
-      }
-      75% {
-        transform: translateY(-300%);
-      }
-      100% {
-        transform: translateY(0);
-      }
+    .age-button:hover {
+      background: #17c964;
+      transform: scale(1.02);
+    }
+    .age-button.no {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-muted);
+    }
+    .age-button.no:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--text-white);
     }
 
-    /* The call‑to‑action button. Uses pulsating shadow and shine to draw
-       attention. On hover (desktop), the button darkens slightly. */
-    .cta {
-      width: 100%;
-      background: var(--primary);
-      color: var(--dark-bg);
-      font-size: 17px;
+    /* Final state */
+    .final-state,
+    .sorry-state {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .final-title {
+      font-size: 36px;
       font-weight: 800;
-      padding: 16px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-align: center;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .final-title .check {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--brand-green);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+    }
+    .final-title .check svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--brand-green);
+    }
+    .final-message {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      background: var(--brand-green);
+      color: #0b0d10;
+      font-weight: 800;
+      font-size: 18px;
+      padding: 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      text-transform: uppercase;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 0 0 rgba(31, 219, 115, 0.4);
-      animation: pulse 2.5s infinite;
-      transition: background 0.2s ease;
     }
-    .cta:hover {
-      background: #19c666;
+    .cta span {
+      position: relative;
+      z-index: 2;
     }
     .cta svg {
       width: 20px;
       height: 20px;
-      fill: var(--dark-bg);
+      fill: #0b0d10;
+      z-index: 2;
     }
+    /* Subtle pulse to draw the eye */
     .cta::after {
       content: '';
       position: absolute;
@@ -284,168 +216,109 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.45),
-        transparent
-      );
-      animation: shine 3.2s infinite;
-    }
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(31, 219, 115, 0.4);
-      }
-      70% {
-        box-shadow: 0 0 0 12px rgba(31, 219, 115, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(31, 219, 115, 0);
-      }
-    }
-    @keyframes shine {
-      0% {
-        left: -100%;
-      }
-      50% {
-        left: 100%;
-      }
-      100% {
-        left: 100%;
-      }
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shine 3s infinite;
     }
 
-    /* Responsive adjustments for very small screens. Reduces font sizes
-       slightly to ensure content remains above the fold. */
-    @media (max-width: 400px) {
+    @keyframes shine {
+      0% { left: -100%; }
+      60% { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    .sorry-state p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 420px) {
       .headline {
+        font-size: 28px;
+      }
+      .final-title {
         font-size: 30px;
-      }
-      .stat .val {
-        font-size: 13px;
-      }
-      .stat .lbl {
-        font-size: 8px;
-      }
-      .cta {
-        font-size: 15px;
-        padding: 14px;
-      }
-      .card {
-        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="badge">Freecash App</div>
-    <h1 class="headline">
-      Earn <span class="highlight">Real Cash</span><br />
-      Every Day
-    </h1>
-    <p class="subheadline">
-      Complete surveys, play games and try new apps to collect coins you can
-      cash out for real money.
-    </p>
-    <div class="sign-bonus">
-      <div class="emoji">🎁</div>
-      <div class="sb-text">
-        <div class="title">$5 Sign‑Up Bonus</div>
-        <div class="subtitle">Instant for new members</div>
-      </div>
-    </div>
-    <!-- Star rating: four full stars and one muted star for a 4.8/5 rating -->
-    <div class="rating">
-      <svg viewBox="0 0 24 24" class="full">
-        <path
-          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-        ></path>
-      </svg>
-      <svg viewBox="0 0 24 24" class="full">
-        <path
-          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-        ></path>
-      </svg>
-      <svg viewBox="0 0 24 24" class="full">
-        <path
-          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-        ></path>
-      </svg>
-      <svg viewBox="0 0 24 24" class="full">
-        <path
-          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-        ></path>
-      </svg>
-      <svg viewBox="0 0 24 24" class="half">
-        <path
-          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-        ></path>
-      </svg>
-      <span class="rate-num">4.8/5 • 50K+ reviews</span>
-    </div>
-    <!-- Statistics row -->
-    <div class="stats">
-      <div class="stat">
-        <!-- User icon -->
-        <svg viewBox="0 0 24 24">
-          <path
-            d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3s-1.34-3-3-3C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 3.45 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
-          ></path>
-        </svg>
-        <div>
-          <div class="val">500K+</div>
-          <div class="lbl">Active Users</div>
+  <div class="wrapper">
+    <!-- Top content: hook and stats -->
+    <div class="card" id="hook-section">
+      <h1 class="headline">
+        Earn <span class="amount">$500+</span> in Real Rewards
+      </h1>
+      <p class="subtext">Complete simple offers, watch videos and play games to earn cash and gift cards every day. It’s fast, free and fun!</p>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-value">750K+</div>
+          <div class="stat-label">Members</div>
         </div>
-      </div>
-      <div class="stat">
-        <!-- Dollar icon -->
-        <svg viewBox="0 0 24 24">
-          <path
-            d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.75-2.7 1.75-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c2.17-.46 3.5-1.66 3.5-3.66 0-2.52-2.38-3.47-5.2-4.14z"
-          ></path>
-        </svg>
-        <div>
-          <div class="val">100+</div>
-          <div class="lbl">Offers Daily</div>
+        <div class="stat">
+          <div class="stat-value">4.8/5</div>
+          <div class="stat-label">Rating</div>
         </div>
-      </div>
-      <div class="stat">
-        <!-- Clock icon for payout speed -->
-        <svg viewBox="0 0 24 24">
-          <path
-            d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h4v-2h-3V6h-2v7z"
-          ></path>
-        </svg>
-        <div>
-          <div class="val">24/7</div>
-          <div class="lbl">Instant Payouts</div>
+        <div class="stat">
+          <div class="stat-value">3M+</div>
+          <div class="stat-label">Payouts</div>
         </div>
       </div>
     </div>
-    <!-- Live payout ticker messages -->
-    <div class="ticker">
-      <div class="inner">
-        <div>James H. just earned $7.80</div>
-        <div>Sarah W. cashed out $12.00</div>
-        <div>Alex P. withdrew 5,000 coins</div>
-        <div>You could be next — join now!</div>
+
+    <!-- Age gate -->
+    <div class="card age-gate" id="age-gate">
+      <div class="age-question">Are you 21 or older?</div>
+      <div class="age-options">
+        <button class="age-button yes" id="yes-btn">Yes, I'm 21+</button>
+        <button class="age-button no" id="no-btn">No, I'm under 21</button>
       </div>
     </div>
-    <!-- Call to action. Replace the href with your tracking link if needed. -->
-    <a
-      href="https://freecash.com/en"
-      class="cta"
-      target="_blank"
-      rel="noopener"
-    >
-      <span>Join &amp; Earn Now</span>
-      <svg viewBox="0 0 24 24">
-        <path
-          d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"
-        ></path>
-      </svg>
-    </a>
+
+    <!-- Final state after confirmation -->
+    <div class="card final-state" id="final-state">
+      <div class="final-title">
+        <div class="check">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19l10-10-1.4-1.4z"/></svg>
+        </div>
+        You're In!
+      </div>
+      <p class="final-message">Your device is eligible. Claim your sign‑up bonus and start earning now.</p>
+      <a class="cta" href="https://freecash.com/en" target="_blank" rel="noopener noreferrer">
+        <span>Join &amp; Start Earning</span>
+        <svg viewBox="0 0 24 24"><path d="M12 4L10.59 5.41 16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+      </a>
+    </div>
+
+    <!-- Sorry state for underage -->
+    <div class="card sorry-state" id="sorry-state">
+      <p>Sorry, this offer is for individuals aged 21 and over. Thanks for your interest!</p>
+    </div>
   </div>
+
+  <script>
+    // JavaScript to handle age gate interactions
+    (function() {
+      const yesBtn = document.getElementById('yes-btn');
+      const noBtn = document.getElementById('no-btn');
+      const ageGate = document.getElementById('age-gate');
+      const finalState = document.getElementById('final-state');
+      const sorryState = document.getElementById('sorry-state');
+
+      yesBtn.addEventListener('click', function() {
+        // Hide gate and show final content
+        ageGate.style.display = 'none';
+        finalState.style.display = 'block';
+      });
+      noBtn.addEventListener('click', function() {
+        ageGate.style.display = 'none';
+        sorryState.style.display = 'block';
+      });
+    })();
+  </script>
 </body>
 </html>

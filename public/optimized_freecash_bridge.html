@@ -1,0 +1,451 @@
+<!--
+  Optimised bridge page for the Freecash offer.
+
+  This landing page follows the “bridge page playbook” outlined by the user:
+  • All of the critical conversion elements (headline, sub‑headline, trust row,
+    social proof and call‑to‑action button) sit above the fold on a mobile
+    device. The wrapper uses `min-height:100vh` and flexbox to centre the
+    content so that no scrolling is required to see and act on the offer.
+  • The colour palette and typography match Freecash’s brand: a rich green
+    (#1fdb73) on a dark background with white text. A modern sans‑serif font
+    (Inter) is loaded from Google Fonts.
+  • A quantifiable hook (“Earn Real Cash Every Day”) anchors the page. A
+    sign‑up bonus notice, star rating and statistics row build trust, while a
+    simple ticker conveys live payouts to boost social proof.
+  • A single pulsating call‑to‑action button draws the eye and links
+    directly to the official Freecash website. It uses a subtle shine and
+    pulse animation to stand out without overwhelming the user.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earn Real Cash – Freecash</title>
+  <!-- Load Inter font → light weight and modern to match Freecash branding -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --primary: #1fdb73;          /* Freecash primary green */
+      --dark-bg: #1a1b1f;         /* dark background for entire page */
+      --panel-bg: #26292f;        /* slightly lighter panel background */
+      --text-main: #ffffff;       /* primary text colour */
+      --text-muted: #95989f;      /* muted text for secondary copy */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    /* The main container that holds all elements. Using a fixed max-width
+       ensures a mobile‑friendly layout. A box‑shadow adds subtle depth. */
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(180deg, var(--dark-bg) 0%, #0f1014 100%);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Small badge at the top to label the app. Uses the primary colour and
+       includes a glowing dot. */
+    .badge {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--primary);
+    }
+
+    /* Main headline with an inline slanted highlight block to draw the eye. */
+    .headline {
+      font-size: 34px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .headline .highlight {
+      background: var(--primary);
+      color: var(--dark-bg);
+      padding: 0 6px;
+      border-radius: 4px;
+      transform: rotate(-2deg);
+      display: inline-block;
+    }
+
+    /* Sub‑headline to describe the offer. Uses muted text colour. */
+    .subheadline {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* Sign‑up bonus banner with a coloured border and emoji icon. */
+    .sign-bonus {
+      background: var(--panel-bg);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sign-bonus .emoji {
+      font-size: 22px;
+    }
+    .sign-bonus .sb-text .title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+    .sign-bonus .sb-text .subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Star rating row. Each star uses the primary colour; the last star
+       is muted to illustrate the fractional rating. */
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .rating svg {
+      width: 16px;
+      height: 16px;
+    }
+    .rating .full {
+      fill: var(--primary);
+    }
+    .rating .half {
+      fill: var(--text-muted);
+    }
+    .rating .rate-num {
+      margin-left: 6px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    /* Statistics row showing quick proof points. Uses a subtle translucent
+       panel and a blurred background to stand out on the dark page. */
+    .stats {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+    .stat {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(4px);
+    }
+    .stat svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      fill: var(--primary);
+    }
+    .stat .val {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+    .stat .lbl {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+
+    /* Ticker for live payouts. The inner container scrolls vertically through
+       several messages, creating the impression of a live feed. */
+    .ticker {
+      position: relative;
+      width: 100%;
+      height: 22px;
+      overflow: hidden;
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding-left: 6px;
+      display: flex;
+      align-items: center;
+    }
+    .ticker .inner {
+      display: flex;
+      flex-direction: column;
+      animation: scrollTicker 8s linear infinite;
+    }
+    .ticker .inner div {
+      font-size: 12px;
+      color: var(--primary);
+      line-height: 22px;
+    }
+    @keyframes scrollTicker {
+      0% {
+        transform: translateY(0);
+      }
+      25% {
+        transform: translateY(-100%);
+      }
+      50% {
+        transform: translateY(-200%);
+      }
+      75% {
+        transform: translateY(-300%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* The call‑to‑action button. Uses pulsating shadow and shine to draw
+       attention. On hover (desktop), the button darkens slightly. */
+    .cta {
+      width: 100%;
+      background: var(--primary);
+      color: var(--dark-bg);
+      font-size: 17px;
+      font-weight: 800;
+      padding: 16px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 0 rgba(31, 219, 115, 0.4);
+      animation: pulse 2.5s infinite;
+      transition: background 0.2s ease;
+    }
+    .cta:hover {
+      background: #19c666;
+    }
+    .cta svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--dark-bg);
+    }
+    .cta::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.45),
+        transparent
+      );
+      animation: shine 3.2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(31, 219, 115, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(31, 219, 115, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(31, 219, 115, 0);
+      }
+    }
+    @keyframes shine {
+      0% {
+        left: -100%;
+      }
+      50% {
+        left: 100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* Responsive adjustments for very small screens. Reduces font sizes
+       slightly to ensure content remains above the fold. */
+    @media (max-width: 400px) {
+      .headline {
+        font-size: 30px;
+      }
+      .stat .val {
+        font-size: 13px;
+      }
+      .stat .lbl {
+        font-size: 8px;
+      }
+      .cta {
+        font-size: 15px;
+        padding: 14px;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">Freecash App</div>
+    <h1 class="headline">
+      Earn <span class="highlight">Real Cash</span><br />
+      Every Day
+    </h1>
+    <p class="subheadline">
+      Complete surveys, play games and try new apps to collect coins you can
+      cash out for real money.
+    </p>
+    <div class="sign-bonus">
+      <div class="emoji">🎁</div>
+      <div class="sb-text">
+        <div class="title">$5 Sign‑Up Bonus</div>
+        <div class="subtitle">Instant for new members</div>
+      </div>
+    </div>
+    <!-- Star rating: four full stars and one muted star for a 4.8/5 rating -->
+    <div class="rating">
+      <svg viewBox="0 0 24 24" class="full">
+        <path
+          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        ></path>
+      </svg>
+      <svg viewBox="0 0 24 24" class="full">
+        <path
+          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        ></path>
+      </svg>
+      <svg viewBox="0 0 24 24" class="full">
+        <path
+          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        ></path>
+      </svg>
+      <svg viewBox="0 0 24 24" class="full">
+        <path
+          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        ></path>
+      </svg>
+      <svg viewBox="0 0 24 24" class="half">
+        <path
+          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        ></path>
+      </svg>
+      <span class="rate-num">4.8/5 • 50K+ reviews</span>
+    </div>
+    <!-- Statistics row -->
+    <div class="stats">
+      <div class="stat">
+        <!-- User icon -->
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3s-1.34-3-3-3C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 3.45 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+          ></path>
+        </svg>
+        <div>
+          <div class="val">500K+</div>
+          <div class="lbl">Active Users</div>
+        </div>
+      </div>
+      <div class="stat">
+        <!-- Dollar icon -->
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.75-2.7 1.75-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c2.17-.46 3.5-1.66 3.5-3.66 0-2.52-2.38-3.47-5.2-4.14z"
+          ></path>
+        </svg>
+        <div>
+          <div class="val">100+</div>
+          <div class="lbl">Offers Daily</div>
+        </div>
+      </div>
+      <div class="stat">
+        <!-- Clock icon for payout speed -->
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h4v-2h-3V6h-2v7z"
+          ></path>
+        </svg>
+        <div>
+          <div class="val">24/7</div>
+          <div class="lbl">Instant Payouts</div>
+        </div>
+      </div>
+    </div>
+    <!-- Live payout ticker messages -->
+    <div class="ticker">
+      <div class="inner">
+        <div>James H. just earned $7.80</div>
+        <div>Sarah W. cashed out $12.00</div>
+        <div>Alex P. withdrew 5,000 coins</div>
+        <div>You could be next — join now!</div>
+      </div>
+    </div>
+    <!-- Call to action. Replace the href with your tracking link if needed. -->
+    <a
+      href="https://freecash.com/en"
+      class="cta"
+      target="_blank"
+      rel="noopener"
+    >
+      <span>Join &amp; Earn Now</span>
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"
+        ></path>
+      </svg>
+    </a>
+  </div>
+</body>
+</html>

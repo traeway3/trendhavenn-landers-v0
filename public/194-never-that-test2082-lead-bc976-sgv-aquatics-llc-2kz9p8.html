@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<!-- Re‑skinned bridge page for the Tyr Rewards offer.  This file is based on the
+     original “Get Paid to Scroll” template but adapted to match the
+     gaming‑focused Tyr Rewards brand.  Colors, text and icons have been
+     updated, while the responsive layout and overall structure remain the
+     same. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Paid to Play – Tyr Rewards</title>
+
+    <!-- Base styles reset and structural styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                'Helvetica Neue', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        /* The logo is represented by a large game controller emoji. */
+        .logo {
+            width: clamp(80px, 20vw, 120px);
+            height: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(40px, 10vw, 64px);
+        }
+
+        /* Progress bar styling with Tyr Rewards colors (gold → green). */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, #f6c343 0%, #32cd32 100%);
+            border-radius: 10px;
+        }
+
+        .headline {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 0 5px;
+        }
+
+        .headline h1 {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 800;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        /* The word “Play” uses a golden gradient for emphasis. */
+        .headline .scroll-text {
+            background: linear-gradient(135deg, #f6c343 0%, #f59700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subheadline {
+            text-align: center;
+            font-size: clamp(14px, 4vw, 18px);
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 10px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 30px 15px;
+            margin-bottom: 40px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .stat:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60px;
+            background: #2a2a2a;
+        }
+
+        .stat-icon {
+            width: clamp(36px, 10vw, 48px);
+            height: clamp(36px, 10vw, 48px);
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(18px, 5vw, 24px);
+            background: linear-gradient(135deg, #f6c343 0%, #32cd32 100%);
+        }
+
+        /* Stat value uses the same gradient as the progress bar for cohesion. */
+        .stat-value {
+            font-size: clamp(20px, 6vw, 32px);
+            font-weight: 700;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #f6c343 0%, #32cd32 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: clamp(9px, 2.5vw, 12px);
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+
+        /* Call to action button uses a gold → green gradient and stands out on dark
+           backgrounds.  The link target is defined in the anchor element. */
+        .cta-button {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 50px;
+            padding: 18px 50px;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #f6c343 0%, #32cd32 100%);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(246, 195, 67, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(246, 195, 67, 0.5);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .journey-section {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-top: 40px;
+        }
+
+        .journey-title {
+            text-align: center;
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: 700;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #f6c343 0%, #32cd32 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .journey-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .journey-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        /* Step numbers share the Tyr Rewards gradient. */
+        .step-number {
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f6c343 0%, #32cd32 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(18px, 5vw, 24px);
+            font-weight: 700;
+            color: #000;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .step-description {
+            font-size: clamp(13px, 3.5vw, 15px);
+            color: #888;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 0 5px;
+            }
+
+            .logo-container {
+                margin-bottom: 20px;
+            }
+
+            .progress-bar {
+                margin-bottom: 20px;
+            }
+
+            .headline {
+                margin-bottom: 15px;
+            }
+
+            .subheadline {
+                margin-bottom: 30px;
+            }
+
+            .stats-container {
+                padding: 20px 10px;
+                margin-bottom: 30px;
+            }
+
+            .stat {
+                padding: 0 5px;
+            }
+
+            .cta-button {
+                margin-bottom: 35px;
+                padding: 16px 40px;
+            }
+
+            .journey-section {
+                padding: 30px 20px;
+            }
+
+            .journey-step {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo replaced with a game controller emoji to reflect the gaming focus -->
+        <div class="logo-container">
+            <div class="logo" aria-label="Game Controller">🎮</div>
+        </div>
+
+        <!-- Progress bar retains the original width but now uses gold‑to‑green colors -->
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <!-- Primary headline updated to promote playing instead of scrolling -->
+        <div class="headline">
+            <h1>Get Paid to <span class="scroll-text">Play</span></h1>
+        </div>
+
+        <!-- Subheadline reflecting the Tyr Rewards offer and evergreen copy -->
+        <p class="subheadline">
+            Turn your phone into a money maker! Earn up to $500/day by playing games and completing simple surveys.
+        </p>
+
+        <!-- Trust & stats section updated to reflect rating, cashout policy and earning potential -->
+        <div class="stats-container">
+            <div class="stat">
+                <div class="stat-icon rating">⭐</div>
+                <div class="stat-value">4.6</div>
+                <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon instant">⚡</div>
+                <div class="stat-value">Instant</div>
+                <div class="stat-label">Cashout</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon money">💰</div>
+                <div class="stat-value">$500</div>
+                <div class="stat-label">Per Day</div>
+            </div>
+        </div>
+
+        <!-- Main call‑to‑action button linking to the specified affiliate URL -->
+        <a href="https://gloffers.org/aff_c?offer_id=2096&aff_id=27696&source=traehollo-test2082-lead-bc976-sgv%20aquatics%20llc_2kz9p8" class="cta-button trxbutton">Start Playing & Earn</a>
+
+        <!-- Steps showing how the user journey works; updated titles and descriptions -->
+        <div class="journey-section">
+            <h2 class="journey-title">How to Get Started</h2>
+            
+            <div class="journey-steps">
+                <div class="journey-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Download & Start</div>
+                        <div class="step-description">Get the app and create your free account in seconds.</div>
+                    </div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Play & Earn</div>
+                        <div class="step-description">Choose from hundreds of games. The more you play, the more you earn.</div>
+                    </div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Redeem Rewards</div>
+                        <div class="step-description">Cash out instantly to PayPal, Visa, or Gift Cards.</div>
+                    </div>
+                </div>
+
+                <!-- Optional fourth step encourages users to continue playing for greater rewards -->
+                <div class="journey-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Repeat & Scale</div>
+                        <div class="step-description">Keep playing to maximize your earnings and unlock bigger rewards.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

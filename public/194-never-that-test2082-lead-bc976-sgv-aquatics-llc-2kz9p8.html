@@ -21,7 +21,10 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                 'Helvetica Neue', Arial, sans-serif;
-            background: #000;
+            /* Use a subtle radial gradient instead of a flat black so the page feels
+               deeper and more refined. A dark centre (#1a1a1a) gently fades to
+               black at the edges. */
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
             color: #fff;
             min-height: 100vh;
             display: flex;
@@ -177,6 +180,26 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(246, 195, 67, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shine animation for the call‑to‑action button: a soft light sweep
+           travels across the button every three seconds. The pseudo‑element
+           uses a skewed gradient to simulate a moving highlight. */
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.7) 50%,
+                rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
         }
 
         .cta-button:hover {
@@ -232,6 +255,8 @@
             font-size: clamp(18px, 5vw, 24px);
             font-weight: 700;
             color: #000;
+            /* Add a gentle pulse to draw the eye without being distracting. */
+            animation: pulse 2.5s infinite ease-in-out;
         }
 
         .step-content {
@@ -298,13 +323,52 @@
                 gap: 15px;
             }
         }
+
+        /* Animation keyframes */
+        @keyframes shine {
+            0% {
+                left: -150%;
+            }
+            50% {
+                left: 150%;
+            }
+            100% {
+                left: 150%;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(50, 205, 50, 0.0);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 12px 4px rgba(50, 205, 50, 0.5);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Logo replaced with a game controller emoji to reflect the gaming focus -->
+        <!-- Premium logo: embed a vector trophy icon that uses the same gold → green
+             gradient as the rest of the page.  Using an SVG here avoids the cheap
+             look of an emoji and builds trust. -->
         <div class="logo-container">
-            <div class="logo" aria-label="Game Controller">🎮</div>
+            <div class="logo" aria-label="Trophy icon">
+                <!-- The SVG is sized relative to its container; the gradient is
+                     defined in <defs> and referenced by the path fill. -->
+                <svg viewBox="0 -32 576 576" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#f6c343" />
+                            <stop offset="100%" stop-color="#32cd32" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M552 64H448V24c0-13.3-10.7-24-24-24H152c-13.3 0-24 10.7-24 24v40H24C10.7 64 0 74.7 0 88v56c0 35.7 22.5 72.4 61.9 100.7 31.5 22.7 69.8 37.1 110 41.7C203.3 338.5 240 360 240 360v72h-48c-35.3 0-64 20.7-64 56v12c0 6.6 5.4 12 12 12h296c6.6 0 12-5.4 12-12v-12c0-35.3-28.7-56-64-56h-48v-72s36.7-21.5 68.1-73.6c40.3-4.6 78.6-19 110-41.7 39.3-28.3 61.9-65 61.9-100.7V88c0-13.3-10.7-24-24-24zM99.3 192.8C74.9 175.2 64 155.6 64 144v-16h64.2c1 32.6 5.8 61.2 12.8 86.2-15.1-5.2-29.2-12.4-41.7-21.4zM512 144c0 16.1-17.7 36.1-35.3 48.8-12.5 9-26.7 16.2-41.8 21.4 7-25 11.8-53.6 12.8-86.2H512v16z" fill="url(#logoGradient)" />
+                </svg>
+            </div>
         </div>
 
         <!-- Progress bar retains the original width but now uses gold‑to‑green colors -->
@@ -342,43 +406,35 @@
         </div>
 
         <!-- Main call‑to‑action button linking to the specified affiliate URL -->
-        <a href="https://gloffers.org/aff_c?offer_id=2096&aff_id=27696&source=traehollo-test2082-lead-bc976-sgv%20aquatics%20llc_2kz9p8" class="cta-button trxbutton">Start Playing & Earn</a>
+        <a href="https://gloffers.org/aff_c?offer_id=2096&aff_id=27696&source=194-never-that-test2082-lead-bc976-sgv-aquatics-llc-2kz9p8" class="cta-button trxbutton">Start Playing & Earn</a>
 
         <!-- Steps showing how the user journey works; updated titles and descriptions -->
         <div class="journey-section">
             <h2 class="journey-title">How to Get Started</h2>
             
             <div class="journey-steps">
+                <!-- Updated onboarding steps with clear, actionable instructions. -->
                 <div class="journey-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <div class="step-title">Download & Start</div>
-                        <div class="step-description">Get the app and create your free account in seconds.</div>
+                        <div class="step-title">Install & Create Free Account</div>
+                        <div class="step-description">Download the app and sign up in seconds. No deposit required.</div>
                     </div>
                 </div>
 
                 <div class="journey-step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <div class="step-title">Play & Earn</div>
-                        <div class="step-description">Choose from hundreds of games. The more you play, the more you earn.</div>
+                        <div class="step-title">Play Your First Game</div>
+                        <div class="step-description">Play any game for 2 minutes to unlock your first reward points instantly.</div>
                     </div>
                 </div>
 
                 <div class="journey-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <div class="step-title">Redeem Rewards</div>
-                        <div class="step-description">Cash out instantly to PayPal, Visa, or Gift Cards.</div>
-                    </div>
-                </div>
-
-                <!-- Optional fourth step encourages users to continue playing for greater rewards -->
-                <div class="journey-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <div class="step-title">Repeat & Scale</div>
-                        <div class="step-description">Keep playing to maximize your earnings and unlock bigger rewards.</div>
+                        <div class="step-title">Cash Out Real Money</div>
+                        <div class="step-description">Redeem your points immediately for PayPal, Visa, or Gift Cards.</div>
                     </div>
                 </div>
             </div>

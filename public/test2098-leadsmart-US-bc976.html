@@ -77,17 +77,22 @@
     }
     /* Logo */
     .logo-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin: 0 auto 12px;
-    }
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #9a59f5; /* Playful purple */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.logo-icon img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  display: block;
+}
     .verified-tag {
       display: inline-flex;
       align-items: center;
@@ -243,8 +248,8 @@
   <div class="container">
     <!-- Logo and verification -->
     <div class="logo-icon">
-      <i class="fa-solid fa-gift"></i>
-    </div>
+  <img src="/playful3.png" alt="Playful Rewards Logo">
+</div>
     <div class="verified-tag"><i class="fa-solid fa-shield-check"></i> Verified Program</div>
     <!-- Hero copy -->
     <h1 class="hero-title">Play games. Earn real rewards.</h1>

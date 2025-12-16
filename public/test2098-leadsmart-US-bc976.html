@@ -3,61 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Playful Rewards – Start Earning</title>
+  <title>Playful Rewards – How It Works</title>
   <!--
-    Redesigned bridge page for Playful Rewards.
+    High‑conversion bridge page for the Playful Rewards CPI offer.
 
-    This file uses a clean, card‑based layout inspired by the provided visual
-    reference.  Colours and typography are pulled directly from Playful Rewards’
-    own branding.  The primary purple (#9a59f5) comes from the site’s CSS
-    variables【638527807064021†L2123-L2129】, while Google fonts reveal the use of
-    “Inter” as a core typeface【492042014272259†L1-L2】.  A complementary gold
-    accent (#c8b612) is sampled from the app’s promotional imagery and echoes
-    the colour of reward coins.  The page avoids emojis and instead relies on
-    crisp SVG/FontAwesome icons to reinforce trust and guide users through
-    each step.
-
-    Technical constraints:
-      • Mobile‑first design with a max‑width container and generous padding
-        ensures the call‑to‑action button appears above the fold on phones.
-      • overflow‑x is hidden to prevent horizontal scrolling.
-      • All content sits inside a white card with soft shadows and rounded
-        corners for a premium feel.
+    This page is designed from the ground up to improve EPC by accurately
+    reflecting the in‑app experience. The layout is inspired by the
+    tescrelief.lovable.app structure: calm tone, clear step‑by‑step
+    instructions and a single call‑to‑action. Copy avoids any mention of
+    passive income, paid scrolling or unrealistic bonuses. Instead, it
+    explains exactly how Playful Rewards works: download the app, play
+    featured games to earn coins, and redeem those coins for PayPal or
+    Visa rewards.  Colors are drawn from the Playful Rewards brand —
+    primarily a vibrant purple with a complementary gold accent — and
+    typography uses the same Inter typeface as the app to reinforce
+    congruency.  The page is mobile‑first, with generous spacing and
+    rounded components that read well on small screens.
   -->
-  <!-- Import Google Fonts (Inter for a modern rounded sans‑serif look) -->
+  <!-- Import Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Import Font Awesome for professional icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-M80IyIZbfV7u1B3meFXT71UEF7Zw9Qh4ZGpTcXZH2SvVZ6kVjXiu6O9Fha6G+eUGQnDyNYM3Chn9h+duOwgdQg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
-      /* Brand colours extracted from Playful Rewards */
-      --primary: #9a59f5;   /* Primary purple from the Playful Rewards CSS【638527807064021†L2123-L2129】 */
-      --secondary: #c8b612; /* Gold accent sampled from promotional imagery */
-      --dark: #1f2937;      /* Dark grey for headings */
-      --text: #4b5563;      /* Secondary text colour */
-      --bg: #f5f7fb;        /* Light page background */
-      --card-bg: #ffffff;   /* Card background */
-      --badge-bg: #f1f5f9;  /* Badge background */
-      --badge-text: #64748b;/* Badge text */
+      /* Brand colours from Playful Rewards */
+      --primary: #9a59f5;   /* purple */
+      --secondary: #c8b612; /* gold */
+      --dark: #1f2937;      /* dark grey */
+      --text: #4b5563;      /* secondary text */
+      --bg: #f5f7fb;        /* page background */
+      --card-bg: #ffffff;   /* card background */
+      --badge-bg: #f1f5f9;  /* trust badge background */
+      --badge-border: #e2e8f0; /* trust badge border */
     }
-    /* Base reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    html, body {
-      overflow-x: hidden; /* prevent horizontal scroll */
-    }
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
       color: var(--dark);
-      min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 16px;
+      padding: 24px 12px;
+      min-height: 100vh;
     }
     /* Card wrapper */
     .card {
@@ -67,14 +59,30 @@
       width: 100%;
       max-width: 420px;
       padding: 24px 20px;
-      margin-top: 24px;
+    }
+    /* Program badge */
+    .program-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .program-badge i {
+      font-size: 0.8rem;
+      color: #ffffff;
     }
     /* Header */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .logo-lockup {
       display: flex;
@@ -89,11 +97,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: #ffffff;
       font-size: 24px;
     }
     .logo-text {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
       line-height: 1.1;
     }
@@ -102,7 +110,7 @@
       align-items: center;
       gap: 6px;
       background-color: var(--badge-bg);
-      color: var(--badge-text);
+      color: var(--text);
       border-radius: 9999px;
       padding: 4px 10px;
       font-size: 0.75rem;
@@ -112,33 +120,47 @@
     .verified-badge i {
       color: var(--secondary);
     }
+    /* Hero */
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 24px;
+      line-height: 1.45;
+    }
     /* Steps */
     .steps {
       display: flex;
       flex-direction: column;
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
-    .step {
+    .step-card {
       display: flex;
-      gap: 12px;
       align-items: flex-start;
+      gap: 12px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 12px;
+      padding: 12px 16px;
     }
-    .step-num {
-      width: 36px;
-      height: 36px;
+    .step-circle {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background-color: var(--primary);
-      color: #fff;
+      color: #ffffff;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       flex-shrink: 0;
-    }
-    .step-content {
-      flex: 1;
+      margin-top: 4px;
     }
     .step-title {
       font-size: 1rem;
@@ -150,33 +172,28 @@
       color: var(--text);
       line-height: 1.4;
     }
-    /* Pro tip box */
-    .pro-tip {
+    /* Disclaimer */
+    .disclaimer {
       display: flex;
-      gap: 10px;
       align-items: flex-start;
-      background-color: #fdf8e2;
+      gap: 10px;
+      background-color: #f9f5ff;
       border-left: 4px solid var(--secondary);
       border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 24px;
+      padding: 12px 16px;
+      margin: 8px 0 24px;
     }
-    .pro-icon {
+    .disclaimer i {
       color: var(--secondary);
       font-size: 1.2rem;
       flex-shrink: 0;
     }
-    .pro-text {
-      font-size: 0.875rem;
-      color: #7c5d00;
+    .disclaimer p {
+      font-size: 0.8rem;
+      color: var(--dark);
+      line-height: 1.5;
     }
-    .pro-text strong {
-      font-weight: 700;
-      display: block;
-      margin-bottom: 2px;
-      color: #5c4500;
-    }
-    /* CTA button */
+    /* CTA */
     .cta {
       display: block;
       width: 100%;
@@ -193,45 +210,27 @@
       position: relative;
       overflow: hidden;
       margin-bottom: 20px;
-      animation: pulse 2.5s infinite;
+      transition: filter 0.2s ease;
     }
     .cta:hover {
       filter: brightness(1.05);
     }
-    /* subtle pulse animation */
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(154,89,245,0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(154,89,245,0); }
-    }
-    /* Shine animation on button */
-    .cta::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
-      transform: skewX(-25deg);
-      animation: shine 3s infinite;
-    }
-    @keyframes shine {
-      0% { left: -100%; }
-      60% { left: 100%; }
-      100% { left: 100%; }
+    .cta i {
+      margin-left: 6px;
     }
     /* Trust badges */
     .trust-badges {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
+      margin-bottom: 16px;
     }
     .badge-item {
       display: flex;
       align-items: center;
       gap: 8px;
       background-color: var(--badge-bg);
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--badge-border);
       border-radius: 12px;
       padding: 8px 10px;
       font-size: 0.8rem;
@@ -247,15 +246,31 @@
         grid-template-columns: repeat(4, 1fr);
       }
     }
+    /* Legal links */
+    .legal-links {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      text-align: center;
+      color: var(--text);
+    }
+    .legal-links a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <main class="card">
-    <!-- Header with logo and verification badge -->
+    <!-- Program indicator -->
+    <div class="program-badge">
+      <i class="fa-solid fa-gamepad"></i>
+      Playful Rewards Program
+    </div>
+    <!-- Header -->
     <header class="header">
       <div class="logo-lockup">
         <div class="logo-icon">
-          <i class="fa-solid fa-gift"></i>
+          <i class="fa-solid fa-gamepad"></i>
         </div>
         <div class="logo-text">Playful Rewards</div>
       </div>
@@ -264,48 +279,54 @@
         Verified Program
       </div>
     </header>
+    <!-- Hero -->
+    <h1 class="hero-title">Play games. Earn real rewards.</h1>
+    <p class="hero-sub">Download Playful Rewards from the App Store, play featured games and complete levels to collect coins. Redeem your coins for PayPal or Visa gift cards when you meet the requirements.</p>
     <!-- Steps -->
     <section class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
+      <div class="step-card">
+        <div class="step-circle">1</div>
         <div class="step-content">
-          <div class="step-title">Free Download</div>
-          <div class="step-desc">Get the app &amp; create a free account.</div>
+          <div class="step-title">Download & Sign Up</div>
+          <div class="step-desc">Get the Playful Rewards app and create your free account.</div>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
+      <div class="step-card">
+        <div class="step-circle">2</div>
         <div class="step-content">
-          <div class="step-title">Play Games</div>
-          <div class="step-desc">Play games to unlock your cash.</div>
+          <div class="step-title">Play & Earn Coins</div>
+          <div class="step-desc">Play featured games and complete surveys or levels to earn coins.</div>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
+      <div class="step-card">
+        <div class="step-circle">3</div>
         <div class="step-content">
-          <div class="step-title">Cash Out</div>
-          <div class="step-desc">Receive rewards to PayPal or Visa.</div>
+          <div class="step-title">Redeem Your Rewards</div>
+          <div class="step-desc">Exchange your coins for PayPal or Visa gift cards once you reach the payout threshold.</div>
         </div>
       </div>
     </section>
-    <!-- Pro Tip -->
-    <div class="pro-tip">
-      <div class="pro-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
-      <div class="pro-text">
-        <strong>PRO TIP:</strong>
-        Complete 5 levels today to unlock a $500 bonus.
-      </div>
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <i class="fa-solid fa-circle-info"></i>
+      <p><strong>Note:</strong> Playful Rewards pays you for playing games and completing offers. This is not paid scrolling or instant income.</p>
     </div>
-    <!-- CTA Button -->
-    <a class="cta" href="https://t.afftrackr.com/?r3x=ayU6RBYIyzj%2fUIczXNbkqMH5eDmwOxUcvQJDRoz7h5U%3d&s1=t1&s2=test2098-leadsmart-US-bc976" target="_blank" rel="noopener noreferrer">
-      Start Earning Now
+    <!-- CTA -->
+    <a class="cta" href="https://affrkr.com/?TTT=WSNuqhjavcBn2ef4fI49JMYeOSl1JcQ4vQJDRoz7h5U%3d&s1=traehollo-test2098-leadsmart-US-bc976" target="_blank" rel="noopener noreferrer">
+      Get Playful Rewards <i class="fa-solid fa-arrow-right"></i>
     </a>
     <!-- Trust badges -->
     <div class="trust-badges">
-      <div class="badge-item"><i class="fa-solid fa-lock"></i>Secure</div>
-      <div class="badge-item"><i class="fa-solid fa-bolt"></i>Fast Payouts</div>
-      <div class="badge-item"><i class="fa-solid fa-users"></i>2M+ Users</div>
-      <div class="badge-item"><i class="fa-solid fa-star"></i>4.9/5 Rating</div>
+      <div class="badge-item"><i class="fa-solid fa-lock"></i> Secure</div>
+      <div class="badge-item"><i class="fa-solid fa-bolt"></i> Fast Payouts</div>
+      <div class="badge-item"><i class="fa-solid fa-users"></i> Millions of Players</div>
+      <div class="badge-item"><i class="fa-solid fa-star"></i> 4.6/5 Rating</div>
+    </div>
+    <!-- Legal links -->
+    <div class="legal-links">
+      <a href="https://www.playfulrewards.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+      &nbsp;•&nbsp;
+      <a href="https://www.playfulrewards.com/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
     </div>
   </main>
 </body>

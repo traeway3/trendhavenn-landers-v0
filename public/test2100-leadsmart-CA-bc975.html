@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://www.straightlyconnected.com/Test.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Paid to Scroll - TikTok Edition</title>
+    
+    <!-- Modular tracking system -->
+    <script src="./Get Paid to Scroll - TikTok Edition_files/click"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            width: clamp(80px, 20vw, 120px);
+            height: auto;
+            display: inline-block;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, #fe2c55 0%, #00f2ea 100%);
+            border-radius: 10px;
+        }
+
+        .headline {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 0 5px;
+        }
+
+        .headline h1 {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 800;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .headline .scroll-text {
+            background: linear-gradient(135deg, #fe2c55 0%, #00f2ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subheadline {
+            text-align: center;
+            font-size: clamp(14px, 4vw, 18px);
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 10px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 30px 15px;
+            margin-bottom: 40px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .stat:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60px;
+            background: #2a2a2a;
+        }
+
+        .stat-icon {
+            width: clamp(36px, 10vw, 48px);
+            height: clamp(36px, 10vw, 48px);
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(18px, 5vw, 24px);
+        }
+
+        .stat-icon.users {
+            background: linear-gradient(135deg, #fe2c55 0%, #ff5577 100%);
+        }
+
+        .stat-icon.money {
+            background: linear-gradient(135deg, #00f2ea 0%, #00d9d0 100%);
+        }
+
+        .stat-icon.instant {
+            background: linear-gradient(135deg, #fe2c55 0%, #00f2ea 100%);
+        }
+
+        .stat-value {
+            font-size: clamp(20px, 6vw, 32px);
+            font-weight: 700;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #fe2c55 0%, #00f2ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: clamp(9px, 2.5vw, 12px);
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 50px;
+            padding: 18px 50px;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fe2c55 0%, #00f2ea 100%);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(254, 44, 85, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(254, 44, 85, 0.5);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .journey-section {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-top: 40px;
+        }
+
+        .journey-title {
+            text-align: center;
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: 700;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #fe2c55 0%, #00f2ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .journey-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .journey-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .step-number {
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fe2c55 0%, #00f2ea 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(18px, 5vw, 24px);
+            font-weight: 700;
+            color: #000;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .step-description {
+            font-size: clamp(13px, 3.5vw, 15px);
+            color: #888;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 0 5px;
+            }
+
+            .logo-container {
+                margin-bottom: 20px;
+            }
+
+            .progress-bar {
+                margin-bottom: 20px;
+            }
+
+            .headline {
+                margin-bottom: 15px;
+            }
+
+            .subheadline {
+                margin-bottom: 30px;
+            }
+
+            .stats-container {
+                padding: 20px 10px;
+                margin-bottom: 30px;
+            }
+
+            .stat {
+                padding: 0 5px;
+            }
+
+            .cta-button {
+                margin-bottom: 35px;
+                padding: 16px 40px;
+            }
+
+            .journey-section {
+                padding: 30px 20px;
+            }
+
+            .journey-step {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body cz-shortcut-listen="true">
+    <div class="container">
+        <div class="logo-container">
+            <img src="./Get Paid to Scroll - TikTok Edition_files/tiktokicon.png" alt="TikTok" class="logo">
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <div class="headline">
+            <h1>Get Paid to <span class="scroll-text">Scroll</span></h1>
+        </div>
+
+        <p class="subheadline">
+            Turn your phone into a money maker! Make $500 By Completing Games Quests, And scrolling on TikTok!
+        </p>
+
+        <div class="stats-container">
+            <div class="stat">
+                <div class="stat-icon users">👥</div>
+                <div class="stat-value">500K+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon money">💵</div>
+                <div class="stat-value">$500</div>
+                <div class="stat-label">Per Day</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon instant">⚡</div>
+                <div class="stat-value">Instant</div>
+                <div class="stat-label">Payments</div>
+            </div>
+        </div>
+
+        <a href="./Get Paid to Scroll - TikTok Edition_files/click" class="cta-button trxbutton">Click Here to Sign Up</a>
+
+        <div class="journey-section">
+            <h2 class="journey-title">How to Get Started</h2>
+            
+            <div class="journey-steps">
+                <div class="journey-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Click Below &amp; Sign Up</div>
+                        <div class="step-description">Click the button above to sign up and get instant access to start earning. It only takes 2 minutes to get started!</div>
+                    </div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Complete Tasks &amp; Games to Level Up</div>
+                        <div class="step-description">Play fun games and complete simple tasks to level up your account and unlock higher earning potential!</div>
+                    </div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Get Paid to Scroll</div>
+                        <div class="step-description">Simply scroll through content you already love and watch your earnings grow. Make $500 a day from home!</div>
+                    </div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Instant Payments</div>
+                        <div class="step-description">Withdraw your earnings instantly via PayPal, crypto, gift cards, and more payment options.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script defer="" src="./Get Paid to Scroll - TikTok Edition_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;e5d1917aa93345609525e51379280d9c&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+</body></html>

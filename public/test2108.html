@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playful Rewards – Earn Real Rewards</title>
+  <!--
+    Final bridge page for the Playful Rewards CPI offer.
+
+    This design follows the non‑negotiable requirements in Claude Chat‑3.pdf:
+    • A concise, above‑the‑fold hero with a centred logo and short subheading.
+    • A single call‑to‑action button that appears without scrolling on mobile.
+    • Steps compressed into a three‑column layout to save vertical space.
+    • All content centred and visually balanced.
+    • Terms and privacy links point to the same URL as instructed.
+    • Dynamic visuals: an animated gradient background, a shimmering CTA
+      and a fade‑in entrance animation to make the page feel lively yet
+      trustworthy.
+  -->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-M80IyIZbfV7u1B3meFXT71UEF7Zw9Qh4ZGpTcXZH2SvVZ6kVjXiu6O9Fha6G+eUGQnDyNYM3Chn9h+duOwgdQg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --primary: #9a59f5;   /* Playful purple */
+      --secondary: #c8b612; /* Playful gold */
+      --dark: #1e293b;      /* Dark text */
+      --text: #475569;      /* Secondary text */
+      --bg-start: #faf5ff;  /* Gradient start */
+      --bg-end: #f7f9ff;    /* Gradient end */
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: linear-gradient(-45deg, var(--bg-start), var(--bg-end), #f5faff, #f9f5ff);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 16px;
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    /* Container with entrance animation */
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      margin-top: 32px;
+      padding: 24px 20px 28px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.7s ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Logo */
+    .logo-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #9a59f5; /* Playful purple */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.logo-icon img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  display: block;
+}
+    .verified-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #f1f5f9;
+      color: var(--text);
+      border-radius: 9999px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .verified-tag i { color: var(--secondary); }
+    /* Hero title/subtitle */
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    /* CTA Button */
+    .cta {
+      display: inline-block;
+      background-color: var(--primary);
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+      transition: transform 0.15s ease;
+    }
+    .cta:hover { transform: translateY(-2px); }
+    /* Shimmer on CTA */
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.5), rgba(255,255,255,0));
+      transform: skewX(-25deg);
+      animation: shine 2.5s infinite;
+    }
+    @keyframes shine {
+      0% { left: -100%; }
+      60% { left: 100%; }
+      100% { left: 100%; }
+    }
+    .cta i { margin-left: 8px; }
+    /* Steps: horizontal layout */
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .step {
+      flex: 1 1 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+    .step-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .step-desc {
+      font-size: 0.75rem;
+      color: var(--text);
+      line-height: 1.3;
+      text-align: center;
+    }
+    /* Disclaimers */
+    .note {
+      background-color: #f9f5ff;
+      border-left: 4px solid var(--secondary);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.7rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+      display: flex;
+      gap: 8px;
+      text-align: left;
+    }
+    .note i {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    /* Trust badges aligned center */
+    .trust {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      color: var(--dark);
+      font-weight: 500;
+    }
+    .trust-item i {
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+    /* Legal links */
+    .legal {
+      font-size: 0.7rem;
+      color: var(--text);
+    }
+    .legal a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo and verification -->
+    <div class="logo-icon">
+  <img src="/playful3.png" alt="Playful Rewards Logo">
+</div>
+    <div class="verified-tag"><i class="fa-solid fa-shield-check"></i> Verified Program</div>
+    <!-- Hero copy -->
+    <h1 class="hero-title">Play games. Earn real rewards.</h1>
+    <p class="hero-sub">Collect coins by playing featured games and redeem them for PayPal or Visa gift cards.</p>
+    <!-- CTA above the fold -->
+    <a class="cta" href="/click-ca-2108.html">
+  Get Playful Rewards <i class="fa-solid fa-arrow-right"></i>
+</a>
+    <!-- Steps compressed -->
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-title">Download & Sign Up</div>
+        <div class="step-desc">Grab the free app & create your account.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-title">Play & Earn</div>
+        <div class="step-desc">Complete levels & surveys to earn coins.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">Redeem</div>
+        <div class="step-desc">Convert coins into PayPal or Visa gift cards.</div>
+      </div>
+    </div>
+    <!-- Important note -->
+    <div class="note">
+  <i class="fa-solid fa-circle-info"></i>
+  <div>
+    Playful Rewards lets you earn rewards by engaging with featured games and offers
+    inside the app.
+  </div>
+</div>
+    <!-- Trust indicators -->
+    <div class="trust">
+      <div class="trust-item"><i class="fa-solid fa-lock"></i> Secure</div>
+      <div class="trust-item"><i class="fa-solid fa-clock"></i> Fast Payouts</div>
+      <div class="trust-item"><i class="fa-solid fa-users"></i> Millions of Players</div>
+      <div class="trust-item"><i class="fa-solid fa-star"></i> 4.6/5 Rating</div>
+    </div>
+    <!-- Legal links (same URL for both terms & privacy) -->
+    <div class="legal">
+      <a href="https://www.trendhavenn.com/test2098-leadsmart-US-bc976.html" target="_blank" rel="noopener noreferrer">Terms & Privacy</a>
+    </div>
+  </div>
+</body>
+</html>

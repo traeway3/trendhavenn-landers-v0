@@ -43,7 +43,8 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            max-width: 600px;
+            width: 100%;
+            max-width: 500px;
             margin: 0 auto;
         }
 
@@ -295,6 +296,24 @@
             font-weight: 700;
         }
 
+        /* Smooth transition for showing step2 */
+        #step2 {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        #step2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Fade out effect for step1 */
+        #step1.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
         .roadmap-step {
             display: flex;
             align-items: center;
@@ -346,7 +365,9 @@
             margin-top: 20px;
             transition: transform 0.2s, box-shadow 0.2s;
             /* animate CTA with glowing pulse */
-            animation: pulseGlow 3s infinite;
+            animation: pulseGlow 1.8s infinite;
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-button:hover {
@@ -358,6 +379,18 @@
             width: 22px;
             height: 22px;
             fill: #000;
+        }
+
+        /* Shine effect overlay on CTA */
+        .cta-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shine 2.5s infinite;
         }
 
         /* Responsive adjustments */
@@ -390,13 +423,22 @@
 
         @keyframes pulseGlow {
             0% {
-                box-shadow: 0 0 0 0 rgba(0, 211, 105, 0.4);
+                box-shadow: 0 0 0 0 rgba(0, 211, 105, 0.5);
             }
             50% {
-                box-shadow: 0 0 20px 10px rgba(0, 211, 105, 0);
+                box-shadow: 0 0 25px 15px rgba(0, 211, 105, 0.1);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(0, 211, 105, 0.4);
+                box-shadow: 0 0 0 0 rgba(0, 211, 105, 0.5);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
             }
         }
     </style>
@@ -468,14 +510,14 @@
         <div class="interaction-module">
             <div class="option-card" data-age="over">
                 <div class="option-content">
-                    <div class="option-title">I'm 18 or older</div>
+                    <div class="option-title">I'm 21 or older</div>
                     <div class="option-desc">Instant Payouts: PayPal, CashApp, Venmo &amp; Crypto</div>
                 </div>
                 <div class="option-radio"></div>
             </div>
             <div class="option-card" data-age="under">
                 <div class="option-content">
-                    <div class="option-title">I'm under 18</div>
+                    <div class="option-title">I'm under 21</div>
                     <div class="option-desc">Limited Payouts: Gift Cards &amp; Biweekly Cash</div>
                 </div>
                 <div class="option-radio"></div>
@@ -484,7 +526,7 @@
     </div>
 
     <!-- Step 2: Success and instructions -->
-    <div id="step2" class="lander-step hidden">
+    <div id="step2" class="lander-step" style="display:none">
         <div class="header-module">
             <div class="logo-badge" style="color: var(--brand-green)">STEP COMPLETE</div>
             <div class="step-indicator">2 / 2</div>
@@ -586,10 +628,23 @@
                     optionCards.forEach(c => c.classList.remove('selected'));
                     card.classList.add('selected');
                     const age = card.dataset.age;
-                    // Hide step1 and show step2
-                    document.getElementById('step1').style.display = 'none';
+
+                    // Fade out step1 smoothly
+                    const step1 = document.getElementById('step1');
+                    step1.classList.add('fade-out');
+                    // After fade duration, hide the element
+                    setTimeout(() => {
+                        step1.style.display = 'none';
+                    }, 500);
+
+                    // Show step2 with a smooth appearance
                     const step2 = document.getElementById('step2');
                     step2.style.display = 'flex';
+                    // Trigger layout so the transition can apply
+                    requestAnimationFrame(() => {
+                        step2.classList.add('visible');
+                    });
+
                     updateStep2(age);
                     window.scrollTo({top: 0, behavior: 'smooth'});
                 });

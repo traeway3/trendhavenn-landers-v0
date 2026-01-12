@@ -161,6 +161,8 @@
         .stats-container {
             display: flex;
             gap: 12px;
+            justify-content: space-between;
+            flex-wrap: nowrap;
             /* smaller top margin brings the action buttons higher on the page */
             margin-top: 10px;
         }
@@ -173,6 +175,8 @@
             padding: 10px 14px;
             border-radius: 12px;
             border: 1px solid var(--card-border);
+            flex: 1;
+            min-width: 0;
         }
 
         .stat-pill svg {
@@ -402,9 +406,9 @@
                 font-size: 32px;
             }
             .stats-container {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 8px;
-                align-items: center;
+                justify-content: space-between;
             }
         }
 

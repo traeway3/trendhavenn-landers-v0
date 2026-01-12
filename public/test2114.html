@@ -1,300 +1,571 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Playful Rewards – Earn Real Rewards</title>
-  <!--
-    Final bridge page for the Playful Rewards CPI offer.
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Freecash Rewards – Earn Real Money</title>
+    <!-- Import an accessible sans‑serif font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Root colour palette to mirror the competitor’s dark style */
+        :root {
+            --brand-green: #00d36f;
+            --bg-dark: #0a0a0a;
+            --text-main: #ffffff;
+            --text-mute: #bbbbbb;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
 
-    This design follows the non‑negotiable requirements in Claude Chat‑3.pdf:
-    • A concise, above‑the‑fold hero with a centred logo and short subheading.
-    • A single call‑to‑action button that appears without scrolling on mobile.
-    • Steps compressed into a three‑column layout to save vertical space.
-    • All content centred and visually balanced.
-    • Terms and privacy links point to the same URL as instructed.
-    • Dynamic visuals: an animated gradient background, a shimmering CTA
-      and a fade‑in entrance animation to make the page feel lively yet
-      trustworthy.
-  -->
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-M80IyIZbfV7u1B3meFXT71UEF7Zw9Qh4ZGpTcXZH2SvVZ6kVjXiu6O9Fha6G+eUGQnDyNYM3Chn9h+duOwgdQg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
-    :root {
-      --primary: #9a59f5;   /* Playful purple */
-      --secondary: #c8b612; /* Playful gold */
-      --dark: #1e293b;      /* Dark text */
-      --text: #475569;      /* Secondary text */
-      --bg-start: #faf5ff;  /* Gradient start */
-      --bg-end: #f7f9ff;    /* Gradient end */
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 100%;
-      overflow-x: hidden;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--dark);
-      background: linear-gradient(-45deg, var(--bg-start), var(--bg-end), #f5faff, #f9f5ff);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 0 16px;
-    }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    /* Container with entrance animation */
-    .container {
-      width: 100%;
-      max-width: 420px;
-      background-color: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-      margin-top: 32px;
-      padding: 24px 20px 28px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.7s ease-out forwards;
-    }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    /* Logo */
-    .logo-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #9a59f5; /* Playful purple */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.logo-icon img {
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
-  display: block;
-}
-    .verified-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background-color: #f1f5f9;
-      color: var(--text);
-      border-radius: 9999px;
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-    .verified-tag i { color: var(--secondary); }
-    /* Hero title/subtitle */
-    .hero-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--text);
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-    /* CTA Button */
-    .cta {
-      display: inline-block;
-      background-color: var(--primary);
-      color: #ffffff;
-      font-size: 1rem;
-      font-weight: 700;
-      padding: 14px 24px;
-      border-radius: 9999px;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 24px;
-      transition: transform 0.15s ease;
-    }
-    .cta:hover { transform: translateY(-2px); }
-    /* Shimmer on CTA */
-    .cta::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.5), rgba(255,255,255,0));
-      transform: skewX(-25deg);
-      animation: shine 2.5s infinite;
-    }
-    @keyframes shine {
-      0% { left: -100%; }
-      60% { left: 100%; }
-      100% { left: 100%; }
-    }
-    .cta i { margin-left: 8px; }
-    /* Steps: horizontal layout */
-    .steps {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-    .step {
-      flex: 1 1 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .step-number {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: var(--primary);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-    }
-    .step-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .step-desc {
-      font-size: 0.75rem;
-      color: var(--text);
-      line-height: 1.3;
-      text-align: center;
-    }
-    /* Disclaimers */
-    .note {
-      background-color: #f9f5ff;
-      border-left: 4px solid var(--secondary);
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-size: 0.7rem;
-      color: var(--dark);
-      margin-bottom: 20px;
-      display: flex;
-      gap: 8px;
-      text-align: left;
-    }
-    .note i {
-      color: var(--secondary);
-      font-size: 0.9rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    /* Trust badges aligned center */
-    .trust {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background-color: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 6px 10px;
-      font-size: 0.75rem;
-      color: var(--dark);
-      font-weight: 500;
-    }
-    .trust-item i {
-      color: var(--primary);
-      font-size: 0.9rem;
-    }
-    /* Legal links */
-    .legal {
-      font-size: 0.7rem;
-      color: var(--text);
-    }
-    .legal a {
-      color: var(--primary);
-      text-decoration: underline;
-    }
-  </style>
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* Container for each step */
+        .lander-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Header with badge and step indicator */
+        .header-module {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-badge {
+            font-weight: 600;
+            background-color: var(--card-bg);
+            padding: 6px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            color: var(--brand-green);
+            font-size: 14px;
+        }
+
+        .step-indicator {
+            color: var(--text-mute);
+            font-size: 14px;
+        }
+
+        /* Hero heading */
+        .main-headline {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .highlight {
+            background: var(--brand-green);
+            color: #000;
+            padding: 4px 6px;
+            border-radius: 6px;
+        }
+
+        /* Bonus callout */
+        .bonus-notification {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--card-bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .bonus-icon {
+            font-size: 20px;
+        }
+
+        .bonus-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .bonus-sub {
+            font-size: 12px;
+            color: var(--text-mute);
+        }
+
+        /* Review stars */
+        .review-stars {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 10px;
+        }
+
+        .star-icon {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .star-icon.partial {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+            clip-path: inset(0 20% 0 0);
+        }
+
+        .review-text {
+            margin-left: 6px;
+            font-size: 14px;
+            color: var(--text-mute);
+        }
+
+        /* Subheadline */
+        .sub-headline {
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+            color: var(--text-mute);
+        }
+
+        .sub-headline b {
+            color: var(--text-main);
+        }
+
+        /* Stats pills */
+        .stats-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--card-bg);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .stat-pill svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--brand-green);
+        }
+
+        .stat-val {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .stat-lbl {
+            font-size: 10px;
+            color: var(--text-mute);
+        }
+
+        /* Instruction text */
+        .instruction-text {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Option cards */
+        .interaction-module {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .option-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            padding: 16px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .option-card:hover {
+            background-color: rgba(0, 211, 105, 0.1);
+            border-color: var(--brand-green);
+        }
+
+        .option-card.selected {
+            border-color: var(--brand-green);
+            box-shadow: 0 0 10px rgba(0, 211, 105, 0.4);
+        }
+
+        .option-title {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .option-desc {
+            font-size: 12px;
+            color: var(--text-mute);
+            margin-top: 4px;
+        }
+
+        .option-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--text-mute);
+            border-radius: 50%;
+            position: relative;
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+
+        .option-card.selected .option-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--brand-green);
+        }
+
+        /* Step 2 hero */
+        .youre-in-headline {
+            font-size: 38px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .in-block {
+            display: inline-block;
+            background-color: var(--brand-green);
+            color: #000;
+            padding: 4px 6px;
+            border-radius: 6px;
+        }
+
+        /* Roadmap container */
+        .roadmap-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .roadmap-card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: var(--brand-green);
+            font-weight: 700;
+        }
+
+        .roadmap-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--brand-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--brand-green);
+            flex-shrink: 0;
+        }
+
+        .step-text .title {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-main);
+        }
+
+        .step-text .description {
+            font-size: 13px;
+            color: var(--text-mute);
+            margin-top: 2px;
+        }
+
+        /* Call to action button */
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            background-color: var(--brand-green);
+            color: #000;
+            padding: 20px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 18px;
+            text-transform: uppercase;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 20px rgba(0, 211, 105, 0.4);
+        }
+
+        .cta-button svg {
+            width: 22px;
+            height: 22px;
+            fill: #000;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .main-headline {
+                font-size: 32px;
+            }
+            .youre-in-headline {
+                font-size: 32px;
+            }
+            .stats-container {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Logo and verification -->
-    <div class="logo-icon">
-  <img src="/playful3.png" alt="Playful Rewards Logo">
-</div>
-    <div class="verified-tag"><i class="fa-solid fa-shield-check"></i> Verified Program</div>
-    <!-- Hero copy -->
-    <h1 class="hero-title">Play games. Earn real rewards.</h1>
-    <p class="hero-sub">Collect coins by playing featured games and redeem them for PayPal or Visa gift cards.</p>
-    <!-- CTA above the fold -->
-    <a class="cta" href="https://go.goldentracee.com/click">
-  Get Playful Rewards <i class="fa-solid fa-arrow-right"></i>
-</a>
-    <!-- Steps compressed -->
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-title">Download & Sign Up</div>
-        <div class="step-desc">Grab the free app & create your account.</div>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-title">Play & Earn</div>
-        <div class="step-desc">Complete levels & surveys to earn coins.</div>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-title">Redeem</div>
-        <div class="step-desc">Convert coins into PayPal or Visa gift cards.</div>
-      </div>
+    <!-- Step 1: Intro -->
+    <div id="step1" class="lander-step">
+        <div class="header-module">
+            <div class="logo-badge" id="step1-badge">Freecash App</div>
+            <div class="step-indicator">1 / 2</div>
+        </div>
+        <div class="hero-module">
+            <h1 class="main-headline">
+                Get Paid for <br /><span class="highlight">Gaming &amp; Surveys</span>
+            </h1>
+            <div class="bonus-notification">
+                <div class="bonus-icon">🎁</div>
+                <div class="bonus-text">
+                    <div class="bonus-title">$5 Sign Up Bonus</div>
+                    <div class="bonus-sub">Available for new users</div>
+                </div>
+            </div>
+            <div class="review-stars">
+                <!-- four full stars -->
+                <svg class="star-icon" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                </svg>
+                <svg class="star-icon" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                </svg>
+                <svg class="star-icon" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                </svg>
+                <svg class="star-icon" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                </svg>
+                <!-- partial star to represent 4.8/5 -->
+                <svg class="star-icon partial" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                </svg>
+                <span class="review-text">4.8 (10K Ratings)</span>
+            </div>
+            <p class="sub-headline">
+                <b>Watch Netflix. Scroll TikTok. Take surveys.</b><br />
+                Earn cash by playing games and answering simple questionnaires whenever you have spare time.
+            </p>
+        </div>
+        <div class="stats-container">
+            <div class="stat-pill">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                </svg>
+                <div class="stat-data">
+                    <span class="stat-val">500K+</span>
+                    <span class="stat-lbl">Active Users</span>
+                </div>
+            </div>
+            <div class="stat-pill">
+                <svg viewBox="0 0 24 24">
+                    <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.75-2.7 1.75-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c2.17-.46 3.5-1.66 3.5-3.66 0-2.52-2.38-3.47-5.2-4.14z"></path>
+                </svg>
+                <div class="stat-data">
+                    <span class="stat-val">100+</span>
+                    <span class="stat-lbl">Offers</span>
+                </div>
+            </div>
+        </div>
+        <div class="instruction-text">Tap below to get started</div>
+        <div class="interaction-module">
+            <div class="option-card" data-age="over">
+                <div class="option-content">
+                    <div class="option-title">I'm 18 or older</div>
+                    <div class="option-desc">Instant Payouts: PayPal, CashApp, Venmo &amp; Crypto</div>
+                </div>
+                <div class="option-radio"></div>
+            </div>
+            <div class="option-card" data-age="under">
+                <div class="option-content">
+                    <div class="option-title">I'm under 18</div>
+                    <div class="option-desc">Limited Payouts: Gift Cards &amp; Biweekly Cash</div>
+                </div>
+                <div class="option-radio"></div>
+            </div>
+        </div>
     </div>
-    <!-- Important note -->
-    <div class="note">
-  <i class="fa-solid fa-circle-info"></i>
-  <div>
-    Playful Rewards lets you earn rewards by engaging with featured games and offers
-    inside the app.
-  </div>
-</div>
-    <!-- Trust indicators -->
-    <div class="trust">
-      <div class="trust-item"><i class="fa-solid fa-lock"></i> Secure</div>
-      <div class="trust-item"><i class="fa-solid fa-clock"></i> Fast Payouts</div>
-      <div class="trust-item"><i class="fa-solid fa-users"></i> Millions of Players</div>
-      <div class="trust-item"><i class="fa-solid fa-star"></i> 4.6/5 Rating</div>
+
+    <!-- Step 2: Success and instructions -->
+    <div id="step2" class="lander-step hidden">
+        <div class="header-module">
+            <div class="logo-badge" style="color: var(--brand-green)">STEP COMPLETE</div>
+            <div class="step-indicator">2 / 2</div>
+        </div>
+        <div class="hero-module">
+            <div class="headline-row" style="display:flex; align-items: center; justify-content: center; gap: 10px;">
+                <div class="success-icon-floating" style="background-color: var(--brand-green); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#000">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                    </svg>
+                </div>
+                <h1 class="youre-in-headline">You're <span class="in-block">In!</span></h1>
+            </div>
+            <p class="sub-headline" id="step2-subheadline">
+                Your device is confirmed compatible. We have reserved a sign up bonus for you.
+            </p>
+        </div>
+        <a href="#" class="cta-button" id="download-button">
+            <span>Download &amp; Start Earning</span>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+            </svg>
+        </a>
+        <div class="roadmap-card">
+            <h3 id="roadmap-label">Your Earning Journey</h3>
+            <div class="roadmap-step">
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    <div class="title" id="roadmap-step1-title">Install &amp; Register</div>
+                    <div class="description" id="roadmap-step1-desc">Create your free account</div>
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    <div class="title" id="roadmap-step2-title">Play &amp; Answer</div>
+                    <div class="description" id="roadmap-step2-desc">Play games &amp; answer surveys to earn points</div>
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    <div class="title" id="roadmap-step3-title">Claim $5 Bonus</div>
+                    <div class="description" id="roadmap-step3-desc">Instant credit to your balance</div>
+                </div>
+            </div>
+            <div class="roadmap-step" id="roadmap-step4">
+                <div class="step-number">4</div>
+                <div class="step-text">
+                    <div class="title" id="roadmap-step4-title">Cash Out</div>
+                    <div class="description" id="roadmap-step4-desc">Redeem via your preferred payout method</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- Legal links (same URL for both terms & privacy) -->
-    <div class="legal">
-      <a href="https://www.trendhavenn.com/test2098-leadsmart-US-bc976.html" target="_blank" rel="noopener noreferrer">Terms & Privacy</a>
-    </div>
-  </div>
+
+    <script>
+        // Utility to retrieve URL parameters (for dynamic tracking values)
+        function getParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name) || '';
+        }
+
+        function buildTrackingUrl() {
+            // Grab custom variables from query parameters if present
+            const s1 = getParam('custom6');
+            const s2 = getParam('custom5');
+            const s3 = getParam('custom4');
+            return `https://montrk4.co.uk/?a=26142&c=47852&s1=${encodeURIComponent(s1)}&s2=${encodeURIComponent(s2)}&s3=${encodeURIComponent(s3)}`;
+        }
+
+        function updateStep2(age) {
+            const subHeadline = document.getElementById('step2-subheadline');
+            const step2Title2 = document.getElementById('roadmap-step2-title');
+            const step2Desc2 = document.getElementById('roadmap-step2-desc');
+            const step4Title = document.getElementById('roadmap-step4-title');
+            const step4Desc = document.getElementById('roadmap-step4-desc');
+
+            if (age === 'over') {
+                subHeadline.textContent = 'Earn cash by answering questions and playing games. Your device is perfect for our offers!';
+                step2Title2.textContent = 'Play & Answer';
+                step2Desc2.textContent = 'Play games & take surveys to earn points';
+                step4Title.textContent = 'Cash Out';
+                step4Desc.textContent = 'Get paid instantly via PayPal, Cash App, Venmo or Crypto';
+            } else {
+                subHeadline.textContent = 'Your device is confirmed compatible. We have reserved a sign up bonus for you.';
+                step2Title2.textContent = 'Play & Answer';
+                step2Desc2.textContent = 'Complete tasks & surveys to earn points';
+                step4Title.textContent = 'Redeem Rewards';
+                step4Desc.textContent = 'Gift cards and cash available after completing offers';
+            }
+            // update CTA link whenever step2 is loaded
+            const cta = document.getElementById('download-button');
+            cta.href = buildTrackingUrl();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const optionCards = document.querySelectorAll('.option-card');
+            optionCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Mark selected
+                    optionCards.forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    const age = card.dataset.age;
+                    // Hide step1 and show step2
+                    document.getElementById('step1').style.display = 'none';
+                    const step2 = document.getElementById('step2');
+                    step2.style.display = 'flex';
+                    updateStep2(age);
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,659 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Freecash Rewards – Earn Real Money</title>
-    <!-- Import an accessible sans‑serif font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* Root colour palette to mirror the competitor’s dark style */
-        :root {
-            --brand-green: #00d36f;
-            --bg-dark: #0a0a0a;
-            --text-main: #ffffff;
-            --text-mute: #bbbbbb;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            padding: 20px;
-            line-height: 1.5;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        /* Container for each step */
-        .lander-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Header with badge and step indicator */
-        .header-module {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-badge {
-            font-weight: 600;
-            background-color: var(--card-bg);
-            padding: 6px 16px;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-            color: var(--brand-green);
-            font-size: 14px;
-        }
-
-        .step-indicator {
-            color: var(--text-mute);
-            font-size: 14px;
-        }
-
-        /* Hero heading */
-        .main-headline {
-            font-size: 40px;
-            font-weight: 800;
-            line-height: 1.2;
-            text-align: center;
-        }
-
-        .highlight {
-            background: var(--brand-green);
-            color: #000;
-            padding: 4px 6px;
-            border-radius: 6px;
-            display: inline-block;
-            /* subtle tilt animation for dynamic visual */
-            animation: tilt 4s ease-in-out infinite alternate;
-        }
-
-        /* Bonus callout */
-        .bonus-notification {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--card-bg);
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-        }
-
-        .bonus-icon {
-            font-size: 20px;
-        }
-
-        .bonus-title {
-            font-weight: 700;
-            font-size: 16px;
-        }
-
-        .bonus-sub {
-            font-size: 12px;
-            color: var(--text-mute);
-        }
-
-        /* Review stars */
-        .review-stars {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 10px;
-        }
-
-        .star-icon {
-            width: 20px;
-            height: 20px;
-            fill: #fff;
-        }
-
-        .star-icon.partial {
-            width: 16px;
-            height: 16px;
-            fill: #fff;
-            clip-path: inset(0 20% 0 0);
-        }
-
-        .review-text {
-            margin-left: 6px;
-            font-size: 14px;
-            color: var(--text-mute);
-        }
-
-        /* Subheadline */
-        .sub-headline {
-            font-size: 16px;
-            text-align: center;
-            margin-top: 10px;
-            color: var(--text-mute);
-        }
-
-        .sub-headline b {
-            color: var(--text-main);
-        }
-
-        /* Stats pills */
-        .stats-container {
-            display: flex;
-            gap: 12px;
-            justify-content: space-between;
-            flex-wrap: nowrap;
-            /* smaller top margin brings the action buttons higher on the page */
-            margin-top: 10px;
-        }
-
-        .stat-pill {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--card-bg);
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-            flex: 1;
-            min-width: 0;
-        }
-
-        .stat-pill svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--brand-green);
-        }
-
-        .stat-val {
-            font-weight: 700;
-            font-size: 16px;
-        }
-
-        .stat-lbl {
-            font-size: 10px;
-            color: var(--text-mute);
-        }
-
-        /* Instruction text */
-        .instruction-text {
-            /* reduced top margin so buttons appear higher on the page */
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        /* Option cards */
-        .interaction-module {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .option-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--card-bg);
-            padding: 16px 18px;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
-        }
-
-        .option-card:hover {
-            background-color: rgba(0, 211, 105, 0.1);
-            border-color: var(--brand-green);
-        }
-
-        .option-card.selected {
-            border-color: var(--brand-green);
-            box-shadow: 0 0 10px rgba(0, 211, 105, 0.4);
-        }
-
-        .option-title {
-            font-weight: 600;
-            font-size: 18px;
-        }
-
-        .option-desc {
-            font-size: 12px;
-            color: var(--text-mute);
-            margin-top: 4px;
-        }
-
-        .option-radio {
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--text-mute);
-            border-radius: 50%;
-            position: relative;
-            margin-left: 10px;
-            flex-shrink: 0;
-        }
-
-        .option-card.selected .option-radio::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--brand-green);
-        }
-
-        /* Step 2 hero */
-        .youre-in-headline {
-            font-size: 38px;
-            font-weight: 800;
-            text-align: center;
-        }
-
-        .in-block {
-            display: inline-block;
-            background-color: var(--brand-green);
-            color: #000;
-            padding: 4px 6px;
-            border-radius: 6px;
-        }
-
-        /* Roadmap container */
-        .roadmap-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 24px 20px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .roadmap-card h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 20px;
-            color: var(--brand-green);
-            font-weight: 700;
-        }
-
-        /* Smooth transition for showing step2 */
-        #step2 {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        #step2.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Fade out effect for step1 */
-        #step1.fade-out {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .roadmap-step {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            border: 2px solid var(--brand-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            color: var(--brand-green);
-            flex-shrink: 0;
-        }
-
-        .step-text .title {
-            font-weight: 600;
-            font-size: 16px;
-            color: var(--text-main);
-        }
-
-        .step-text .description {
-            font-size: 13px;
-            color: var(--text-mute);
-            margin-top: 2px;
-        }
-
-        /* Call to action button */
-        .cta-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            background-color: var(--brand-green);
-            color: #000;
-            padding: 20px;
-            border-radius: 14px;
-            font-weight: 800;
-            font-size: 18px;
-            text-transform: uppercase;
-            width: 100%;
-            margin-top: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            /* animate CTA with glowing pulse */
-            animation: pulseGlow 1.8s infinite;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.04);
-            box-shadow: 0 0 20px rgba(0, 211, 105, 0.4);
-        }
-
-        .cta-button svg {
-            width: 22px;
-            height: 22px;
-            fill: #000;
-        }
-
-        /* Shine effect overlay on CTA */
-        .cta-button::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shine 2.5s infinite;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .main-headline {
-                font-size: 32px;
-            }
-            .youre-in-headline {
-                font-size: 32px;
-            }
-            .stats-container {
-                flex-direction: row;
-                gap: 8px;
-                justify-content: space-between;
-            }
-        }
-
-        /* Animation keyframes */
-        @keyframes tilt {
-            0% {
-                transform: rotate(-2deg);
-            }
-            50% {
-                transform: rotate(2deg);
-            }
-            100% {
-                transform: rotate(-2deg);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 211, 105, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 25px 15px rgba(0, 211, 105, 0.1);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 211, 105, 0.5);
-            }
-        }
-
-        @keyframes shine {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FreeCash Rewards</title>
+  <style>
+    /* Basic reset */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #0c0c0c;
+      color: #fff;
+    }
+    .container {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+    /* Hero section */
+    .hero {
+      text-align: center;
+      padding-top: 32px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    .hero p {
+      font-size: 16px;
+      color: #b3b3b3;
+      margin: 0;
+    }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat span {
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      color: #4ade80;
+    }
+    .stat small {
+      font-size: 12px;
+      color: #888;
+    }
+    /* Quiz section */
+    .quiz {
+      margin-top: 40px;
+    }
+    .quiz h2 {
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 20px;
+    }
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .option:hover {
+      background: #242424;
+    }
+    .option.selected {
+      border: 2px solid #4ade80;
+    }
+    .option .title {
+      font-size: 16px;
+      color: #fff;
+    }
+    .option .sub {
+      font-size: 12px;
+      color: #6c6c6c;
+    }
+    /* Success state */
+    .success {
+      display: none;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .success .check {
+      font-size: 40px;
+      color: #4ade80;
+    }
+    .success .title {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 12px 0 4px;
+    }
+    .success .desc {
+      font-size: 16px;
+      color: #b3b3b3;
+      margin: 0 0 24px;
+    }
+    /* CTA */
+    .cta {
+      display: none;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .cta button {
+      width: 100%;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      background: #4ade80;
+      color: #0c0c0c;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .cta button:active {
+      transform: scale(0.97);
+    }
+    .cta p {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+    }
+    /* Steps section */
+    .steps {
+      margin-top: 48px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .step .num {
+      background: #4ade80;
+      color: #0c0c0c;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-right: 16px;
+    }
+    .step .content h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .step .content p {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #888;
+    }
+    /* Trust section */
+    .trust {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+    .trust .stars {
+      color: #facc15;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .trust .methods {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+    /* Footer reinforcement */
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 12px;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-    <!-- Step 1: Intro -->
-    <div id="step1" class="lander-step">
-        <div class="header-module">
-            <div class="logo-badge" id="step1-badge">Freecash App</div>
-            <div class="step-indicator">1 / 2</div>
+  <div class="container">
+    <!-- Hero / Primary Hook -->
+    <div class="hero">
+      <h1>Get Paid to Scroll TikTok</h1>
+      <p>Turn your screen time into rewards — up to $500/week.</p>
+      <div class="stats">
+        <div class="stat">
+          <span>1M+</span>
+          <small>Members</small>
         </div>
-        <div class="hero-module">
-            <h1 class="main-headline">
-                Get Paid for <br /><span class="highlight">Gaming &amp; Scrolling</span>
-            </h1>
-            <div class="bonus-notification">
-                <div class="bonus-icon">🎁</div>
-                <div class="bonus-text">
-                    <div class="bonus-title">$5 Sign Up Bonus</div>
-                    <div class="bonus-sub">Available for new users</div>
-                </div>
-            </div>
-            <div class="review-stars">
-                <!-- four full stars -->
-                <svg class="star-icon" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                </svg>
-                <svg class="star-icon" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                </svg>
-                <svg class="star-icon" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                </svg>
-                <svg class="star-icon" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                </svg>
-                <!-- partial star to represent 4.8/5 -->
-                <svg class="star-icon partial" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                </svg>
-                <span class="review-text">4.8 (10K Ratings)</span>
-            </div>
-            <p class="sub-headline">
-                <b>Watch Netflix. Scroll TikTok. Take surveys.</b><br />
-                Earn cash by playing games and answering simple questionnaires whenever you have spare time.
-            </p>
+        <div class="stat">
+          <span>4.8 ★</span>
+          <small>250k reviews</small>
         </div>
-        <div class="stats-container">
-            <div class="stat-pill">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
-                </svg>
-                <div class="stat-data">
-                    <span class="stat-val">500K+</span>
-                    <span class="stat-lbl">Active Users</span>
-                </div>
-            </div>
-            <div class="stat-pill">
-                <svg viewBox="0 0 24 24">
-                    <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.75-2.7 1.75-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c2.17-.46 3.5-1.66 3.5-3.66 0-2.52-2.38-3.47-5.2-4.14z"></path>
-                </svg>
-                <div class="stat-data">
-                    <span class="stat-val">100+</span>
-                    <span class="stat-lbl">Offers</span>
-                </div>
-            </div>
-        </div>
-        <div class="instruction-text">Tap below to get started</div>
-        <div class="interaction-module">
-            <div class="option-card" data-age="over">
-                <div class="option-content">
-                    <div class="option-title">I'm 21 or older</div>
-                    <div class="option-desc">Instant Payouts: PayPal, CashApp, Venmo &amp; Crypto</div>
-                </div>
-                <div class="option-radio"></div>
-            </div>
-            <div class="option-card" data-age="under">
-                <div class="option-content">
-                    <div class="option-title">I'm under 21</div>
-                    <div class="option-desc">Limited Payouts: Gift Cards &amp; Biweekly Cash</div>
-                </div>
-                <div class="option-radio"></div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- Step 2: Success and instructions -->
-    <div id="step2" class="lander-step" style="display:none">
-        <div class="header-module">
-            <div class="logo-badge" style="color: var(--brand-green)">STEP COMPLETE</div>
-            <div class="step-indicator">2 / 2</div>
+    <!-- Qualification Step (micro-commitment) -->
+    <div class="quiz">
+      <h2>How old are you?</h2>
+      <div class="option" data-option="over">
+        <div>
+          <span class="title">I'm 21 or older</span><br>
+          <span class="sub">Instant payouts via PayPal, Crypto &amp; more</span>
         </div>
-        <div class="hero-module">
-            <div class="headline-row" style="display:flex; align-items: center; justify-content: center; gap: 10px;">
-                <div class="success-icon-floating" style="background-color: var(--brand-green); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#000">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                    </svg>
-                </div>
-                <h1 class="youre-in-headline">You're <span class="in-block">In!</span></h1>
-            </div>
-            <p class="sub-headline" id="step2-subheadline">
-                Your device is confirmed compatible. We have reserved a sign up bonus for you.
-            </p>
+      </div>
+      <div class="option" data-option="under">
+        <div>
+          <span class="title">I'm under 21</span><br>
+          <span class="sub">Limited payout options</span>
         </div>
-        <a href="#" class="cta-button" id="download-button">
-            <span>Download &amp; Start Earning</span>
-            <svg viewBox="0 0 24 24">
-                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-            </svg>
-        </a>
-        <div class="roadmap-card">
-            <h3 id="roadmap-label">Your Earning Journey</h3>
-            <div class="roadmap-step">
-                <div class="step-number">1</div>
-                <div class="step-text">
-                    <div class="title" id="roadmap-step1-title">Install &amp; Register</div>
-                    <div class="description" id="roadmap-step1-desc">Create your free account</div>
-                </div>
-            </div>
-            <div class="roadmap-step">
-                <div class="step-number">2</div>
-                <div class="step-text">
-                    <div class="title" id="roadmap-step2-title">Play &amp; Answer</div>
-                    <div class="description" id="roadmap-step2-desc">Play games &amp; answer surveys to earn points</div>
-                </div>
-            </div>
-            <div class="roadmap-step">
-                <div class="step-number">3</div>
-                <div class="step-text">
-                    <div class="title" id="roadmap-step3-title">Claim $5 Bonus</div>
-                    <div class="description" id="roadmap-step3-desc">Instant credit to your balance</div>
-                </div>
-            </div>
-            <div class="roadmap-step" id="roadmap-step4">
-                <div class="step-number">4</div>
-                <div class="step-text">
-                    <div class="title" id="roadmap-step4-title">Cash Out</div>
-                    <div class="description" id="roadmap-step4-desc">Redeem via your preferred payout method</div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script>
-        // Utility to retrieve URL parameters (for dynamic tracking values)
-        function getParam(name) {
-            const params = new URLSearchParams(window.location.search);
-            return params.get(name) || '';
-        }
+    <!-- Success / Confirmation State -->
+    <div class="success">
+      <div class="check">✔</div>
+      <div class="title">You're In!</div>
+      <div class="desc">You're pre‑qualified for the highest rewards. Your bonus is reserved!</div>
+    </div>
 
-        function buildTrackingUrl() {
-            // Always return the final offer link provided by the campaign
-            return 'https://go.goldentracee.com/click';
-        }
+    <!-- Primary CTA (hidden until qualified) -->
+    <div class="cta">
+      <button id="ctaButton">Download FreeCash App &amp; Start Earning</button>
+      <p>No credit card needed • iOS &amp; Android</p>
+    </div>
 
-        function updateStep2(age) {
-            const subHeadline = document.getElementById('step2-subheadline');
-            const step2Title2 = document.getElementById('roadmap-step2-title');
-            const step2Desc2 = document.getElementById('roadmap-step2-desc');
-            const step4Title = document.getElementById('roadmap-step4-title');
-            const step4Desc = document.getElementById('roadmap-step4-desc');
+    <!-- 3-Step “How It Works” -->
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div class="content">
+          <h3>Install &amp; Join</h3>
+          <p>Download the FreeCash app and sign up to receive an instant sign‑up bonus.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div class="content">
+          <h3>Complete an offer</h3>
+          <p>Do one quick offer to unlock TikTok earning &amp; more ways to earn.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div class="content">
+          <h3>Cash out</h3>
+          <p>Collect rewards and withdraw via PayPal, gift cards, crypto and more — fast.</p>
+        </div>
+      </div>
+    </div>
 
-            if (age === 'over') {
-                subHeadline.textContent = 'Earn cash by answering questions and playing games. Your device is perfect for our offers!';
-                step2Title2.textContent = 'Play & Answer';
-                step2Desc2.textContent = 'Play games & take surveys to earn points';
-                step4Title.textContent = 'Cash Out';
-                step4Desc.textContent = 'Get paid instantly via PayPal, Cash App, Venmo or Crypto';
-            } else {
-                subHeadline.textContent = 'Your device is confirmed compatible. We have reserved a sign up bonus for you.';
-                step2Title2.textContent = 'Play & Answer';
-                step2Desc2.textContent = 'Complete tasks & surveys to earn points';
-                step4Title.textContent = 'Redeem Rewards';
-                step4Desc.textContent = 'Gift cards and cash available after completing offers';
-            }
-            // update CTA link whenever step2 is loaded
-            const cta = document.getElementById('download-button');
-            cta.href = buildTrackingUrl();
-        }
+    <!-- Trust & Proof -->
+    <div class="trust">
+      <div class="stars">★★★★☆</div>
+      <div>Rated 4.8/5 by 250k+ users</div>
+      <div class="methods">PayPal • Cash App • Gift cards • Crypto</div>
+    </div>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const optionCards = document.querySelectorAll('.option-card');
-            optionCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    // Mark selected
-                    optionCards.forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
-                    const age = card.dataset.age;
+    <!-- Footer Reinforcement -->
+    <div class="footer">
+      <p>Results may vary. Earnings are not guaranteed. Terms apply.</p>
+    </div>
+  </div>
 
-                    // Fade out step1 smoothly
-                    const step1 = document.getElementById('step1');
-                    step1.classList.add('fade-out');
-                    // After fade duration, hide the element
-                    setTimeout(() => {
-                        step1.style.display = 'none';
-                    }, 500);
+  <script>
+    // Handle quiz selection and reveal success & CTA
+    (function() {
+      var options = document.querySelectorAll('.option');
+      var success = document.querySelector('.success');
+      var cta = document.querySelector('.cta');
+      var ctaButton = document.getElementById('ctaButton');
 
-                    // Show step2 with a smooth appearance
-                    const step2 = document.getElementById('step2');
-                    step2.style.display = 'flex';
-                    // Trigger layout so the transition can apply
-                    requestAnimationFrame(() => {
-                        step2.classList.add('visible');
-                    });
-
-                    updateStep2(age);
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                });
-            });
+      options.forEach(function(opt) {
+        opt.addEventListener('click', function() {
+          options.forEach(function(o) { o.classList.remove('selected'); });
+          this.classList.add('selected');
+          success.style.display = 'block';
+          cta.style.display = 'block';
         });
-    </script>
+      });
+
+      // Append source parameter based on file name/slug
+      var slug = window.location.pathname.split('/').pop().split('.').shift();
+      var baseUrl = 'https://go.goldentracee.com/click';
+      ctaButton.addEventListener('click', function() {
+        var link = baseUrl + '?source=' + encodeURIComponent(slug || 'freecash');
+        window.location.href = link;
+      });
+    })();
+  </script>
 </body>
 </html>

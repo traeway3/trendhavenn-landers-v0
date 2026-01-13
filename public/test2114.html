@@ -89,9 +89,14 @@
     }
     /* Success state */
     .success {
+      /* hidden by default, will fade in */
       display: none;
       text-align: center;
       margin-top: 32px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
     }
     .success .check {
       font-size: 40px;
@@ -109,9 +114,14 @@
     }
     /* CTA */
     .cta {
+      /* hidden by default, will fade in */
       display: none;
       text-align: center;
       margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
     }
     .cta button {
       width: 100%;
@@ -124,6 +134,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.1s;
+      /* CTA animation will start when parent .cta gets .show */
     }
     .cta button:active {
       transform: scale(0.97);
@@ -189,92 +200,159 @@
       font-size: 12px;
       color: #555;
     }
+
+    /* Hero enhancements */
+    .hero h1 {
+      position: relative;
+      background: linear-gradient(90deg, #4ade80, #2dd4bf, #4ade80);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 8s linear infinite;
+    }
+    .hero p {
+      position: relative;
+      display: inline-block;
+    }
+    .hero p::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.6), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 6s linear infinite;
+    }
+
+    /* Quiz transition animations */
+    .quiz {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .quiz.fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    .success.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .cta.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    /* CTA glow effect once visible */
+    .cta.show button {
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    /* Keyframes for animations */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -100% 0; }
+      100% { background-position: 100% 0; }
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 10px 0 rgba(74, 222, 128, 0.7); }
+      50% { box-shadow: 0 0 20px 6px rgba(74, 222, 128, 0.4); }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Hero / Primary Hook -->
-    <div class="hero">
-      <h1>Get Paid to Scroll TikTok</h1>
-      <p>Turn your screen time into rewards — up to $500/week.</p>
-      <div class="stats">
-        <div class="stat">
-          <span>1M+</span>
-          <small>Members</small>
-        </div>
-        <div class="stat">
-          <span>4.8 ★</span>
-          <small>250k reviews</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- Qualification Step (micro-commitment) -->
-    <div class="quiz">
-      <h2>How old are you?</h2>
-      <div class="option" data-option="over">
-        <div>
-          <span class="title">I'm 21 or older</span><br>
-          <span class="sub">Instant payouts via PayPal, Crypto &amp; more</span>
+      <!-- Hero / Primary Hook -->
+      <div class="hero">
+        <h1>Get Paid to Scroll TikTok</h1>
+        <p>Turn your screen time into rewards — up to $500/week.</p>
+        <div class="stats">
+          <div class="stat">
+            <span>1M+</span>
+            <small>Members</small>
+          </div>
+          <div class="stat">
+            <span>4.8 ★</span>
+            <small>250k reviews</small>
+          </div>
         </div>
       </div>
-      <div class="option" data-option="under">
-        <div>
-          <span class="title">I'm under 21</span><br>
-          <span class="sub">Limited payout options</span>
+
+      <!-- Qualification Step (micro-commitment) -->
+      <div class="quiz">
+        <h2>How old are you?</h2>
+        <div class="option" data-option="over">
+          <div>
+            <span class="title">I'm 21 or older</span><br>
+            <span class="sub">Instant payouts via PayPal, Crypto &amp; more</span>
+          </div>
+        </div>
+        <div class="option" data-option="under">
+          <div>
+            <span class="title">I'm under 21</span><br>
+            <span class="sub">Limited payout options</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Success / Confirmation State -->
-    <div class="success">
-      <div class="check">✔</div>
-      <div class="title">You're In!</div>
-      <div class="desc">You're pre‑qualified for the highest rewards. Your bonus is reserved!</div>
-    </div>
+      <!-- Success / Confirmation State -->
+      <div class="success">
+        <div class="check">✔</div>
+        <div class="title">You're In!</div>
+        <div class="desc">You're pre‑qualified for the highest rewards. Your bonus is reserved!</div>
+      </div>
 
-    <!-- Primary CTA (hidden until qualified) -->
-    <div class="cta">
-      <button id="ctaButton">Download FreeCash App &amp; Start Earning</button>
-      <p>No credit card needed • iOS &amp; Android</p>
-    </div>
+      <!-- Primary CTA (hidden until qualified) -->
+      <div class="cta">
+        <button id="ctaButton">Download FreeCash App &amp; Start Earning</button>
+        <p>No credit card needed • iOS &amp; Android</p>
+      </div>
 
-    <!-- 3-Step “How It Works” -->
-    <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <div class="content">
-          <h3>Install &amp; Join</h3>
-          <p>Download the FreeCash app and sign up to receive an instant sign‑up bonus.</p>
+      <!-- 3-Step “How It Works” -->
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div class="content">
+            <h3>Install &amp; Join</h3>
+            <p>Download the FreeCash app and sign up to receive an instant sign‑up bonus.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div class="content">
+            <h3>Complete an offer</h3>
+            <p>Do one quick offer to unlock TikTok earning &amp; more ways to earn.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div class="content">
+            <h3>Cash out</h3>
+            <p>Collect rewards and withdraw via PayPal, gift cards, crypto and more — fast.</p>
+          </div>
         </div>
       </div>
-      <div class="step">
-        <div class="num">2</div>
-        <div class="content">
-          <h3>Complete an offer</h3>
-          <p>Do one quick offer to unlock TikTok earning &amp; more ways to earn.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <div class="content">
-          <h3>Cash out</h3>
-          <p>Collect rewards and withdraw via PayPal, gift cards, crypto and more — fast.</p>
-        </div>
-      </div>
-    </div>
 
-    <!-- Trust & Proof -->
-    <div class="trust">
-      <div class="stars">★★★★☆</div>
-      <div>Rated 4.8/5 by 250k+ users</div>
-      <div class="methods">PayPal • Cash App • Gift cards • Crypto</div>
-    </div>
+      <!-- Trust & Proof -->
+      <div class="trust">
+        <div class="stars">★★★★☆</div>
+        <div>Rated 4.8/5 by 250k+ users</div>
+        <div class="methods">PayPal • Cash App • Gift cards • Crypto</div>
+      </div>
 
-    <!-- Footer Reinforcement -->
-    <div class="footer">
-      <p>Results may vary. Earnings are not guaranteed. Terms apply.</p>
-    </div>
+      <!-- Footer Reinforcement -->
+      <div class="footer">
+        <p>Results may vary. Earnings are not guaranteed. Terms apply.</p>
+      </div>
   </div>
 
   <script>
@@ -284,13 +362,21 @@
       var success = document.querySelector('.success');
       var cta = document.querySelector('.cta');
       var ctaButton = document.getElementById('ctaButton');
+      var quiz = document.querySelector('.quiz');
 
       options.forEach(function(opt) {
         opt.addEventListener('click', function() {
+          // mark selected option visually
           options.forEach(function(o) { o.classList.remove('selected'); });
           this.classList.add('selected');
-          success.style.display = 'block';
-          cta.style.display = 'block';
+          // animate quiz out
+          quiz.classList.add('fade-out');
+          // after animation ends, hide quiz and reveal success & CTA
+          setTimeout(function() {
+            quiz.style.display = 'none';
+            success.classList.add('show');
+            cta.classList.add('show');
+          }, 400);
         });
       });
 

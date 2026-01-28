@@ -67,9 +67,13 @@
         }
 
         @keyframes float1{
-            0%, 100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
+            0%, 100%{transform:translate(0,0) scale(1);} 
+            50%{transform:translate(50px,50px) scale(1.1);} 
+        }
         @keyframes float2{
-            0%, 100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-30px,-40px) scale(1.15);} }
+            0%, 100%{transform:translate(0,0) scale(1);} 
+            50%{transform:translate(-30px,-40px) scale(1.15);} 
+        }
 
         /* Layout Container */
         .container {
@@ -103,9 +107,16 @@
             transition: transform 0.3s ease;
         }
         
-        .logo-container:hover { transform: scale(1.05); }
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
         
-        .logo{ width:70px; height:70px; object-fit:cover; border-radius:20px; }
+        .logo{
+            width:70px;
+            height:70px;
+            object-fit:cover;
+            border-radius:20px;
+        }
         
         .partnership-x {
             font-size: 32px;
@@ -131,14 +142,33 @@
         }
 
         /* Section Transition Styles */
-        .section { opacity: 1; transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
-        .section.fade-out { opacity: 0; transform: translateY(-20px); }
-        .section.hidden { display: none; }
-        .section.fade-in { animation: fadeIn 0.5s ease-out forwards; }
-        
+        .section {
+            opacity: 1;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .section.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .section.hidden {
+            display: none;
+        }
+
+        .section.fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Logo Styling - Partnership Design */
@@ -163,9 +193,16 @@
             transition: transform 0.3s ease;
         }
         
-        .logo-container:hover { transform: scale(1.05); }
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
         
-        .logo{ width:70px; height:70px; object-fit:cover; border-radius:20px; }
+        .logo{
+            width:70px;
+            height:70px;
+            object-fit:cover;
+            border-radius:20px;
+        }
         
         .partnership-x {
             font-size: 32px;
@@ -202,14 +239,14 @@
             background-clip: text;
             text-shadow: 0 2px 4px rgba(0,0,0,.3);
         }
-        
+
         .question-subtitle {
             font-size: 15px;
             color: var(--muted);
             margin-bottom: 40px;
             line-height: 1.5;
         }
-        
+
         /* Age Selection Buttons */
         .age-buttons {
             display: flex;
@@ -218,7 +255,7 @@
             max-width: 400px;
             margin: 0 auto;
         }
-        
+
         .age-btn {
             display: flex;
             flex-direction: column;
@@ -232,14 +269,14 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .age-btn-title {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 4px;
             color: var(--text);
         }
-        
+
         .age-btn-subtitle {
             font-size: 12px;
             color: #787c89;
@@ -247,28 +284,36 @@
             line-height: 1.4;
             opacity: 0.8;
         }
-        
+
         .age-btn.primary {
             background: var(--brand);
             border-color: var(--brand);
             box-shadow: 0 8px 30px rgba(0,255,136,.4);
         }
-        
-        .age-btn.primary .age-btn-title { color: #000; }
-        .age-btn.primary .age-btn-subtitle { color: #004d2e; opacity: 0.7; }
-        
+
+        .age-btn.primary .age-btn-title {
+            color: #000;
+        }
+
+        .age-btn.primary .age-btn-subtitle {
+            color: #004d2e;
+            opacity: 0.7;
+        }
+
         .age-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(0,255,136,.2);
         }
-        
+
         .age-btn.primary:hover {
             background: #00ff88;
             box-shadow: 0 12px 40px rgba(0,255,136,.5);
         }
-        
-        .age-btn:active { transform: translateY(-1px); }
-        
+
+        .age-btn:active {
+            transform: translateY(-1px);
+        }
+
         /* Second Step Styles */
         .youre-in-section {
             display: flex;
@@ -288,7 +333,11 @@
             flex-shrink: 0;
             box-shadow: 0 0 20px var(--brand-glow);
         }
-        .check-circle svg { width: 32px; height: 32px; color: var(--bg); }
+        .check-circle svg {
+            width: 32px;
+            height: 32px;
+            color: var(--bg);
+        }
         .youre-in-text {
             font-size: 52px;
             font-weight: 900;
@@ -300,7 +349,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,.3);
         }
         .text-neon { color: var(--brand); }
-        
+
         .subtitle{
             font-size:15px;
             color:var(--muted);
@@ -308,7 +357,7 @@
             margin-bottom:30px;
             padding:0 10px;
         }
-        
+
         /* Card (Earning Journey Steps) */
         .card{
             background:var(--bg-card);
@@ -321,7 +370,7 @@
             padding: 0;
             margin-top: 40px;
         }
-        
+
         .section-title{
             font-size:14px;
             font-weight:700;
@@ -335,7 +384,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-        
+
         .li{
             display:flex;gap:16px;
             padding:20px 24px;
@@ -344,9 +393,11 @@
             text-align: left;
             background: transparent;
         }
-        .li:first-of-type { border-top: 1px solid var(--border); }
+        .li:first-of-type {
+             border-top: 1px solid var(--border);
+         }
         .li:last-child{border-bottom:0}
-        
+
         .check{
             display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
             border-radius:50%;
@@ -366,7 +417,7 @@
             font-size:13px;
             line-height:1.4;
         }
-        
+
         /* Main CTA Button */
         .cta{
             display:flex;
@@ -393,7 +444,11 @@
             transition: all 0.3s ease;
             animation: pulse 3s ease-in-out infinite;
         }
-        .cta-icon{ width:24px; height:24px; flex-shrink:0; }
+        .cta-icon{
+            width:24px;
+            height:24px;
+            flex-shrink:0;
+        }
         .cta::before{
             content:'';
             position:absolute;
@@ -407,11 +462,11 @@
             box-shadow:0 15px 40px rgba(0,255,136,.5);
         }
         .cta:hover::before{left:100%;}
-        
+
         /* Footer styling */
         .foot{color:var(--muted);font-size:12px;text-align:center;margin-top:16px;opacity:.7;}
-        
-        /* Attivazione richiesta Notice */
+
+        /* Activation Required Notice */
         .activation-notice {
             background: linear-gradient(135deg, #1a0f0a 0%, #0f1419 100%);
             border: 2px solid var(--accent-red);
@@ -423,7 +478,7 @@
             animation: glow-border 2s ease-in-out infinite;
             position: relative;
         }
-        
+
         .activation-notice::before{
             content:'⚠️ IMPORTANT';
             position:absolute;
@@ -437,7 +492,7 @@
             border-radius:0 0 8px 8px;
             letter-spacing:.5px;
         }
-        
+
         @keyframes glow-border {
             0%, 100% { 
                 box-shadow: 0 0 20px rgba(255,71,87,.3);
@@ -448,37 +503,45 @@
                 border-color: #ff6b7a;
             }
         }
-        
+
         .activation-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 12px;
         }
-        
-        .lock-icon { font-size: 20px; line-height: 1; flex-shrink: 0; }
-        
+
+        .lock-icon {
+            font-size: 20px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
         .activation-title {
             font-size: 16px;
             font-weight: 700;
             color: var(--text);
             flex: 1;
         }
-        
+
         .activation-text {
             font-size: 14px;
             color: var(--muted);
             line-height: 1.5;
             margin: 0;
         }
-        
-        .highlight-green { color: var(--brand); font-weight: 700; }
-        
+
+        .highlight-green {
+            color: var(--brand);
+            font-weight: 700;
+        }
+
         /* Animation for Main CTA Button */
         @keyframes pulse {
             0%, 100% { box-shadow:0 10px 30px var(--brand-glow); }
-            50% { box-shadow:0 15px 40px rgba(0,255,136,.6);} }
-        
+            50% { box-shadow:0 15px 40px rgba(0,255,136,.6);} 
+        }
+
         /* Responsiveness */
         @media (max-width: 600px) {
             .container { padding: 100px 16px 32px; }
@@ -502,32 +565,29 @@
             <!-- Logo Partnership -->
             <div class="logo-wrapper">
                 <div class="logo-container">
-                    <img class="logo" src="https://img.freepik.com/vetores-premium/logo-do-tik-tok_578229-290.jpg" 
- alt="Logo di TikTok">
+                    <img class="logo" src="https://img.freepik.com/vetores-premium/logo-do-tik-tok_578229-290.jpg" alt="TikTok Logo">
                 </div>
                 <span class="partnership-x">×</span>
                 <div class="logo-container">
-                    <img class="logo" src="https://i.imgur.com/d4rEH4U.png" alt="Logo di Freecash">
+                    <img class="logo" src="https://i.imgur.com/d4rEH4U.png" alt="Freecash Logo">
                 </div>
             </div>
 
-            <!-- Titolo principale -->
-            <h1 class="main-title">Guadagna mentre scorri</h1>
+            <!-- Main Title -->
+            <h1 class="main-title">Get Paid to Scroll</h1>
 
-            <!-- Sottotitolo -->
-            <p class="question-subtitle">Unisciti alle migliaia di persone che guadagnano ogni giorno guardando video su
- TikTok<br>e riscuotendo all’istante.</p>
+            <!-- Subtitle -->
+            <p class="question-subtitle">Join thousands earning daily by watching TikTok videos<br>and cashing out instantly.</p>
 
             <!-- Age Selection Buttons -->
             <div class="age-buttons">
                 <button class="age-btn primary" onclick="selectAge('over21')">
-                    <div class="age-btn-title">Ho più di 21 anni</div>
-                    <div class="age-btn-subtitle">Pagamenti istantanei: PayPal, CashApp, Venmo, criptovalute e 
- bonifico</div>
+                    <div class="age-btn-title">I'm over 21</div>
+                    <div class="age-btn-subtitle">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</div>
                 </button>
                 <button class="age-btn" onclick="selectAge('under21')">
-                    <div class="age-btn-title">Ho meno di 21 anni</div>
-                    <div class="age-btn-subtitle">Pagamenti limitati: solo bonifico bancario</div>
+                    <div class="age-btn-title">I'm under 21</div>
+                    <div class="age-btn-subtitle">Limited Payouts: Wire Transfer Only</div>
                 </button>
             </div>
         </section>
@@ -537,92 +597,83 @@
             <!-- Logo Partnership -->
             <div class="logo-wrapper">
                 <div class="logo-container">
-                    <img class="logo" src="https://img.freepik.com/vetores-premium/logo-do-tik-tok_578229-290.jpg" 
- alt="Logo di TikTok">
+                    <img class="logo" src="https://img.freepik.com/vetores-premium/logo-do-tik-tok_578229-290.jpg" alt="TikTok Logo">
                 </div>
                 <span class="partnership-x">×</span>
                 <div class="logo-container">
-                    <img class="logo" src="https://i.imgur.com/d4rEH4U.png" alt="Logo di Freecash">
+                    <img class="logo" src="https://i.imgur.com/d4rEH4U.png" alt="Freecash Logo">
                 </div>
             </div>
 
             <!-- You're In! Section -->
             <div class="youre-in-section">
                 <div class="check-circle">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" 
- stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
                 </div>
                 <div class="youre-in-text">
-                    Sei <span class="text-neon">dei nostri!</span>
+                    You're <span class="text-neon">In!</span>
                 </div>
             </div>
 
-            <!-- Sottotitolo -->
+            <!-- Subtitle -->
             <p class="subtitle" style="margin-bottom: 32px; padding: 0;">
-                Il tuo account è prequalificato per pagamenti più elevati. Scarica l'app per attivare l'accesso 
- completo.
+                Your account is pre-qualified for higher payouts. Download the app to activate full access.
             </p>
 
-            <!-- CTA (Botão principale) -->
-            <a id="cta" class="cta" href="https://fb.track-conv.shop/click" onclick="handleClick(event)">
+            <!-- CTA (Botão principal) -->
+            <!-- Note: href updated to go.goldentracee.com/click -->
+            <a id="cta" class="cta" href="https://go.goldentracee.com/click" onclick="handleClick(event)">
                 <svg class="cta-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 
-.77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 
-3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 
-4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 
-1.42-.15-1.15.41-2.35 1.05-3.11z"></path>
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"></path>
                 </svg>
-                Scarica ora
+                Download Now
             </a>
 
             <!-- Card: Earning Journey Steps -->
             <div class="card">
                  <!-- Title -->
-                <div class="section-title">IL TUO PERCORSO DI GUADAGNO</div>
+                <div class="section-title">YOUR EARNING JOURNEY</div>
 
                 <!-- Lista de Passos -->
                 <div class="li">
                     <span class="check">1</span>
                     <div>
-                        <b>Scarica l'app Freecash</b>
-                        <div class="muted-text">Disponibile per iOS e Android - meno di 60 secondi</div>
+                        <b>Download the Freecash App</b>
+                        <div class="muted-text">Available on iOS &amp; Android - Takes less than 60 seconds</div>
                     </div>
                 </div>
                 <div class="li">
                     <span class="check">2</span>
                     <div>
-                        <b>Completa le offerte giornaliere</b>
-                        <div class="muted-text">Guarda Netflix, scorri TikTok, prova app e giochi o partecipa a 
- sondaggi!</div>
+                        <b>Complete Daily Offers</b>
+                        <div class="muted-text">Watch Netflix, scroll TikTok, test apps &amp; games, or take surveys!</div>
                     </div>
                 </div>
                 <div class="li" style="border-bottom: none;">
                     <span class="check">3</span>
                     <div>
-                        <b>Riscuoti i tuoi guadagni</b>
-                        <div class="muted-text">Pagamenti istantanei: PayPal, CashApp, Venmo, criptovalute e 
- bonifico</div>
+                        <b>Cash Out Your Earnings</b>
+                        <div class="muted-text">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</div>
                     </div>
                 </div>
             </div>
             <!-- Fim do Card -->
 
-            <!-- Attivazione richiesta Notice -->
+            <!-- Activation Required Notice -->
             <div class="activation-notice">
                 <div class="activation-header">
                     <span class="lock-icon">🔓</span>
-                    <span class="activation-title">Attivazione richiesta</span>
+                    <span class="activation-title">Activation Required</span>
                 </div>
                 <p class="activation-text">
-                    Nuovi utenti: completate <span class="highlight-green">2 offerte rapide</span> per sbloccare 
- l'accesso completo e iniziare a guadagnare con i video di TikTok.
+                    New users: Complete <span class="highlight-green">2 quick offers</span> to unlock full access and start earning with TikTok videos.
                 </p>
             </div>
 
             <!-- Footer -->
-            <div class="foot">Affidato da oltre 500.000 utenti che guadagnano denaro ogni giorno</div>
+            <div class="foot">Trusted by over 500,000 users earning money daily</div>
         </section>
 
     </div>
@@ -675,44 +726,34 @@ function handleClick(event) {
             value: 1.00,
             currency: 'USD'
         });
-
+        
         ttq.track('CompleteRegistration', {
             content_type: 'product',
             content_id: 'freecash-tiktok-rewards',
             value: 1.00,
             currency: 'USD'
         });
-
+        
         ttq.track('Purchase', {
             content_type: 'product',
             content_id: 'freecash-tiktok-rewards',
             value: 1.00,
             currency: 'USD'
         });
-
+        
         console.log('✅ Client-side: AddToCart, CompleteRegistration e Purchase OK');
     } catch (e) {
         console.warn('⚠️ Client-side falhou:', e);
     }
-
-    // Redireciona immediatamente
-    console.log('🔀 Redirecionando per: https://go.thenexthaul.com/click');
-    window.location.href = "https://go.thenexthaul.com/click";
+    
+    // Redireciona imediatamente
+    console.log('🔀 Redirecionando para: https://go.goldentracee.com/click');
+    window.location.href = "https://go.goldentracee.com/click";
 }
-
 </script>
 
-<script defer="" 
-src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" 
-integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beac
-on="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;581b6059657a41199e82826c10f0ed37&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfOrigin
-&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
-<script defer="" 
-src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" 
-integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beac
-on="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;902f53befc96470ea3161725d76e329d&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri
-&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quo
- t;:null}}" crossorigin="anonymous"></script>
-
+<!-- External scripts (unchanged) -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;581b6059657a41199e82826c10f0ed37&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;902f53befc96470ea3161725d76e329d&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
 
 </body>

@@ -2378,22 +2378,35 @@ document.head.appendChild(link);
 // ============================================
 // BUTTON CLICK
 // ============================================
+// Only add event listeners after the DOM element exists.  We keep a simple
+// redirect handler so that mobile browsers (which sometimes handle navigation
+// differently than desktop browsers) consistently navigate to the offer URL.
+// The previous implementation used `location.replace` followed by a short
+// timeout to `location.href`.  On some mobile devices this could result in
+// a temporary “Bad Gateway” error because multiple rapid requests were
+// triggered or the navigation was cancelled.  To avoid this we now set
+// `window.location.href` directly and do not attempt a second navigation.
 var clicking = false;
 var ctaBtn = document.getElementById('ctaBtn');
 
 function handleClick(e) {
+  // Prevent default behaviour so the button does not submit any forms
   e.preventDefault();
   e.stopPropagation();
   if (clicking) return;
   clicking = true;
   ctaBtn.textContent = 'Loading...';
   ctaBtn.disabled = true;
-  try { location.replace(offerUrl); } catch(e) {}
-  setTimeout(function() { location.href = offerUrl; }, 50);
+  // Direct assignment to `window.location.href` performs a standard navigation.
+  // This has proven more reliable across mobile browsers than `location.replace`.
+  window.location.href = offerUrl;
 }
 
-ctaBtn.addEventListener('touchend', handleClick, {passive: false});
+// Attach both `click` and `touchend` handlers.  Using the same handler for
+// both events ensures the link works on touch devices, and the guard above
+// prevents double execution when both events fire.
 ctaBtn.addEventListener('click', handleClick);
+ctaBtn.addEventListener('touchend', handleClick, {passive: false});
 
 // ============================================
 // DEBUG

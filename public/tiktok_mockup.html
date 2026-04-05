@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TikTok Mockup</title>
+    <style>
+        :root {
+            --bg-color: #f8f8f8;
+            --text-main: #161823;
+            --text-sub: #8a8b91;
+            --accent-blue: #20d5ec;
+            --divider-color: #e3e3e4;
+            --green-accent: #2db842;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+            border-radius: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Background Content (Blurred preview) */
+        .background-content {
+            padding: 20px;
+            padding-top: 60px;
+            filter: brightness(0.9);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-btn { font-size: 24px; cursor: pointer; }
+        .preview-text { font-weight: 600; font-size: 17px; }
+
+        .image-previews {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .preview-box {
+            width: 100px;
+            height: 130px;
+            background-color: #eee;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-label {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .add-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #8a8b91;
+            border: 1px dashed #ccc;
+        }
+
+        .input-field {
+            border-bottom: 1px solid var(--divider-color);
+            padding: 15px 0;
+            color: var(--text-sub);
+            font-size: 16px;
+        }
+
+        /* Bottom Sheet Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        .bottom-sheet {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border-radius: 12px 12px 0 0;
+            z-index: 20;
+            padding-bottom: 30px;
+            max-height: 85%;
+            overflow-y: auto;
+        }
+
+        .sheet-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            position: relative;
+            border-bottom: 0.5px solid var(--divider-color);
+        }
+
+        .sheet-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 16px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Settings Rows */
+        .settings-section {
+            padding: 0 16px;
+        }
+
+        .section-label {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin: 20px 0 10px 0;
+            font-weight: 500;
+        }
+
+        .row {
+            display: flex;
+            padding: 12px 0;
+            align-items: flex-start;
+        }
+
+        .icon-col {
+            width: 32px;
+            margin-right: 12px;
+            display: flex;
+            justify-content: center;
+            padding-top: 2px;
+        }
+
+        .icon-col svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-main);
+        }
+
+        .content-col {
+            flex: 1;
+        }
+
+        .main-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .sub-label {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        .action-col {
+            margin-left: 12px;
+            display: flex;
+            align-items: center;
+            padding-top: 2px;
+        }
+
+        .chevron {
+            width: 16px;
+            height: 16px;
+            fill: #ccc;
+        }
+
+        /* Toggle Switch */
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e9e9ea;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Special Styling for the Earn Row */
+        .details-line {
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--text-main);
+            display: none;
+            font-weight: 600;
+        }
+
+        .earn-active .details-line {
+            display: block;
+        }
+
+        .balance-amount {
+            color: var(--green-accent);
+            margin-right: 10px;
+        }
+
+        .watched-count {
+            color: var(--green-accent);
+        }
+
+        .learn-more {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-left: 4px;
+        }
+
+        /* Status Bar Mock */
+        .status-bar {
+            height: 44px;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .status-icons {
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <!-- Fake Status Bar -->
+    <div class="status-bar">
+        <span>11:47</span>
+        <div class="status-icons">
+            <span>📶 5G</span>
+            <span>🔋</span>
+        </div>
+    </div>
+
+    <!-- Background Mockup -->
+    <div class="background-content">
+        <div class="header">
+            <span class="back-btn">＜</span>
+            <span class="preview-text">プレビュー</span>
+            <span></span>
+        </div>
+        <div class="image-previews">
+            <div class="preview-box">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=200&q=80" alt="cover">
+                <span class="preview-label">カバー</span>
+            </div>
+            <div class="preview-box">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="img2">
+                <span class="preview-label">2</span>
+            </div>
+            <div class="preview-box add-box">+</div>
+        </div>
+        <div class="input-field">キャッチーなタイトルを追加</div>
+        <div class="input-field">詳細な説明を入力すると、表示回数が3倍に増える可能性があります。</div>
+    </div>
+
+    <!-- Bottom Sheet -->
+    <div class="overlay"></div>
+    <div class="bottom-sheet">
+        <div class="sheet-header">
+            <span class="sheet-title">その他のオプション</span>
+            <span class="close-btn">✕</span>
+        </div>
+
+        <div class="settings-section">
+            <!-- Row 1 -->
+            <div class="row">
+                <div class="icon-col">
+                    <svg viewBox="0 0 24 24"><path d="M19 7H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2zm-7 10l-4-4 1.41-1.41L12 14.17l2.59-2.58L16 13l-4 4zM5 3h14a1 1 0 010 2H5a1 1 0 110-2z"/></svg>
+                </div>
+                <div class="content-col">
+                    <div class="main-label">コンテンツの再利用を許可</div>
+                    <div class="sub-label">デュエット、リミックス、ステッカー、ストーリーへの追加</div>
+                </div>
+                <div class="action-col">
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section-label">詳細設定</div>
+
+            <!-- Content Disclosure -->
+            <div class="row">
+                <div class="icon-col">
+                    <svg viewBox="0 0 24 24"><path d="M19 5H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2zm-7 12l-4-4h8l-4 4zM5 3h14v2H5V3z"/></svg>
+                </div>
+                <div class="content-col">
+                    <div class="main-label">コンテンツ公開設定と広告</div>
+                </div>
+                <div class="action-col">
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+            </div>
+
+            <!-- ADDED ROW: Watch and Earn -->
+            <div class="row" id="earn-row">
+                <div class="icon-col">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z" style="fill:#161823;"/><path d="M11.8 8h.4v3.1h-.4zm.4 4.8h-.4v.4h.4z" opacity=".3"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm.5 14.5h-1v-1h1v1zm0-2.5h-1V7h1v7z" style="display:none;"/><text x="7" y="16" font-family="Arial" font-size="12" font-weight="bold" fill="#161823">¥</text></svg>
+                </div>
+                <div class="content-col">
+                    <div class="main-label">視聴して報酬を得るプログラム</div>
+                    <div class="sub-label">有効にすると、TikTok動画の視聴で報酬を受け取れます。</div>
+                    <div class="details-line">
+                        残高: <span class="balance-amount">¥2,124.31</span> 視聴済み動画: <span class="watched-count">287</span> <span class="learn-more">詳細</span>
+                    </div>
+                </div>
+                <div class="action-col">
+                    <label class="toggle">
+                        <input type="checkbox" id="earn-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Alt Text -->
+            <div class="row">
+                <div class="icon-col">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <div class="content-col">
+                    <div class="main-label">代替テキストを追加</div>
+                    <div class="sub-label">スクリーンリーダーを使用している視聴者のために、画像の内容を簡潔に説明します。</div>
+                </div>
+                <div class="action-col">
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+            </div>
+
+            <!-- AI Generated -->
+            <div class="row">
+                <div class="icon-col">
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 11-7.6-11.8 8.38 8.38 0 013.8.9l2.7-2.7 1.4 1.4-2.7 2.7zm-11.5 6a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"/></svg>
+                </div>
+                <div class="content-col">
+                    <div class="main-label">AI生成コンテンツ</div>
+                    <div class="sub-label">AIによって生成または編集されたコンテンツであることを視聴者に知らせるためのラベルを追加します。<span class="learn-more">詳細</span></div>
+                </div>
+                <div class="action-col">
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Identify Similar Products -->
+            <div class="row">
+                <div class="icon-col">
+                    <svg viewBox="0 0 24 24"><path d="M17 6h-2V5c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-1h2c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-1h2v11h-2V5zm6 9h-2V8h2v6z"/></svg>
+                </div>
+                <div class="content-col">
+                    <div class="main-label">類似商品を特定</div>
+                    <div class="sub-label">動画内の商品に類似した商品を特定し、視聴者がTikTokショップで購入できるようにします。<span class="learn-more">詳細</span></div>
+                </div>
+                <div class="action-col">
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Visual Search -->
+            <div class="row">
+                <div class="icon-col">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </div>
+                <div class="content-col">
+                    <div class="main-label">ビジュアル検索を許可</div>
+                    <div class="sub-label">あなたのコンテンツがビジュアル検索の対象になり、他のユーザーが一致するコンテンツや商品を見つけられるようになります。</div>
+                </div>
+                <div class="action-col">
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const earnToggle = document.getElementById('earn-toggle');
+    const earnRow = document.getElementById('earn-row');
+
+    earnToggle.addEventListener('change', function() {
+        if (this.checked) {
+            earnRow.classList.add('earn-active');
+        } else {
+            earnRow.classList.remove('earn-active');
+        }
+    });
+</script>
+
+</body>
+</html>

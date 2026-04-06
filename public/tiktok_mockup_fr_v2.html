@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>TikTok Mockup FR Refined</title>
+    <style>
+        :root {
+            --bg-color: #f8f8f8;
+            --text-main: #161823;
+            --text-sub: #8a8b91;
+            --accent-blue: #20d5ec;
+            --divider-color: #e3e3e4;
+            --green-accent: #2db842;
+            --phone-width: 440px;
+            --phone-height: 956px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .phone-container {
+            width: var(--phone-width);
+            height: var(--phone-height);
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+            border-radius: 55px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            border: 12px solid #1a1a1a;
+        }
+
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 35px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 100;
+        }
+
+        /* Enhanced Realistic Status Bar */
+        .status-bar {
+            height: 54px;
+            padding: 0 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 16px;
+            font-weight: 600;
+            padding-bottom: 5px;
+            z-index: 90;
+            position: relative;
+        }
+        
+        .status-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .status-right {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* SVG Icons for realism */
+        .icon-signal { width: 20px; height: 12px; fill: #000; }
+        .icon-wifi { width: 18px; height: 14px; fill: #000; }
+        .icon-battery { width: 26px; height: 13px; }
+
+        /* App Content */
+        .app-content {
+            padding: 20px 24px;
+            filter: brightness(0.85);
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .back-btn { font-size: 26px; cursor: pointer; font-weight: 300; }
+        .preview-text { font-weight: 600; font-size: 18px; }
+
+        .media-grid {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .media-item {
+            width: 120px;
+            height: 160px;
+            background-color: #f0f0f0;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            font-size: 11px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .add-media {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: #b0b0b0;
+            border: 1.5px dashed #d0d0d0;
+        }
+
+        .form-input {
+            border-bottom: 0.5px solid var(--divider-color);
+            padding: 18px 0;
+            color: var(--text-sub);
+            font-size: 17px;
+        }
+
+        /* Bottom Sheet UI */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .bottom-sheet {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border-radius: 16px 16px 0 0;
+            z-index: 20;
+            padding-bottom: 40px;
+            max-height: 88%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sheet-handle {
+            width: 40px;
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 10px auto;
+        }
+
+        .sheet-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px 20px 20px;
+            position: relative;
+            border-bottom: 0.5px solid var(--divider-color);
+        }
+
+        .sheet-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .sheet-scroll-area {
+            overflow-y: auto;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            color: var(--text-sub);
+            margin: 25px 0 12px 0;
+            font-weight: 600;
+        }
+
+        .row {
+            display: flex;
+            padding: 15px 0;
+            align-items: flex-start;
+            border-bottom: 0.3px solid rgba(227, 227, 228, 0.5);
+        }
+        .row:last-child { border-bottom: none; }
+
+        .icon-box {
+            width: 36px;
+            margin-right: 14px;
+            display: flex;
+            justify-content: center;
+            padding-top: 3px;
+        }
+
+        .icon-box svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-main);
+        }
+
+        .text-box {
+            flex: 1;
+        }
+
+        .label-main {
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .label-sub {
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.45;
+        }
+
+        .action-box {
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            padding-top: 3px;
+        }
+
+        .chevron-icon {
+            width: 18px;
+            height: 18px;
+            fill: #c7c7cc;
+        }
+
+        .ios-toggle {
+            position: relative;
+            display: inline-block;
+            width: 51px;
+            height: 31px;
+        }
+
+        .ios-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .ios-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #e9e9eb;
+            transition: .3s;
+            border-radius: 31px;
+        }
+
+        .ios-slider:before {
+            position: absolute;
+            content: "";
+            height: 27px;
+            width: 27px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        input:checked + .ios-slider {
+            background-color: var(--accent-blue);
+        }
+
+        input:checked + .ios-slider:before {
+            transform: translateX(20px);
+        }
+
+        .info-details {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--text-main);
+            display: none;
+            font-weight: 600;
+            background: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .earn-enabled .info-details {
+            display: block;
+        }
+
+        .currency {
+            color: var(--green-accent);
+            margin-right: 12px;
+        }
+
+        .stats {
+            color: var(--green-accent);
+        }
+
+        .link-more {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-left: 6px;
+            text-decoration: none;
+        }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 5px;
+            background: #000;
+            border-radius: 100px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <div class="dynamic-island"></div>
+    
+    <!-- Realistic Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>11:47</span>
+        </div>
+        <div class="status-right">
+            <!-- Cellular Signal -->
+            <svg class="icon-signal" viewBox="0 0 20 12">
+                <rect x="0" y="8" width="3" height="4" rx="1" />
+                <rect x="5" y="6" width="3" height="6" rx="1" />
+                <rect x="10" y="3" width="3" height="9" rx="1" />
+                <rect x="15" y="0" width="3" height="12" rx="1" />
+            </svg>
+            <span style="font-size: 12px; margin-top: -2px;">5G</span>
+            <!-- WiFi -->
+            <svg class="icon-wifi" viewBox="0 0 18 14">
+                <path d="M9 13.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm4.95-4.95a7 7 0 00-9.9 0l1.41 1.41a5 5 0 017.08 0l1.41-1.41zm2.83-2.83a11 11 0 00-15.56 0l1.42 1.42a9 9 0 0112.72 0l1.42-1.42z" />
+            </svg>
+            <!-- Battery -->
+            <svg class="icon-battery" viewBox="0 0 26 13">
+                <rect x="0.5" y="0.5" width="22" height="11" rx="2.5" fill="none" stroke="#000" stroke-width="1"/>
+                <rect x="2" y="2" width="16" height="8" rx="1" fill="#2db842"/>
+                <path d="M24 4.5v4c.8 0 1.5-.7 1.5-2s-.7-2-1.5-2z" fill="#000"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Background App View -->
+    <div class="app-content">
+        <div class="app-header">
+            <span class="back-btn">〈</span>
+            <span class="preview-text">Aperçu</span>
+            <span style="width: 26px;"></span>
+        </div>
+        <div class="media-grid">
+            <div class="media-item">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=300&q=80" alt="cover">
+                <span class="badge">Couverture</span>
+            </div>
+            <div class="media-item">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" alt="img2">
+                <span class="badge">2</span>
+            </div>
+            <div class="media-item add-media">+</div>
+        </div>
+        <div class="form-input">Ajouter un titre accrocheur</div>
+        <div class="form-input">Rédiger une description détaillée peut aider à multiplier les vues par 3.</div>
+    </div>
+
+    <!-- Bottom Sheet -->
+    <div class="overlay"></div>
+    <div class="bottom-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+            <span class="sheet-title">Plus d'options</span>
+            <span class="close-btn">✕</span>
+        </div>
+
+        <div class="sheet-scroll-area">
+            <div class="row">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M19 7H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2zm-7 10l-4-4 1.41-1.41L12 14.17l2.59-2.58L16 13l-4 4zM5 3h14a1 1 0 010 2H5a1 1 0 110-2z"/></svg>
+                </div>
+                <div class="text-box">
+                    <div class="label-main">Autoriser la réutilisation</div>
+                    <div class="label-sub">Duo, Collage, stickers et ajout en Story</div>
+                </div>
+                <div class="action-box">
+                    <label class="ios-toggle">
+                        <input type="checkbox" checked>
+                        <span class="ios-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section-title">Paramètres avancés</div>
+
+            <div class="row">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M19 5H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2zm-7 12l-4-4h8l-4 4zM5 3h14v2H5V3z"/></svg>
+                </div>
+                <div class="text-box">
+                    <div class="label-main">Divulgation de contenu et publicités</div>
+                </div>
+                <div class="action-box">
+                    <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+            </div>
+
+            <!-- REFINED ROW: Removed brand mention from subtext -->
+            <div class="row" id="earn-row-fr">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="#161823" stroke-width="2"/>
+                        <text x="50%" y="50%" text-anchor="middle" dy=".35em" font-family="Arial" font-size="12" font-weight="bold" fill="#161823">€</text>
+                    </svg>
+                </div>
+                <div class="text-box">
+                    <div class="label-main">Programme "Regarder et Gagner"</div>
+                    <div class="label-sub">Activez cette option pour être rémunéré en regardant des vidéos.</div>
+                    <div class="info-details">
+                        Solde : <span class="currency">13,50 €</span> Vidéos vues : <span class="stats">287</span> <a href="#" class="link-more">En savoir plus</a>
+                    </div>
+                </div>
+                <div class="action-box">
+                    <label class="ios-toggle">
+                        <input type="checkbox" id="earn-toggle-fr">
+                        <span class="ios-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <div class="text-box">
+                    <div class="label-main">Ajouter un texte alternatif</div>
+                    <div class="label-sub">Fournissez une brève description de l'image pour les spectateurs utilisant des lecteurs d'écran.</div>
+                </div>
+                <div class="action-box">
+                    <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 11-7.6-11.8 8.38 8.38 0 013.8.9l2.7-2.7 1.4 1.4-2.7 2.7zm-11.5 6a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"/></svg>
+                </div>
+                <div class="text-box">
+                    <div class="label-main">Contenu généré par IA</div>
+                    <div class="label-sub">Ajoutez ce libellé pour informer que votre contenu a été généré ou modifié par IA. <a href="#" class="link-more">En savoir plus</a></div>
+                </div>
+                <div class="action-box">
+                    <label class="ios-toggle">
+                        <input type="checkbox">
+                        <span class="ios-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M17 6h-2V5c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-1h2c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-1h2v11h-2V5zm6 9h-2V8h2v6z"/></svg>
+                </div>
+                <div class="text-box">
+                    <div class="label-main">Identifier des produits similaires</div>
+                    <div class="label-sub">Permet d'identifier des articles similaires dans vos vidéos pour que les utilisateurs puissent les acheter. <a href="#" class="link-more">En savoir plus</a></div>
+                </div>
+                <div class="action-box">
+                    <label class="ios-toggle">
+                        <input type="checkbox">
+                        <span class="ios-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </div>
+                <div class="text-box">
+                    <div class="label-main">Autoriser la recherche visuelle</div>
+                    <div class="label-sub">Votre contenu sera éligible à la recherche visuelle afin que d'autres puissent trouver du contenu ou des produits correspondants.</div>
+                </div>
+                <div class="action-box">
+                    <label class="ios-toggle">
+                        <input type="checkbox" checked>
+                        <span class="ios-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-indicator"></div>
+</div>
+
+<script>
+    const toggleFr = document.getElementById('earn-toggle-fr');
+    const rowFr = document.getElementById('earn-row-fr');
+
+    toggleFr.addEventListener('change', function() {
+        if (this.checked) {
+            rowFr.classList.add('earn-enabled');
+        } else {
+            rowFr.classList.remove('earn-enabled');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>TikTok Mockup JP Compliant</title>
+    <style>
+        :root {
+            --bg-color: #f8f8f8;
+            --text-main: #161823;
+            --text-sub: #8a8b91;
+            --accent-green: #2db842;
+            --divider-color: #e3e3e4;
+            --phone-width: 440px;
+            --phone-height: 956px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .phone-container {
+            width: var(--phone-width);
+            height: var(--phone-height);
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+            border-radius: 55px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            border: 12px solid #1a1a1a;
+        }
+
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 35px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 100;
+        }
+
+        .status-bar {
+            height: 54px;
+            padding: 0 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 16px;
+            font-weight: 600;
+            padding-bottom: 5px;
+            z-index: 90;
+        }
+        
+        .status-right { display: flex; gap: 6px; align-items: center; }
+        .icon-signal { width: 20px; height: 12px; fill: #000; }
+        .icon-wifi { width: 18px; height: 14px; fill: #000; }
+        .icon-battery { width: 26px; height: 13px; }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 0.5px solid var(--divider-color);
+            position: relative;
+        }
+
+        .back-btn { font-size: 24px; cursor: pointer; position: absolute; left: 20px; }
+        .header-title { flex: 1; text-align: center; font-size: 18px; font-weight: 700; }
+
+        .settings-list {
+            padding: 10px 0;
+            overflow-y: auto;
+            height: calc(100% - 130px);
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 0.3px solid rgba(227, 227, 228, 0.5);
+            cursor: pointer;
+        }
+
+        .setting-label { font-size: 17px; color: var(--text-main); font-weight: 500; }
+        .chevron { width: 18px; height: 18px; fill: #c7c7cc; }
+
+        /* Watch & Earn Program Section */
+        .program-section {
+            padding: 16px 20px;
+            border-bottom: 0.3px solid rgba(227, 227, 228, 0.5);
+        }
+
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .program-title { font-size: 17px; font-weight: 700; color: var(--text-main); }
+
+        .program-stats {
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .stat-value { color: var(--text-main); font-weight: 600; margin-left: 4px; }
+
+        /* Transparency Box for Compliance */
+        .compliance-box {
+            margin-top: 12px;
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 10px;
+            border: 0.5px solid #eee;
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+
+        .compliance-box b { color: #555; }
+        .compliance-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .compliance-row:last-child { margin-bottom: 0; }
+
+        /* Toggle Styling */
+        .ios-toggle { position: relative; display: inline-block; width: 51px; height: 31px; }
+        .ios-toggle input { opacity: 0; width: 0; height: 0; }
+        .ios-slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #2db842; transition: .3s; border-radius: 31px;
+        }
+        .ios-slider:before {
+            position: absolute; content: ""; height: 27px; width: 27px;
+            left: 22px; bottom: 2px; background-color: white;
+            transition: .3s; border-radius: 50%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .home-indicator {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            width: 140px; height: 5px; background: #000; border-radius: 100px;
+        }
+
+        .sub-text {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <div class="dynamic-island"></div>
+    
+    <div class="status-bar">
+        <div class="status-left"><span>3:02</span></div>
+        <div class="status-right">
+            <svg class="icon-signal" viewBox="0 0 20 12"><rect x="0" y="8" width="3" height="4" rx="1" /><rect x="5" y="6" width="3" height="6" rx="1" /><rect x="10" y="3" width="3" height="9" rx="1" /><rect x="15" y="0" width="3" height="12" rx="1" /></svg>
+            <svg class="icon-wifi" viewBox="0 0 18 14"><path d="M9 13.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm4.95-4.95a7 7 0 00-9.9 0l1.41 1.41a5 5 0 017.08 0l1.41-1.41zm2.83-2.83a11 11 0 00-15.56 0l1.42 1.42a9 9 0 0112.72 0l1.42-1.42z" /></svg>
+            <svg class="icon-battery" viewBox="0 0 26 13"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" fill="none" stroke="#000" stroke-width="1"/><rect x="2" y="2" width="18" height="8" rx="1" fill="#2db842"/><path d="M24 4.5v4c.8 0 1.5-.7 1.5-2s-.7-2-1.5-2z" fill="#000"/></svg>
+        </div>
+    </div>
+
+    <div class="app-header">
+        <span class="back-btn">〈</span>
+        <div class="header-title">アカウント</div>
+    </div>
+
+    <div class="settings-list">
+        <div class="setting-row">
+            <span class="setting-label">アカウント情報</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+        <div class="setting-row">
+            <span class="setting-label">パスワード</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+
+        <!-- REFINED WATCH & EARN SECTION -->
+        <div class="program-section">
+            <div class="program-header">
+                <span class="program-title">動画を視聴して報酬を獲得</span>
+                <label class="ios-toggle">
+                    <input type="checkbox" checked disabled>
+                    <span class="ios-slider"></span>
+                </label>
+            </div>
+            <div class="program-stats">
+                視聴時間：<span class="stat-value">5.6時間</span><br>
+                獲得金額：<span class="stat-value">約¥15,200</span>
+            </div>
+
+            <!-- COMPLIANCE DETAILS (Transparency) -->
+            <div class="compliance-box">
+                <div class="compliance-row"><b>出金方法：</b> 銀行振込、PayPay</div>
+                <div class="compliance-row"><b>最低出金額：</b> ¥1,500</div>
+                <div class="compliance-row"><b>処理時間：</b> 通常24時間以内</div>
+            </div>
+        </div>
+
+        <div class="setting-row">
+            <span class="setting-label">パスキー</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+        <div class="sub-text" style="padding: 0 20px;">
+            Face IDまたはTouch IDでTikTokにログインするためのパスキーを作成します。パスキーはパスワードより安全です。
+        </div>
+
+        <div class="setting-row">
+            <span class="setting-label">認証</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+        <div class="setting-row">
+            <span class="setting-label">ビジネスアカウントに切り替え</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+        <div class="setting-row">
+            <span class="setting-label">TikTokショップ（販売者向け）</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+        <div class="setting-row">
+            <span class="setting-label">データをダウンロード</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+        <div class="sub-text" style="padding: 0 20px;">
+            ご利用中のTikTokアプリからデータのコピーを取得します。
+        </div>
+        <div class="setting-row">
+            <span class="setting-label">アカウントを利用停止または削除</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
+    </div>
+
+    <div class="home-indicator"></div>
+</div>
+
+</body>
+</html>

@@ -2,555 +2,275 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Testerup - Get Paid Testing Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Get Paid to Test Games - Testerup</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  background:#f0f0f0;
+  color:#222;
+  line-height:1.5;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px 16px 40px;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
+/* ── Card containers (matching swagtest two-card layout) ── */
+.card{
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  width:100%;
+  max-width:480px;
+  padding:32px 24px;
+  text-align:center;
+  animation:slideDown .55s ease-out both;
+}
+.card+.card{
+  margin-top:20px;
+  animation:slideUp .55s ease-out .15s both;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
-  color: #222;
-  line-height: 1.6;
-  overflow-x: hidden;
+/* ── Hero card ── */
+.logo-img{
+  display:block;
+  margin:0 auto 20px;
+  max-width:100px;
+  height:auto;
+  animation:fadeIn .6s ease-out .1s both;
+}
+.hero-title{
+  font-size:22px;
+  font-weight:700;
+  color:#1a1a2e;
+  line-height:1.3;
+  margin-bottom:8px;
+  animation:fadeIn .6s ease-out .2s both;
+}
+.hero-sub{
+  font-size:13px;
+  color:#888;
+  margin-bottom:14px;
+  animation:fadeIn .6s ease-out .25s both;
+}
+.online-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  color:#555;
+  animation:fadeIn .6s ease-out .3s both;
+}
+.online-pill::before{
+  content:'';
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#dc1b14;
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── Action card ── */
+.progress-label{
+  font-size:12px;
+  font-weight:600;
+  color:#dc1b14;
+  letter-spacing:.4px;
+  margin-bottom:10px;
+}
+.progress-track{
+  width:100%;height:6px;
+  background:#e8e8e8;
+  border-radius:3px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.progress-fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#dc1b14,#e63946);
+  border-radius:3px;
+  animation:grow 1s ease-out .5s forwards;
+}
+@keyframes grow{to{width:65%}}
+
+.action-text{
+  font-size:16px;
+  font-weight:600;
+  color:#1a1a2e;
+  margin-bottom:20px;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 16px;
+/* ── CTA button ── */
+.cta{
+  display:block;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+  background:linear-gradient(135deg,#dc1b14 0%,#b81510 100%);
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(220,27,20,.30);
+  transition:transform .2s,box-shadow .2s;
+  position:relative;
+  overflow:hidden;
+  text-decoration:none;
+  text-align:center;
+  letter-spacing:.3px;
+}
+.cta::after{
+  content:'';
+  position:absolute;
+  top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+  animation:shine 3s infinite;
+}
+@keyframes shine{0%{left:-100%}100%{left:100%}}
+.cta:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(220,27,20,.40)}
+.cta:active{transform:translateY(0)}
+
+/* ── Quick Start Guide ── */
+.qs-header{
+  font-size:14px;
+  font-weight:700;
+  color:#1a1a2e;
+  text-align:left;
+  margin:24px 0 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.qs-header::after{content:'›';color:#dc1b14;font-size:18px}
+
+.guide-row{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  text-align:left;
+  margin-bottom:18px;
+  animation:fadeIn .5s ease-out both;
+}
+.guide-row:nth-child(2){animation-delay:.35s}
+.guide-row:nth-child(3){animation-delay:.45s}
+.guide-row:nth-child(4){animation-delay:.55s}
+
+.guide-check{
+  width:24px;height:24px;
+  border-radius:50%;
+  background:#dc1b14;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  margin-top:2px;
+}
+.guide-check svg{width:14px;height:14px}
+
+.guide-info h4{
+  font-size:14px;
+  font-weight:600;
+  color:#1a1a2e;
+  margin-bottom:2px;
+}
+.guide-info p{
+  font-size:12px;
+  color:#888;
+  line-height:1.45;
 }
 
-/* Header & Hero */
-.hero {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-  padding: 40px 0;
-  text-align: center;
-  animation: slideDown 0.6s ease-out;
-  border-bottom: 1px solid #e8e8e8;
+/* ── Trust footer ── */
+.trust{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin-top:20px;
+  font-size:12px;
+  color:#aaa;
+  animation:fadeIn .5s ease-out .6s both;
 }
+.trust svg{width:14px;height:14px;opacity:.5}
 
-.logo-section {
-  margin-bottom: 24px;
-  animation: fadeIn 0.8s ease-out 0.1s both;
-}
+/* ── Animations ── */
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-.logo-section img {
-  max-width: 120px;
-  height: auto;
-  display: inline-block;
-}
-
-.hero h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #1a1a1a;
-  animation: fadeIn 0.8s ease-out 0.2s both;
-}
-
-.hero .subtitle {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 16px;
-  animation: fadeIn 0.8s ease-out 0.3s both;
-}
-
-.online-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #f0f0f0;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  color: #555;
-  animation: fadeIn 0.8s ease-out 0.4s both;
-}
-
-.online-badge::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  background: #dc1b14;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-/* Progress Section */
-.progress-section {
-  padding: 32px 0;
-  background: #fff;
-  animation: slideUp 0.6s ease-out 0.2s both;
-}
-
-.progress-label {
-  font-size: 12px;
-  color: #dc1b14;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background: #e8e8e8;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #dc1b14 0%, #e63028 100%);
-  width: 65%;
-  animation: fillProgress 1s ease-out 0.5s both;
-}
-
-@keyframes fillProgress {
-  from { width: 0; }
-  to { width: 65%; }
-}
-
-.progress-text {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.progress-subtext {
-  font-size: 13px;
-  color: #666;
-  text-align: center;
-}
-
-/* CTA Button */
-.cta-button {
-  width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, #dc1b14 0%, #c41410 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-bottom: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(220, 27, 20, 0.3);
-  position: relative;
-  overflow: hidden;
-  animation: slideUp 0.6s ease-out 0.3s both;
-}
-
-.cta-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(220, 27, 20, 0.4);
-}
-
-.cta-button:active {
-  transform: translateY(0);
-}
-
-/* Quick Start Guide */
-.quick-start {
-  padding: 32px 0;
-  animation: slideUp 0.6s ease-out 0.4s both;
-}
-
-.quick-start h3 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.quick-start h3::after {
-  content: '→';
-  color: #dc1b14;
-}
-
-.guide-item {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-  padding: 16px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  border-left: 3px solid #dc1b14;
-  animation: fadeIn 0.6s ease-out calc(0.5s + var(--delay, 0s)) both;
-}
-
-.guide-item:nth-child(1) { --delay: 0s; }
-.guide-item:nth-child(2) { --delay: 0.1s; }
-.guide-item:nth-child(3) { --delay: 0.2s; }
-
-.guide-icon {
-  width: 32px;
-  height: 32px;
-  background: #dc1b14;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
-.guide-content h4 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 4px;
-}
-
-.guide-content p {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.5;
-}
-
-/* Benefits Section */
-.benefits {
-  padding: 32px 0;
-  animation: slideUp 0.6s ease-out 0.5s both;
-}
-
-.benefit-item {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-  padding: 12px;
-  background: #f9f9f9;
-  border-radius: 6px;
-  animation: fadeIn 0.6s ease-out calc(0.6s + var(--benefit-delay, 0s)) both;
-}
-
-.benefit-item:nth-child(1) { --benefit-delay: 0s; }
-.benefit-item:nth-child(2) { --benefit-delay: 0.1s; }
-.benefit-item:nth-child(3) { --benefit-delay: 0.2s; }
-
-.benefit-check {
-  width: 20px;
-  height: 20px;
-  background: #dc1b14;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.benefit-text {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
-}
-
-/* Trust Section */
-.trust-section {
-  padding: 24px;
-  background: linear-gradient(135deg, #fff5f5 0%, #fffbfb 100%);
-  border-radius: 8px;
-  text-align: center;
-  margin-bottom: 32px;
-  animation: slideUp 0.6s ease-out 0.6s both;
-}
-
-.trust-icon {
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-
-.trust-text {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.6;
-}
-
-/* Final CTA Section */
-.final-cta {
-  padding: 32px 0;
-  text-align: center;
-  animation: slideUp 0.6s ease-out 0.7s both;
-}
-
-.final-cta h2 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 12px;
-}
-
-.final-cta p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-
-.final-cta-btn {
-  width: 100%;
-  padding: 18px;
-  background: linear-gradient(135deg, #dc1b14 0%, #c41410 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(220, 27, 20, 0.35);
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-
-.final-cta-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation: shine 3s infinite;
-}
-
-.final-cta-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(220, 27, 20, 0.4);
-}
-
-.final-cta-btn:active {
-  transform: translateY(-1px);
-}
-
-/* Footer */
-footer {
-  padding: 24px 0;
-  text-align: center;
-  font-size: 12px;
-  color: #999;
-  border-top: 1px solid #e8e8e8;
-  margin-top: 24px;
-}
-
-footer a {
-  color: #999;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Animations */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 24px;
-  }
-  
-  .cta-button,
-  .final-cta-btn {
-    padding: 14px;
-    font-size: 15px;
-  }
-  
-  .guide-item {
-    padding: 12px;
-    gap: 12px;
-  }
+/* ── Responsive ── */
+@media(max-width:480px){
+  body{padding:16px 12px 32px}
+  .card{padding:24px 18px}
+  .hero-title{font-size:20px}
+  .cta{padding:14px;font-size:15px}
 }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="container">
-    <div class="logo-section">
-      <img src="data:image/jpeg;base64,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" alt="Testerup">
-    </div>
-    <h1>Get Paid Testing Games</h1>
-    <p class="subtitle">Earn real money by testing the latest mobile games</p>
-    <div class="online-badge">
-      <span>12,847 users online</span>
-    </div>
-  </div>
+<!-- ═══════ CARD 1 : Hero ═══════ -->
+<div class="card">
+  <img class="logo-img" src="data:image/jpeg;base64,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" alt="Testerup">
+  <h1 class="hero-title">Get Paid to Test Games<br>on Testerup!</h1>
+  <p class="hero-sub">As Seen On TikTok</p>
+  <div class="online-pill"><span><strong>24,663</strong> online</span></div>
 </div>
 
-<div class="container">
-  <div class="progress-section">
-    <div class="progress-label">Progress to start earning</div>
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
-    </div>
-    <div class="progress-text">Follow the instructions to start earning today!</div>
-    <div class="progress-subtext">Complete setup in under 2 minutes</div>
-  </div>
+<!-- ═══════ CARD 2 : Action ═══════ -->
+<div class="card">
+  <div class="progress-label">Progress to start earning</div>
+  <div class="progress-track"><div class="progress-fill"></div></div>
+  <div class="action-text">Follow the instructions<br>to start earning today!</div>
 
-  <button class="cta-button" onclick="handleCTA()">START EARNING NOW</button>
+  <a class="cta" href="javascript:void(0)" onclick="handleCTA()">START EARNING NOW</a>
 
-  <div class="quick-start">
-    <h3>Quick Start Guide</h3>
-    
-    <div class="guide-item">
-      <div class="guide-icon">1</div>
-      <div class="guide-content">
-        <h4>Download the Testerup App</h4>
-        <p>Available on iOS and Android. Takes less than 1 minute to install.</p>
-      </div>
-    </div>
+  <div class="qs-header">Quick Start Guide</div>
 
-    <div class="guide-item">
-      <div class="guide-icon">2</div>
-      <div class="guide-content">
-        <h4>Complete Your Profile</h4>
-        <p>Answer a few quick questions about your gaming preferences.</p>
-      </div>
-    </div>
-
-    <div class="guide-item">
-      <div class="guide-icon">3</div>
-      <div class="guide-content">
-        <h4>Start Testing Games</h4>
-        <p>Receive game testing tasks and earn money for each completed test.</p>
-      </div>
+  <div class="guide-row">
+    <div class="guide-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="guide-info">
+      <h4>Download the Testerup App</h4>
+      <p>Click the button above</p>
     </div>
   </div>
 
-  <div class="benefits">
-    <div class="benefit-item">
-      <div class="benefit-check">✓</div>
-      <div class="benefit-text"><strong>Instant Payouts</strong> - Get paid within 24 hours</div>
-    </div>
-    <div class="benefit-item">
-      <div class="benefit-check">✓</div>
-      <div class="benefit-text"><strong>Easy Tasks</strong> - Test games at your own pace</div>
-    </div>
-    <div class="benefit-item">
-      <div class="benefit-check">✓</div>
-      <div class="benefit-text"><strong>Real Rewards</strong> - Earn $5-$50 per game test</div>
+  <div class="guide-row">
+    <div class="guide-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="guide-info">
+      <h4>Earn More by Testing Games</h4>
+      <p>Make over $300/Day</p>
     </div>
   </div>
 
-  <div class="trust-section">
-    <div class="trust-icon">🔒</div>
-    <div class="trust-text">
-      <strong>Secure & Confidential</strong><br>
-      Your data is protected with industry-standard encryption. We never share your information.
+  <div class="guide-row">
+    <div class="guide-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="guide-info">
+      <h4>Pro tip: Complete offers to earn faster</h4>
+      <p>They reimburse you for anything you spend!</p>
     </div>
   </div>
 
-  <div class="final-cta">
-    <h2>Ready to Earn?</h2>
-    <p>Join thousands of gamers earning money by testing the latest games. Start today and get your first payment within 24 hours.</p>
-    <button class="final-cta-btn" onclick="handleCTA()">GET STARTED NOW</button>
+  <div class="trust">
+    <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2.5 4v3.5c0 3.5 2.3 6.2 5.5 7 3.2-.8 5.5-3.5 5.5-7V4L8 1.5z" stroke="#aaa" stroke-width="1.2" stroke-linejoin="round"/><path d="M5.5 8.2l2 2 3.5-4" stroke="#aaa" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Secure &amp; Confidential</span>
   </div>
-
-  <footer>
-    <p>© 2024 Testerup. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-  </footer>
 </div>
 
 <script>
-function handleCTA() {
-  const baseUrl = 'https://go.goldentracee.com/click';
-  const params = new URLSearchParams(window.location.search);
-  
-  const allowed = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'source_id', 'camp', 'ttclid', 'iab_source', 'iab_click_time', 'landPageShowType'];
-  const filtered = new URLSearchParams();
-  
-  allowed.forEach(key => {
-    const value = params.get(key);
-    if (value !== null) {
-      filtered.set(key, value);
-    }
-  });
-  
-  const queryString = filtered.toString();
-  const finalUrl = queryString ? baseUrl + '?' + queryString : baseUrl;
-  
-  window.location.href = finalUrl;
+function handleCTA(){
+  var base='https://go.goldentracee.com/click';
+  var p=new URLSearchParams(window.location.search);
+  var allow=['sub1','sub2','sub3','sub4','sub5','source_id','camp','ttclid','iab_source','iab_click_time','landPageShowType'];
+  var f=new URLSearchParams();
+  allow.forEach(function(k){var v=p.get(k);if(v!==null)f.set(k,v)});
+  var q=f.toString();
+  window.location.href=q?base+'?'+q:base;
 }
-
-document.documentElement.style.scrollBehavior = 'smooth';
 </script>
-
 </body>
 </html>

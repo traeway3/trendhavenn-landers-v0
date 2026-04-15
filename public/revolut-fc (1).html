@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FC Wallet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:radial-gradient(ellipse at 50% -10%,#005c5c 0%,#003333 25%,#001a1a 55%,#000d0d 100%);color:#fff;min-height:100vh;max-width:430px;margin:0 auto;position:relative;overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none}
+
+  /* Glassmorphism */
+  .glass{background:rgba(255,255,255,0.045);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.08);border-radius:20px}
+  .glass-heavy{background:rgba(15,50,48,0.82);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border:1px solid rgba(255,255,255,0.1);border-radius:22px}
+
+  /* Status bar */
+  .status-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 6px;font-size:15px;font-weight:700;letter-spacing:-0.3px}
+  .status-right{display:flex;align-items:center;gap:6px}
+
+  /* Top bar */
+  .top-bar{display:flex;align-items:center;gap:10px;padding:8px 20px 14px}
+  .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+  .avatar .dot{position:absolute;top:-1px;right:-1px;width:11px;height:11px;background:#ef4444;border-radius:50%;border:2.5px solid #003333}
+  .search-box{flex:1;background:rgba(0,200,170,0.1);border:1.5px solid rgba(0,210,170,0.35);border-radius:50px;padding:10px 16px;display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,0.45)}
+  .icon-btn{width:44px;height:44px;border-radius:50%;background:rgba(0,180,150,0.18);border:1px solid rgba(0,210,170,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  /* Balance */
+  .balance-section{text-align:center;padding:48px 0 8px}
+  .balance-label{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.5px;margin-bottom:10px}
+  .balance-amount{font-size:56px;font-weight:800;letter-spacing:-2px;line-height:1}
+  .accounts-btn{display:inline-block;margin-top:20px;padding:9px 28px;border-radius:50px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.08);font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);cursor:pointer;transition:background .2s}
+  .accounts-btn:hover{background:rgba(255,255,255,0.14)}
+
+  /* Dots */
+  .dots{display:flex;justify-content:center;gap:7px;padding:28px 0 24px}
+  .dot-indicator{width:7px;height:7px;border-radius:50%}
+  .dot-active{background:rgba(255,255,255,0.75)}
+  .dot-inactive{background:rgba(255,255,255,0.2)}
+
+  /* Actions */
+  .actions{display:flex;justify-content:space-around;padding:0 32px 24px}
+  .action-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .action-circle{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .action-circle:hover{background:rgba(255,255,255,0.14)}
+  .action-label{font-size:11px;color:rgba(255,255,255,0.55);font-weight:500}
+
+  /* Transactions */
+  .tx-card{margin:0 16px 14px;padding:4px 0}
+  .tx-item{display:flex;align-items:center;gap:14px;padding:14px 18px}
+  .tx-logo{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#00c9a7,#00a68a);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+  .tx-logo span{font-weight:700;font-size:16px;letter-spacing:-0.5px}
+  .tx-arrow{position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;background:#00c853;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid #0a1f1f}
+  .tx-info{flex:1;min-width:0}
+  .tx-name{font-size:14px;font-weight:600;color:rgba(255,255,255,0.92)}
+  .tx-date{font-size:12px;color:rgba(255,255,255,0.32);margin-top:2px}
+  .tx-amount{font-size:14px;font-weight:600;color:#00e676;white-space:nowrap;text-shadow:0 0 12px rgba(0,230,118,0.3)}
+  .tx-divider{height:1px;background:rgba(255,255,255,0.05);margin:0 18px}
+  .see-all{text-align:center;padding:14px 0 6px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.4)}
+
+  /* Discover */
+  .discover{margin:0 16px 120px;padding:16px 18px}
+  .discover span{font-size:13px;color:rgba(255,255,255,0.4);font-weight:500}
+
+  /* Bottom Nav */
+  .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:0 14px 16px;z-index:50}
+  .nav-inner{display:flex;align-items:center;justify-content:space-around;padding:10px 0 12px}
+  .nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 20px;border-radius:16px;position:relative;transition:background .2s}
+  .nav-item.active{background:rgba(255,255,255,0.08)}
+  .nav-item.active::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:rgba(0,210,170,0.5);border-radius:2px}
+  .nav-label{font-size:10px;font-weight:500;color:rgba(255,255,255,0.35)}
+  .nav-item.active .nav-label{color:rgba(255,255,255,0.85)}
+  .nav-badge{position:absolute;top:4px;right:14px;width:8px;height:8px;background:#ef4444;border-radius:50%}
+  .nav-icon-active{color:rgba(255,255,255,0.9)}
+  .nav-icon{color:rgba(255,255,255,0.35)}
+</style>
+</head>
+<body>
+
+<!-- Status Bar -->
+<div class="status-bar">
+  <span>8:51</span>
+  <div class="status-right">
+    <svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx=".8" fill="white"/><rect x="4.5" y="2" width="3" height="10" rx=".8" fill="white"/><rect x="9" y="0" width="3" height="12" rx=".8" fill="white"/><rect x="13.5" y="3" width="2.5" height="9" rx=".8" fill="white" opacity=".25"/></svg>
+    <span style="font-size:12px;font-weight:800;letter-spacing:.8px">LTE</span>
+    <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y="1" width="22" height="11" rx="3" stroke="white" stroke-width="1.2" fill="none"/><rect x="2" y="3" width="16" height="7" rx="1.5" fill="#4ade80"/><path d="M23.5 5v3a1.5 1.5 0 001.5-1.5v0A1.5 1.5 0 0023.5 5z" fill="white" opacity=".35"/></svg>
+  </div>
+</div>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="avatar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    <div class="dot"></div>
+  </div>
+  <div class="search-box">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span>Search</span>
+  </div>
+  <div class="icon-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="4" y="14" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="13" rx="1"/><rect x="16" y="3" width="4" height="18" rx="1"/></svg>
+  </div>
+  <div class="icon-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="12" y2="18"/></svg>
+  </div>
+</div>
+
+<!-- Balance -->
+<div class="balance-section">
+  <div class="balance-label">個人用口座 · JPY</div>
+  <div class="balance-amount">¥345,000</div>
+  <div><button class="accounts-btn">口座一覧</button></div>
+</div>
+
+<!-- Dots -->
+<div class="dots">
+  <div class="dot-indicator dot-active"></div>
+  <div class="dot-indicator dot-inactive"></div>
+</div>
+
+<!-- Actions -->
+<div class="actions">
+  <div class="action-item">
+    <div class="action-circle">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </div>
+    <span class="action-label">入金</span>
+  </div>
+  <div class="action-item">
+    <div class="action-circle">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9c-.6-.6-1.4-1-2.5-1-2 0-3 1.2-3 2.5s1.2 2 2.8 2.3c1.6.3 2.7 1 2.7 2.2s-1.2 2.5-3 2.5c-1 0-2-.4-2.5-1"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg>
+    </div>
+    <span class="action-label">両替</span>
+  </div>
+  <div class="action-item">
+    <div class="action-circle">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+    </div>
+    <span class="action-label">詳細</span>
+  </div>
+  <div class="action-item">
+    <div class="action-circle">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></svg>
+    </div>
+    <span class="action-label">その他</span>
+  </div>
+</div>
+
+<!-- Transactions -->
+<div class="tx-card glass">
+  <div class="tx-item">
+    <div class="tx-logo">
+      <span>FC</span>
+      <div class="tx-arrow">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+      </div>
+    </div>
+    <div class="tx-info">
+      <div class="tx-name">Fr33Cash</div>
+      <div class="tx-date">1月23日 10:11</div>
+    </div>
+    <div class="tx-amount">+¥45,800</div>
+  </div>
+  <div class="tx-divider"></div>
+  <div class="tx-item">
+    <div class="tx-logo">
+      <span>FC</span>
+      <div class="tx-arrow">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+      </div>
+    </div>
+    <div class="tx-info">
+      <div class="tx-name">F-Cash</div>
+      <div class="tx-date">1月23日 10:10</div>
+    </div>
+    <div class="tx-amount">+¥52,300</div>
+  </div>
+  <div class="tx-divider"></div>
+  <div class="see-all">See all</div>
+</div>
+
+<!-- Discover -->
+<div class="discover glass">
+  <span>Discover more ›</span>
+</div>
+
+<!-- Bottom Nav -->
+<div class="bottom-nav">
+  <div class="nav-inner glass-heavy">
+    <div class="nav-item active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="nav-icon-active"><text x="4" y="19" font-family="Inter,sans-serif" font-weight="800" font-size="22" fill="white">R</text></svg>
+      <span class="nav-label">Home</span>
+    </div>
+    <div class="nav-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="nav-icon" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l4-4 4 4"/><path d="M7 5v14"/><path d="M13 15l4 4 4-4"/><path d="M17 19V5"/></svg>
+      <span class="nav-label">Invest</span>
+    </div>
+    <div class="nav-item" style="position:relative">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="nav-icon" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4"/><path d="M21 7H9"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h12"/></svg>
+      <div class="nav-badge"></div>
+      <span class="nav-label">Payments</span>
+    </div>
+    <div class="nav-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="nav-icon" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span class="nav-label">Lifestyle</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

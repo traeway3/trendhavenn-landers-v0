@@ -10,8 +10,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    background: #001010;
-    background: radial-gradient(ellipse at 50% -15%, #008c7a 0%, #003d35 30%, #001515 65%, #000d0d 100%);
+    background: linear-gradient(to bottom, #00A3A3 0%, #001a1a 40%, #000000 100%);
     color: #fff;
     min-height: 100dvh;
     overflow-x: hidden;
@@ -31,7 +30,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     padding-top: 6px;
   }
   .avatar {
@@ -73,23 +72,23 @@
   /* Balance */
   .balance-section {
     text-align: center;
-    margin: 48px 0 14px;
+    margin: 32px 0 10px;
   }
   .balance-label {
     font-size: 14px;
     color: rgba(255,255,255,0.5);
     letter-spacing: 0.3px;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
   .balance {
     font-size: 58px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -2.5px;
     line-height: 1;
   }
   .accounts-btn {
     display: inline-block;
-    margin-top: 14px;
+    margin-top: 12px;
     padding: 8px 26px;
     border-radius: 22px;
     background: rgba(255,255,255,0.07);
@@ -102,7 +101,7 @@
   /* Dots */
   .dots {
     display: flex; justify-content: center; gap: 6px;
-    margin: 24px 0 22px;
+    margin: 18px 0 18px;
   }
   .dots span {
     width: 6px; height: 6px;
@@ -115,7 +114,7 @@
   .actions {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
     padding: 0 8px;
   }
   .action {
@@ -152,11 +151,11 @@
   }
   .tx-item + .tx-item { border-top: 0.5px solid rgba(255,255,255,0.05); }
   .tx-logo {
-    width: 44px; height: 44px;
+    width: 50px; height: 50px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
     flex-shrink: 0;
     position: relative;
   }
@@ -164,12 +163,12 @@
   .tx-logo .arrow-badge {
     position: absolute;
     bottom: -2px; right: -2px;
-    width: 16px; height: 16px;
+    width: 18px; height: 18px;
     border-radius: 50%;
     background: #fff;
     display: flex; align-items: center; justify-content: center;
   }
-  .tx-logo .arrow-badge svg { width: 9px; height: 9px; }
+  .tx-logo .arrow-badge svg { width: 10px; height: 10px; }
   .tx-info { flex: 1; min-width: 0; }
   .tx-name {
     font-size: 15px;

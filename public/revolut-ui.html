@@ -3,68 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>FC Rewards</title>
+<title>FC Points</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  body {
+  html, body {
+    height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     background: linear-gradient(to bottom, #00A3A3 0%, #001a1a 40%, #000000 100%);
     color: #fff;
-    min-height: 100dvh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    padding-top: env(safe-area-inset-top, 54px);
-    padding-bottom: env(safe-area-inset-bottom, 34px);
   }
   .app {
-    max-width: 430px;
-    margin: 0 auto;
-    padding: 10px 18px 110px;
+    min-height: 100vh;
     min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding-top: max(env(safe-area-inset-top), 60px);
+    padding-bottom: max(env(safe-area-inset-bottom), 34px);
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  /* Top bar */
+  /* Top Bar */
   .top-bar {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 0;
-    padding-top: 6px;
+    margin-bottom: 20px;
   }
   .avatar {
-    width: 40px; height: 40px;
+    width: 42px; height: 42px;
     border-radius: 50%;
-    background: #7c4dff;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
     display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
+    font-size: 16px; font-weight: 600;
     flex-shrink: 0;
-    position: relative;
-  }
-  .avatar .dot {
-    position: absolute; top: 1px; right: -2px;
-    width: 8px; height: 8px;
-    background: #ff3b30;
-    border-radius: 50%;
-    border: 1.5px solid #001515;
   }
   .search-bar {
     flex: 1;
-    height: 38px;
-    border-radius: 20px;
-    border: 1.2px solid rgba(0, 210, 170, 0.3);
-    background: rgba(255,255,255,0.03);
+    height: 42px;
+    border-radius: 21px;
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.12);
     display: flex; align-items: center;
     padding: 0 14px;
     gap: 8px;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.4);
     font-size: 15px;
   }
+  .search-bar svg { opacity: 0.5; }
   .top-icon {
-    width: 40px; height: 40px;
+    width: 42px; height: 42px;
     border-radius: 50%;
-    background: rgba(0, 170, 140, 0.2);
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.1);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
@@ -72,302 +65,274 @@
   /* Balance */
   .balance-section {
     text-align: center;
-    margin: 32px 0 10px;
+    margin: 16px 0 10px;
   }
   .balance-label {
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(255,255,255,0.5);
-    letter-spacing: 0.3px;
-    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
   }
-  .balance {
-    font-size: 58px;
+  .balance-amount {
+    font-size: 52px;
     font-weight: 800;
-    letter-spacing: -2.5px;
-    line-height: 1;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
   }
-  .accounts-btn {
+  .balance-unit {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    margin-left: 4px;
+    vertical-align: baseline;
+  }
+  .account-btn {
     display: inline-block;
-    margin-top: 12px;
-    padding: 8px 26px;
-    border-radius: 22px;
-    background: rgba(255,255,255,0.07);
-    border: 0.5px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.75);
-    font-size: 14px;
+    margin-top: 10px;
+    padding: 7px 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
     font-weight: 500;
   }
-
-  /* Dots */
   .dots {
-    display: flex; justify-content: center; gap: 6px;
-    margin: 18px 0 18px;
+    display: flex; justify-content: center; gap: 5px;
+    margin: 12px 0 18px;
   }
-  .dots span {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.18);
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
   }
-  .dots span.active { background: rgba(255,255,255,0.65); }
+  .dot.active { background: rgba(255,255,255,0.7); }
 
-  /* Actions */
+  /* Action Buttons */
   .actions {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    padding: 0 8px;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 22px;
   }
-  .action {
+  .action-item {
     display: flex; flex-direction: column; align-items: center; gap: 7px;
   }
   .action-circle {
     width: 52px; height: 52px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    border: 0.5px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.07);
+    border: 0.5px solid rgba(255,255,255,0.1);
     display: flex; align-items: center; justify-content: center;
   }
+  .action-circle svg { width: 22px; height: 22px; stroke: rgba(255,255,255,0.8); }
   .action-label {
-    font-size: 11.5px;
-    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
     font-weight: 500;
   }
 
-  /* Transaction card */
+  /* Transaction Card */
   .tx-card {
-    background: rgba(255,255,255,0.035);
+    background: rgba(255,255,255,0.04);
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
-    border: 0.5px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 14px 16px;
-    margin-bottom: 14px;
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
   }
-  .tx-item {
-    display: flex;
-    align-items: center;
+  .tx-row {
+    display: flex; align-items: center;
     padding: 10px 0;
-    gap: 12px;
   }
-  .tx-item + .tx-item { border-top: 0.5px solid rgba(255,255,255,0.05); }
+  .tx-row + .tx-row { border-top: 0.5px solid rgba(255,255,255,0.06); }
   .tx-logo {
     width: 50px; height: 50px;
     border-radius: 50%;
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    font-size: 17px;
-    flex-shrink: 0;
+    font-size: 16px; font-weight: 700; color: #fff;
     position: relative;
+    flex-shrink: 0;
+    margin-right: 14px;
   }
-  .tx-logo.fc { background: #00897b; color: #fff; }
   .tx-logo .arrow-badge {
     position: absolute;
-    bottom: -2px; right: -2px;
+    bottom: -1px; right: -1px;
     width: 18px; height: 18px;
     border-radius: 50%;
-    background: #fff;
+    background: #0d9488;
+    border: 2px solid rgba(0,0,0,0.6);
     display: flex; align-items: center; justify-content: center;
   }
-  .tx-logo .arrow-badge svg { width: 10px; height: 10px; }
-  .tx-info { flex: 1; min-width: 0; }
-  .tx-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .tx-date {
-    font-size: 13px;
-    color: rgba(255,255,255,0.38);
-    margin-top: 2px;
-  }
+  .tx-logo .arrow-badge svg { width: 9px; height: 9px; stroke: #fff; stroke-width: 2.5; }
+  .tx-info { flex: 1; }
+  .tx-name { font-size: 15px; font-weight: 600; color: #fff; }
+  .tx-date { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
   .tx-amount {
-    font-size: 15px;
-    font-weight: 600;
-    color: #00e676;
-    flex-shrink: 0;
+    font-size: 16px; font-weight: 700;
+    color: #4FD1C5;
+    text-align: right;
+    white-space: nowrap;
   }
-  .see-all {
+  .tx-see-all {
     text-align: center;
-    padding: 12px 0 4px;
-    font-size: 14px;
-    color: rgba(255,255,255,0.45);
-    font-weight: 500;
+    padding: 10px 0 2px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
   }
 
-  /* Discover */
-  .discover-card {
-    background: rgba(255,255,255,0.035);
+  /* More Card */
+  .more-card {
+    background: rgba(255,255,255,0.04);
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
-    border: 0.5px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 18px 16px;
-    margin-bottom: 20px;
-  }
-  .discover-card span {
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-bottom: 100px;
     font-size: 14px;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.35);
   }
 
-  /* Bottom nav */
+  /* Bottom Nav */
   .bottom-nav {
     position: fixed;
-    bottom: 0;
+    bottom: max(env(safe-area-inset-bottom), 20px);
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 20px);
-    max-width: 414px;
-    padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 20px));
-    background: rgba(8, 35, 30, 0.8);
+    width: calc(100% - 32px);
+    max-width: 400px;
+    height: 64px;
+    border-radius: 32px;
+    background: rgba(255,255,255,0.06);
     backdrop-filter: blur(60px);
     -webkit-backdrop-filter: blur(60px);
-    border-radius: 22px 22px 0 0;
-    border-top: 0.5px solid rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.1);
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
   }
   .nav-item {
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
-    font-size: 10px;
-    color: rgba(255,255,255,0.35);
-    font-weight: 500;
-    position: relative;
-    padding: 5px 14px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 3px; position: relative;
   }
+  .nav-item svg { width: 22px; height: 22px; stroke: rgba(255,255,255,0.4); fill: none; stroke-width: 1.8; }
+  .nav-label { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 500; }
   .nav-item.active {
-    color: #fff;
-    background: rgba(255,255,255,0.07);
-    border-radius: 14px;
-    padding: 6px 18px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 6px 16px;
   }
-  .nav-item svg { width: 22px; height: 22px; }
+  .nav-item.active svg { stroke: #fff; }
+  .nav-item.active .nav-label { color: #fff; }
   .nav-badge {
-    position: absolute;
-    top: 2px; right: 10px;
+    position: absolute; top: -2px; right: -4px;
     width: 7px; height: 7px;
-    background: #ff3b30;
     border-radius: 50%;
+    background: #ef4444;
   }
 </style>
 </head>
 <body>
 <div class="app">
+
   <!-- Top Bar -->
   <div class="top-bar">
-    <div class="avatar">
-      <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6 21v-1a6 6 0 0112 0v1"/></svg>
-      <span class="dot"></span>
-    </div>
+    <div class="avatar">🏅</div>
     <div class="search-bar">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       検索
     </div>
     <div class="top-icon">
-      <svg width="20" height="20" fill="none" stroke="#00e6b4" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="17" y="4" width="4" height="16" rx="1"/></svg>
+      <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     </div>
     <div class="top-icon">
-      <svg width="20" height="20" fill="none" stroke="#00e6b4" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </div>
   </div>
 
   <!-- Balance -->
   <div class="balance-section">
-    <div class="balance-label">個人用口座 · JPY</div>
-    <div class="balance">¥345,000</div>
-    <div class="accounts-btn">すべての口座</div>
+    <div class="balance-label">ポイント残高</div>
+    <div class="balance-amount">345,000<span class="balance-unit">pts</span></div>
+    <div class="account-btn">すべての口座</div>
+    <div class="dots"><span class="dot active"></span><span class="dot"></span></div>
   </div>
 
-  <!-- Dots -->
-  <div class="dots"><span class="active"></span><span></span></div>
-
-  <!-- Action Buttons -->
+  <!-- Actions -->
   <div class="actions">
-    <div class="action">
-      <div class="action-circle">
-        <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
+    <div class="action-item">
+      <div class="action-circle"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
       <span class="action-label">入金</span>
     </div>
-    <div class="action">
-      <div class="action-circle">
-        <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7h2a4 4 0 010 8H8zm0 0V5h4M16 17h-2a4 4 0 010-8h2zm0 0v2h-4"/></svg>
-      </div>
+    <div class="action-item">
+      <div class="action-circle"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7h12l-2 13H6L4 4H1"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg></div>
       <span class="action-label">両替</span>
     </div>
-    <div class="action">
-      <div class="action-circle">
-        <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
-      </div>
+    <div class="action-item">
+      <div class="action-circle"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
       <span class="action-label">詳細</span>
     </div>
-    <div class="action">
-      <div class="action-circle">
-        <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
-      </div>
+    <div class="action-item">
+      <div class="action-circle"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
       <span class="action-label">その他</span>
     </div>
   </div>
 
   <!-- Transactions -->
   <div class="tx-card">
-    <div class="tx-item">
-      <div class="tx-logo fc">
+    <div class="tx-row">
+      <div class="tx-logo">
         FC
-        <span class="arrow-badge">
-          <svg viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="#00897b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
+        <span class="arrow-badge"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 17 17 7M17 7H7m10 0v10"/></svg></span>
       </div>
       <div class="tx-info">
-        <div class="tx-name">FC Rewards</div>
+        <div class="tx-name">FC Points</div>
         <div class="tx-date">1月23日 10:11</div>
       </div>
-      <div class="tx-amount">+¥45,800</div>
+      <div class="tx-amount">+45,800 pts</div>
     </div>
-    <div class="tx-item">
-      <div class="tx-logo fc">
+    <div class="tx-row">
+      <div class="tx-logo">
         FC
-        <span class="arrow-badge">
-          <svg viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="#00897b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
+        <span class="arrow-badge"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 17 17 7M17 7H7m10 0v10"/></svg></span>
       </div>
       <div class="tx-info">
-        <div class="tx-name">FC Rewards</div>
+        <div class="tx-name">FC Points</div>
         <div class="tx-date">1月23日 09:42</div>
       </div>
-      <div class="tx-amount">+¥52,300</div>
+      <div class="tx-amount">+52,300 pts</div>
     </div>
-    <div class="see-all">すべて見る</div>
+    <div class="tx-see-all">すべて見る</div>
   </div>
 
-  <!-- Discover -->
-  <div class="discover-card">
-    <span>もっと見る ›</span>
-  </div>
+  <!-- More -->
+  <div class="more-card">もっと見る ›</div>
+
 </div>
 
 <!-- Bottom Nav -->
-<div class="bottom-nav">
+<nav class="bottom-nav">
   <div class="nav-item active">
-    <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><text x="6" y="18" font-size="16" font-weight="800" fill="#fff" stroke="none" font-family="-apple-system,sans-serif">R</text></svg>
-    <span>ホーム</span>
+    <svg viewBox="0 0 24 24"><path d="M9 22V12h6v10M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    <span class="nav-label">ホーム</span>
   </div>
   <div class="nav-item">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="17" y="4" width="4" height="16" rx="1"/></svg>
-    <span>投資</span>
+    <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+    <span class="nav-label">投資</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" style="position:relative;">
+    <svg viewBox="0 0 24 24"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>
+    <span class="nav-label">支払い</span>
     <span class="nav-badge"></span>
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17l4-4-4-4M13 7l4 4-4 4"/></svg>
-    <span>支払い</span>
   </div>
   <div class="nav-item">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75M21 21v-2a4 4 0 00-3-3.87"/></svg>
-    <span>ライフスタイル</span>
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="nav-label">ライフスタイル</span>
   </div>
-</div>
+</nav>
+
 </body>
 </html>

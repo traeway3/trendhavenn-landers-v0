@@ -5,23 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Fr33Cash</title>
+<title>FC Rewards</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    background: radial-gradient(circle at 50% -10%, #009688 0%, #001515 80%);
+    background: #001010;
+    background: radial-gradient(ellipse at 50% -15%, #008c7a 0%, #003d35 30%, #001515 65%, #000d0d 100%);
     color: #fff;
     min-height: 100dvh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    padding-top: env(safe-area-inset-top, 60px);
+    padding-top: env(safe-area-inset-top, 54px);
     padding-bottom: env(safe-area-inset-bottom, 34px);
   }
   .app {
     max-width: 430px;
     margin: 0 auto;
-    padding: 12px 16px 100px;
+    padding: 10px 18px 110px;
     min-height: 100dvh;
   }
 
@@ -30,8 +31,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
-    padding-top: 8px;
+    margin-bottom: 10px;
+    padding-top: 6px;
   }
   .avatar {
     width: 40px; height: 40px;
@@ -43,7 +44,7 @@
     position: relative;
   }
   .avatar .dot {
-    position: absolute; top: 2px; right: -2px;
+    position: absolute; top: 1px; right: -2px;
     width: 8px; height: 8px;
     background: #ff3b30;
     border-radius: 50%;
@@ -53,18 +54,18 @@
     flex: 1;
     height: 38px;
     border-radius: 20px;
-    border: 1.2px solid rgba(0, 230, 180, 0.35);
-    background: rgba(255,255,255,0.04);
+    border: 1.2px solid rgba(0, 210, 170, 0.3);
+    background: rgba(255,255,255,0.03);
     display: flex; align-items: center;
     padding: 0 14px;
     gap: 8px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.45);
     font-size: 15px;
   }
   .top-icon {
     width: 40px; height: 40px;
     border-radius: 50%;
-    background: rgba(0, 180, 150, 0.25);
+    background: rgba(0, 170, 140, 0.2);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
@@ -72,33 +73,28 @@
   /* Balance */
   .balance-section {
     text-align: center;
-    margin: 32px 0 16px;
+    margin: 48px 0 14px;
   }
   .balance-label {
     font-size: 14px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.5);
     letter-spacing: 0.3px;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .balance {
-    font-size: 56px;
+    font-size: 58px;
     font-weight: 700;
-    letter-spacing: -2px;
+    letter-spacing: -2.5px;
     line-height: 1;
-  }
-  .balance .decimal {
-    font-size: 28px;
-    font-weight: 500;
-    opacity: 0.7;
   }
   .accounts-btn {
     display: inline-block;
-    margin-top: 12px;
-    padding: 7px 24px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.08);
-    border: 0.5px solid rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.8);
+    margin-top: 14px;
+    padding: 8px 26px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.07);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.75);
     font-size: 14px;
     font-weight: 500;
   }
@@ -106,46 +102,46 @@
   /* Dots */
   .dots {
     display: flex; justify-content: center; gap: 6px;
-    margin: 20px 0 18px;
+    margin: 24px 0 22px;
   }
   .dots span {
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.18);
   }
-  .dots span.active { background: rgba(255,255,255,0.7); }
+  .dots span.active { background: rgba(255,255,255,0.65); }
 
   /* Actions */
   .actions {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
-    padding: 0 4px;
+    margin-bottom: 22px;
+    padding: 0 8px;
   }
   .action {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
   }
   .action-circle {
-    width: 56px; height: 56px;
+    width: 52px; height: 52px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.07);
-    border: 0.5px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.08);
     display: flex; align-items: center; justify-content: center;
   }
   .action-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.65);
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.55);
     font-weight: 500;
   }
 
   /* Transaction card */
   .tx-card {
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 0.5px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.035);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 0.5px solid rgba(255,255,255,0.08);
     border-radius: 20px;
-    padding: 16px;
+    padding: 14px 16px;
     margin-bottom: 14px;
   }
   .tx-item {
@@ -154,7 +150,7 @@
     padding: 10px 0;
     gap: 12px;
   }
-  .tx-item + .tx-item { border-top: 0.5px solid rgba(255,255,255,0.06); }
+  .tx-item + .tx-item { border-top: 0.5px solid rgba(255,255,255,0.05); }
   .tx-logo {
     width: 44px; height: 44px;
     border-radius: 50%;
@@ -185,36 +181,36 @@
   }
   .tx-date {
     font-size: 13px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.38);
     margin-top: 2px;
   }
   .tx-amount {
     font-size: 15px;
     font-weight: 600;
-    color: #00FF9D;
+    color: #00e676;
     flex-shrink: 0;
   }
   .see-all {
     text-align: center;
     padding: 12px 0 4px;
     font-size: 14px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.45);
     font-weight: 500;
   }
 
   /* Discover */
   .discover-card {
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 0.5px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.035);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 0.5px solid rgba(255,255,255,0.08);
     border-radius: 20px;
     padding: 18px 16px;
     margin-bottom: 20px;
   }
   .discover-card span {
     font-size: 14px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.45);
   }
 
   /* Bottom nav */
@@ -223,36 +219,36 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 24px);
-    max-width: 410px;
-    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 20px));
-    background: rgba(10, 40, 35, 0.75);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
-    border-radius: 24px 24px 0 0;
-    border-top: 0.5px solid rgba(255,255,255,0.08);
+    width: calc(100% - 20px);
+    max-width: 414px;
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 20px));
+    background: rgba(8, 35, 30, 0.8);
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+    border-radius: 22px 22px 0 0;
+    border-top: 0.5px solid rgba(255,255,255,0.06);
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
   .nav-item {
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
     font-size: 10px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.35);
     font-weight: 500;
     position: relative;
-    padding: 4px 12px;
+    padding: 5px 14px;
   }
   .nav-item.active {
     color: #fff;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.07);
     border-radius: 14px;
-    padding: 6px 16px;
+    padding: 6px 18px;
   }
   .nav-item svg { width: 22px; height: 22px; }
   .nav-badge {
     position: absolute;
-    top: 2px; right: 8px;
+    top: 2px; right: 10px;
     width: 7px; height: 7px;
     background: #ff3b30;
     border-radius: 50%;
@@ -282,8 +278,8 @@
   <!-- Balance -->
   <div class="balance-section">
     <div class="balance-label">個人用口座 · JPY</div>
-    <div class="balance">¥345,000<span class="decimal">.00</span></div>
-    <div class="accounts-btn">口座一覧</div>
+    <div class="balance">¥345,000</div>
+    <div class="accounts-btn">すべての口座</div>
   </div>
 
   <!-- Dots -->
@@ -293,25 +289,25 @@
   <div class="actions">
     <div class="action">
       <div class="action-circle">
-        <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
       </div>
       <span class="action-label">入金</span>
     </div>
     <div class="action">
       <div class="action-circle">
-        <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7h2a4 4 0 010 8H8zm0 0V5h4M16 17h-2a4 4 0 010-8h2zm0 0v2h-4"/></svg>
+        <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7h2a4 4 0 010 8H8zm0 0V5h4M16 17h-2a4 4 0 010-8h2zm0 0v2h-4"/></svg>
       </div>
       <span class="action-label">両替</span>
     </div>
     <div class="action">
       <div class="action-circle">
-        <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+        <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
       </div>
       <span class="action-label">詳細</span>
     </div>
     <div class="action">
       <div class="action-circle">
-        <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+        <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
       </div>
       <span class="action-label">その他</span>
     </div>
@@ -327,7 +323,7 @@
         </span>
       </div>
       <div class="tx-info">
-        <div class="tx-name">Fr33Cash</div>
+        <div class="tx-name">FC Rewards</div>
         <div class="tx-date">1月23日 10:11</div>
       </div>
       <div class="tx-amount">+¥45,800</div>
@@ -340,7 +336,7 @@
         </span>
       </div>
       <div class="tx-info">
-        <div class="tx-name">F-Cash</div>
+        <div class="tx-name">FC Rewards</div>
         <div class="tx-date">1月23日 09:42</div>
       </div>
       <div class="tx-amount">+¥52,300</div>
@@ -371,7 +367,7 @@
   </div>
   <div class="nav-item">
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75M21 21v-2a4 4 0 00-3-3.87"/></svg>
-    <span>ライフ</span>
+    <span>ライフスタイル</span>
   </div>
 </div>
 </body>

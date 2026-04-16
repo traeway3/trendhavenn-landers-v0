@@ -442,17 +442,22 @@ body{
     document.title='Get Paid to '+game.verb+' '+game.name;
   }
 
-  function showView(){
-    var params=new URLSearchParams(window.location.search);
-    var gameKey=(params.get('game')||'').toLowerCase();
+  var currentGame=null;
+
+  function showSelector(){
+    currentGame=null;
+    selectorView.classList.remove('hidden');
+    detailView.classList.add('hidden');
+    document.title='Playful Rewards';
+  }
+
+  function showDetail(gameKey){
     if(gameKey&&games[gameKey]){
+      currentGame=gameKey;
       populateDetail(gameKey);
       selectorView.classList.add('hidden');
       detailView.classList.remove('hidden');
-    }else{
-      selectorView.classList.remove('hidden');
-      detailView.classList.add('hidden');
-      document.title='Playful Rewards';
+      window.scrollTo(0,0);
     }
   }
 
@@ -463,17 +468,11 @@ body{
   document.querySelectorAll('#selectorView .game-card').forEach(function(btn){
     btn.addEventListener('click',function(){
       var gameKey=btn.getAttribute('data-game');
-      var params=new URLSearchParams(window.location.search);
-      params.set('game',gameKey);
-      var newUrl=window.location.pathname+'?'+params.toString();
-      window.history.pushState({game:gameKey},'',newUrl);
-      showView();
-      window.scrollTo(0,0);
+      showDetail(gameKey);
     });
   });
 
-  window.addEventListener('popstate',showView);
-  showView();
+  showSelector();
 })();
 </script>
 </body>

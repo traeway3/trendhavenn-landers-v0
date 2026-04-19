@@ -427,7 +427,8 @@ body{
     var forward=new URLSearchParams();
     params.forEach(function(v,k){if(k!=='game')forward.set(k,v)});
     var qs=forward.toString();
-    return qs?base+'?'+qs:base;
+    var campid=params.get('campid')||params.get('s1')||'';
+return base+encodeURIComponent(campid);
   }
 
   function populateDetail(gameKey){

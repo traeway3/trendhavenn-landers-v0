@@ -86,7 +86,7 @@ function handleRedirect(e){
       'content_type': 'form'
     });
   }
-  window.location.href = 'https://vmry7.ttrk.io/click';
+  window.location.href = 'https://lvill.ttrk.io/click';
 }
 
 document.getElementById('age-gate').addEventListener('click',function(e){

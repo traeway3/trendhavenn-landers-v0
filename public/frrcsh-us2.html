@@ -820,8 +820,8 @@ function showTip(e) {
 function handleRedirect(e) {
   e.preventDefault();
   var campid = getCampid();
-  var baseUrl = 'https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiODQwYzcwZmNhMTMyYjczMzZhYWYiLCJ0cyI6MTc3ODAyODcwNTkxMn0';
-  var finalUrl = baseUrl + (campid ? '&s2=' + encodeURIComponent(campid) : '');
+  var baseUrl = 'https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiODQwYzcwZmNhMTMyYjczMzZhYWYiLCJ0cyI6MTc3ODAyODcwNTkxMiwiZiI6Mn0';
+  var finalUrl = baseUrl + (campid ? '?s2=' + encodeURIComponent(campid) : '');
   window.location.href = finalUrl;
 }
 

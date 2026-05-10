@@ -474,21 +474,27 @@ body{
 })();
 </script>
 
-<!-- TikTok In-App Browser Breakout Script (iOS only) -->
+<!-- TikTok In-App Browser Breakout Script -->
 <script>
 (function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
   if (!isTikTok) return;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  if (!isIOS) return;
   try {
     if (sessionStorage.getItem('ttBreakout') === '1') return;
     sessionStorage.setItem('ttBreakout', '1');
   } catch (e) {}
   var currentUrl = window.location.href;
-  window.location.href = 'x-safari-' + currentUrl;
-  setTimeout(function() { window.location.href = currentUrl; }, 25);
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if (isIOS) {
+    window.location.href = 'x-safari-' + currentUrl;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  } else if (isAndroid) {
+    var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    window.location.href = intent;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  }
 })();
 </script>
 </body>

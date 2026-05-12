@@ -167,6 +167,24 @@ h1,h2,h3,p{margin:0}
 /* Footer */
 .footer{margin-top:2.5rem;text-align:center;font-size:11px;color:rgba(255,255,255,0.25)}
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3Q40V7324Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3Q40V7324Z');
+</script>
+<!-- Funnel tracking pixel: fires on page load -->
+<script>
+(function() {
+  try {
+    var s1 = (new URLSearchParams(window.location.search)).get('s1') || (new URLSearchParams(window.location.search)).get('campid') || '';
+    var img = new Image();
+    img.src = 'https://buenohoodies.com/postback?event=pageload&campid=' + encodeURIComponent(s1) + '&key=6250906604&_=' + Date.now();
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 <div class="wrapper">
@@ -381,6 +399,12 @@ h1,h2,h3,p{margin:0}
   }
 
   downloadBtn.addEventListener('click', function() {
+    try {
+      var s1v = getS1();
+      var cimg = new Image();
+      cimg.src = 'https://buenohoodies.com/postback?event=ctaclick&campid=' + encodeURIComponent(s1v) + '&key=6250906604&_=' + Date.now();
+      if (typeof gtag === 'function') { gtag('event', 'cta_click', { campid: s1v }); }
+    } catch(e) {}
     window.location.href = computeDownloadURL();
   });
 

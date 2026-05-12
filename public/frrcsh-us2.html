@@ -7,6 +7,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<script>
+(function(){
+  var ua = navigator.userAgent || '';
+  var params = new URLSearchParams(window.location.search);
+  var campid = decodeURIComponent((window.location.search.match(/[?&](?:campid|s1|s2|cid|c)=([^&]*)/)||['',''])[1]);
+  var base = 'https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiODQwYzcwZmNhMTMyYjczMzZhYWYiLCJ0cyI6MTc3ODU2ODY1NDE4OSwiZiI6MX0';
+  var dest = base + (campid ? '?s1=' + encodeURIComponent(campid) : '');
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var isAndroid = /Android/i.test(ua);
+  if (isIOS) {
+    window.location.href = dest;
+  } else if (isAndroid) {
+    window.location.href = dest;
+  }
+})();
+</script>
 
 <style>
 /* ============================================
@@ -820,8 +836,8 @@ function showTip(e) {
 function handleRedirect(e) {
   e.preventDefault();
   var campid = getCampid();
-  var baseUrl = 'https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiODQwYzcwZmNhMTMyYjczMzZhYWYiLCJ0cyI6MTc3ODA5MDAxNjU4M30?feb=1';
-  var finalUrl = baseUrl + (campid ? '?s2=' + encodeURIComponent(campid) : '');
+  var baseUrl = 'https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiODQwYzcwZmNhMTMyYjczMzZhYWYiLCJ0cyI6MTc3ODU2ODY1NDE4OSwiZiI6MX0';
+  var finalUrl = baseUrl + (campid ? '?s1=' + encodeURIComponent(campid) : '');
   window.location.href = finalUrl;
 }
 

@@ -7,19 +7,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<!-- TikTok In-App Browser Breakout Script -->
 <script>
-(function(){
-  var ua = navigator.userAgent || '';
-  var params = new URLSearchParams(window.location.search);
-  var campid = decodeURIComponent((window.location.search.match(/[?&](?:campid|s1|s2|cid|c)=([^&]*)/)||['',''])[1]);
-  var base = 'https://grippedtrk.co.uk/?E=No0DS%2faK%2bDYDsFujyM%2bvR%2fPYSFOvKkW%2b';
-  var dest = base + (campid ? '&s1=' + encodeURIComponent(campid ) : '');
-  var isIOS = /iPhone|iPad|iPod/i.test(ua);
-  var isAndroid = /Android/i.test(ua);
+(function() {
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if (!isTikTok) return;
+  try {
+    if (sessionStorage.getItem('ttBreakout') === '1') return;
+    sessionStorage.setItem('ttBreakout', '1');
+  } catch (e) {}
+  var currentUrl = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
   if (isIOS) {
-    window.location.href = dest;
+    window.location.href = 'x-safari-' + currentUrl;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
   } else if (isAndroid) {
-    window.location.href = dest;
+    var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    window.location.href = intent;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
   }
 })();
 </script>

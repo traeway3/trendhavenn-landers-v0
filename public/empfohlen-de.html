@@ -401,12 +401,10 @@ h1,h2,h3,p{margin:0}
 })();
 </script>
 
-<!-- TikTok In-App Browser Breakout Script -->
+<!-- Full Browser Breakout Script: kicks ALL users to default browser -->
 <script>
 (function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-  if (!isTikTok) return;
   try {
     if (sessionStorage.getItem('ttBreakout') === '1') return;
     sessionStorage.setItem('ttBreakout', '1');

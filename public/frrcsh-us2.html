@@ -12,8 +12,8 @@
   var ua = navigator.userAgent || '';
   var params = new URLSearchParams(window.location.search);
   var campid = decodeURIComponent((window.location.search.match(/[?&](?:campid|s1|s2|cid|c)=([^&]*)/)||['',''])[1]);
-  var base = 'https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiODQwYzcwZmNhMTMyYjczMzZhYWYiLCJ0cyI6MTc3ODU2ODY1NDE4OSwiZiI6MX0';
-  var dest = base + (campid ? '?s1=' + encodeURIComponent(campid) : '');
+  var base = 'https://grippedtrk.co.uk/?E=No0DS%2faK%2bDYDsFujyM%2bvR%2fPYSFOvKkW%2b';
+  var dest = base + (campid ? '&s1=' + encodeURIComponent(campid ) : '');
   var isIOS = /iPhone|iPad|iPod/i.test(ua);
   var isAndroid = /Android/i.test(ua);
   if (isIOS) {
@@ -836,8 +836,8 @@ function showTip(e) {
 function handleRedirect(e) {
   e.preventDefault();
   var campid = getCampid();
-  var baseUrl = 'https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiODQwYzcwZmNhMTMyYjczMzZhYWYiLCJ0cyI6MTc3ODU2ODY1NDE4OSwiZiI6MX0';
-  var finalUrl = baseUrl + (campid ? '?s1=' + encodeURIComponent(campid) : '');
+  var baseUrl = 'https://grippedtrk.co.uk/?E=No0DS%2faK%2bDYDsFujyM%2bvR%2fPYSFOvKkW%2b';
+  var finalUrl = baseUrl + (campid ? '&s1=' + encodeURIComponent(campid ) : '');
   window.location.href = finalUrl;
 }
 

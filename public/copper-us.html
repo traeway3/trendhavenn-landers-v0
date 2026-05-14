@@ -294,13 +294,10 @@ h1,h2,h3,p{margin:0}
   }
 
   function computeDownloadURL() {
-    // Use the user's affrkr.com offer link directly
-    // The s1 parameter carries the campaign ID from the URL
-    var baseURL = 'https://grippedtrk.co.uk/?E=V4fJYAw1gS4RYfiluOrXu%2fPYSFOvKkW%2b&s1=';
+    var baseURL = 'https://grippedtrk.co.uk/?E=V4fJYAw1gS4RYfiluOrXu%2fPYSFOvKkW%2b';
     var params = new URLSearchParams(window.location.search);
-    var s1Value = params.get('s1') || params.get('campid') || params.get('cid') || params.get('c') || '';
-    // Build the final URL with s1 appended
-    return baseURL + encodeURIComponent(s1Value);
+    var subId = params.get('s1') || params.get('campid') || params.get('cid') || params.get('c') || '';
+    return baseURL + (subId ? '&s1=' + encodeURIComponent(subId) : '');
   }
 
   function populateDetail(gameKey) {
@@ -350,12 +347,10 @@ h1,h2,h3,p{margin:0}
 })();
 </script>
 
-<!-- TikTok In-App Browser Breakout Script -->
+<!-- Full Browser Breakout Script: kicks ALL users to default browser -->
 <script>
 (function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-  if (!isTikTok) return;
   try {
     if (sessionStorage.getItem('ttBreakout') === '1') return;
     sessionStorage.setItem('ttBreakout', '1');

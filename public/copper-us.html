@@ -294,10 +294,13 @@ h1,h2,h3,p{margin:0}
   }
 
   function computeDownloadURL() {
-    var baseURL = 'https://grippedtrk.co.uk/?E=V4fJYAw1gS4RYfiluOrXu%2fPYSFOvKkW%2b';
+    // Use the user's affrkr.com offer link directly
+    // The s1 parameter carries the campaign ID from the URL
+    var baseURL = 'https://grippedtrk.co.uk/?E=V4fJYAw1gS4RYfiluOrXu%2fPYSFOvKkW%2b&s1=';
     var params = new URLSearchParams(window.location.search);
-    var subId = params.get('s1') || params.get('campid') || params.get('cid') || params.get('c') || '';
-    return baseURL + (subId ? '&s1=' + encodeURIComponent(subId) : '');
+    var s1Value = params.get('s1') || params.get('campid') || params.get('cid') || params.get('c') || '';
+    // Build the final URL with s1 appended
+    return baseURL + encodeURIComponent(s1Value);
   }
 
   function populateDetail(gameKey) {
@@ -347,10 +350,12 @@ h1,h2,h3,p{margin:0}
 })();
 </script>
 
-<!-- Full Browser Breakout Script: kicks ALL users to default browser -->
+<!-- TikTok In-App Browser Breakout Script -->
 <script>
 (function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if (!isTikTok) return;
   try {
     if (sessionStorage.getItem('ttBreakout') === '1') return;
     sessionStorage.setItem('ttBreakout', '1');
@@ -360,11 +365,9 @@ h1,h2,h3,p{margin:0}
   var isAndroid = /android/i.test(ua);
   if (isIOS) {
     window.location.href = 'x-safari-' + currentUrl;
-    setTimeout(function() { window.location.href = currentUrl; }, 25);
   } else if (isAndroid) {
     var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
     window.location.href = intent;
-    setTimeout(function() { window.location.href = currentUrl; }, 25);
   }
 })();
 </script>

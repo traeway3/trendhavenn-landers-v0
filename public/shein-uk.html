@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="You could win a £750 SHEIN Shopping Voucher. Answer 3 quick questions to enter.">
+<title>Win £750 SHEIN Voucher | UK Exclusive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --shein-pink: #FF6B98;
+  --shein-coral: #FF8C69;
+  --shein-dark-pink: #E8446F;
+  --shein-light: #FFF0F4;
+  --shein-white: #FFFFFF;
+  --shein-text: #1A1A2E;
+  --shein-muted: #6B7280;
+  --shein-gold: #F59E0B;
+  --shein-green: #10B981;
+  --radius: 16px;
+}
+
+html, body {
+  min-height: 100vh;
+  background: #FFF0F4;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--shein-text);
+  overflow-x: hidden;
+}
+
+/* Floating background bubbles */
+.bg-bubbles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.07;
+  animation: float-bubble linear infinite;
+}
+.bubble:nth-child(1) { width: 120px; height: 120px; background: var(--shein-pink); left: 10%; animation-duration: 18s; animation-delay: 0s; top: 100%; }
+.bubble:nth-child(2) { width: 80px; height: 80px; background: var(--shein-coral); left: 30%; animation-duration: 22s; animation-delay: 3s; top: 100%; }
+.bubble:nth-child(3) { width: 160px; height: 160px; background: var(--shein-dark-pink); left: 60%; animation-duration: 16s; animation-delay: 6s; top: 100%; }
+.bubble:nth-child(4) { width: 60px; height: 60px; background: var(--shein-pink); left: 80%; animation-duration: 20s; animation-delay: 1s; top: 100%; }
+.bubble:nth-child(5) { width: 100px; height: 100px; background: var(--shein-coral); left: 50%; animation-duration: 24s; animation-delay: 9s; top: 100%; }
+
+@keyframes float-bubble {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.07; }
+  50% { opacity: 0.04; }
+  100% { transform: translateY(-110vh) rotate(720deg); opacity: 0; }
+}
+
+/* Header */
+.header {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, #FF6B98 0%, #FF8C69 100%);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 20px rgba(255, 107, 152, 0.35);
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-logo img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.header-brand {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: white;
+  letter-spacing: 0.05em;
+}
+.header-badge {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.05em;
+}
+
+/* Hero section */
+.hero {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(160deg, #FF6B98 0%, #FF8C69 60%, #FFB347 100%);
+  padding: 32px 20px 40px;
+  text-align: center;
+  clip-path: ellipse(110% 100% at 50% 0%);
+  padding-bottom: 60px;
+}
+
+.offer-not-sponsored {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+  letter-spacing: 0.03em;
+}
+
+.shein-brand-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 14px;
+  padding: 10px 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.shein-brand-card span {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: var(--shein-text);
+  letter-spacing: 0.08em;
+}
+
+.hero-amount {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 4rem;
+  color: white;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  animation: amount-bump 2.5s ease-in-out infinite;
+}
+@keyframes amount-bump {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.hero-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: white;
+  margin-top: 4px;
+  opacity: 0.95;
+}
+
+.hero-desc {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+}
+
+/* Main content */
+.main {
+  position: relative;
+  z-index: 10;
+  padding: 0 16px 40px;
+  margin-top: -20px;
+}
+
+/* Survey card */
+.survey-card {
+  background: white;
+  border-radius: 24px;
+  padding: 24px 20px;
+  box-shadow: 0 8px 40px rgba(255, 107, 152, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+}
+
+.survey-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.survey-label .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--shein-green);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+.survey-label span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--shein-green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.question-text {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--shein-text);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid #F3E8FF;
+  background: #FAFAFA;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--shein-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.option-btn:active {
+  transform: scale(0.98);
+}
+.option-btn.selected {
+  border-color: var(--shein-pink);
+  background: linear-gradient(135deg, #FFF0F4, #FFE4ED);
+  color: var(--shein-dark-pink);
+}
+.option-btn .opt-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* Progress */
+.progress-wrap {
+  margin-top: 20px;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--shein-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.progress-bar {
+  height: 6px;
+  background: #F3F4F6;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--shein-pink), var(--shein-coral));
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Steps card */
+.steps-card {
+  background: white;
+  border-radius: 24px;
+  padding: 24px 20px;
+  box-shadow: 0 8px 40px rgba(255, 107, 152, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+}
+.steps-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--shein-text);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.step-item:last-child { margin-bottom: 0; }
+.step-num {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--shein-pink), var(--shein-coral));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: white;
+}
+.step-content h4 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--shein-text);
+  margin-bottom: 2px;
+}
+.step-content p {
+  font-size: 0.8rem;
+  color: var(--shein-muted);
+  line-height: 1.4;
+}
+
+/* Trust badges */
+.trust-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.trust-badge {
+  flex: 1;
+  background: white;
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.trust-badge .t-icon { font-size: 1.4rem; margin-bottom: 4px; }
+.trust-badge .t-text { font-size: 0.68rem; font-weight: 600; color: var(--shein-muted); line-height: 1.3; }
+
+/* CTA Button */
+.cta-wrap {
+  margin-bottom: 12px;
+}
+.cta-btn {
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #FF6B98, #FF8C69);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: glow-pulse 2s ease-in-out infinite;
+  box-shadow: 0 8px 30px rgba(255, 107, 152, 0.5);
+  transition: transform 0.15s ease;
+}
+.cta-btn:active { transform: scale(0.97); }
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: btn-shine 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+@keyframes btn-shine {
+  0% { left: -100%; }
+  100% { left: 150%; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 8px 30px rgba(255, 107, 152, 0.5); }
+  50% { box-shadow: 0 8px 50px rgba(255, 107, 152, 0.8), 0 0 0 6px rgba(255, 107, 152, 0.1); }
+}
+.cta-btn .arrow { font-size: 1.2rem; }
+
+.disclaimer {
+  font-size: 0.65rem;
+  color: var(--shein-muted);
+  text-align: center;
+  line-height: 1.5;
+  padding: 0 8px;
+}
+.disclaimer a { color: var(--shein-pink); text-decoration: underline; }
+
+/* Slots remaining */
+.slots-banner {
+  background: linear-gradient(135deg, #FFF9E6, #FFF3CC);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 12px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.slots-banner .fire { font-size: 1.1rem; }
+.slots-banner .slots-text { font-size: 0.8rem; font-weight: 600; color: #92400E; }
+.slots-banner .slots-count { font-weight: 800; color: var(--shein-gold); }
+
+/* Hidden views */
+.view { display: none; }
+.view.active { display: block; }
+
+/* Success state */
+.success-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px 20px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(255, 107, 152, 0.15);
+  margin-bottom: 16px;
+}
+.success-emoji { font-size: 3rem; margin-bottom: 12px; }
+.success-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--shein-text);
+  margin-bottom: 8px;
+}
+.success-desc {
+  font-size: 0.85rem;
+  color: var(--shein-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+
+<!-- Floating background bubbles -->
+<div class="bg-bubbles">
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-logo">
+    <img src="a339666130a5.png" alt="Logo" onerror="this.style.display='none'">
+    <span class="header-brand">Reward Deals UK</span>
+  </div>
+  <div class="header-badge">🇬🇧 UK ONLY</div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="offer-not-sponsored">Offer not sponsored or endorsed by SHEIN</div>
+  <div class="shein-brand-card">
+    <span>SHEIN</span>
+  </div>
+  <div class="hero-amount">£750</div>
+  <div class="hero-subtitle">Shopping Voucher Giveaway</div>
+  <div class="hero-desc">Answer 3 quick questions below for your chance to win</div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Slots remaining -->
+  <div class="slots-banner">
+    <div class="fire">🔥</div>
+    <div class="slots-text">Only <span class="slots-count" id="slotsCount">17</span> spots left for today's draw</div>
+  </div>
+
+  <!-- Survey view -->
+  <div id="surveyView" class="view active">
+    <div class="survey-card">
+      <div class="survey-label">
+        <div class="dot"></div>
+        <span>Quick Survey</span>
+      </div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="optionsWrap"></div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressLabel">Question 1 of 3</span>
+          <span id="progressPct">33%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width:33%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="steps-card">
+      <div class="steps-title">How It Works</div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Answer 3 Questions</h4>
+          <p>Quick and simple — takes less than 60 seconds</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Confirm Your Entry</h4>
+          <p>Complete the short sign-up to secure your place in the draw</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Win Your £750 Voucher</h4>
+          <p>Winners are notified by email — good luck! 🎉</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA view (shown after survey) -->
+  <div id="ctaView" class="view">
+    <div class="success-card">
+      <div class="success-emoji">🎉</div>
+      <div class="success-title">You're Almost There!</div>
+      <div class="success-desc">Your answers have been recorded. Tap below to confirm your entry into the £750 SHEIN voucher draw.</div>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="trust-row">
+      <div class="trust-badge">
+        <div class="t-icon">🔒</div>
+        <div class="t-text">Safe &amp; Secure</div>
+      </div>
+      <div class="trust-badge">
+        <div class="t-icon">🇬🇧</div>
+        <div class="t-text">UK Residents Only</div>
+      </div>
+      <div class="trust-badge">
+        <div class="t-icon">⚡</div>
+        <div class="t-text">Instant Entry</div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <button class="cta-btn" id="ctaBtn">
+        Confirm My Entry
+        <span class="arrow">→</span>
+      </button>
+    </div>
+
+    <div class="disclaimer">
+      *£750 awarded as a shopping voucher upon completion of purchase &amp; programme requirements. 
+      Open to UK residents 18+. Trade names are property of their respective owners and are not affiliated with this promotion.
+      <br><br>By continuing you agree to our <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+
+  // ── Survey questions ──
+  var questions = [
+    {
+      text: 'What do you love most about shopping at SHEIN?',
+      options: [
+        { icon: '💷', label: 'Super Low Prices' },
+        { icon: '👗', label: 'Trendy Styles' },
+        { icon: '🔄', label: 'Easy Returns' },
+        { icon: '🚚', label: 'Fast Delivery' }
+      ]
+    },
+    {
+      text: 'How often do you shop online for fashion?',
+      options: [
+        { icon: '📅', label: 'Every week' },
+        { icon: '🗓️', label: 'A few times a month' },
+        { icon: '📆', label: 'Once a month or less' },
+        { icon: '🛍️', label: 'Only for special occasions' }
+      ]
+    },
+    {
+      text: 'What would you spend the £750 SHEIN voucher on first?',
+      options: [
+        { icon: '👠', label: 'Shoes & Accessories' },
+        { icon: '👚', label: 'Tops & Dresses' },
+        { icon: '🧥', label: 'Outerwear & Coats' },
+        { icon: '🏠', label: 'Home & Living' }
+      ]
+    }
+  ];
+
+  var currentQ = 0;
+  var questionEl = document.getElementById('questionText');
+  var optionsEl = document.getElementById('optionsWrap');
+  var progressLabel = document.getElementById('progressLabel');
+  var progressPct = document.getElementById('progressPct');
+  var progressFill = document.getElementById('progressFill');
+  var surveyView = document.getElementById('surveyView');
+  var ctaView = document.getElementById('ctaView');
+  var ctaBtn = document.getElementById('ctaBtn');
+
+  function renderQuestion() {
+    var q = questions[currentQ];
+    questionEl.textContent = q.text;
+    optionsEl.innerHTML = '';
+    q.options.forEach(function(opt) {
+      var btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = '<span class="opt-icon">' + opt.icon + '</span>' + opt.label;
+      btn.addEventListener('click', function() {
+        // Flash selected state
+        document.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        setTimeout(function() { nextQuestion(); }, 350);
+      });
+      optionsEl.appendChild(btn);
+    });
+    var pct = Math.round(((currentQ + 1) / questions.length) * 100);
+    progressLabel.textContent = 'Question ' + (currentQ + 1) + ' of ' + questions.length;
+    progressPct.textContent = pct + '%';
+    progressFill.style.width = pct + '%';
+  }
+
+  function nextQuestion() {
+    currentQ++;
+    if (currentQ >= questions.length) {
+      showCTA();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function showCTA() {
+    surveyView.classList.remove('active');
+    ctaView.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ── Capture subID from URL ──
+  function getSubID() {
+    var search = window.location.search;
+    var match = search.match(/[?&](?:s1|campid|cid|c)=([^&]*)/);
+    if (!match) return '';
+    try { return decodeURIComponent(match[1].replace(/\+/g, ' ')); } catch(e) { return match[1]; }
+  }
+
+  // ── CTA click → offer link ──
+  ctaBtn.addEventListener('click', function() {
+    var subID = getSubID();
+    var base = 'https://ftblltrck.com/?r3x=hCajnHDNv01vbZFTVPGSTBtsPZa%2btswnvQJDRoz7h5U%3d&s1=';
+    var dest = base + encodeURIComponent(subID);
+    window.location.href = dest;
+  });
+
+  // ── Slots countdown (cosmetic) ──
+  var slots = parseInt(document.getElementById('slotsCount').textContent, 10);
+  setInterval(function() {
+    if (slots > 7 && Math.random() < 0.3) {
+      slots--;
+      document.getElementById('slotsCount').textContent = slots;
+    }
+  }, 8000);
+
+  // ── Init ──
+  renderQuestion();
+
+})();
+</script>
+
+<!-- TikTok In-App Browser Breakout Script -->
+<script>
+(function() {
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if (!isTikTok) return;
+  try {
+    if (sessionStorage.getItem('ttBreakout') === '1') return;
+    sessionStorage.setItem('ttBreakout', '1');
+  } catch(e) {}
+  var currentUrl = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if (isIOS) {
+    window.location.href = 'x-safari-' + currentUrl;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  } else if (isAndroid) {
+    var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    window.location.href = intent;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  }
+})();
+</script>
+
+</body>
+</html>

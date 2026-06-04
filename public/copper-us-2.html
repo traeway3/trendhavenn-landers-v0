@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Download your first game through Copper and get $10 guaranteed. Tap Play Now. Install the game. Receive your $10 bonus automatically.">
+<title>Copper – Get $10 Guaranteed</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:hsl(222,47%,6%);color:hsl(0,0%,97%);min-height:100vh;overflow-x:hidden}
+
+:root{
+  --green:hsl(158,64%,52%);
+  --green-rgb:52,211,153;
+  --bg:hsl(222,47%,6%);
+  --card:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.08);
+  --muted:rgba(255,255,255,0.52);
+  --r:16px;
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes ctaPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 22px rgba(var(--green-rgb),.35),0 8px 32px rgba(var(--green-rgb),.2)}
+  50%{transform:scale(1.032);box-shadow:0 0 40px rgba(var(--green-rgb),.55),0 12px 48px rgba(var(--green-rgb),.35)}
+}
+@keyframes logoGlow{
+  0%,100%{box-shadow:0 0 20px rgba(var(--green-rgb),.2),0 0 50px rgba(var(--green-rgb),.1)}
+  50%{box-shadow:0 0 34px rgba(var(--green-rgb),.45),0 0 80px rgba(var(--green-rgb),.2)}
+}
+@keyframes badgePop{0%{opacity:0;transform:scale(.6) translateY(8px)}70%{transform:scale(1.06) translateY(-2px)}100%{opacity:1;transform:scale(1)}}
+@keyframes shine{0%{left:-100%}100%{left:150%}}
+@keyframes sparkle{0%{opacity:0;transform:translateY(0) scale(0)}15%{opacity:1}85%{opacity:.5}100%{opacity:0;transform:translateY(-130px) scale(1.3)}}
+@keyframes cardShimmer{0%,100%{border-color:rgba(255,255,255,.08)}50%{border-color:rgba(var(--green-rgb),.22);box-shadow:0 0 10px rgba(var(--green-rgb),.06)}}
+
+.fu{opacity:0;animation:fadeUp .7s cubic-bezier(.16,1,.3,1) forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}
+.d4{animation-delay:.55s}.d5{animation-delay:.7s}.d6{animation-delay:.88s}
+.d7{animation-delay:1.05s}.d8{animation-delay:1.22s}.d9{animation-delay:1.4s}
+
+/* === BACKGROUND === */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden}
+.bg-g{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 5%,rgba(10,25,60,.95) 0%,transparent 55%),
+             radial-gradient(ellipse at 85% 95%,rgba(5,30,50,.9) 0%,transparent 55%),
+             linear-gradient(160deg,hsl(222,47%,7%) 0%,hsl(222,60%,4%) 100%);
+  background-size:200% 200%;animation:gradShift 12s ease infinite}
+.bg-grid{position:absolute;inset:0;opacity:.03;
+  background-image:linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px);
+  background-size:60px 60px}
+.sparkles{position:absolute;inset:0;pointer-events:none}
+.sp{position:absolute;border-radius:50%;animation:sparkle linear infinite;opacity:0}
+
+/* === LAYOUT === */
+.page{position:relative;z-index:1;max-width:420px;margin:0 auto;padding:0 20px 80px}
+
+/* === HERO === */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:52px}
+
+.logo-wrap{width:84px;height:84px;border-radius:50%;border:1.5px solid rgba(var(--green-rgb),.25);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:logoGlow 3s ease-in-out infinite}
+.logo-wrap img{width:68px;height:68px;border-radius:50%;object-fit:cover}
+
+.badge{display:inline-flex;align-items:center;gap:7px;border-radius:999px;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.1);padding:6px 14px;margin-top:16px;animation:badgePop .6s cubic-bezier(.34,1.56,.64,1) both .9s;opacity:0}
+.badge-dot{width:18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.badge-dot svg{width:10px;height:10px}
+.badge-text{font-size:12px;font-weight:700;color:var(--green)}
+
+.hero-h{margin-top:22px;font-size:32px;font-weight:900;line-height:1.15;letter-spacing:-.035em;color:#fff}
+.hero-h .hi{color:var(--green);display:block}
+.hero-p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--muted);max-width:290px}
+
+.money-badge{margin-top:22px;display:inline-flex;align-items:center;gap:14px;background:rgba(var(--green-rgb),.09);border:1px solid rgba(var(--green-rgb),.22);border-radius:16px;padding:14px 22px}
+.money-amt{font-size:38px;font-weight:900;color:var(--green);letter-spacing:-.025em;line-height:1}
+.money-lbl{text-align:left;font-size:12px;color:var(--muted);line-height:1.45}
+.money-lbl strong{display:block;color:#fff;font-size:14px;font-weight:700}
+
+/* CTA */
+a.cta-btn,button.cta-btn{display:block;width:100%;max-width:360px;padding:19px 24px;background:var(--green);color:#000;font-size:16px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;border:none;border-radius:14px;cursor:pointer;text-decoration:none;text-align:center;position:relative;overflow:hidden;animation:ctaPulse 2s ease-in-out infinite;transition:transform .15s,-webkit-transform .15s}
+a.cta-btn::after,button.cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);animation:shine 3.5s ease-in-out infinite 2s}
+a.cta-btn:active,button.cta-btn:active{transform:scale(.97)}
+.cta-wrap{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:26px}
+.cta-note{margin-top:9px;font-size:11px;color:rgba(255,255,255,.28);text-align:center}
+
+/* === STATS === */
+.stats{display:flex;gap:10px;margin-top:44px;width:100%}
+.stat{flex:1;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 8px;text-align:center;backdrop-filter:blur(6px)}
+.stat-v{font-size:20px;font-weight:900;color:var(--green);letter-spacing:-.02em}
+.stat-l{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.3}
+
+/* === SECTIONS === */
+.sec{margin-top:48px}
+.sec-eye{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green);text-align:center;margin-bottom:8px}
+.sec-h{font-size:23px;font-weight:800;letter-spacing:-.025em;color:#fff;text-align:center}
+.sec-p{font-size:14px;color:var(--muted);text-align:center;margin-top:6px;line-height:1.5}
+
+/* HOW IT WORKS */
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.step{display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;animation:cardShimmer 5s ease-in-out infinite}
+.step.hot{border-color:rgba(var(--green-rgb),.3);background:rgba(var(--green-rgb),.07)}
+.step-n{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+.step-n.def{background:rgba(var(--green-rgb),.15);color:var(--green)}
+.step-n.act{background:var(--green);color:#000}
+.step-body h3{font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+.step-body p{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
+.tag{display:inline-block;background:rgba(var(--green-rgb),.15);color:var(--green);font-size:10px;font-weight:800;letter-spacing:.06em;border-radius:5px;padding:2px 8px;margin-top:6px}
+
+/* EARN GRID */
+.earn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.earn-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 14px}
+.earn-icon{font-size:24px;margin-bottom:8px}
+.earn-card h3{font-size:13px;font-weight:700;color:#fff}
+.earn-card p{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+/* PAYOUTS */
+.payout-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.pout{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:14px 8px;text-align:center}
+.pout-icon{font-size:22px;margin-bottom:6px}
+.pout-name{font-size:11px;font-weight:700;color:#fff}
+.pout-sub{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* REVIEWS */
+.reviews{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.rev{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.stars{color:#fbbf24;font-size:12px;letter-spacing:1px;margin-bottom:8px}
+.rev-t{font-size:13px;color:rgba(255,255,255,.8);line-height:1.55;font-style:italic}
+.rev-a{font-size:11px;color:var(--green);font-weight:600;margin-top:8px}
+
+/* FINAL CTA BOX */
+.final-box{margin-top:48px;text-align:center;padding:32px 20px;background:rgba(var(--green-rgb),.06);border:1px solid rgba(var(--green-rgb),.16);border-radius:22px}
+.final-box h2{font-size:25px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:1.2}
+.final-box h2 span{color:var(--green)}
+.final-box p{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* FOOTER */
+.foot{margin-top:40px;text-align:center;font-size:11px;color:rgba(255,255,255,.2);line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg">
+  <div class="bg-g"></div>
+  <div class="bg-grid"></div>
+  <div class="sparkles" id="sparkles"></div>
+</div>
+
+<div class="page">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="logo-wrap fu d1">
+      <img src="data:image/png;base64,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" alt="Copper">
+    </div>
+    <div class="badge">
+      <div class="badge-dot">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="badge-text">1M+ Downloads · App Store Verified</span>
+    </div>
+    <h1 class="hero-h fu d3">
+      Get <span class="hi">$10 Guaranteed</span>
+      When You Download Your First Game
+    </h1>
+    <p class="hero-p fu d4">
+      Tap Play Now. Install the game. Receive your $10 bonus automatically. No hidden steps.
+    </p>
+    <div class="money-badge fu d5">
+      <div class="money-amt">$10</div>
+      <div class="money-lbl">
+        <strong>Guaranteed Bonus</strong>
+        First game download
+      </div>
+    </div>
+    <div class="cta-wrap fu d6">
+      <a href="https://grippedtrk.co.uk/?E=bb2yRqZp93%2f55qQfDdJvEPPYSFOvKkW%2b&s1=" class="cta-btn">
+        🎮 Claim Your $10 — Free
+      </a>
+      <p class="cta-note">Free to download · iOS only · No credit card needed</p>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <div class="stats fu d7">
+    <div class="stat">
+      <div class="stat-v">1M+</div>
+      <div class="stat-l">Downloads</div>
+    </div>
+    <div class="stat">
+      <div class="stat-v">$10</div>
+      <div class="stat-l">Guaranteed bonus</div>
+    </div>
+    <div class="stat">
+      <div class="stat-v">4.6★</div>
+      <div class="stat-l">App Store</div>
+    </div>
+  </div>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="sec fu d8">
+    <div class="sec-eye">How It Works</div>
+    <div class="sec-h">Three Easy Steps</div>
+    <p class="sec-p">Simple. Fast. No catch.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n def">1</div>
+        <div class="step-body">
+          <h3>Download the Copper App</h3>
+          <p>Free on iOS. Get it from the App Store in 30 seconds.</p>
+        </div>
+      </div>
+      <div class="step hot">
+        <div class="step-n act">2</div>
+        <div class="step-body">
+          <h3>Tap Play Now on Any Game</h3>
+          <p>Pick a game inside Copper, install it, and open it once.</p>
+          <span class="tag">$10 UNLOCKS HERE</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n def">3</div>
+        <div class="step-body">
+          <h3>Cash Out Your Earnings</h3>
+          <p>Instant payouts to PayPal, Venmo, gift cards &amp; more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EARN WAYS ===== -->
+  <section class="sec fu d9">
+    <div class="sec-eye">Best Ways to Earn</div>
+    <div class="sec-h">More Ways to Make Money</div>
+    <div class="earn-grid">
+      <div class="earn-card">
+        <div class="earn-icon">🎮</div>
+        <h3>Play Games</h3>
+        <p>Download games and earn cash as you reach milestones.</p>
+      </div>
+      <div class="earn-card">
+        <div class="earn-icon">📱</div>
+        <h3>Try New Apps</h3>
+        <p>Test apps and get paid to discover them.</p>
+      </div>
+      <div class="earn-card">
+        <div class="earn-icon">📋</div>
+        <h3>Take Surveys</h3>
+        <p>Share your opinion. Companies pay real cash for feedback.</p>
+      </div>
+      <div class="earn-card">
+        <div class="earn-icon">🎁</div>
+        <h3>Daily Bonuses</h3>
+        <p>Fresh reward opportunities added every single day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAYOUTS ===== -->
+  <section class="sec fu d9">
+    <div class="sec-eye">Cash Out</div>
+    <div class="sec-h">Get Paid Your Way</div>
+    <p class="sec-p">Most payouts process instantly.</p>
+    <div class="payout-grid">
+      <div class="pout">
+        <div class="pout-icon">💙</div>
+        <div class="pout-name">PayPal</div>
+        <div class="pout-sub">Instant</div>
+      </div>
+      <div class="pout">
+        <div class="pout-icon">💚</div>
+        <div class="pout-name">Venmo</div>
+        <div class="pout-sub">Instant</div>
+      </div>
+      <div class="pout">
+        <div class="pout-icon">🎁</div>
+        <div class="pout-name">Gift Cards</div>
+        <div class="pout-sub">50+ options</div>
+      </div>
+      <div class="pout">
+        <div class="pout-icon">🏦</div>
+        <div class="pout-name">Bank Transfer</div>
+        <div class="pout-sub">Direct deposit</div>
+      </div>
+      <div class="pout">
+        <div class="pout-icon">💳</div>
+        <div class="pout-name">Visa Prepaid</div>
+        <div class="pout-sub">Use anywhere</div>
+      </div>
+      <div class="pout">
+        <div class="pout-icon">🛒</div>
+        <div class="pout-name">Amazon</div>
+        <div class="pout-sub">Gift card</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="sec fu d9">
+    <div class="sec-eye">Real People, Real Payouts</div>
+    <div class="sec-h">What Users Are Saying</div>
+    <div class="reviews">
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p class="rev-t">"Got my $10 bonus the same day I downloaded my first game. Cashed out to PayPal in minutes. This is real."</p>
+        <div class="rev-a">— Jordan M., verified user</div>
+      </div>
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p class="rev-t">"Was skeptical at first but I made $142 in my first two weeks just by playing games I was already playing. No joke."</p>
+        <div class="rev-a">— Kayla R., verified user</div>
+      </div>
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p class="rev-t">"Way better than other reward apps I've tried. The $10 hit my Venmo the same day. Keep earning after that too."</p>
+        <div class="rev-a">— DeShawn T., verified user</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <div class="final-box fu d9">
+    <h2>Ready to Earn? <span>Start Free.</span></h2>
+    <p>Download the app. Play your first game. Get your $10 bonus. Cash out anytime.</p>
+    <div class="cta-wrap" style="margin-top:24px">
+      <a href="https://grippedtrk.co.uk/?E=bb2yRqZp93%2f55qQfDdJvEPPYSFOvKkW%2b&s1=" class="cta-btn" style="max-width:100%">
+        🎮 Download Free &amp; Get $10
+      </a>
+      <p class="cta-note">Free · iOS App Store · Instant $10 Bonus</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <p>© 2026 Copper by Next Financial · All rights reserved</p>
+    <p>Bonus awarded after first qualifying game download via Play Now. Results may vary.</p>
+  </div>
+
+</div>
+
+<script>
+// === SPARKLES ===
+(function(){
+  var c = document.getElementById('sparkles');
+  var cols = ['rgba(52,211,153,.7)','rgba(52,211,153,.4)','rgba(255,255,255,.35)','rgba(74,222,128,.6)'];
+  for(var i=0;i<32;i++){
+    var el = document.createElement('div');
+    el.className = 'sp';
+    var sz = Math.random()*3+2;
+    el.style.cssText=[
+      'left:'+(Math.random()*100)+'%',
+      'bottom:'+(Math.random()*60)+'%',
+      'width:'+sz+'px',
+      'height:'+sz+'px',
+      'background:'+cols[Math.floor(Math.random()*cols.length)],
+      'animation-duration:'+(Math.random()*4+3)+'s',
+      'animation-delay:'+(Math.random()*6)+'s'
+    ].join(';');
+    c.appendChild(el);
+  }
+})();
+</script>
+
+<!-- TikTok In-App Browser Breakout Script -->
+<script>
+(function() {
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if (!isTikTok) return;
+  try {
+    if (sessionStorage.getItem('ttBreakout') === '1') return;
+    sessionStorage.setItem('ttBreakout', '1');
+  } catch (e) {}
+  var currentUrl = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if (isIOS) {
+    window.location.href = 'x-safari-' + currentUrl;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  } else if (isAndroid) {
+    var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    window.location.href = intent;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  }
+})();
+</script>
+</body>
+</html>

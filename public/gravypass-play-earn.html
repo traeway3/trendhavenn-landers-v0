@@ -1,0 +1,317 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title data-t="_t0">Continue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: hsl(160,20%,5%);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bcif_ahey8l {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bcif_i1feij {
+            position: absolute;
+            background: rgba(0, 200, 100, 0.07);
+            border-radius: 50%;
+        }
+
+        .bcif_ue3vpt {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+        }
+
+        .bcif_ncq7oo {
+            width: 400px;
+            height: 400px;
+            bottom: -200px;
+            right: -200px;
+        }
+
+        .container {
+            background: hsl(160,10%,10%);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px hsla(160,100%,50%,0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border: 1px solid hsl(160,15%,18%);
+        }
+
+        h1 {
+            font-size: clamp(40px, 8vw, 56px);
+            font-weight: 800;
+            background: linear-gradient(180deg, #fff 0%, hsl(160,30%,60%) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .bcif_cczgis {
+            font-size: clamp(16px, 4vw, 18px);
+            color: hsl(160,20%,65%);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .bcif_cy8ipa {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .bcif_t0z1u4 {
+            stroke: hsl(160,100%,55%);
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            animation: progress 2s ease-out infinite;
+            filter: drop-shadow(0 0 6px hsla(160,100%,55%,0.6));
+        }
+
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+            100% { stroke-dasharray: 100 100; }
+        }
+
+        .bcif_iinolp {
+            background: linear-gradient(180deg, hsl(160,100%,55%) 0%, hsl(160,100%,45%) 100%);
+            color: #0a1a12;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 20px 60px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px hsla(160,100%,50%,0.4), 0 0 60px hsla(160,100%,50%,0.2);
+            animation: btnGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes btnGlow {
+            0%, 100% {
+                box-shadow: 0 0 30px hsla(160,100%,50%,0.4), 0 0 60px hsla(160,100%,50%,0.2);
+            }
+            50% {
+                box-shadow: 0 0 50px hsla(160,100%,50%,0.7), 0 0 90px hsla(160,100%,50%,0.35);
+            }
+        }
+
+        .bcif_iinolp::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            animation: shine 3s ease-in-out infinite 1s;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 160%; }
+        }
+
+        .bcif_iinolp:hover {
+            transform: translateY(-2px);
+        }
+
+        .bcif_iinolp:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 30px 20px; }
+            .bcif_iinolp { padding: 16px 40px; font-size: 16px; }
+        }
+
+        /* 404 overlay (hidden by default, shown to desktop visitors) */
+        #not-found {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #f4f4f4;
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: #333;
+        }
+        #not-found h2 {
+            font-size: 72px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 8px;
+        }
+        #not-found p {
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body cz-shortcut-listen="true"><!-- g1777ln372st -->
+
+    <!-- Desktop 404 overlay -->
+    <div id="not-found">
+        <h2>404</h2>
+        <p>Page Not Found</p>
+    </div>
+
+    <div class="bcif_ahey8l" data-v="wiu49t">
+        <div class="bcif_i1feij bcif_ue3vpt" data-v="q0zzq7"></div>
+        <div class="bcif_i1feij bcif_ncq7oo" data-v="ujnxq0"></div>
+    </div>
+
+    <div class="container" data-v="d59p4r">
+        <h1 data-t="_t1">Ready?</h1>
+        <p class="bcif_cczgis" data-t="_t2">Continue below</p>
+
+        <div class="bcif_cy8ipa" data-v="w462kb">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="54" class="bcif_t0z1u4"></circle>
+            </svg>
+        </div>
+
+        <button class="bcif_iinolp" onclick="handleContinue()" data-t="_t3">Continue</button>
+    </div>
+
+    <script>
+        // === MOBILE-ONLY GATE ===
+        (function(){
+            var ua = navigator.userAgent || '';
+            var isMobile = /Android|iPad|iPhone|iPod/i.test(ua);
+            if (!isMobile) {
+                var nf = document.getElementById('not-found');
+                nf.style.display = 'flex';
+                document.title = '404 Not Found';
+            }
+        })();
+
+        // === SET YOUR AFFILIATE LINK HERE ===
+        var AFFILIATE_LINK = "https://www.trendhavenn.com/gravypass-us.html";
+
+        function getParam(name) {
+            var params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        function appendParam(url, key, value) {
+            if (!value) return url;
+            var separator = url.includes('?') ? '&' : '?';
+            return url + separator + key + '=' + encodeURIComponent(value);
+        }
+
+        function isAndroid() {
+            return /Android/i.test(navigator.userAgent);
+        }
+
+        function openInExternalBrowser(url) {
+            if (isAndroid()) {
+                // Android: intent to open in Chrome
+                try {
+                    var parsed = new URL(url);
+                    var intentUrl = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;end;';
+                    window.location.href = intentUrl;
+                } catch(e) {
+                    window.location.href = url;
+                }
+            } else {
+                // iOS: x-safari scheme to force Safari
+                var safariUrl = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
+                window.location.href = safariUrl;
+            }
+        }
+
+        function handleContinue() {
+            // Use dest param if provided, otherwise use the hardcoded affiliate link
+            var dest = getParam('dest');
+            var url = dest ? decodeURIComponent(dest) : AFFILIATE_LINK;
+
+            // Pass through ALL URL params from the current page to the destination
+            var params = new URLSearchParams(window.location.search);
+            params.forEach(function(value, key) {
+                // Skip 'dest' param since that's the destination itself
+                if (key === 'dest') return;
+                // Only add if not already in the URL
+                if (!url.includes(key + '=')) {
+                    url = appendParam(url, key, value);
+                }
+            });
+
+            openInExternalBrowser(url);
+        }
+    </script>
+
+<script>
+(function(){
+  var _p33=239;
+  var _b8o3=[{"s":"[data-t=\"_t0\"]","e":"00ac00800081009b00860081009a008a"},{"s":"[data-t=\"_t1\"]","e":"00bd008a008e008b009600d0"},{"s":"[data-t=\"_t2\"]","e":"00ac00800081009b00860081009a008a00cf008d008a008300800098"},{"s":"[data-t=\"_t3\"]","e":"00ac00800081009b00860081009a008a"}];
+  function _thqeif(h,k){
+    var r='';
+    for(var i=0;i<h.length;i+=4){
+      var c=parseInt(h.substr(i,4),16)^k;
+      r+=String.fromCharCode(c);
+    }
+    return r;
+  }
+  setTimeout(function(){
+    _b8o3.forEach(function(t){
+      var el=document.querySelector(t.s);
+      if(el)el.textContent=_thqeif(t.e,_p33);
+    });
+  },10);
+})();
+</script>
+
+<!-- TikTok In-App Browser Breakout -->
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if(!isTikTok) return;
+  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
+  var url = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
+  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
+})();
+</script>
+
+</body></html>

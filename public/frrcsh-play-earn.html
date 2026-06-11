@@ -183,36 +183,35 @@ body{
 </div>
 
 <script>
-// === CONTINUE BUTTON — opens in new tab, passes all URL params ===
+// === CONTINUE BUTTON — kicks out of TikTok browser on click, passes all URL params ===
 (function(){
-  var DEST = 'https://www.trendhavenn.com/FRRCSH-US.html';
+  var DEST = 'https://www.trendhavenn.com/frrcsh-us2.html';
 
   function buildUrl(){
     var p = new URLSearchParams(window.location.search);
     return p.toString() ? DEST + '?' + p.toString() : DEST;
   }
 
-  document.getElementById('ctaBtn').addEventListener('click', function(){
-    var w = window.open(buildUrl(), '_blank', 'noopener,noreferrer');
-    if(!w || w.closed || typeof w.closed === 'undefined'){
-      window.location.href = buildUrl();
+  function openInExternalBrowser(url){
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isAndroid = /android/i.test(ua);
+    if(isAndroid){
+      try{
+        var parsed = new URL(url);
+        window.location.href = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+      }catch(e){ window.location.href = url; }
+    } else if(isIOS){
+      window.location.href = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
+    } else {
+      var w = window.open(url, '_blank', 'noopener,noreferrer');
+      if(!w || w.closed || typeof w.closed === 'undefined') window.location.href = url;
     }
-  });
-})();
-</script>
+  }
 
-<!-- TikTok In-App Browser Breakout -->
-<script>
-(function(){
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-  if(!isTikTok) return;
-  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
-  var url = window.location.href;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  var isAndroid = /android/i.test(ua);
-  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
-  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
+  document.getElementById('ctaBtn').addEventListener('click', function(){
+    openInExternalBrowser(buildUrl());
+  });
 })();
 </script>
 </body>

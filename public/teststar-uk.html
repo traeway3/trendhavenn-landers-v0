@@ -357,6 +357,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var offerMap = JSON.parse("{\"1\":{\"url\":\"https://taprkr.com/r/eyJ0IjoidGVzdHN0YXIiLCJ0aWQiOiI4NDBjNzBmY2ExMzJiNzMzNmFhZiIsInRzIjoxNzgxNTQwNDcyMTc3fQ\",\"splits\":null}}");
   var fallbackUrl = 'https://taprkr.com/r/eyJ0IjoidGVzdHN0YXIiLCJ0aWQiOiI4NDBjNzBmY2ExMzJiNzMzNmFhZiIsInRzIjoxNzgxNTQwNDcyMTc3fQ';
   var urlParams = JSON.parse("{\"sub1\":\"camp_1781452235382_00uat03\",\"sub2\":\"HOW%2BDID%2BI%2BJUST%2BFIND%2BOUT%2BAB%2BTHIS%25F0%259F%2598%25AD%25F0%259F%2598%25AD_Ad%2Bname2026-06-14%2B11%253A50%253A29\",\"sub3\":\"Copy%2B15%2Bof%2BAd%2Bgroup%2B20260614115007\",\"s2\":\"camp_1781452235382_00uat03\",\"s3\":\"HOW%2BDID%2BI%2BJUST%2BFIND%2BOUT%2BAB%2BTHIS%25F0%259F%2598%25AD%25F0%259F%2598%25AD_Ad%2Bname2026-06-14%2B11%253A50%253A29\",\"ttclid\":\"E_C_P_CuABevAhZgbUENW8kbj3NvUy1gDk55igBY4m_EhOZT2gNJ5kIHuQDuWX3TkD7kK-147nc9U_NOVCjYTPpyG7evmlp5BVff7TeXaGZdJWId3a5V7CYySGKZR6EQb82-TV0ZF4LNVzq0S_GsdwEt-58gVmHfCBeZNuRTSySpyrvi7f7iMkStLi86OTl1_sWlRFFgbH1Uy_YrcEjdrF64iEotYyU-HUD-taSxzW9aZHeLbmHd5Al7YDJawy_uGzubnVrXrR3rGOsmM_CiI3gZZA9GTwRSg0PcGIMN0a1t0NBNL8VkwSBHYyLjA\",\"camp\":\"rzjzego3\",\"sub4\":\"2319c407-0aa9-45a9-93a0-b3fe50a35a26\"}");
+  // TRACKING FIX: inject live campid as s1 into urlParams so buildFinalUrl appends it to every CTA click
+  (function(){ var c = new URLSearchParams(window.location.search).get('campid') || new URLSearchParams(window.location.search).get('s1'); if(c) urlParams.s1 = c; })();
   var forceExternal = true;
 
   var ua = navigator.userAgent || '';
@@ -553,25 +555,4 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;518c4c8f1449406796d6db999c02f9ec&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
 
-<script>
-// TRACKING FIX: wrap buildFinalUrl to inject s1=campid from the live URL
-(function(){
-  var _campid = new URLSearchParams(window.location.search).get('campid') || new URLSearchParams(window.location.search).get('s1') || '';
-  if (!_campid) return;
-  var _timer = setInterval(function(){
-    if (typeof buildFinalUrl !== 'function') return;
-    clearInterval(_timer);
-    var _orig = buildFinalUrl;
-    buildFinalUrl = function(baseUrl){
-      var result = _orig(baseUrl);
-      if (!result) return result;
-      try {
-        var u = new URL(result);
-        u.searchParams.set('s1', _campid);
-        return u.href;
-      } catch(e) { return result; }
-    };
-  }, 50);
-})();
-</script>
 </body></html>

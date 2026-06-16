@@ -569,6 +569,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 (function(){
   var CTA_FINAL = 'https://taprkr.com/r/eyJ0IjoidGVzdHN0YXIiLCJ0aWQiOiI4NDBjNzBmY2ExMzJiNzMzNmFhZiIsInRzIjoxNzgxNTQwNDcyMTc3fQ';
+  
+  // TRACKING FIX: Read campid from URL and append as s1 to TapRain link
+  var urlParams = new URLSearchParams(window.location.search);
+  var campid = urlParams.get('campid') || urlParams.get('s1') || '';
+  if (campid) {
+    // Append s1 parameter for TapRain tracking
+    CTA_FINAL += (CTA_FINAL.indexOf('?') === -1 ? '?' : '&') + 's1=' + encodeURIComponent(campid);
+  }
+
   var modal = document.getElementById('ts-modal');
   function showModal(){ modal.style.display='flex'; }
   function hideModal(){ modal.style.display='none'; }

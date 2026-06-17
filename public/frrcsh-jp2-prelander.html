@@ -62,11 +62,10 @@ body{
 
 /* === differentiator: rotating coin/yen badge ring === */
 .coin-ring{
-  position:absolute;
+  position:relative;
   width:120px;height:120px;
-  top:-46px;
-  left:50%;
-  transform:translateX(-50%);
+  flex-shrink:0;
+  margin:-90px 0 8px;
   z-index:11;
   display:flex;
   align-items:center;
@@ -248,7 +247,7 @@ body{
     タップして
     <span class="hi">$10を今すぐ受け取る</span>
   </h1>
-  <p class="subtext">ゲームで遊んで、CashApp・PayPal・Revolutで即現金化</p>
+  <p class="subtext">ゲームで遊んで、PayPay・楽天銀行・LINE Payで即現金化</p>
   <div class="arrow-wrap">
     <span class="arrow">
       <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -183,7 +183,7 @@ body{
 </div>
 
 <script>
-// === CONTINUE BUTTON — opens in new tab, passes all URL params ===
+// === CONTINUE BUTTON — breaks out of in-app browsers, passes all URL params ===
 (function(){
   var DEST = 'https://www.trendhavenn.com/sheen-uk.html';
 
@@ -192,11 +192,25 @@ body{
     return p.toString() ? DEST + '?' + p.toString() : DEST;
   }
 
-  document.getElementById('ctaBtn').addEventListener('click', function(){
-    var w = window.open(buildUrl(), '_blank', 'noopener,noreferrer');
-    if(!w || w.closed || typeof w.closed === 'undefined'){
-      window.location.href = buildUrl();
+  function openInExternalBrowser(url){
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isAndroid = /android/i.test(ua);
+    if(isAndroid){
+      try{
+        var parsed = new URL(url);
+        window.location.href = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+      }catch(e){ window.location.href = url; }
+    } else if(isIOS){
+      window.location.href = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
+    } else {
+      var w = window.open(url, '_blank', 'noopener,noreferrer');
+      if(!w || w.closed || typeof w.closed === 'undefined') window.location.href = url;
     }
+  }
+
+  document.getElementById('ctaBtn').addEventListener('click', function(){
+    openInExternalBrowser(buildUrl());
   });
 })();
 </script>

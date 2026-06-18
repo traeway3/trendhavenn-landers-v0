@@ -1,11 +1,13 @@
 <html lang="en"><head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0d1f16">
 <title>Get Paid To Game</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(160,20%,5%);color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(160,20%,5%);color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden;-webkit-text-size-adjust:100%;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .bg-glow{position:fixed;inset:0;background:radial-gradient(ellipse at center,hsla(160,100%,30%,0.12) 0%,transparent 60%),radial-gradient(ellipse at center,hsla(160,100%,20%,0.08) 0%,transparent 80%),hsl(160,20%,5%);z-index:0}
 .container{position:relative;z-index:1;width:100%;max-width:540px;padding:64px 24px;display:flex;flex-direction:column;align-items:center;text-align:center}
 .logo-row{display:flex;align-items:center;gap:12px;margin-bottom:24px}
@@ -61,6 +63,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
   50%{box-shadow:0 0 50px hsla(160,100%,50%,0.75),0 0 100px hsla(160,100%,50%,0.4),0 4px 20px hsla(0,0%,0%,0.35)}
 }
 .bg-glow{animation:bgBreathe 6s ease-in-out infinite}
+
+@media(max-width:480px){
+  .container{padding:48px 18px}
+  .headline{font-size:clamp(1.7rem,7vw,2.4rem)}
+  .subtext{font-size:14px}
+  .btn-neon,.btn-dark,.btn-activate{padding:18px 28px}
+  .card-dark,.card-important{padding:18px}
+}
+@media(max-width:375px){
+  .container{padding:40px 14px}
+  .headline{font-size:clamp(1.5rem,7.5vw,2.1rem)}
+  .btn-neon .main,.btn-dark .main{font-size:18px}
+}
 </style>
 <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d5072099-796a-4c72-ba39-45fb2640c5e2/id-preview-19988ed7--8c68b666-5ac7-490b-b17c-3448dea46474.lovable.app-1771817371518.png"></head>
 <body cz-shortcut-listen="true">
@@ -149,28 +164,53 @@ function showScreenB(){
   },400);
 }
 
-function handleActivate(){
-  var params=new URLSearchParams(window.location.search);
-  var allowed=['sub1','sub2','sub3','sub4','sub5'];
-  var filtered=new URLSearchParams();
+var BASE_URL = "https://monetisetrk4.co.uk/?a=26648&c=55319&s1=";
 
-  allowed.forEach(function(k){
-    var v=params.get(k);
-    if(v!==null) filtered.set(k,v);
-  });
-
-  var userAgent=navigator.userAgent||navigator.vendor||window.opera;
-  var isAndroid=/android/i.test(userAgent);
-
-  var base='https://grippedtrk.co.uk/?E=bv5wiOy1RU%2bIS2mk%2fQ4zdfPYSFOvKkW%2b&s1=';
-
-  if(!filtered.get('sub1')){
-    filtered.set('sub1','crton');
-  }
-
-  var qs=filtered.toString();
-  window.location.href=base + (qs ? '?' + qs : '');
+function getSubID() {
+  var m = window.location.search.match(/[?&](?:s1|campid|cid|c|sub1)=([^&]*)/);
+  if (!m) return 'crton';
+  try { return decodeURIComponent(m[1].replace(/\+/g,' ')) || 'crton'; } catch(e) { return m[1] || 'crton'; }
 }
+
+function getOfferURL() {
+  return BASE_URL + encodeURIComponent(getSubID());
+}
+
+function openInExternalBrowser(url){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if(isAndroid){
+    try{
+      var parsed = new URL(url);
+      window.location.href = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    }catch(e){ window.location.href = url; }
+  } else if(isIOS){
+    window.location.href = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
+  } else {
+    var w = window.open(url, '_blank', 'noopener,noreferrer');
+    if(!w || w.closed || typeof w.closed === 'undefined') window.location.href = url;
+  }
+}
+
+function handleActivate(){
+  openInExternalBrowser(getOfferURL());
+}
+</script>
+
+<!-- TikTok In-App Browser Breakout -->
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if(!isTikTok) return;
+  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
+  var url = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
+  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
+})();
 </script>
 
 

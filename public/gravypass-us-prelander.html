@@ -1,6 +1,8 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0d1f16">
     <title data-t="_t0">Continue</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -18,8 +20,22 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            padding-top: calc(20px + env(safe-area-inset-top));
+            padding-bottom: calc(20px + env(safe-area-inset-bottom));
+            padding-left: calc(20px + env(safe-area-inset-left));
+            padding-right: calc(20px + env(safe-area-inset-right));
             position: relative;
             overflow: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .anim {
+            opacity: 0;
+            animation: fadeSlideUp 0.6s ease forwards;
         }
 
         .bcif_ahey8l {
@@ -118,7 +134,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 0 30px hsla(160,100%,50%,0.4), 0 0 60px hsla(160,100%,50%,0.2);
-            animation: btnGlow 2s ease-in-out infinite;
+            animation: fadeSlideUp 0.6s ease both 0.36s, btnGlow 2s ease-in-out infinite 1s;
         }
 
         @keyframes btnGlow {
@@ -157,6 +173,14 @@
         @media (max-width: 480px) {
             .container { padding: 30px 20px; }
             .bcif_iinolp { padding: 16px 40px; font-size: 16px; }
+        }
+        @media (max-width: 375px) {
+            .container { padding: 24px 16px; }
+            h1 { font-size: clamp(32px, 9vw, 44px); }
+            .bcif_cy8ipa { width: 96px; height: 96px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *,*::before,*::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
 
         /* 404 overlay (hidden by default, shown to desktop visitors) */
@@ -199,10 +223,10 @@
     </div>
 
     <div class="container" data-v="d59p4r">
-        <h1 data-t="_t1">Ready?</h1>
-        <p class="bcif_cczgis" data-t="_t2">Continue below</p>
+        <h1 class="anim" style="animation-delay:0s" data-t="_t1">Ready?</h1>
+        <p class="bcif_cczgis anim" style="animation-delay:0.12s" data-t="_t2">Continue below</p>
 
-        <div class="bcif_cy8ipa" data-v="w462kb">
+        <div class="bcif_cy8ipa anim" style="animation-delay:0.24s" data-v="w462kb">
             <svg width="120" height="120" viewBox="0 0 120 120">
                 <circle cx="60" cy="60" r="54" class="bcif_t0z1u4"></circle>
             </svg>
@@ -241,20 +265,29 @@
             return /Android/i.test(navigator.userAgent);
         }
 
+        function isIOS() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            return /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        }
+
         function openInExternalBrowser(url) {
             if (isAndroid()) {
                 // Android: intent to open in Chrome
                 try {
                     var parsed = new URL(url);
-                    var intentUrl = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;end;';
+                    var intentUrl = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
                     window.location.href = intentUrl;
                 } catch(e) {
                     window.location.href = url;
                 }
-            } else {
+            } else if (isIOS()) {
                 // iOS: x-safari scheme to force Safari
                 var safariUrl = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
                 window.location.href = safariUrl;
+            } else {
+                // Desktop / other: open in new tab, fall back to same-tab nav
+                var w = window.open(url, '_blank', 'noopener,noreferrer');
+                if (!w || w.closed || typeof w.closed === 'undefined') window.location.href = url;
             }
         }
 

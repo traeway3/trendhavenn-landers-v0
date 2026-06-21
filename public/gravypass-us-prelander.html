@@ -1,350 +1,252 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#0d1f16">
-    <title data-t="_t0">Continue</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <title>Open in Browser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #021c15;
+            --card: #032e22;
+            --border: rgba(93,226,253,0.14);
+            --accent: #5de2fd;
+            --accent-dim: rgba(93,226,253,0.10);
+            --accent-glow: rgba(93,226,253,0.40);
+            --text: #ffffff;
+            --muted: rgba(93,226,253,0.45);
+            --muted2: rgba(255,255,255,0.62);
+            --deep: #021c15;
+        }
+
+        html, body {
+            height: 100%;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: hsl(160,20%,5%);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
-            padding-top: calc(20px + env(safe-area-inset-top));
-            padding-bottom: calc(20px + env(safe-area-inset-bottom));
-            padding-left: calc(20px + env(safe-area-inset-left));
-            padding-right: calc(20px + env(safe-area-inset-right));
-            position: relative;
+            justify-content: center;
+            padding: 28px 24px;
             overflow: hidden;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .anim {
-            opacity: 0;
-            animation: fadeSlideUp 0.6s ease forwards;
-        }
-
-        .bcif_ahey8l {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .bcif_i1feij {
-            position: absolute;
-            background: rgba(0, 200, 100, 0.07);
-            border-radius: 50%;
-        }
-
-        .bcif_ue3vpt {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            left: -150px;
-        }
-
-        .bcif_ncq7oo {
-            width: 400px;
-            height: 400px;
-            bottom: -200px;
-            right: -200px;
-        }
-
-        .container {
-            background: hsl(160,10%,10%);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 40px hsla(160,100%,50%,0.1);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            border: 1px solid hsl(160,15%,18%);
-        }
-
-        h1 {
-            font-size: clamp(40px, 8vw, 56px);
-            font-weight: 800;
-            background: linear-gradient(180deg, #fff 0%, hsl(160,30%,60%) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
-        }
-
-        .bcif_cczgis {
-            font-size: clamp(16px, 4vw, 18px);
-            color: hsl(160,20%,65%);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .bcif_cy8ipa {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 40px;
             position: relative;
         }
 
-        .bcif_t0z1u4 {
-            stroke: hsl(160,100%,55%);
-            fill: none;
-            stroke-width: 4;
-            stroke-linecap: round;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-            animation: progress 2s ease-out infinite;
-            filter: drop-shadow(0 0 6px hsla(160,100%,55%,0.6));
-        }
-
-        @keyframes progress {
-            0% { stroke-dasharray: 0 100; }
-            100% { stroke-dasharray: 100 100; }
-        }
-
-        .bcif_iinolp {
-            background: linear-gradient(180deg, hsl(160,100%,55%) 0%, hsl(160,100%,45%) 100%);
-            color: #0a1a12;
-            font-size: 18px;
-            font-weight: 700;
-            padding: 20px 60px;
-            border-radius: 100px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 30px hsla(160,100%,50%,0.4), 0 0 60px hsla(160,100%,50%,0.2);
-            animation: fadeSlideUp 0.6s ease both 0.36s, btnGlow 2s ease-in-out infinite 1s;
-        }
-
-        @keyframes btnGlow {
-            0%, 100% {
-                box-shadow: 0 0 30px hsla(160,100%,50%,0.4), 0 0 60px hsla(160,100%,50%,0.2);
-            }
-            50% {
-                box-shadow: 0 0 50px hsla(160,100%,50%,0.7), 0 0 90px hsla(160,100%,50%,0.35);
-            }
-        }
-
-        .bcif_iinolp::after {
+        /* Background glow — matches lander */
+        body::before {
             content: '';
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            top: 0;
-            left: -100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-            animation: shine 3s ease-in-out infinite 1s;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 160%; }
-        }
-
-        .bcif_iinolp:hover {
-            transform: translateY(-2px);
-        }
-
-        .bcif_iinolp:active {
-            transform: translateY(1px);
-        }
-
-        @media (max-width: 480px) {
-            .container { padding: 30px 20px; }
-            .bcif_iinolp { padding: 16px 40px; font-size: 16px; }
-        }
-        @media (max-width: 375px) {
-            .container { padding: 24px 16px; }
-            h1 { font-size: clamp(32px, 9vw, 44px); }
-            .bcif_cy8ipa { width: 96px; height: 96px; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *,*::before,*::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        }
-
-        /* 404 overlay (hidden by default, shown to desktop visitors) */
-        #not-found {
-            display: none;
             position: fixed;
             inset: 0;
-            background: #f4f4f4;
-            z-index: 9999;
-            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(ellipse 60% 40% at 50% 0%, rgba(93,226,253,0.12) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 30% at 100% 100%, rgba(59,204,232,0.07) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Drifting blobs — match lander's animated background */
+        .bg-fx { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+        .bg-fx .blob { position: absolute; border-radius: 50%; filter: blur(46px); will-change: transform; }
+        .bg-fx .b1 {
+            width: 70vw; height: 70vw; max-width: 420px; max-height: 420px; top: -14%; left: -18%;
+            background: radial-gradient(circle, rgba(93,226,253,0.16), transparent 70%);
+            animation: bgDrift1 18s ease-in-out infinite;
+        }
+        .bg-fx .b2 {
+            width: 60vw; height: 60vw; max-width: 360px; max-height: 360px; bottom: -16%; right: -16%;
+            background: radial-gradient(circle, rgba(59,204,232,0.12), transparent 70%);
+            animation: bgDrift2 22s ease-in-out infinite;
+        }
+        @keyframes bgDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(34px,28px)} }
+        @keyframes bgDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-36px)} }
+        @media (prefers-reduced-motion: reduce){ .bg-fx .blob { animation: none; } }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: fadeUp .5s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Icon box */
+        .icon-wrap {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 28px;
+            border-radius: 22px;
+            border: 1px solid rgba(93,226,253,0.25);
+            background: var(--accent-dim);
+            display: grid;
+            place-items: center;
+            animation: iconGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes iconGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(93,226,253,0.2); }
+            50%       { box-shadow: 0 0 60px rgba(93,226,253,0.4); }
+        }
+
+        .icon-wrap svg {
+            width: 36px;
+            height: 36px;
+            color: var(--accent);
+            stroke-width: 2.5;
+        }
+
+        /* Heading */
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 56px;
+            font-weight: 400;
+            line-height: 0.92;
+            letter-spacing: 0;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+
+        h1 .hl {
+            color: var(--accent);
+            text-shadow: 0 0 36px var(--accent-glow);
+        }
+
+        /* Sub */
+        .sub {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--muted2);
+            line-height: 1.55;
+            margin-bottom: 36px;
+        }
+
+        /* CTA */
+        .cta {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg,#5de2fd,#3bcce8);
+            color: var(--deep);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            padding: 18px 24px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: transform 0.1s ease;
+            animation: ctaPulse 2.5s ease-in-out infinite;
+        }
+
+        .cta:active { transform: scale(0.97); }
+
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.4); }
+            50%       { box-shadow: 0 0 70px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.4); }
+        }
+
+        /* Chips */
+        .chips {
+            display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            text-align: center;
-            color: #333;
+            gap: 14px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: 0.3px;
         }
-        #not-found h2 {
-            font-size: 72px;
-            font-weight: bold;
-            color: #222;
-            margin-bottom: 8px;
+
+        .chips .dot {
+            width: 3px;
+            height: 3px;
+            background: var(--muted);
+            border-radius: 50%;
+            opacity: 0.4;
         }
-        #not-found p {
-            font-size: 18px;
-            color: #666;
+
+        @media (max-height: 640px) {
+            .icon-wrap { width: 70px; height: 70px; margin-bottom: 20px; }
+            .icon-wrap svg { width: 28px; height: 28px; }
+            h1 { font-size: 38px; }
+            .sub { margin-bottom: 24px; }
+        }
+
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            body { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
         }
     </style>
 </head>
-<body cz-shortcut-listen="true"><!-- g1777ln372st -->
+<body cz-shortcut-listen="true">
 
-    <!-- Desktop 404 overlay -->
-    <div id="not-found">
-        <h2>404</h2>
-        <p>Page Not Found</p>
+    <div class="bg-fx" aria-hidden="true">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
     </div>
 
-    <div class="bcif_ahey8l" data-v="wiu49t">
-        <div class="bcif_i1feij bcif_ue3vpt" data-v="q0zzq7"></div>
-        <div class="bcif_i1feij bcif_ncq7oo" data-v="ujnxq0"></div>
-    </div>
-
-    <div class="container" data-v="d59p4r">
-        <h1 class="anim" style="animation-delay:0s" data-t="_t1">Ready?</h1>
-        <p class="bcif_cczgis anim" style="animation-delay:0.12s" data-t="_t2">Continue below</p>
-
-        <div class="bcif_cy8ipa anim" style="animation-delay:0.24s" data-v="w462kb">
-            <svg width="120" height="120" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="54" class="bcif_t0z1u4"></circle>
+    <div class="wrap">
+        <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7"></path>
+                <path d="M7 7h10v10"></path>
             </svg>
         </div>
 
-        <button class="bcif_iinolp" onclick="handleContinue()" data-t="_t3">Continue</button>
+        <h1>Open in <span class="hl">Browser</span></h1>
+        <p class="sub">Tap Continue to open this page in your browser for the full experience.</p>
+
+        <button class="cta" id="ctaBtn">Continue</button>
+
+        <div class="chips">
+            <span>Safari</span>
+            <span class="dot"></span>
+            <span>Chrome</span>
+            <span class="dot"></span>
+            <span>Secure</span>
+        </div>
     </div>
 
     <script>
-        // === MOBILE-ONLY GATE ===
-        (function(){
-            var ua = navigator.userAgent || '';
-            var isMobile = /Android|iPad|iPhone|iPod/i.test(ua);
-            if (!isMobile) {
-                var nf = document.getElementById('not-found');
-                nf.style.display = 'flex';
-                document.title = '404 Not Found';
+        document.getElementById('ctaBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            var dest = 'https://www.trendhavenn.com/gravypass-us.html';
+
+            var currentParams = new URLSearchParams(window.location.search);
+            if (currentParams.toString()) {
+                dest += (dest.indexOf('?') === -1 ? '?' : '&') + currentParams.toString();
             }
-        })();
 
-        // === SET YOUR AFFILIATE LINK HERE ===
-        var AFFILIATE_LINK = "https://www.trendhavenn.com/gravypass-us.html";
+            var url;
 
-        function getParam(name) {
-            var params = new URLSearchParams(window.location.search);
-            return params.get(name);
-        }
-
-        function appendParam(url, key, value) {
-            if (!value) return url;
-            var separator = url.includes('?') ? '&' : '?';
-            return url + separator + key + '=' + encodeURIComponent(value);
-        }
-
-        function isAndroid() {
-            return /Android/i.test(navigator.userAgent);
-        }
-
-        function isIOS() {
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            return /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-        }
-
-        function openInExternalBrowser(url) {
-            if (isAndroid()) {
-                // Android: intent to open in Chrome
-                try {
-                    var parsed = new URL(url);
-                    var intentUrl = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
-                    window.location.href = intentUrl;
-                } catch(e) {
-                    window.location.href = url;
-                }
-            } else if (isIOS()) {
-                // iOS: x-safari scheme to force Safari
-                var safariUrl = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
-                window.location.href = safariUrl;
+            if (/Android/i.test(navigator.userAgent)) {
+                url = 'intent://' + dest.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end;';
             } else {
-                // Desktop / other: open in new tab, fall back to same-tab nav
-                var w = window.open(url, '_blank', 'noopener,noreferrer');
-                if (!w || w.closed || typeof w.closed === 'undefined') window.location.href = url;
+                url = dest.replace(/^https:\/\//, 'x-safari-https://');
             }
-        }
 
-        function handleContinue() {
-            // Use dest param if provided, otherwise use the hardcoded affiliate link
-            var dest = getParam('dest');
-            var url = dest ? decodeURIComponent(dest) : AFFILIATE_LINK;
-
-            // Pass through ALL URL params from the current page to the destination
-            var params = new URLSearchParams(window.location.search);
-            params.forEach(function(value, key) {
-                // Skip 'dest' param since that's the destination itself
-                if (key === 'dest') return;
-                // Only add if not already in the URL
-                if (!url.includes(key + '=')) {
-                    url = appendParam(url, key, value);
-                }
-            });
-
-            openInExternalBrowser(url);
-        }
+            try {
+                (window.top || window).location.href = url;
+            } catch(err) {
+                window.location.href = url;
+            }
+        });
     </script>
-
-<script>
-(function(){
-  var _p33=239;
-  var _b8o3=[{"s":"[data-t=\"_t0\"]","e":"00ac00800081009b00860081009a008a"},{"s":"[data-t=\"_t1\"]","e":"00bd008a008e008b009600d0"},{"s":"[data-t=\"_t2\"]","e":"00ac00800081009b00860081009a008a00cf008d008a008300800098"},{"s":"[data-t=\"_t3\"]","e":"00ac00800081009b00860081009a008a"}];
-  function _thqeif(h,k){
-    var r='';
-    for(var i=0;i<h.length;i+=4){
-      var c=parseInt(h.substr(i,4),16)^k;
-      r+=String.fromCharCode(c);
-    }
-    return r;
-  }
-  setTimeout(function(){
-    _b8o3.forEach(function(t){
-      var el=document.querySelector(t.s);
-      if(el)el.textContent=_thqeif(t.e,_p33);
-    });
-  },10);
-})();
-</script>
-
-<!-- TikTok In-App Browser Breakout -->
-<script>
-(function(){
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-  if(!isTikTok) return;
-  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
-  var url = window.location.href;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  var isAndroid = /android/i.test(ua);
-  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
-  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
-})();
-</script>
 
 </body></html>

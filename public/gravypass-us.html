@@ -693,7 +693,12 @@
     showScreen('result');
   }
 
-  document.getElementById('resultCta').addEventListener('click',function(){ window.location.href = OFFER_LINK; });
+  // Carry the SPRK click ID (passed in as ?campid=) into the offer link's s1 so conversions match
+  function buildOfferUrl(){
+    var cid = new URLSearchParams(window.location.search).get('campid') || '';
+    return OFFER_LINK + encodeURIComponent(cid);
+  }
+  document.getElementById('resultCta').addEventListener('click',function(){ window.location.href = buildOfferUrl(); });
 </script>
 
 </body></html>

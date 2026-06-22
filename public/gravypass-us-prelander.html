@@ -1,704 +1,252 @@
 <html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>GravyPass — Earnings Quiz</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #5de2fd;
-      --accent-glow: rgba(93,226,253,0.28);
-      --accent-dim: rgba(93,226,253,0.10);
-      --bg: #021c15;
-      --surface: #032e22;
-      --border: rgba(93,226,253,0.14);
-      --muted: rgba(93,226,253,0.45);
-      --text: #ffffff;
-      --deep: #021c15;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-    html, body {
-      background: var(--bg); color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      height: 100%; width: 100%; overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <title>Open in Browser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    @keyframes shimmer { 100%{ transform:translateX(100%); } }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    @keyframes popIn { 0%{transform:scale(0.9);opacity:0} 60%{transform:scale(1.03)} 100%{transform:scale(1);opacity:1} }
-    @keyframes spin { to{transform:rotate(360deg)} }
-    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+        :root {
+            --bg: #021c15;
+            --card: #032e22;
+            --border: rgba(93,226,253,0.14);
+            --accent: #5de2fd;
+            --accent-dim: rgba(93,226,253,0.10);
+            --accent-glow: rgba(93,226,253,0.40);
+            --text: #ffffff;
+            --muted: rgba(93,226,253,0.45);
+            --muted2: rgba(255,255,255,0.62);
+            --deep: #021c15;
+        }
 
-    /* ── Persistent animated background (never resets between screens) ── */
-    @keyframes bgDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(34px,28px)} }
-    @keyframes bgDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-36px)} }
-    @keyframes bgFloat { 0%{transform:translateY(0);opacity:0} 12%{opacity:.55} 88%{opacity:.55} 100%{transform:translateY(-120px);opacity:0} }
+        html, body {
+            height: 100%;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    .bg-fx {
-      position: fixed; inset: 0; z-index: 0;
-      background: var(--bg); overflow: hidden; pointer-events: none;
-    }
-    .bg-fx .blob {
-      position: absolute; border-radius: 50%;
-      filter: blur(46px); will-change: transform;
-    }
-    .bg-fx .b1 {
-      width: 70vw; height: 70vw; max-width: 420px; max-height: 420px;
-      top: -12%; left: -18%;
-      background: radial-gradient(circle, rgba(93,226,253,0.16), transparent 70%);
-      animation: bgDrift1 18s ease-in-out infinite;
-    }
-    .bg-fx .b2 {
-      width: 60vw; height: 60vw; max-width: 360px; max-height: 360px;
-      bottom: -14%; right: -16%;
-      background: radial-gradient(circle, rgba(59,204,232,0.12), transparent 70%);
-      animation: bgDrift2 22s ease-in-out infinite;
-    }
-    .bg-fx .pt {
-      position: absolute; bottom: -10px;
-      width: 4px; height: 4px; border-radius: 50%;
-      background: var(--accent); opacity: 0;
-      box-shadow: 0 0 7px var(--accent-glow);
-      will-change: transform, opacity;
-      animation: bgFloat linear infinite;
-    }
-    .bg-fx .pt:nth-child(3){ left:12%; animation-duration:13s; animation-delay:0s; }
-    .bg-fx .pt:nth-child(4){ left:30%; animation-duration:17s; animation-delay:3s; }
-    .bg-fx .pt:nth-child(5){ left:50%; animation-duration:15s; animation-delay:6s; }
-    .bg-fx .pt:nth-child(6){ left:68%; animation-duration:19s; animation-delay:1.5s; }
-    .bg-fx .pt:nth-child(7){ left:85%; animation-duration:14s; animation-delay:4.5s; }
-    @media (prefers-reduced-motion: reduce){
-      .bg-fx .blob, .bg-fx .pt { animation: none; }
-      .bg-fx .pt { display: none; }
-    }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 24px;
+            overflow: hidden;
+            position: relative;
+        }
 
-    /* ── Both pages fill the viewport ── */
-    .page {
-      position: fixed; inset: 0; z-index: 1;
-      max-width: 440px; margin: 0 auto;
-      background: transparent;
-      display: flex; flex-direction: column;
-      overflow: hidden;
-      transition: opacity 0.25s ease;
-    }
-    .page.hidden { opacity: 0; pointer-events: none; }
-    .page.gone { display: none; }
+        /* Background glow — matches lander */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 40% at 50% 0%, rgba(93,226,253,0.12) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 30% at 100% 100%, rgba(59,204,232,0.07) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    /* ════════════════════════════════
-       SPLASH
-    ════════════════════════════════ */
-    .ticker-wrap {
-      overflow: hidden;
-      background: rgba(93,226,253,0.05);
-      border-bottom: 1px solid var(--border);
-      padding: 9px 0; flex-shrink: 0;
-    }
-    .ticker-track {
-      display: flex; width: max-content;
-      animation: ticker 24s linear infinite;
-    }
-    .ticker-item {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 0 20px; font-size: 12px; font-weight: 600; color: #fff;
-      white-space: nowrap; border-right: 1px solid var(--border);
-    }
-    .ticker-dollar { color: var(--accent); }
-    .ticker-amt { color: var(--accent); font-weight: 800; }
+        /* Drifting blobs — match lander's animated background */
+        .bg-fx { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+        .bg-fx .blob { position: absolute; border-radius: 50%; filter: blur(46px); will-change: transform; }
+        .bg-fx .b1 {
+            width: 70vw; height: 70vw; max-width: 420px; max-height: 420px; top: -14%; left: -18%;
+            background: radial-gradient(circle, rgba(93,226,253,0.16), transparent 70%);
+            animation: bgDrift1 18s ease-in-out infinite;
+        }
+        .bg-fx .b2 {
+            width: 60vw; height: 60vw; max-width: 360px; max-height: 360px; bottom: -16%; right: -16%;
+            background: radial-gradient(circle, rgba(59,204,232,0.12), transparent 70%);
+            animation: bgDrift2 22s ease-in-out infinite;
+        }
+        @keyframes bgDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(34px,28px)} }
+        @keyframes bgDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-36px)} }
+        @media (prefers-reduced-motion: reduce){ .bg-fx .blob { animation: none; } }
 
-    .splash-inner {
-      flex: 1; display: flex; flex-direction: column;
-      padding: 22px 22px 0;
-    }
-    .splash-hero { display: flex; flex-direction: column; gap: 10px; }
-    .live-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: var(--accent-dim); border: 1px solid rgba(93,226,253,0.25);
-      border-radius: 999px; padding: 5px 13px;
-      font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent);
-      width: fit-content;
-    }
-    .live-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); animation: pulse 1.4s ease-in-out infinite;
-    }
-    .splash-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.2rem,14vw,4.6rem);
-      line-height: 0.88; letter-spacing: -0.01em;
-    }
-    .splash-headline .hi { color: var(--accent); text-shadow: 0 0 36px var(--accent-glow); }
-    .splash-sub { font-size: 13px; color: var(--muted); line-height: 1.5; }
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: fadeUp .5s ease both;
+        }
 
-    /* Feed */
-    .live-feed {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 14px; padding: 12px 14px;
-      display: flex; flex-direction: column; gap: 9px;
-      margin-top: 18px;
-    }
-    .feed-hdr {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .feed-row {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 12px;
-    }
-    .feed-name { color: #ccc; font-weight: 600; }
-    .feed-action { color: var(--muted); font-size: 11px; }
-    .feed-amt { color: var(--accent); font-weight: 800; font-size: 13px; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
-    /* Stats + trust */
-    .stats-row {
-      display: flex; gap: 8px; margin-top: 18px;
-    }
-    .stat-box {
-      flex: 1; background: var(--surface);
-      border: 1px solid var(--border); border-radius: 12px;
-      padding: 11px 8px; text-align: center;
-    }
-    .stat-val {
-      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; line-height: 1;
-      color: var(--accent); text-shadow: 0 0 14px var(--accent-glow); margin-bottom: 3px;
-    }
-    .stat-lbl { font-size: 9px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+        /* Icon box */
+        .icon-wrap {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 28px;
+            border-radius: 22px;
+            border: 1px solid rgba(93,226,253,0.25);
+            background: var(--accent-dim);
+            display: grid;
+            place-items: center;
+            animation: iconGlow 3s ease-in-out infinite;
+        }
 
-    .trust-bar {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 12px; margin-top: 10px;
-      background: var(--accent-dim); border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    .trust-label { font-size: 13px; font-weight: 800; color: #fff; }
-    .trust-stars { display: flex; gap: 3px; }
-    .trust-star {
-      width: 19px; height: 19px; border-radius: 3px; background: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: var(--deep);
-    }
-    .trust-name { font-size: 13px; font-weight: 700; color: var(--accent); }
+        @keyframes iconGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(93,226,253,0.2); }
+            50%       { box-shadow: 0 0 60px rgba(93,226,253,0.4); }
+        }
 
-    /* Splash CTA */
-    .splash-cta { padding: 16px 22px calc(24px + env(safe-area-inset-bottom)); flex-shrink: 0; }
-    .splash-btn {
-      display: block; width: 100%; padding: 17px;
-      background: linear-gradient(135deg,#5de2fd,#3bcce8);
-      color: var(--deep); font-family: 'DM Sans', sans-serif;
-      font-size: 16px; font-weight: 800; text-align: center;
-      border: none; border-radius: 14px; cursor: pointer;
-      box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.35);
-      position: relative; overflow: hidden; transition: transform 0.12s;
-    }
-    .splash-btn::after {
-      content:''; position:absolute; inset:0;
-      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
-      transform: translateX(-100%); animation: shimmer 2.2s infinite;
-    }
-    .splash-btn:active { transform: scale(0.975); }
-    .splash-sub-txt {
-      text-align: center; font-size: 10px; color: var(--muted);
-      margin-top: 8px; letter-spacing: 0.04em;
-    }
+        .icon-wrap svg {
+            width: 36px;
+            height: 36px;
+            color: var(--accent);
+            stroke-width: 2.5;
+        }
 
-    /* ════════════════════════════════
-       QUIZ
-    ════════════════════════════════ */
-    .quiz-topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 22px 0; flex-shrink: 0;
-    }
-    .quiz-topbar-left { display: flex; flex-direction: column; gap: 1px; }
-    .quiz-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-    .quiz-title-bar { font-size: 14px; font-weight: 800; color: #fff; }
-    .topbar-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: var(--accent-dim); border: 1px solid rgba(93,226,253,0.25);
-      border-radius: 999px; padding: 5px 12px;
-      font-size: 11px; font-weight: 800; color: var(--accent);
-      letter-spacing: 0.04em;
-    }
-    .quiz-logo { height: 24px; width: auto; filter: brightness(0) invert(1); }
+        /* Heading */
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 56px;
+            font-weight: 400;
+            line-height: 0.92;
+            letter-spacing: 0;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
 
-    .progress-wrap { padding: 14px 22px 0; flex-shrink: 0; }
-    .progress-track {
-      height: 3px; background: var(--surface); border-radius: 99px; overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%; background: var(--accent); border-radius: 99px;
-      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-      box-shadow: 0 0 8px var(--accent-glow);
-    }
+        h1 .hl {
+            color: var(--accent);
+            text-shadow: 0 0 36px var(--accent-glow);
+        }
 
-    /* Screens stack inside .quiz-body */
-    .quiz-body {
-      flex: 1; position: relative; overflow: hidden;
-      margin-top: 22px;
-    }
-    .screen {
-      position: absolute; inset: 0;
-      padding: 0 22px 0;
-      display: flex; flex-direction: column;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.28s ease, transform 0.28s ease;
-      transform: translateX(30px);
-    }
-    .screen.active {
-      opacity: 1; pointer-events: all;
-      transform: translateX(0);
-    }
-    .screen.exit {
-      opacity: 0; pointer-events: none; transform: translateX(-30px);
-      visibility: hidden;
-    }
-    #screen-loading, #screen-result {
-      overflow-y: auto;
-    }
-    #screen-loading::-webkit-scrollbar,
-    #screen-result::-webkit-scrollbar { display: none; }
+        /* Sub */
+        .sub {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--muted2);
+            line-height: 1.55;
+            margin-bottom: 36px;
+        }
 
-    /* Q content */
-    .q-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-    .q-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.8rem,12vw,3.6rem); line-height: 0.9;
-      letter-spacing: -0.01em; margin-bottom: 8px;
-    }
-    .q-sub { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 18px; }
+        /* CTA */
+        .cta {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg,#5de2fd,#3bcce8);
+            color: var(--deep);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            padding: 18px 24px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: transform 0.1s ease;
+            animation: ctaPulse 2.5s ease-in-out infinite;
+        }
 
-    .options { display: flex; flex-direction: column; gap: 12px; }
-    .opt {
-      display: flex; align-items: center; gap: 13px;
-      background: var(--surface); border: 1.5px solid var(--border);
-      border-radius: 14px; padding: 20px 16px;
-      cursor: pointer;
-      transition: border-color 0.18s, background 0.18s, transform 0.12s;
-    }
-    .opt:active { transform: scale(0.985); }
-    .opt.selected { border-color: var(--accent); background: rgba(93,226,253,0.08); }
-    .opt-icon { font-size: 22px; flex-shrink: 0; width: 30px; text-align: center; }
-    .opt-text { flex: 1; }
-    .opt-label { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2; }
-    .opt-hint { font-size: 11px; color: var(--muted); margin-top: 2px; }
-    .opt-check {
-      width: 20px; height: 20px; border-radius: 50%;
-      border: 1.5px solid rgba(93,226,253,0.25);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 11px; color: transparent;
-      transition: all 0.18s;
-    }
-    .opt.selected .opt-check {
-      background: var(--accent); border-color: var(--accent);
-      color: var(--deep); box-shadow: 0 0 10px var(--accent-glow);
-    }
+        .cta:active { transform: scale(0.97); }
 
-    /* Review card shown on Q1 */
-    .q-review {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 13px 15px; margin-top: 12px;
-    }
-    .qr-stars { color: var(--accent); font-size: 12px; letter-spacing: 2px; margin-bottom: 5px; }
-    .qr-text { font-size: 12px; color: #ccc; line-height: 1.5; margin-bottom: 4px; font-style: italic; }
-    .qr-name { font-size: 10px; font-weight: 700; color: var(--muted); }
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.4); }
+            50%       { box-shadow: 0 0 70px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.4); }
+        }
 
-    /* Quiz footer - fixed at bottom of quiz page */
-    .quiz-footer {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 22px calc(20px + env(safe-area-inset-bottom));
-      border-top: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-    .qf-stat { text-align: center; }
-    .qf-val { font-size: 13px; font-weight: 800; color: var(--accent); }
-    .qf-lbl { font-size: 9px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
-    .qf-div { width: 1px; height: 26px; background: var(--border); }
+        /* Chips */
+        .chips {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: 0.3px;
+        }
 
-    /* Loading */
-    #screen-loading { align-items: center; justify-content: center; text-align: center; }
-    .loading-orb {
-      width: 60px; height: 60px; border-radius: 50%;
-      border: 2px solid var(--border); border-top-color: var(--accent);
-      animation: spin 0.9s linear infinite;
-      margin: 0 auto 16px; box-shadow: 0 0 24px var(--accent-glow);
-    }
-    .loading-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; margin-bottom: 18px; }
-    .ls-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 240px; }
-    .ls { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
-    .ls-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.3s; }
-    .ls.done .ls-dot { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
-    .ls.done { color: #fff; }
+        .chips .dot {
+            width: 3px;
+            height: 3px;
+            background: var(--muted);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
 
-    /* Result */
-    #screen-result { gap: 10px; padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
-    .result-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(93,226,253,0.12); border: 1px solid rgba(93,226,253,0.3);
-      border-radius: 999px; padding: 5px 14px;
-      font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
-    }
-    .result-headline { font-size: 21px; font-weight: 800; color: #fff; line-height: 1.2; }
+        @media (max-height: 640px) {
+            .icon-wrap { width: 70px; height: 70px; margin-bottom: 20px; }
+            .icon-wrap svg { width: 28px; height: 28px; }
+            h1 { font-size: 38px; }
+            .sub { margin-bottom: 24px; }
+        }
 
-    .est-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; padding: 16px; text-align: center;
-      animation: popIn 0.45s ease both;
-    }
-    .est-lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-    .est-amount {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.6rem,12vw,3.6rem); line-height: 1;
-      color: var(--accent); text-shadow: 0 0 32px var(--accent-glow); margin-bottom: 2px;
-    }
-    .est-period { font-size: 12px; color: var(--muted); }
-
-    .boost-card {
-      background: linear-gradient(135deg,rgba(93,226,253,0.11),rgba(93,226,253,0.04));
-      border: 1.5px solid rgba(93,226,253,0.35);
-      border-radius: 16px; padding: 16px; text-align: center;
-      animation: popIn 0.45s 0.15s ease both; opacity: 0; animation-fill-mode: both;
-      position: relative; overflow: hidden;
-    }
-    .boost-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:2px;
-      background: linear-gradient(90deg,transparent,var(--accent),transparent);
-    }
-    .boost-top { font-size: 10px; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px; }
-    .boost-chips { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 9px; }
-    .chip { display: inline-flex; align-items: center; background: var(--accent); color: var(--deep); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
-    .chip.outline { background: transparent; border: 1px solid rgba(93,226,253,0.4); color: var(--accent); }
-    .boost-amount {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.6rem,12vw,3.6rem); line-height: 1;
-      color: #fff; text-shadow: 0 0 28px var(--accent-glow); margin-bottom: 12px;
-    }
-    .boost-divider { display: flex; align-items: center; gap: 8px; font-size: 9px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
-    .boost-divider::before,.boost-divider::after { content:''; flex:1; height:1px; background:rgba(93,226,253,0.18); }
-    .boost-how { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.55; }
-    .boost-how b { color: #fff; font-weight: 700; }
-    .boost-how strong { color: var(--accent); font-weight: 700; }
-
-    .result-cta { flex-shrink: 0; }
-    .cta-spots { text-align: center; font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
-    @keyframes ctaGlow {
-      0%,100%{ box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.35); }
-      50%{ box-shadow: 0 0 70px var(--accent-glow), 0 6px 26px rgba(0,0,0,0.42); }
-    }
-    .cta-btn {
-      display: block; width: 100%; padding: 17px;
-      background: linear-gradient(135deg,#5de2fd,#3bcce8);
-      color: var(--deep); font-family: 'DM Sans', sans-serif;
-      font-size: 16px; font-weight: 800; text-align: center;
-      border: none; border-radius: 14px; cursor: pointer;
-      box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.35);
-      position: relative; overflow: hidden; transition: transform 0.12s;
-      animation: ctaGlow 2.4s ease-in-out infinite;
-    }
-    .cta-btn::after {
-      content:''; position:absolute; inset:0;
-      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
-      transform: translateX(-100%); animation: shimmer 2.2s infinite;
-    }
-    .cta-btn:active { transform: scale(0.975); }
-    .cta-sub { text-align: center; font-size: 10px; color: var(--muted); margin-top: 7px; letter-spacing: 0.04em; }
-  </style>
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            body { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+        }
+    </style>
 </head>
 <body cz-shortcut-listen="true">
 
-<!-- ══ PERSISTENT ANIMATED BACKGROUND ══ -->
-<div class="bg-fx" aria-hidden="true">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <span class="pt"></span>
-  <span class="pt"></span>
-  <span class="pt"></span>
-  <span class="pt"></span>
-  <span class="pt"></span>
-</div>
-
-<!-- ══ SPLASH PAGE ══ -->
-<div class="page" id="pageSplash">
-  <div class="ticker-wrap">
-    <div class="ticker-track" id="tickerTrack"><div class="ticker-item"><span class="ticker-dollar">$</span><span>Maria just cashed out <span class="ticker-amt">$128</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Tyler just cashed out <span class="ticker-amt">$75</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Jade just cashed out <span class="ticker-amt">$210</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Lewis just cashed out <span class="ticker-amt">$95</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Priya just cashed out <span class="ticker-amt">$340</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Marcus just cashed out <span class="ticker-amt">$60</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Sophie just cashed out <span class="ticker-amt">$185</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Aiden just cashed out <span class="ticker-amt">$420</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Chloe just cashed out <span class="ticker-amt">$110</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Devon just cashed out <span class="ticker-amt">$250</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Kezia just cashed out <span class="ticker-amt">$88</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Finn just cashed out <span class="ticker-amt">$162</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Maria just cashed out <span class="ticker-amt">$128</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Tyler just cashed out <span class="ticker-amt">$75</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Jade just cashed out <span class="ticker-amt">$210</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Lewis just cashed out <span class="ticker-amt">$95</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Priya just cashed out <span class="ticker-amt">$340</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Marcus just cashed out <span class="ticker-amt">$60</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Sophie just cashed out <span class="ticker-amt">$185</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Aiden just cashed out <span class="ticker-amt">$420</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Chloe just cashed out <span class="ticker-amt">$110</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Devon just cashed out <span class="ticker-amt">$250</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Kezia just cashed out <span class="ticker-amt">$88</span></span></div><div class="ticker-item"><span class="ticker-dollar">$</span><span>Finn just cashed out <span class="ticker-amt">$162</span></span></div></div>
-  </div>
-  <div class="splash-inner">
-    <div class="splash-hero">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <div class="live-badge"><div class="live-dot"></div>Live payouts happening now</div>
-        <div class="live-badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);color:#fff;">⚡ No app needed</div>
-      </div>
-      <div class="splash-headline">Your phone<br><span class="hi">pays you.</span></div>
-      <p class="splash-sub">Test apps &amp; games. Cash out to PayPal. No app needed.</p>
+    <div class="bg-fx" aria-hidden="true">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
     </div>
 
-    <div class="live-feed">
-      <div class="feed-hdr"><div class="live-dot"></div>Recent cashouts</div>
-      <div id="feedList"><div class="feed-row"><span class="feed-name">Maria K.</span><span class="feed-action">cashed out</span><span class="feed-amt">$128</span></div><div class="feed-row"><span class="feed-name">Tyler J.</span><span class="feed-action">cashed out</span><span class="feed-amt">$75</span></div><div class="feed-row"><span class="feed-name">Priya S.</span><span class="feed-action">cashed out</span><span class="feed-amt">$340</span></div><div class="feed-row"><span class="feed-name">Lewis M.</span><span class="feed-action">cashed out</span><span class="feed-amt">$95</span></div></div>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-box"><div class="stat-val">1.3M+</div><div class="stat-lbl">Members</div></div>
-      <div class="stat-box"><div class="stat-val">$500M</div><div class="stat-lbl">Paid out</div></div>
-      <div class="stat-box"><div class="stat-val">4.7★</div><div class="stat-lbl">Rated</div></div>
-    </div>
-
-    <div class="trust-bar">
-      <div class="trust-label">Excellent</div>
-      <div class="trust-stars">
-        <div class="trust-star">★</div><div class="trust-star">★</div><div class="trust-star">★</div><div class="trust-star">★</div><div class="trust-star">★</div>
-      </div>
-      <div class="trust-name">Trustpilot</div>
-    </div>
-  </div>
-
-  <div class="splash-cta">
-    <button class="splash-btn" onclick="startQuiz()">FIND OUT WHAT YOU CAN EARN →</button>
-    <p class="splash-sub-txt">Free · 30 seconds · No credit card</p>
-  </div>
-</div>
-
-<!-- ══ QUIZ PAGE ══ -->
-<div class="page hidden gone" id="pageQuiz">
-  <div class="quiz-topbar">
-    <div class="quiz-topbar-left">
-      <div class="quiz-eyebrow">Earnings Quiz</div>
-      <div class="quiz-title-bar">Your estimate</div>
-    </div>
-    <div class="topbar-badge">⚡ 60 sec setup</div>
-  </div>
-  <div class="progress-wrap">
-    <div class="progress-track"><div class="progress-fill" id="progress" style="width:5%"></div></div>
-  </div>
-
-  <div class="quiz-body">
-
-    <!-- Q1 -->
-    <div class="screen active" id="screen-q1">
-      <div class="q-eyebrow">Question 1 of 3</div>
-      <div class="q-title">What phone<br>do you use?</div>
-      <p class="q-sub">Helps us match you to the right offers.</p>
-      <div class="options">
-        <div class="opt" data-q="1" data-val="ios" onclick="pick(this)">
-          <div class="opt-icon">🍎</div>
-          <div class="opt-text"><div class="opt-label">iPhone</div><div class="opt-hint">Apple Wallet — top-paying iOS offers</div></div>
-          <div class="opt-check">✓</div>
+    <div class="wrap">
+        <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7"></path>
+                <path d="M7 7h10v10"></path>
+            </svg>
         </div>
-        <div class="opt" data-q="1" data-val="android" onclick="pick(this)">
-          <div class="opt-icon">🤖</div>
-          <div class="opt-text"><div class="opt-label">Android</div><div class="opt-hint">Google Wallet — high-volume offer pool</div></div>
-          <div class="opt-check">✓</div>
+
+        <h1>Open in <span class="hl">Browser</span></h1>
+        <p class="sub">Tap Continue to open this page in your browser for the full experience.</p>
+
+        <button class="cta" id="ctaBtn">Continue</button>
+
+        <div class="chips">
+            <span>Safari</span>
+            <span class="dot"></span>
+            <span>Chrome</span>
+            <span class="dot"></span>
+            <span>Secure</span>
         </div>
-      </div>
-      <div class="q-review">
-        <div class="qr-stars">★★★★★</div>
-        <div class="qr-text">"Cashed out $340 in my first week. Didn't believe it until it hit my PayPal."</div>
-        <div class="qr-name">— Priya S., verified member</div>
-      </div>
     </div>
 
-    <!-- Q2 -->
-    <div class="screen" id="screen-q2">
-      <div class="q-eyebrow">Question 2 of 3</div>
-      <div class="q-title">Turn $50<br>into $500<br>this week?</div>
-      <p class="q-sub">Make small in-app purchases to unlock higher-paying offers?</p>
-      <div class="options">
-        <div class="opt" data-q="2" data-val="yes" onclick="pick(this)">
-          <div class="opt-icon">🚀</div>
-          <div class="opt-text"><div class="opt-label">Yes — I'm in</div><div class="opt-hint">Unlock boosted earnings via in-app offers</div></div>
-          <div class="opt-check">✓</div>
-        </div>
-        <div class="opt" data-q="2" data-val="maybe" onclick="pick(this)">
-          <div class="opt-icon">🤔</div>
-          <div class="opt-text"><div class="opt-label">Maybe — show me how</div><div class="opt-hint">I'd need to understand it first</div></div>
-          <div class="opt-check">✓</div>
-        </div>
-        <div class="opt" data-q="2" data-val="no" onclick="pick(this)">
-          <div class="opt-icon">🆓</div>
-          <div class="opt-text"><div class="opt-label">Free offers only</div><div class="opt-hint">No spend — lower earning tier</div></div>
-          <div class="opt-check">✓</div>
-        </div>
-      </div>
-    </div>
+    <script>
+        document.getElementById('ctaBtn').addEventListener('click', function(e) {
+            e.preventDefault();
 
-    <!-- Q3 -->
-    <div class="screen" id="screen-q3">
-      <div class="q-eyebrow">Question 3 of 3</div>
-      <div class="q-title">How much<br>time daily<br>can you put in?</div>
-      <p class="q-sub">More time = more offers = more earned back.</p>
-      <div class="options">
-        <div class="opt" data-q="3" data-val="low" onclick="pick(this)">
-          <div class="opt-icon">⚡</div>
-          <div class="opt-text"><div class="opt-label">Under 30 mins</div><div class="opt-hint">Quick hits — 2–3 offers per day</div></div>
-          <div class="opt-check">✓</div>
-        </div>
-        <div class="opt" data-q="3" data-val="mid" onclick="pick(this)">
-          <div class="opt-icon">⏱️</div>
-          <div class="opt-text"><div class="opt-label">30 mins – 2 hours</div><div class="opt-hint">Solid — 4–6 offers per day</div></div>
-          <div class="opt-check">✓</div>
-        </div>
-        <div class="opt" data-q="3" data-val="high" onclick="pick(this)">
-          <div class="opt-icon">🔥</div>
-          <div class="opt-text"><div class="opt-label">2+ hours</div><div class="opt-hint">Max stack — full offer board unlocked</div></div>
-          <div class="opt-check">✓</div>
-        </div>
-      </div>
-    </div>
+            var dest = 'https://www.trendhavenn.com/gravypass-us.html';
 
-    <!-- Loading -->
-    <div class="screen" id="screen-loading">
-      <div class="loading-orb"></div>
-      <div class="loading-title">Calculating your estimate…</div>
-      <div class="ls-list">
-        <div class="ls" id="ls1"><div class="ls-dot"></div><span>Matching available offers</span></div>
-        <div class="ls" id="ls2"><div class="ls-dot"></div><span>Calculating base earnings</span></div>
-        <div class="ls" id="ls3"><div class="ls-dot"></div><span>Applying boosted rate</span></div>
-      </div>
-    </div>
+            var currentParams = new URLSearchParams(window.location.search);
+            if (currentParams.toString()) {
+                dest += (dest.indexOf('?') === -1 ? '?' : '&') + currentParams.toString();
+            }
 
-    <!-- Result -->
-    <div class="screen" id="screen-result">
-      <div class="result-badge">✓ Estimate ready</div>
-      <div class="result-headline">Here's what you can earn</div>
-      <div class="est-card">
-        <div class="est-lbl">Your estimate</div>
-        <div class="est-amount" id="baseAmount">$135–$480</div>
-        <div class="est-period">daily</div>
-      </div>
-      <div class="boost-card">
-        <div class="boost-top">You're eligible for boosted earnings</div>
-        <div class="boost-chips">
-          <div class="chip">Daily</div>
-          <div class="chip outline">⏱ Limited time</div>
-        </div>
-        <div class="boost-amount" id="boostAmount">$297–$1,152</div>
-        <div class="boost-divider">How to participate</div>
-        <div class="boost-how" id="boostHow">Simply <b>spend $10 on an app of your choice</b> — make <strong>$100 back</strong>. Treat it like a transfer, not a cost.</div>
-      </div>
-      <div class="result-cta">
-        <div class="cta-spots">START NOW — LIMITED SPOTS</div>
-        <button class="cta-btn" id="resultCta">CLAIM MY SPOT →</button>
-        <p class="cta-sub">No credit card · Instant welcome bonus</p>
-      </div>
-    </div>
+            var url;
 
-  </div><!-- /quiz-body -->
+            if (/Android/i.test(navigator.userAgent)) {
+                url = 'intent://' + dest.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end;';
+            } else {
+                url = dest.replace(/^https:\/\//, 'x-safari-https://');
+            }
 
-  <div class="quiz-footer" id="quizFooter">
-    <div class="qf-stat"><div class="qf-val">1.3M+</div><div class="qf-lbl">Members</div></div>
-    <div class="qf-div"></div>
-    <div class="qf-stat"><div class="qf-val">$500M+</div><div class="qf-lbl">Paid out</div></div>
-    <div class="qf-div"></div>
-    <div class="qf-stat"><div class="qf-val">4.7★</div><div class="qf-lbl">Rated</div></div>
-  </div>
-
-</div><!-- /pageQuiz -->
-
-<script>
-  var OFFER_LINK = 'https://grippedtrk.co.uk/?E=C6vwlNsYejbiktBaZWPZoPPYSFOvKkW%2b&s1=';
-  var answers = {};
-  var earningsTable = {
-    yes:   { base:'$135–$480', boost:'$297–$1,152' },
-    maybe: { base:'$90–$320',  boost:'$220–$860'   },
-    no:    { base:'$40–$120',  boost:'$135–$480'   }
-  };
-
-  // Ticker
-  var cashouts = [
-    {name:'Maria',amt:'$128'},{name:'Tyler',amt:'$75'},{name:'Jade',amt:'$210'},
-    {name:'Lewis',amt:'$95'},{name:'Priya',amt:'$340'},{name:'Marcus',amt:'$60'},
-    {name:'Sophie',amt:'$185'},{name:'Aiden',amt:'$420'},{name:'Chloe',amt:'$110'},
-    {name:'Devon',amt:'$250'},{name:'Kezia',amt:'$88'},{name:'Finn',amt:'$162'},
-  ];
-  (function(){
-    var track = document.getElementById('tickerTrack');
-    cashouts.concat(cashouts).forEach(function(c){
-      var el = document.createElement('div');
-      el.className = 'ticker-item';
-      el.innerHTML = '<span class="ticker-dollar">$</span><span>' + c.name + ' just cashed out <span class="ticker-amt">' + c.amt + '</span></span>';
-      track.appendChild(el);
-    });
-  })();
-
-  // Feed
-  var feedData = [
-    {name:'Maria K.',amt:'$128',ago:'2m ago'},
-    {name:'Tyler J.',amt:'$75',ago:'5m ago'},
-    {name:'Priya S.',amt:'$340',ago:'9m ago'},
-    {name:'Lewis M.',amt:'$95',ago:'12m ago'},
-  ];
-  (function(){
-    var list = document.getElementById('feedList');
-    feedData.forEach(function(r){
-      var el = document.createElement('div');
-      el.className = 'feed-row';
-      el.innerHTML = '<span class="feed-name">'+r.name+'</span><span class="feed-action">cashed out</span><span class="feed-amt">'+r.amt+'</span>';
-      list.appendChild(el);
-    });
-  })();
-
-  function startQuiz() {
-    var splash = document.getElementById('pageSplash');
-    var quiz   = document.getElementById('pageQuiz');
-    splash.classList.add('hidden');
-    quiz.classList.remove('gone');
-    quiz.classList.remove('hidden');
-    setTimeout(function(){ splash.classList.add('gone'); }, 300);
-  }
-
-  function setProgress(pct){ document.getElementById('progress').style.width = pct+'%'; }
-
-  var currentScreen = 'q1';
-  function showScreen(id){
-    var old = document.getElementById('screen-' + currentScreen);
-    if(old){ old.classList.remove('active'); old.classList.add('exit'); setTimeout(function(){ old.classList.remove('exit'); },300); }
-    var next = document.getElementById('screen-' + id);
-    next.classList.add('active');
-    currentScreen = id;
-    // hide footer on loading/result
-    var footer = document.getElementById('quizFooter');
-    footer.style.display = (id==='loading'||id==='result') ? 'none' : 'flex';
-  }
-
-  function pick(el){
-    var q = el.dataset.q, val = el.dataset.val;
-    el.closest('.options').querySelectorAll('.opt').forEach(function(o){ o.classList.remove('selected'); });
-    el.classList.add('selected');
-    answers['q'+q] = val;
-    setTimeout(function(){ advance(parseInt(q)); }, 260);
-  }
-
-  function advance(q){
-    if(q===1){ showScreen('q2'); setProgress(36); }
-    else if(q===2){ showScreen('q3'); setProgress(68); }
-    else if(q===3){ setProgress(88); showScreen('loading'); runLoader(); }
-  }
-
-  function runLoader(){
-    var steps=['ls1','ls2','ls3'], i=0;
-    function tick(){ if(i<steps.length){ document.getElementById(steps[i]).classList.add('done'); i++; setTimeout(tick,650); } else setTimeout(showResult,350); }
-    setTimeout(tick,350);
-  }
-
-  function showResult(){
-    var spend = answers.q2||'yes';
-    var row = earningsTable[spend];
-    document.getElementById('baseAmount').textContent  = row.base;
-    document.getElementById('boostAmount').textContent = row.boost;
-    if(spend==='no'){
-      document.getElementById('boostHow').innerHTML = 'Unlock this tier by making <b>just one in-app purchase</b> — spend <b>$10</b>, earn <strong>$100+ back</strong>.';
-    }
-    setProgress(100);
-    showScreen('result');
-  }
-
-  // Carry the SPRK click ID (passed in as ?campid=) into the offer link's s1 so conversions match
-  function buildOfferUrl(){
-    var cid = new URLSearchParams(window.location.search).get('campid') || '';
-    return OFFER_LINK + encodeURIComponent(cid);
-  }
-  document.getElementById('resultCta').addEventListener('click',function(){ window.location.href = buildOfferUrl(); });
-</script>
+            try {
+                (window.top || window).location.href = url;
+            } catch(err) {
+                window.location.href = url;
+            }
+        });
+    </script>
 
 </body></html>

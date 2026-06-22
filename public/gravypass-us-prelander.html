@@ -1,7 +1,7 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-    <title>Open in Browser</title>
+    <title>GravyPass – Get Started</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -203,50 +203,57 @@
     <div class="wrap">
         <div class="icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17L17 7"></path>
-                <path d="M7 7h10v10"></path>
+                <path d="M12 5v14"></path>
+                <path d="M19 12l-7 7-7-7"></path>
             </svg>
         </div>
 
-        <h1>Open in <span class="hl">Browser</span></h1>
-        <p class="sub">Tap Continue to open this page in your browser for the full experience.</p>
+        <h1>Click here to Get <span class="hl">Started</span></h1>
 
         <button class="cta" id="ctaBtn">Continue</button>
-
-        <div class="chips">
-            <span>Safari</span>
-            <span class="dot"></span>
-            <span>Chrome</span>
-            <span class="dot"></span>
-            <span>Secure</span>
-        </div>
     </div>
 
     <script>
-        document.getElementById('ctaBtn').addEventListener('click', function(e) {
-            e.preventDefault();
+    // === CONTINUE BUTTON — opens in new tab, passes all URL params ===
+    (function(){
+      var DEST = 'https://www.trendhavenn.com/gravypass-us.html';
 
-            var dest = 'https://www.trendhavenn.com/gravypass-us.html';
+      function buildUrl(){
+        var p = new URLSearchParams(window.location.search);
+        return p.toString() ? DEST + '?' + p.toString() : DEST;
+      }
 
-            var currentParams = new URLSearchParams(window.location.search);
-            if (currentParams.toString()) {
-                dest += (dest.indexOf('?') === -1 ? '?' : '&') + currentParams.toString();
-            }
-
-            var url;
-
-            if (/Android/i.test(navigator.userAgent)) {
-                url = 'intent://' + dest.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end;';
-            } else {
-                url = dest.replace(/^https:\/\//, 'x-safari-https://');
-            }
-
-            try {
-                (window.top || window).location.href = url;
-            } catch(err) {
-                window.location.href = url;
-            }
-        });
+      document.getElementById('ctaBtn').addEventListener('click', function(){
+        // window.open from the user gesture forces out of the in-app browser into Safari/Chrome
+        var w = window.open(buildUrl(), '_blank', 'noopener,noreferrer');
+        if(!w || w.closed || typeof w.closed === 'undefined'){
+          window.location.href = buildUrl();
+        }
+      });
+    })();
     </script>
 
+    <!-- TikTok In-App Browser Breakout (pre-lander level) -->
+    <script>
+    (function(){
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+      if(!isTikTok) return;
+      try{
+        if(sessionStorage.getItem('ttBreakout')==='1') return;
+        sessionStorage.setItem('ttBreakout','1');
+      }catch(e){}
+      var currentUrl = window.location.href;
+      var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      var isAndroid = /android/i.test(ua);
+      if(isIOS){
+        window.location.href = 'x-safari-' + currentUrl;
+        setTimeout(function(){ window.location.href = currentUrl; }, 25);
+      } else if(isAndroid){
+        var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+        window.location.href = intent;
+        setTimeout(function(){ window.location.href = currentUrl; }, 25);
+      }
+    })();
+    </script>
 </body></html>

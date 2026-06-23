@@ -114,59 +114,83 @@
 
   <script>
     /* ═══════════════════════════════════════════════════════════════
-       EDIT YOUR URL BELOW
-       Replace the link inside the quotes with your destination URL.
+       ⬇️  EDIT YOUR DESTINATION LINK HERE  ⬇️
+       Put your final landing-page URL between the quotes.
+       This is the ONLY line you need to change.
        ═══════════════════════════════════════════════════════════════ */
-    
+
     const DESTINATION_URL = "https://www.trendhavenn.com/aplr20.html";
 
     /* ═══════════════════════════════════════════════════════════════
-       TIKTOK ESCAPE LOGIC (DO NOT EDIT BELOW THIS LINE)
+       ESCAPE LOGIC  —  no need to edit below this line
+       iOS  → forces Safari
+       Android → forces Chrome, then default browser, then direct
+       A successful escape cancels the in-app fallback, so users
+       don't get dumped back into TikTok's browser.
        ═══════════════════════════════════════════════════════════════ */
 
-    function isTikTok() {
-      const ua = navigator.userAgent || "";
-      return /BytedanceWebview|ByteLocale|musical_ly|TikTok|trill/i.test(ua);
+    const UA = navigator.userAgent || "";
+
+    function isInAppBrowser() {
+      // TikTok / Bytedance webviews
+      return /BytedanceWebview|ByteLocale|musical_ly|TikTok|trill|Bytedance/i.test(UA);
     }
 
     function isIOS() {
-      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      return (/iPad|iPhone|iPod/.test(UA) ||
+              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) &&
+             !window.MSStream;
     }
 
-    function handleRedirect() {
-      if (!isTikTok()) {
-        window.location.href = DESTINATION_URL;
-        return;
-      }
+    // Did we actually leave the in-app browser? If the page gets
+    // backgrounded/hidden, the escape worked — so we cancel the
+    // in-app fallback to avoid loading the destination inside TikTok.
+    let leftApp = false;
+    function markLeft() { leftApp = true; }
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) markLeft();
+    });
+    window.addEventListener("pagehide", markLeft);
+
+    function go(url) { window.location.href = url; }
+
+    function openInRealBrowser() {
+      // Already in a normal browser? Just continue to the destination.
+      if (!isInAppBrowser()) { go(DESTINATION_URL); return; }
+
+      const bare = DESTINATION_URL.replace(/^https?:\/\//i, "");
 
       if (isIOS()) {
-        // Force Safari on iOS
-        const safariURL = DESTINATION_URL.replace(/^https?:\/\//i, "x-safari-https://");
-        window.location.href = safariURL;
-        
-        // Fallback
-        setTimeout(() => { window.location.href = DESTINATION_URL; }, 1000);
+        /* ---- iOS: force Safari ---- */
+        go("x-safari-https://" + bare);
+
+        // If still here after the hand-off window, load directly.
+        setTimeout(function () { if (!leftApp) go(DESTINATION_URL); }, 2500);
+
       } else {
-        // Force Chrome/System Browser on Android
-        const intentURL = 
-          "intent://" + DESTINATION_URL.replace(/^https?:\/\//i, "") + 
-          "#Intent;scheme=https;action=android.intent.action.VIEW;" + 
-          "category=android.intent.category.BROWSABLE;package=com.android.chrome;end";
-        
-        window.location.href = intentURL;
-        
-        // Fallback
-        setTimeout(() => { window.location.href = DESTINATION_URL; }, 1000);
+        /* ---- Android: Chrome → default browser → direct ---- */
+        go("intent://" + bare +
+           "#Intent;scheme=https;action=android.intent.action.VIEW;" +
+           "category=android.intent.category.BROWSABLE;package=com.android.chrome;end");
+
+        setTimeout(function () {
+          if (leftApp) return;
+          // Chrome not installed/enabled → let Android open the default browser.
+          go("intent://" + bare +
+             "#Intent;scheme=https;action=android.intent.action.VIEW;" +
+             "category=android.intent.category.BROWSABLE;end");
+
+          setTimeout(function () { if (!leftApp) go(DESTINATION_URL); }, 1500);
+        }, 1500);
       }
     }
 
-    document.getElementById("ctaBtn").addEventListener("click", function (e) {
+    const btn = document.getElementById("ctaBtn");
+    btn.href = DESTINATION_URL; // keeps the link accessible / long-press works
+    btn.addEventListener("click", function (e) {
       e.preventDefault();
-      handleRedirect();
+      openInRealBrowser();
     });
-
-    // Set the initial href for accessibility
-    document.getElementById("ctaBtn").href = DESTINATION_URL;
   </script>
 </body>
 </html>

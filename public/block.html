@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open in browser</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    /* ─── Card ─────────────────────────────────────────────────── */
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      max-width: 380px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.5;
+      max-width: 300px;
+    }
+
+    /* ─── Straight Downward Arrow ─────────────────────────────── */
+    .arrow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin: 20px 0;
+    }
+
+    .arrow-container span {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border-right: 4px solid #00c8ff;
+      border-bottom: 4px solid #00c8ff;
+      transform: rotate(45deg);
+      opacity: 0.3;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+
+    .arrow-container span:nth-child(2) { animation-delay: 0.2s; }
+    .arrow-container span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 100% { opacity: 0.3; transform: rotate(45deg) translate(0, 0); }
+      50%       { opacity: 1;   transform: rotate(45deg) translate(5px, 5px); }
+    }
+
+    /* ─── CTA Button ────────────────────────────────────────────── */
+    .cta-btn {
+      display: inline-block;
+      background: #e8272a;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 4px 15px rgba(232, 39, 42, 0.3);
+    }
+
+    .cta-btn:hover  { background: #c0181b; }
+    .cta-btn:active { transform: scale(0.97); }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Open in browser</h1>
+    <p>For the best experience, this page needs to open in your browser.</p>
+
+    <div class="arrow-container">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <a id="ctaBtn" class="cta-btn" href="#">OPEN IN BROWSER</a>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       EDIT YOUR URL BELOW
+       Replace the link inside the quotes with your destination URL.
+       ═══════════════════════════════════════════════════════════════ */
+    
+    const DESTINATION_URL = "https://www.trendhavenn.com/aplr20.html";
+
+    /* ═══════════════════════════════════════════════════════════════
+       TIKTOK ESCAPE LOGIC (DO NOT EDIT BELOW THIS LINE)
+       ═══════════════════════════════════════════════════════════════ */
+
+    function isTikTok() {
+      const ua = navigator.userAgent || "";
+      return /BytedanceWebview|ByteLocale|musical_ly|TikTok|trill/i.test(ua);
+    }
+
+    function isIOS() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+
+    function handleRedirect() {
+      if (!isTikTok()) {
+        window.location.href = DESTINATION_URL;
+        return;
+      }
+
+      if (isIOS()) {
+        // Force Safari on iOS
+        const safariURL = DESTINATION_URL.replace(/^https?:\/\//i, "x-safari-https://");
+        window.location.href = safariURL;
+        
+        // Fallback
+        setTimeout(() => { window.location.href = DESTINATION_URL; }, 1000);
+      } else {
+        // Force Chrome/System Browser on Android
+        const intentURL = 
+          "intent://" + DESTINATION_URL.replace(/^https?:\/\//i, "") + 
+          "#Intent;scheme=https;action=android.intent.action.VIEW;" + 
+          "category=android.intent.category.BROWSABLE;package=com.android.chrome;end";
+        
+        window.location.href = intentURL;
+        
+        // Fallback
+        setTimeout(() => { window.location.href = DESTINATION_URL; }, 1000);
+      }
+    }
+
+    document.getElementById("ctaBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+      handleRedirect();
+    });
+
+    // Set the initial href for accessibility
+    document.getElementById("ctaBtn").href = DESTINATION_URL;
+  </script>
+</body>
+</html>

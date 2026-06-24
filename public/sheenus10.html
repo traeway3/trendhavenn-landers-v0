@@ -1,0 +1,333 @@
+<!DOCTYPE html><html lang="en-US"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#fce4ec">
+<title>Claim Your $750 SHEIN Voucher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fce4ec;--surface:#fff8f9;--surface2:#fde8ee;--text:#2f1f24;--muted:#7b5c63;--pink:#e91e63;--pink-bright:#f06292;--pink-deep:#c2185b;--pink-glow:rgba(233,30,99,0.10);--pink-glow-strong:rgba(233,30,99,0.22);--border:rgba(47,31,36,0.10);--border-pink:rgba(233,30,99,0.22);--shadow-sm:0 2px 8px rgba(233,30,99,0.08);--shadow-md:0 8px 24px rgba(233,30,99,0.12);--shadow-lg:0 12px 40px rgba(233,30,99,0.18);--radius:20px;--radius-sm:14px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);min-height:100vh;overflow-x:hidden;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+.ambient{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.ambient::before{content:"";position:absolute;width:720px;height:720px;top:-260px;left:-200px;background:radial-gradient(circle,rgba(233,30,99,0.08) 0%,transparent 70%);animation:drift1 22s ease-in-out infinite}
+.ambient::after{content:"";position:absolute;width:600px;height:600px;bottom:-200px;right:-150px;background:radial-gradient(circle,rgba(240,98,146,0.06) 0%,transparent 70%);animation:drift2 26s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,80px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,-60px)}}
+.slide-up{animation:slideUp 0.6s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+
+/* AGE GATE */
+#age-quiz{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;position:relative;z-index:1}
+.quiz-wrap{max-width:420px;width:100%;text-align:center}
+.quiz-badge{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border-pink);border-radius:100px;padding:8px 18px 8px 10px;margin-bottom:28px;animation:slideUp 0.4s ease-out both}
+.quiz-badge img{width:28px;height:28px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.quiz-badge span{font-size:13px;font-weight:600;color:var(--pink-bright);letter-spacing:0.3px}
+.brand-disc{text-align:center;font-size:10px;font-weight:600;color:var(--muted);opacity:0.65;margin:-18px auto 24px;letter-spacing:0.1px}
+.cta sup,.main-heading sup,.quiz-heading sup{font-size:0.5em;vertical-align:super}
+.quiz-heading{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(38px,10vw,56px);font-weight:800;line-height:1.05;margin-bottom:16px;animation:slideUp 0.5s ease-out 0.1s both}
+.quiz-heading .accent{background:linear-gradient(135deg,var(--pink) 0%,var(--pink-deep) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.quiz-towards{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(22px,6vw,30px);font-weight:800;color:var(--text);line-height:1.15;margin-bottom:16px;animation:slideUp 0.5s ease-out 0.12s both}
+.quiz-sub{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:36px;animation:slideUp 0.5s ease-out 0.15s both;max-width:340px;margin-left:auto;margin-right:auto}
+.live-counter{display:inline-flex;align-items:center;gap:12px;background:#fff0f3;border:1px solid rgba(233,30,99,0.18);border-radius:14px;padding:14px 22px;margin-bottom:32px;box-shadow:var(--shadow-sm);animation:slideUp 0.5s ease-out 0.2s both,livePulse 2.4s ease-in-out infinite}
+@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(233,30,99,0.18)}50%{box-shadow:0 0 0 6px rgba(233,30,99,0.0)}}
+.live-dot{width:10px;height:10px;background:var(--pink);border-radius:50%;box-shadow:0 0 12px var(--pink),0 0 20px rgba(233,30,99,0.5);animation:blink 1.5s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.85)}}
+.live-counter span{font-size:15px;color:var(--text);font-weight:600;letter-spacing:0.1px}
+.live-counter span .live-num{font-size:18px;font-weight:800;color:var(--pink-deep);font-variant-numeric:tabular-nums;margin-right:4px}
+.age-options{display:flex;flex-direction:column;gap:12px;animation:slideUp 0.5s ease-out 0.25s both}
+.age-btn{display:block;text-decoration:none;border:none;border-radius:var(--radius);padding:22px 24px;cursor:pointer;position:relative;overflow:hidden;transition:all 0.25s ease;text-align:center}
+.age-btn.primary{background:linear-gradient(135deg,var(--pink) 0%,var(--pink-deep) 100%);box-shadow:0 10px 28px rgba(233,30,99,0.30),inset 0 1px 0 rgba(255,255,255,0.18)}
+.age-btn.primary .age-label{color:#fff}
+.age-btn.primary .age-desc{color:rgba(255,255,255,0.85)}
+.age-btn.primary:active{transform:scale(0.97)}
+.age-btn.secondary{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.age-btn.secondary:active{transform:scale(0.97);border-color:var(--border-pink)}
+.age-label{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px}
+.age-desc{font-size:12px;color:var(--muted);font-weight:500}
+.age-btn.primary::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);animation:shimmer 3s ease-in-out infinite}
+
+/* MAIN CONTENT */
+.scroll-content{display:none;opacity:0}
+.scroll-content.active{display:block;animation:fadeIn 0.5s ease-out forwards}
+.main-wrap{max-width:440px;margin:0 auto;padding:100px 20px 120px;position:relative;z-index:1}
+.logo-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px}
+.logo-pill{width:64px;height:64px;border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-md);background:var(--surface)}
+.logo-pill img{width:100%;height:100%;object-fit:cover;display:block}
+.countdown-bar{display:flex;align-items:center;justify-content:center;gap:8px;background:#fff1f3;border:1px solid rgba(233,30,99,0.18);border-radius:10px;padding:10px 16px;margin-bottom:20px}
+.countdown-bar svg{width:14px;height:14px;color:#c2185b;flex-shrink:0}
+.countdown-bar span{font-size:13px;color:#880e4f;font-weight:600}
+.countdown-bar .timer{font-variant-numeric:tabular-nums;color:#c2185b;font-weight:700}
+.main-heading{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(32px,8vw,44px);font-weight:800;line-height:1.1;margin-bottom:8px;text-align:center}
+.main-heading .g{background:linear-gradient(135deg,var(--pink) 0%,var(--pink-deep) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.main-towards{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(20px,5.5vw,26px);font-weight:800;color:var(--text);line-height:1.15;text-align:center;margin-bottom:8px}
+.pound-counter{text-align:center;margin-bottom:8px}
+.pound-counter span{font-size:13px;font-weight:600;color:var(--pink-deep);font-variant-numeric:tabular-nums;letter-spacing:0.3px}
+.main-sub{font-size:15px;color:var(--muted);line-height:1.6;text-align:center;margin-bottom:32px;max-width:360px;margin-left:auto;margin-right:auto}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:linear-gradient(135deg,var(--pink) 0%,var(--pink-deep) 100%);color:#fff !important;font-weight:800;font-size:16px;letter-spacing:0.3px;border:0;border-radius:var(--radius);padding:20px;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 10px 28px rgba(233,30,99,0.28),inset 0 1px 0 rgba(255,255,255,0.18);transition:all 0.3s ease;animation:ctaPulse 3s ease-in-out infinite}
+.cta:active{transform:scale(0.97)}
+.cta-icon{width:22px;height:22px;flex-shrink:0}
+.cta::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);animation:shimmer 3s ease-in-out infinite}
+@keyframes ctaPulse{0%,100%{box-shadow:0 10px 28px rgba(233,30,99,0.28)}50%{box-shadow:0 14px 40px rgba(233,30,99,0.50)}}
+.payout-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;margin-bottom:36px}
+.payout-icon{width:28px;height:28px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px}
+.payout-label{font-size:12px;color:var(--muted);margin-left:4px;font-weight:500}
+
+/* NOTIFICATIONS */
+.notif-zone{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;width:calc(100% - 32px);max-width:400px;pointer-events:none;height:70px}
+.notif-toast{position:absolute;top:0;left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-lg);animation:toastIn 0.4s cubic-bezier(0.16,1,0.3,1) both;pointer-events:auto;opacity:0;transform:translateY(-20px)}
+@keyframes toastIn{from{opacity:0;transform:translateY(-20px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes toastOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-10px) scale(0.96)}}
+.notif-toast.leaving{animation:toastOut 0.3s ease-in forwards}
+.notif-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border:1px solid var(--border);background:var(--surface)}
+.notif-icon img{width:100%;height:100%;object-fit:cover;display:block}
+.notif-body{flex:1;min-width:0}
+.notif-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-desc{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-time{font-size:10px;color:var(--muted);opacity:0.6;flex-shrink:0;margin-left:2px}
+
+/* STEPS */
+.steps-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow-sm)}
+.steps-title{padding:18px 20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);border-bottom:1px solid var(--border)}
+.step-item{display:flex;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border);align-items:flex-start}
+.step-item:last-child{border-bottom:none}
+.step-num{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--pink) 0%,var(--pink-deep) 100%);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 4px 10px rgba(233,30,99,0.25)}
+.step-text b{display:block;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
+.step-text span{font-size:13px;color:var(--muted);line-height:1.4}
+
+/* URGENCY + TRUST */
+.urgency{background:#fff9fa;border:1px solid rgba(233,30,99,0.18);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;margin-bottom:20px}
+.urgency-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.urgency-text{font-size:13px;color:#880e4f;line-height:1.5;font-weight:500}
+.urgency-text strong{color:#c2185b;font-weight:700}
+.trust-bar{display:flex;align-items:center;justify-content:center;gap:20px;padding:16px 0;margin-top:4px}
+.trust-item{display:flex;align-items:center;gap:6px}
+.trust-item svg{width:14px;height:14px;color:var(--pink-deep);opacity:0.85}
+.trust-item span{font-size:11px;color:var(--muted);font-weight:500}
+.foot{text-align:center;font-size:11px;color:var(--muted);opacity:0.7;margin-top:8px}
+.affil-disc{text-align:center;font-size:9px;color:var(--muted);opacity:0.45;line-height:1.45;margin-top:10px;padding:0 8px 24px;max-width:380px;margin-left:auto;margin-right:auto}
+
+/* STICKY CTA */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(to top,var(--bg) 60%,transparent);padding:16px 20px calc(16px + env(safe-area-inset-bottom));display:none;justify-content:center;opacity:0;transform:translateY(20px);transition:opacity 0.3s ease,transform 0.3s ease}
+.sticky-cta.visible{display:flex;opacity:1;transform:translateY(0)}
+.sticky-cta .cta-sm{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:440px;background:linear-gradient(135deg,var(--pink) 0%,var(--pink-deep) 100%);color:#fff;font-weight:800;font-size:15px;border:0;border-radius:16px;padding:16px 20px;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 -2px 18px rgba(233,30,99,0.22),0 10px 24px rgba(233,30,99,0.20),inset 0 1px 0 rgba(255,255,255,0.18)}
+.sticky-cta .cta-sm:active{transform:scale(0.97)}
+.sticky-cta .cta-sm::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);animation:shimmer 3s ease-in-out infinite}
+.sticky-cta .cta-sm svg{width:18px;height:18px;flex-shrink:0}
+
+@media(max-width:480px){#age-quiz{padding:32px 16px}.quiz-heading{font-size:clamp(34px,9vw,48px)}.main-wrap{padding:90px 16px 120px}.logo-pill{width:48px;height:48px;border-radius:14px}.main-heading{font-size:clamp(28px,7.5vw,38px)}.cta{padding:18px;font-size:15px;border-radius:16px}.step-item{padding:16px}}
+@media(max-width:375px){.quiz-heading{font-size:32px}.main-heading{font-size:26px}.logo-pill{width:44px;height:44px;border-radius:12px}.cta{padding:16px;font-size:14px}.step-item{padding:14px;gap:10px}.step-num{width:24px;height:24px;font-size:12px;border-radius:7px}.step-text b{font-size:14px}.step-text span{font-size:12px}.urgency{padding:14px}.urgency-text{font-size:12px}.trust-bar{gap:14px}.trust-item span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<!-- AGE GATE -->
+<div id="age-quiz">
+<div class="quiz-wrap">
+<div class="quiz-badge slide-up"><img id="logoAge" src="" alt="SHEIN"><span>SHEIN Rewards US</span></div>
+<p class="brand-disc">Offer not sponsored or endorsed by this brand.</p>
+<h1 class="quiz-heading slide-up"><span class="accent">Get $750<sup>*</sup></span></h1>
+<p class="quiz-towards slide-up">Towards shopping at SHEIN</p>
+<p class="quiz-sub">Get up to $750 towards shopping at SHEIN — for dresses, tops, shoes &amp; accessories. Limited spots available today only.</p>
+<div class="live-counter"><div class="live-dot"></div><span><span class="live-num" id="liveCount">9,241</span>shoppers claiming now</span></div>
+<div class="age-options">
+<button class="age-btn primary" id="opt21"><div class="age-label">I'm 21 or older</div><div class="age-desc">Eligible for the full $750 reward</div></button>
+<button class="age-btn secondary" id="opt18"><div class="age-label">I'm 18–20</div><div class="age-desc">Limited reward eligibility</div></button>
+</div>
+</div>
+</div>
+
+<!-- NOTIFICATIONS -->
+<div class="notif-zone" id="notifZone"></div>
+
+<!-- MAIN CONTENT -->
+<div id="fc-content" class="scroll-content">
+<div class="main-wrap">
+<div class="logo-row"><div class="logo-pill"><img id="logoMain" src="" alt="SHEIN"></div></div>
+<p class="brand-disc" style="margin-bottom:18px">Offer not sponsored or endorsed by this brand.</p>
+<div class="countdown-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><span>Offer expires in <span class="timer" id="countdown">14:59</span></span></div>
+<h2 class="main-heading"><span class="g">Get $750<sup>*</sup></span></h2>
+<p class="main-towards">Towards shopping at SHEIN</p>
+<div class="pound-counter"><span>🎁 <span id="poundCount">$612,300</span>+ in vouchers claimed today</span></div>
+<p class="main-sub">Your spot is confirmed. Sign up and unlock up to $750 towards shopping at SHEIN.</p>
+<button class="cta trxbutton"><svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>Get My $750<sup>*</sup></button>
+<div class="payout-row"><div class="payout-icon">👜</div><div class="payout-icon">👗</div><div class="payout-icon">👟</div><div class="payout-icon">💄</div><span class="payout-label">Dresses, shoes, bags &amp; more</span></div>
+<div class="steps-card">
+<div class="steps-title">How it works</div>
+<div class="step-item"><div class="step-num">1</div><div class="step-text"><b>Create Your Account</b><span>Quick sign-up — takes less than 60 seconds</span></div></div>
+<div class="step-item"><div class="step-num">2</div><div class="step-text"><b>Complete 2–3 Short Tasks</b><span>Earn up to $750 in vouchers — the more you do, the more you earn</span></div></div>
+<div class="step-item"><div class="step-num">3</div><div class="step-text"><b>Enjoy Your Reward</b><span>Your voucher is sent straight to your email</span></div></div>
+</div>
+<div class="urgency"><div class="urgency-icon">⏳</div><div class="urgency-text"><strong>Limited spots remaining.</strong> Complete <strong>2 quick steps</strong> after sign-up to lock in your reward of up to $750 before it's gone.</div></div>
+<div class="trust-bar">
+<div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span>Verified</span></div>
+<div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>500K+ shoppers</span></div>
+<div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><span>4.8 rated</span></div>
+</div>
+<div class="foot">Trusted by over 500,000 shoppers claiming bonuses daily</div>
+<div class="affil-disc">Advertising disclosure: This is an independent rewards promotion and is not affiliated with, endorsed by, or sponsored by SHEIN. Reward fulfilment requires completing partner offers, some of which may involve a purchase or paid subscription. We may earn a commission from completed offers. Available to US residents aged 18+. *$750 awarded upon completion of purchase &amp; program requirements.</div>
+</div>
+</div>
+
+<div class="sticky-cta" id="stickyCta"><button class="cta-sm trxbutton"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>Get My $750<sup>*</sup></button></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // ── Embedded logo ──
+  var LOGO_SRC = "data:image/jpeg;base64,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";
+  document.getElementById("logoAge").src = LOGO_SRC;
+  document.getElementById("logoMain").src = LOGO_SRC;
+
+  // ── SubID capture ──
+  function getSubID() {
+    var m = window.location.search.match(/[?&](?:s1|campid|cid|c)=([^&]*)/);
+    if (!m) return '';
+    try { return decodeURIComponent(m[1].replace(/\+/g,' ')); } catch(e) { return m[1]; }
+  }
+
+  // ── Offer URL ──
+  var BASE_URL = "https://giftclick.org/aff_c?offer_id=2141&aff_id=2021&source=s1";
+  function getOfferURL() { return BASE_URL + encodeURIComponent(getSubID()); }
+
+  // ── Breaks out of in-app browsers when the CTA fires ──
+  function openInExternalBrowser(url){
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isAndroid = /android/i.test(ua);
+    if(isAndroid){
+      try{
+        var parsed = new URL(url);
+        window.location.href = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+      }catch(e){ window.location.href = url; }
+    } else if(isIOS){
+      window.location.href = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
+    } else {
+      var w = window.open(url, '_blank', 'noopener,noreferrer');
+      if(!w || w.closed || typeof w.closed === 'undefined') window.location.href = url;
+    }
+  }
+
+  // ── Live counter ──
+  var baseCount = 9241, liveEl = document.getElementById("liveCount");
+  setInterval(function() {
+    baseCount += Math.floor(Math.random() * 5) - 1;
+    if (baseCount < 8800) baseCount = 8800;
+    if (liveEl) liveEl.textContent = baseCount.toLocaleString('en-US');
+  }, 4000);
+
+  // ── Countdown ──
+  var countdownSeconds = 14 * 60 + 59, countdownEl = document.getElementById("countdown");
+  function updateCountdown() {
+    if (countdownSeconds <= 0) return;
+    countdownSeconds--;
+    var m = Math.floor(countdownSeconds / 60), s = countdownSeconds % 60;
+    if (countdownEl) countdownEl.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+  }
+
+  // ── Dollar counter ──
+  var poundBase = 612300, poundEl = document.getElementById("poundCount");
+  function updatePound() {
+    poundBase += Math.floor(Math.random() * 80) + 10;
+    if (poundEl) poundEl.textContent = "$" + poundBase.toLocaleString('en-US');
+  }
+
+  // ── Notifications ──
+  var notifData = [
+    {n:"Sophia T.",t:"Grabbed a summer dress + sandals",a:"+$84"},
+    {n:"Mia R.",t:"Added 3 tops &amp; a tote bag",a:"+$67"},
+    {n:"Emma L.",t:"Picked up a full autumn haul",a:"+$150"},
+    {n:"Olivia W.",t:"Claimed matching co-ord set",a:"+$95"},
+    {n:"Charlotte K.",t:"Unlocked $250 bonus",a:"+$250"},
+    {n:"Amelia B.",t:"Ordered shoes + accessories",a:"+$58"},
+    {n:"Isabella H.",t:"Grabbed jeans &amp; a blazer",a:"+$120"},
+    {n:"Lily S.",t:"Claimed party dress + bag",a:"+$98"},
+    {n:"Grace D.",t:"Built a $200 capsule wardrobe",a:"+$200"},
+    {n:"Madison F.",t:"Loaded up on winter layers",a:"+$45"},
+    {n:"Ava M.",t:"Locked in the full $750 bonus",a:"+$750"},
+    {n:"Chloe J.",t:"Scored a summer accessories bundle",a:"+$112"}
+  ];
+  var times = ["just now","2s ago","5s ago","just now","1s ago","3s ago","just now","4s ago","2s ago","just now","1s ago","3s ago"];
+  var notifZone = document.getElementById("notifZone"), notifIdx = 0, notifActive = false;
+
+  function escHtml(s) { return String(s).replace(/[&<>"']/g, function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]}); }
+
+  function showNotif() {
+    if (!notifActive || !notifZone) return;
+    var item = notifData[notifIdx % notifData.length];
+    var time = times[notifIdx % times.length];
+    notifIdx++;
+    var toast = document.createElement("div");
+    toast.className = "notif-toast";
+    toast.innerHTML = '<div class="notif-icon"><img src="' + LOGO_SRC + '" alt="S"></div><div class="notif-body"><div class="notif-title">' + escHtml(item.n) + ' claimed ' + item.a + '</div><div class="notif-desc">' + item.t + '</div></div><div class="notif-time">' + escHtml(time) + '</div>';
+    var old = notifZone.querySelector(".notif-toast");
+    if (old) { old.classList.add("leaving"); setTimeout(function(){if(old.parentNode)old.parentNode.removeChild(old);notifZone.appendChild(toast);},300); }
+    else { notifZone.appendChild(toast); }
+    setTimeout(function(){toast.classList.add("leaving");setTimeout(function(){if(toast.parentNode)toast.parentNode.removeChild(toast);},300);},3500);
+  }
+
+  function startNotifs() {
+    if (notifActive) return;
+    notifActive = true;
+    setTimeout(showNotif, 1500);
+    (function scheduleNext(){var d=4000+Math.random()*2000;setTimeout(function(){if(notifActive){showNotif();scheduleNext();}},d);})();
+  }
+
+  // ── Sticky CTA ──
+  var stickyCta = document.getElementById("stickyCta"), mainCta = null;
+  function handleStickyScroll() {
+    if (!mainCta || !stickyCta) return;
+    if (mainCta.getBoundingClientRect().bottom < 0) { stickyCta.classList.add("visible"); }
+    else { stickyCta.classList.remove("visible"); }
+  }
+
+  // ── Age gate ──
+  function goToMain() {
+    document.getElementById("age-quiz").style.display = "none";
+    document.getElementById("fc-content").classList.add("active");
+    window.scrollTo(0, 0);
+    startNotifs();
+    setInterval(updateCountdown, 1000);
+    setInterval(updatePound, 3000);
+    mainCta = document.querySelector("#fc-content .cta.trxbutton");
+    window.addEventListener("scroll", handleStickyScroll, {passive:true});
+  }
+
+  document.getElementById("opt21").addEventListener("click", goToMain);
+  document.getElementById("opt18").addEventListener("click", goToMain);
+
+  // ── All CTA buttons → offer link (breaks out of in-app browsers) ──
+  document.querySelectorAll(".trxbutton").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      openInExternalBrowser(getOfferURL());
+    });
+  });
+
+});
+</script>
+
+<!-- TikTok In-App Browser Breakout -->
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if (!isTikTok) return;
+  try { if (sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); } catch(e) {}
+  var url = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if (isIOS) { window.location.href = 'x-safari-' + url; setTimeout(function(){window.location.href=url;},25); }
+  else if (isAndroid) { window.location.href = 'intent://' + url.replace(/https?:\/\//,'') + '#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
+})();
+</script>
+</body></html>

@@ -1,0 +1,453 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>TesterUp — Get $15 + Get Paid to Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #e01e2b;
+      --accent-2: #f24a52;
+      --accent-deep: #b3121d;
+      --accent-glow: rgba(224,30,43,0.30);
+      --accent-dim: rgba(224,30,43,0.10);
+      --gold: #fbbf24;
+      --bg: #0f0b1d;
+      --surface: #1a1430;
+      --border: rgba(224,30,43,0.18);
+      --muted: rgba(205,200,220,0.5);
+      --text: #f5f3fa;
+      --navy: #1e1b3a;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html, body { background:var(--bg); color:var(--text); font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif; -webkit-font-smoothing:antialiased; height:100%; width:100%; overflow:hidden; }
+
+    @keyframes shimmer { 100%{ transform:translateX(100%); } }
+    @keyframes popIn { 0%{transform:scale(0.9);opacity:0} 60%{transform:scale(1.03)} 100%{transform:scale(1);opacity:1} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    @keyframes feedIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Persistent animated background */
+    @keyframes bgDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(34px,28px)} }
+    @keyframes bgDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-36px)} }
+    @keyframes bgFloat { 0%{transform:translateY(0);opacity:0} 12%{opacity:.5} 88%{opacity:.5} 100%{transform:translateY(-120px);opacity:0} }
+    .bg-fx { position:fixed; inset:0; z-index:0; background:var(--bg); overflow:hidden; pointer-events:none; }
+    .bg-fx .blob { position:absolute; border-radius:50%; filter:blur(46px); will-change:transform; }
+    .bg-fx .b1 { width:70vw; height:70vw; max-width:420px; max-height:420px; top:-12%; left:-18%; background:radial-gradient(circle,rgba(224,30,43,0.16),transparent 70%); animation:bgDrift1 9s ease-in-out infinite; }
+    .bg-fx .b2 { width:60vw; height:60vw; max-width:360px; max-height:360px; bottom:-14%; right:-16%; background:radial-gradient(circle,rgba(242,74,82,0.12),transparent 70%); animation:bgDrift2 11s ease-in-out infinite; }
+    .bg-fx .pt { position:absolute; bottom:-10px; width:4px; height:4px; border-radius:50%; background:var(--accent); opacity:0; box-shadow:0 0 7px var(--accent-glow); will-change:transform,opacity; animation:bgFloat linear infinite; }
+    .bg-fx .pt:nth-child(3){ left:14%; animation-duration:7s; animation-delay:0s; }
+    .bg-fx .pt:nth-child(4){ left:34%; animation-duration:9s; animation-delay:3s; }
+    .bg-fx .pt:nth-child(5){ left:54%; animation-duration:8s; animation-delay:6s; }
+    .bg-fx .pt:nth-child(6){ left:72%; animation-duration:10s; animation-delay:1.5s; }
+    .bg-fx .pt:nth-child(7){ left:88%; animation-duration:7.5s; animation-delay:4.5s; }
+    @media (prefers-reduced-motion: reduce){ .bg-fx .blob,.bg-fx .pt{ animation:none; } .bg-fx .pt{ display:none; } }
+
+    .page { position:fixed; inset:0; z-index:1; max-width:440px; margin:0 auto; background:transparent; display:flex; flex-direction:column; overflow:hidden; transition:opacity 0.25s ease; }
+    .page.hidden { opacity:0; pointer-events:none; }
+    .page.gone { display:none; }
+
+    .urgency { display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(251,191,36,0.08); border-bottom:1px solid rgba(251,191,36,0.25); padding:8px 14px; flex-shrink:0; font-size:12px; font-weight:700; color:var(--gold); }
+    .urgency .clock { font-variant-numeric:tabular-nums; background:rgba(251,191,36,0.18); border-radius:6px; padding:2px 8px; color:#fde68a; }
+
+    .splash-inner { flex:1; display:flex; flex-direction:column; padding:16px 22px 0; overflow-y:auto; }
+    .splash-inner::-webkit-scrollbar{ display:none; }
+    .brand-logo { width:50px; height:50px; border-radius:13px; align-self:flex-start; margin-bottom:12px; box-shadow:0 6px 20px rgba(224,30,43,0.30); }
+    .bonus-badge { display:inline-flex; align-items:center; gap:7px; background:linear-gradient(135deg,rgba(251,191,36,0.16),rgba(224,30,43,0.10)); border:1px solid rgba(251,191,36,0.35); border-radius:999px; padding:6px 14px; font-size:11px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:var(--gold); width:fit-content; }
+    .splash-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,13vw,4.4rem); line-height:0.9; letter-spacing:-0.01em; margin-top:12px; }
+    .splash-headline .hi { color:var(--accent); text-shadow:0 0 36px var(--accent-glow); }
+    .splash-sub { font-size:13px; color:var(--muted); line-height:1.55; margin-top:10px; }
+    .splash-sub b { color:var(--accent-2); }
+
+    .stats-row { display:flex; gap:8px; margin-top:16px; }
+    .stat-box { flex:1; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:11px 8px; text-align:center; }
+    .stat-val { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; line-height:1; color:var(--accent-2); text-shadow:0 0 14px var(--accent-glow); margin-bottom:3px; }
+    .stat-lbl { font-size:9px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.06em; }
+
+    .payout-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:13px 14px; margin-top:16px; }
+    .payout-hdr { display:flex; align-items:center; justify-content:space-between; font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+    .payout-hdr .live { display:inline-flex; align-items:center; gap:6px; color:var(--accent-2); }
+    .live-dot { width:6px; height:6px; border-radius:50%; background:var(--accent-2); animation:pulse 1.4s ease-in-out infinite; }
+    .prow { display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid rgba(255,255,255,0.04); animation:feedIn 0.4s ease both; }
+    .prow:first-of-type { border-top:none; }
+    .pm { flex-shrink:0; width:50px; font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.03em; color:var(--accent-2); }
+    .pinfo { flex:1; min-width:0; }
+    .pname { font-size:12px; font-weight:700; color:#fff; }
+    .pmeta { font-size:10px; color:var(--muted); }
+    .pamt { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; color:var(--accent-2); }
+
+    .live-now { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:12px; font-size:12px; color:var(--muted); }
+    .live-now b { color:#fff; font-variant-numeric:tabular-nums; }
+
+    .disclaimer { font-size:9px; color:var(--muted); line-height:1.4; text-align:center; margin-top:12px; padding:0 4px; }
+
+    .splash-cta { padding:14px 22px calc(18px + env(safe-area-inset-bottom)); flex-shrink:0; }
+    .splash-sub-txt { text-align:center; font-size:10px; color:var(--muted); margin-top:8px; letter-spacing:0.03em; }
+
+    @keyframes ctaGlow { 0%,100%{ box-shadow:0 0 40px var(--accent-glow),0 4px 20px rgba(0,0,0,0.4);} 50%{ box-shadow:0 0 72px var(--accent-glow),0 6px 26px rgba(0,0,0,0.5);} }
+    .big-btn { display:block; width:100%; padding:18px 16px; background:linear-gradient(135deg,var(--accent),var(--accent-deep)); color:#fff; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:800; letter-spacing:0.02em; text-align:center; border:none; border-radius:14px; cursor:pointer; position:relative; overflow:hidden; transition:transform 0.12s; animation:ctaGlow 2.2s ease-in-out infinite; }
+    .big-btn::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent); transform:translateX(-100%); animation:shimmer 2.4s infinite; }
+    .big-btn:active { transform:scale(0.975); }
+
+    .quiz-topbar { display:flex; align-items:center; justify-content:space-between; padding:16px 22px 0; flex-shrink:0; }
+    .quiz-eyebrow { font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+    .quiz-title-bar { font-size:14px; font-weight:800; color:#fff; }
+    .topbar-badge { display:inline-flex; align-items:center; gap:5px; background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.3); border-radius:999px; padding:5px 12px; font-size:11px; font-weight:800; color:var(--gold); }
+    .progress-wrap { padding:14px 22px 0; flex-shrink:0; }
+    .progress-track { height:3px; background:var(--surface); border-radius:99px; overflow:hidden; }
+    .progress-fill { height:100%; background:var(--accent); border-radius:99px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); box-shadow:0 0 8px var(--accent-glow); }
+
+    .quiz-body { flex:1; position:relative; overflow:hidden; margin-top:20px; }
+    .screen { position:absolute; inset:0; padding:0 22px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transition:opacity 0.28s ease,transform 0.28s ease; transform:translateX(30px); overflow-y:auto; }
+    .screen::-webkit-scrollbar{ display:none; }
+    .screen.active { opacity:1; pointer-events:all; transform:translateX(0); }
+    .screen.exit { opacity:0; pointer-events:none; transform:translateX(-30px); visibility:hidden; }
+
+    .q-eyebrow { font-size:10px; font-weight:800; letter-spacing:0.13em; text-transform:uppercase; color:var(--accent-2); margin-bottom:8px; }
+    .q-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.6rem,11vw,3.4rem); line-height:0.9; margin-bottom:8px; }
+    .q-sub { font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:18px; }
+    .options { display:flex; flex-direction:column; gap:12px; }
+    .opt { display:flex; align-items:center; gap:13px; background:var(--surface); border:1.5px solid var(--border); border-radius:14px; padding:18px 16px; cursor:pointer; transition:border-color 0.18s,background 0.18s,transform 0.12s; }
+    .opt:active { transform:scale(0.985); }
+    .opt.selected { border-color:var(--accent); background:rgba(224,30,43,0.08); }
+    .opt-icon { font-size:22px; flex-shrink:0; width:30px; text-align:center; }
+    .opt-icon svg { display:block; margin:0 auto; }
+    .opt-text { flex:1; }
+    .opt-label { font-size:14px; font-weight:700; color:#fff; line-height:1.2; }
+    .opt-hint { font-size:11px; color:var(--muted); margin-top:2px; }
+    .opt-best { display:inline-block; margin-left:6px; font-size:8px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:var(--accent); border-radius:4px; padding:2px 5px; vertical-align:middle; }
+    .opt-check { width:20px; height:20px; border-radius:50%; border:1.5px solid rgba(224,30,43,0.3); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; color:transparent; transition:all 0.18s; }
+    .opt.selected .opt-check { background:var(--accent); border-color:var(--accent); color:#fff; box-shadow:0 0 10px var(--accent-glow); }
+    .q-review { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:13px 15px; margin-top:14px; }
+    .qr-stars { color:var(--accent-2); font-size:12px; letter-spacing:2px; margin-bottom:5px; }
+    .qr-text { font-size:12px; color:#ccc; line-height:1.5; margin-bottom:4px; font-style:italic; }
+    .qr-name { font-size:10px; font-weight:700; color:var(--muted); }
+
+    #screen-loading { align-items:center; justify-content:center; text-align:center; }
+    .loading-orb { width:60px; height:60px; border-radius:50%; border:2px solid var(--border); border-top-color:var(--accent); animation:spin 0.9s linear infinite; margin:0 auto 16px; box-shadow:0 0 24px var(--accent-glow); }
+    .loading-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; margin-bottom:18px; }
+    .ls-list { display:flex; flex-direction:column; gap:10px; width:100%; max-width:250px; }
+    .ls { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted); }
+    .ls-dot { width:8px; height:8px; border-radius:50%; background:var(--border); flex-shrink:0; transition:background 0.3s; }
+    .ls.done .ls-dot { background:var(--accent); box-shadow:0 0 6px var(--accent-glow); }
+    .ls.done { color:#fff; }
+
+    #screen-result { gap:10px; padding-bottom:0; }
+    .result-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(224,30,43,0.12); border:1px solid rgba(224,30,43,0.3); border-radius:999px; padding:5px 14px; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-2); align-self:flex-start; }
+    .result-headline { font-size:21px; font-weight:800; color:#fff; line-height:1.2; }
+    .est-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; text-align:center; animation:popIn 0.45s ease both; }
+    .est-lbl { font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+    .est-amount { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.6rem,12vw,3.6rem); line-height:1; color:var(--accent-2); text-shadow:0 0 32px var(--accent-glow); margin-bottom:2px; }
+    .est-period { font-size:12px; color:var(--muted); }
+    .est-bonus { margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06); font-size:12px; color:#fff; }
+    .est-bonus b { color:var(--gold); }
+
+    .steps-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; }
+    .steps-top { font-size:10px; font-weight:800; letter-spacing:0.13em; text-transform:uppercase; color:var(--accent-2); margin-bottom:12px; }
+    .step { display:flex; gap:11px; align-items:flex-start; margin-bottom:12px; }
+    .step:last-child { margin-bottom:0; }
+    .step-n { flex-shrink:0; width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+    .step-h { font-size:13px; font-weight:700; color:#fff; line-height:1.3; }
+    .step-t { font-size:11.5px; color:var(--muted); line-height:1.45; margin-top:2px; }
+    .step-t b { color:var(--accent-2); }
+
+    .age-note { display:flex; gap:10px; align-items:center; background:rgba(224,30,43,0.10); border:1px solid rgba(224,30,43,0.4); border-radius:14px; padding:13px 15px; }
+    .age-note .ic { font-size:20px; flex-shrink:0; }
+    .age-note .tx { font-size:12.5px; line-height:1.4; color:#fff; }
+    .age-note .tx b { color:var(--accent-2); }
+
+    .result-cta { position:sticky; bottom:0; z-index:2; margin:8px -22px 0; padding:14px 22px calc(8px + env(safe-area-inset-bottom)); background:linear-gradient(to top, var(--bg) 58%, rgba(15,11,29,0)); }
+    .cta-timer { text-align:center; font-size:11px; font-weight:700; color:var(--gold); letter-spacing:0.04em; margin-bottom:8px; }
+    .cta-timer .clock { font-variant-numeric:tabular-nums; }
+    .cta-sub { text-align:center; font-size:10px; color:var(--muted); margin-top:7px; letter-spacing:0.03em; }
+
+    /* 21+ POPUP */
+    .age-pop { position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; padding:24px; background:rgba(5,3,12,0.74); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+    .age-pop.show { display:flex; animation:fadeIn .2s ease; }
+    .age-pop-card { width:100%; max-width:360px; background:var(--surface); border:1px solid rgba(224,30,43,0.35); border-radius:20px; padding:28px 22px 24px; text-align:center; animation:popIn .4s ease both; box-shadow:0 24px 70px rgba(0,0,0,0.65); }
+    .age-pop .ic { font-size:42px; line-height:1; }
+    .age-pop h3 { font-family:'Bebas Neue',sans-serif; font-size:2.1rem; margin:10px 0 8px; color:#fff; letter-spacing:0.01em; }
+    .age-pop h3 .hl { color:var(--accent-2); }
+    .age-pop p { font-size:13px; color:rgba(255,255,255,0.82); line-height:1.55; margin-bottom:20px; }
+    .age-pop p b { color:var(--accent-2); }
+    .age-pop .pop-btn { display:block; width:100%; padding:17px; background:linear-gradient(135deg,var(--accent),var(--accent-deep)); color:#fff; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:800; border:none; border-radius:13px; cursor:pointer; box-shadow:0 0 36px var(--accent-glow); transition:transform .12s; }
+    .age-pop .pop-btn:active { transform:scale(0.975); }
+  </style>
+</head>
+<body>
+
+<div class="bg-fx" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <span class="pt"></span><span class="pt"></span><span class="pt"></span><span class="pt"></span><span class="pt"></span>
+</div>
+
+<!-- ══ SPLASH ══ -->
+<div class="page" id="pageSplash">
+  <div class="urgency">🎁 $15 sign-up bonus — ends in <span class="clock" data-countdown>16:58</span></div>
+  <div class="splash-inner">
+    <img class="brand-logo" src="data:image/png;base64,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" alt="TesterUp">
+    <div class="bonus-badge">🎁 $15 instant bonus</div>
+    <div class="splash-headline">Get Paid To<br><span class="hi">Test &amp; Play</span></div>
+    <p class="splash-sub">Create your free account, grab your <b>$15 bonus</b>, test fun games like <b>Gardenscapes</b>, and cash out today.</p>
+
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val">$200–500+</div><div class="stat-lbl">Weekly</div></div>
+      <div class="stat-box"><div class="stat-val">3.5M+</div><div class="stat-lbl">Testers</div></div>
+      <div class="stat-box"><div class="stat-val">4.8★</div><div class="stat-lbl">App Store</div></div>
+    </div>
+
+    <div class="payout-card">
+      <div class="payout-hdr"><span>Real payouts this hour</span><span class="live"><span class="live-dot"></span>Live</span></div>
+      <div id="payoutList"></div>
+    </div>
+
+    <div class="live-now"><span class="live-dot"></span><b id="liveCount">9,247</b> testing right now</div>
+    <p class="disclaimer">Availability, rewards &amp; eligibility may vary by user, location &amp; completed activity. Results are not guaranteed.</p>
+  </div>
+
+  <div class="splash-cta">
+    <button class="big-btn" onclick="startQuiz()">CLAIM $15 FREE + START TESTING →</button>
+    <p class="splash-sub-txt">Instant $15 bonus · No card · Cash out via PayPal, Venmo, Cash App</p>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div class="page hidden gone" id="pageQuiz">
+  <div class="quiz-topbar">
+    <div><div class="quiz-eyebrow">Earnings Quiz</div><div class="quiz-title-bar">Unlock your $15 + estimate</div></div>
+    <div class="topbar-badge">🎁 $15 reserved</div>
+  </div>
+  <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="progress" style="width:8%"></div></div></div>
+
+  <div class="quiz-body">
+
+    <!-- Q1 device -->
+    <div class="screen active" id="screen-q1">
+      <div class="q-eyebrow">Question 1 of 3</div>
+      <div class="q-title">What phone<br>do you use?</div>
+      <p class="q-sub">We match you to the right-paying tests &amp; games.</p>
+      <div class="options">
+        <div class="opt" data-q="1" data-val="ios" onclick="pick(this)">
+          <div class="opt-icon"><svg viewBox="0 0 384 512" width="21" height="21" fill="#f5f3fa" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg></div>
+          <div class="opt-text"><div class="opt-label">iPhone</div><div class="opt-hint">iOS — top-paying tests</div></div>
+          <div class="opt-check">✓</div>
+        </div>
+        <div class="opt" data-q="1" data-val="android" onclick="pick(this)">
+          <div class="opt-icon"><svg viewBox="0 0 576 512" width="23" height="23" fill="#3ddc84" aria-hidden="true"><path d="M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24m273.7-144.48 47.94-83a10 10 0 1 0-17.27-10l-48.54 84.07a301.25 301.25 0 0 0-246.56 0L116.18 64.45a10 10 0 1 0-17.27 10l47.94 83C64.53 202.22 8.24 285.55 0 384h576c-8.24-98.45-64.54-181.78-146.85-226.55"/></svg></div>
+          <div class="opt-text"><div class="opt-label">Android</div><div class="opt-hint">High-volume test pool</div></div>
+          <div class="opt-check">✓</div>
+        </div>
+      </div>
+      <div class="q-review">
+        <div class="qr-stars">★★★★★</div>
+        <div class="qr-text">"Made $312 my first week just testing games on my phone. Got paid to PayPal in 2 days."</div>
+        <div class="qr-name">— Tyler M., Denver CO · verified</div>
+      </div>
+    </div>
+
+    <!-- Q2 age (steer 21+) -->
+    <div class="screen" id="screen-q2">
+      <div class="q-eyebrow">Question 2 of 3</div>
+      <div class="q-title">How old<br>are you?</div>
+      <p class="q-sub">Test &amp; game rewards only unlock for 21+ members.</p>
+      <div class="options">
+        <div class="opt" data-q="2" data-val="21plus" onclick="pick(this)">
+          <div class="opt-icon">🔓</div>
+          <div class="opt-text"><div class="opt-label">21 or older<span class="opt-best">Unlocks tests</span></div><div class="opt-hint">Unlocks the top-paying tests &amp; games</div></div>
+          <div class="opt-check">✓</div>
+        </div>
+        <div class="opt" data-q="2" data-val="18to20" onclick="pick(this)">
+          <div class="opt-icon">👤</div>
+          <div class="opt-text"><div class="opt-label">18 – 20</div><div class="opt-hint">Standard offers only</div></div>
+          <div class="opt-check">✓</div>
+        </div>
+      </div>
+      <div class="age-note" style="margin-top:14px;">
+        <span class="ic">✅</span>
+        <span class="tx">Rewards only unlock for <b>21+</b> members — remember to <b>select 21+ when you sign up.</b></span>
+      </div>
+    </div>
+
+    <!-- Q3 intent -->
+    <div class="screen" id="screen-q3">
+      <div class="q-eyebrow">Question 3 of 3</div>
+      <div class="q-title">Serious about<br>earning?</div>
+      <p class="q-sub">Be honest — it sets your payout estimate.</p>
+      <div class="options">
+        <div class="opt" data-q="3" data-val="yes" onclick="pick(this)">
+          <div class="opt-icon">🚀</div>
+          <div class="opt-text"><div class="opt-label">Yes — I'm in</div><div class="opt-hint">I want the boosted earnings tier</div></div>
+          <div class="opt-check">✓</div>
+        </div>
+        <div class="opt" data-q="3" data-val="maybe" onclick="pick(this)">
+          <div class="opt-icon">🤔</div>
+          <div class="opt-text"><div class="opt-label">Maybe — show me how</div><div class="opt-hint">I'd like to understand it first</div></div>
+          <div class="opt-check">✓</div>
+        </div>
+        <div class="opt" data-q="3" data-val="no" onclick="pick(this)">
+          <div class="opt-icon">👀</div>
+          <div class="opt-text"><div class="opt-label">Just looking</div><div class="opt-hint">Lower earning tier</div></div>
+          <div class="opt-check">✓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="screen" id="screen-loading">
+      <div class="loading-orb"></div>
+      <div class="loading-title">Unlocking your $15 + estimate…</div>
+      <div class="ls-list">
+        <div class="ls" id="ls1"><div class="ls-dot"></div><span>Reserving your $15 bonus</span></div>
+        <div class="ls" id="ls2"><div class="ls-dot"></div><span>Matching tests &amp; games</span></div>
+        <div class="ls" id="ls3"><div class="ls-dot"></div><span>Calculating your weekly estimate</span></div>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="screen" id="screen-result">
+      <div class="result-badge">✓ $15 bonus reserved</div>
+      <div class="result-headline">Here's what you can earn</div>
+      <div class="est-card">
+        <div class="est-lbl">Your estimate</div>
+        <div class="est-amount" id="baseAmount">$200–$500+</div>
+        <div class="est-period">per week</div>
+        <div class="est-bonus">+ <b>$15 instant sign-up bonus</b> the moment you join</div>
+      </div>
+
+      <div class="steps-card">
+        <div class="steps-top">How to unlock your earnings</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-h">Create your account &amp; select 21+</div><div class="step-t">Test &amp; game rewards only unlock for <b>21+</b> members. Select it when signing up.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-h">Complete 2 tests to activate earning</div><div class="step-t">A quick game or survey activates your earnings and <b>all high-paying offers</b>.</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-h">Cash out instantly</div><div class="step-t">Test games anytime. Withdraw via <b>PayPal, Venmo, Cash App</b> — no fees.</div></div></div>
+      </div>
+
+      <div class="age-note">
+        <span class="ic">⚠️</span>
+        <span class="tx">Before you go — <b>select 21+ when you sign up</b>, then complete your first test to unlock all high-paying offers.</span>
+      </div>
+
+      <div class="result-cta">
+        <div class="cta-timer">🎁 $15 bonus ends in <span class="clock" data-countdown>16:58</span></div>
+        <button class="big-btn" id="resultCta">CLAIM $15 FREE + START TESTING →</button>
+        <p class="cta-sub">Instant $15 bonus · No card · No fees</p>
+      </div>
+    </div>
+
+  </div><!-- /quiz-body -->
+</div><!-- /pageQuiz -->
+
+<!-- 21+ POPUP -->
+<div class="age-pop" id="agePopup">
+  <div class="age-pop-card">
+    <div class="ic">⚠️</div>
+    <h3>Select <span class="hl">21+</span> at signup</h3>
+    <p>Test &amp; game rewards only unlock for <b>21+</b> members. Choose <b>21+</b> when you sign up to access the top-paying offers.</p>
+    <button class="pop-btn" id="ageContinue">Got it — Continue →</button>
+  </div>
+</div>
+
+<script>
+  // Final offer link — campid injected into s1 for conversion attribution
+  var OFFER_LINK = 'https://grippedtrk.co.uk/?E=bv5wiOy1RU8cR946p4CchPPYSFOvKkW%2b&s1=';
+  var answers = {};
+  var earningsTable = { yes:'$200–$500+', maybe:'$120–$340', no:'$60–$160' };
+
+  var payouts = [
+    {m:'Cash App',amt:'$172',name:'Tyler',city:'Denver, CO',ago:'4 min ago'},
+    {m:'PayPal',amt:'$96',name:'Sarah',city:'Miami, FL',ago:'11 min ago'},
+    {m:'Venmo',amt:'$240',name:'Alex',city:'Charlotte, NC',ago:'8 min ago'},
+    {m:'PayPal',amt:'$78',name:'Mike',city:'Austin, TX',ago:'19 min ago'},
+    {m:'Cash App',amt:'$134',name:'Jordan',city:'Seattle, WA',ago:'27 min ago'}
+  ];
+  (function(){
+    var list = document.getElementById('payoutList');
+    payouts.forEach(function(p,i){
+      var el = document.createElement('div');
+      el.className='prow'; el.style.animationDelay=(i*0.07)+'s';
+      el.innerHTML='<div class="pm">'+p.m+'</div><div class="pinfo"><div class="pname">'+p.name+' · '+p.amt+'</div><div class="pmeta">'+p.city+' · '+p.ago+'</div></div><div class="pamt">'+p.amt+'</div>';
+      list.appendChild(el);
+    });
+  })();
+  (function(){
+    var n = 9247, el = document.getElementById('liveCount');
+    setInterval(function(){ n += Math.floor(Math.random()*4)+1; el.textContent = n.toLocaleString(); }, 3500);
+  })();
+  (function(){
+    var secs = 16*60+58;
+    function fmt(s){ var m=Math.floor(s/60), r=s%60; return m+':'+(r<10?'0':'')+r; }
+    setInterval(function(){
+      secs--; if(secs<=240){ secs = 16*60+58; }
+      document.querySelectorAll('[data-countdown]').forEach(function(e){ e.textContent = fmt(secs); });
+    }, 1000);
+  })();
+
+  function startQuiz(){
+    var splash=document.getElementById('pageSplash'), quiz=document.getElementById('pageQuiz');
+    splash.classList.add('hidden');
+    quiz.classList.remove('gone'); quiz.classList.remove('hidden');
+    setTimeout(function(){ splash.classList.add('gone'); }, 300);
+  }
+  function setProgress(p){ document.getElementById('progress').style.width = p+'%'; }
+  var currentScreen='q1';
+  function showScreen(id){
+    var old=document.getElementById('screen-'+currentScreen);
+    if(old){ old.classList.remove('active'); old.classList.add('exit'); setTimeout(function(){ old.classList.remove('exit'); },300); }
+    document.getElementById('screen-'+id).classList.add('active');
+    currentScreen=id;
+  }
+  function pick(el){
+    var q=el.dataset.q, val=el.dataset.val;
+    el.closest('.options').querySelectorAll('.opt').forEach(function(o){ o.classList.remove('selected'); });
+    el.classList.add('selected');
+    answers['q'+q]=val;
+    setTimeout(function(){ advance(parseInt(q)); }, 240);
+  }
+  function advance(q){
+    if(q===1){ showScreen('q2'); setProgress(40); }
+    else if(q===2){ showScreen('q3'); setProgress(70); }
+    else if(q===3){ setProgress(90); showScreen('loading'); runLoader(); }
+  }
+  function runLoader(){
+    var steps=['ls1','ls2','ls3'], i=0;
+    function tick(){ if(i<steps.length){ document.getElementById(steps[i]).classList.add('done'); i++; setTimeout(tick,600); } else setTimeout(showResult,350); }
+    setTimeout(tick,350);
+  }
+  function showResult(){
+    var spend=answers.q3||'yes';
+    document.getElementById('baseAmount').textContent = earningsTable[spend];
+    setProgress(100);
+    showScreen('result');
+  }
+
+  // Carry the click ID (?campid=) into the offer link's s1 so conversions match
+  function buildOfferUrl(){
+    var cid = new URLSearchParams(window.location.search).get('campid') || '';
+    return OFFER_LINK + encodeURIComponent(cid);
+  }
+  // Final CTA -> 21+ popup -> Continue -> offer
+  document.getElementById('resultCta').addEventListener('click', function(){
+    document.getElementById('agePopup').classList.add('show');
+  });
+  document.getElementById('ageContinue').addEventListener('click', function(){
+    window.location.href = buildOfferUrl();
+  });
+</script>
+
+<!-- TikTok In-App Browser Breakout (lander level) -->
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if(!isTikTok) return;
+  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
+  var currentUrl = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if(isIOS){ window.location.href='x-safari-'+currentUrl; setTimeout(function(){ window.location.href=currentUrl; },25); }
+  else if(isAndroid){ window.location.href='intent://'+currentUrl.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){ window.location.href=currentUrl; },25); }
+})();
+</script>
+</body></html>

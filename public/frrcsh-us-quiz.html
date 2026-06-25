@@ -137,7 +137,7 @@
     .ls.done { color:#fff; }
 
     /* Result */
-    #screen-result { gap:10px; padding-bottom:calc(16px + env(safe-area-inset-bottom)); }
+    #screen-result { gap:10px; padding-bottom:0; }
     .result-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); border-radius:999px; padding:5px 14px; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); align-self:flex-start; }
     .result-headline { font-size:21px; font-weight:800; color:#fff; line-height:1.2; }
     .est-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; text-align:center; animation:popIn 0.45s ease both; }
@@ -161,7 +161,7 @@
     .age-note .tx { font-size:12.5px; line-height:1.4; color:#fff; }
     .age-note .tx b { color:var(--accent); }
 
-    .result-cta { flex-shrink:0; margin-top:2px; }
+    .result-cta { position:sticky; bottom:0; z-index:2; margin:8px -22px 0; padding:14px 22px calc(8px + env(safe-area-inset-bottom)); background:linear-gradient(to top, var(--bg) 58%, rgba(9,9,11,0)); }
     .cta-timer { text-align:center; font-size:11px; font-weight:700; color:var(--gold); letter-spacing:0.04em; margin-bottom:8px; }
     .cta-timer .clock { font-variant-numeric:tabular-nums; }
     .cta-sub { text-align:center; font-size:10px; color:var(--muted); margin-top:7px; letter-spacing:0.03em; }

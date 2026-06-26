@@ -74,7 +74,10 @@ body{
 </div>
 
 <script>
-// === CONTINUE BUTTON — opens in new tab, passes all URL params ===
+// === CONTINUE BUTTON — breaks out to Safari/Chrome ON CLICK ONLY ===
+// No on-load breakout: the Carrd cloaker in front handles bot protection, so this prelander
+// renders normally on landing and only kicks out of the in-app browser when Continue is tapped.
+// Passes all URL params (subIDs) through to the lander.
 (function(){
   var DEST = 'https://www.trendhavenn.com/testerup-us-quiz.html';
   function buildUrl(){
@@ -82,24 +85,17 @@ body{
     return p.toString() ? DEST + '?' + p.toString() : DEST;
   }
   document.getElementById('ctaBtn').addEventListener('click', function(){
-    var w = window.open(buildUrl(), '_blank', 'noopener,noreferrer');
-    if(!w || w.closed || typeof w.closed === 'undefined'){ window.location.href = buildUrl(); }
+    var dest = buildUrl();
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isAndroid = /android/i.test(ua);
+    var url;
+    if(isAndroid){ url = 'intent://' + dest.replace(/^https?:\/\//,'') + '#Intent;scheme=https;action=android.intent.action.VIEW;end'; }
+    else if(isIOS){ url = dest.replace(/^https:\/\//, 'x-safari-https://'); }
+    else { window.location.href = dest; return; }
+    try { (window.top || window).location.href = url; }
+    catch(e){ window.location.href = dest; }
   });
-})();
-</script>
-
-<!-- TikTok In-App Browser Breakout (pre-lander level) -->
-<script>
-(function(){
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-  if(!isTikTok) return;
-  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
-  var url = window.location.href;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  var isAndroid = /android/i.test(ua);
-  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
-  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
 })();
 </script>
 </body>

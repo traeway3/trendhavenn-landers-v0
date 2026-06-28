@@ -116,38 +116,34 @@ body{
 </div>
 
 <script>
-// === OG KICKER — breaks out of TikTok's in-app browser to Safari/Chrome on LOAD and on the CTA tap.
-// Carries the full query string (subIDs) through to the lander. 25ms setTimeout fallbacks so the page
-// still proceeds if a breakout is blocked. ===
+// === CONTINUE BUTTON — opens the lander in a NEW TAB (window.open _blank); on the TikTok in-app
+// browser that _blank pop bumps the user out to the device browser. Passes all URL params (subIDs)
+// through; same-tab fallback if the popup is blocked. ===
 (function(){
   var DEST = 'https://www.trendhavenn.com/frrcsh-us-quiz.html';
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  var isAndroid = /android/i.test(ua);
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-
-  function buildLanderUrl(){
+  function buildUrl(){
     var p = new URLSearchParams(window.location.search);
     return p.toString() ? DEST + '?' + p.toString() : DEST;
   }
-  function kick(target){
-    if(isIOS){ window.location.href = target.replace(/^https:\/\//, 'x-safari-https://'); setTimeout(function(){ window.location.href = target; }, 25); }
-    else if(isAndroid){ window.location.href = 'intent://' + target.replace(/^https?:\/\//,'') + '#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){ window.location.href = target; }, 25); }
-    else { window.location.href = target; }
-  }
-
-  // 1) ON LOAD — kick TikTok in-app users out to Safari/Chrome (reopen this prelander). Once-guard.
-  if(isTikTok){
-    try{ if(sessionStorage.getItem('ttBreakout') !== '1'){ sessionStorage.setItem('ttBreakout','1'); kick(window.location.href); } }
-    catch(e){ kick(window.location.href); }
-  }
-
-  // 2) ON CTA TAP — if still inside the in-app browser, kick out to the lander; otherwise just go.
   document.getElementById('ctaBtn').addEventListener('click', function(){
-    var lander = buildLanderUrl();
-    if(isTikTok){ kick(lander); }
-    else { window.location.href = lander; }
+    var w = window.open(buildUrl(), '_blank', 'noopener,noreferrer');
+    if(!w || w.closed || typeof w.closed === 'undefined'){ window.location.href = buildUrl(); }
   });
+})();
+</script>
+
+<!-- TikTok In-App Browser Breakout (pre-lander level) — fires ON LOAD -->
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if(!isTikTok) return;
+  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
+  var url = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
+  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
 })();
 </script>
 </body>

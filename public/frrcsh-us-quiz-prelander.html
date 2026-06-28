@@ -88,14 +88,6 @@ body{
 .cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);animation:shine 3.5s ease-in-out infinite 2s;pointer-events:none}
 .cta-btn:active{transform:scale(.96)!important;animation-play-state:paused}
 .cta-btn.loading{opacity:.8}
-/* Manual fallback — only shown if the auto-breakout is blocked */
-.fallback{display:none;width:100%;margin-top:6px;animation:textIn .4s ease both}
-.fb-title{font-family:"Bricolage Grotesque",sans-serif;font-size:19px;font-weight:800;color:var(--green-bright);margin-bottom:8px}
-.fb-text{font-size:13px;line-height:1.55;color:#c8ccd2;margin-bottom:14px}
-.fb-text b{color:#fff}
-.fb-link{font-size:11px;color:var(--muted);word-break:break-all;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:12px;text-align:left;font-family:monospace}
-.fb-copy{display:block;width:100%;padding:18px;background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 100%);color:#04140d;font-family:"DM Sans",sans-serif;font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;animation:btnPulse 2s ease-in-out infinite;-webkit-user-select:none;user-select:none}
-.fb-copy:active{transform:scale(.96);animation-play-state:paused}
 </style>
 </head>
 <body>
@@ -121,76 +113,40 @@ body{
     </span>
   </div>
   <button id="ctaBtn" class="cta-btn">Continue</button>
-  <div class="fallback" id="fallback">
-    <div class="fb-title">One quick step</div>
-    <div class="fb-text">Tap <b>Copy Link</b> below, then paste it into <b>Safari</b> or <b>Chrome</b> to claim your bonus.</div>
-    <div class="fb-link" id="linkText"></div>
-    <button class="fb-copy" id="copyBtn">Copy Link</button>
-  </div>
 </div>
 
 <script>
-// === CONTINUE — attempts Safari/Chrome breakout on tap; if TikTok blocks it, reveals a
-// manual Copy-Link fallback (paste into Safari) so users are never stranded. Carries all subIDs. ===
+// === OG KICKER — breaks out of TikTok's in-app browser to Safari/Chrome on LOAD and on the CTA tap.
+// Carries the full query string (subIDs) through to the lander. 25ms setTimeout fallbacks so the page
+// still proceeds if a breakout is blocked. ===
 (function(){
   var DEST = 'https://www.trendhavenn.com/frrcsh-us-quiz.html';
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+
   function buildLanderUrl(){
     var p = new URLSearchParams(window.location.search);
     return p.toString() ? DEST + '?' + p.toString() : DEST;
   }
-  var landerUrl = buildLanderUrl();
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  var isAndroid = /android/i.test(ua);
-
-  // If the breakout succeeds the app hands off and this page hides/blurs.
-  var leftPage = false;
-  document.addEventListener('visibilitychange', function(){ if(document.hidden) leftPage = true; });
-  window.addEventListener('pagehide', function(){ leftPage = true; });
-  window.addEventListener('blur', function(){ leftPage = true; });
-
-  var ctaBtn = document.getElementById('ctaBtn');
-  var fallback = document.getElementById('fallback');
-  var linkText = document.getElementById('linkText');
-  var copyBtn = document.getElementById('copyBtn');
-
-  function showFallback(){
-    if(leftPage) return;                       // breakout worked — user is in Safari/Chrome
-    if(fallback.style.display === 'block') return;
-    linkText.textContent = landerUrl;
-    fallback.style.display = 'block';
-    ctaBtn.style.display = 'none';
+  function kick(target){
+    if(isIOS){ window.location.href = target.replace(/^https:\/\//, 'x-safari-https://'); setTimeout(function(){ window.location.href = target; }, 25); }
+    else if(isAndroid){ window.location.href = 'intent://' + target.replace(/^https?:\/\//,'') + '#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){ window.location.href = target; }, 25); }
+    else { window.location.href = target; }
   }
 
-  ctaBtn.addEventListener('click', function(){
-    ctaBtn.textContent = 'Opening…';
-    ctaBtn.classList.add('loading');
-    if(isIOS){
-      window.location.href = landerUrl.replace(/^https:\/\//, 'x-safari-https://');
-    } else if(isAndroid){
-      window.location.href = 'intent://' + landerUrl.replace(/^https?:\/\//,'') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
-    } else {
-      window.location.href = landerUrl;        // desktop / non-mobile: just go
-      return;
-    }
-    setTimeout(showFallback, 1800);            // breakout blocked -> show Copy-Link escape hatch
-  });
+  // 1) ON LOAD — kick TikTok in-app users out to Safari/Chrome (reopen this prelander). Once-guard.
+  if(isTikTok){
+    try{ if(sessionStorage.getItem('ttBreakout') !== '1'){ sessionStorage.setItem('ttBreakout','1'); kick(window.location.href); } }
+    catch(e){ kick(window.location.href); }
+  }
 
-  function flashCopied(){
-    copyBtn.textContent = 'Copied! Now paste in Safari';
-    setTimeout(function(){ copyBtn.textContent = 'Copy Link'; }, 2200);
-  }
-  function legacyCopy(t){
-    var ta = document.createElement('textarea');
-    ta.value = t; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
-    document.body.appendChild(ta); ta.focus(); ta.select();
-    try{ document.execCommand('copy'); flashCopied(); }catch(e){}
-    document.body.removeChild(ta);
-  }
-  copyBtn.addEventListener('click', function(){
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(landerUrl).then(flashCopied, function(){ legacyCopy(landerUrl); });
-    } else { legacyCopy(landerUrl); }
+  // 2) ON CTA TAP — if still inside the in-app browser, kick out to the lander; otherwise just go.
+  document.getElementById('ctaBtn').addEventListener('click', function(){
+    var lander = buildLanderUrl();
+    if(isTikTok){ kick(lander); }
+    else { window.location.href = lander; }
   });
 })();
 </script>

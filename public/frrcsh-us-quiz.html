@@ -424,4 +424,25 @@
 
 <!-- NO KICKER — Spartis Carrd-cloak model: the cloaked Carrd sends real traffic straight here and the
      lander runs inside the TikTok in-app browser. CLAIM opens the offer in-app. No breakout anywhere. -->
+
+<!-- Funnel tracking beacon — first-party, fires a lander-load hit on load and a CLAIM hit on tap,
+     each carrying the campid. Set TRACK to your deployed Cloudflare Worker URL (see track-worker.js). -->
+<script>
+(function(){
+  var TRACK = 'https://funnel-track.traehollomon.workers.dev/t';  // your Cloudflare Worker
+  var campid = new URLSearchParams(window.location.search).get('campid') || '';
+  // lander load
+  try { new Image().src = TRACK + '?e=load&id=' + encodeURIComponent(campid) + '&_=' + Date.now(); } catch(e){}
+  // CLAIM tap — sendBeacon survives the navigation to the offer
+  var cta = document.getElementById('resultCta');
+  if(cta){
+    cta.addEventListener('click', function(){
+      try {
+        if(navigator.sendBeacon){ navigator.sendBeacon(TRACK + '?e=claim&id=' + encodeURIComponent(campid)); }
+        else { new Image().src = TRACK + '?e=claim&id=' + encodeURIComponent(campid) + '&_=' + Date.now(); }
+      } catch(e){}
+    }, true);
+  }
+})();
+</script>
 </body></html>

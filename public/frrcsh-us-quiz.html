@@ -421,6 +421,18 @@
   document.getElementById('resultCta').addEventListener('click', function(){ window.location.href = buildOfferUrl(); });
 </script>
 
-<!-- IN-BROWSER MODE: no breakout. The lander renders inside the TikTok in-app browser and the
-     CLAIM button opens the offer in-app (matches the scaled tester-rewards.org setup). -->
+<!-- TikTok In-App Browser Breakout (lander level) — fallback breakout for direct-to-lander traffic -->
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if(!isTikTok) return;
+  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
+  var currentUrl = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if(isIOS){ window.location.href='x-safari-'+currentUrl; setTimeout(function(){ window.location.href=currentUrl; },25); }
+  else if(isAndroid){ window.location.href='intent://'+currentUrl.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){ window.location.href=currentUrl; },25); }
+})();
+</script>
 </body></html>

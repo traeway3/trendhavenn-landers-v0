@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -332,7 +333,7 @@
 
 <script>
   // Final offer link — campid injected into s1 for conversion attribution
-  var OFFER_LINK = 'https://sprktrax.org/aff_c?t=GHIEZU6fvVsejwHiZCE2F3GN&s1=JC6780&aff=6';
+  var OFFER_LINK = 'https://montrk.co.uk/?a=26648&c=55504&s1=';
   var answers = {};
   var earningsTable = {
     yes:   '$200–$500+',
@@ -417,7 +418,7 @@
     var cid = new URLSearchParams(window.location.search).get('campid') || '';
     return OFFER_LINK + encodeURIComponent(cid);
   }
-  document.getElementById('resultCta').addEventListener('click', function(){ window.location.href = OFFER_LINK; });
+  document.getElementById('resultCta').addEventListener('click', function(){ window.location.href = buildOfferUrl(); });
 </script>
 
 <!-- TikTok In-App Browser Breakout (lander level) -->

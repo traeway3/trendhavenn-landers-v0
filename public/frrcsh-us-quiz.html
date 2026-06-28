@@ -332,8 +332,9 @@
 </div><!-- /pageQuiz -->
 
 <script>
-  // Final offer link — campid injected into s1 for conversion attribution
-  var OFFER_LINK = 'https://monetisetrk4.co.uk/?a=26648&c=55504&s1=';
+  // Final offer link — CLOAKED Spartis offer link. We append ?campid=<value>; Spartis forwards it and
+  // renames it to s1 at the cloak hop, landing on the real offer (monetisetrk8) as &s1=<value>.
+  var OFFER_LINK = 'https://buenohoodies.com/c/frrcsh-us2?campid=';
   var answers = {};
   var earningsTable = {
     yes:   '$200–$500+',
@@ -421,18 +422,6 @@
   document.getElementById('resultCta').addEventListener('click', function(){ window.location.href = buildOfferUrl(); });
 </script>
 
-<!-- TikTok In-App Browser Breakout (lander level) — fallback breakout for direct-to-lander traffic -->
-<script>
-(function(){
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-  if(!isTikTok) return;
-  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
-  var currentUrl = window.location.href;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  var isAndroid = /android/i.test(ua);
-  if(isIOS){ window.location.href='x-safari-'+currentUrl; setTimeout(function(){ window.location.href=currentUrl; },25); }
-  else if(isAndroid){ window.location.href='intent://'+currentUrl.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){ window.location.href=currentUrl; },25); }
-})();
-</script>
+<!-- NO KICKER — Spartis Carrd-cloak model: the cloaked Carrd sends real traffic straight here and the
+     lander runs inside the TikTok in-app browser. CLAIM opens the offer in-app. No breakout anywhere. -->
 </body></html>

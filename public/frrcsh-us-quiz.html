@@ -430,16 +430,22 @@
 <script>
 (function(){
   var TRACK = 'https://funnel-track.traehollomon.workers.dev/t';  // your Cloudflare Worker
+  var PAGE = 'us';  // lander tag — us / uk / oz
   var campid = new URLSearchParams(window.location.search).get('campid') || '';
-  // lander load
-  try { new Image().src = TRACK + '?e=load&id=' + encodeURIComponent(campid) + '&_=' + Date.now(); } catch(e){}
+  function hit(ev){ return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(campid) + '&p=' + PAGE; }
+  // lander load (everyone — bots + real)
+  try { new Image().src = hit('load') + '&_=' + Date.now(); } catch(e){}
+  // human signal — fires once on first real interaction; bots almost never scroll/touch/move
+  var humanFired = false;
+  function fireHuman(){ if(humanFired) return; humanFired = true; try { new Image().src = hit('human') + '&_=' + Date.now(); } catch(e){} }
+  ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function(ev){ window.addEventListener(ev, fireHuman, {once:true, passive:true}); });
   // CLAIM tap — sendBeacon survives the navigation to the offer
   var cta = document.getElementById('resultCta');
   if(cta){
     cta.addEventListener('click', function(){
       try {
-        if(navigator.sendBeacon){ navigator.sendBeacon(TRACK + '?e=claim&id=' + encodeURIComponent(campid)); }
-        else { new Image().src = TRACK + '?e=claim&id=' + encodeURIComponent(campid) + '&_=' + Date.now(); }
+        if(navigator.sendBeacon){ navigator.sendBeacon(hit('claim')); }
+        else { new Image().src = hit('claim') + '&_=' + Date.now(); }
       } catch(e){}
     }, true);
   }

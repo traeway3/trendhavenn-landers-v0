@@ -34,17 +34,17 @@
     /* Persistent animated background */
     @keyframes bgDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(34px,28px)} }
     @keyframes bgDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-36px)} }
-    @keyframes bgFloat { 0%{transform:translateY(0);opacity:0} 12%{opacity:.5} 88%{opacity:.5} 100%{transform:translateY(-120px);opacity:0} }
+    @keyframes bgFloat { 0%{transform:translateY(0);opacity:0} 8%{opacity:.55} 72%{opacity:.55} 100%{transform:translateY(-100vh);opacity:0} }
     .bg-fx { position:fixed; inset:0; z-index:0; background:var(--bg); overflow:hidden; pointer-events:none; }
     .bg-fx .blob { position:absolute; border-radius:50%; filter:blur(46px); will-change:transform; }
     .bg-fx .b1 { width:70vw; height:70vw; max-width:420px; max-height:420px; top:-12%; left:-18%; background:radial-gradient(circle,rgba(16,185,129,0.16),transparent 70%); animation:bgDrift1 9s ease-in-out infinite; }
     .bg-fx .b2 { width:60vw; height:60vw; max-width:360px; max-height:360px; bottom:-14%; right:-16%; background:radial-gradient(circle,rgba(52,211,153,0.12),transparent 70%); animation:bgDrift2 11s ease-in-out infinite; }
     .bg-fx .pt { position:absolute; bottom:-10px; width:4px; height:4px; border-radius:50%; background:var(--accent); opacity:0; box-shadow:0 0 7px var(--accent-glow); will-change:transform,opacity; animation:bgFloat linear infinite; }
-    .bg-fx .pt:nth-child(3){ left:14%; animation-duration:7s; animation-delay:0s; }
-    .bg-fx .pt:nth-child(4){ left:34%; animation-duration:9s; animation-delay:3s; }
-    .bg-fx .pt:nth-child(5){ left:54%; animation-duration:8s; animation-delay:6s; }
-    .bg-fx .pt:nth-child(6){ left:72%; animation-duration:10s; animation-delay:1.5s; }
-    .bg-fx .pt:nth-child(7){ left:88%; animation-duration:7.5s; animation-delay:4.5s; }
+    .bg-fx .pt:nth-child(3){ left:14%; animation-duration:3s;   animation-delay:0s; }
+    .bg-fx .pt:nth-child(4){ left:34%; animation-duration:3.8s; animation-delay:0.6s; }
+    .bg-fx .pt:nth-child(5){ left:54%; animation-duration:3.3s; animation-delay:1.2s; }
+    .bg-fx .pt:nth-child(6){ left:72%; animation-duration:4.2s; animation-delay:0.4s; }
+    .bg-fx .pt:nth-child(7){ left:88%; animation-duration:3.5s; animation-delay:0.9s; }
     @media (prefers-reduced-motion: reduce){ .bg-fx .blob,.bg-fx .pt{ animation:none; } .bg-fx .pt{ display:none; } }
 
     .page { position:fixed; inset:0; z-index:1; max-width:440px; margin:0 auto; background:transparent; display:flex; flex-direction:column; overflow:hidden; transition:opacity 0.25s ease; }
@@ -161,6 +161,18 @@
     .age-note .ic { font-size:20px; flex-shrink:0; }
     .age-note .tx { font-size:12.5px; line-height:1.4; color:#fff; }
     .age-note .tx b { color:var(--accent); }
+
+    /* ═══ 21+ age gate (shown on final CTA tap) ═══ */
+    .agegate-ov { position:fixed; inset:0; z-index:50; background:rgba(4,6,5,.80); backdrop-filter:blur(5px); display:none; align-items:center; justify-content:center; padding:24px; opacity:0; transition:opacity .2s; }
+    .agegate-ov.show { display:flex; opacity:1; }
+    .agegate-modal { width:100%; max-width:360px; background:linear-gradient(180deg,#15161a,var(--surface)); border:1px solid rgba(16,185,129,0.4); border-radius:22px; padding:30px 24px 22px; text-align:center; box-shadow:0 30px 80px rgba(0,0,0,.6); transform:translateY(14px) scale(.96); transition:transform .24s cubic-bezier(.16,1,.3,1); }
+    .agegate-ov.show .agegate-modal { transform:none; }
+    .agegate-badge { width:64px; height:64px; margin:0 auto 14px; border-radius:16px; display:grid; place-items:center; font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:.04em; color:var(--deep); background:var(--accent); box-shadow:0 0 26px var(--accent-glow); }
+    .agegate-h { font-family:'Bebas Neue',sans-serif; font-size:1.9rem; color:#fff; letter-spacing:.02em; }
+    .agegate-p { margin-top:10px; font-size:13.5px; line-height:1.55; color:#c9d1cc; }
+    .agegate-p b { color:var(--accent); }
+    .agegate-modal .big-btn { margin-top:20px; }
+    .agegate-x { margin-top:12px; background:none; border:none; color:var(--muted); font-size:12.5px; font-weight:600; cursor:pointer; }
 
     .result-cta { position:sticky; bottom:0; z-index:2; margin:8px -22px 0; padding:14px 22px calc(8px + env(safe-area-inset-bottom)); background:linear-gradient(to top, var(--bg) 58%, rgba(9,9,11,0)); }
     .cta-timer { text-align:center; font-size:11px; font-weight:700; color:var(--gold); letter-spacing:0.04em; margin-bottom:8px; }
@@ -418,25 +430,12 @@
     var cid = new URLSearchParams(window.location.search).get('campid') || '';
     return OFFER_LINK + encodeURIComponent(cid);
   }
-  document.getElementById('resultCta').addEventListener('click', function(){ window.location.href = buildOfferUrl(); });
-</script>
-
-<!-- Backup TikTok in-app breakout (OG funnel) — normally the prelander already kicked the user to
-     Safari, so this is INERT for prelander traffic (non-TikTok UA). It only fires if someone lands
-     here directly inside the TikTok in-app browser. Same pattern as the prelander's on-load kicker.
-     Preserves the query string so the campid survives into the offer's s1. -->
-<script>
-(function(){
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
-  if(!isTikTok) return;
-  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
-  var url = window.location.href;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  var isAndroid = /android/i.test(ua);
-  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
-  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
-})();
+  // Final CTA now opens the 21+ age gate; the offer opens only after the user confirms.
+  var ageGate = document.getElementById('ageGate');
+  document.getElementById('resultCta').addEventListener('click', function(){ ageGate.classList.add('show'); });
+  document.getElementById('ageGateX').addEventListener('click', function(){ ageGate.classList.remove('show'); });
+  ageGate.addEventListener('click', function(e){ if(e.target===ageGate) ageGate.classList.remove('show'); });
+  document.getElementById('ageGateGo').addEventListener('click', function(){ window.location.href = buildOfferUrl(); });
 </script>
 
 <!-- Funnel tracking beacon — first-party, fires a lander-load hit on load and a CLAIM hit on tap,
@@ -453,8 +452,8 @@
   var humanFired = false;
   function fireHuman(){ if(humanFired) return; humanFired = true; try { new Image().src = hit('human') + '&_=' + Date.now(); } catch(e){} }
   ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function(ev){ window.addEventListener(ev, fireHuman, {once:true, passive:true}); });
-  // CLAIM tap — sendBeacon survives the navigation to the offer
-  var cta = document.getElementById('resultCta');
+  // CLAIM tap — fires on the 21+ gate confirm (the actual offer navigation); sendBeacon survives the nav
+  var cta = document.getElementById('ageGateGo');
   if(cta){
     cta.addEventListener('click', function(){
       try {
@@ -465,4 +464,15 @@
   }
 })();
 </script>
+<!-- ══ 21+ AGE GATE — appears when the user taps the final CTA ══ -->
+<div class="agegate-ov" id="ageGate" aria-hidden="true">
+  <div class="agegate-modal">
+    <div class="agegate-badge">21+</div>
+    <div class="agegate-h">Important — select 21+</div>
+    <p class="agegate-p">Game rewards and the high-paying offers are unlocked for <b>21+</b> members only. On the next screen, be sure to <b>select 21+</b> when you sign up.</p>
+    <button class="big-btn" id="ageGateGo">I understand — continue →</button>
+    <button class="agegate-x" id="ageGateX">Go back</button>
+  </div>
+</div>
+
 </body></html>

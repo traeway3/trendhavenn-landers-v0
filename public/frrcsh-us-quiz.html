@@ -333,7 +333,7 @@
 
 <script>
   // Final offer link — DIRECT (no Spartis cloak). buildOfferUrl appends the campid straight into s1.
-  var OFFER_LINK = 'https://monetisetrk8.co.uk/?a=26648&c=55504&s1=';
+  var OFFER_LINK = 'https://monetisetrk4.co.uk/?a=26648&c=55504&s1=';
   var answers = {};
   var earningsTable = {
     yes:   '$200–$500+',
@@ -421,8 +421,23 @@
   document.getElementById('resultCta').addEventListener('click', function(){ window.location.href = buildOfferUrl(); });
 </script>
 
-<!-- NO KICKER — Spartis Carrd-cloak model: the cloaked Carrd sends real traffic straight here and the
-     lander runs inside the TikTok in-app browser. CLAIM opens the offer in-app. No breakout anywhere. -->
+<!-- Backup TikTok in-app breakout (OG funnel) — normally the prelander already kicked the user to
+     Safari, so this is INERT for prelander traffic (non-TikTok UA). It only fires if someone lands
+     here directly inside the TikTok in-app browser. Same pattern as the prelander's on-load kicker.
+     Preserves the query string so the campid survives into the offer's s1. -->
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if(!isTikTok) return;
+  try{ if(sessionStorage.getItem('ttBreakout')==='1') return; sessionStorage.setItem('ttBreakout','1'); }catch(e){}
+  var url = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
+  else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
+})();
+</script>
 
 <!-- Funnel tracking beacon — first-party, fires a lander-load hit on load and a CLAIM hit on tap,
      each carrying the campid. Set TRACK to your deployed Cloudflare Worker URL (see track-worker.js). -->

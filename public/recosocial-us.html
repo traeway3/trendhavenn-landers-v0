@@ -407,7 +407,8 @@
   }
 
   function buildOfferUrl(){
-    var cid = new URLSearchParams(window.location.search).get('campid') || '';
+    var _q = new URLSearchParams(window.location.search);
+    var cid = _q.get('campid') || _q.get('cid') || _q.get('c') || _q.get('s1') || _q.get('sub1') || '';
     return OFFER_LINK + encodeURIComponent(cid);
   }
   document.getElementById('resultCta').addEventListener('click', function(){ window.location.href = buildOfferUrl(); });
@@ -422,7 +423,8 @@
 (function(){
   var TRACK = 'https://funnel-track.traehollomon.workers.dev/t';  // your Cloudflare Worker
   var PAGE = 'reco';  // lander tag
-  var campid = new URLSearchParams(window.location.search).get('campid') || '';
+  var _qp = new URLSearchParams(window.location.search);
+  var campid = _qp.get('campid') || _qp.get('cid') || _qp.get('c') || _qp.get('s1') || _qp.get('sub1') || '';
   function hit(ev){ return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(campid) + '&p=' + PAGE; }
   // lander load (everyone — bots + real)
   try { new Image().src = hit('load') + '&_=' + Date.now(); } catch(e){}

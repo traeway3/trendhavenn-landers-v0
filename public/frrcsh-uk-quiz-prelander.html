@@ -14,13 +14,25 @@
 html{background:#09090b;-webkit-text-size-adjust:100%}
 body{
   font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;
-  background:#09090b;color:#f0f2f5;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:#09090b;
+  color:#f0f2f5;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
   padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 :root{
-  --green:#10b981;--green-deep:#059669;--green-rgb:16,185,129;
-  --text:#f0f2f5;--surface:#111114;--border:rgba(16,185,129,0.2);
+  --green:#10b981;
+  --green-deep:#059669;
+  --green-bright:#34d399;
+  --green-rgb:16,185,129;
+  --text:#f0f2f5;
+  --muted:#6b7280;
+  --surface:#111114;
+  --border:rgba(16,185,129,0.2);
 }
 .ambient{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .ambient::before{content:"";position:absolute;width:700px;height:700px;top:-250px;left:-180px;background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%);animation:drift1 22s ease-in-out infinite}
@@ -30,20 +42,52 @@ body{
 @keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes textIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes arrowBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-@keyframes btnPulse{0%,100%{box-shadow:0 10px 28px rgba(16,185,129,.3),inset 0 1px 0 rgba(255,255,255,.18);transform:scale(1)}50%{box-shadow:0 14px 40px rgba(16,185,129,.48),inset 0 1px 0 rgba(255,255,255,.18);transform:scale(1.034)}}
+@keyframes btnPulse{
+  0%,100%{box-shadow:0 10px 28px rgba(16,185,129,.3),inset 0 1px 0 rgba(255,255,255,.18);transform:scale(1)}
+  50%{box-shadow:0 14px 40px rgba(16,185,129,.48),inset 0 1px 0 rgba(255,255,255,.18);transform:scale(1.034)}
+}
 @keyframes shine{0%{left:-100%}100%{left:160%}}
-.card{position:relative;z-index:10;width:calc(100% - 48px);max-width:340px;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:48px 28px 44px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 12px 48px rgba(16,185,129,0.13),0 2px 8px rgba(16,185,129,0.07);animation:cardIn .65s cubic-bezier(.16,1,.3,1) both .05s}
-.icon-wrap{width:88px;height:88px;margin:0 auto 26px;border-radius:22px;border:1px solid rgba(16,185,129,0.25);background:rgba(16,185,129,0.10);display:grid;place-items:center;animation:iconGlow 3s ease-in-out infinite}
+.card{
+  position:relative;z-index:10;
+  width:calc(100% - 48px);max-width:340px;
+  background:var(--surface);border:1px solid var(--border);border-radius:24px;
+  padding:48px 28px 44px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  box-shadow:0 12px 48px rgba(16,185,129,0.13),0 2px 8px rgba(16,185,129,0.07);
+  animation:cardIn .65s cubic-bezier(.16,1,.3,1) both .05s;
+}
+.icon-wrap{
+  width:88px;height:88px;margin:0 auto 26px;border-radius:22px;
+  border:1px solid rgba(16,185,129,0.25);background:rgba(16,185,129,0.10);
+  display:grid;place-items:center;animation:iconGlow 3s ease-in-out infinite;
+}
 @keyframes iconGlow{0%,100%{box-shadow:0 0 30px rgba(16,185,129,0.2)}50%{box-shadow:0 0 60px rgba(16,185,129,0.4)}}
 .icon-wrap svg{width:36px;height:36px;color:var(--green);stroke-width:2.5}
-.headline{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(26px,8vw,34px);font-weight:800;line-height:1.12;color:#f0f2f5;animation:textIn .6s cubic-bezier(.16,1,.3,1) both .25s}
-.headline .hi{background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-top:3px}
+.headline{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-size:clamp(26px,8vw,34px);font-weight:800;line-height:1.12;color:#f0f2f5;
+  animation:textIn .6s cubic-bezier(.16,1,.3,1) both .25s;
+}
+.headline .hi{
+  background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;margin-top:3px;
+}
 .arrow-wrap{margin:26px 0 24px;animation:textIn .6s cubic-bezier(.16,1,.3,1) both .4s}
 .arrow{display:inline-block;animation:arrowBounce 1.2s ease-in-out infinite}
 .arrow svg{width:30px;height:30px;color:var(--green);filter:drop-shadow(0 0 6px rgba(var(--green-rgb),.4))}
-.cta-btn{display:block;width:100%;padding:20px 24px;background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 100%);color:#04140d;font-family:"DM Sans",sans-serif;font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;position:relative;overflow:hidden;animation:btnPulse 2s ease-in-out infinite, textIn .6s cubic-bezier(.16,1,.3,1) both .55s;transition:transform .12s;user-select:none;-webkit-user-select:none}
+.cta-btn{
+  display:block;width:100%;padding:20px 24px;
+  background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 100%);
+  color:#04140d;font-family:"DM Sans",sans-serif;font-size:15px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;
+  position:relative;overflow:hidden;
+  animation:btnPulse 2s ease-in-out infinite, textIn .6s cubic-bezier(.16,1,.3,1) both .55s;
+  transition:transform .12s;user-select:none;-webkit-user-select:none;
+}
 .cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);animation:shine 3.5s ease-in-out infinite 2s;pointer-events:none}
 .cta-btn:active{transform:scale(.96)!important;animation-play-state:paused}
+.cta-btn.loading{opacity:.8}
 </style>
 </head>
 <body>
@@ -72,7 +116,9 @@ body{
 </div>
 
 <script>
-// === CONTINUE BUTTON — opens in new tab, passes all URL params ===
+// === CONTINUE BUTTON — opens the lander in a NEW TAB (window.open _blank); on the TikTok in-app
+// browser that _blank pop bumps the user out to the device browser. Passes all URL params (subIDs)
+// through; same-tab fallback if the popup is blocked. ===
 (function(){
   var DEST = 'https://www.trendhavenn.com/frrcsh-uk-quiz.html';
   function buildUrl(){
@@ -86,7 +132,7 @@ body{
 })();
 </script>
 
-<!-- TikTok In-App Browser Breakout (pre-lander level) -->
+<!-- TikTok In-App Browser Breakout (pre-lander level) — fires ON LOAD -->
 <script>
 (function(){
   var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -98,6 +144,32 @@ body{
   var isAndroid = /android/i.test(ua);
   if(isIOS){ window.location.href='x-safari-'+url; setTimeout(function(){window.location.href=url;},25); }
   else if(isAndroid){ window.location.href='intent://'+url.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){window.location.href=url;},25); }
+})();
+</script>
+
+<!-- Funnel tracking beacon (lander tag: uk-pre) — prelander load + human signal + Continue-tap -->
+<script>
+(function(){
+  var TRACK = 'https://px.trendhavenn.com/t';  // your Cloudflare Worker
+  var PAGE = 'uk-pre';  // lander tag
+  var campid = new URLSearchParams(window.location.search).get('campid') || '';
+  function hit(ev){ return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(campid) + '&p=' + PAGE; }
+  // prelander load (everyone — bots + real)
+  try { new Image().src = hit('load') + '&_=' + Date.now(); } catch(e){}
+  // human signal — first real interaction; bots almost never scroll/touch/move
+  var humanFired = false;
+  function fireHuman(){ if(humanFired) return; humanFired = true; try { new Image().src = hit('human') + '&_=' + Date.now(); } catch(e){} }
+  ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function(ev){ window.addEventListener(ev, fireHuman, {once:true, passive:true}); });
+  // Continue tap (the prelander's "claim" equivalent — intent to proceed)
+  var cta = document.getElementById('ctaBtn');
+  if(cta){
+    cta.addEventListener('click', function(){
+      try {
+        if(navigator.sendBeacon){ navigator.sendBeacon(hit('claim')); }
+        else { new Image().src = hit('claim') + '&_=' + Date.now(); }
+      } catch(e){}
+    }, true);
+  }
 })();
 </script>
 </body>

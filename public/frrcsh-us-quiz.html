@@ -453,7 +453,7 @@
      each carrying the campid. Set TRACK to your deployed Cloudflare Worker URL (see track-worker.js). -->
 <script>
 (function(){
-  var TRACK = 'https://funnel-track.traehollomon.workers.dev/t';  // your Cloudflare Worker
+  var TRACK = 'https://px.trendhavenn.com/t';  // your Cloudflare Worker
   var PAGE = 'us';  // lander tag — us / uk / oz
   var campid = new URLSearchParams(window.location.search).get('campid') || '';
   function hit(ev){ return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(campid) + '&p=' + PAGE; }

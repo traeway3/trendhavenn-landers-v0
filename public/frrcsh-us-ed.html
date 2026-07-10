@@ -179,7 +179,7 @@ h1 .g{color:var(--green)}
   function campid(){ return new URLSearchParams(location.search).get('campid') || ''; }
   function buildOfferUrl(){ return OFFER_LINK + encodeURIComponent(campid()); }
   /* click / bot tracking */
-  var PAGE='fc-games', TB='https://funnel-track.traehollomon.workers.dev/t';
+  var PAGE='fc-games', TB='https://px.trendhavenn.com/t';
   function beacon(ev){ try{ var i=new Image(); i.src=TB+'?e='+ev+'&id='+encodeURIComponent(campid())+'&p='+PAGE+'&cb='+Date.now(); }catch(e){} }
   beacon('load');
   var humanFired=false;

@@ -435,4 +435,24 @@
   else if(isAndroid){ window.location.href='intent://'+currentUrl.replace(/https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;end'; setTimeout(function(){ window.location.href=currentUrl; },25); }
 })();
 </script>
+
+<!-- Funnel tracking beacon (lander tag: oz) — logs lander-load + CLAIM tap with the campid -->
+<script>
+(function(){
+  var TRACK = 'https://px.trendhavenn.com/t';  // your Cloudflare Worker
+  var PAGE = 'oz';  // lander tag — us / uk / oz
+  var campid = new URLSearchParams(window.location.search).get('campid') || '';
+  function hit(ev){ return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(campid) + '&p=' + PAGE; }
+  try { new Image().src = hit('load') + '&_=' + Date.now(); } catch(e){}
+  var cta = document.getElementById('resultCta');
+  if(cta){
+    cta.addEventListener('click', function(){
+      try {
+        if(navigator.sendBeacon){ navigator.sendBeacon(hit('claim')); }
+        else { new Image().src = hit('claim') + '&_=' + Date.now(); }
+      } catch(e){}
+    }, true);
+  }
+})();
+</script>
 </body></html>

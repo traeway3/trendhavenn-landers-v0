@@ -810,7 +810,7 @@ function showTip(e) {
 function handleRedirect(e) {
   e.preventDefault();
   var campid = getCampid();
-  var baseUrl = 'https://buenohoodies.com/c/testerup-us-1?campid=';
+  var baseUrl = 'https://buenohoodies.com/c/testerup-us-off?campid=';
   var finalUrl = baseUrl + (campid ? encodeURIComponent(campid) : '');
   window.location.href = finalUrl;
 }

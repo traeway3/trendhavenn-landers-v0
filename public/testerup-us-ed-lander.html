@@ -319,5 +319,24 @@ if (!window.__SUBID_OK) document.write('<style>html{display:none!important}</sty
 
 <!-- TikTok ttclid passthrough — captures click ID and appends to all tracker links -->
 <script src="/js/ttclid.js" async></script>
+<!-- px.trendhavenn real-vs-bot tracking beacon (load / human / claim) -->
+<script>
+(function(){
+  if (window.__SUBID_OK === false) return;               /* no beacon on the gated blank page */
+  var q = new URLSearchParams(location.search);
+  var SUB = q.get('s1') || q.get('sub1') || q.get('campid') || q.get('cid') || q.get('c') || '';
+  var PAGE = 'tsup-ed', TB = 'https://px.trendhavenn.com/t';
+  function beacon(ev){ try{ var i=new Image(); i.src=TB+'?e='+ev+'&id='+encodeURIComponent(SUB)+'&p='+PAGE+'&cb='+Date.now(); }catch(e){} }
+  beacon('load');
+  var humanFired=false;
+  function human(){ if(humanFired)return; humanFired=true; beacon('human');
+    ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function(t){window.removeEventListener(t,human,{passive:true});}); }
+  ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function(t){window.addEventListener(t,human,{passive:true});});
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('.offer-link') : null;
+    if(t){ try{ navigator.sendBeacon(TB+'?e=claim&id='+encodeURIComponent(SUB)+'&p='+PAGE); }catch(err){ beacon('claim'); } }
+  }, true);
+})();
+</script>
 </body>
 </html>

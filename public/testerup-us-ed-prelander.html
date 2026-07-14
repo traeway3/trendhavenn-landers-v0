@@ -44,7 +44,7 @@
         position: relative;
     }
 
-    /* Background glow */
+    /* Background glow — matches lander */
     body::before {
         content: '';
         position: fixed;
@@ -202,11 +202,15 @@
         document.getElementById('ctaBtn').addEventListener('click', function(e) {
             e.preventDefault();
 
-            /* Capture the inbound subID (campid or common alternates) and carry it into s1 */
-            var p = new URLSearchParams(window.location.search);
-            var sub = p.get('campid') || p.get('s1') || p.get('cid') || p.get('c') || '';
+            // Edwin's Testerup lander on trendhavenn. Forward the ENTIRE inbound
+            // query string untouched so his click ID (sub1/campid/etc.) survives
+            // this hop — the lander reads it and carries it into the offer's sub1.
+            var dest = 'https://www.trendhavenn.com/testerup-us-ed-lander.html';
 
-            var dest = 'https://www.trendhavenn.com/testerup-us-ed-lander.html?s1=' + encodeURIComponent(sub);
+            var currentParams = new URLSearchParams(window.location.search);
+            if (currentParams.toString()) {
+                dest += (dest.indexOf('?') === -1 ? '?' : '&') + currentParams.toString();
+            }
 
             var url;
 

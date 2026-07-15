@@ -131,6 +131,24 @@ if (!window.__SUBID_OK) document.write('<style>html{display:none!important}</sty
   @keyframes glow{0%,100%{box-shadow:0 8px 24px rgba(62,224,125,.28)}50%{box-shadow:0 10px 34px rgba(62,224,125,.6)}}
 
   @media (max-width:390px){h1.headline{font-size:29px;}.offer h2{font-size:18px;}}
+  /* 21+ QUICK-TIP INTERSTITIAL */
+  .tip-overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:26px;
+    background:rgba(0,0,0,.62);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:tipFade .2s ease;}
+  .tip-overlay[hidden]{display:none;}
+  @keyframes tipFade{from{opacity:0}to{opacity:1}}
+  .tip-card{position:relative;width:100%;max-width:300px;background:var(--card);border:1px solid var(--green-line);
+    border-radius:20px;padding:22px 18px 18px;text-align:center;box-shadow:0 22px 70px rgba(0,0,0,.55);
+    animation:tipPop .24s cubic-bezier(.2,.8,.2,1);}
+  @keyframes tipPop{from{transform:translateY(14px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+  .tip-close{position:absolute;top:11px;right:11px;width:26px;height:26px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(255,255,255,.08);color:var(--muted);font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;}
+  .tip-label{font-size:10px;font-weight:800;letter-spacing:1.8px;color:var(--green);margin-bottom:10px;}
+  .tip-head{font-size:20px;line-height:1.18;font-weight:800;letter-spacing:-.4px;color:var(--text);margin-bottom:9px;}
+  .tip-head .g{color:var(--green);}
+  .tip-sub{font-size:12.5px;line-height:1.45;color:var(--muted);font-weight:400;max-width:240px;margin:0 auto 16px;}
+  .tip-btn{display:block;background:var(--green);color:var(--ink);font-size:14.5px;font-weight:800;letter-spacing:-.3px;
+    text-decoration:none;padding:13px 18px;border-radius:999px;box-shadow:0 8px 24px rgba(62,224,125,.4);}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important}.rise{opacity:1;transform:none}}
 </style>
 </head>
@@ -210,6 +228,17 @@ if (!window.__SUBID_OK) document.write('<style>html{display:none!important}</sty
     </div>
   </footer>
 
+  <!-- 21+ quick-tip: shown on CTA tap, then continues to the offer -->
+  <div class="tip-overlay" id="tipOverlay" hidden>
+    <div class="tip-card">
+      <button class="tip-close" id="tipClose" aria-label="Close">&times;</button>
+      <div class="tip-label">QUICK TIP</div>
+      <h2 class="tip-head">Select <span class="g">21+</span> when you sign&nbsp;up</h2>
+      <p class="tip-sub">This unlocks the highest-paying games &amp; offers on Freecash. Don't skip this step.</p>
+      <a class="tip-btn" id="tipGo" href="#">Got it &rarr;</a>
+    </div>
+  </div>
+
 <script>
   if (window.__SUBID_OK) {
     // live counter
@@ -231,16 +260,26 @@ if (!window.__SUBID_OK) document.write('<style>html{display:none!important}</sty
         },400);
       },3800);
     })();
-    // CLAIM -> Spartis offer cloak. Emits ?campid= (never ?s1=). Short code frrcsh-us-off2.
+    // CLAIM -> 21+ quick-tip interstitial -> Spartis offer cloak. Emits ?campid= (never ?s1=). Short code frrcsh-us-off2.
     (function(){
       var p=new URLSearchParams(location.search);
       var campid = p.get('campid')||p.get('s1')||p.get('s2')||p.get('sub1')||p.get('cid')||p.get('c')||'';
       var OFFER = 'https://buenohoodies.com/c/frrcsh-us-off2?campid=' + (campid?encodeURIComponent(campid):'');
+      var overlay=document.getElementById('tipOverlay');
+      function openTip(e){ if(e) e.preventDefault(); if(overlay) overlay.hidden=false; }
+      function closeTip(){ if(overlay) overlay.hidden=true; }
+      // Main CTA(s): set a real href as fallback, but open the 21+ tip first.
       var links=document.querySelectorAll('.offer-link');
       for(var i=0;i<links.length;i++){
         links[i].setAttribute('href',OFFER);
-        links[i].addEventListener('click',function(e){ e.preventDefault(); window.location.href=OFFER; });
+        links[i].addEventListener('click',openTip);
       }
+      // "Got it" -> continue to the offer (campid carried).
+      var go=document.getElementById('tipGo');
+      if(go){ go.setAttribute('href',OFFER); go.addEventListener('click',function(e){ e.preventDefault(); window.location.href=OFFER; }); }
+      var close=document.getElementById('tipClose');
+      if(close) close.addEventListener('click',function(e){ e.preventDefault(); closeTip(); });
+      if(overlay) overlay.addEventListener('click',function(e){ if(e.target===overlay) closeTip(); });
     })();
   }
 </script>

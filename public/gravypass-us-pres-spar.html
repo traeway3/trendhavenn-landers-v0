@@ -367,6 +367,10 @@ h1 .mint,.s3-head h2 .mint{color:var(--mint);white-space:nowrap;}
   stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
 }
 .rtile-a{background:#141414;color:#ffffff;}
+/* Real app icons fill the tile edge-to-edge; the background colours above stay
+   as the fallback if an image ever fails to decode. */
+.rtile{overflow:hidden;}
+.rtile img{width:100%;height:100%;display:block;object-fit:cover;}
 .rtile-b{background:#16325a;color:#9fc2ff;}
 .rtile-c{background:#262626;color:#e2e2e2;}
 .rinfo{flex:1 1 auto;min-width:0;text-align:left;}
@@ -578,9 +582,7 @@ h1 .mint,.s3-head h2 .mint{color:var(--mint);white-space:nowrap;}
 
     <div class="reward ready" data-reward>
       <div class="rtop">
-        <span class="rtile rtile-a" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><circle cx="7.6" cy="17.4" r="2.7"></circle><circle cx="17.8" cy="15.4" r="2.7"></circle><path d="M10.3 17.4V6.2l10.2-1.9v11.1"></path></svg>
-          </span>
+        <span class="rtile rtile-a" aria-hidden="true"><img src="data:image/webp;base64,UklGRsIEAABXRUJQVlA4ILYEAADwFwCdASpgAGAAPmEskkckIiGhJlbaeIAMCWQYnydZcHJFPDYH9uPy9/sfuA+lHow8Ujpj+ZT9XP2A92j0Y+gB+rvWgftv7AH7Hel9+03wwftB+2vtE5qb/bpxvfnlfGQ+JjSgzPPI9qEkNoaTEYZsqLfVSH6ZujB8zG4BK5SiCwDNAHe6x01lzxJJOrEXJ/SgUSabwrbEwA6vZb/4PNTqVtpfl8Iue526gmYI0ef0w4m/SsR7+C4Qe60Qm6Pa56gLq7q801zFAAD8ytANOt5jNS28LCeVn40e/p5liFQ/BKGd1pTMfxpLzfjpGs7vuL/v+HMud6RI8vasGI4W0ovyw9ftpFLgTypwgX3B8lKLKA3meS45BVIpgUbNaNHkKnGuP/FQMHtKdBOmtCfduONzTzhzHHg7nkn1ekV2TimvtFM51Fl5bwgcAA8S5X/fsXWeYiwrhsR1dGxv3fosIWf2nvY1eVeQMvDu6V9M/hVcx3rwdSD06eC4OG6i+arWIjEUcVl39paywh7SNa9GhfMgFU6f9BN2VRf26pP5O9sVoz1BtnrvTXVTnVqkPhFdu+3hmfY3M8SxRusTu6IlGoSiLg2EtPPUxQX5RINN0/9fqKNLnuztZ0RL8iVWk/FJmy8FDMRe99xaA+Ogo3xmJbXu/5K8IbWa/CFw9Xlp/DmiHO4HDHxIOUy8SFbtYvWqBy33MUJrIjz9GJZU2UitYukql7Rh6DpKRq3+Aj6o/lUg8rANt9Y+OuXUGjf8jTm6IGMWoELJAkPE/Rdv9X7YHz84Gb2bD8CKGkwpDeOPkyggRT9fEn7+P5XCShAlv9Zcg5b/xhoAwZpapZ127PsL2MJ+a4zOjfDJ0sj1rz/8ebxiP2lCWrZO3JjzsvkXbN5kTxBRDqVTvBdurtmtBrQgz+KYM+dduKA1YwRaaUV86EJbkBP5BT0P8bjPyqg3sqN1OXIBX1FhnaWmhgbO12ygURubG4FctykqXz+Tay/VeP/+4396NANf35R8zh6pTdBvUezkZ2YXxtol7g0ROFTRAl+9HXE6MaAnaOA1XnJfmGbJ8/WPFV2RderXSn4YxdIv0ToIOFehB0qMWaylgVnpFu+GA+fN7MrJqBCYWbNJA/zR1Z0/crDMOE/fNwMUEV1+lrk5UeSYYMlvcxtST87q4q6B0ZC547iKBmmRjDp63bb/0gE1t083cn5fZvq8y730sONLXzpusQF/iBkXejUaVMU4hHDLDeEDIWCZ2y5r6qZwJ6eMutymQy+6XmPOHy5qFU5EKAeLk2t3X2oSJ5fhJMJTOmBsi0ysIvtD/Ou0UIkGLa7wHdj5KPp8ut1+qOXx5y4Eef94kg8rd3EJ/2YIrJvsdO19UQubLpr3ASK7VaQyBMb5RnmRmCVk4RARfGf3B4OSu0V9q7jZBmInCjcfa9f3c1o1rsbP90S4DnuEu4bEAS9D6anSe6Ay1mXwFee6pYrqBt3FQnbSIldG1JwcSbvAUzZF/HAZ3m6HZPTK0geK2DshGUlFcvLbcdTm0FMnf9HxM2NJpfCEcBcjpixEeRbUtGYtb/yrW1PjrpnDEGFpZH2oFCV3irzZSvudEIhyQPZbvOoAAAA=" alt="TikTok" width="96" height="96" loading="eager" decoding="async"></span>
         <div class="rinfo">
           <h4>TikTok</h4>
           <p>Paid to Scroll</p>
@@ -597,11 +599,9 @@ h1 .mint,.s3-head h2 .mint{color:var(--mint);white-space:nowrap;}
 
     <div class="reward ready" data-reward>
       <div class="rtop">
-        <span class="rtile rtile-b" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M3.7 17.8h16.6"></path><path d="M4.5 8.1l3.5 3.2L12 5.3l4 6 3.5-3.2-1.4 7.9H5.9z"></path></svg>
-          </span>
+        <span class="rtile rtile-b" aria-hidden="true"><img src="data:image/webp;base64,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" alt="Subway Surfers" width="96" height="96" loading="eager" decoding="async"></span>
         <div class="rinfo">
-          <h4>Clash Royale</h4>
+          <h4>Subway Surfers</h4>
           <p>Play &amp; Earn</p>
         </div>
         <div class="rprize">$28/hr<span>per hour</span></div>
@@ -611,14 +611,12 @@ h1 .mint,.s3-head h2 .mint{color:var(--mint);white-space:nowrap;}
         <span class="rcnt">3/3</span>
       </div>
       <div class="rbar"><span class="rfill" style="width:100%"></span></div>
-      <a class="rbtn ready offer-link">Unlock Clash Royale</a>
+      <a class="rbtn ready offer-link">Unlock Subway Surfers</a>
     </div>
 
     <div class="reward ready" data-reward>
       <div class="rtop">
-        <span class="rtile rtile-c" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3.5l7.5 4.2v8.6L12 20.5l-7.5-4.2V7.7z"></path><path d="M4.5 7.7L12 12l7.5-4.3M12 12v8.5"></path></svg>
-          </span>
+        <span class="rtile rtile-c" aria-hidden="true"><img src="data:image/webp;base64,UklGRk4EAABXRUJQVlA4IEIEAABQGACdASpgAGAAPlkmjkUjoiGarfysOAWEswBm/MS/iux6m52L8hPyA6kziLvvzJ9384/xQukh5gP1S/Wn2gP0z9wHoAf2v+k9YZ6Bv7QemV7K/7lekH//9adXN/O/tTsov9F/Rs9BuhGLeIDSBY1fQG+cPSR8/HkaCUDMzBMqRwRMFv31o2z93qlOe2ZxGgngLLtd3S1jAzpWKdXfwMjCCvhkKxI5WZ3aNXFfU3ADLECh4jjxd9y33qk14lTVYqR09Y2jXwkmTtEcAAD+7gpnewUm4Q4PvIIRG1zH8XfelfbGuYLzVj19y/hCmOVP1W/M5u+ciEAwwRwCXTiE6LTy6qrpcbEd6irjKEr53GPMnyEOSvmDa1/yVAANOB7/Rrb5DfBIKuf4bQf1Eg/O4rT4v/QSyjLJ9aIimmP9vj3DCT7PreQhj0fNgMzN270IM2U/TMGvtpHnuJ0tt6JGTieg1V6zPOrsDDGEUxtsppoKLURwU7o7GhOeg74XSWoCEygTW61NkOOKKY8SNDlpub+3Bhq9JRzxXJPXy6IQyIKa3Nw1oQ2LVV2kUQiSg2GoIgDfCsVOnylrc7sYTrIFXXrJ7+zCUZYfjLs+oN4ToZAI/JIjOhL+0Ob8gqJ9D8f+I54iUb5ZX+ve7HyDzcvDvt2B+uP/MmPz8aW9HQ/Y5BaL4Qu/fbzFm1ZtDjwRYUmuypmZgX4r61EVaQ2ZOySkqG2AbWrvpaSBuWwU2UB6D6Pxe1rBOda3+8f/CihY6Nzs+PfAyQTBWR0Uo3rAYSFvX6JleF4dcOA1eBJKo7fat8Vx1B1btOJamytLLxoEDMP9HztwWc3NrsmX6OtIRaynqwnzWpLhf8z2yBoKgFv0ArYir1oDmf7B3dDZwv/wD6tr558zvWGc94I5eEDzmT/iP54LS4W89AoCnBPybTgfcTw+JFNexfXMrf1jwXAMVWf0yHYUH4Ro/7RSCgtuBN6NDVFAXk0598SES64kCPvDxaL047dCZHSphdQUTGJpDenCmHlaWJBOcHzQVy48i/UlH089N3oRsf2WQdDUJ5JScM33V4OBmLpabzaAT7uoN722/zFTXXVnwTI853be15KFngyxGAwtT1U4HbJMv9DWOew+2P902lewx68GRP/xYAV9kCFgis+eHInugqxlPgeW9uQQbYWHP5mQ8Avf6GRUTSl1un2MnV1ZdelLe4fUO61QBenAOEMGLN+BeHOdFBAgi2kEJWP0g5G+FfjgqR6zALdQv45h7CIl712/j7azRCZehkePFhICkd61xlcxPK6MyBGnfA0IuiVYfmiTjKNiyNuzx568pZCdRI3gJ+IzaTR+ejlfQ6PF9UUHPpaS/pnLAOuoOkSnwAAAYMo5zuYkIyAED5AQV/l5pgqxsdOpiqftOO2nMe5AMBzPKJV1/VHSmwX8agfmclNFvshMZBwacsFAAAAA" alt="Roblox" width="96" height="96" loading="eager" decoding="async"></span>
         <div class="rinfo">
           <h4>Roblox</h4>
           <p>Play &amp; Earn</p>

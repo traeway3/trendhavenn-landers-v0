@@ -267,15 +267,21 @@ html{scroll-behavior:smooth}
 <script>
 // ---- CTA & Redirect ----
 function redirectToOffer() {
-  // MANUAL-launch SubID chain. The prelander forwards the entire inbound query
-  // string untouched, so the click ID can arrive under whichever name the ad
-  // was built with. Widest sensible net, first match wins. Always re-emitted as
-  // ?campid= — the real destination and the forward param live behind the short
-  // code, so the offer can be repointed without a redeploy.
-  var params = new URLSearchParams(window.location.search);
-  var campid = params.get('campid') || params.get('sub1') || params.get('s1')
-            || params.get('s2') || params.get('cid') || params.get('c') || '';
-  var href = 'https://buenohoodies.com/c/frrcsh-us-glt-off?campid=' + encodeURIComponent(campid);
+  // MANUAL / straight-link funnel: build the Glitchy Freecash offer link at
+  // runtime and forward the inbound click ID into source. NO short code —
+  // direct network link. (The /c short code is Spartis plumbing: on a bot
+  // launch Spartis appends the Forward Param itself. There is no Spartis in a
+  // manual launch, so the page has to append it.)
+  //
+  // Read whatever the prelander forwarded (broad chain so no click ID is missed).
+  var p = new URLSearchParams(location.search);
+  var subid = p.get('sub1') || p.get('campid') || p.get('s1') || p.get('s2')
+           || p.get('cid') || p.get('c') || '';
+
+  // Glitchy smart link. The click ID rides in `source`, which is what Glitchy
+  // reads back out on the postback ({source}), so source MUST carry the value
+  // above. Glitchy re-maps it to sub2 on the advertiser URL.
+  var href = 'https://trksy.org/aff_c?tl_id=9ea88677&source=' + encodeURIComponent(subid);
   setTimeout(function () { window.location.href = href; }, 500);
 }
 var preGoModal = document.getElementById('preGoModal');

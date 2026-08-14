@@ -348,12 +348,20 @@
     return p.get('campid') || p.get('s1') || p.get('s2') || '';
   }
   function offerUrl(){
-    var campid = getCampid();
-    // BOT LAUNCH (Spartis): the offer short code. Emits ?campid= (never ?source=).
-    // Short code MUST match the Offer Links tab entry — Destination
-    // https://trksy.org/aff_c?tl_id=9ea88677 with NO trailing sub param, Forward Param
-    // "source" (Glitchy's name for the sub ID). Spartis appends it, not this page.
-    return 'https://buenohoodies.com/c/frrcsh-us-glt-off?campid=' + (campid ? encodeURIComponent(campid) : '');
+    var v = getCampid();
+    v = v ? encodeURIComponent(v) : '';
+    // BOT LAUNCH (Spartis): the offer short code frrcsh-us-glt-off. Destination
+    // https://trksy.org/aff_c?tl_id=9ea88677 with NO trailing sub param; Forward Param
+    // "source" (Glitchy's name for the sub ID) — Spartis appends that outbound, not us.
+    //
+    // Inbound we send the sub ID under BOTH names. Every lander in this account sends
+    // ?campid= (including Yaser's, which is scaling), but the Offer Links row displays
+    // the short link as ?source={your_source}. Sending both removes the guess: it's the
+    // same value under either name, so whichever one /c reads, the sub ID matches. If /c
+    // also passes the spare through, the destination just gets a duplicate of the same
+    // value — harmless. The dangerous case is an EMPTY duplicate, which is why the
+    // Destination field itself must stay bare.
+    return 'https://buenohoodies.com/c/frrcsh-us-glt-off?campid=' + v + '&source=' + v;
   }
 
   // ---- Screen toggle: game picker -> claim (keeps campid in the URL) ----

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#141414">
+  <link rel="icon" type="image/webp" href="data:image/webp;base64,UklGRugDAABXRUJQVlA4INwDAAAQFACdASpAAEAAPmEikEUkIiGYDAZ8QAYEtgBkDCGDz9H/Cj8jOku554QOk9MB2SzgPEh6QH8t/1/qA/ZnqAegP+1vWIegB0lX7eftx7O0SsqC9JHYDtI7ufAjSBTRPGD+beoF+sHWSUT64N8ay3DlonILa4gdyVdJfw/0bVjb9YUqizUDzf4yUs+rwdgE3zDp/+OS/lj8pILz0v7JOrn1u5QCLiDu9YgAAP7uCmf/fJfYXL/3V//5dl2M2yGV1fmfKjp7djrs3N59WkzsfyAii/gDBFVUlzlTysSxW1i5H4dZWoJqYUQm7Gw17kXemgeIa/URoz2yzEfKePvo58U3CdhA/4T4fpfOe/O+RjaOBQ5UhncSYQTIJqi5FSD7v9YXoh37/pnHgS6vt6Um+ZDdvEBetDXj6ctXbfcVPv1ytEbj5dWDfNbBpJOYq8WAD8l11UKoastQTUdKzc5R7bLKmhO3DQhibrUM3857LaJ3P/g3xFKqXcu15Xa1ZEVx8FpF76b/HwZtNEN6we+40sfbX6kH22ZQVKn3xnLvA56JYSkKeaGqArEzRGk2oJzvXwVuZheg0ZrryQrMml0dlo6+FjJz8tZDagmaEKvGLqDj6SpDSgKRGc6axn959SNUjdlF9bWpAoXLc1RpOyhO+qy7qL72Bv1RMOX2kN8bYIumY4DmHnkZKQlvLKFV9cHB2/85mKmYHJCeru1/sGYUupJlKqYvxcHzTni1Xyf0Zvc9HG/L26bEcJLfkXWHp6tkfbN3taa4uZHwVeguFbQWwDlXmiqhrKUJfKuQOdDB/ATJTWfcJbXvLR8zGOHc9V+dyzYPWvBBs2BFVaT3uMYxL5CXNFf1o44m/CkHd5OI+5n8AHKelM6ZbuVDiUFH5M8kUu7zJCucbND3fEot4JZxc5xoX5zPWI+vbHCdl9HPzSe8w5Y4AobBzWQfuvvy9WUCPz7GBd92JqGwc1iZ4+33vwfOdH7NulXH2++v9q1eHi/1JM54iRbZgWZotY68Zy5HbjWF0u1oz0EC47DmwuTcJ0hei/t12XSy5EPfipYPh7ogAJb/cs7+q+L5VvOg+QfgeOwkSfKuCMw7Ha7RM4NZ7Ocv4f4fiF9LoiUTAfdG751nx16FHM5QH/3dJ1fqTk++Z/DuyVIlb4r/0hFcEvDPhfzY6iQ1nbqoKj5yz4yFbAA1hTL2VL03tgKJJZHLCp1hnu2ZnKUu0CKvBHvWnCiu7cuqbfqzUK+UsnkFyg2cskD4KHFPuFgd/53mXPW92CtK1mJZOcoXzm0ySLdrjAueNJH09b8R/s9XBa6QAAAA">
+  <link rel="apple-touch-icon" href="data:image/webp;base64,UklGRugDAABXRUJQVlA4INwDAAAQFACdASpAAEAAPmEikEUkIiGYDAZ8QAYEtgBkDCGDz9H/Cj8jOku554QOk9MB2SzgPEh6QH8t/1/qA/ZnqAegP+1vWIegB0lX7eftx7O0SsqC9JHYDtI7ufAjSBTRPGD+beoF+sHWSUT64N8ay3DlonILa4gdyVdJfw/0bVjb9YUqizUDzf4yUs+rwdgE3zDp/+OS/lj8pILz0v7JOrn1u5QCLiDu9YgAAP7uCmf/fJfYXL/3V//5dl2M2yGV1fmfKjp7djrs3N59WkzsfyAii/gDBFVUlzlTysSxW1i5H4dZWoJqYUQm7Gw17kXemgeIa/URoz2yzEfKePvo58U3CdhA/4T4fpfOe/O+RjaOBQ5UhncSYQTIJqi5FSD7v9YXoh37/pnHgS6vt6Um+ZDdvEBetDXj6ctXbfcVPv1ytEbj5dWDfNbBpJOYq8WAD8l11UKoastQTUdKzc5R7bLKmhO3DQhibrUM3857LaJ3P/g3xFKqXcu15Xa1ZEVx8FpF76b/HwZtNEN6we+40sfbX6kH22ZQVKn3xnLvA56JYSkKeaGqArEzRGk2oJzvXwVuZheg0ZrryQrMml0dlo6+FjJz8tZDagmaEKvGLqDj6SpDSgKRGc6axn959SNUjdlF9bWpAoXLc1RpOyhO+qy7qL72Bv1RMOX2kN8bYIumY4DmHnkZKQlvLKFV9cHB2/85mKmYHJCeru1/sGYUupJlKqYvxcHzTni1Xyf0Zvc9HG/L26bEcJLfkXWHp6tkfbN3taa4uZHwVeguFbQWwDlXmiqhrKUJfKuQOdDB/ATJTWfcJbXvLR8zGOHc9V+dyzYPWvBBs2BFVaT3uMYxL5CXNFf1o44m/CkHd5OI+5n8AHKelM6ZbuVDiUFH5M8kUu7zJCucbND3fEot4JZxc5xoX5zPWI+vbHCdl9HPzSe8w5Y4AobBzWQfuvvy9WUCPz7GBd92JqGwc1iZ4+33vwfOdH7NulXH2++v9q1eHi/1JM54iRbZgWZotY68Zy5HbjWF0u1oz0EC47DmwuTcJ0hei/t12XSy5EPfipYPh7ogAJb/cs7+q+L5VvOg+QfgeOwkSfKuCMw7Ha7RM4NZ7Ocv4f4fiF9LoiUTAfdG751nx16FHM5QH/3dJ1fqTk++Z/DuyVIlb4r/0hFcEvDPhfzY6iQ1nbqoKj5yz4yFbAA1hTL2VL03tgKJJZHLCp1hnu2ZnKUu0CKvBHvWnCiu7cuqbfqzUK+UsnkFyg2cskD4KHFPuFgd/53mXPW92CtK1mJZOcoXzm0ySLdrjAueNJH09b8R/s9XBa6QAAAA">
+  <title>Swagbucks — Get Paid to Play</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- TikTok In-App Browser Breakout Script -->
+<script>
+(function() {
+  return; // DISABLED — remove this line to re-enable the in-app browser breakout
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
+  if (!isTikTok) return;
+  try {
+    if (sessionStorage.getItem('ttBreakout') === '1') return;
+    sessionStorage.setItem('ttBreakout', '1');
+  } catch (e) {}
+  var currentUrl = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if (isIOS) {
+    window.location.href = 'x-safari-' + currentUrl;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  } else if (isAndroid) {
+    var intent = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    window.location.href = intent;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  }
+})();
+</script>
+
+  <style>
+/* Swagbucks theme. Yaser's layout is untouched — only the accent family moved from Freecash
+   green (#00ff88 / #00d175 / #4ADE80 / #22C55E) to Swagbucks royal blue.
+   #3366f7 is sampled directly off the app icon in this folder, not from a brand-palette site
+   (those list #54B5D2, which is the older mark and does not match the current icon). It's
+   saturated but mid-dark, so small text on #141414 uses the lightened tints #6b93fb / #9db6fd
+   while solid fills and gradients use the true #3366f7. The neutral #141414 base is Yaser's. */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background-color:#141414;color:#F4F4F6;min-height:100vh;-webkit-font-smoothing:antialiased;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html{overflow-x:hidden}
+body{overflow-x:clip}
+a,button{pointer-events:auto !important}
+.page-wrapper{max-width:430px;margin:0 auto;padding-bottom:156px;position:relative;background:radial-gradient(560px 320px at 50% -40px,rgba(76,124,250,0.14),transparent 70%),#141414}
+.notif-bar{background:#1A1A1A;border-bottom:1px solid rgba(255,255,255,0.06);color:#D7D7DE;font-size:12.5px;font-weight:500;text-align:center;padding:0 16px;letter-spacing:0.01em;overflow:hidden;height:42px;display:flex;align-items:center;justify-content:center;position:relative}
+.notif-inner{position:absolute;width:100%;text-align:center;transition:opacity 0.35s ease,transform 0.35s ease;padding:0 16px}
+.notif-inner.exit{opacity:0;transform:translateY(-10px);pointer-events:none}
+.notif-inner.enter{opacity:0;transform:translateY(10px)}
+.notif-bar .notif-amount{color:#6b93fb;font-weight:700}
+.notif-bar .notif-flag{font-size:12px;margin-right:5px;opacity:0.7}
+.notif-bar strong{color:#FFFFFF;font-weight:600}
+.card{background:linear-gradient(180deg,#1C1C1C 0%,#161616 100%);border:1px solid rgba(255,255,255,0.06);border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 12px 28px rgba(0,0,0,0.35);margin:14px 16px;padding:26px 22px}
+.hero-card{text-align:center;padding-top:32px;padding-bottom:26px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-90px;left:50%;transform:translateX(-50%);width:320px;height:240px;background:radial-gradient(circle,rgba(76,124,250,0.35) 0%,rgba(76,124,250,0) 70%);pointer-events:none;filter:blur(4px)}
+.hero-logo-wrap{display:flex;justify-content:center;margin-bottom:18px;position:relative;z-index:1}
+.hero-logo-wrap::before{content:'';position:absolute;top:50%;left:50%;width:180px;height:180px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(76,124,250,0.25) 0%,rgba(76,124,250,0) 70%);pointer-events:none;z-index:0}
+.hero-logo-ring{width:92px;height:92px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;border-radius:20px;overflow:hidden;background:#3366f7}
+.hero-logo{width:100%;height:100%;object-fit:contain;border-radius:20px;position:absolute;inset:0}
+.hero-rating{display:inline-flex;align-items:center;gap:6px;background:rgba(76,124,250,0.07);border:1px solid rgba(76,124,250,0.32);border-radius:99px;padding:6px 15px;font-size:13px;font-weight:600;color:#F4F4F6;margin-bottom:20px;position:relative;z-index:1}
+.hero-rating .rating-score{color:#6b93fb;font-weight:700}
+.hero-rating .divider{opacity:0.4}
+.hero-rating .rating-store{color:#F4F4F6;font-weight:600}
+.hero-rating .reviews{font-weight:500;color:#9C9CA6}
+.hero-headline{font-size:30px;font-weight:800;line-height:1.18;color:#FFFFFF;letter-spacing:-0.03em;margin-bottom:12px;position:relative;z-index:1}
+.hero-headline .accent{color:#6b93fb}
+.hero-sub{font-size:14.5px;color:#9C9CA6;line-height:1.6;max-width:290px;margin:0 auto 20px;font-weight:400;position:relative;z-index:1}
+.live-status{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#9db6fd;background:rgba(76,124,250,0.08);border:1px solid rgba(76,124,250,0.25);border-radius:99px;padding:6px 14px;position:relative;z-index:1}
+.live-dot{width:7px;height:7px;background:#6b93fb;border-radius:50%;flex-shrink:0;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(76,124,250,0.4)}50%{box-shadow:0 0 0 5px rgba(76,124,250,0)}}
+.app-card{padding:20px 20px 24px}
+.app-row{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.app-img-wrap{width:76px;height:76px;border-radius:18px;background:linear-gradient(155deg,#232323,#161616);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 16px rgba(0,0,0,0.3);overflow:hidden}
+.app-img{width:100%;height:100%;object-fit:cover}
+.app-info{flex:1;min-width:0}
+.app-title{font-size:16.5px;font-weight:700;color:#FFFFFF;margin-bottom:4px;letter-spacing:-0.01em}
+.app-rating{font-size:12px;color:#9C9CA6;margin-bottom:6px}
+.app-rating .stars{color:#FFC400;letter-spacing:-1px}
+.app-pay{font-size:14px;font-weight:700;color:#6b93fb;letter-spacing:-0.01em}
+.steps-divider{border:none;border-top:1px solid rgba(255,255,255,0.07);margin-bottom:20px}
+.steps-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6B6B76;margin-bottom:16px}
+.steps-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.step-item{display:flex;align-items:center;gap:13px}
+.step-num{width:28px;height:28px;border-radius:9px;background:rgba(76,124,250,0.1);border:1px solid rgba(76,124,250,0.25);color:#6b93fb;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-text{font-size:14.5px;font-weight:500;color:#D7D7DE}
+.trust-strip{display:flex;align-items:stretch;justify-content:space-between;margin:14px 16px;padding:18px 12px;background:#131318;border:1px solid rgba(255,255,255,0.06);border-radius:16px}
+.trust-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.trust-num{font-size:17px;font-weight:800;color:#FFFFFF;letter-spacing:-0.02em}
+.trust-desc{font-size:10.5px;color:#6B6B76;font-weight:600;text-align:center;letter-spacing:0.02em;text-transform:uppercase}
+.trust-sep{width:1px;background:rgba(255,255,255,0.08);margin:2px 0}
+.disclaimer{font-size:11.5px;color:#6B6B76;text-align:center;line-height:1.65;padding:6px 26px 16px}
+.legal-links{display:flex;align-items:center;justify-content:center;gap:10px;padding:0 24px 28px}
+.legal-links a{font-size:11.5px;font-weight:600;color:#6B6B76;text-decoration:none;letter-spacing:0.01em}
+.legal-links a:active{color:#9C9CA6}
+.legal-sep{width:3px;height:3px;border-radius:50%;background:#3A3A42;flex-shrink:0}
+.sticky-cta{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(13,13,17,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,0.08);padding:16px 16px 26px;box-shadow:0 -8px 32px rgba(0,0,0,0.5);z-index:100}
+.cta-eyebrow{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11.5px;font-weight:600;color:#9C9CA6;margin-bottom:10px;letter-spacing:0.01em}
+.cta-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:#6b93fb;flex-shrink:0}
+.cta-buttons{display:flex;gap:10px}
+.btn-store{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;border:none;border-radius:14px;padding:11px 12px;cursor:pointer;font-family:inherit;text-decoration:none;transition:opacity 0.15s,transform 0.1s,box-shadow 0.15s}
+.btn-store:active{opacity:0.9;transform:scale(0.97)}
+.btn-store .store-icon{width:26px;height:26px;flex-shrink:0}
+.btn-store .store-label{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;text-align:left}
+.btn-store .store-small{font-size:10.5px;font-weight:500;letter-spacing:0.01em;opacity:0.9}
+.btn-store .store-big{font-size:15.5px;font-weight:700;letter-spacing:-0.01em}
+.btn-appstore{background:#202024;border:1px solid rgba(255,255,255,0.14);color:#FFFFFF}
+.btn-googleplay{background:linear-gradient(180deg,#3366f7,#1f47c9);color:#ffffff;box-shadow:0 6px 18px rgba(76,124,250,0.35);animation:cta-glow 2.2s ease-in-out infinite}
+@keyframes cta-glow{0%,100%{box-shadow:0 6px 18px rgba(76,124,250,0.35)}50%{box-shadow:0 8px 30px rgba(76,124,250,0.6)}}
+@media(min-width:431px){body{background:#08080A}.page-wrapper{padding-top:12px;padding-bottom:170px;box-shadow:0 0 60px rgba(0,0,0,0.6)}}
+html{scroll-behavior:smooth}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.55s cubic-bezier(0.22,1,0.36,1),transform 0.55s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.08s}
+.reveal-delay-2{transition-delay:0.16s}
+.reveal-delay-3{transition-delay:0.24s}
+.step-item{transition:opacity 0.45s cubic-bezier(0.22,1,0.36,1),transform 0.45s cubic-bezier(0.22,1,0.36,1)}
+/* Pre-go modal */
+.pre-go-overlay{display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;background:rgba(0,0,0,0.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:20px}
+.pre-go-card{background:#1C1C22;border:1px solid rgba(255,255,255,0.1);border-radius:24px;max-width:340px;width:100%;padding:32px 24px 24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,0.65);position:relative}
+.pre-go-close{position:absolute;top:14px;right:16px;background:none;border:none;color:#6B6B76;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px;font-family:inherit;text-decoration:none}
+.pre-go-close:active{color:#9C9CA6}
+.pre-go-kicker{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B76;margin-bottom:10px}
+.pre-go-title{font-size:22px;font-weight:800;color:#FFFFFF;letter-spacing:-0.03em;line-height:1.2;margin-bottom:12px}
+.pre-go-accent{color:#6b93fb}
+.pre-go-desc{font-size:13.5px;color:#9C9CA6;line-height:1.65;margin-bottom:26px}
+.pre-go-btn{display:block;width:100%;padding:15px;border:none;border-radius:12px;background:linear-gradient(180deg,#3366f7,#1f47c9);color:#ffffff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity 0.15s,transform 0.1s;letter-spacing:-0.01em;text-align:center;text-decoration:none}
+.pre-go-btn:active{opacity:0.88;transform:scale(0.97)}
+.pre-go-btn.loading{display:flex;align-items:center;justify-content:center;gap:10px;opacity:0.85;cursor:default}
+.pre-go-btn.loading:active{transform:none}
+.pre-go-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.35);border-top-color:#ffffff;border-radius:50%;flex-shrink:0;animation:pre-go-spin 0.65s linear infinite}
+@keyframes pre-go-spin{to{transform:rotate(360deg)}}
+
+/* ---- mobile ladder (same set used on frrcsh-us-glt-spar2.html) ----
+   Yaser's file only has the >=431px desktop rule, so nothing below 430 was ever tuned. */
+@media(max-width:400px){
+  .card{margin:12px 14px;padding:24px 18px}
+  .hero-headline{font-size:28px}
+  .hero-sub{font-size:14px}
+  .app-img-wrap{width:70px;height:70px}
+  .trust-strip{margin:12px 14px;padding:16px 10px}
+  .btn-store .store-big{font-size:15px}
+}
+@media(max-width:360px){
+  .card{margin:11px 12px;padding:22px 16px}
+  .hero-card{padding-top:28px;padding-bottom:22px}
+  .hero-logo-ring{width:82px;height:82px}
+  .hero-headline{font-size:26px}
+  .hero-sub{font-size:13.5px;margin-bottom:16px}
+  .hero-rating{font-size:12.5px;padding:5px 13px;margin-bottom:16px}
+  .live-status{font-size:12.5px}
+  .app-img-wrap{width:64px;height:64px;border-radius:16px}
+  .app-title{font-size:15.5px}
+  .step-text{font-size:13.5px}
+  .trust-strip{margin:11px 12px;padding:15px 8px}
+  .trust-num{font-size:16px}
+  .trust-desc{font-size:10px}
+  .sticky-cta{padding:14px 12px 22px}
+  .btn-store{padding:10px 8px;gap:8px}
+  .btn-store .store-icon{width:23px;height:23px}
+  .btn-store .store-big{font-size:14px}
+  .btn-store .store-small{font-size:10px}
+  .cta-eyebrow{font-size:11px}
+}
+@media(max-width:340px){
+  .card{margin:10px 10px;padding:20px 14px}
+  .hero-logo-ring{width:74px;height:74px}
+  .hero-headline{font-size:24px}
+  .hero-sub{font-size:13px}
+  .notif-bar{font-size:11.5px}
+  .app-img-wrap{width:58px;height:58px}
+  .app-title{font-size:15px}
+  .app-pay{font-size:13px}
+  .step-text{font-size:13px}
+  .step-num{width:26px;height:26px;font-size:12px}
+  .trust-strip{margin:10px 10px;padding:14px 6px}
+  .trust-num{font-size:15px}
+  .trust-desc{font-size:9px}
+  .disclaimer{font-size:11px;padding:6px 18px 14px}
+  .btn-store{padding:10px 6px;gap:6px}
+  .btn-store .store-icon{width:21px;height:21px}
+  .btn-store .store-big{font-size:13px}
+  .btn-store .store-small{font-size:9.5px}
+}
+/* short viewports — keep the hero and the sticky CTA from colliding */
+@media(max-height:680px){
+  .hero-card{padding-top:24px;padding-bottom:20px}
+  .hero-logo-wrap{margin-bottom:14px}
+  .hero-rating{margin-bottom:14px}
+  .hero-sub{margin-bottom:16px}
+  .card{margin-top:11px;margin-bottom:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <div class="notif-bar">
+    <div class="notif-inner" id="notif-msg"><span class="notif-flag">🇺🇸</span><strong>Marcus W.</strong> just earned <span class="notif-amount">$14.70</span> — paid instantly</div>
+  </div>
+
+  <div class="card hero-card reveal visible">
+    <div class="hero-glow"></div>
+    <div class="hero-logo-wrap">
+      <div class="hero-logo-ring">
+        <img class="hero-logo" src="data:image/webp;base64,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" alt="Swagbucks logo">
+      </div>
+    </div>
+    <div>
+      <span class="hero-rating">
+        <span class="rating-score">4.4</span>
+        <span class="divider">·</span>
+        <span class="rating-store">App Store</span>
+        <span class="reviews">(148K+ ratings)</span>
+      </span>
+    </div>
+    <h1 class="hero-headline">Get paid <br><span class="accent">to play</span></h1>
+    <p class="hero-sub">Earn real cash and gift cards playing games, completing tasks, and testing apps. Cash out from just $1.</p>
+    <div>
+      <span class="live-status">
+        <span class="live-dot"></span>
+        <span id="liveCount">1,853</span> people earning right now
+      </span>
+    </div>
+  </div>
+
+  <div class="card app-card reveal">
+    <div class="app-row">
+      <div class="app-img-wrap">
+        <img class="app-img" src="data:image/webp;base64,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" alt="Block Blast">
+      </div>
+      <div class="app-info">
+        <div class="app-title">Block Blast</div>
+        <div class="app-rating">4.8 · Top Rated</div>
+        <div class="app-pay">Pay: $36/hr</div>
+      </div>
+    </div>
+    <hr class="steps-divider">
+    <div class="steps-label">How it works</div>
+    <ol class="steps-list">
+      <li class="step-item reveal reveal-delay-1"><span class="step-num">1</span><span class="step-text">Sign up on Swagbucks (select 21+)</span></li>
+      <li class="step-item reveal reveal-delay-2"><span class="step-num">2</span><span class="step-text">Play games &amp; complete tasks</span></li>
+      <li class="step-item reveal reveal-delay-3"><span class="step-num">3</span><span class="step-text">Withdraw via PayPal, Amazon, or Visa</span></li>
+    </ol>
+  </div>
+
+  <div class="trust-strip reveal">
+    <div class="trust-item"><span class="trust-num">$800M+</span><span class="trust-desc">Paid Out</span></div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-num">4.4★</span><span class="trust-desc">App Rating</span></div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-num">$0</span><span class="trust-desc">to Join</span></div>
+  </div>
+
+  <p class="disclaimer reveal">Availability, rewards, and eligibility may vary by user, location, and completed activity. Results are not guaranteed and are based on individual participation. Earnings vary by offer.</p>
+
+  <div class="legal-links">
+    <a href="https://www.swagbucks.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+    <span class="legal-sep"></span>
+    <a href="https://www.swagbucks.com/terms" target="_blank" rel="noopener">Terms of Service</a>
+  </div>
+
+</div>
+
+<div class="sticky-cta">
+  <div class="cta-eyebrow"><span class="dot"></span>Free to join · Cash out from $1</div>
+  <div class="cta-buttons">
+    <a href="#" class="btn-store btn-appstore" id="ctaAppStore">
+      <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.66c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.71-3.19-1.73-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.87-.76-1.48.02-2.84.86-3.6 2.18-1.53 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.25 2.74 2.2 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.71.71 2.87.69 1.19-.02 1.94-1.08 2.66-2.14.84-1.23 1.19-2.42 1.21-2.48-.03-.01-2.32-.89-2.34-3.5zM14.9 5.4c.6-.74 1.01-1.75.9-2.77-.87.04-1.94.59-2.57 1.31-.56.64-1.06 1.68-.93 2.67.98.08 1.98-.5 2.6-1.21z"/></svg>
+      <span class="store-label"><span class="store-small">Download on the</span><span class="store-big">App Store</span></span>
+    </a>
+    <a href="#" class="btn-store btn-googleplay" id="ctaGooglePlay">
+      <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3c-.25.26-.4.67-.4 1.2v17c0 .53.15.94.4 1.2l.06.06 9.53-9.53v-.22L3.66 2.24l-.06.06zm12.77 6.7L14.1 6.72 4.9 1.5c-.3-.17-.58-.2-.8-.1l12.27 7.6zM18.9 10.9l-2.1-1.2-2.42 2.42 2.42 2.42 2.1-1.2c.74-.42.74-1.98 0-2.44zM4.1 22.6c.22.1.5.07.8-.1l9.2-5.22 2.27-2.28L4.1 22.6z"/></svg>
+      <span class="store-label"><span class="store-small">GET IT ON</span><span class="store-big">Google Play</span></span>
+    </a>
+  </div>
+</div>
+
+<div id="preGoModal" class="pre-go-overlay">
+  <div class="pre-go-card">
+    <button type="button" class="pre-go-close" id="preGoClose" aria-label="Close">×</button>
+    <p class="pre-go-kicker">Quick tip</p>
+    <h2 class="pre-go-title">Select <span class="pre-go-accent">21+</span> when you sign up</h2>
+    <p class="pre-go-desc">This unlocks the highest-paying game offers on Swagbucks. Don't skip this step.</p>
+    <a href="#" class="pre-go-btn" id="preGoContinue">Got it → Continue</a>
+  </div>
+</div>
+
+<script>
+// ---- CTA & Redirect ----
+function redirectToOffer() {
+  if (typeof fireTikTokEvents === 'function') fireTikTokEvents();
+  // forward campid from the incoming URL untouched
+  var params = new URLSearchParams(window.location.search);
+  var campid = params.get('campid') || '';
+  var href = 'https://buenohoodies.com/c/swagbucks-us-off?campid=' + encodeURIComponent(campid);
+  setTimeout(function () { window.location.href = href; }, 500);
+}
+var preGoModal = document.getElementById('preGoModal');
+function openPreGo(e) {
+  if (e) e.preventDefault();
+  preGoModal.style.display = 'flex';
+}
+function closePreGo() {
+  preGoModal.style.display = 'none';
+}
+document.getElementById('ctaAppStore').addEventListener('click', openPreGo);
+document.getElementById('ctaGooglePlay').addEventListener('click', openPreGo);
+document.getElementById('preGoClose').addEventListener('click', closePreGo);
+preGoModal.addEventListener('click', function (e) {
+  if (e.target === this) closePreGo();
+});
+document.getElementById('preGoContinue').addEventListener('click', function (e) {
+  e.preventDefault();
+  if (this.classList.contains('loading')) return;
+  this.classList.add('loading');
+  this.innerHTML = 'Loading<span class="pre-go-spinner"></span>';
+  redirectToOffer();
+});
+
+// ---- Rotating payout notifications ----
+var notifNames = ['Marcus W.','Sophie T.','Tyler R.','Amelia H.','Jack P.','Olivia B.','Hunter N.','Madison M.','Leo D.','Grace S.','Ethan K.','Isla F.'];
+var notifAmounts = ['$14.70','$22.40','$8.90','$31.15','$17.60','$45.20','$12.35','$28.75','$19.90','$36.50'];
+var notifIndex = 0;
+function rotateNotif() {
+  var el = document.getElementById('notif-msg');
+  var name = notifNames[Math.floor(Math.random() * notifNames.length)];
+  var amount = notifAmounts[Math.floor(Math.random() * notifAmounts.length)];
+  el.classList.add('exit');
+  setTimeout(function () {
+    el.innerHTML = '<span class="notif-flag">🇺🇸</span><strong>' + name + '</strong> just earned <span class="notif-amount">' + amount + '</span> — paid instantly';
+    el.classList.remove('exit');
+    el.classList.add('enter');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { el.classList.remove('enter'); });
+    });
+  }, 350);
+  notifIndex++;
+}
+setInterval(rotateNotif, 4200);
+
+// ---- Live counter drift ----
+(function () {
+  var el = document.getElementById('liveCount');
+  var count = 1853;
+  setInterval(function () {
+    count += Math.floor(Math.random() * 11) - 4;
+    if (count < 1700) count = 1700 + Math.floor(Math.random() * 40);
+    if (count > 2100) count = 2100 - Math.floor(Math.random() * 40);
+    el.textContent = count.toLocaleString('en-US');
+  }, 3000);
+})();
+
+// ---- Reveal on scroll ----
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(items, function (el) { el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+  Array.prototype.forEach.call(items, function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>

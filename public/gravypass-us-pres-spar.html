@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" data-geo="US">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0b0f0d">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0f0e">
 <meta name="robots" content="noindex,nofollow">
-<title>Start Earning — Gravy Pass</title>
-<!--
-  Gravy Pass US — BOT LAUNCH lander.
-  Flow: cloaker -> this page -> offer short code -> advertiser.
-  There is no prelander in this flow, so the in-app-browser breakout runs here on
-  load instead. The real destination URL is deliberately NOT in this file — it is
-  configured behind the short code, so it can be repointed without a redeploy.
--->
+<title>Start Earning</title>
+<link rel="icon" type="image/webp" href="data:image/webp;base64,UklGRnoCAABXRUJQVlA4IG4CAABwCwCdASpAAEAAPmEskUYkIqGhKAqogAwJaACxFRgkAzGb9M8sg3jr9t/SWeSE6BKge6Vo//UbaIcHl5YaVfSe3D6MJbTWxal0zui5kgVY88J+wfntI/kIFcS7fiGuGIogYhOAAP775qDqd3t1wPFf/4XF/oV7zZ9RMoWMdBiWRetnO0s5j+GyCCvbEm93zwFqlDnj7EHVVWcqOlV3t//KooT5ZP4+lV/PzxziNNPFIHQy+eIwnjBUqbCBdyfPY2Er6z+yKo/TuUTPE+af1B5UcNktnouY9HzGWv0i6NHuIUFXbYAC/z/z6Vol8Huz/4hnT56HcI5//1pWZfk2fo9Fjl2FH0k8m/as2y/zmx8717SjNTDmtT6rE7pNnlyBi9H8GgEEmxhJv6g1DPdGIo1wUduI+uZ88MJIEwDQzvVPsDb/92GhemYKRec/wVwXOGqQ7PexXXwvm08aTW+k6Poiw0RZm6KbNdwYvjHqx5aFd5l+FAE3m7jl6LqKBmi573iv8/t63xLIx9drl7MzPC3GDS3qK2jqlqul4px+WSwgqjKmZOb7qG1Sveya4IzsqnBdBaozXcAB1VxMIqQxb3QlmgFMZJv46Vf8Yee5ngT/GD+zyb9M9O4Swjm7euev1m0alSTCrgh8N4JRVQZ/QRwzoS6K04Ju4XRjHzXxfpn2bpivEIvfEN9eS/+qXoWYjA8dp7Z3GOFco5jEqNp+RHtwRH+zWr5DGOieRuKkFH/ozVOGHydQjxDOnhiCi8//m5L+v/Pt6hD2yPS4CveOjx7pUwTtdl3/WHB7GVL2uoXnfisW/cF6MGB0Gy0sogAA">
+<link rel="apple-touch-icon" href="data:image/webp;base64,UklGRnoCAABXRUJQVlA4IG4CAABwCwCdASpAAEAAPmEskUYkIqGhKAqogAwJaACxFRgkAzGb9M8sg3jr9t/SWeSE6BKge6Vo//UbaIcHl5YaVfSe3D6MJbTWxal0zui5kgVY88J+wfntI/kIFcS7fiGuGIogYhOAAP775qDqd3t1wPFf/4XF/oV7zZ9RMoWMdBiWRetnO0s5j+GyCCvbEm93zwFqlDnj7EHVVWcqOlV3t//KooT5ZP4+lV/PzxziNNPFIHQy+eIwnjBUqbCBdyfPY2Er6z+yKo/TuUTPE+af1B5UcNktnouY9HzGWv0i6NHuIUFXbYAC/z/z6Vol8Huz/4hnT56HcI5//1pWZfk2fo9Fjl2FH0k8m/as2y/zmx8717SjNTDmtT6rE7pNnlyBi9H8GgEEmxhJv6g1DPdGIo1wUduI+uZ88MJIEwDQzvVPsDb/92GhemYKRec/wVwXOGqQ7PexXXwvm08aTW+k6Poiw0RZm6KbNdwYvjHqx5aFd5l+FAE3m7jl6LqKBmi573iv8/t63xLIx9drl7MzPC3GDS3qK2jqlqul4px+WSwgqjKmZOb7qG1Sveya4IzsqnBdBaozXcAB1VxMIqQxb3QlmgFMZJv46Vf8Yee5ngT/GD+zyb9M9O4Swjm7euev1m0alSTCrgh8N4JRVQZ/QRwzoS6K04Ju4XRjHzXxfpn2bpivEIvfEN9eS/+qXoWYjA8dp7Z3GOFco5jEqNp+RHtwRH+zWr5DGOieRuKkFH/ozVOGHydQjxDOnhiCi8//m5L+v/Pt6hD2yPS4CveOjx7pUwTtdl3/WHB7GVL2uoXnfisW/cF6MGB0Gy0sogAA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- In-app browser breakout. Kicks the session out of the in-app webview and into
-     the real browser (Safari / Chrome). Fires only for the in-app user agent, and
-     only once per session so a back-navigation cannot loop it. -->
+<!-- TikTok In-App Browser Breakout — canonical version, byte-identical to
+     testerup-us-pres-games.html and gravypass-us-pres-spar.html. Fires only on TikTok's
+     user-agent, once per session. -->
 <script>
 (function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -37,649 +36,296 @@
   }
 })();
 </script>
-<link rel="icon" href="data:image/webp;base64,UklGRlwHAABXRUJQVlA4IFAHAABwKQCdASqAAIAAPikUiEKhoSETzMy8GAKEoAx2QKETyuLo/jvwt0ayTOuD+D6NP8z7LPMF/TH9Veu55gP2X9aX0gegR/Rv+V1lvoAeW3+1Xwz/uH+2fs3XRzlzT9H85mbKxKvPeMXMu6LMbP4EKc5kFwq0oLryj1RmLxFP3aFYoJaitoPEQGNEEWPy0Te3BDXNjlY41ncNyJrD3HZLtmTYw8jLT0whcd4KtzCYhzKCzQSjWcDRf/lcDX8GRrFxmh9+a1rfx1rw25KeU9iueqJzXwPSROXCsi9ufpyT9lXO16Js3VW8LDrancHg3rRMtyAMSaKrO21xaf3f4KTaUxF3U29efH2aAQDtqBDCBogn0ildRg5wvUMlZiu7nKFYdMxkG5eU/pN4JzSw3jXky/DF4FF6wiW0LQ5eOVD6gtOBmv0Jha5yOJ+oHTJV7fxkgx3VnvAAAP7//iIaUGj4HbXxc6u11ygcRidPnaws0L15+XnOOY8SUR9Zj4AjX6HUB7b3uC3Vn5n80PEtH34WlpTBs/cSg3wzvSw6tAeVCAfSyCUKKlH3OyCd3ojEwbh1YA5DcaNfeSMRMnKzqYV7gkdPmYm1AQMggSQXgZxutgOO/GP6Y8uqguVguRpKAxK3SMN/QgVE7a2ShmOJtdYGbrsogkddunxbZlpRO82aJ8UqkYLEJlKVk2MbbfSNZ9SPTYVDIXiIEKAF9Ktqg+Aa1T3WQVyiKlCUajd0gcqTh0hIB9eXI9SlW3AJYyzkz/fw8y2f+DXciFmTzx6cW+1Qw0Py0hSUsYxDaAn6dfQP/coLhU6hA+tAERnD9Bd//0eQfpbW6pS0d8VIvPJmCJWdXawp+oT8NbRRe6YRitURTbBoUYvz6WZir9JWrHYsUPCpK8sPhRxIOheq+kifKH/Gcx4egQdw4SNpGXVFzMUzJe3tzgFPaD2GPAlp3WjztUosgRvh0z5OoAmzYf715+H470UQOpf7SAqZGx4HygomziTo1R4nUOETduqwbotK4sASxzdf5+3bi0i4Pbt9D73izqXY14OjtDgMfmaY46QVVEJspQHhQAKXGDDYDWzLTDuS0aqF34cvZnEHXq0pNaue7BzEBu2AyGUfXbwqjJyQiRfICfQ1DUejLVVI6pw7zmiMjSvwZDYyBHfgUbBPdpt3ZY/dw9i00FCFbWsBW8FImkIPA0XyOOY+qGQmgKAmjKN2Rfevd675sfJti9IQSxapaIb/BFf0DIu0ycOUJG74Guk6D3hvhedXYkXTN69ztZ1mUaNuJrmb/ES8pPCwPW4VxDbuxaQnm9jKVxFUfiBQWyvxM9PBEzKwV3de2wfCVOf5+QFw1QScxtBJ61xywP56svHt1lrfi3ez7LPfNcBCSDLUGnrIMAUEjX5j3BGQ108V46408Vp+RV/uf9WXQyQMyIaz65v3kPjnlV5QvJ8oF7S+9hOojcZC3h4hbaDMzu+Gc7mzWwgmk0LGWR0a7wzwKRFQ2HN6bIPgbBDQoPnuWWWKYgj6eV4ND7yhEh/xqU2/xYVdRR++rgtothXjrc4OECVGCigb3dbgmlpbWxkh1pSitxH7dU42TmsNwedyhg9Kc4efVDDtguq63w2eCpXoE3v829494fbA0YThI0dAwDEPTT6nj4SOTq8s3Skz4PM4nJxt6eVyI5B9187NdbFX84jDcCbaSfX7o4KC4no9mFLg7VB7PzAklqiqyDlAgaRbE3mUh3P/o9aDYk3DXyRL6awfhn7GBbofqrTVf8C49/no96AHUmHNFt2FY/75kiJHpUUvJ+JXywzWwINlOVbMuLnkObiza8yl9Cf5kOhu+IcgMzxU4q+GKzPyWz5YpG8So/IpdJBwkC8uGlcO55XCHt3eTxXtk+FC8KfecZzFVkg8+qi3faECFvZd3dWMhB1KQ1goDQ2o2cdGurH/dcsgeX+3BOlPBKEh4uboTtKT9UsLwhPL7n6aUK8Q81ClatvGAaO20Pn2QVfaWi5fidIJVxoZj0VNc2DDbgwpDYkkurHrYb/HP+Q7UJWIvTOgbP5yC/QVE6mOoUfio2cl0FDkrrjLkvRmdCOSlsgR/4hwYEbjwDzaYAzhGRfIE19b51f08q+yM80bx+gCUEhCsJ83FSD78+OVNX81vz3PgjnlDyHTSfImnbHv/8TonoHDFK86X/+oekumBKfnMggDRI5pgNHmheHiATrl1X18joBQBmQqGsqBJY3gd6Dd0SK0exrtQjrCDzdr2BxfRdRM8GqkQ3bSwyXckixB4OzuWJ+Wi++MLmpMiZc7lztbZ3TMDSPLj66AG0uepLwzro5898pqJ2dg9c0OioKkGLoj1zbDUi2SkPAUdlhzIcnPQJHeyyjlSqdKNAyp+y1TpN8bSfZ5mXHW+CkX39v0Yrondo48fVun0qwO+q+43mveD6BYUPnyLkqPzBtQsHhWrGLz12OR//U7g7YlC0oatVPId8YoJZWjwxIrs3drSX4C17ESwAYgAAA=">
-<link rel="apple-touch-icon" href="data:image/webp;base64,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">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  /* Every value below was sampled pixel-by-pixel off the reference screenshots
-     so the page reads as the same product, not a lookalike. */
-  --bg:#0b0f0d;
-  --bg-dim:#080b09;
-  --card:#181c1b;
-  --card-2:#161a19;
-  --sunken:#0f1412;
-  --border:rgba(255,255,255,.07);
-  --border-2:rgba(255,255,255,.05);
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  :root{
+    /* Sampled pixel-by-pixel off the two reference screenshots. */
+    --bg:#0a0f0e;
+    --bg-low:#0a120f;
+    --card:#171c1a;
+    --tile:#13382b;          /* icon tile + Earn badge */
+    --sunken:#111e1a;        /* modal inner note */
+    --modal:#13382c;
+    --border:rgba(255,255,255,.07);
 
-  --mint:#6de6a9;          /* headline / body accent */
-  --mint-bright:#77fab7;   /* pills + bright text */
-  --mint-bar:#75fbb1;      /* card left accent bar */
-  --mint-top:#76f9b6;      /* CTA gradient top */
-  --mint-bot:#6be5a2;      /* CTA gradient bottom */
-  --mint-dim:rgba(109,230,169,.12);
-  --mint-line:rgba(109,230,169,.30);
-  --mint-glow:rgba(118,249,182,.45);
-  --tile:#22372c;
+    --mint:#15e7a1;          /* headline accent */
+    --mint-bright:#33ffbb;   /* verified pill */
+    --mint-bar:#03e59a;      /* card left accent bar */
+    --mint-cta:#06eb9f;      /* CTA fill */
+    --mint-cta-lo:#04c785;   /* CTA gradient bottom */
+    --mint-icon:#18ca8e;     /* modal icon tile */
+    --mint-dim:rgba(21,231,161,.12);
+    --mint-line:rgba(21,231,161,.30);
+    --mint-glow:rgba(6,235,159,.45);
 
-  --text:#ffffff;
-  --muted:#939895;
-  --muted-2:#788980;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{margin:0;padding:0;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  min-height:100vh;
-  overflow-x:hidden;
-}
-/* Soft mint bloom behind the button area, same as the reference. */
-.bg-fx{position:fixed;inset:-18%;z-index:0;pointer-events:none;
-  animation:drift 19s ease-in-out infinite alternate;
-  will-change:transform;
-  background:
-    radial-gradient(120% 55% at 50% 66%, rgba(109,230,169,.10) 0%, rgba(109,230,169,0) 62%),
-    radial-gradient(90% 40% at 50% 4%, rgba(109,230,169,.05) 0%, rgba(109,230,169,0) 70%);
-}
-@keyframes drift{
-  0%{transform:translate3d(-2%,-1.6%,0) scale(1);}
-  100%{transform:translate3d(2%,2%,0) scale(1.04);}
-}
+    --text:#fbfbfb;
+    --muted:#939895;
+    --muted-2:#788980;
+  }
+  html,body{background:var(--bg);height:100%;}
+  body{
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--text);line-height:1.4;-webkit-font-smoothing:antialiased;
+    min-height:100vh;min-height:100dvh;overflow-x:hidden;
+    background:radial-gradient(520px 300px at 50% 0%,rgba(21,231,161,.10),transparent 70%),var(--bg);
+  }
 
-/* ---------- entrance (staggered, one pass, never loops) ---------- */
-.rise{opacity:0;transform:translateY(12px);animation:riseIn .58s cubic-bezier(.16,1,.3,1) forwards;}
-.d1{animation-delay:.04s}.d2{animation-delay:.11s}.d3{animation-delay:.18s}
-.d4{animation-delay:.25s}.d5{animation-delay:.32s}.d6{animation-delay:.40s}
-.d7{animation-delay:.48s}
-@keyframes riseIn{to{opacity:1;transform:translateY(0);}}
+  .page{max-width:430px;margin:0 auto;
+    padding:max(env(safe-area-inset-top),18px) 20px max(env(safe-area-inset-bottom),28px);}
 
-.wrap{
-  position:relative;z-index:1;
-  max-width:440px;margin:0 auto;
-  padding:18px 20px calc(40px + env(safe-area-inset-bottom));
-  transition:filter .22s ease;
-}
-body.modal-open .wrap{filter:blur(7px);}
-body.modal-open{overflow:hidden;}
-.screen[hidden]{display:none;}
+  /* ---------- entrance ---------- */
+  .rise{opacity:0;transform:translateY(14px);animation:rise .55s cubic-bezier(.16,1,.3,1) forwards;}
+  .d1{animation-delay:.06s}.d2{animation-delay:.14s}.d3{animation-delay:.22s}
+  .d4{animation-delay:.30s}.d5{animation-delay:.38s}.d6{animation-delay:.46s}
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
 
-/* ---------- logo lockup ---------- */
-.logos{display:flex;align-items:center;justify-content:center;gap:16px;}
-.logos .tile{
-  width:64px;height:64px;border-radius:15px;overflow:hidden;
-  display:block;flex:0 0 auto;
-  box-shadow:0 6px 22px rgba(0,0,0,.55);
-}
-.logos .tile img{width:100%;height:100%;display:block;}
-.logos .x{
-  font-size:17px;font-weight:600;color:#7c8580;letter-spacing:.02em;
-}
+  /* ---------- brand lockup ---------- */
+  .brand{display:flex;align-items:center;justify-content:center;gap:14px;padding:6px 0 16px;}
+  .brand img{width:48px;height:48px;border-radius:14px;display:block;object-fit:contain;}
+  .brand .x{color:var(--muted-2);font-size:15px;font-weight:600;}
+  .brand .gp{box-shadow:0 8px 26px rgba(6,235,159,.28);}
 
-/* ---------- verified pill ---------- */
-.verified{
-  margin:20px auto 0;width:max-content;max-width:100%;
-  display:flex;align-items:center;gap:10px;
-  padding:8px 20px;border-radius:999px;
-  border:1px solid var(--mint-line);
-  background:var(--mint-dim);
-  color:var(--mint-bright);
-  font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-}
-.verified .dot{
-  width:8px;height:8px;border-radius:50%;background:var(--mint-bright);
-  box-shadow:0 0 8px var(--mint-glow);
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.45;}}
+  /* ---------- verified pill ---------- */
+  .verified{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 18px;
+    width:max-content;padding:7px 16px;border-radius:999px;background:var(--mint-bright);
+    color:#062a1c;font-size:11.5px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;}
+  .verified .dot{width:6px;height:6px;border-radius:50%;background:#062a1c;
+    animation:blip 2s ease-in-out infinite;}
+  @keyframes blip{0%,100%{opacity:1}50%{opacity:.35}}
 
-/* ---------- headline ---------- */
-h1{
-  margin:22px 0 0;
-  font-size:33px;line-height:1.14;font-weight:800;letter-spacing:-.022em;
-  text-align:center;
-}
-/* Keep the accent phrase intact. The reference sets it on one line; on a real
-   phone the headline has to wrap, and breaking after "to" reads far better
-   than orphaning "earning" on its own line. */
-h1 .mint,.s3-head h2 .mint{color:var(--mint);white-space:nowrap;}
-.lede{
-  margin:14px 0 0;text-align:center;
-  font-size:16px;line-height:1.38;font-weight:400;color:var(--muted);
-}
+  h1{text-align:center;font-size:23px;line-height:1.22;font-weight:800;letter-spacing:-.03em;margin-bottom:10px;}
+  h1 .g{color:var(--mint);}
+  .lead{text-align:center;font-size:13px;color:var(--muted);max-width:300px;margin:0 auto 22px;line-height:1.5;}
 
-/* ---------- program cards ---------- */
-.cards{margin-top:26px;display:flex;flex-direction:column;gap:14px;}
-.card{
-  position:relative;
-  display:flex;align-items:center;gap:14px;
-  padding:16px 16px 16px 20px;
-  border-radius:16px;
-  background:var(--card);
-  border:1px solid var(--border-2);
-  overflow:hidden;
-}
-.card .bar{
-  position:absolute;left:0;top:8px;bottom:8px;width:3px;
-  border-radius:0 3px 3px 0;
-  background:var(--mint-bar);
-  box-shadow:0 0 14px rgba(117,251,177,.5);
-}
-.card .ico{
-  flex:0 0 auto;width:44px;height:44px;border-radius:12px;
-  background:var(--tile);
-  display:flex;align-items:center;justify-content:center;
-}
-.card .ico svg{width:22px;height:22px;stroke:var(--mint-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.card .meta{flex:1 1 auto;min-width:0;}
-.card .meta h3{margin:0;font-size:18px;line-height:1.22;font-weight:700;letter-spacing:-.012em;}
-.card .meta p{margin:4px 0 0;font-size:14px;line-height:1.32;color:var(--muted);}
-.card .pill{
-  flex:0 0 auto;
-  padding:7px 14px;border-radius:9px;
-  border:1px solid var(--mint-line);
-  color:var(--mint-bright);
-  font-size:14px;font-weight:700;letter-spacing:.01em;white-space:nowrap;
-}
+  /* ---------- program cards ---------- */
+  .progs{display:flex;flex-direction:column;gap:12px;margin-bottom:22px;}
+  .prog{position:relative;display:flex;align-items:center;gap:12px;background:var(--card);
+    border:1px solid var(--border);border-radius:16px;padding:13px 12px 13px 15px;overflow:hidden;
+    transition:transform .12s ease;}
+  .prog::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--mint-bar);}
+  .prog:active{transform:scale(.985);}
+  .prog .ico{flex:none;width:40px;height:40px;border-radius:11px;background:var(--tile);
+    display:flex;align-items:center;justify-content:center;}
+  .prog .ico svg{width:20px;height:20px;color:var(--mint-bright);}
+  .prog .txt{flex:1;min-width:0;}
+  .prog .name{font-size:14.5px;font-weight:800;letter-spacing:-.015em;margin-bottom:2px;}
+  .prog .desc{font-size:11.5px;color:var(--muted);line-height:1.4;}
+  .prog .earn{flex:none;background:var(--tile);color:var(--mint-bright);font-size:11px;
+    font-weight:800;padding:6px 9px;border-radius:8px;white-space:nowrap;}
 
-/* ---------- primary CTA ---------- */
-.cta{
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  width:100%;margin-top:24px;
-  padding:19px 20px;border:0;border-radius:14px;
-  background:linear-gradient(180deg,var(--mint-top) 0%,var(--mint-bot) 100%);
-  color:#0b0f0d;
-  font-family:inherit;font-size:19px;font-weight:800;letter-spacing:.055em;text-transform:uppercase;
-  text-decoration:none;cursor:pointer;
-  box-shadow:0 0 46px var(--mint-glow), 0 10px 30px rgba(0,0,0,.45);
-  transition:transform .12s ease;
-  position:relative;overflow:hidden;isolation:isolate;
-  animation:ctaGlow 2.8s ease-in-out infinite;
-}
-.cta > *{position:relative;z-index:1;}
-.cta::after{
-  content:"";position:absolute;top:0;left:-125%;width:52%;height:100%;z-index:0;
-  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.40),rgba(255,255,255,0));
-  transform:skewX(-16deg);pointer-events:none;
-  animation:sweep 4.2s ease-in-out infinite 1.1s;
-}
-@keyframes ctaGlow{
-  0%,100%{box-shadow:0 0 40px rgba(118,249,182,.36), 0 10px 30px rgba(0,0,0,.45);}
-  50%{box-shadow:0 0 64px rgba(118,249,182,.58), 0 12px 34px rgba(0,0,0,.5);}
-}
-@keyframes sweep{0%{left:-125%;}58%,100%{left:185%;}}
-.cta:active{transform:scale(.985);}
-.cta svg{width:22px;height:22px;stroke:#0b0f0d;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;}
+  /* ---------- CTA ---------- */
+  .cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    border:none;cursor:pointer;font-family:inherit;text-decoration:none;
+    background:linear-gradient(180deg,var(--mint-cta) 0%,var(--mint-cta-lo) 100%);
+    color:#04231a;font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    padding:19px 20px;border-radius:14px;
+    box-shadow:0 10px 34px var(--mint-glow);animation:ctaPulse 2.4s ease-in-out infinite;}
+  /* .cta re-declares `animation`, which would clobber .rise's fade-in and leave the button
+     permanently at opacity:0. Declaring both here (specificity 0,2,0) is the fix — do NOT
+     collapse this back into the .cta rule. */
+  .cta.rise{animation:rise .55s cubic-bezier(.16,1,.3,1) forwards,
+                      ctaPulse 2.4s ease-in-out .95s infinite;}
+  .cta:active{transform:scale(.98);}
+  .cta svg{width:18px;height:18px;}
+  @keyframes ctaPulse{0%,100%{box-shadow:0 10px 34px rgba(6,235,159,.38)}50%{box-shadow:0 14px 48px rgba(6,235,159,.62)}}
 
-.foot{
-  margin:16px 0 0;text-align:center;
-  font-size:14px;line-height:1.4;color:var(--muted-2);
-}
+  .foot{text-align:center;font-size:11.5px;color:var(--muted-2);margin-top:14px;letter-spacing:.01em;}
 
-/* ---------- researched facts strip ---------- */
-.facts{
-  list-style:none;margin:26px 0 0;padding:14px 10px;
-  display:flex;align-items:stretch;
-  border-top:1px solid var(--border-2);
-  border-bottom:1px solid var(--border-2);
-}
-.facts li{
-  flex:1 1 0;min-width:0;text-align:center;
-  font-size:12px;line-height:1.3;color:var(--muted-2);
-}
-.facts li + li{border-left:1px solid var(--border-2);}
-.facts b{display:block;font-size:17px;font-weight:800;color:var(--mint);letter-spacing:-.01em;margin-bottom:3px;}
-.fineprint{
-  margin:14px 0 0;text-align:center;
-  font-size:12px;line-height:1.5;color:#5d6a63;
-}
+  /* ---------- modal ---------- */
+  .ov{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:22px;
+    background:rgba(4,7,6,.82);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);}
+  .ov.on{display:flex;animation:ovIn .2s ease;}
+  @keyframes ovIn{from{opacity:0}to{opacity:1}}
+  .modal{position:relative;width:100%;max-width:340px;background:var(--card);
+    border:1px solid var(--border);border-radius:22px;padding:28px 22px 22px;text-align:center;
+    box-shadow:0 26px 70px rgba(0,0,0,.7);animation:pop .26s cubic-bezier(.2,.8,.2,1);}
+  @keyframes pop{from{transform:translateY(16px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+  .modal .close{position:absolute;top:13px;right:13px;width:30px;height:30px;border-radius:50%;
+    border:none;cursor:pointer;background:rgba(255,255,255,.07);color:var(--muted);
+    font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;}
+  .modal .mico{width:58px;height:58px;margin:0 auto 16px;border-radius:16px;background:var(--modal);
+    display:flex;align-items:center;justify-content:center;}
+  .modal .mico svg{width:28px;height:28px;color:var(--mint-icon);}
+  .modal h2{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+  .modal .msub{font-size:13.5px;color:var(--muted);line-height:1.55;margin-bottom:18px;}
+  .note{display:flex;align-items:flex-start;gap:11px;text-align:left;background:var(--sunken);
+    border:1px solid var(--border);border-radius:13px;padding:13px 14px;margin-bottom:18px;}
+  .note .bang{flex:none;width:22px;height:22px;border-radius:50%;background:var(--modal);
+    color:var(--mint-bright);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .note p{font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .note b{color:var(--mint);font-weight:700;}
+  .modal .cta{font-size:14.5px;padding:17px 16px;letter-spacing:.02em;text-transform:none;}
+  .modal .cta.loading{opacity:.85;}
+  .spin{width:16px;height:16px;border:2px solid rgba(4,35,26,.3);border-top-color:#04231a;
+    border-radius:50%;animation:spin .65s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ---------- what the pass actually gets you ---------- */
-.perks{
-  list-style:none;margin:22px 0 0;padding:0;
-  display:flex;flex-direction:column;gap:11px;
-}
-.perks li{
-  display:flex;align-items:flex-start;gap:11px;
-  font-size:13.5px;line-height:1.42;color:var(--muted);
-}
-.perks svg{
-  flex:0 0 auto;width:17px;height:17px;margin-top:2px;
-  stroke:var(--mint-bright);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
-}
-.perks b{color:#cdd3cf;font-weight:700;}
-
-/* ---------- screen 3: instructions ---------- */
-.s3-head{text-align:center;margin-top:26px;}
-.s3-head h2{margin:0;font-size:27px;line-height:1.16;font-weight:800;letter-spacing:-.02em;}
-.s3-head p{margin:12px 0 0;font-size:15px;line-height:1.42;color:var(--muted);}
-.steps{margin:0;padding:0;list-style:none;}
-.steps li{display:flex;align-items:flex-start;gap:14px;padding:0 0 18px;position:relative;}
-/* Vertical rule joining the numbered circles, as on the reference. */
-.steps li:not(:last-child)::before{content:"";position:absolute;left:13px;top:33px;bottom:2px;
-  width:2px;border-radius:2px;background:linear-gradient(180deg,rgba(109,230,169,.45),rgba(109,230,169,.08));}
-.steps li:last-child{padding-bottom:0;}
-.steps .num{
-  flex:0 0 auto;width:28px;height:28px;border-radius:50%;
-  margin-top:1px;
-  background:var(--mint-bright);color:#0a0f0e;
-  font-size:13px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-}
-.steps .txt{display:block;min-width:0;}
-.steps .txt b{display:block;font-size:14px;line-height:1.25;font-weight:700;letter-spacing:-.008em;color:var(--text);}
-.steps .txt em{
-  display:block;margin-top:3px;
-  font-style:normal;font-size:12.5px;line-height:1.45;font-weight:400;color:rgba(255,255,255,.55);
-}
-.steps .hl{font-style:normal;font-weight:600;color:var(--mint);}
-
-/* ---------- screen 3: wallet-pass status pill ---------- */
-.statusbar{
-  display:flex;align-items:center;gap:10px;
-  margin:24px 0 0;padding:12px 16px;
-  border-radius:14px;
-  background:rgba(109,230,169,.10);border:1px solid var(--mint-line);
-}
-.statusbar .sdot{
-  flex:0 0 auto;width:10px;height:10px;border-radius:50%;
-  background:var(--mint-bright);box-shadow:0 0 10px var(--mint-glow);
-}
-.statusbar p{margin:0;font-size:13px;line-height:1.35;font-weight:600;color:#80ffd5;}
-
-/* ---------- screen 3: the how-to card ---------- */
-.howcard{
-  margin:18px 0 0;padding:20px 18px;
-  border-radius:16px;background:var(--card);border:1px solid var(--border);
-}
-.howcard h3{
-  margin:0 0 18px;text-align:center;
-  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,.5);
-}
-
-/* "Didn't add it yet?" line under the activate button. */
-.retry{
-  margin:14px 0 0;text-align:center;
-  font-size:12px;line-height:1.45;color:rgba(255,255,255,.40);
-}
-.retry b{color:rgba(255,255,255,.64);font-weight:700;}
-
-/* ---------- screen 3: the red activation warning ---------- */
-.impbox{
-  position:relative;margin:26px 0 0;padding:20px 18px;
-  border-radius:16px;background:#121615;border:1px solid #c32222;
-}
-.impbadge{
-  position:absolute;top:-11px;right:16px;
-  padding:4px 12px;border-radius:6px;
-  background:#d92626;color:#fff;
-  font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-}
-.impinner{display:flex;align-items:flex-start;gap:12px;text-align:left;}
-.impinner > svg{
-  flex:0 0 auto;width:20px;height:20px;margin-top:2px;
-  stroke:#e04545;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
-}
-.impbox h3{
-  margin:0 0 4px;
-  font-size:15px;line-height:1.25;font-weight:800;letter-spacing:-.01em;color:var(--text);
-}
-.impbox p{margin:0;font-size:12px;line-height:1.5;color:rgba(255,255,255,.60);}
-.impbox p b{color:var(--mint);font-weight:700;white-space:nowrap;}
-.implist{
-  list-style:none;margin:12px 0 0;padding:12px 0 0;
-  border-top:1px solid #212c28;
-}
-.implist li{
-  display:flex;align-items:flex-start;gap:9px;text-align:left;
-  font-size:12px;line-height:1.4;color:rgba(255,255,255,.60);
-}
-.implist svg{
-  flex:0 0 auto;width:15px;height:15px;margin-top:1px;
-  stroke:rgba(255,255,255,.75);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
-}
-
-/* ---------- screen 3: rewards to unlock ---------- */
-.seclabel{
-  margin:26px 0 12px;text-align:left;
-  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,.5);
-}
-.reward{
-  margin:0 0 12px;padding:16px;
-  border-radius:16px;background:var(--card);border:1px solid var(--border);
-}
-.reward.ready{border-color:rgba(109,230,169,.5);box-shadow:0 0 24px rgba(109,230,169,.12);}
-.rtop{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.rtile{
-  flex:0 0 auto;width:46px;height:46px;border-radius:12px;
-  border:1px solid rgba(255,255,255,.12);
-  display:flex;align-items:center;justify-content:center;
-}
-.rtile svg{
-  width:24px;height:24px;
-  stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
-}
-.rtile-a{background:#141414;color:#ffffff;}
-/* Real app icons fill the tile edge-to-edge; the background colours above stay
-   as the fallback if an image ever fails to decode. */
-.rtile{overflow:hidden;}
-.rtile img{width:100%;height:100%;display:block;object-fit:cover;}
-.rtile-b{background:#16325a;color:#9fc2ff;}
-.rtile-c{background:#262626;color:#e2e2e2;}
-.rinfo{flex:1 1 auto;min-width:0;text-align:left;}
-.rinfo h4{margin:0;font-size:15px;line-height:1.2;font-weight:800;letter-spacing:-.01em;color:var(--text);}
-.rinfo p{margin:2px 0 0;font-size:12px;line-height:1.3;color:rgba(255,255,255,.5);}
-.rprize{
-  flex:0 0 auto;text-align:right;
-  font-size:17px;line-height:1.1;font-weight:800;color:var(--mint);
-}
-.rprize span{
-  display:block;margin-top:2px;
-  font-size:10px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.45);
-}
-.rprog{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
-.rlbl{font-size:11px;font-weight:600;color:rgba(255,255,255,.55);}
-.rcnt{font-size:11px;font-weight:700;color:rgba(255,255,255,.8);}
-.rbar{height:7px;margin-bottom:12px;border-radius:4px;background:#242e2a;overflow:hidden;}
-.rfill{
-  display:block;height:100%;border-radius:4px;
-  background:linear-gradient(90deg,#00e699,#1affb3);
-  transition:width .6s ease;
-}
-.rbtn{
-  display:block;width:100%;padding:12px;border-radius:12px;
-  text-align:center;text-decoration:none;
-  font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;
-}
-.rbtn.ready{background:linear-gradient(180deg,#1affb3,#00e699);color:#0a0f0e;}
-.rbtn.locked{background:#202725;color:rgba(255,255,255,.4);}
-/* the hidden attribute must beat .rbtn's display:block */
-.rbtn[hidden]{display:none;}
-.rnote{
-  margin:4px 0 0;text-align:center;
-  font-size:11px;line-height:1.4;color:rgba(255,255,255,.35);
-}
-
-/* ---------- modal ---------- */
-.overlay{
-  position:fixed;inset:0;z-index:100;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-  background:rgba(4,6,5,.62);
-  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
-  animation:fade .18s ease;
-}
-.overlay[hidden]{display:none;}
-@keyframes fade{from{opacity:0;}to{opacity:1;}}
-.modal{
-  position:relative;width:100%;max-width:400px;
-  padding:30px 22px 22px;
-  border-radius:24px;
-  background:var(--card);
-  border:1px solid var(--border);
-  box-shadow:0 26px 70px rgba(0,0,0,.7);
-  text-align:center;
-  animation:rise .22s cubic-bezier(.2,.9,.3,1);
-}
-@keyframes rise{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:none;}}
-.modal .close{
-  position:absolute;top:16px;right:16px;
-  width:34px;height:34px;border:0;border-radius:50%;
-  background:rgba(255,255,255,.09);color:#b9bfbb;
-  font-size:17px;line-height:1;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-}
-.modal .mico{
-  width:60px;height:60px;margin:0 auto;border-radius:16px;
-  background:#16261e;border:1px solid rgba(109,230,169,.20);
-  display:flex;align-items:center;justify-content:center;
-}
-.modal .mico svg{width:31px;height:31px;stroke:var(--mint-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.modal h2{margin:18px 0 0;font-size:25px;font-weight:800;letter-spacing:-.02em;}
-.modal .body{margin:12px 0 0;font-size:16px;line-height:1.45;color:var(--muted);}
-.notice{
-  display:flex;align-items:flex-start;gap:13px;text-align:left;
-  margin:22px 0 0;padding:15px;
-  border-radius:13px;background:var(--sunken);border:1px solid var(--border-2);
-}
-.notice .bang{
-  flex:0 0 auto;width:30px;height:30px;border-radius:50%;
-  background:var(--mint-bright);color:#0b0f0d;
-  font-size:16px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-}
-.notice p{margin:0;font-size:15px;line-height:1.42;color:var(--muted);}
-.notice b{color:var(--mint-bright);font-weight:700;}
-.notice b.keep{white-space:nowrap;}
-.modal .cta{margin-top:20px;font-size:18px;padding:18px 16px;border-radius:13px;}
-
-@media (max-width:380px){
-  .perks li{font-size:12.5px;}
-  .facts li{font-size:11.5px;}
-  .facts b{font-size:16px;}
-}
-@media (max-width:360px){
-  .steps .txt em{font-size:12px;}
-  .rinfo h4{font-size:14px;}
-  .rprize{font-size:16px;}
-  .rbtn{font-size:12px;letter-spacing:.02em;}
-  h1{font-size:29px;}
-  .cta{font-size:17px;letter-spacing:.04em;}
-  .card{padding:15px 13px 15px 18px;gap:12px;}
-  .card .meta h3{font-size:17px;}
-  .card .meta p{font-size:13px;}
-  .card .pill{padding:6px 11px;font-size:13px;}
-  .card .ico{width:40px;height:40px;}
-  .verified{padding:8px 15px;font-size:12px;letter-spacing:.10em;}
-  .modal h2{font-size:23px;}
-}
-@media (max-width:330px){
-  .howcard{padding:17px 14px;}
-  .steps li{gap:11px;padding-bottom:16px;}
-  .steps .txt em{font-size:11.5px;}
-  .impbox{padding:18px 14px;}
-  .reward{padding:13px;}
-  .rtop{gap:10px;}
-  .rtile{width:40px;height:40px;}
-  .rinfo h4{font-size:13.5px;}
-  .rprize{font-size:15px;}
-  .rbtn{font-size:11.5px;padding:11px 8px;}
-  h1{font-size:26px;}
-  .lede{font-size:15px;}
-  .cta{font-size:15.5px;letter-spacing:.03em;padding:17px 12px;gap:9px;}
-  .card .meta h3{font-size:16px;}
-  .card .pill{padding:6px 9px;font-size:12px;}
-  .facts b{font-size:15px;}
-}
-
-/* Anyone who has asked their phone to calm down gets a completely static page. */
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important;}
-  .rise{opacity:1;transform:none;}
-  .bg-fx{transform:none;}
-}
+  /* ---------- mobile ladder ---------- */
+  @media (max-width:400px){
+    .page{padding-left:17px;padding-right:17px;}
+    h1{font-size:25px}
+    .brand img{width:52px;height:52px}
+    .prog{padding:15px 13px 15px 16px;gap:12px}
+    .prog .name{font-size:15px}
+    .cta{font-size:15px;padding:18px 16px}
+  }
+  @media (max-width:360px){
+    .page{padding-left:15px;padding-right:15px;}
+    .brand img{width:48px;height:48px}
+    h1{font-size:23px}
+    .lead{font-size:13px;margin-bottom:18px}
+    .verified{font-size:11px;padding:6px 13px;letter-spacing:.08em}
+    .progs{gap:10px;margin-bottom:18px}
+    .prog{padding:14px 11px 14px 14px;gap:11px}
+    .prog .ico{width:40px;height:40px;border-radius:11px}
+    .prog .ico svg{width:20px;height:20px}
+    .prog .name{font-size:14.5px}
+    .prog .desc{font-size:12px}
+    .prog .earn{font-size:11px;padding:6px 9px}
+    .cta{font-size:14px;padding:17px 12px;letter-spacing:.04em}
+    .foot{font-size:11px}
+  }
+  @media (max-width:340px){
+    .page{padding-left:13px;padding-right:13px;}
+    .brand{gap:11px}
+    .brand img{width:44px;height:44px}
+    h1{font-size:21px}
+    .lead{font-size:12.5px}
+    .prog{padding:13px 9px 13px 12px;gap:10px}
+    .prog .ico{width:36px;height:36px}
+    .prog .name{font-size:14px}
+    .prog .desc{font-size:11.5px}
+    .prog .earn{font-size:10.5px;padding:6px 8px}
+    .cta{font-size:13px;padding:16px 8px;letter-spacing:.02em}
+    .modal{padding:24px 17px 18px}
+    .modal h2{font-size:18.5px}
+  }
+  /* short viewports — keep CTA above the fold */
+  @media (max-height:680px){
+    .brand{padding:2px 0 12px}
+    .brand img{width:48px;height:48px}
+    .verified{margin-bottom:14px}
+    h1{font-size:24px}
+    .lead{margin-bottom:16px}
+    .progs{margin-bottom:16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .rise{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
-<div class="bg-fx"></div>
 
-<main class="wrap">
+<div class="page">
 
-  <div class="logos rise d1">
-      <span class="tile"><img src="data:image/webp;base64,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" alt="TikTok" width="128" height="128"></span>
-      <span class="x">X</span>
-      <span class="tile"><img src="data:image/webp;base64,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" alt="Gravy Pass" width="128" height="128"></span>
+  <div class="brand rise d1">
+    <img src="data:image/webp;base64,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" alt="TikTok">
+    <span class="x">&times;</span>
+    <img class="gp" src="data:image/webp;base64,UklGRugGAABXRUJQVlA4INwGAADQJQCdASqAAIAAPjEYikOiIakjKRgIiSAGCUEOAZADFeMzTp8h+JPtj3b/Cfhv9vOuBQz1W/rvuQ+F/qy8wX9If7J+R/9J7q/mA/kf9n/y39m94T0ofQB8gH6y9aP6AH7L+lt+xPwlftj+yvwH/sRdEcyo3BslHbYMT54/pD9gPgM/VQgpKtQk8XDKjL0Pz/qb+f+QM50kPnLP0pXiQoTWlqlmGpk2TvITEmL/75N+CqNfA92KisLHjnfS9fjS5yoZV2RexJFa+l7vjPXDG2PPau3rW+E9KAbPosoBIL/UxeQocuIAWsQ2h3MoV0olL5yaPswNd03tlGzTiLeb0TAwYEi08qBBaEEB4zDqNBrpNq/U4II5of3aP5O0boxM71z/Xsxe5X22LCvVWz0g0bvk+TrVwt//KAD+/qC9J97qW0P/6ZS29vkPOXDiqrc0/zrq4fsF8z2EtHUBEVgvL0wgs1XxbDnK+1teloDhsc+5hN9/QYlQU9M4Vjnfv98A3JbMDd1/F7cwWmtZDfqsW6jlq+O05bavTwNdNgudXDxDAokcwUf6fBIMXguFKBNnG6DKeJKDM7xoPKstyfQPmX1qwMJaPCajSxW9s3wpwohrti6Ace2mtlX/vW0pS6SEww8VIjJLV/KaJ+Yft/+Sjgx+eV7VrUATvb3nbQW+o8ux7vXW57oG/DaYVyPvSw/UbsHgwWnFwg8zbLExnop3bBV/mh71++Olv392V9EEs6bEW6wLqMexzuzQmqcMTvsiu7B1jhMnYMFXGeIRuGbRiEk4UIcyY4kOmR7fBzBJ95gspzzZ71zYMq7Fj+WfDN9nO+BrpFJfrY6vKZGfSHMPVawrJyd7MZWAs5sxFC6crRAHn5T4BvtIeOWctWAv73a+af4P/iRd5AVQC3QH3vLjtd0E3+WPZaKQOMYuzXh2HwVZr61HqzTqkma9RxzOvKyurr0Va/8K5cUal7odT88fkHUDeD2CWJpQjMZ6iut5ntMcIk63EdnEt5aFexUSK9BFCN9sG85DK3KucJf5sdwNhYQCf2cW6jglfg6vhNBFDHOmRM4oJpGNOranuDcjCy6ZhCptuouVXGaO3KC1JSEJESbO7PZHyoTboLKIIfucG1rqfdVa/+nI73QdxWkTwS8yVPMbl6Tjict+YlNHJY9EgVokKqC7fA5kr9DtESVHhKOl0CPw0iEUaFSeOMG0aChQEP0zUAI6m8a7k7eq5v4coWPFdaVyit/0Xzdo7/D0QZ00nHHrEvpHBqXJs8RgGBqG+uImHEedcPmr6TbGjtAzUobUMWpXpGPL/BH9Tbn+ergwpnWIf7UynZmRa4BgGLXTUp3Nvj8fNCoVpU9DE/iCm1IRJwsa6yBT+aAQ3NvEoI3n/801xa/gcj9pup5h83nOC622EtSOg4Dr5Q7iZvIStnRjouHv7dVf+e89VwXIvwjTRcqOLkeciQTWCpcGwi++s7V/4Wv7c5Hu6kye5/7P0wDe0OYGXTgxyUSOINzXnakYDFlWmcA9/OR4/vIGb6iAM1cJS3OyDwdmaQgezak/+L/Gaxg1DaizK5Npu7rvQwuAv7c2o/WBswsyj3uryCMcjYmSXKUY//aIESOrvx1zeE0B+hTeqtHKvJA0g4kfYQvn9h5cPS9QE2agQ/HmCvw5f/UlZ3Ea+aohFkexqAHbugVPC+yZyc4IRTX/o+t3ChlWov9cJvxk1xoMGOBAEVQGm9bH8RgLbP8x3+gJqkb2jlR9hX9Q8AOr8Aj/aKGBozr+nfN+Wm121O90hw48fjLonx8myAyah3RY+JbVmjP/WmG8Vspg/rBHh4qUc5iEecXjw7b/UDhox3Craq1tUzXp/zHGBDeS9n/1kjraRvl/TlJaAMi6yXg1b/gH1lgjKH6eewQ/BeTimDWicjY2QO/BPxyswmstppO/6J3K/WnUkaVeIefcnS1Y0992E5QfDZXOgQejYA72ZQr/39F9TTOLOXn3+y97QYavSHxliGeWtI+i/exE9zhP5r8spBanXS73hmLVEcUlnIMCtCO2L5GVNXk6dDHUTnWcakrIo1oxvHB7Dki0yY9fmraBvvd0/h0a1lFG4juW59N9gk9zJHbJwxlJpS7kMtz6mB/f/Yj2mepMMNikhpmKrk71nYEQ3gbuawjp9eeL3Mn9P0uUhPIVfpS87ijBuOxcq/rjv3gbvDbOO8QvqIP/S6AM/DrWW4ueLnMtO2dCG28sgwpLkYIi4IYQsbyE/4RbyPCS+xbjO+z3xakfG+KUL7xvIr69z/TEoJj+nZJWbiFV8xXL9NaKAAtrqZYqNq87dhsnD5A/dFmYFfU9ncyfiiV5AAAA" alt="Gravy Pass">
+  </div>
+
+  <div class="verified rise d1"><span class="dot"></span>Account Verified</div>
+
+  <h1 class="rise d2">You're eligible to <span class="g">start earning</span></h1>
+  <p class="lead rise d2">Your account qualifies for the following paid programs:</p>
+
+  <div class="progs">
+    <div class="prog rise d3">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><rect x="2" y="6" width="20" height="12" rx="4"/></svg>
+      </span>
+      <div class="txt">
+        <div class="name">Get Paid To Game</div>
+        <div class="desc">Play Roblox, Subway Surfers &amp; more</div>
+      </div>
+      <span class="earn">Earn $$$</span>
     </div>
 
-
-  <!-- ============ SCREEN 3 — post-tap instructions ============ -->
-  <section class="screen" id="screen3">
-
-    <div class="statusbar">
-      <span class="sdot" aria-hidden="true"></span>
-      <p id="statusText">All rewards unlocked &mdash; checking availability&hellip;</p>
+    <div class="prog rise d4">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><line x1="10.5" y1="18" x2="13.5" y2="18"/></svg>
+      </span>
+      <div class="txt">
+        <div class="name">Get Paid For Screentime</div>
+        <div class="desc">Earn while you scroll, no skills needed</div>
+      </div>
+      <span class="earn">Earn $$$</span>
     </div>
+  </div>
 
-    <div class="howcard">
-      <h3>How to start earning</h3>
-      <ol class="steps">
-        <li>
-          <span class="num">1</span>
-          <span class="txt">
-            <b>Activate &amp; open your Gravy Pass</b>
-            <em>Tap <span class="hl">Activate Wallet Pass</span> below, then open your Gravy Pass in <span class="hl">Apple Wallet</span> to get started.</em>
-          </span>
-        </li>
-        <li>
-          <span class="num">2</span>
-          <span class="txt">
-            <b>Complete games &amp; tasks for money</b>
-            <em>Follow the instructions in your pass and complete <span class="hl">games and tasks</span> to start earning real money.</em>
-          </span>
-        </li>
-        <li>
-          <span class="num">3</span>
-          <span class="txt">
-            <b>Complete 3 tasks to unlock top offers</b>
-            <em>Complete <span class="hl">3 tasks</span> to unlock high-paying popular offers like <span class="hl">Paid to Scroll</span>, Roblox and more.</em>
-          </span>
-        </li>
-      </ol>
+  <button class="cta rise d5" id="continueBtn" type="button">
+    Continue
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m13 6 6 6-6 6"/></svg>
+  </button>
+
+  <p class="foot rise d6">Cash out through Apple Wallet &middot; Instant payouts</p>
+
+</div>
+
+<!-- ---------- Wallet modal ---------- -->
+<div class="ov" id="ov">
+  <div class="modal">
+    <button class="close" id="closeBtn" type="button" aria-label="Close">&times;</button>
+    <div class="mico">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5a2.5 2.5 0 0 0-2.5-1.5c-1.4 0-2.3.7-2.3 1.8 0 2.5 5 1.4 5 4 0 1.2-1 2-2.6 2a2.7 2.7 0 0 1-2.7-1.7"/><path d="M12 6.2v1.8M12 16v1.8"/></svg>
     </div>
-
-    <a class="cta offer-link" id="activateBtn" href="#" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="3"></rect><path d="M16.5 12h2"></path></svg>
-      Activate Wallet Pass
-    </a>
-
-    <p class="retry">Didn&rsquo;t add it yet? <b>Tap above</b> to add your pass again.</p>
-
-    <div class="impbox">
-      <span class="impbadge">Important</span>
-      <div class="impinner">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.4" width="15" height="10.1" rx="2.4"></rect><path d="M8.2 10.4V7.7a3.8 3.8 0 0 1 7.6 0v2.7"></path></svg>
-        <div>
-          <h3>Activation Required to Unlock</h3>
-          <p>Top offers stay locked until your wallet pass is active and you&rsquo;ve completed <b>3 tasks</b>. Keep completing tasks in your Gravy Pass to unlock them.</p>
-        </div>
-      </div>
-      <ul class="implist">
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.6l4.6 4.6L19.4 6.9"></path></svg>
-          <span>Complete tasks inside your Gravy Pass to make progress.</span>
-        </li>
-      </ul>
+    <h2>Start Earning Now</h2>
+    <p class="msub">Add your Gravy Pass to Apple Wallet and start earning from your screentime &amp; get paid to game.</p>
+    <div class="note">
+      <span class="bang">!</span>
+      <p>After adding the pass, <b>come back to this page</b> for your earning instructions.</p>
     </div>
-
-    <p class="seclabel">Rewards to unlock</p>
-
-    <div class="reward ready" data-reward>
-      <div class="rtop">
-        <span class="rtile rtile-a" aria-hidden="true"><img src="data:image/webp;base64,UklGRsIEAABXRUJQVlA4ILYEAADwFwCdASpgAGAAPmEskkckIiGhJlbaeIAMCWQYnydZcHJFPDYH9uPy9/sfuA+lHow8Ujpj+ZT9XP2A92j0Y+gB+rvWgftv7AH7Hel9+03wwftB+2vtE5qb/bpxvfnlfGQ+JjSgzPPI9qEkNoaTEYZsqLfVSH6ZujB8zG4BK5SiCwDNAHe6x01lzxJJOrEXJ/SgUSabwrbEwA6vZb/4PNTqVtpfl8Iue526gmYI0ef0w4m/SsR7+C4Qe60Qm6Pa56gLq7q801zFAAD8ytANOt5jNS28LCeVn40e/p5liFQ/BKGd1pTMfxpLzfjpGs7vuL/v+HMud6RI8vasGI4W0ovyw9ftpFLgTypwgX3B8lKLKA3meS45BVIpgUbNaNHkKnGuP/FQMHtKdBOmtCfduONzTzhzHHg7nkn1ekV2TimvtFM51Fl5bwgcAA8S5X/fsXWeYiwrhsR1dGxv3fosIWf2nvY1eVeQMvDu6V9M/hVcx3rwdSD06eC4OG6i+arWIjEUcVl39paywh7SNa9GhfMgFU6f9BN2VRf26pP5O9sVoz1BtnrvTXVTnVqkPhFdu+3hmfY3M8SxRusTu6IlGoSiLg2EtPPUxQX5RINN0/9fqKNLnuztZ0RL8iVWk/FJmy8FDMRe99xaA+Ogo3xmJbXu/5K8IbWa/CFw9Xlp/DmiHO4HDHxIOUy8SFbtYvWqBy33MUJrIjz9GJZU2UitYukql7Rh6DpKRq3+Aj6o/lUg8rANt9Y+OuXUGjf8jTm6IGMWoELJAkPE/Rdv9X7YHz84Gb2bD8CKGkwpDeOPkyggRT9fEn7+P5XCShAlv9Zcg5b/xhoAwZpapZ127PsL2MJ+a4zOjfDJ0sj1rz/8ebxiP2lCWrZO3JjzsvkXbN5kTxBRDqVTvBdurtmtBrQgz+KYM+dduKA1YwRaaUV86EJbkBP5BT0P8bjPyqg3sqN1OXIBX1FhnaWmhgbO12ygURubG4FctykqXz+Tay/VeP/+4396NANf35R8zh6pTdBvUezkZ2YXxtol7g0ROFTRAl+9HXE6MaAnaOA1XnJfmGbJ8/WPFV2RderXSn4YxdIv0ToIOFehB0qMWaylgVnpFu+GA+fN7MrJqBCYWbNJA/zR1Z0/crDMOE/fNwMUEV1+lrk5UeSYYMlvcxtST87q4q6B0ZC547iKBmmRjDp63bb/0gE1t083cn5fZvq8y730sONLXzpusQF/iBkXejUaVMU4hHDLDeEDIWCZ2y5r6qZwJ6eMutymQy+6XmPOHy5qFU5EKAeLk2t3X2oSJ5fhJMJTOmBsi0ysIvtD/Ou0UIkGLa7wHdj5KPp8ut1+qOXx5y4Eef94kg8rd3EJ/2YIrJvsdO19UQubLpr3ASK7VaQyBMb5RnmRmCVk4RARfGf3B4OSu0V9q7jZBmInCjcfa9f3c1o1rsbP90S4DnuEu4bEAS9D6anSe6Ay1mXwFee6pYrqBt3FQnbSIldG1JwcSbvAUzZF/HAZ3m6HZPTK0geK2DshGUlFcvLbcdTm0FMnf9HxM2NJpfCEcBcjpixEeRbUtGYtb/yrW1PjrpnDEGFpZH2oFCV3irzZSvudEIhyQPZbvOoAAAA=" alt="TikTok" width="96" height="96" loading="eager" decoding="async"></span>
-        <div class="rinfo">
-          <h4>TikTok</h4>
-          <p>Paid to Scroll</p>
-        </div>
-        <div class="rprize">$32/hr<span>per hour</span></div>
-      </div>
-      <div class="rprog">
-        <span class="rlbl">Tasks completed</span>
-        <span class="rcnt">3/3</span>
-      </div>
-      <div class="rbar"><span class="rfill" style="width:100%"></span></div>
-      <a class="rbtn ready offer-link">Unlock TikTok</a>
-    </div>
-
-    <div class="reward ready" data-reward>
-      <div class="rtop">
-        <span class="rtile rtile-b" aria-hidden="true"><img src="data:image/webp;base64,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" alt="Subway Surfers" width="96" height="96" loading="eager" decoding="async"></span>
-        <div class="rinfo">
-          <h4>Subway Surfers</h4>
-          <p>Play &amp; Earn</p>
-        </div>
-        <div class="rprize">$28/hr<span>per hour</span></div>
-      </div>
-      <div class="rprog">
-        <span class="rlbl">Tasks completed</span>
-        <span class="rcnt">3/3</span>
-      </div>
-      <div class="rbar"><span class="rfill" style="width:100%"></span></div>
-      <a class="rbtn ready offer-link">Unlock Subway Surfers</a>
-    </div>
-
-    <div class="reward ready" data-reward>
-      <div class="rtop">
-        <span class="rtile rtile-c" aria-hidden="true"><img src="data:image/webp;base64,UklGRk4EAABXRUJQVlA4IEIEAABQGACdASpgAGAAPlkmjkUjoiGarfysOAWEswBm/MS/iux6m52L8hPyA6kziLvvzJ9384/xQukh5gP1S/Wn2gP0z9wHoAf2v+k9YZ6Bv7QemV7K/7lekH//9adXN/O/tTsov9F/Rs9BuhGLeIDSBY1fQG+cPSR8/HkaCUDMzBMqRwRMFv31o2z93qlOe2ZxGgngLLtd3S1jAzpWKdXfwMjCCvhkKxI5WZ3aNXFfU3ADLECh4jjxd9y33qk14lTVYqR09Y2jXwkmTtEcAAD+7gpnewUm4Q4PvIIRG1zH8XfelfbGuYLzVj19y/hCmOVP1W/M5u+ciEAwwRwCXTiE6LTy6qrpcbEd6irjKEr53GPMnyEOSvmDa1/yVAANOB7/Rrb5DfBIKuf4bQf1Eg/O4rT4v/QSyjLJ9aIimmP9vj3DCT7PreQhj0fNgMzN270IM2U/TMGvtpHnuJ0tt6JGTieg1V6zPOrsDDGEUxtsppoKLURwU7o7GhOeg74XSWoCEygTW61NkOOKKY8SNDlpub+3Bhq9JRzxXJPXy6IQyIKa3Nw1oQ2LVV2kUQiSg2GoIgDfCsVOnylrc7sYTrIFXXrJ7+zCUZYfjLs+oN4ToZAI/JIjOhL+0Ob8gqJ9D8f+I54iUb5ZX+ve7HyDzcvDvt2B+uP/MmPz8aW9HQ/Y5BaL4Qu/fbzFm1ZtDjwRYUmuypmZgX4r61EVaQ2ZOySkqG2AbWrvpaSBuWwU2UB6D6Pxe1rBOda3+8f/CihY6Nzs+PfAyQTBWR0Uo3rAYSFvX6JleF4dcOA1eBJKo7fat8Vx1B1btOJamytLLxoEDMP9HztwWc3NrsmX6OtIRaynqwnzWpLhf8z2yBoKgFv0ArYir1oDmf7B3dDZwv/wD6tr558zvWGc94I5eEDzmT/iP54LS4W89AoCnBPybTgfcTw+JFNexfXMrf1jwXAMVWf0yHYUH4Ro/7RSCgtuBN6NDVFAXk0598SES64kCPvDxaL047dCZHSphdQUTGJpDenCmHlaWJBOcHzQVy48i/UlH089N3oRsf2WQdDUJ5JScM33V4OBmLpabzaAT7uoN722/zFTXXVnwTI853be15KFngyxGAwtT1U4HbJMv9DWOew+2P902lewx68GRP/xYAV9kCFgis+eHInugqxlPgeW9uQQbYWHP5mQ8Avf6GRUTSl1un2MnV1ZdelLe4fUO61QBenAOEMGLN+BeHOdFBAgi2kEJWP0g5G+FfjgqR6zALdQv45h7CIl712/j7azRCZehkePFhICkd61xlcxPK6MyBGnfA0IuiVYfmiTjKNiyNuzx568pZCdRI3gJ+IzaTR+ejlfQ6PF9UUHPpaS/pnLAOuoOkSnwAAAYMo5zuYkIyAED5AQV/l5pgqxsdOpiqftOO2nMe5AMBzPKJV1/VHSmwX8agfmclNFvshMZBwacsFAAAAA" alt="Roblox" width="96" height="96" loading="eager" decoding="async"></span>
-        <div class="rinfo">
-          <h4>Roblox</h4>
-          <p>Play &amp; Earn</p>
-        </div>
-        <div class="rprize">$35/hr<span>per hour</span></div>
-      </div>
-      <div class="rprog">
-        <span class="rlbl">Tasks completed</span>
-        <span class="rcnt">3/3</span>
-      </div>
-      <div class="rbar"><span class="rfill" style="width:100%"></span></div>
-      <a class="rbtn ready offer-link">Unlock Roblox</a>
-    </div>
-
-
-    <p class="rnote">Rewards are credited to your Apple Wallet. One reward set per verified account.</p>
-
-  </section>
-
-</main>
+    <button class="cta" id="goBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="3"/><path d="M2 10h20"/></svg>
+      Start Earning Now
+    </button>
+  </div>
+</div>
 
 <script>
 (function(){
-
-  /* ---- Click ID ------------------------------------------------------------
-     The launcher appends ?campid=<id> to this page. s1 / s2 are accepted as
-     fallbacks so a hand-built test link still resolves. */
+  // ---- SubID chain (bot launch, B-variant: fed by a PRELANDER) ----
+  // Chain is Carrd /r -> prelander -> THIS PAGE -> short code -> offer. The prelander forwards
+  // the entire inbound query string untouched, so campid arrives here exactly as Spartis wrote
+  // it. s1/s2/sub1 accepted so a hand-built test link still resolves.
+  // Spartis LANDERS tab points at the PRELANDER for this variant, not at this file.
   function getCampid(){
     var p = new URLSearchParams(window.location.search);
-    return p.get('campid') || p.get('s1') || p.get('s2') || '';
+    return p.get('campid') || p.get('s1') || p.get('s2') || p.get('sub1') || '';
   }
-
-  /* ---- Outbound ------------------------------------------------------------
-     No advertiser URL lives in this file. Everything outbound goes to the offer
-     short code, which emits ?campid= (never ?sub1=). The real destination and
-     the forward parameter are configured against the short code in the launcher
-     dashboard, so the offer can be swapped without a redeploy. */
+  // BOT LAUNCH: the Spartis short code. No advertiser URL lives in this file — the real
+  // Prescott link (phef6trk.com/ZKTQ1K/32BB7QT/) and the Forward Param sit in the
+  // Offer Links tab behind "gravypass-us-off", so the offer can be repointed without a
+  // redeploy. Prescott reads the sub ID out of sub1 and echoes it back as {sub1} on the
+  // postback — and postbacks 928/929 (Global) already cover every Prescott offer, so this
+  // one needs no postback work at all.
   function offerUrl(){
     var campid = getCampid();
     return 'https://buenohoodies.com/c/gravypass-us-off?campid=' + (campid ? encodeURIComponent(campid) : '');
   }
 
-  /* Stamp the URL onto every outbound control up front, so a long-press or a
-     middle-click that bypasses the handler still carries the click ID. */
-  var links = document.querySelectorAll('a.offer-link');
-  for (var i = 0; i < links.length; i++) { links[i].setAttribute('href', offerUrl()); }
+  var ov = document.getElementById('ov');
+  function openModal(){ ov.classList.add('on'); document.body.style.overflow = 'hidden'; }
+  function closeModal(){ ov.classList.remove('on'); document.body.style.overflow = ''; }
 
-  /* Fired from the user's own tap, so the pop counts as user-initiated and is
-     not blocked. Falls back to a same-tab navigation if the pop is refused, so
-     the click is never lost. */
-  function go(){
+  document.getElementById('continueBtn').addEventListener('click', openModal);
+  document.getElementById('closeBtn').addEventListener('click', closeModal);
+  ov.addEventListener('click', function(e){ if (e.target === ov) closeModal(); });
+
+  // Whole card is tappable, same as the CTA.
+  document.querySelectorAll('.prog').forEach(function(c){ c.addEventListener('click', openModal); });
+
+  var go = document.getElementById('goBtn');
+  go.addEventListener('click', function(){
+    if (go.classList.contains('loading')) return;
+    go.classList.add('loading');
+    go.innerHTML = 'Loading<span class="spin"></span>';
     var url = offerUrl(), w = null;
     try { w = window.open(url, '_blank'); } catch (e) {}
     if (!w || w.closed || typeof w.closed === 'undefined') { window.location.href = url; }
-  }
-
-  document.addEventListener('click', function(e){
-    var a = e.target.closest && e.target.closest('a.offer-link');
-    if (!a) return;
-    e.preventDefault();
-    go();
   });
-
 })();
 </script>
 </body>

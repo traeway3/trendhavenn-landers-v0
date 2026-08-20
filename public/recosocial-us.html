@@ -328,8 +328,13 @@
 </div>
 
 <script>
-  // Direct offer link (no Spartis cloak) — buildOfferUrl appends the campid straight into s1.
-  var OFFER_LINK = 'https://monetisetrk4.co.uk/?a=26648&c=56065&s1=';
+  // BOT LAUNCH (Spartis). The CLAIM goes to the Spartis SHORT CODE, never straight to the
+  // network — the real Glitchy link (linkthem.net/aff_c?offer_id=4747&aff_id=27696) and the
+  // Forward Param live in the Offer Links tab behind "recosocial-us-glt-off", so the offer can
+  // be repointed without a redeploy.
+  // Emits ?campid= — never ?source= and never ?s1=. Spartis forwards it into Glitchy's sub ID,
+  // which Glitchy calls `source` and re-maps to sub2 on the advertiser URL.
+  var OFFER_LINK = 'https://buenohoodies.com/c/recosocial-us-glt-off?campid=';
   var answers = {};
   var earningsTable = {
     yes:   '$200–$500+',
@@ -416,7 +421,9 @@
 
 <script>document.fonts.ready.then(function(){document.body.classList.add('ready')});setTimeout(function(){document.body.classList.add('ready')},800);</script>
 
-<!-- NO KICKER — the prelander handles the Safari breakout; this lander runs in-browser (matches the US funnel). -->
+<!-- NO KICKER — by instruction, this page carries NO breakout code of any kind: no
+     x-safari-https, no intent://, no UA sniffing, no window.open. Bot launch: the Carrd /r
+     cloaker is the front and this page is selected in the Spartis LANDERS tab. Do not add one. -->
 
 <!-- Funnel tracking beacon (lander tag: reco) — load + human signal + claim, carries the campid -->
 <script>

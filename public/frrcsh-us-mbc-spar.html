@@ -16,9 +16,7 @@
 <!-- TikTok In-App Browser Breakout Script -->
 <script>
 (function() {
-  // Kicker ENABLED — every Freecash Spartis lander runs it. The file this design was cloned
-  // from has it switched off; that is a per-offer choice, not a house rule.
-  // To disable, put `return;` on the next line.
+  return; // DISABLED — remove this line to re-enable the in-app browser breakout
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   var isTikTok = /tiktok|musical_ly|bytedance/i.test(ua);
   if (!isTikTok) return;
@@ -52,7 +50,7 @@ html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-s
 html{overflow-x:hidden}
 body{overflow-x:clip}
 a,button{pointer-events:auto !important}
-.page-wrapper{max-width:430px;margin:0 auto;padding-bottom:156px;position:relative;background:radial-gradient(560px 320px at 50% -40px,rgba(76,124,250,0.14),transparent 70%),#141414}
+.page-wrapper{max-width:430px;margin:0 auto;padding-bottom:156px;position:relative;background:radial-gradient(560px 320px at 50% -40px,rgba(0,255,136,0.14),transparent 70%),#141414}
 .notif-bar{background:#1A1A1A;border-bottom:1px solid rgba(255,255,255,0.06);color:#D7D7DE;font-size:12.5px;font-weight:500;text-align:center;padding:0 16px;letter-spacing:0.01em;overflow:hidden;height:42px;display:flex;align-items:center;justify-content:center;position:relative}
 .notif-inner{position:absolute;width:100%;text-align:center;transition:opacity 0.35s ease,transform 0.35s ease;padding:0 16px}
 .notif-inner.exit{opacity:0;transform:translateY(-10px);pointer-events:none}
@@ -62,12 +60,12 @@ a,button{pointer-events:auto !important}
 .notif-bar strong{color:#FFFFFF;font-weight:600}
 .card{background:linear-gradient(180deg,#1C1C1C 0%,#161616 100%);border:1px solid rgba(255,255,255,0.06);border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 12px 28px rgba(0,0,0,0.35);margin:14px 16px;padding:26px 22px}
 .hero-card{text-align:center;padding-top:32px;padding-bottom:26px;position:relative;overflow:hidden}
-.hero-glow{position:absolute;top:-90px;left:50%;transform:translateX(-50%);width:320px;height:240px;background:radial-gradient(circle,rgba(76,124,250,0.35) 0%,rgba(76,124,250,0) 70%);pointer-events:none;filter:blur(4px)}
+.hero-glow{position:absolute;top:-90px;left:50%;transform:translateX(-50%);width:320px;height:240px;background:radial-gradient(circle,rgba(0,255,136,0.35) 0%,rgba(0,255,136,0) 70%);pointer-events:none;filter:blur(4px)}
 .hero-logo-wrap{display:flex;justify-content:center;margin-bottom:18px;position:relative;z-index:1}
-.hero-logo-wrap::before{content:'';position:absolute;top:50%;left:50%;width:180px;height:180px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(76,124,250,0.25) 0%,rgba(76,124,250,0) 70%);pointer-events:none;z-index:0}
+.hero-logo-wrap::before{content:'';position:absolute;top:50%;left:50%;width:180px;height:180px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,255,136,0.25) 0%,rgba(0,255,136,0) 70%);pointer-events:none;z-index:0}
 .hero-logo-ring{width:92px;height:92px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;border-radius:20px;overflow:hidden;background:#00ff88}
 .hero-logo{width:100%;height:100%;object-fit:contain;border-radius:20px;position:absolute;inset:0}
-.hero-rating{display:inline-flex;align-items:center;gap:6px;background:rgba(76,124,250,0.07);border:1px solid rgba(76,124,250,0.32);border-radius:99px;padding:6px 15px;font-size:13px;font-weight:600;color:#F4F4F6;margin-bottom:20px;position:relative;z-index:1}
+.hero-rating{display:inline-flex;align-items:center;gap:6px;background:rgba(0,255,136,0.07);border:1px solid rgba(0,255,136,0.32);border-radius:99px;padding:6px 15px;font-size:13px;font-weight:600;color:#F4F4F6;margin-bottom:20px;position:relative;z-index:1}
 .hero-rating .rating-score{color:#4ade80;font-weight:700}
 .hero-rating .divider{opacity:0.4}
 .hero-rating .rating-store{color:#F4F4F6;font-weight:600}
@@ -75,9 +73,9 @@ a,button{pointer-events:auto !important}
 .hero-headline{font-size:30px;font-weight:800;line-height:1.18;color:#FFFFFF;letter-spacing:-0.03em;margin-bottom:12px;position:relative;z-index:1}
 .hero-headline .accent{color:#4ade80}
 .hero-sub{font-size:14.5px;color:#9C9CA6;line-height:1.6;max-width:290px;margin:0 auto 20px;font-weight:400;position:relative;z-index:1}
-.live-status{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#86efac;background:rgba(76,124,250,0.08);border:1px solid rgba(76,124,250,0.25);border-radius:99px;padding:6px 14px;position:relative;z-index:1}
+.live-status{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#86efac;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.25);border-radius:99px;padding:6px 14px;position:relative;z-index:1}
 .live-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;flex-shrink:0;animation:pulse-dot 2s infinite}
-@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(76,124,250,0.4)}50%{box-shadow:0 0 0 5px rgba(76,124,250,0)}}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,0.4)}50%{box-shadow:0 0 0 5px rgba(0,255,136,0)}}
 .app-card{padding:20px 20px 24px}
 .app-row{display:flex;align-items:center;gap:14px;margin-bottom:22px}
 .app-img-wrap{width:76px;height:76px;border-radius:18px;background:linear-gradient(155deg,#232323,#161616);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 16px rgba(0,0,0,0.3);overflow:hidden}
@@ -91,7 +89,7 @@ a,button{pointer-events:auto !important}
 .steps-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6B6B76;margin-bottom:16px}
 .steps-list{list-style:none;display:flex;flex-direction:column;gap:14px}
 .step-item{display:flex;align-items:center;gap:13px}
-.step-num{width:28px;height:28px;border-radius:9px;background:rgba(76,124,250,0.1);border:1px solid rgba(76,124,250,0.25);color:#4ade80;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-num{width:28px;height:28px;border-radius:9px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.25);color:#4ade80;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .step-text{font-size:14.5px;font-weight:500;color:#D7D7DE}
 .trust-strip{display:flex;align-items:stretch;justify-content:space-between;margin:14px 16px;padding:18px 12px;background:#131318;border:1px solid rgba(255,255,255,0.06);border-radius:16px}
 .trust-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
@@ -114,8 +112,8 @@ a,button{pointer-events:auto !important}
 .btn-store .store-small{font-size:10.5px;font-weight:500;letter-spacing:0.01em;opacity:0.9}
 .btn-store .store-big{font-size:15.5px;font-weight:700;letter-spacing:-0.01em}
 .btn-appstore{background:#202024;border:1px solid rgba(255,255,255,0.14);color:#FFFFFF}
-.btn-googleplay{background:linear-gradient(180deg,#00ff88,#00d175);color:#ffffff;box-shadow:0 6px 18px rgba(76,124,250,0.35);animation:cta-glow 2.2s ease-in-out infinite}
-@keyframes cta-glow{0%,100%{box-shadow:0 6px 18px rgba(76,124,250,0.35)}50%{box-shadow:0 8px 30px rgba(76,124,250,0.6)}}
+.btn-googleplay{background:linear-gradient(180deg,#00ff88,#00d175);color:#ffffff;box-shadow:0 6px 18px rgba(0,255,136,0.35);animation:cta-glow 2.2s ease-in-out infinite}
+@keyframes cta-glow{0%,100%{box-shadow:0 6px 18px rgba(0,255,136,0.35)}50%{box-shadow:0 8px 30px rgba(0,255,136,0.6)}}
 @media(min-width:431px){body{background:#08080A}.page-wrapper{padding-top:12px;padding-bottom:170px;box-shadow:0 0 60px rgba(0,0,0,0.6)}}
 html{scroll-behavior:smooth}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.55s cubic-bezier(0.22,1,0.36,1),transform 0.55s cubic-bezier(0.22,1,0.36,1)}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#fdf7f9">
+<meta name="robots" content="noindex,nofollow">
+<meta name="format-detection" content="telephone=no">
+<title>Shein Codes — Claim Your Gift Card</title>
+
+<!-- NO KICKER on this page. The prelander (shein750-us-flu-spar-prelander.html) does the
+     breakout, so this lander runs in-browser. One hop, no double-fire. Do not add one here. -->
+
+<style>
+/* Shein sweeps theme. Structure is copied from the reference lander — monochrome black/white
+   with light grey cards, which is Shein's own aesthetic — and softened with the brand's campaign
+   pink (#ff4f81 / #ff86ab) on the accents that carry motion: the progress bar, the value figure's
+   glow, the sparkles and the CTA halo. The CTA itself stays BLACK on purpose: it's the highest
+   contrast element on a near-white page and the reference proved it. Pink is the accent, not the
+   button. */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{
+  background:#fdf7f9;color:#0e0e10;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,'Helvetica Neue',sans-serif;
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh;overflow-x:hidden;position:relative;line-height:1.45}
+img{max-width:100%;display:block}
+
+/* ---- background: soft pink wash + drifting sparkles ----------------------
+   The reference has faint floating dots on flat grey. Same idea, warmed up:
+   two slow pink radials plus sparkles. Both pointer-events:none under .wrap. */
+.wash{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%,rgba(255,79,129,.10),transparent 68%),
+    radial-gradient(ellipse 60% 34% at 50% 100%,rgba(255,134,171,.09),transparent 64%);
+  animation:washDrift 15s ease-in-out infinite}
+@keyframes washDrift{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:1}50%{transform:translate3d(0,-12px,0) scale(1.05);opacity:.82}}
+.sparks{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sparks i{position:absolute;bottom:-12px;border-radius:50%;background:#ff86ab;opacity:0;filter:blur(.3px);animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(0) scale(.7);opacity:0}14%{opacity:.5}80%{opacity:.28}100%{transform:translateY(-104vh) scale(1.1);opacity:0}}
+
+.wrap{position:relative;z-index:1;max-width:390px;margin:0 auto;
+  padding:calc(26px + env(safe-area-inset-top)) max(18px,env(safe-area-inset-left))
+          calc(28px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-right))}
+
+/* ---- entrance ------------------------------------------------------------
+   TRAP worth knowing: any later rule that re-declares `animation` on a .rise
+   element replaces this one and leaves it stuck at opacity 0 — present and
+   tappable but invisible. Anything needing a loop too declares BOTH in one
+   selector (see .cta.rise). */
+.rise{opacity:0;animation:rise .55s cubic-bezier(.2,.8,.25,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---- logo ---- */
+.logo{width:58px;height:58px;margin:0 auto;border-radius:16px;background:#0e0e10;
+  display:grid;place-items:center;color:#fff;font-size:30px;font-weight:800;letter-spacing:-.03em;
+  box-shadow:0 8px 24px rgba(255,79,129,.22)}
+
+h1{margin-top:18px;text-align:center;font-size:29px;font-weight:800;letter-spacing:-.028em;line-height:1.15}
+.lede{margin-top:8px;text-align:center;color:#6b6b72;font-size:14.5px}
+
+/* ---- trust pill ---- */
+.pill{display:flex;align-items:center;justify-content:center;gap:7px;width:max-content;max-width:100%;
+  margin:14px auto 0;padding:8px 14px;border-radius:999px;
+  background:rgba(255,79,129,.07);border:1px solid rgba(255,79,129,.22);
+  font-size:12.5px;font-weight:700;color:#0e0e10;text-align:center;line-height:1.3}
+.pill svg{width:13px;height:13px;flex:0 0 auto;fill:#ff4f81}
+
+/* ---- value card ---- */
+.value{margin-top:18px;padding:22px 18px 18px;border-radius:18px;background:#f4eff1;
+  border:1px solid rgba(14,14,16,.06);text-align:center}
+.amount{font-size:46px;font-weight:800;letter-spacing:-.035em;line-height:1;
+  font-variant-numeric:tabular-nums}
+.amount-sub{margin-top:7px;font-size:12.5px;font-weight:700;color:#6b6b72}
+.bar{margin-top:15px;height:7px;border-radius:99px;background:rgba(14,14,16,.09);overflow:hidden}
+.bar span{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,#ff4f81,#ff86ab);
+  box-shadow:0 0 10px rgba(255,79,129,.5);transition:width 1.6s cubic-bezier(.2,.8,.25,1)}
+
+/* ---- CTA ---- */
+.cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;cursor:pointer;
+  margin-top:16px;padding:19px 16px;border-radius:15px;font-family:inherit;
+  font-size:17px;font-weight:800;letter-spacing:-.01em;color:#fff;background:#0e0e10;
+  min-height:44px;transition:transform .13s ease}
+.cta:active{transform:scale(.978)}
+/* Combined rule — entrance AND the looping halo, per the trap noted at .rise. */
+.cta.rise{
+  animation:rise .55s cubic-bezier(.2,.8,.25,1) forwards,
+            ctaPulse 2.4s ease-in-out 1s infinite;
+  animation-delay:var(--d,0s), 1s}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:0 8px 26px rgba(14,14,16,.20), 0 0 0 0 rgba(255,79,129,.40)}
+  50%    {box-shadow:0 10px 32px rgba(14,14,16,.26), 0 0 0 13px rgba(255,79,129,0)}
+}
+
+.chips{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  margin-top:11px;font-size:11.5px;color:#6b6b72}
+.chips b{font-weight:600}
+.chips i{font-style:normal;color:#ff4f81;font-weight:800;margin-right:3px}
+
+/* ---- how it works ---- */
+.card{margin-top:20px;border-radius:18px;background:#f4eff1;border:1px solid rgba(14,14,16,.06);overflow:hidden}
+.card-head{padding:13px;text-align:center;font-size:11px;font-weight:800;letter-spacing:.14em;color:#6b6b72;
+  border-bottom:1px solid rgba(14,14,16,.07)}
+.step{display:flex;gap:12px;padding:14px 15px;align-items:flex-start}
+.step + .step{border-top:1px solid rgba(14,14,16,.07)}
+.step .n{width:26px;height:26px;flex:0 0 auto;border-radius:50%;background:#0e0e10;color:#fff;
+  display:grid;place-items:center;font-size:12.5px;font-weight:800}
+.step h4{font-size:14.5px;font-weight:700;letter-spacing:-.012em}
+.step p{margin-top:3px;font-size:13px;color:#6b6b72;line-height:1.45}
+
+/* ---- important ---- */
+.important{position:relative;margin-top:20px;padding:20px 15px 16px;border-radius:18px;
+  background:#f4eff1;border:1px solid rgba(14,14,16,.06)}
+.important .badge{position:absolute;top:-12px;right:12px;padding:5px 11px;border-radius:8px;
+  background:#0e0e10;color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em}
+.important .label{font-size:10.5px;font-weight:800;letter-spacing:.13em;color:#6b6b72}
+.important .row{display:flex;gap:11px;align-items:flex-start;margin-top:7px}
+.important .row .ico{font-size:19px;line-height:1.2;flex:0 0 auto}
+.important p{font-size:13.5px;line-height:1.5;color:#3a3a40}
+.important b{color:#0e0e10;font-weight:800}
+
+.foot{margin-top:18px;text-align:center;font-size:12px;color:#9a9aa2}
+.stickypad{height:92px}
+
+/* ---- sticky CTA ----------------------------------------------------------
+   Not on the reference, but on a phone this page runs past one screen and the
+   inline button scrolls away. Shown ONLY while the inline CTA is off screen
+   (IntersectionObserver), so two identical buttons are never visible at once.
+   translateY + opacity so it slides instead of snapping and never reflows the
+   page underneath. */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;pointer-events:none;
+  padding:28px max(18px,env(safe-area-inset-left)) calc(12px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-right));
+  background:linear-gradient(to top,#fdf7f9 58%,rgba(253,247,249,.9) 78%,transparent);
+  transform:translateY(105%);opacity:0;
+  transition:transform .32s cubic-bezier(.22,.9,.28,1), opacity .22s ease;will-change:transform}
+.sticky.on{transform:translateY(0);opacity:1}
+.sticky .cta{margin:0 auto;max-width:354px;pointer-events:auto}
+@media (max-height:520px){.sticky{display:none}.stickypad{display:none}}
+
+@media (max-width:360px){h1{font-size:25px}.amount{font-size:40px}.cta{font-size:15.5px;padding:17px 12px}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rise{opacity:1!important}
+  .sparks{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="wash"></div>
+<div class="sparks" aria-hidden="true">
+  <i style="left:8%;width:5px;height:5px;animation-duration:18s;animation-delay:-2s"></i>
+  <i style="left:23%;width:7px;height:7px;animation-duration:23s;animation-delay:-10s"></i>
+  <i style="left:39%;width:4px;height:4px;animation-duration:20s;animation-delay:-15s"></i>
+  <i style="left:57%;width:6px;height:6px;animation-duration:25s;animation-delay:-6s"></i>
+  <i style="left:73%;width:5px;height:5px;animation-duration:17s;animation-delay:-19s"></i>
+  <i style="left:90%;width:7px;height:7px;animation-duration:22s;animation-delay:-8s"></i>
+</div>
+
+<div class="wrap">
+
+  <div class="logo rise" style="--d:.04s">S</div>
+
+  <h1 class="rise" style="--d:.10s">Get Started with Shein Codes</h1>
+  <p class="lede rise" style="--d:.16s">Complete simple tasks &amp; get your gift card instantly!</p>
+
+  <div class="pill rise" style="--d:.22s">
+    <svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/></svg>
+    Shein Gift Card — delivered directly to your inbox.
+  </div>
+
+  <div class="value rise" style="--d:.28s">
+    <div class="amount" id="amount">$0.00</div>
+    <div class="amount-sub">Instantly sent to you</div>
+    <div class="bar"><span id="bar"></span></div>
+  </div>
+
+  <button class="cta rise" style="--d:.34s" id="ctaMain">Claim Your Rewards &rarr;</button>
+
+  <div class="chips rise" style="--d:.40s">
+    <b><i>✓</i>No Credit Card</b>
+    <b><i>✓</i>Quick &amp; Easy</b>
+    <b><i>✓</i>Instant Rewards</b>
+  </div>
+
+  <div class="card rise" style="--d:.46s">
+    <div class="card-head">HOW IT WORKS</div>
+    <div class="step">
+      <div class="n">1</div>
+      <div><h4>Tap "Claim Your Rewards"</h4>
+      <p>Get started in seconds — no credit card needed.</p></div>
+    </div>
+    <div class="step">
+      <div class="n">2</div>
+      <div><h4>Complete 2–5 quick deals</h4>
+      <p>Unlock up to $750 in Shein Gift Card value.</p></div>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <div><h4>Receive your Gift Card code</h4>
+      <p>Delivered to your inbox — redeem on Shein anytime.</p></div>
+    </div>
+  </div>
+
+  <div class="important rise" style="--d:.52s">
+    <span class="badge">⚠ IMPORTANT</span>
+    <div class="label">ACTIVATION REQUIRED</div>
+    <div class="row">
+      <span class="ico">🔓</span>
+      <p>New users: Complete <b>2 quick offers in a single day</b> to receive an additional Shein bonus rewards!</p>
+    </div>
+  </div>
+
+  <p class="foot rise" style="--d:.58s">Secure &amp; Private</p>
+  <div class="stickypad" aria-hidden="true"></div>
+</div>
+
+<!-- Sticky CTA. Deliberately NOT .rise — it's driven by the observer below, and an entrance
+     animation would fight the transform that slides it in. -->
+<div class="sticky" id="stickyBar">
+  <button class="cta" id="ctaSticky">Claim Your Rewards &rarr;</button>
+</div>
+
+<script>
+(function(){
+  /* ======================================================================
+     BOT LAUNCH (Spartis) — the CLAIM goes to the Spartis SHORT CODE, never
+     straight to the network. The real Fluent link
+     (fkn8s74mztrk.com/F2R45HNR/H3J9L2H2/) and the Forward Param live in the
+     Offer Links tab behind "shein750-us-flu-off", so the offer can be
+     repointed without a redeploy.
+
+     Fluent runs on Everflow (fluentco.everflowclient.io), so its sub ID is
+     sub1 and its payout macro is {payout_amount} — never the bare {payout}
+     that Glitchy uses.
+
+     Emits ?campid= — never ?sub1=. campid first (that is what the launcher
+     writes); the rest are accepted so a hand-built test link still resolves.
+     ====================================================================== */
+  function getCampid(){
+    var p = new URLSearchParams(window.location.search);
+    return p.get('campid') || p.get('s1') || p.get('s2') || p.get('sub1') || '';
+  }
+  function offerUrl(){
+    var c = getCampid();
+    return 'https://buenohoodies.com/c/shein750-us-flu-off?campid=' + (c ? encodeURIComponent(c) : '');
+  }
+  window.__OFFER_URL = offerUrl;
+
+  var leaving = false;
+  function go(){
+    if (leaving) return;        // one outbound per visitor — a double-tap must not bill twice
+    leaving = true;
+    window.location.href = offerUrl();
+  }
+  document.getElementById('ctaMain').addEventListener('click', go);
+  document.getElementById('ctaSticky').addEventListener('click', go);
+
+  /* ---- value counts up to $750, bar fills alongside -------------------
+     The reference opens at $0.00 and ticks up; it's what makes the number
+     land instead of just sitting there. Kept short so it finishes well
+     before anyone can read the steps. */
+  var TARGET = 750, el = document.getElementById('amount'), bar = document.getElementById('bar');
+  function money(v){ return '$' + v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  setTimeout(function(){
+    var start = null, DUR = 1500;
+    function tick(ts){
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / DUR);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = money(TARGET * eased);
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = money(TARGET);
+    }
+    requestAnimationFrame(tick);
+    bar.style.width = '78%';
+  }, 450);
+
+  /* ---- sticky CTA visibility -----------------------------------------
+     Show the bar only while the inline CTA is off screen. IntersectionObserver
+     rather than a scroll listener: no per-frame work, no jank on a mid-range
+     phone. rootMargin trims the bar's own height off the bottom so the inline
+     button doesn't count as visible while sitting behind it. */
+  (function(){
+    var bar = document.getElementById('stickyBar');
+    var inline = document.getElementById('ctaMain');
+    if (!bar || !inline) return;
+    if (!('IntersectionObserver' in window)) { bar.classList.add('on'); return; }
+    new IntersectionObserver(function(e){
+      bar.classList.toggle('on', !e[0].isIntersecting);
+    }, { rootMargin: '0px 0px -92px 0px', threshold: 0 }).observe(inline);
+  })();
+})();
+</script>
+
+</body>
+</html>

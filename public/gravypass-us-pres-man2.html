@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-geo="US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b0f0d">
+<title>Start Earning — Gravy Pass</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(160,20%,5%);color:#fff;overflow-x:clip;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.lp-wrap{min-height:100vh;min-height:100dvh;display:flex;align-items:flex-start;justify-content:center;position:relative;overflow-x:hidden}
+.bg-glow{position:fixed;inset:0;background:radial-gradient(ellipse at center,hsla(160,100%,30%,0.12) 0%,transparent 60%),radial-gradient(ellipse at center,hsla(160,100%,20%,0.08) 0%,transparent 80%),hsl(160,20%,5%);z-index:0;animation:bgDrift 14s ease-in-out infinite}
+@keyframes bgDrift{0%,100%{transform:scale(1) translateY(0);opacity:1}50%{transform:scale(1.06) translateY(-10px);opacity:.88}}
+
+/* Floating spark field — subtle, never distracting. */
+.sparks{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sparks i{position:absolute;bottom:-12px;width:3px;height:3px;border-radius:50%;background:hsl(160,100%,60%);opacity:0;animation:floatUp linear infinite}
+@keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.6)}12%{opacity:.5}70%{opacity:.32}100%{opacity:0;transform:translateY(-104vh) scale(1.1)}}
+
+.container{position:relative;z-index:1;width:100%;max-width:480px;padding:24px 20px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;text-align:center}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.brand .mark{width:52px;height:52px;border-radius:14px;object-fit:cover;background:hsl(0,0%,8%)}
+.brand .mark.tt{box-shadow:0 0 20px hsla(0,0%,100%,0.10)}
+.brand .mark.gp{box-shadow:0 0 20px hsla(160,100%,50%,0.28);animation:markGlow 3.2s ease-in-out infinite}
+@keyframes markGlow{0%,100%{box-shadow:0 0 18px hsla(160,100%,50%,0.22)}50%{box-shadow:0 0 34px hsla(160,100%,50%,0.45)}}
+.brand .x{color:hsla(0,0%,100%,0.45);font-size:20px;font-weight:500}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+
+.btn-activate{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:60px;padding:20px 32px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(180deg,hsl(160,100%,55%) 0%,hsl(160,100%,45%) 100%);transition:transform 0.2s ease;animation:ctaPulse 2.4s ease-in-out infinite}
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 30px hsla(160,100%,50%,0.45),0 0 60px hsla(160,100%,50%,0.20),0 4px 15px hsla(0,0%,0%,0.3)}50%{box-shadow:0 0 46px hsla(160,100%,50%,0.72),0 0 92px hsla(160,100%,50%,0.34),0 4px 15px hsla(0,0%,0%,0.3)}}
+.btn-activate:active{transform:translateY(1px) scale(0.98)}
+.btn-activate span{font-size:16px;font-weight:700;color:hsl(160,20%,5%);letter-spacing:0.05em}
+.btn-activate svg{flex-shrink:0}
+.cta-wrap{width:100%}
+
+/* Entrance. NOTE: nothing else may re-declare `animation` on a .anim element —
+   a second declaration wins and leaves the element stuck at opacity:0, which is
+   invisible but still tappable. Looping effects live on children or wrappers. */
+.anim{opacity:0;animation:fadeSlideUp 0.5s ease forwards}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.card-dark{background:hsl(160,10%,10%);border:1px solid hsl(160,15%,18%);border-radius:16px;padding:20px 18px;width:100%;text-align:left;margin-bottom:16px}
+.card-dark h3{text-align:center;font-size:11px;font-weight:700;letter-spacing:0.2em;color:hsla(0,0%,100%,0.5);margin-bottom:18px}
+.step{position:relative;display:flex;gap:14px;padding-bottom:18px}
+.step:not(:last-child)::after{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:hsl(160,15%,18%)}
+.step:last-child{padding-bottom:0}
+.step-num{width:28px;height:28px;border-radius:50%;background:hsl(160,100%,50%);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:hsl(160,20%,5%);flex-shrink:0;z-index:1}
+.step h4{font-size:14px;font-weight:700;margin-bottom:3px}
+.step p{font-size:12px;color:hsla(0,0%,100%,0.55);line-height:1.45}
+.step p .accent{color:hsl(160,100%,55%);font-weight:600}
+.section-label{width:100%;text-align:left;font-size:11px;font-weight:700;letter-spacing:0.2em;color:hsla(0,0%,100%,0.5);margin-bottom:12px}
+
+.reward{position:relative;width:100%;background:hsl(160,10%,10%);border:1px solid hsl(160,15%,18%);border-radius:16px;padding:16px;margin-bottom:12px;text-align:left;overflow:hidden}
+.reward-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.reward-tile{position:relative;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid hsla(0,0%,100%,0.12);background:hsl(160,12%,14%);font-size:20px;overflow:hidden}
+.reward-tile img{width:30px;height:30px;object-fit:contain}
+.reward-progress{margin-bottom:12px}
+.reward-progress-head{display:flex;justify-content:space-between;font-size:11px;color:hsla(0,0%,100%,0.5);margin-bottom:6px}
+.reward-bar{position:relative;height:6px;border-radius:999px;background:hsl(160,15%,16%);overflow:hidden}
+.reward-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,hsl(160,100%,50%),hsl(160,100%,42%));width:0%;transition:width .9s cubic-bezier(.22,1,.36,1)}
+/* Sheen sweeping the empty track — reads as "in progress", not broken. */
+.reward-bar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,hsla(160,100%,60%,0.18),transparent);transform:translateX(-100%);animation:barSheen 2.6s ease-in-out infinite}
+@keyframes barSheen{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.reward-btn{display:block;width:100%;min-height:46px;padding:13px;border:none;border-radius:12px;font-size:13px;font-weight:800;letter-spacing:0.03em;cursor:pointer;text-align:center;color:hsl(160,20%,5%);background:linear-gradient(180deg,hsl(160,100%,55%),hsl(160,100%,45%));box-shadow:0 0 20px hsla(160,100%,50%,0.4);transition:transform 0.15s ease}
+.reward-btn:active{transform:scale(0.98)}
+.reward-info{flex:1;min-width:0}
+.reward-info h4{font-size:15px;font-weight:800}
+.reward-info p{font-size:12px;color:hsla(0,0%,100%,0.5)}
+.reward-prize{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;line-height:1.1;font-size:15px;font-weight:800;color:hsl(160,100%,55%)}
+.reward-prize span{font-size:10px;font-weight:600;color:hsla(0,0%,100%,0.45);letter-spacing:0.02em;margin-top:2px}
+
+/* ---- LOCKED STATE ---- still fully tappable: completing tasks IS the offer. ---- */
+.reward.locked{border-color:hsla(0,0%,100%,0.10);background:hsl(160,10%,9%)}
+.reward.locked .reward-tile img{filter:grayscale(1);opacity:.5}
+.reward.locked .reward-tile::after{content:"";position:absolute;inset:0;background:hsla(160,20%,5%,0.45)}
+.reward.locked .reward-info h4,.reward.locked .reward-info p{color:hsla(0,0%,100%,0.45)}
+.reward.locked .reward-prize{color:hsla(160,60%,60%,0.55)}
+.reward.locked .reward-btn{background:hsl(160,12%,16%);color:hsla(0,0%,100%,0.72);box-shadow:none;border:1px solid hsla(160,100%,50%,0.22);display:flex;align-items:center;justify-content:center;gap:8px}
+.lock-badge{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:5px;background:hsla(160,20%,5%,0.85);border:1px solid hsla(0,0%,100%,0.14);border-radius:999px;padding:4px 9px 4px 7px;font-size:10px;font-weight:800;letter-spacing:0.06em;color:hsla(0,0%,100%,0.62)}
+.lock-badge svg{animation:lockNudge 3.4s ease-in-out infinite}
+@keyframes lockNudge{0%,88%,100%{transform:rotate(0)}91%{transform:rotate(-9deg)}94%{transform:rotate(7deg)}}
+
+.mini-note{font-size:11px;color:hsla(0,0%,100%,0.35);margin-top:4px;text-align:center;line-height:1.4}
+.status{display:flex;align-items:center;gap:9px;width:100%;background:hsla(160,100%,50%,0.07);border:1px solid hsla(160,100%,50%,0.3);border-radius:14px;padding:12px 15px;margin-bottom:18px;font-size:12.5px;font-weight:600;color:hsl(160,100%,60%);line-height:1.35;text-align:left}
+.status .dot{width:8px;height:8px;border-radius:50%;background:hsl(160,100%,50%);box-shadow:0 0 8px hsl(160,100%,50%);flex-shrink:0;animation:pulse 1.8s ease-in-out infinite}
+.subnote{margin-top:12px;font-size:12px;color:hsla(0,0%,100%,0.4);text-align:center;line-height:1.45}
+.important{position:relative;width:100%;background:hsla(0,70%,45%,0.07);border:1px solid hsla(0,75%,58%,0.45);border-radius:16px;padding:18px 16px 14px;margin-top:20px;text-align:left}
+.important .flag{position:absolute;top:-10px;right:14px;background:hsl(0,75%,52%);color:#fff;font-size:10px;font-weight:800;letter-spacing:0.08em;padding:4px 9px;border-radius:6px}
+.important .hd{display:flex;align-items:flex-start;gap:11px;margin-bottom:6px}
+.important h4{font-size:15px;font-weight:800;color:#fff}
+.important p{font-size:12.5px;color:hsla(0,0%,100%,0.62);line-height:1.5}
+.important .accent{color:hsl(160,100%,55%);font-weight:700}
+.important .rule{height:1px;background:hsla(0,0%,100%,0.09);margin:13px 0 11px}
+.important .ok{display:flex;align-items:center;gap:9px;font-size:12.5px;color:hsla(0,0%,100%,0.62);line-height:1.4}
+
+/* Small phones — iPhone SE / Android 360px. */
+@media (max-width:374px){
+  .container{padding:18px 14px calc(24px + env(safe-area-inset-bottom))}
+  .brand .mark{width:44px;height:44px}
+  .btn-activate{padding:17px 20px}
+  .btn-activate span{font-size:14.5px}
+  .reward-info h4{font-size:14px}
+  .reward-prize{font-size:14px}
+  .reward-tile{width:42px;height:42px}
+  .lock-badge{font-size:9px;padding:3px 7px 3px 6px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}.anim{opacity:1}}
+</style>
+</head>
+<body>
+<div class="lp-wrap">
+  <div class="bg-glow"></div>
+  <div class="sparks" aria-hidden="true">
+    <i style="left:8%;animation-duration:15s;animation-delay:0s"></i>
+    <i style="left:22%;animation-duration:19s;animation-delay:3s"></i>
+    <i style="left:37%;animation-duration:13s;animation-delay:6s"></i>
+    <i style="left:54%;animation-duration:21s;animation-delay:1.5s"></i>
+    <i style="left:69%;animation-duration:16s;animation-delay:8s"></i>
+    <i style="left:83%;animation-duration:18s;animation-delay:4.5s"></i>
+    <i style="left:94%;animation-duration:14s;animation-delay:10s"></i>
+  </div>
+  <div class="container">
+
+    <div class="brand anim">
+      <img class="mark tt" src="data:image/webp;base64,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" alt="TikTok" width="52" height="52">
+      <span class="x">×</span>
+      <img class="mark gp" src="data:image/webp;base64,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" alt="Gravy Pass" width="52" height="52">
+    </div>
+
+    <div class="status anim" style="animation-delay:0.06s"><span class="dot"></span>Pass ready — 0 of 3 tasks complete. Top offers unlock at 3.</div>
+
+    <div class="card-dark anim" style="animation-delay:0.1s">
+      <h3>HOW TO START EARNING</h3>
+      <div class="step"><div class="step-num">1</div><div><h4>Activate &amp; open your Gravy Pass</h4><p>Tap <span class="accent">Activate Wallet Pass</span> below, then open your Gravy Pass in <span class="accent">Apple Wallet</span> to get started.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h4>Complete games &amp; tasks for money</h4><p>Follow the instructions in your pass and complete <span class="accent">games and tasks</span> to start earning real money.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h4>Complete 3 tasks to unlock top offers</h4><p>Complete <span class="accent">3 tasks</span> to unlock high-paying popular offers like <span class="accent">Paid to Scroll</span>, Roblox and more.</p></div></div>
+    </div>
+
+    <div class="cta-wrap anim" style="animation-delay:0.16s">
+      <button class="btn-activate" data-go="">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5" stroke="hsl(160,20%,5%)" stroke-width="2"></rect><path d="M2.5 10h19" stroke="hsl(160,20%,5%)" stroke-width="2"></path></svg>
+        <span>ACTIVATE WALLET PASS</span>
+      </button>
+    </div>
+    <p class="subnote anim" style="animation-delay:0.2s">Didn't add it yet? Tap above to add your pass again.</p>
+
+    <div class="important anim" style="animation-delay:0.24s">
+      <span class="flag">IMPORTANT</span>
+      <div class="hd">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="hsl(0,80%,66%)" stroke-width="2"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="hsl(0,80%,66%)" stroke-width="2" stroke-linecap="round"></path></svg>
+        <h4>Activation Required to Unlock</h4>
+      </div>
+      <p>Top offers stay locked until your wallet pass is active and you've completed <span class="accent">3 tasks</span>. Keep completing tasks in your Gravy Pass to unlock them.</p>
+      <div class="rule"></div>
+      <div class="ok">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M5 13l4 4L19 7" stroke="hsl(160,100%,55%)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        Complete tasks inside your Gravy Pass to make progress.
+      </div>
+    </div>
+
+    <div class="section-label anim" style="animation-delay:0.3s;margin-top:26px">REWARDS TO UNLOCK</div>
+
+    <div class="reward locked anim" style="animation-delay:0.32s">
+      <span class="lock-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>LOCKED</span>
+      <div class="reward-top">
+        <div class="reward-tile" style="background:hsl(0,0%,8%)"><img src="/images/tiktok-icon-free-png.png" alt="TikTok"></div>
+        <div class="reward-info"><h4>TikTok</h4><p>Paid to Scroll</p></div>
+        <div class="reward-prize">$32/hr<span>per hour</span></div>
+      </div>
+      <div class="reward-progress"><div class="reward-progress-head"><span>Tasks completed</span><span>0/3</span></div><div class="reward-bar"><div class="reward-bar-fill"></div></div></div>
+      <button class="reward-btn" data-go=""><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>COMPLETE 3 TASKS TO UNLOCK</button>
+    </div>
+
+    <div class="reward locked anim" style="animation-delay:0.35s">
+      <span class="lock-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>LOCKED</span>
+      <div class="reward-top">
+        <div class="reward-tile" style="background:hsl(28,70%,22%)"><img src="/images/subway-surfers.jpg" alt="Subway Surfers"></div>
+        <div class="reward-info"><h4>Subway Surfers</h4><p>Play &amp; Earn</p></div>
+        <div class="reward-prize">$28/hr<span>per hour</span></div>
+      </div>
+      <div class="reward-progress"><div class="reward-progress-head"><span>Tasks completed</span><span>0/3</span></div><div class="reward-bar"><div class="reward-bar-fill"></div></div></div>
+      <button class="reward-btn" data-go=""><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>COMPLETE 3 TASKS TO UNLOCK</button>
+    </div>
+
+    <div class="reward locked anim" style="animation-delay:0.38s">
+      <span class="lock-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>LOCKED</span>
+      <div class="reward-top">
+        <div class="reward-tile" style="background:hsl(0,0%,15%)"><img src="/images/roblox.jpg" alt="Roblox"></div>
+        <div class="reward-info"><h4>Roblox</h4><p>Play &amp; Earn</p></div>
+        <div class="reward-prize">$35/hr<span>per hour</span></div>
+      </div>
+      <div class="reward-progress"><div class="reward-progress-head"><span>Tasks completed</span><span>0/3</span></div><div class="reward-bar"><div class="reward-bar-fill"></div></div></div>
+      <button class="reward-btn" data-go=""><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>COMPLETE 3 TASKS TO UNLOCK</button>
+    </div>
+
+    <p class="mini-note anim" style="animation-delay:0.42s">Rewards are credited to your Apple Wallet. One reward set per verified account.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* MANUAL launch — the CTA goes DIRECT to the Prescott (Everflow) offer and this page
+     appends the sub ID itself. There is no Spartis in this funnel, so there is no short
+     code and nothing to append it for us. Everflow reads sub1..sub5 and silently discards
+     s1, so the outbound param is sub1. */
+  var OFFER_LINK = 'https://www.phef6trk.com/ZKTQ1K/32BB7QT/';
+
+  /* The prelander forwards the ENTIRE inbound query string untouched, so the click ID
+     arrives here under whatever name the ad used. Read wide, emit as sub1. */
+  function buildOfferUrl() {
+    var p = new URLSearchParams(location.search);
+    var subid = p.get('sub1') || p.get('campid') || p.get('s1')
+             || p.get('s2') || p.get('cid') || p.get('c') || '';
+    return OFFER_LINK + '?sub1=' + encodeURIComponent(subid);
+  }
+
+  /* ONE TAP, EVERY CTA — including the locked reward cards. The lock is a motivation
+     device, not a dead end: completing tasks IS the offer, so a locked card must still
+     open it. A dead button here would shed the tap and cost EPC. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (b) {
+    b.addEventListener('click', function () { location.href = buildOfferUrl(); });
+  });
+
+  /* Progress bars animate 0 -> their locked value once on view, so the cards read as a
+     live meter rather than a static empty track. Locked stays visibly at zero. */
+  var bars = document.querySelectorAll('.reward-bar-fill');
+  setTimeout(function () {
+    Array.prototype.forEach.call(bars, function (el) { el.style.width = '4%'; });
+  }, 700);
+})();
+</script>
+</body>
+</html>

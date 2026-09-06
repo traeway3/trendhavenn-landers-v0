@@ -134,7 +134,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 
     <div class="card-dark anim" style="animation-delay:0.1s">
       <h3>HOW TO START EARNING</h3>
-      <div class="step"><div class="step-num">1</div><div><h4>Activate &amp; open your Gravy Pass</h4><p>Tap <span class="accent">Activate Wallet Pass</span> below, then open your Gravy Pass in <span class="accent">Apple Wallet</span> to get started.</p></div></div>
+      <div class="step"><div class="step-num">1</div><div><h4>Activate &amp; open your Gravy Pass</h4><p>Tap <span class="accent">Activate Wallet Pass</span> below, then open your Gravy Pass in <span class="accent wallet-name">Apple Wallet</span> to get started.</p></div></div>
       <div class="step"><div class="step-num">2</div><div><h4>Complete games &amp; tasks for money</h4><p>Follow the instructions in your pass and complete <span class="accent">games and tasks</span> to start earning real money.</p></div></div>
       <div class="step"><div class="step-num">3</div><div><h4>Complete 3 tasks to unlock top offers</h4><p>Complete <span class="accent">3 tasks</span> to unlock high-paying popular offers like <span class="accent">Paid to Scroll</span>, Roblox and more.</p></div></div>
     </div>
@@ -196,13 +196,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
       <button class="reward-btn" data-go=""><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>COMPLETE 3 TASKS TO UNLOCK</button>
     </div>
 
-    <p class="mini-note anim" style="animation-delay:0.42s">Rewards are credited to your Apple Wallet. One reward set per verified account.</p>
+    <p class="mini-note anim" style="animation-delay:0.42s">Rewards are credited to your <span class="wallet-name">Apple Wallet</span>. One reward set per verified account.</p>
   </div>
 </div>
 
 <script>
 (function () {
   'use strict';
+
+  /* Gravy Pass works on BOTH platforms — the pass lands in Apple Wallet on iOS and
+     Google Wallet on Android. Markup ships with "Apple Wallet" so a no-JS render still
+     reads correctly; Android gets swapped on load. */
+  (function(){
+    var name = /android/i.test(navigator.userAgent || '') ? 'Google Wallet' : 'Apple Wallet';
+    Array.prototype.forEach.call(document.querySelectorAll('.wallet-name'), function(el){
+      el.textContent = name;
+    });
+  })();
 
   /* MANUAL launch — the CTA goes DIRECT to the Prescott (Everflow) offer and this page
      appends the sub ID itself. There is no Spartis in this funnel, so there is no short

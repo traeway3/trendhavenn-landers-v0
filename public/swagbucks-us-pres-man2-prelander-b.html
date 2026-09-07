@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#141414">
+<meta name="robots" content="noindex, nofollow">
+<title>Open in browser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #141414;
+  color: #f4f4f6;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+
+/* ─── Card ─────────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 380px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+p {
+  font-size: 1rem;
+  color: #9c9ca6;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+/* ─── Straight Downward Arrow ─────────────────────────────── */
+.arrow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 20px 0;
+}
+
+.arrow-container span {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-right: 4px solid #6b93fb;
+  border-bottom: 4px solid #6b93fb;
+  transform: rotate(45deg);
+  opacity: 0.3;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.arrow-container span:nth-child(2) { animation-delay: 0.2s; }
+.arrow-container span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 100% { opacity: 0.3; transform: rotate(45deg) translate(0, 0); }
+  50%      { opacity: 1;   transform: rotate(45deg) translate(5px, 5px); }
+}
+
+/* ─── CTA Button ────────────────────────────────────────────── */
+.cta-btn {
+  display: inline-block;
+  background: #3366f7;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 18px 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 15px rgba(51, 102, 247, 0.3);
+}
+
+.cta-btn:hover  { background: #1f47c9; }
+.cta-btn:active { transform: scale(0.97); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Open in browser</h1>
+    <p>For the best experience, this page needs to open in your browser.</p>
+    <div class="arrow-container">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <a id="ctaBtn" class="cta-btn" href="#">OPEN IN BROWSER</a>
+  </div>
+
+<script>
+(function () {
+  /* ── Destination ────────────────────────────────────────────
+     DELIBERATE DEVIATION from the reference: the reference navigates to a bare
+     URL and drops the inbound query string. That would kill the click ID and
+     conversions would come back unmatched. This build forwards the ENTIRE
+     inbound query string untouched — invisible to the user, so it cannot
+     affect the drop-off comparison. */
+  var DESTINATION_URL = 'https://www.trendhavenn.com/swagbucks-us-pres-man2.html';
+
+  function dest() {
+    var d = DESTINATION_URL;
+    var qs = window.location.search;
+    if (qs && qs.length > 1) d += (d.indexOf('?') === -1 ? '?' : '&') + qs.slice(1);
+    return d;
+  }
+
+  /* ── Tracking beacon (page tag: sb-pre-b) ──────────────────
+     Added so this variant can be compared against the current prelander in
+     px.trendhavenn.com. Each event fires at most once per page view. */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('sub1') || QP.get('campid') || QP.get('s1')
+        || QP.get('s2')   || QP.get('cid')    || QP.get('c') || '';
+  }
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'sb-pre-b', sent = {};
+  function turl(ev) { return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE; }
+  function hit(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try { new Image().src = turl(ev) + '&_=' + Date.now(); } catch (e) {}
+  }
+  function hitBeacon(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      if (navigator.sendBeacon) { navigator.sendBeacon(turl(ev)); }
+      else { new Image().src = turl(ev) + '&_=' + Date.now(); }
+    } catch (e) {}
+  }
+  hit('load');
+  ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function (e) {
+    window.addEventListener(e, function () { hit('human'); }, { once: true, passive: true });
+  });
+
+  /* ── Breakout — structure copied 1:1 from the reference ────
+     Tap-triggered only. Nothing fires on load. Non-TikTok traffic navigates
+     straight through without a scheme attempt; TikTok gets the scheme with a
+     1000ms same-tab fallback. */
+  var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+
+  function isTikTok() { return /tiktok|musical_ly|bytedance/i.test(ua); }
+  function isIOS()    { return /iPhone|iPad|iPod/i.test(ua); }
+  function isAndroid(){ return /Android/i.test(ua); }
+
+  document.getElementById('ctaBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    hitBeacon('continue');
+
+    var target = dest();
+
+    if (!isTikTok()) {
+      window.location.href = target;
+      return;
+    }
+
+    if (isIOS()) {
+      var safariURL = target.replace(/^https:\/\//, 'x-safari-https://');
+      window.location.href = safariURL;
+      setTimeout(function () { window.location.href = target; }, 1000);
+    } else if (isAndroid()) {
+      var intentURL = 'intent://' + target.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end';
+      window.location.href = intentURL;
+      setTimeout(function () { window.location.href = target; }, 1000);
+    } else {
+      window.location.href = target;
+    }
+  });
+})();
+</script>
+</body>
+</html>

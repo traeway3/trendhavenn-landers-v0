@@ -46,24 +46,26 @@
    saturated but mid-dark, so small text on #141414 uses the lightened tints #6b93fb / #9db6fd
    while solid fills and gradients use the true #3366f7. The neutral #141414 base is Yaser's. */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background-color:#141414;color:#F4F4F6;min-height:100vh;-webkit-font-smoothing:antialiased;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background-color:#0f1524;color:#F4F4F6;min-height:100vh;-webkit-font-smoothing:antialiased;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 html{overflow-x:hidden}
 body{overflow-x:clip}
 a,button{pointer-events:auto !important}
-.page-wrapper{max-width:430px;margin:0 auto;padding-bottom:156px;position:relative;background:radial-gradient(560px 320px at 50% -40px,rgba(76,124,250,0.14),transparent 70%),#141414}
-.notif-bar{background:#1A1A1A;border-bottom:1px solid rgba(255,255,255,0.06);color:#D7D7DE;font-size:12.5px;font-weight:500;text-align:center;padding:0 16px;letter-spacing:0.01em;overflow:hidden;height:42px;display:flex;align-items:center;justify-content:center;position:relative}
+.page-wrapper{max-width:430px;margin:0 auto;padding-bottom:156px;position:relative;background:radial-gradient(560px 320px at 50% -40px,rgba(76,124,250,0.16),transparent 70%),radial-gradient(420px 300px at 50% 62%,rgba(51,102,247,0.07),transparent 72%),#0f1524}
+.notif-bar{background:#141b2b;border-bottom:1px solid rgba(255,255,255,0.06);color:#D7D7DE;font-size:12.5px;font-weight:500;text-align:center;padding:0 16px;letter-spacing:0.01em;overflow:hidden;height:42px;display:flex;align-items:center;justify-content:center;position:relative}
 .notif-inner{position:absolute;width:100%;text-align:center;transition:opacity 0.35s ease,transform 0.35s ease;padding:0 16px}
 .notif-inner.exit{opacity:0;transform:translateY(-10px);pointer-events:none}
 .notif-inner.enter{opacity:0;transform:translateY(10px)}
 .notif-bar .notif-amount{color:#6b93fb;font-weight:700}
 .notif-bar .notif-flag{font-size:12px;margin-right:5px;opacity:0.7}
 .notif-bar strong{color:#FFFFFF;font-weight:600}
-.card{background:linear-gradient(180deg,#1C1C1C 0%,#161616 100%);border:1px solid rgba(255,255,255,0.06);border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 12px 28px rgba(0,0,0,0.35);margin:14px 16px;padding:26px 22px}
+.card{background:linear-gradient(180deg,#1a2135 0%,#151c2e 100%);border:1px solid rgba(255,255,255,0.06);border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 12px 28px rgba(0,0,0,0.35);margin:14px 16px;padding:26px 22px}
 .hero-card{text-align:center;padding-top:32px;padding-bottom:26px;position:relative;overflow:hidden}
-.hero-glow{position:absolute;top:-90px;left:50%;transform:translateX(-50%);width:320px;height:240px;background:radial-gradient(circle,rgba(76,124,250,0.35) 0%,rgba(76,124,250,0) 70%);pointer-events:none;filter:blur(4px)}
+.hero-glow{position:absolute;top:-90px;left:50%;width:320px;height:240px;background:radial-gradient(circle,rgba(76,124,250,0.35) 0%,rgba(76,124,250,0) 70%);pointer-events:none;filter:blur(4px);animation:heroDrift 11s ease-in-out infinite}
+@keyframes heroDrift{0%,100%{transform:translateX(-50%) scale(1);opacity:1}50%{transform:translateX(-50%) scale(1.14) translateY(10px);opacity:.82}}
 .hero-logo-wrap{display:flex;justify-content:center;margin-bottom:18px;position:relative;z-index:1}
 .hero-logo-wrap::before{content:'';position:absolute;top:50%;left:50%;width:180px;height:180px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(76,124,250,0.25) 0%,rgba(76,124,250,0) 70%);pointer-events:none;z-index:0}
-.hero-logo-ring{width:92px;height:92px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;border-radius:20px;overflow:hidden;background:#3366f7}
+.hero-logo-ring{width:92px;height:92px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;border-radius:20px;overflow:hidden;background:#3366f7;animation:logoBreathe 3.4s ease-in-out infinite}
+@keyframes logoBreathe{0%,100%{box-shadow:0 0 0 0 rgba(76,124,250,.42),0 8px 22px rgba(0,0,0,.34)}50%{box-shadow:0 0 0 9px rgba(76,124,250,0),0 8px 22px rgba(0,0,0,.34)}}
 .hero-logo{width:100%;height:100%;object-fit:contain;border-radius:20px;position:absolute;inset:0}
 .hero-rating{display:inline-flex;align-items:center;gap:6px;background:rgba(76,124,250,0.07);border:1px solid rgba(76,124,250,0.32);border-radius:99px;padding:6px 15px;font-size:13px;font-weight:600;color:#F4F4F6;margin-bottom:20px;position:relative;z-index:1}
 .hero-rating .rating-score{color:#6b93fb;font-weight:700}
@@ -91,7 +93,9 @@ a,button{pointer-events:auto !important}
 .step-item{display:flex;align-items:center;gap:13px}
 .step-num{width:28px;height:28px;border-radius:9px;background:rgba(76,124,250,0.1);border:1px solid rgba(76,124,250,0.25);color:#6b93fb;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .step-text{font-size:14.5px;font-weight:500;color:#D7D7DE}
-.trust-strip{display:flex;align-items:stretch;justify-content:space-between;margin:14px 16px;padding:18px 12px;background:#131318;border:1px solid rgba(255,255,255,0.06);border-radius:16px}
+.trust-strip{position:relative;overflow:hidden;display:flex;align-items:stretch;justify-content:space-between;margin:14px 16px;padding:18px 12px;background:#141b2b;border:1px solid rgba(255,255,255,0.06);border-radius:16px}
+.trust-strip::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(107,147,251,.10) 50%,transparent 62%);transform:translateX(-100%);animation:trustSheen 5.5s ease-in-out infinite}
+@keyframes trustSheen{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
 .trust-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
 .trust-num{font-size:17px;font-weight:800;color:#FFFFFF;letter-spacing:-0.02em}
 .trust-desc{font-size:10.5px;color:#6B6B76;font-weight:600;text-align:center;letter-spacing:0.02em;text-transform:uppercase}
@@ -101,9 +105,10 @@ a,button{pointer-events:auto !important}
 .legal-links a{font-size:11.5px;font-weight:600;color:#6B6B76;text-decoration:none;letter-spacing:0.01em}
 .legal-links a:active{color:#9C9CA6}
 .legal-sep{width:3px;height:3px;border-radius:50%;background:#3A3A42;flex-shrink:0}
-.sticky-cta{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(13,13,17,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,0.08);padding:16px 16px 26px;box-shadow:0 -8px 32px rgba(0,0,0,0.5);z-index:100}
+.sticky-cta{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(13,19,33,0.90);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,0.08);padding:16px 16px 26px;box-shadow:0 -8px 32px rgba(0,0,0,0.5);z-index:100}
 .cta-eyebrow{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11.5px;font-weight:600;color:#9C9CA6;margin-bottom:10px;letter-spacing:0.01em}
-.cta-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:#6b93fb;flex-shrink:0}
+.cta-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:#6b93fb;flex-shrink:0;animation:eyebrowPulse 2.2s ease-in-out infinite}
+@keyframes eyebrowPulse{0%,100%{box-shadow:0 0 0 0 rgba(107,147,251,.55)}50%{box-shadow:0 0 0 5px rgba(107,147,251,0)}}
 .cta-buttons{display:flex;gap:10px}
 .btn-store{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;border:none;border-radius:14px;padding:11px 12px;cursor:pointer;font-family:inherit;text-decoration:none;transition:opacity 0.15s,transform 0.1s,box-shadow 0.15s}
 .btn-store:active{opacity:0.9;transform:scale(0.97)}

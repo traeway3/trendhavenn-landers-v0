@@ -10,9 +10,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{overflow-x:hidden;-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(160,20%,5%);color:#fff;overflow-x:clip;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#07110c;color:#fff;overflow-x:clip;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 .lp-wrap{min-height:100vh;min-height:100dvh;display:flex;align-items:flex-start;justify-content:center;position:relative;overflow-x:hidden}
-.bg-glow{position:fixed;inset:0;background:radial-gradient(ellipse at center,hsla(160,100%,30%,0.12) 0%,transparent 60%),radial-gradient(ellipse at center,hsla(160,100%,20%,0.08) 0%,transparent 80%),hsl(160,20%,5%);z-index:0;animation:bgDrift 14s ease-in-out infinite}
+.bg-glow{position:fixed;inset:0;background:radial-gradient(760px 420px at 50% -6%,rgba(109,230,169,0.17) 0%,transparent 66%),radial-gradient(460px 340px at 50% 68%,rgba(63,191,131,0.08) 0%,transparent 72%),#07110c;z-index:0;animation:bgDrift 14s ease-in-out infinite}
 @keyframes bgDrift{0%,100%{transform:scale(1) translateY(0);opacity:1}50%{transform:scale(1.06) translateY(-10px);opacity:.88}}
 
 /* Floating spark field — subtle, never distracting. */
@@ -22,9 +22,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 
 .container{position:relative;z-index:1;width:100%;max-width:480px;padding:24px 20px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;text-align:center}
 .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.brand .mark.tt{animation:swayL 6.5s ease-in-out infinite}
+.brand .mark.gp{animation:markGlow 3.2s ease-in-out infinite,swayR 6.5s ease-in-out infinite}
+@keyframes swayL{0%,100%{transform:translateX(0)}50%{transform:translateX(-3px)}}
+@keyframes swayR{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
 .brand .mark{width:52px;height:52px;border-radius:14px;object-fit:cover;background:hsl(0,0%,8%)}
 .brand .mark.tt{box-shadow:0 0 20px hsla(0,0%,100%,0.10)}
-.brand .mark.gp{box-shadow:0 0 20px hsla(160,100%,50%,0.28);animation:markGlow 3.2s ease-in-out infinite}
+.brand .mark.gp{box-shadow:0 0 20px hsla(160,100%,50%,0.28)}
 @keyframes markGlow{0%,100%{box-shadow:0 0 18px hsla(160,100%,50%,0.22)}50%{box-shadow:0 0 34px hsla(160,100%,50%,0.45)}}
 .brand .x{color:hsla(0,0%,100%,0.45);font-size:20px;font-weight:500}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
@@ -42,19 +46,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .anim{opacity:0;animation:fadeSlideUp 0.5s ease forwards}
 @keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-.card-dark{background:hsl(160,10%,10%);border:1px solid hsl(160,15%,18%);border-radius:16px;padding:20px 18px;width:100%;text-align:left;margin-bottom:16px}
+.card-dark{background:linear-gradient(168deg,#0f1c15 0%,#0b1710 100%);border:1px solid rgba(255,255,255,0.075);border-radius:16px;padding:20px 18px;width:100%;text-align:left;margin-bottom:16px}
 .card-dark h3{text-align:center;font-size:11px;font-weight:700;letter-spacing:0.2em;color:hsla(0,0%,100%,0.5);margin-bottom:18px}
 .step{position:relative;display:flex;gap:14px;padding-bottom:18px}
 .step:not(:last-child)::after{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:hsl(160,15%,18%)}
 .step:last-child{padding-bottom:0}
-.step-num{width:28px;height:28px;border-radius:50%;background:hsl(160,100%,50%);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:hsl(160,20%,5%);flex-shrink:0;z-index:1}
+.step-num{width:28px;height:28px;border-radius:50%;background:hsl(160,100%,50%);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:hsl(160,20%,5%);flex-shrink:0;z-index:1;animation:stepHalo 3.6s ease-in-out infinite}
+.step:nth-child(2) .step-num{animation-delay:.45s}
+.step:nth-child(3) .step-num{animation-delay:.9s}
+@keyframes stepHalo{0%,100%{box-shadow:0 0 0 0 rgba(109,230,169,.45)}55%{box-shadow:0 0 0 7px rgba(109,230,169,0)}}
 .step h4{font-size:14px;font-weight:700;margin-bottom:3px}
 .step p{font-size:12px;color:hsla(0,0%,100%,0.55);line-height:1.45}
 .step p .accent{color:hsl(160,100%,55%);font-weight:600}
 .section-label{width:100%;text-align:left;font-size:11px;font-weight:700;letter-spacing:0.2em;color:hsla(0,0%,100%,0.5);margin-bottom:12px}
 
-.reward{position:relative;width:100%;background:hsl(160,10%,10%);border:1px solid hsl(160,15%,18%);border-radius:16px;padding:16px;margin-bottom:12px;text-align:left;overflow:hidden}
-.reward-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.reward{position:relative;width:100%;background:linear-gradient(168deg,#0f1c15 0%,#0b1710 100%);border:1px solid rgba(255,255,255,0.075);border-radius:16px;padding:16px;margin-bottom:12px;text-align:left;overflow:hidden}
+.reward::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:16px;background:linear-gradient(108deg,transparent 40%,rgba(109,230,169,.07) 50%,transparent 60%);transform:translateX(-100%);animation:cardSheen 6s ease-in-out infinite}
+@keyframes cardSheen{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+.reward-top{display:flex;align-items:center;gap:12px;position:relative;z-index:1;margin-bottom:14px}
 .reward-tile{position:relative;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid hsla(0,0%,100%,0.12);background:hsl(160,12%,14%);font-size:20px;overflow:hidden}
 .reward-tile img{width:30px;height:30px;object-fit:contain}
 .reward-progress{margin-bottom:12px}
@@ -73,7 +82,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .reward-prize span{font-size:10px;font-weight:600;color:hsla(0,0%,100%,0.45);letter-spacing:0.02em;margin-top:2px}
 
 /* ---- LOCKED STATE ---- still fully tappable: completing tasks IS the offer. ---- */
-.reward.locked{border-color:hsla(0,0%,100%,0.10);background:hsl(160,10%,9%)}
+.reward.locked{border-color:rgba(255,255,255,0.08);background:linear-gradient(168deg,#0d1712 0%,#0a130e 100%)}
 .reward.locked .reward-tile img{filter:grayscale(1);opacity:.5}
 .reward.locked .reward-tile::after{content:"";position:absolute;inset:0;background:hsla(160,20%,5%,0.45)}
 .reward.locked .reward-info h4,.reward.locked .reward-info p{color:hsla(0,0%,100%,0.45)}
@@ -96,6 +105,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .important .rule{height:1px;background:hsla(0,0%,100%,0.09);margin:13px 0 11px}
 .important .ok{display:flex;align-items:center;gap:9px;font-size:12.5px;color:hsla(0,0%,100%,0.62);line-height:1.4}
 
+/* ---- AGE GATE ---- shown on load, over a blurred page. A bot that never taps
+   never gets past it, so it doubles as a cheap human filter. ---- */
+/* Hidden until a CTA tap opens it — never shown on load. */
+#ageGate{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
+  padding:24px;background:rgba(4,10,7,.82);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+  animation:gateIn .28s ease both}
+@keyframes gateIn{from{opacity:0}to{opacity:1}}
+#ageGate.out{animation:gateOut .3s ease both;pointer-events:none}
+@keyframes gateOut{to{opacity:0;transform:scale(1.02)}}
+.gate-card{width:100%;max-width:340px;text-align:center;
+  background:linear-gradient(168deg,#0f1c15 0%,#0b1710 100%);
+  border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:26px 22px 22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.55);animation:gatePop .34s cubic-bezier(.22,1,.36,1) both}
+@keyframes gatePop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.gate-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(109,230,169,.1);
+  border:1px solid rgba(109,230,169,.3);border-radius:999px;padding:6px 12px;font-size:10.5px;
+  font-weight:800;letter-spacing:.09em;color:#6de6a9;margin-bottom:16px}
+.gate-card h3{font-size:21px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px;color:#fff}
+.gate-card p{font-size:13px;line-height:1.5;color:rgba(255,255,255,.55);margin-bottom:20px}
+.gate-btns{display:flex;flex-direction:column;gap:10px}
+.gate-yes{width:100%;min-height:54px;border:none;border-radius:13px;cursor:pointer;
+  background:linear-gradient(180deg,hsl(160,100%,55%),hsl(160,100%,45%));color:#04231a;
+  font-family:inherit;font-size:16px;font-weight:800;letter-spacing:.02em;
+  transition:transform .12s ease;animation:gateGlow 2.4s ease-in-out infinite}
+.gate-yes:active{transform:scale(.975)}
+@keyframes gateGlow{0%,100%{box-shadow:0 4px 20px rgba(109,230,169,.36)}
+  50%{box-shadow:0 6px 34px rgba(109,230,169,.62)}}
+.gate-no{width:100%;min-height:46px;border:1px solid rgba(255,255,255,.12);border-radius:13px;
+  cursor:pointer;background:transparent;color:rgba(255,255,255,.5);font-family:inherit;
+  font-size:14px;font-weight:600;transition:background .15s ease}
+.gate-no:active{background:rgba(255,255,255,.05)}
+.gate-note{margin-top:14px;font-size:11px;color:rgba(255,255,255,.3);line-height:1.45}
+#gateDeny{display:none}
+#gateDeny p{font-size:13px;line-height:1.55;color:rgba(255,255,255,.62);margin:0 0 18px}
+.warn-mark{width:52px;height:52px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;
+  background:rgba(232,58,58,.12);border:1px solid rgba(232,58,58,.45);animation:warnPulse 1.7s ease-in-out infinite}
+@keyframes warnPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,58,58,.42)}55%{box-shadow:0 0 0 10px rgba(232,58,58,0)}}
+#gateDeny h3{color:#ff6b6b}
+#gateDeny b{color:#ff8f8f}
+#ageGate.open{display:flex}
+body.gated{overflow:hidden}
+@media (max-width:374px){.gate-card{padding:22px 18px 18px}.gate-card h3{font-size:19px}}
+
 /* Small phones — iPhone SE / Android 360px. */
 @media (max-width:374px){
   .container{padding:18px 14px calc(24px + env(safe-area-inset-bottom))}
@@ -111,6 +163,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 </style>
 </head>
 <body>
+<div id="ageGate" role="dialog" aria-modal="true" aria-label="Age confirmation">
+  <div class="gate-card">
+    <div id="gateAsk">
+      <span class="gate-badge">ONE QUICK THING</span>
+      <h3>Are you 21 or older?</h3>
+      <p>Your answer sets which rewards unlock on your pass.</p>
+      <div class="gate-btns">
+        <button class="gate-yes" id="gateYes">Yes, I'm 21+</button>
+        <button class="gate-no"  id="gateNo">No, I'm under 21</button>
+      </div>
+      <p class="gate-note">Pick <b>21+</b> at signup to unlock the highest-paying offers.</p>
+    </div>
+    <div id="gateDeny">
+      <div class="warn-mark">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 7v6" stroke="#ff5a5a" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="17" r="1.5" fill="#ff5a5a"/></svg>
+      </div>
+      <h3>Heads up</h3>
+      <p>Under-21 accounts only see limited offers. When you sign up, select <b>21+</b> to unlock the highest-paying games and tasks.</p>
+      <div class="gate-btns">
+        <button class="gate-yes" id="gateGo">Got it — Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="lp-wrap">
   <div class="bg-glow"></div>
   <div class="sparks" aria-hidden="true">
@@ -204,6 +281,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 (function () {
   'use strict';
 
+  /* ---- Age gate ---- opens AFTER a CTA tap, never on load, and NEVER blocks.
+     21+ goes straight through. Under-21 gets a red notice telling them to pick
+     21+ at signup, then continues to the same offer — no traffic is held. */
+  var gateEl   = document.getElementById('ageGate');
+  var gateAsk  = document.getElementById('gateAsk');
+  var gateDeny = document.getElementById('gateDeny');
+
+  function openGate() {
+    gateAsk.style.display  = 'block';
+    gateDeny.style.display = 'none';
+    gateEl.classList.add('open');
+    document.body.classList.add('gated');
+  }
+  function leaveToOffer() {
+    document.body.classList.remove('gated');
+    location.href = buildOfferUrl();
+  }
+  document.getElementById('gateYes').addEventListener('click', leaveToOffer);
+  document.getElementById('gateGo').addEventListener('click', leaveToOffer);
+  document.getElementById('gateNo').addEventListener('click', function () {
+    gateAsk.style.display  = 'none';
+    gateDeny.style.display = 'block';
+  });
+
+
+
   /* Gravy Pass works on BOTH platforms — the pass lands in Apple Wallet on iOS and
      Google Wallet on Android. Markup ships with "Apple Wallet" so a no-JS render still
      reads correctly; Android gets swapped on load. */
@@ -218,7 +321,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
      appends the sub ID itself. There is no Spartis in this funnel, so there is no short
      code and nothing to append it for us. Everflow reads sub1..sub5 and silently discards
      s1, so the outbound param is sub1. */
-  var OFFER_LINK = 'https://www.phef6trk.com/ZKTQ1K/32BB7QT/';
+  var OFFER_LINK = 'https://www.pcbdfv7trk.com/ZKTQ1K/35KZJBX/';
 
   /* The prelander forwards the ENTIRE inbound query string untouched, so the click ID
      arrives here under whatever name the ad used. Read wide, emit as sub1. */
@@ -233,7 +336,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
      device, not a dead end: completing tasks IS the offer, so a locked card must still
      open it. A dead button here would shed the tap and cost EPC. */
   Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (b) {
-    b.addEventListener('click', function () { location.href = buildOfferUrl(); });
+    b.addEventListener('click', function () { openGate(); });
   });
 
   /* Progress bars animate 0 -> their locked value once on view, so the cards read as a

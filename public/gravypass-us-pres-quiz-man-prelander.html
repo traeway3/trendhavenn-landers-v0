@@ -200,20 +200,24 @@
             /* Tracking beacon — first-party, px.trendhavenn.com. Same event names as the
                lander so the two rows line up in the dashboard and drop-off is readable. */
             var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'gp-quiz-pre';
+            /* Fire each event at most once per page view — a repeat tap must not log a
+               second hit, or the drop-off percentages stop meaning anything. */
+            var sent = {};
+            function url(ev){ return TRACK+'?e='+ev+'&id='+encodeURIComponent(subid())+'&p='+PAGE; }
             function hit(ev){
-                try { new Image().src = TRACK+'?e='+ev+'&id='+encodeURIComponent(subid())+'&p='+PAGE+'&_='+Date.now(); } catch(e){}
+                if(sent[ev]) return; sent[ev]=1;
+                try { new Image().src = url(ev)+'&_='+Date.now(); } catch(e){}
             }
             function hitBeacon(ev){
+                if(sent[ev]) return; sent[ev]=1;
                 try {
-                    var u = TRACK+'?e='+ev+'&id='+encodeURIComponent(subid())+'&p='+PAGE;
-                    if (navigator.sendBeacon) { navigator.sendBeacon(u); } else { new Image().src = u+'&_='+Date.now(); }
+                    if (navigator.sendBeacon) { navigator.sendBeacon(url(ev)); }
+                    else { new Image().src = url(ev)+'&_='+Date.now(); }
                 } catch(e){}
             }
             hit('load');
-            var human = false;
-            function fireHuman(){ if(human) return; human = true; hit('human'); }
             ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function(e){
-                window.addEventListener(e, fireHuman, {once:true, passive:true});
+                window.addEventListener(e, function(){ hit('human'); }, {once:true, passive:true});
             });
 
             /* Forward the ENTIRE inbound query string untouched so the click ID survives

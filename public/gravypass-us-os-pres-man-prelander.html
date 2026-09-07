@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b0f0d">
+<meta name="robots" content="noindex, nofollow">
+<title>Continue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0b0f0d;
+  --accent: #6de6a9;
+  --accent-dim: rgba(109,230,169,0.14);
+  --accent-glow: rgba(109,230,169,0.42);
+  --ink: #f2f5f3;
+  --muted: #6f7a75;
+  --muted2: #8b9a93;
+}
+
+html, body {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Two slow drifting glows — borrowed from the reference's driftS pair. */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+body::before {
+  width: 420px; height: 420px;
+  top: -140px; left: 50%; margin-left: -210px;
+  background: radial-gradient(circle, rgba(109,230,169,0.16) 0%, transparent 68%);
+  animation: driftDown 13s ease-in-out infinite;
+}
+body::after {
+  width: 340px; height: 340px;
+  bottom: -120px; right: -80px;
+  background: radial-gradient(circle, rgba(63,191,131,0.10) 0%, transparent 70%);
+  animation: driftUp 17s ease-in-out infinite;
+}
+@keyframes driftDown { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(26px) scale(1.08); } }
+@keyframes driftUp   { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.06); } }
+
+.ask {
+  position: relative;
+  z-index: 1;
+  max-width: 380px;
+  width: 100%;
+}
+
+.ask-card {
+  text-align: center;
+  animation: fadeUp .5s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Badge above the headline — replaces the old 88px icon box. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(109,230,169,0.28);
+  border-radius: 999px;
+  padding: 7px 14px 7px 11px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 20px;
+  animation: breathe 3s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { box-shadow: 0 0 0 rgba(109,230,169,0); }
+  50%     { box-shadow: 0 0 22px rgba(109,230,169,0.22); }
+}
+.badge .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.ask-title {
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1.1px;
+  margin: 0;
+  color: var(--accent);
+}
+
+/* CTA sits directly under the headline — reassurance goes BELOW it. */
+.ask-cta {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  margin-top: 28px;
+  background: var(--accent);
+  color: #04231a;
+  font-family: "Inter", sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 18px 24px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  animation: ctaPulse 2.5s ease-in-out infinite;
+}
+.ask-cta:active { transform: scale(0.97); }
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 34px var(--accent-glow), 0 4px 18px rgba(0,0,0,0.4); }
+  50%      { box-shadow: 0 0 62px var(--accent-glow), 0 4px 18px rgba(0,0,0,0.4); }
+}
+
+.ask-points {
+  list-style: none;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.ask-points li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  color: var(--muted);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.ask-points svg { flex-shrink: 0; }
+
+.sub {
+  margin-top: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.sub a {
+  color: var(--muted2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+@media (max-height: 640px) {
+  .ask-title { font-size: 28px; }
+  .badge { margin-bottom: 14px; }
+  .ask-cta { margin-top: 20px; }
+}
+@media (max-width: 374px) {
+  .ask-title { font-size: 28px; }
+  .ask-cta { font-size: 15.5px; padding: 16px 18px; }
+  .ask-points { gap: 12px; }
+  .ask-points li { font-size: 11.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+</style>
+</head>
+<body>
+  <div class="ask">
+    <div class="ask-card">
+      <span class="badge"><span class="dot"></span>REWARD UNLOCKED</span>
+      <h1 class="ask-title">Begin Below</h1>
+      <button class="ask-cta" id="ctaBtn">Continue</button>
+      <ul class="ask-points">
+        <li>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6de6a9" stroke-width="2"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#6de6a9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Secure Chrome Browser
+        </li>
+        <li>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6de6a9" stroke-width="2"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#6de6a9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Secure Safari Browser
+        </li>
+      </ul>
+      <p class="sub">Nothing happened? <a id="fallbackLink">Tap here</a></p>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var DEST = 'https://www.trendhavenn.com/gravypass-us-os-pres-man.html';
+
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('sub1') || QP.get('campid') || QP.get('s1')
+        || QP.get('s2')   || QP.get('cid')    || QP.get('c') || '';
+  }
+
+  /* Forward the ENTIRE inbound query string untouched so the click ID survives. */
+  function dest() {
+    var d = DEST, qs = window.location.search;
+    if (qs && qs.length > 1) d += (d.indexOf('?') === -1 ? '?' : '&') + qs.slice(1);
+    return d;
+  }
+
+  /* ── Beacon (page tag: gp-os-pre) ──────────────────────────
+     Each event fires at most once per page view. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'gp-os-pre', sent = {};
+  function turl(ev) { return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE; }
+  function hit(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try { new Image().src = turl(ev) + '&_=' + Date.now(); } catch (e) {}
+  }
+  function hitBeacon(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      if (navigator.sendBeacon) { navigator.sendBeacon(turl(ev)); }
+      else { new Image().src = turl(ev) + '&_=' + Date.now(); }
+    } catch (e) {}
+  }
+  hit('load');
+  ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function (e) {
+    window.addEventListener(e, function () { hit('human'); }, { once: true, passive: true });
+  });
+
+  /* ── Breakout ──────────────────────────────────────────────
+     Tap-triggered only; nothing fires on load. */
+  var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+  var isTikTok  = /tiktok|musical_ly|bytedance/i.test(ua);
+  var isIOS     = /iPhone|iPad|iPod/i.test(ua);
+  var isAndroid = /Android/i.test(ua);
+  var tapped = false;
+
+  /* Borrowed from the reference: if the page goes hidden right after the tap,
+     the breakout WORKED — the webview handed off to the real browser. Firing
+     'escaped' here is the only way to measure whether the breakout is failing,
+     which is exactly what a bad prelander drop-off looks like. */
+  ['pagehide','blur','visibilitychange'].forEach(function (evt) {
+    window.addEventListener(evt, function () {
+      if (!tapped) return;
+      if (evt === 'visibilitychange' && !document.hidden) return;
+      hitBeacon('escaped');
+    }, { passive: true });
+  });
+
+  document.getElementById('ctaBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    tapped = true;
+    hitBeacon('continue');
+
+    var target = dest();
+
+    if (!isTikTok) { window.location.href = target; return; }
+
+    if (isIOS) {
+      window.location.href = target.replace(/^https:\/\//, 'x-safari-https://');
+      setTimeout(function () { window.location.href = target; }, 350);
+    } else if (isAndroid) {
+      window.location.href = 'intent://' + target.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end';
+      setTimeout(function () { window.location.href = target; }, 350);
+    } else {
+      window.location.href = target;
+    }
+  });
+
+  document.getElementById('fallbackLink').addEventListener('click', function (e) {
+    e.preventDefault();
+    hitBeacon('fallback');
+    window.location.href = dest();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#080d0a">
+<meta name="robots" content="noindex, nofollow">
+<title>Get Paid To Scroll — Gravy Pass</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080d0a; --surf:#101a14; --surf2:#0c130f;
+  --line:rgba(255,255,255,0.07); --line2:rgba(109,230,169,0.16);
+  --mint:#6de6a9; --mint2:#3fbf83; --gold:#f5c86b;
+  --ink:#eef5f1; --muted:#7d8e86;
+}
+html,body{height:100%;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);overflow-x:clip;position:relative;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom));
+}
+.wrap{max-width:430px;margin:0 auto;position:relative;
+  background:
+    radial-gradient(620px 340px at 50% -60px,rgba(109,230,169,0.15),transparent 68%),
+    radial-gradient(420px 300px at 12% 52%,rgba(63,191,131,0.07),transparent 70%),
+    var(--bg);
+}
+
+/* ── floating sparks (subtle background movement) ───────────── */
+.sparks{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sparks i{position:absolute;bottom:-14px;width:5px;height:5px;border-radius:50%;
+  background:var(--mint);opacity:0;animation:sparkFloat linear infinite}
+@keyframes sparkFloat{
+  0%{transform:translateY(0) scale(.6);opacity:0}
+  12%{opacity:.5}
+  80%{opacity:.28}
+  100%{transform:translateY(-104vh) scale(1.1);opacity:0}
+}
+.wrap>*{position:relative;z-index:1}
+
+/* ── entrance ───────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(20px);
+  transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.07s} .rd2{transition-delay:.14s} .rd3{transition-delay:.21s}
+
+/* ── top bar ────────────────────────────────────────────────── */
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;padding:11px 16px;background:rgba(8,13,10,.86);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.lockup{display:flex;align-items:center;gap:7px}
+.lockup img{width:26px;height:26px;border-radius:8px;display:block}
+.lockup .x{font-size:12px;color:var(--muted);font-weight:700}
+.mark.gp{box-shadow:0 0 14px rgba(109,230,169,.34);animation:markGlow 3.6s ease-in-out infinite}
+@keyframes markGlow{0%,100%{box-shadow:0 0 12px rgba(109,230,169,.28)}50%{box-shadow:0 0 22px rgba(109,230,169,.55)}}
+.livepill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;
+  background:rgba(109,230,169,.10);border:1px solid var(--line2);
+  font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mint);white-space:nowrap}
+.livepill i{width:6px;height:6px;border-radius:50%;background:var(--mint);animation:dotLive 1.8s ease-in-out infinite}
+@keyframes dotLive{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(109,230,169,.6)}55%{opacity:.35;box-shadow:0 0 0 6px rgba(109,230,169,0)}}
+.livepill b{color:#fff;font-variant-numeric:tabular-nums}
+
+/* ── hero ───────────────────────────────────────────────────── */
+.hero{padding:30px 20px 22px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mint);background:rgba(109,230,169,.10);
+  border:1px solid var(--line2);border-radius:999px;padding:6px 12px;margin-bottom:14px}
+h1{font-size:40px;line-height:.98;font-weight:900;letter-spacing:-.035em;margin-bottom:14px;
+  background:linear-gradient(100deg,#fff 30%,var(--mint) 50%,#fff 70%);
+  background-size:280% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;animation:gravyShine 6s ease-in-out infinite}
+@keyframes gravyShine{0%,100%{background-position:180% 0}50%{background-position:-40% 0}}
+h1 span{display:block}
+.lede{font-size:14.5px;line-height:1.6;color:var(--muted);max-width:330px;margin:0 auto 20px}
+.lede b{color:var(--ink);font-weight:700}
+
+/* ── buttons ────────────────────────────────────────────────── */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:60px;
+  border:none;border-radius:16px;background:linear-gradient(180deg,#7cf0b5,var(--mint2));color:#04231a;
+  font-family:inherit;font-size:17px;font-weight:900;letter-spacing:-.01em;cursor:pointer;
+  text-decoration:none;position:relative;overflow:hidden;
+  transition:transform .12s ease;animation:ctaPulse 2.4s ease-in-out infinite}
+.btn:active{transform:scale(.975)}
+@keyframes ctaPulse{0%,100%{box-shadow:0 6px 22px rgba(109,230,169,.34)}50%{box-shadow:0 10px 38px rgba(109,230,169,.62)}}
+.btn::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(104deg,transparent 40%,rgba(255,255,255,.4) 50%,transparent 60%);
+  transform:translateX(-100%);animation:btnSweep 3.4s ease-in-out infinite}
+@keyframes btnSweep{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+.btn-note{margin-top:9px;text-align:center;font-size:11.5px;font-weight:700;color:var(--muted);letter-spacing:.02em}
+
+/* ── the scroll-earn simulator (signature block) ────────────── */
+.sim{margin:6px 16px 22px;background:linear-gradient(180deg,var(--surf) 0%,var(--surf2) 100%);
+  border:1px solid var(--line2);border-radius:22px;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 18px 44px rgba(0,0,0,.5)}
+.sim-head{display:flex;align-items:flex-end;justify-content:space-between;padding:16px 16px 12px;
+  border-bottom:1px solid var(--line)}
+.sim-head .lbl{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.bal{font-size:34px;font-weight:900;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+.bal.pop{animation:balPop .42s cubic-bezier(.22,1,.36,1)}
+@keyframes balPop{0%{transform:scale(1)}40%{transform:scale(1.09);color:var(--mint)}100%{transform:scale(1)}}
+.rate{text-align:right}
+.rate .amt{font-size:15px;font-weight:900;color:var(--mint);letter-spacing:-.02em}
+.rate .per{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.feed{position:relative;height:196px;overflow:hidden}
+.clip{display:flex;align-items:center;gap:11px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.thumb{position:relative;flex-shrink:0;width:46px;height:60px;border-radius:9px;overflow:hidden;
+  background:linear-gradient(155deg,#1b2b22,#0e1712);border:1px solid var(--line)}
+.thumb::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(112deg,transparent 42%,rgba(109,230,169,.22) 50%,transparent 58%);
+  transform:translateX(-100%);animation:feedGlint 3.2s ease-in-out infinite}
+@keyframes feedGlint{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.clip-body{flex:1;min-width:0}
+.clip-tag{font-size:9.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--mint);margin-bottom:3px}
+.clip-handle{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.clip-stats{display:flex;gap:12px;font-size:11px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.clip-stats span{display:flex;align-items:center;gap:4px}
+.credit{flex-shrink:0;font-size:13px;font-weight:900;color:var(--mint);
+  background:rgba(109,230,169,.11);border:1px solid var(--line2);border-radius:9px;padding:6px 9px}
+.coin{position:absolute;right:18px;bottom:12px;font-size:14px;font-weight:900;color:var(--mint);
+  pointer-events:none;opacity:0;text-shadow:0 0 14px rgba(109,230,169,.7)}
+.coin.fly{animation:coinFly 1.15s cubic-bezier(.22,1,.36,1)}
+@keyframes coinFly{0%{opacity:0;transform:translateY(10px) scale(.8)}
+  18%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translateY(-104px) scale(1.14)}}
+.sim-foot{padding:11px 16px;font-size:11px;font-weight:700;color:var(--muted);text-align:center;
+  background:rgba(0,0,0,.22);border-top:1px solid var(--line)}
+.sim-foot b{color:var(--mint)}
+
+/* ── rank ladder ────────────────────────────────────────────── */
+.sec{padding:26px 16px 6px}
+.sec-kick{font-size:10.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+h2{font-size:25px;font-weight:900;letter-spacing:-.03em;line-height:1.16;margin-bottom:16px}
+h2 em{font-style:normal;color:var(--mint)}
+.rank{display:flex;align-items:center;gap:13px;padding:15px 15px;border-radius:16px;margin-bottom:10px;
+  background:var(--surf);border:1px solid var(--line);position:relative;overflow:hidden;
+  transition:border-color .4s ease,background .4s ease}
+.rank .rn{flex-shrink:0;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+  font-size:16px;font-weight:900;color:#04231a;background:linear-gradient(155deg,#4a5c53,#33403a)}
+.rank .rt{flex:1;min-width:0}
+.rank .rt b{display:block;font-size:15px;font-weight:900;letter-spacing:-.01em;margin-bottom:2px}
+.rank .rt i{display:block;font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.rank .rt span{display:block;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.rank.on{border-color:var(--line2);background:linear-gradient(180deg,#132018,var(--surf))}
+.rank.on .rn{background:linear-gradient(155deg,#7cf0b5,var(--mint2));animation:rankGlow 2.6s ease-in-out infinite}
+@keyframes rankGlow{0%,100%{box-shadow:0 0 0 0 rgba(109,230,169,.5)}60%{box-shadow:0 0 0 9px rgba(109,230,169,0)}}
+.rank.top.on .rn{background:linear-gradient(155deg,#ffe6ad,var(--gold));color:#3a2a05}
+.rank.top.on{border-color:rgba(245,200,107,.3);background:linear-gradient(180deg,#1d1a10,var(--surf))}
+.rank.top.on .rt b{color:var(--gold)}
+.rank .now{position:absolute;top:11px;right:12px;font-size:9px;font-weight:900;letter-spacing:.1em;
+  text-transform:uppercase;color:#04231a;background:var(--mint);border-radius:5px;padding:3px 6px;
+  opacity:0;transform:scale(.8);transition:opacity .3s ease,transform .3s ease}
+.rank.on .now{opacity:1;transform:scale(1)}
+.rank.top.on .now{background:var(--gold);color:#3a2a05}
+
+/* ── steps ──────────────────────────────────────────────────── */
+.step{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line)}
+.step:last-of-type{border-bottom:none}
+.step .sn{flex-shrink:0;width:27px;height:27px;border-radius:9px;display:grid;place-items:center;
+  font-size:12.5px;font-weight:900;color:var(--mint);background:rgba(109,230,169,.13);border:1px solid var(--line2)}
+.step .sb b{display:block;font-size:15px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+.step .sb span{display:block;font-size:13px;line-height:1.6;color:var(--muted)}
+.passcard{display:flex;align-items:center;gap:12px;margin:14px 0 4px;padding:13px;border-radius:15px;
+  background:linear-gradient(180deg,#13211a,var(--surf2));border:1px solid var(--line2)}
+.passcard img{width:46px;height:46px;border-radius:12px;flex-shrink:0}
+.passcard .pi{flex:1;min-width:0}
+.passcard .pi b{display:block;font-size:14.5px;font-weight:800;margin-bottom:3px}
+.passcard .pi span{display:block;font-size:11.5px;font-weight:600;color:var(--muted)}
+.stars{color:var(--gold);letter-spacing:.5px}
+.passcard .pill{flex-shrink:0;font-size:12px;font-weight:900;color:#04231a;background:var(--mint);
+  border-radius:999px;padding:8px 15px;letter-spacing:.02em}
+.payrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.payrow span{font-size:11px;font-weight:800;color:var(--ink);background:rgba(255,255,255,.05);
+  border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+
+/* ── game marquee ───────────────────────────────────────────── */
+.marquee{overflow:hidden;margin:6px 0 4px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.track{display:flex;gap:11px;width:max-content;animation:marqueeRoll 26s linear infinite}
+.tile{width:96px;flex-shrink:0;text-align:center}
+.tile img{width:96px;height:96px;border-radius:20px;display:block;border:1px solid var(--line);object-fit:cover;
+  background:var(--surf)}
+.tile b{display:block;margin-top:7px;font-size:11.5px;font-weight:700;color:var(--muted)}
+@keyframes marqueeRoll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── closer ─────────────────────────────────────────────────── */
+.closer{margin:24px 16px 0;padding:24px 20px;border-radius:22px;text-align:center;
+  background:linear-gradient(180deg,#132018,var(--surf2));border:1px solid var(--line2)}
+.closer h2{margin-bottom:9px}
+.closer p{font-size:13.5px;line-height:1.6;color:var(--muted);margin-bottom:18px}
+.legal{padding:22px 20px 8px;font-size:10.5px;line-height:1.65;color:#5c6b64;text-align:center}
+.legal a{color:var(--muted)}
+
+/* ── sticky bottom bar ──────────────────────────────────────── */
+.dock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(6,10,8,.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line2)}
+.dock-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.dock-top img{width:34px;height:34px;border-radius:10px;flex-shrink:0}
+.dock-top .di{flex:1;min-width:0}
+.dock-top .di b{display:block;font-size:13px;font-weight:800;line-height:1.25}
+.dock-top .di span{display:block;font-size:10.5px;font-weight:600;color:var(--muted);margin-top:1px}
+.dock .btn{min-height:54px;font-size:16px;border-radius:14px}
+.dock-note{margin-top:7px;text-align:center;font-size:9.5px;font-weight:800;letter-spacing:.09em;
+  text-transform:uppercase;color:#5c6b64}
+
+@media (max-width:374px){
+  h1{font-size:34px} h2{font-size:22px}
+  .bal{font-size:29px} .tile,.tile img{width:84px} .tile img{height:84px}
+  .btn{font-size:15.5px;min-height:56px} .lede{font-size:13.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  .reveal{opacity:1;transform:none;transition:none}
+  h1{-webkit-text-fill-color:#fff;color:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="sparks" id="sparks" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="lockup">
+      <img class="mark tt" src="data:image/webp;base64,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" alt="" width="26" height="26">
+      <span class="x">&times;</span>
+      <img class="mark gp" src="data:image/webp;base64,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" alt="" width="26" height="26">
+    </div>
+    <span class="livepill"><i></i><b id="liveCount">4,128</b> earning now</span>
+  </div>
+
+  <div class="hero">
+    <span class="eyebrow reveal">US &middot; Free to join &middot; 18+</span>
+    <h1 class="reveal rd1"><span>EARN ON</span><span>EVERY SCROLL</span></h1>
+    <p class="lede reveal rd2">You already scroll for hours. Now <b>get paid for it.</b> Add your free pass, play, and cash out. That's it.</p>
+    <div class="reveal rd3">
+      <a href="#" class="btn" data-go>Add My Free Pass</a>
+      <p class="btn-note">No app store &middot; Adds in 30 seconds</p>
+    </div>
+  </div>
+
+  <div class="sim reveal">
+    <div class="sim-head">
+      <div>
+        <div class="lbl">Your balance</div>
+        <div class="bal" id="bal">$0.00</div>
+      </div>
+      <div class="rate">
+        <div class="amt">+$0.25</div>
+        <div class="per">per scroll</div>
+      </div>
+    </div>
+    <div class="feed" id="feed">
+      <div class="coin" id="coin">+$0.25</div>
+    </div>
+    <div class="sim-foot">Keep scrolling &mdash; this is <b>your</b> balance building</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-kick reveal">Rank progression</div>
+    <h2 class="reveal rd1">The more you play, <em>the more each one pays.</em></h2>
+
+    <div class="rank reveal rd1" data-rank="0">
+      <span class="now">You</span>
+      <div class="rn">N</div>
+      <div class="rt"><b>NOOB</b><i>0&ndash;2 offers done</i><span>General offer pool unlocked.</span></div>
+    </div>
+    <div class="rank reveal rd2" data-rank="1">
+      <span class="now">You</span>
+      <div class="rn">P</div>
+      <div class="rt"><b>PRO</b><i>2&ndash;5 offers done</i><span>Exclusive pool with higher payouts.</span></div>
+    </div>
+    <div class="rank top reveal rd3" data-rank="2">
+      <span class="now">You</span>
+      <div class="rn">S</div>
+      <div class="rt"><b>SCROLLER</b><i>5+ offers done</i><span>Top pool, best payouts, first access to new offers.</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-kick reveal">How it works</div>
+    <h2 class="reveal rd1">3 steps to <em>cash.</em></h2>
+
+    <div class="step reveal rd1">
+      <div class="sn">1</div>
+      <div class="sb"><b>Add your free pass</b><span>Goes straight into <b class="wallet-name">Apple Wallet</b> &mdash; works on iPhone and Android. No app store, no download.</span></div>
+    </div>
+    <div class="passcard reveal rd2">
+      <img src="data:image/webp;base64,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" alt="" width="46" height="46">
+      <div class="pi"><b>Gravy Pass</b><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.5 &middot; <span class="wallet-name">Apple Wallet</span> &middot; Free</span></div>
+      <span class="pill">ADD</span>
+    </div>
+    <div class="step reveal rd2">
+      <div class="sn">2</div>
+      <div class="sb"><b>Play to earn</b><span>Play mobile games and finish simple offers. Each one pays points.</span></div>
+    </div>
+    <div class="step reveal rd3">
+      <div class="sn">3</div>
+      <div class="sb"><b>Cash out your way</b><span>Turn points into gift cards or cash. $1 welcome bonus, $10 minimum.</span>
+        <div class="payrow"><span>PayPal</span><span>Cash App</span><span>Venmo</span><span>Gift cards</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-kick reveal">Offer pool</div>
+    <h2 class="reveal rd1">Get paid to play the games <em>you already love.</em></h2>
+    <div class="marquee reveal rd2">
+      <div class="track" id="track"></div>
+    </div>
+  </div>
+
+  <div class="closer reveal">
+    <h2>Still playing <em>for free?</em></h2>
+    <p>Stop giving your time away. Add the pass and your welcome bonus lands right away.</p>
+    <a href="#" class="btn" data-go>Claim My $1 Bonus</a>
+    <p class="btn-note">Free &middot; No card needed &middot; 18+</p>
+  </div>
+
+  <p class="legal">
+    18+ only. Rewards and payouts subject to terms. Not affiliated with Apple, Google, TikTok or any
+    brand shown. Games pictured are examples only and may not be in the current offer pool.<br><br>
+    &copy; 2026 &middot; All rights reserved.
+  </p>
+</div>
+
+<div class="dock">
+  <div class="dock-top">
+    <img src="data:image/webp;base64,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" alt="" width="34" height="34">
+    <div class="di"><b>Gravy Pass</b><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.5 &middot; <span class="wallet-name">Apple Wallet</span> &middot; Free</span></div>
+  </div>
+  <a href="#" class="btn" data-go id="dockBtn">Add To <span class="wallet-name">Apple Wallet</span></a>
+  <p class="dock-note">Free &middot; Adds in 30 seconds &middot; 18+</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ────────────────────────────────────────────────────────────
+     MANUAL LAUNCH — this page goes DIRECT to the network and
+     appends the sub itself. No short code, no Spartis, no
+     postback. Conversions are read in the Prescott dashboard
+     by sub1.
+     ──────────────────────────────────────────────────────────── */
+  var OFFER = 'https://www.pcbdfv7trk.com/ZKTQ1K/35KZJBX/?sub1=';
+
+  function subid() {
+    var p = new URLSearchParams(window.location.search);
+    return p.get('campid') || p.get('sub1') || p.get('s1') ||
+           p.get('s2') || p.get('cid') || p.get('c') || '';
+  }
+  function offerUrl() { return OFFER + encodeURIComponent(subid()); }
+
+  /* ── beacon (guarded so one event fires once per page) ────── */
+  var PAGE = 'gp-m3', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      var u = 'https://px.trendhavenn.com/t?e=' + encodeURIComponent(ev) +
+              '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+      if (navigator.sendBeacon) navigator.sendBeacon(u); else new Image().src = u;
+    } catch (e) {}
+  }
+  px('load');
+  ['scroll','touchstart','mousemove'].forEach(function (t) {
+    window.addEventListener(t, function h() { px('human'); }, { once: true, passive: true });
+  });
+
+  /* ── wallet name: Apple on iOS, GOOGLE on Android ─────────── */
+  var wallet = /android/i.test(navigator.userAgent || '') ? 'Google Wallet' : 'Apple Wallet';
+  Array.prototype.forEach.call(document.querySelectorAll('.wallet-name'), function (el) {
+    el.textContent = wallet;
+  });
+
+  /* ── CTAs ─────────────────────────────────────────────────── */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (b) {
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      px('claim');
+      window.location.href = offerUrl();
+    });
+  });
+
+  /* ── entrance ─────────────────────────────────────────────── */
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(items, function (el) { el.classList.add('visible'); });
+  } else {
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) {
+        if (x.isIntersecting) { x.target.classList.add('visible'); io.unobserve(x.target); }
+      });
+    }, { rootMargin: '0px 0px -50px 0px', threshold: .08 });
+    Array.prototype.forEach.call(items, function (el) { io.observe(el); });
+  }
+
+  /* ── background sparks ────────────────────────────────────── */
+  var sp = document.getElementById('sparks'), frag = document.createDocumentFragment();
+  for (var i = 0; i < 8; i++) {
+    var s = document.createElement('i');
+    s.style.left = (5 + Math.random() * 90).toFixed(1) + '%';
+    s.style.animationDuration = (14 + Math.random() * 9).toFixed(1) + 's';
+    s.style.animationDelay = (Math.random() * -20).toFixed(1) + 's';
+    s.style.opacity = 0;
+    frag.appendChild(s);
+  }
+  sp.appendChild(frag);
+
+  /* ── live "earning now" counter ───────────────────────────── */
+  var live = 4128, liveEl = document.getElementById('liveCount');
+  setInterval(function () {
+    live += Math.floor(Math.random() * 7) - 2;
+    if (live < 3900) live = 3900 + Math.floor(Math.random() * 40);
+    liveEl.textContent = live.toLocaleString('en-US');
+  }, 2600);
+
+  /* ────────────────────────────────────────────────────────────
+     THE DIFFERENTIATOR — the balance is scroll-linked.
+     Their page shows a static number. Here every clip the user
+     actually scrolls past credits $0.25 for real, on THIS page,
+     so "earn on every scroll" is demonstrated instead of claimed.
+     ──────────────────────────────────────────────────────────── */
+  var CLIPS = [
+    { tag: 'Sponsored clip', at: '@testerfeed',  v: '9.8K',  l: '312',   c: '744' },
+    { tag: 'Partner ad',     at: '@scrollpays',  v: '77.4K', l: '2,880', c: '6.4K' },
+    { tag: 'Brand reel',     at: '@cashcuts',    v: '12.9K', l: '486',   c: '921' },
+    { tag: 'Sponsored clip', at: '@dailygrind',  v: '48.2K', l: '1,204', c: '3.1K' },
+    { tag: 'Partner ad',     at: '@passandplay', v: '23.6K', l: '907',   c: '1.8K' },
+    { tag: 'Brand reel',     at: '@gravygains',  v: '61.1K', l: '2,145', c: '4.9K' }
+  ];
+  var feed = document.getElementById('feed'), coin = document.getElementById('coin');
+  var balEl = document.getElementById('bal'), cents = 0, idx = 0;
+
+  function eyeSvg() {
+    return '<svg width="11" height="11" viewBox="0 0 24 24" fill="none">' +
+      '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" stroke="#7d8e86" stroke-width="2"/>' +
+      '<circle cx="12" cy="12" r="3" stroke="#7d8e86" stroke-width="2"/></svg>';
+  }
+  function heartSvg() {
+    return '<svg width="11" height="11" viewBox="0 0 24 24" fill="none">' +
+      '<path d="M12 20s-7-4.4-7-9.2A4 4 0 0112 8a4 4 0 017 2.8C19 15.6 12 20 12 20z" stroke="#7d8e86" stroke-width="2"/></svg>';
+  }
+  function addClip() {
+    var d = CLIPS[idx % CLIPS.length]; idx++;
+    var el = document.createElement('div');
+    el.className = 'clip';
+    el.innerHTML =
+      '<div class="thumb"></div>' +
+      '<div class="clip-body">' +
+        '<div class="clip-tag">' + d.tag + '</div>' +
+        '<div class="clip-handle">' + d.at + '</div>' +
+        '<div class="clip-stats"><span>' + eyeSvg() + d.v + '</span><span>' + heartSvg() + d.l + '</span></div>' +
+      '</div>' +
+      '<div class="credit">+$0.25</div>';
+    feed.insertBefore(el, coin);
+    while (feed.querySelectorAll('.clip').length > 4) feed.removeChild(feed.querySelector('.clip'));
+  }
+  function credit() {
+    cents += 25;
+    balEl.textContent = '$' + (cents / 100).toFixed(2);
+    balEl.classList.remove('pop'); void balEl.offsetWidth; balEl.classList.add('pop');
+    coin.classList.remove('fly'); void coin.offsetWidth; coin.classList.add('fly');
+    addClip();
+  }
+  addClip(); addClip(); addClip();
+
+  var lastY = window.pageYOffset, travelled = 0, capped = false;
+  window.addEventListener('scroll', function () {
+    if (capped) return;
+    var y = window.pageYOffset;
+    travelled += Math.abs(y - lastY); lastY = y;
+    if (travelled >= 260) {
+      travelled = 0; credit();
+      if (cents >= 1275) { capped = true; }   // settles at $12.75, same as the reference
+    }
+  }, { passive: true });
+
+  /* rank ladder lights up as the balance climbs */
+  var ranks = document.querySelectorAll('.rank');
+  setInterval(function () {
+    var lvl = cents >= 850 ? 2 : cents >= 400 ? 1 : 0;
+    Array.prototype.forEach.call(ranks, function (r, i) {
+      r.classList.toggle('on', i === lvl);
+    });
+  }, 400);
+
+  /* ── game marquee (duplicated for a seamless loop) ────────── */
+  var GAMES = [
+    { img: '/images/subway-surfers.jpg', name: 'Subway Surfers' },
+    { img: '/images/roblox.jpg',         name: 'Roblox' },
+    { img: '/images/block-blast.jpg',    name: 'Block Blast' }
+  ];
+  var track = document.getElementById('track'), html = '';
+  for (var r = 0; r < 4; r++) {
+    GAMES.forEach(function (g) {
+      html += '<div class="tile"><img src="' + g.img + '" alt="" width="96" height="96" loading="lazy"><b>' + g.name + '</b></div>';
+    });
+  }
+  track.innerHTML = html;
+})();
+</script>
+</body>
+</html>

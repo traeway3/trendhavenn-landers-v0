@@ -51,12 +51,12 @@ body{
   gap:10px;padding:11px 16px;background:rgba(8,13,10,.86);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .lockup{display:flex;align-items:center;gap:7px}
-.lockup img{width:26px;height:26px;border-radius:8px;display:block}
+.lockup img,.lockup .gp-tile{width:26px;height:26px;border-radius:8px;display:block}
 .lockup .x{font-size:12px;color:var(--muted);font-weight:700}
-.gp-tile{background:linear-gradient(155deg,#17271e 0%,#0d1712 100%);border:1px solid rgba(109,230,169,.26);
-  padding:4px;object-fit:contain}
-.mark.gp{box-shadow:0 0 14px rgba(109,230,169,.30);animation:markGlow 3.6s ease-in-out infinite}
-@keyframes markGlow{0%,100%{box-shadow:0 0 12px rgba(109,230,169,.28)}50%{box-shadow:0 0 22px rgba(109,230,169,.55)}}
+.gp-tile{border:1px solid rgba(255,255,255,.10);background:#5DE2FD url('data:image/webp;base64,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') center/cover no-repeat;
+  display:block;flex-shrink:0}
+.mark.gp{box-shadow:0 0 14px rgba(93,226,253,.30);animation:markGlow 3.6s ease-in-out infinite}
+@keyframes markGlow{0%,100%{box-shadow:0 0 10px rgba(93,226,253,.22)}50%{box-shadow:0 0 20px rgba(93,226,253,.46)}}
 .livepill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;
   background:rgba(109,230,169,.10);border:1px solid var(--line2);
   font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mint);white-space:nowrap}
@@ -165,7 +165,7 @@ h2 em{font-style:normal;color:var(--mint)}
 .step .sb span{display:block;font-size:13px;line-height:1.6;color:var(--muted)}
 .passcard{display:flex;align-items:center;gap:12px;margin:14px 0 4px;padding:13px;border-radius:15px;
   background:linear-gradient(180deg,#13211a,var(--surf2));border:1px solid var(--line2)}
-.passcard img{width:46px;height:46px;border-radius:13px;flex-shrink:0}
+.passcard .gp-tile{width:46px;height:46px;border-radius:13px;flex-shrink:0}
 .passcard .pi{flex:1;min-width:0}
 .passcard .pi b{display:block;font-size:14.5px;font-weight:800;margin-bottom:3px}
 .passcard .pi span{display:block;font-size:11.5px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -201,7 +201,7 @@ h2 em{font-style:normal;color:var(--mint)}
   background:rgba(6,10,8,.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-top:1px solid var(--line2)}
 .dock-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.dock-top img{width:38px;height:38px;border-radius:11px;flex-shrink:0}
+.dock-top .gp-tile{width:38px;height:38px;border-radius:11px;flex-shrink:0}
 .dock-top .di{flex:1;min-width:0}
 .dock-top .di .r1{display:flex;align-items:center;gap:7px;line-height:1.2}
 .dock-top .di b{font-size:14px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
@@ -236,7 +236,7 @@ h2 em{font-style:normal;color:var(--mint)}
     <div class="lockup">
       <img class="mark tt" src="data:image/webp;base64,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" alt="" width="26" height="26">
       <span class="x">&times;</span>
-      <img class="mark gp gp-tile" src="data:image/webp;base64,UklGRuwAAABXRUJQVlA4TN8AAAAvn8AnEA8w5tM2qfMf8IBb21Yd52IChZQgd0JpUBoluARKIJwvN+CJi2Q7miSi/xOAj9MbSUocN6Eau9CMKLyMJHSDArk3KZNhcFPlYDutkqGSDIrDD7lPNQYAnVHwAF5MgjMowHKnpQM/c4tDX0LtxlHhivJXud+RLUztMKKy8ELhMtsSb3zNNYwlzH0bVbDXtMvczsskmRSa7nVatvxc+U9wDQBaWhKHflo+4BTOKEJnAtC4Tb1IADfhRtJXCo1kaKSfqkvKgZvKB5inLXQjCi9jF27GJlTDCXmI+DgFAA==" alt="" width="26" height="26">
+      <span class="mark gp gp-tile" role="img" aria-label="Gravy Pass"></span>
     </div>
     <span class="livepill"><i></i><b id="liveCount">4,128</b> earning now</span>
   </div>
@@ -298,7 +298,7 @@ h2 em{font-style:normal;color:var(--mint)}
       <div class="sb"><b>Add your free pass</b><span>Goes straight into <b class="wallet-name">Apple Wallet</b> &mdash; works on iPhone and Android. No app store, no download.</span></div>
     </div>
     <div class="passcard reveal rd2">
-      <img class="gp-tile" src="data:image/webp;base64,UklGRuwAAABXRUJQVlA4TN8AAAAvn8AnEA8w5tM2qfMf8IBb21Yd52IChZQgd0JpUBoluARKIJwvN+CJi2Q7miSi/xOAj9MbSUocN6Eau9CMKLyMJHSDArk3KZNhcFPlYDutkqGSDIrDD7lPNQYAnVHwAF5MgjMowHKnpQM/c4tDX0LtxlHhivJXud+RLUztMKKy8ELhMtsSb3zNNYwlzH0bVbDXtMvczsskmRSa7nVatvxc+U9wDQBaWhKHflo+4BTOKEJnAtC4Tb1IADfhRtJXCo1kaKSfqkvKgZvKB5inLXQjCi9jF27GJlTDCXmI+DgFAA==" alt="" width="46" height="46">
+      <span class="gp-tile" role="img" aria-label="Gravy Pass"></span>
       <div class="pi"><b>Gravy Pass</b><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <em>4.5</em> &middot; <span class="wallet-name">Apple Wallet</span> &middot; Free</span></div>
       <span class="pill">ADD</span>
     </div>
@@ -338,7 +338,7 @@ h2 em{font-style:normal;color:var(--mint)}
 
 <div class="dock">
   <div class="dock-top">
-    <img class="gp-tile" src="data:image/webp;base64,UklGRuwAAABXRUJQVlA4TN8AAAAvn8AnEA8w5tM2qfMf8IBb21Yd52IChZQgd0JpUBoluARKIJwvN+CJi2Q7miSi/xOAj9MbSUocN6Eau9CMKLyMJHSDArk3KZNhcFPlYDutkqGSDIrDD7lPNQYAnVHwAF5MgjMowHKnpQM/c4tDX0LtxlHhivJXud+RLUztMKKy8ELhMtsSb3zNNYwlzH0bVbDXtMvczsskmRSa7nVatvxc+U9wDQBaWhKHflo+4BTOKEJnAtC4Tb1IADfhRtJXCo1kaKSfqkvKgZvKB5inLXQjCi9jF27GJlTDCXmI+DgFAA==" alt="" width="38" height="38">
+    <span class="gp-tile" role="img" aria-label="Gravy Pass"></span>
     <div class="di">
       <div class="r1"><b>Gravy Pass</b><span class="chip wallet-name">Apple Wallet</span></div>
       <div class="r2"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><em>4.5</em> &middot; 264K ratings &middot; Free</div>

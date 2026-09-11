@@ -4,189 +4,328 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0b0f0d">
+<meta name="theme-color" content="#07050e">
 <meta name="robots" content="noindex, nofollow">
-<title>Continue</title>
+<title>Get Started</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-    :root {
-        --bg: #0b0f0d;
-        --card: #141a18;
-        --border: rgba(255,255,255,0.06);
-        --accent: #6de6a9;
-        --accent-dim: rgba(109,230,169,0.15);
-        --accent-glow: rgba(109,230,169,0.4);
-        --text: #f2f5f3;
-        --muted: #6f7a75;
-        --muted2: #8b9a93;
+    :root{
+        --bg:      #07050e;
+        --bg2:     #0c0819;
+        --cyan:    #22e5ff;
+        --magenta: #ff3ea5;
+        --violet:  #8b5cf6;
+        --text:    #f4f2ff;
+        --muted:   #6f6a8c;
+        --muted2:  #9d97bd;
     }
 
-    html, body {
-        height: 100%;
-        -webkit-font-smoothing: antialiased;
-        -webkit-tap-highlight-color: transparent;
+    html, body{
+        height:100%;
+        -webkit-font-smoothing:antialiased;
+        -webkit-tap-highlight-color:transparent;
     }
 
-    body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        min-height: 100dvh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 28px 24px;
-        overflow: hidden;
-        position: relative;
+    body{
+        font-family:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background:var(--bg);
+        color:var(--text);
+        min-height:100vh;
+        min-height:100dvh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:28px 22px;
+        overflow:hidden;
+        position:relative;
     }
 
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
+    /* ---------- background layer 1: retro perspective grid ---------- */
+    .grid{
+        position:fixed;
+        left:-60%; right:-60%; bottom:0;
+        height:46%;
+        background-image:
+            linear-gradient(rgba(34,229,255,.42) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(34,229,255,.42) 1px, transparent 1px);
+        background-size:46px 46px;
+        transform:perspective(260px) rotateX(66deg);
+        transform-origin:bottom center;
+        -webkit-mask-image:linear-gradient(to top, #000 0%, rgba(0,0,0,.35) 55%, transparent 92%);
+        mask-image:linear-gradient(to top, #000 0%, rgba(0,0,0,.35) 55%, transparent 92%);
+        animation:gridScroll 3.4s linear infinite;
+        pointer-events:none;
+        z-index:0;
+        opacity:.85;
+    }
+    @keyframes gridScroll{ to{ background-position:0 46px, 0 0; } }
+
+    /* ---------- background layer 2: slow drifting glow ---------- */
+    .glow{
+        position:fixed; inset:0; pointer-events:none; z-index:0;
         background:
-            radial-gradient(ellipse 60% 40% at 50% 0%, rgba(109,230,169,0.13) 0%, transparent 65%),
-            radial-gradient(ellipse 40% 30% at 100% 100%, rgba(63,191,131,0.06) 0%, transparent 60%);
-        pointer-events: none;
-        z-index: 0;
+            radial-gradient(ellipse 65% 42% at 50% -4%,  rgba(139,92,246,.30) 0%, transparent 62%),
+            radial-gradient(ellipse 50% 34% at 88% 102%, rgba(255,62,165,.20) 0%, transparent 60%),
+            radial-gradient(ellipse 46% 30% at 6% 88%,   rgba(34,229,255,.16) 0%, transparent 60%);
+        animation:drift 15s ease-in-out infinite alternate;
+        will-change:transform;
+    }
+    @keyframes drift{
+        from{ transform:scale(1)    translate3d(0,0,0); }
+        to  { transform:scale(1.14) translate3d(0,-16px,0); }
     }
 
-    .wrap {
-        position: relative;
-        z-index: 1;
-        max-width: 400px;
-        width: 100%;
-        text-align: center;
-        animation: fadeUp .5s ease both;
+    /* ---------- background layer 3: floating particles ---------- */
+    .particles{ position:fixed; inset:0; pointer-events:none; z-index:0; }
+    .particles i{
+        position:absolute;
+        display:block;
+        border-radius:50%;
+        opacity:0;
+        animation:rise linear infinite;
+        will-change:transform, opacity;
+    }
+    @keyframes rise{
+        0%   { opacity:0; transform:translate3d(0,0,0) scale(.6); }
+        12%  { opacity:1; }
+        86%  { opacity:1; }
+        100% { opacity:0; transform:translate3d(0,-170px,0) scale(1.1); }
     }
 
-    @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(16px); }
-        to   { opacity: 1; transform: translateY(0); }
+    /* ---------- endowed-progress bar ---------- */
+    .prog{
+        position:fixed;
+        top:0; left:0; right:0;
+        height:3px;
+        background:rgba(255,255,255,.05);
+        z-index:3;
+    }
+    .prog span{
+        display:block;
+        height:100%;
+        width:0;
+        border-radius:0 3px 3px 0;
+        background:linear-gradient(90deg, var(--cyan), var(--magenta));
+        box-shadow:0 0 14px rgba(34,229,255,.85);
+        animation:fill 1.5s cubic-bezier(.22,.9,.3,1) .25s forwards;
+    }
+    @keyframes fill{ to{ width:22%; } }
+
+    /* ---------- content ---------- */
+    .wrap{
+        position:relative;
+        z-index:2;
+        max-width:400px;
+        width:100%;
+        text-align:center;
     }
 
-    .icon-wrap {
-        width: 88px;
-        height: 88px;
-        margin: 0 auto 28px;
-        border-radius: 22px;
-        border: 1px solid rgba(109,230,169,0.25);
-        background: var(--accent-dim);
-        display: grid;
-        place-items: center;
-        animation: iconGlow 3s ease-in-out infinite;
+    /* shared entrance */
+    @keyframes fadeUp{ to{ opacity:1; transform:translateY(0); } }
+    .anim{ opacity:0; transform:translateY(20px); animation:fadeUp .55s cubic-bezier(.22,.9,.3,1) forwards; }
+
+    /* badge — spinning conic ring, static icon */
+    .badge{
+        position:relative;
+        width:108px; height:108px;
+        margin:0 auto 26px;
+        border-radius:32px;
+        overflow:hidden;
+        display:grid; place-items:center;
+        opacity:0; transform:translateY(20px);
+        animation:
+            fadeUp .55s cubic-bezier(.22,.9,.3,1) .05s forwards,
+            badgeGlow 3s ease-in-out 1s infinite;
+    }
+    .badge::before{
+        content:'';
+        position:absolute;
+        width:210%; height:210%;
+        left:-55%; top:-55%;
+        background:conic-gradient(var(--cyan), var(--magenta), var(--violet), var(--cyan));
+        animation:spin 4.5s linear infinite;
+        will-change:transform;
+    }
+    .badge::after{
+        content:'';
+        position:absolute;
+        inset:2px;
+        border-radius:30px;
+        background:var(--bg2);
+    }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+    @keyframes badgeGlow{
+        0%,100%{ box-shadow:0 0 26px rgba(139,92,246,.35); }
+        50%    { box-shadow:0 0 54px rgba(34,229,255,.55); }
+    }
+    .badge svg{
+        position:relative;
+        z-index:1;
+        width:46px; height:46px;
+        color:var(--cyan);
+        filter:drop-shadow(0 0 9px rgba(34,229,255,.75));
     }
 
-    @keyframes iconGlow {
-        0%, 100% { box-shadow: 0 0 30px rgba(109,230,169,0.2); }
-        50%       { box-shadow: 0 0 60px rgba(109,230,169,0.4); }
+    h1{
+        font-size:42px;
+        font-weight:900;
+        line-height:1.05;
+        letter-spacing:-1.6px;
+        margin-bottom:13px;
+    }
+    h1 .hl{
+        background:linear-gradient(100deg, var(--cyan) 0%, var(--magenta) 55%, var(--violet) 100%);
+        -webkit-background-clip:text;
+        background-clip:text;
+        -webkit-text-fill-color:transparent;
+        color:var(--cyan);          /* fallback if background-clip:text is unsupported */
     }
 
-    .icon-wrap svg {
-        width: 36px;
-        height: 36px;
-        color: var(--accent);
-        stroke-width: 2.5;
+    .sub{
+        font-size:14.5px;
+        font-weight:700;
+        color:var(--muted2);
+        line-height:1.55;
+        margin-bottom:34px;
     }
 
-    h1 {
-        font-family: "Inter", sans-serif;
-        font-size: 44px;
-        font-weight: 900;
-        line-height: 1.04;
-        letter-spacing: -1.5px;
-        margin-bottom: 12px;
-        color: var(--text);
+    .cta{
+        position:relative;
+        display:block;
+        width:100%;
+        min-height:60px;
+        overflow:hidden;
+        border:none;
+        border-radius:16px;
+        padding:19px 24px;
+        background:linear-gradient(100deg, var(--cyan) 0%, var(--violet) 52%, var(--magenta) 100%);
+        color:#0a0418;
+        font-family:inherit;
+        font-size:18px;
+        font-weight:900;
+        letter-spacing:.6px;
+        text-transform:uppercase;
+        cursor:pointer;
+        margin-bottom:18px;
+        -webkit-appearance:none;
+        appearance:none;
+        opacity:0; transform:translateY(20px);
+        /* entrance AND loop in one rule — a separate entrance class would
+           overwrite animation-name and the pulse would silently never run */
+        animation:
+            fadeUp .55s cubic-bezier(.22,.9,.3,1) .42s forwards,
+            ctaPulse 2.1s ease-in-out 1s infinite;
+    }
+    @keyframes ctaPulse{
+        0%,100%{ box-shadow:0 0 26px rgba(255,62,165,.40), 0 6px 22px rgba(0,0,0,.5); }
+        50%    { box-shadow:0 0 62px rgba(34,229,255,.70), 0 6px 22px rgba(0,0,0,.5); }
+    }
+    /* shimmer sweep across the button */
+    .cta::after{
+        content:'';
+        position:absolute;
+        top:0; bottom:0; left:-60%;
+        width:45%;
+        background:linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+        transform:skewX(-18deg);
+        animation:sweep 2.8s ease-in-out 1.4s infinite;
+        pointer-events:none;
+    }
+    @keyframes sweep{
+        0%  { left:-60%; }
+        55% { left:120%; }
+        100%{ left:120%; }
+    }
+    .cta:active{ transform:translateY(0) scale(.975); }
+
+    .fallback{
+        font-size:12px;
+        font-weight:700;
+        color:var(--muted);
+        letter-spacing:.2px;
+    }
+    .fallback a{
+        color:var(--muted2);
+        text-decoration:underline;
+        text-underline-offset:3px;
+        cursor:pointer;
+        padding:15px 12px;          /* ~44px tap target */
+        display:inline-block;
     }
 
-    h1 .hl { color: var(--accent); }
-
-    .sub {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--muted2);
-        line-height: 1.55;
-        margin-bottom: 36px;
+    /* ---------- responsive ---------- */
+    @media (max-height:680px){
+        .badge{ width:84px; height:84px; margin-bottom:18px; border-radius:26px; }
+        .badge::after{ border-radius:24px; }
+        .badge svg{ width:36px; height:36px; }
+        h1{ font-size:34px; letter-spacing:-1.2px; }
+        .sub{ margin-bottom:24px; }
+        .cta{ min-height:56px; padding:17px 22px; }
+    }
+    @media (max-width:374px){
+        body{ padding:24px 18px; }
+        h1{ font-size:33px; letter-spacing:-1.1px; }
+        .sub{ font-size:13.5px; }
+        .cta{ font-size:16px; padding:17px 18px; }
     }
 
-    .cta {
-        display: block;
-        width: 100%;
-        min-height: 60px;
-        background: var(--accent);
-        color: #04231a;
-        font-family: "Inter", sans-serif;
-        font-size: 18px;
-        font-weight: 900;
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
-        padding: 18px 24px;
-        border-radius: 14px;
-        border: none;
-        cursor: pointer;
-        margin-bottom: 18px;
-        transition: transform 0.1s ease;
-        animation: ctaPulse 2.5s ease-in-out infinite;
+    @supports (padding-bottom: env(safe-area-inset-bottom)){
+        body{ padding-bottom:calc(28px + env(safe-area-inset-bottom)); }
     }
 
-    .cta:active { transform: scale(0.97); }
-
-    @keyframes ctaPulse {
-        0%, 100% { box-shadow: 0 0 40px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.4); }
-        50%       { box-shadow: 0 0 70px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.4); }
-    }
-
-    .fallback {
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--muted);
-        letter-spacing: 0.2px;
-    }
-    .fallback a {
-        color: var(--muted2);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        cursor: pointer;
-    }
-
-    @media (max-height: 640px) {
-        .icon-wrap { width: 70px; height: 70px; margin-bottom: 20px; }
-        .icon-wrap svg { width: 28px; height: 28px; }
-        h1 { font-size: 36px; }
-        .sub { margin-bottom: 24px; }
-    }
-
-    @media (max-width: 374px) {
-        h1 { font-size: 38px; }
-        .cta { font-size: 16px; padding: 16px 18px; }
-    }
-
-    @supports (padding-bottom: env(safe-area-inset-bottom)) {
-        body { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    @media (prefers-reduced-motion: reduce){
+        *, *::before, *::after{
+            animation-duration:.01ms !important;
+            animation-iteration-count:1 !important;
+        }
+        .anim, .badge, .cta{ opacity:1 !important; transform:none !important; }
+        .prog span{ width:22%; }
     }
 </style>
 </head>
 <body>
+
+    <div class="grid" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+
+    <div class="particles" aria-hidden="true">
+        <i style="left:8%;  bottom:12%; width:3px; height:3px; background:#22e5ff; animation-duration:6.5s; animation-delay:0s"></i>
+        <i style="left:18%; bottom:26%; width:2px; height:2px; background:#ff3ea5; animation-duration:8s;   animation-delay:1.2s"></i>
+        <i style="left:27%; bottom:6%;  width:4px; height:4px; background:#8b5cf6; animation-duration:7.2s; animation-delay:2.6s"></i>
+        <i style="left:36%; bottom:38%; width:2px; height:2px; background:#22e5ff; animation-duration:9s;   animation-delay:.6s"></i>
+        <i style="left:44%; bottom:18%; width:3px; height:3px; background:#ffffff; animation-duration:6.8s; animation-delay:3.4s"></i>
+        <i style="left:53%; bottom:48%; width:2px; height:2px; background:#ff3ea5; animation-duration:8.6s; animation-delay:1.9s"></i>
+        <i style="left:61%; bottom:9%;  width:3px; height:3px; background:#22e5ff; animation-duration:7.6s; animation-delay:4.1s"></i>
+        <i style="left:69%; bottom:31%; width:2px; height:2px; background:#8b5cf6; animation-duration:9.4s; animation-delay:.3s"></i>
+        <i style="left:77%; bottom:15%; width:4px; height:4px; background:#22e5ff; animation-duration:6.2s; animation-delay:2.2s"></i>
+        <i style="left:85%; bottom:42%; width:2px; height:2px; background:#ffffff; animation-duration:8.2s; animation-delay:3.8s"></i>
+        <i style="left:92%; bottom:22%; width:3px; height:3px; background:#ff3ea5; animation-duration:7s;   animation-delay:1.5s"></i>
+        <i style="left:13%; bottom:52%; width:2px; height:2px; background:#22e5ff; animation-duration:9.8s; animation-delay:5s"></i>
+        <i style="left:48%; bottom:64%; width:2px; height:2px; background:#8b5cf6; animation-duration:8.8s; animation-delay:2.9s"></i>
+        <i style="left:73%; bottom:58%; width:3px; height:3px; background:#ffffff; animation-duration:7.8s; animation-delay:4.6s"></i>
+    </div>
+
+    <div class="prog" aria-hidden="true"><span></span></div>
+
     <div class="wrap">
-        <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M13 6l6 6-6 6"></path>
+        <div class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 11h4M8 9v4"></path>
+                <path d="M15.5 12h.01M18 10h.01"></path>
+                <path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z"></path>
             </svg>
         </div>
-        <h1>Let's <span class="hl">Get Started</span></h1>
-        <p class="sub">Tap continue to load your rewards page.</p>
-        <button class="cta" id="ctaBtn">Continue</button>
-        <p class="fallback">Nothing happened? <a id="fallbackLink">Tap here</a></p>
+
+        <h1 class="anim" style="animation-delay:.18s">Your Games Are <span class="hl">Ready</span></h1>
+        <p class="sub anim" style="animation-delay:.30s">Tap below to see how much you can earn playing.</p>
+
+        <button class="cta" id="ctaBtn">Let's Go</button>
+
+        <p class="fallback anim" style="animation-delay:.54s">Still here? <a id="fallbackLink">Tap to continue</a></p>
     </div>
 
     <script>

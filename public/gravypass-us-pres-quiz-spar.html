@@ -2,29 +2,8 @@
 <html lang="en" data-geo="US">
 <head>
 <meta charset="UTF-8">
-<!-- On-load TikTok breakout. Verbatim from gravypass-us-pres-spar.html / the Testerup
-     landers: same /tiktok|musical_ly|bytedance/i gate, same ttBreakout sessionStorage
-     once-flag, same x-safari- / intent:// pair with the 25ms same-tab fallback. Gated to
-     the TikTok user-agent ONLY -- never a blind redirect for all visitors. -->
-<script>
-(function() {
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  if (!/tiktok|musical_ly|bytedance/i.test(ua)) return;
-  try {
-    if (sessionStorage.getItem('ttBreakout') === '1') return;
-    sessionStorage.setItem('ttBreakout', '1');
-  } catch (e) {}
-  var currentUrl = window.location.href;
-  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  if (isIOS) {
-    window.location.href = 'x-safari-' + currentUrl;
-    setTimeout(function() { window.location.href = currentUrl; }, 25);
-  } else if (/android/i.test(ua)) {
-    window.location.href = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
-    setTimeout(function() { window.location.href = currentUrl; }, 25);
-  }
-})();
-</script>
+<!-- No lander-level kicker on this funnel by design (removed 2026-09-12).
+     Nothing on this page breaks out of the TikTok in-app browser. -->
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -37,36 +16,62 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{overflow-x:hidden;-webkit-text-size-adjust:100%}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0f0d;color:#f2f5f3;overflow-x:clip;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+body{min-height:100vh;min-height:100dvh;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0f0d;color:#f2f5f3;overflow-x:clip;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 :root{--mint:#6de6a9;--mint2:#3fbf83;--ink:#04231a;--card:#141a18;--line:#232b28;--mut:#8b9a93}
 
-.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 70% 45% at 50% -5%,rgba(109,230,169,.14),transparent 65%),radial-gradient(ellipse 45% 35% at 100% 100%,rgba(63,191,131,.07),transparent 60%),#0b0f0d;animation:drift 16s ease-in-out infinite}
-@keyframes drift{0%,100%{transform:scale(1)}50%{transform:scale(1.06) translateY(-8px)}}
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 70% 45% at 50% -5%,rgba(109,230,169,.18),transparent 65%),radial-gradient(ellipse 50% 38% at 100% 100%,rgba(63,191,131,.11),transparent 60%),radial-gradient(ellipse 44% 30% at 0% 82%,rgba(109,230,169,.08),transparent 60%),#0b0f0d;animation:drift 16s ease-in-out infinite;will-change:transform}
+@keyframes drift{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.09) translateY(-14px)}}
+/* slow aurora sweep across the top */
+.bg::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 30%,rgba(109,230,169,.07) 50%,transparent 70%);background-size:260% 100%;animation:aurora 11s ease-in-out infinite}
+@keyframes aurora{0%,100%{background-position:120% 0}50%{background-position:-20% 0}}
 .sparks{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.sparks i{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--mint);opacity:0;animation:up linear infinite}
+.sparks i{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--mint);opacity:0;animation:up linear infinite;will-change:transform,opacity}
 @keyframes up{0%{opacity:0;transform:translateY(0) scale(.6)}12%{opacity:.45}70%{opacity:.28}100%{opacity:0;transform:translateY(-104vh) scale(1.1)}}
 
 .wrap{position:relative;z-index:1;max-width:440px;margin:0 auto;padding:22px 18px calc(30px + env(safe-area-inset-bottom))}
-.anim{opacity:0;animation:fade .5s ease forwards}
+.anim{opacity:0;animation:fade .55s cubic-bezier(.22,.9,.3,1) forwards}
 @keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sweep{0%{left:-60%}55%{left:130%}100%{left:130%}}
 
 .brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
-.brand img{width:46px;height:46px;border-radius:13px;box-shadow:0 0 22px rgba(109,230,169,.3);animation:glow 3.2s ease-in-out infinite}
+.brand img{width:46px;height:46px;border-radius:13px;box-shadow:0 0 22px rgba(109,230,169,.3);animation:glow 3.2s ease-in-out infinite,bob 4.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @keyframes glow{0%,100%{box-shadow:0 0 18px rgba(109,230,169,.22)}50%{box-shadow:0 0 34px rgba(109,230,169,.46)}}
 .brand .x{color:rgba(255,255,255,.4);font-size:18px}
 .brand .nm{font-size:19px;font-weight:800;letter-spacing:-.02em}
 
 h1{font-size:31px;line-height:1.12;font-weight:900;letter-spacing:-.9px;text-align:center;margin-bottom:12px}
-h1 .hl{color:var(--mint)}
+.hl{background:linear-gradient(100deg,var(--mint) 0%,#b6ffdc 45%,var(--mint2) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--mint);animation:hue 6s ease-in-out infinite}
+@keyframes hue{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .sub{font-size:14px;line-height:1.55;color:var(--mut);text-align:center;margin-bottom:20px}
 
 .stats{display:flex;gap:9px;margin-bottom:20px}
-.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 6px;text-align:center}
+.stat{position:relative;overflow:hidden;flex:1;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 6px;text-align:center}
+.stat::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--mint),transparent);opacity:.3;animation:statLine 3.4s ease-in-out infinite}
+.stat:nth-child(2)::before{animation-delay:.5s}.stat:nth-child(3)::before{animation-delay:1s}
+@keyframes statLine{0%,100%{opacity:.2}50%{opacity:.95}}
 .stat b{display:block;font-size:16px;font-weight:900;color:var(--mint)}
 .stat span{font-size:10.5px;color:var(--mut);letter-spacing:.02em}
 
+/* locked "Paid to Scroll" setting — the toggle nudges toward on, then falls back */
+.unlockrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid rgba(109,230,169,.26);border-radius:14px;padding:12px 14px;margin-bottom:14px;position:relative;overflow:hidden}
+.unlockrow::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 35%,rgba(109,230,169,.12) 50%,transparent 65%);background-size:300% 100%;animation:sweep2 4.6s ease-in-out infinite}
+.ulk{width:32px;height:32px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;background:rgba(109,230,169,.12);border:1px solid rgba(109,230,169,.3);color:var(--mint);animation:nPop 3s ease-in-out infinite}
+.ulk svg{width:16px;height:16px}
+.utx{flex:1;min-width:0;position:relative;z-index:1}
+.utx b{display:block;font-size:13.5px;font-weight:800;letter-spacing:-.01em}
+.utx span{display:block;font-size:11px;color:var(--mut);margin-top:1px}
+.utg{width:42px;height:24px;border-radius:999px;flex-shrink:0;background:#1c2321;border:1px solid var(--line);position:relative;z-index:1}
+.utg i{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#4c5a55;animation:nudge 2.6s ease-in-out infinite}
+@keyframes nudge{
+  0%,58%,100%{transform:translateX(0);background:#4c5a55;box-shadow:none}
+  70%,84%{transform:translateX(11px);background:var(--mint);box-shadow:0 0 12px rgba(109,230,169,.8)}
+}
 .cta{display:block;width:100%;min-height:58px;padding:18px;border:none;border-radius:15px;background:linear-gradient(180deg,var(--mint),var(--mint2));color:var(--ink);font-family:inherit;font-size:16.5px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:transform .15s ease;animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 28px rgba(109,230,169,.42),0 4px 16px rgba(0,0,0,.35)}50%{box-shadow:0 0 46px rgba(109,230,169,.7),0 4px 16px rgba(0,0,0,.35)}}
+.cta{position:relative;overflow:hidden}
+.cta::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:42%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);animation:sweep 2.9s ease-in-out .9s infinite;pointer-events:none}
 .cta:active{transform:scale(.98)}
 .cta-wrap{width:100%}
 
@@ -75,12 +80,19 @@ h1 .hl{color:var(--mint)}
 .stp{display:flex;gap:13px;padding-bottom:16px;position:relative}
 .stp:not(:last-child)::after{content:"";position:absolute;left:13px;top:29px;bottom:0;width:2px;background:var(--line)}
 .stp:last-child{padding-bottom:0}
-.stp .n{width:27px;height:27px;border-radius:50%;background:var(--mint);color:var(--ink);font-size:12.5px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1}
+.stp .n{width:27px;height:27px;border-radius:50%;background:linear-gradient(140deg,#b6ffdc,var(--mint2));color:var(--ink);font-size:12.5px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;animation:nPop 3s ease-in-out infinite}
+.stp:nth-child(2) .n{animation-delay:.35s}.stp:nth-child(3) .n{animation-delay:.7s}
+@keyframes nPop{0%,100%{box-shadow:0 0 0 0 rgba(109,230,169,.5)}50%{box-shadow:0 0 0 6px rgba(109,230,169,0)}}
 .stp h4{font-size:14px;font-weight:700;margin-bottom:3px}
 .stp p{font-size:12px;color:var(--mut);line-height:1.45}
 .stp p b{color:var(--mint);font-weight:600}
 
-.act{position:relative;background:rgba(255,193,7,.06);border:1px solid rgba(255,193,7,.4);border-radius:15px;padding:17px 15px;margin-top:18px}
+.act{position:relative;background:linear-gradient(rgba(255,193,7,.06),rgba(255,193,7,.06)),var(--card);border:1px solid rgba(255,193,7,.4);border-radius:15px;padding:17px 15px;margin-top:18px}
+/* NOTE: no overflow:hidden — .flag sits at top:-10px and would be clipped. Shine is
+   animated via background-position so nothing escapes the box. */
+.act::after{content:'';position:absolute;inset:0;border-radius:15px;pointer-events:none;background:linear-gradient(100deg,transparent 35%,rgba(255,193,7,.15) 50%,transparent 65%);background-size:300% 100%;animation:sweep2 5s ease-in-out infinite}
+@keyframes sweep2{0%{background-position:100% 0}60%,100%{background-position:-100% 0}}
+.act .flag,.act h4,.act p{position:relative;z-index:1}
 .act .flag{position:absolute;top:-10px;left:14px;background:#ffc107;color:#241c00;font-size:9.5px;font-weight:900;letter-spacing:.08em;padding:4px 9px;border-radius:6px}
 .act h4{font-size:14.5px;font-weight:800;margin:4px 0 6px}
 .act p{font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.5}
@@ -92,36 +104,58 @@ h1 .hl{color:var(--mint)}
 .qhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .qstep{font-size:10.5px;font-weight:800;letter-spacing:.16em;color:var(--mut)}
 .qtally{font-size:17px;font-weight:900;color:var(--mint);font-variant-numeric:tabular-nums}
-.qbar{height:5px;border-radius:999px;background:#1c2321;overflow:hidden;margin-bottom:22px}
-.qbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--mint2));width:0;transition:width .45s cubic-bezier(.22,1,.36,1)}
+.qbar{position:relative;height:5px;border-radius:999px;background:#1c2321;overflow:hidden;margin-bottom:22px}
+.qbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#b6ffdc,var(--mint),var(--mint2));width:0;transition:width .45s cubic-bezier(.22,1,.36,1);box-shadow:0 0 12px rgba(109,230,169,.75)}
+.qbar::after{content:'';position:absolute;top:0;bottom:0;left:-40%;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:sweep 2.6s ease-in-out infinite;pointer-events:none}
 .q h2{font-size:22px;font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:16px;text-align:center}
 .opts{display:flex;flex-direction:column;gap:10px}
-.opt{width:100%;min-height:56px;padding:16px;border-radius:13px;border:1.5px solid var(--line);background:var(--card);color:#f2f5f3;font-family:inherit;font-size:14.5px;font-weight:700;text-align:left;cursor:pointer;transition:border-color .15s,background .15s,transform .12s}
+/* options are rebuilt on every question, so this entrance replays each step */
+.opt{width:100%;min-height:56px;padding:16px;border-radius:13px;border:1.5px solid var(--line);background:var(--card);color:#f2f5f3;font-family:inherit;font-size:14.5px;font-weight:700;text-align:left;cursor:pointer;-webkit-appearance:none;appearance:none;transition:border-color .15s,background .15s,transform .12s;opacity:0;animation:optIn .42s cubic-bezier(.22,.9,.3,1) forwards}
+.opt:nth-child(1){animation-delay:.04s}.opt:nth-child(2){animation-delay:.12s}
+.opt:nth-child(3){animation-delay:.20s}.opt:nth-child(4){animation-delay:.28s}
+@keyframes optIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
 .opt:active{transform:scale(.985)}
-.opt.sel{border-color:var(--mint);background:rgba(109,230,169,.1)}
+.opt.sel{border-color:var(--mint);background:rgba(109,230,169,.12);animation:optSel .5s ease}
+@keyframes optSel{0%{box-shadow:0 0 0 0 rgba(109,230,169,.55)}100%{box-shadow:0 0 0 14px rgba(109,230,169,0)}}
 
 /* ---------- RESULT ---------- */
 #result{display:none}
-.badge{display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(109,230,169,.1);border:1px solid rgba(109,230,169,.34);border-radius:999px;padding:8px 15px;font-size:12px;font-weight:800;color:var(--mint);width:fit-content;margin:0 auto 16px}
+.badge{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(109,230,169,.1);border:1px solid rgba(109,230,169,.34);border-radius:999px;padding:8px 15px;font-size:12px;font-weight:800;color:var(--mint);width:fit-content;margin:0 auto 16px}
+.badge::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-18deg);animation:sweep 3.2s ease-in-out infinite;pointer-events:none}
 .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);animation:bl 1.7s ease-in-out infinite}
 @keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
-.est{background:var(--card);border:1px solid rgba(109,230,169,.3);border-radius:17px;padding:22px 18px;text-align:center;margin-bottom:16px}
+/* the spinning conic must be SQUARE and centred — a 200%x200% rectangle on a wide,
+   short card leaves the left/right edges uncovered at most rotations */
+.est{position:relative;border-radius:17px;padding:2px;margin-bottom:16px;overflow:hidden}
+.est::before{content:'';position:absolute;top:50%;left:50%;width:190%;aspect-ratio:1;background:conic-gradient(#b6ffdc,var(--mint),var(--mint2),#b6ffdc);animation:spinC 6s linear infinite;will-change:transform}
+@keyframes spinC{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.est-in{position:relative;z-index:1;background:var(--card);border-radius:15px;padding:22px 18px;text-align:center}
 .est .lbl{font-size:10.5px;font-weight:800;letter-spacing:.16em;color:var(--mut);margin-bottom:8px}
-.est .big{font-size:39px;font-weight:900;letter-spacing:-1.6px;color:var(--mint);line-height:1;font-variant-numeric:tabular-nums}
+.est .big{font-size:39px;font-weight:900;letter-spacing:-1.6px;color:var(--mint);line-height:1;font-variant-numeric:tabular-nums;animation:estGlow 2.4s ease-in-out infinite}
+@keyframes estGlow{0%,100%{text-shadow:0 0 16px rgba(109,230,169,.4)}50%{text-shadow:0 0 36px rgba(109,230,169,.85)}}
 .est .cap{font-size:11.5px;color:var(--mut);margin-top:9px}
-.timer{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12.5px;font-weight:700;color:#ff9e6b;margin-bottom:16px}
+.timer{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12.5px;font-weight:700;color:#ff9e6b;margin-bottom:16px;animation:tPulse 1.8s ease-in-out infinite}
+@keyframes tPulse{0%,100%{opacity:.78}50%{opacity:1}}
 .timer b{font-variant-numeric:tabular-nums}
 .live{font-size:12px;color:var(--mut);text-align:center;margin-top:13px}
 .live b{color:var(--mint);font-weight:700}
 .fine{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:11px}
 
+@media (max-height:680px){
+  .brand img{width:40px;height:40px}
+  h1{font-size:28px}
+  .sub{margin-bottom:14px}
+  .stat{padding:10px 5px}
+}
 @media (max-width:374px){
+  .unlockrow{padding:10px 12px;gap:10px}
+  .utx b{font-size:12.5px}.utx span{font-size:10.5px}
   .wrap{padding:18px 14px calc(24px + env(safe-area-inset-bottom))}
   h1{font-size:27px}.q h2{font-size:20px}.est .big{font-size:34px}
   .stat b{font-size:14.5px}.stat span{font-size:9.5px}
   .cta{font-size:15px;padding:16px}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.anim{opacity:1}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.anim,.opt{opacity:1}}
 </style>
 </head>
 <body>
@@ -152,6 +186,20 @@ h1 .hl{color:var(--mint)}
       <div class="stat"><b>$1</b><span>signup bonus</span></div>
       <div class="stat"><b>$10</b><span>min cashout</span></div>
       <div class="stat"><b>4.5★</b><span>rated</span></div>
+    </div>
+
+    <div class="unlockrow anim" style="animation-delay:.16s">
+      <span class="ulk" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"></rect>
+          <path d="M8 10.5V7a4 4 0 0 1 8 0"></path>
+        </svg>
+      </span>
+      <div class="utx">
+        <b>Paid to Scroll</b>
+        <span>Locked &middot; turns on after setup</span>
+      </div>
+      <span class="utg" aria-hidden="true"><i></i></span>
     </div>
 
     <div class="cta-wrap anim" style="animation-delay:.18s">
@@ -201,9 +249,11 @@ h1 .hl{color:var(--mint)}
     <h1 style="font-size:26px;margin-bottom:16px">Your Earnings <span class="hl">Estimate</span> Is Ready</h1>
 
     <div class="est">
+      <div class="est-in">
       <div class="lbl">ESTIMATED WEEKLY EARNINGS</div>
       <div class="big" id="estVal">$0</div>
       <div class="cap">Based on your answers · results vary by activity</div>
+    </div>
     </div>
 
     <div class="timer">

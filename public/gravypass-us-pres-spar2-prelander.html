@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#eef5f1">
+<meta name="robots" content="noindex, nofollow">
+<title>Continue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg1:#eef5f1; --bg2:#e8eef8;
+    --card:#ffffff;
+    --teal:#12b981; --teal2:#0891a8; --deep:#0b3d38;
+    --ink:#12211d; --mut:#6b7d77;
+    --ring:rgba(18,185,129,.35);
+  }
+  html,body{height:100%;-webkit-text-size-adjust:100%}
+  body{
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg1);
+    color:var(--ink);
+    min-height:100vh;min-height:100dvh;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px 20px;
+    overflow:hidden;position:relative;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+    -webkit-user-select:none;user-select:none;
+  }
+
+  /* ── soft drifting background ─────────────────────────────── */
+  .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+      background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 100%)}
+  .blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55;
+        animation:float 18s ease-in-out infinite alternate;will-change:transform}
+  .b1{width:260px;height:260px;top:-90px;left:-80px;background:rgba(18,185,129,.20)}
+  .b2{width:300px;height:300px;bottom:-120px;right:-110px;background:rgba(8,145,168,.16);animation-delay:-6s}
+  .b3{width:170px;height:170px;top:42%;right:-70px;background:rgba(18,185,129,.13);animation-delay:-11s}
+  @keyframes float{
+    from{transform:translate3d(0,0,0) scale(1)}
+    to  {transform:translate3d(0,-26px,0) scale(1.12)}
+  }
+  .dots i{position:absolute;width:5px;height:5px;border-radius:50%;
+          background:rgba(18,185,129,.45);opacity:0;
+          animation:rise linear infinite;will-change:transform,opacity}
+  @keyframes rise{
+    0%{opacity:0;transform:translateY(0) scale(.6)}
+    15%{opacity:.8}85%{opacity:.5}
+    100%{opacity:0;transform:translateY(-150px) scale(1.1)}
+  }
+
+  /* ── card ─────────────────────────────────────────────────── */
+  .card{
+    position:relative;z-index:1;
+    width:100%;max-width:400px;
+    background:var(--card);
+    border-radius:26px;
+    padding:38px 26px 30px;
+    text-align:center;
+    box-shadow:0 1px 2px rgba(11,61,56,.04),
+               0 8px 20px rgba(11,61,56,.07),
+               0 28px 60px rgba(11,61,56,.10);
+  }
+
+  @keyframes up{to{opacity:1;transform:translateY(0)}}
+  .a{opacity:0;transform:translateY(16px);animation:up .55s cubic-bezier(.22,.9,.3,1) forwards}
+  .d1{animation-delay:.06s}.d2{animation-delay:.16s}
+  .d3{animation-delay:.26s}.d4{animation-delay:.36s}
+
+  h1{font-size:37px;line-height:1.06;font-weight:900;letter-spacing:-1.4px;margin-bottom:11px}
+  h1 .hl{
+    background:linear-gradient(100deg,var(--teal) 0%,var(--teal2) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:var(--teal);
+  }
+  .sub{font-size:14.5px;font-weight:500;color:var(--mut);line-height:1.5;margin-bottom:22px}
+
+  /* ── near-done badge ──────────────────────────────────────── */
+  .badge{
+    position:relative;overflow:hidden;
+    display:inline-flex;align-items:center;gap:7px;
+    background:rgba(18,185,129,.10);
+    border:1px solid rgba(18,185,129,.28);
+    color:#0d7d5b;
+    font-size:12px;font-weight:800;letter-spacing:.01em;
+    padding:7px 14px;border-radius:999px;margin-bottom:16px;
+  }
+  .badge svg{width:13px;height:13px;flex-shrink:0}
+  .badge::after{
+    content:'';position:absolute;top:0;bottom:0;left:-60%;width:45%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);
+    transform:skewX(-18deg);animation:sweep 3.4s ease-in-out 1s infinite;pointer-events:none;
+  }
+  @keyframes sweep{0%{left:-60%}55%{left:130%}100%{left:130%}}
+
+  /* ── progress ─────────────────────────────────────────────── */
+  .track{height:9px;border-radius:999px;background:#e7eeea;overflow:hidden;margin-bottom:24px}
+  .track i{
+    display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--teal),var(--teal2));
+    box-shadow:0 0 12px var(--ring);
+    animation:fill 1.5s cubic-bezier(.22,.9,.3,1) .45s forwards;
+  }
+  @keyframes fill{to{width:88%}}
+
+  /* ── CTA ──────────────────────────────────────────────────── */
+  .cta{
+    position:relative;overflow:hidden;
+    display:block;width:100%;min-height:58px;
+    border:0;border-radius:16px;padding:19px 22px;
+    background:linear-gradient(100deg,var(--teal) 0%,var(--teal2) 100%);
+    color:#fff;font-family:inherit;font-size:16.5px;font-weight:900;
+    letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+    -webkit-appearance:none;appearance:none;
+    opacity:0;transform:translateY(16px);
+    /* entrance AND loop in one rule — a separate entrance class would
+       overwrite animation-name and the pulse would silently never run */
+    animation:up .55s cubic-bezier(.22,.9,.3,1) .36s forwards,
+              pulse 2.1s ease-in-out 1s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 6px 18px rgba(11,61,56,.16), 0 0 0 0 var(--ring)}
+    50%    {box-shadow:0 6px 18px rgba(11,61,56,.16), 0 0 0 11px rgba(18,185,129,0)}
+  }
+  .cta::after{
+    content:'';position:absolute;top:0;bottom:0;left:-60%;width:42%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+    transform:skewX(-18deg);animation:sweep 2.9s ease-in-out 1.4s infinite;pointer-events:none;
+  }
+  .cta:active{transform:translateY(0) scale(.978)}
+  .note{margin-top:13px;font-size:11.5px;font-weight:600;color:#9aa8a3;letter-spacing:.01em}
+
+  @media (max-height:640px){
+    .card{padding:28px 22px 24px;border-radius:22px}
+    h1{font-size:31px}
+    .sub{margin-bottom:16px}
+    .track{margin-bottom:18px}
+  }
+  @media (max-width:360px){
+    h1{font-size:30px;letter-spacing:-1.1px}
+    .cta{font-size:15px}
+  }
+  @supports(padding:max(0px)){
+    body{padding-bottom:max(24px,env(safe-area-inset-bottom))}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
+    .a,.cta{opacity:1!important;transform:none!important}
+    .track i{width:88%}
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+    <span class="dots">
+      <i style="left:12%;bottom:14%;animation-duration:9s;animation-delay:0s"></i>
+      <i style="left:27%;bottom:30%;animation-duration:11s;animation-delay:2.4s"></i>
+      <i style="left:44%;bottom:9%;animation-duration:8.4s;animation-delay:4.8s"></i>
+      <i style="left:61%;bottom:36%;animation-duration:12s;animation-delay:1.3s"></i>
+      <i style="left:78%;bottom:18%;animation-duration:9.6s;animation-delay:6.1s"></i>
+      <i style="left:90%;bottom:44%;animation-duration:10.4s;animation-delay:3.2s"></i>
+    </span>
+  </div>
+
+  <div class="card">
+    <h1 class="a d1">You're <span class="hl">almost in</span></h1>
+    <p class="sub a d2">One quick step and you're done.</p>
+
+    <span class="badge a d3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+      Step 2 of 2
+    </span>
+
+    <div class="track a d3" aria-hidden="true"><i></i></div>
+
+    <button class="cta" id="ctaBtn" type="button">Continue</button>
+    <p class="note a d4">Takes a few seconds</p>
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ────────────────────────────────────────────────────────────
+     SPARTIS BOT LAUNCH — prelander.
+     Chain: Carrd /r  ->  THIS PAGE  ->  lander  ->  short code  ->  offer.
+     Spartis LANDERS points at THIS file, not at the lander.
+
+     Destination is HARDCODED. The page this is modelled on reads its
+     destination from a ?dest= query param, which makes it an open redirect —
+     anyone could point the domain anywhere. This funnel has exactly one
+     destination, so it lives in the file.
+     ──────────────────────────────────────────────────────────── */
+  var DEST = 'https://www.trendhavenn.com/gravypass-us-pres-spar2.html';
+
+  function qp() { return new URLSearchParams(window.location.search); }
+
+  /* Forward the ENTIRE inbound query string untouched so campid survives this
+     hop under whatever name Spartis wrote it. */
+  function buildDest() {
+    var d = DEST, p = qp();
+    if (p.toString()) d += (d.indexOf('?') === -1 ? '?' : '&') + p.toString();
+    return d;
+  }
+
+  function subid() {
+    var p = qp();
+    return p.get('campid') || p.get('sub1') || p.get('s1') ||
+           p.get('s2')     || p.get('cid')  || p.get('c')   || '';
+  }
+
+  /* ── beacon, once-guarded per event ───────────────────────── */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'gp-spar2-pre', sent = {};
+  function url(ev) {
+    return TRACK + '?e=' + encodeURIComponent(ev) +
+           '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+  }
+  function hit(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon(url(ev));
+      else new Image().src = url(ev) + '&_=' + Date.now();
+    } catch (e) {}
+  }
+
+  var ua        = navigator.userAgent || navigator.vendor || window.opera || '';
+  var isAndroid = /android/i.test(ua);
+  var isTikTok  = /tiktok|musical_ly|bytedance/i.test(ua);
+
+  /* ── the handoff ──────────────────────────────────────────────
+     Android: intent:// hands off silently, so it can fire on load.
+     iOS:     x-safari- MUST run inside a user gesture, or Safari throws an
+              "Open in Safari?" confirmation. So iOS ONLY ever breaks out on
+              the Continue tap — the tap is the gesture that lets the handoff
+              go through with no prompt.
+     Both paths get a fallback so a blocked scheme can never strand anyone. */
+  function breakout(target) {
+    if (isAndroid) {
+      try {
+        var u = new URL(target);
+        window.location.href = 'intent://' + u.hostname + u.pathname + u.search + u.hash +
+                               '#Intent;scheme=https;end;';
+      } catch (e) { window.location.href = target; }
+    } else {
+      window.location.href = target.replace(/^https:\/\//, 'x-safari-https://')
+                                   .replace(/^http:\/\//,  'x-safari-http://');
+    }
+    setTimeout(function () { window.location.href = target; }, 1200);
+  }
+
+  /* ── CTA: always breaks out, fired by the tap ─────────────── */
+  document.getElementById('ctaBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    hit('continue');
+    breakout(buildDest());
+  });
+
+  hit('load');
+  ['scroll', 'touchstart', 'pointerdown', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { hit('human'); }, { once: true, passive: true });
+  });
+
+  /* ── ON-LOAD AUTO-BREAKOUT — Android + TikTok UA only ────────
+     Android only, because intent:// is the one that hands off without a
+     prompt (see breakout() — iOS waits for the tap by design).
+     TikTok-UA-gated, because a blind redirect for every visitor is the
+     clearest cloaking signal there is — and because gating it to TikTok is
+     exactly what bounces TikTok's crawler before it can read the page.
+     Once-guarded so a redirect back here can't start a loop.
+     Kill it per-link with ?force=0 — no redeploy needed. */
+  (function () {
+    if (!isAndroid || !isTikTok) return;
+    if (qp().get('force') === '0') return;
+    try {
+      if (sessionStorage.getItem('ttBreakout') === '1') return;
+      sessionStorage.setItem('ttBreakout', '1');
+    } catch (e) {}
+    setTimeout(function () { hit('auto'); breakout(buildDest()); }, 250);
+  })();
+})();
+</script>
+</body>
+</html>

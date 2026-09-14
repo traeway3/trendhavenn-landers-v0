@@ -110,7 +110,7 @@ h1{
 /* Keep the accent phrase intact. The reference sets it on one line; on a real
    phone the headline has to wrap, and breaking after "to" reads far better
    than orphaning "earning" on its own line. */
-h1 .mint{color:var(--mint);white-space:nowrap;}
+h1 .mint,.s3-head h2 .mint{color:var(--mint);white-space:nowrap;}
 .lede{
   margin:14px 0 0;text-align:center;
   font-size:16px;line-height:1.38;font-weight:400;color:var(--muted);
@@ -192,21 +192,144 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
 .s3-head{text-align:center;margin-top:26px;}
 .s3-head h2{margin:0;font-size:27px;line-height:1.16;font-weight:800;letter-spacing:-.02em;}
 .s3-head p{margin:12px 0 0;font-size:15px;line-height:1.42;color:var(--muted);}
-.steps{margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;}
-.steps li{
-  display:flex;align-items:center;gap:14px;
-  padding:16px;border-radius:14px;
-  background:var(--card);border:1px solid var(--border-2);
-}
+.steps{margin:0;padding:0;list-style:none;}
+.steps li{display:flex;align-items:flex-start;gap:14px;padding:0 0 18px;}
+.steps li:last-child{padding-bottom:0;}
 .steps .num{
-  flex:0 0 auto;width:34px;height:34px;border-radius:50%;
-  background:var(--mint-dim);border:1px solid var(--mint-line);
-  color:var(--mint-bright);font-size:15px;font-weight:800;
+  flex:0 0 auto;width:28px;height:28px;border-radius:50%;
+  margin-top:1px;
+  background:var(--mint-bright);color:#0a0f0e;
+  font-size:13px;font-weight:800;
   display:flex;align-items:center;justify-content:center;
 }
-.steps .txt{font-size:15px;line-height:1.32;font-weight:600;}
-.status{
-  margin:18px 0 0;text-align:center;font-size:13px;color:var(--muted-2);
+.steps .txt{display:block;min-width:0;}
+.steps .txt b{display:block;font-size:14px;line-height:1.25;font-weight:700;letter-spacing:-.008em;color:var(--text);}
+.steps .txt em{
+  display:block;margin-top:3px;
+  font-style:normal;font-size:12.5px;line-height:1.45;font-weight:400;color:rgba(255,255,255,.55);
+}
+.steps .hl{font-style:normal;font-weight:600;color:var(--mint);}
+
+/* ---------- screen 3: wallet-pass status pill ---------- */
+.statusbar{
+  display:flex;align-items:center;gap:10px;
+  margin:24px 0 0;padding:12px 16px;
+  border-radius:14px;
+  background:rgba(109,230,169,.10);border:1px solid var(--mint-line);
+}
+.statusbar .sdot{
+  flex:0 0 auto;width:10px;height:10px;border-radius:50%;
+  background:var(--mint-bright);box-shadow:0 0 10px var(--mint-glow);
+}
+.statusbar p{margin:0;font-size:13px;line-height:1.35;font-weight:600;color:#80ffd5;}
+
+/* ---------- screen 3: the how-to card ---------- */
+.howcard{
+  margin:18px 0 0;padding:20px 18px;
+  border-radius:16px;background:var(--card);border:1px solid var(--border);
+}
+.howcard h3{
+  margin:0 0 18px;text-align:center;
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+}
+
+/* "Didn't add it yet?" line under the activate button. */
+.retry{
+  margin:14px 0 0;text-align:center;
+  font-size:12px;line-height:1.45;color:rgba(255,255,255,.40);
+}
+.retry b{color:rgba(255,255,255,.64);font-weight:700;}
+
+/* ---------- screen 3: the red activation warning ---------- */
+.impbox{
+  position:relative;margin:26px 0 0;padding:20px 18px;
+  border-radius:16px;background:#121615;border:1px solid #c32222;
+}
+.impbadge{
+  position:absolute;top:-11px;right:16px;
+  padding:4px 12px;border-radius:6px;
+  background:#d92626;color:#fff;
+  font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+}
+.impinner{display:flex;align-items:flex-start;gap:12px;text-align:left;}
+.impinner > svg{
+  flex:0 0 auto;width:20px;height:20px;margin-top:2px;
+  stroke:#e04545;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+}
+.impbox h3{
+  margin:0 0 4px;
+  font-size:15px;line-height:1.25;font-weight:800;letter-spacing:-.01em;color:var(--text);
+}
+.impbox p{margin:0;font-size:12px;line-height:1.5;color:rgba(255,255,255,.60);}
+.impbox p b{color:var(--mint);font-weight:700;white-space:nowrap;}
+.implist{
+  list-style:none;margin:12px 0 0;padding:12px 0 0;
+  border-top:1px solid #212c28;
+}
+.implist li{
+  display:flex;align-items:flex-start;gap:9px;text-align:left;
+  font-size:12px;line-height:1.4;color:rgba(255,255,255,.60);
+}
+.implist svg{
+  flex:0 0 auto;width:15px;height:15px;margin-top:1px;
+  stroke:rgba(255,255,255,.75);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* ---------- screen 3: rewards to unlock ---------- */
+.seclabel{
+  margin:26px 0 12px;text-align:left;
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+}
+.reward{
+  margin:0 0 12px;padding:16px;
+  border-radius:16px;background:var(--card);border:1px solid var(--border);
+}
+.reward.ready{border-color:rgba(109,230,169,.5);box-shadow:0 0 24px rgba(109,230,169,.12);}
+.rtop{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.rtile{
+  flex:0 0 auto;width:46px;height:46px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+}
+.rtile svg{
+  width:24px;height:24px;
+  stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+.rtile-a{background:#141414;color:#ffffff;}
+.rtile-b{background:#16325a;color:#9fc2ff;}
+.rtile-c{background:#262626;color:#e2e2e2;}
+.rinfo{flex:1 1 auto;min-width:0;text-align:left;}
+.rinfo h4{margin:0;font-size:15px;line-height:1.2;font-weight:800;letter-spacing:-.01em;color:var(--text);}
+.rinfo p{margin:2px 0 0;font-size:12px;line-height:1.3;color:rgba(255,255,255,.5);}
+.rprize{
+  flex:0 0 auto;text-align:right;
+  font-size:17px;line-height:1.1;font-weight:800;color:var(--mint);
+}
+.rprize span{
+  display:block;margin-top:2px;
+  font-size:10px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.45);
+}
+.rprog{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.rlbl{font-size:11px;font-weight:600;color:rgba(255,255,255,.55);}
+.rcnt{font-size:11px;font-weight:700;color:rgba(255,255,255,.8);}
+.rbar{height:7px;margin-bottom:12px;border-radius:4px;background:#242e2a;overflow:hidden;}
+.rfill{
+  display:block;height:100%;border-radius:4px;
+  background:linear-gradient(90deg,#00e699,#1affb3);
+  transition:width .6s ease;
+}
+.rbtn{
+  display:block;width:100%;padding:12px;border-radius:12px;
+  text-align:center;text-decoration:none;
+  font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;
+}
+.rbtn.ready{background:linear-gradient(180deg,#1affb3,#00e699);color:#0a0f0e;}
+.rbtn.locked{background:#202725;color:rgba(255,255,255,.4);}
+.rnote{
+  margin:4px 0 0;text-align:center;
+  font-size:11px;line-height:1.4;color:rgba(255,255,255,.35);
 }
 
 /* ---------- modal ---------- */
@@ -263,10 +386,35 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
 .modal .cta{margin-top:20px;font-size:18px;padding:18px 16px;border-radius:13px;}
 
 @media (max-width:360px){
+  .steps .txt em{font-size:12px;}
+  .rinfo h4{font-size:14px;}
+  .rprize{font-size:16px;}
+  .rbtn{font-size:12px;letter-spacing:.02em;}
   h1{font-size:29px;}
   .cta{font-size:17px;letter-spacing:.04em;}
   .card .meta h3{font-size:17px;}
   .card .pill{padding:6px 11px;font-size:13px;}
+}
+@media (max-width:330px){
+  .howcard{padding:17px 14px;}
+  .steps li{gap:11px;padding-bottom:16px;}
+  .steps .txt em{font-size:11.5px;}
+  .impbox{padding:18px 14px;}
+  .reward{padding:13px;}
+  .rtop{gap:10px;}
+  .rtile{width:40px;height:40px;}
+  .rinfo h4{font-size:13.5px;}
+  .rprize{font-size:15px;}
+  .rbtn{font-size:11.5px;padding:11px 8px;}
+  h1{font-size:26px;}
+  .lede{font-size:15px;}
+  .cta{font-size:15.5px;letter-spacing:.03em;padding:17px 12px;gap:9px;}
+  .card .meta h3{font-size:16px;}
+  .card .pill{padding:6px 9px;font-size:12px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;}
 }
 </style>
 </head>
@@ -300,7 +448,7 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
           <h3>Get Paid To Game</h3>
           <p>Play Roblox, Subway Surfers &amp; more</p>
         </span>
-        <span class="pill">Paid</span>
+        <span class="pill">Earn $$$</span>
       </div>
 
       <div class="card">
@@ -312,7 +460,7 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
           <h3>Get Paid For Screentime</h3>
           <p>Earn while you scroll, no skills needed</p>
         </span>
-        <span class="pill">Paid</span>
+        <span class="pill">Earn $$$</span>
       </div>
 
     </div>
@@ -340,28 +488,120 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
       <span class="tile"><img src="data:image/webp;base64,UklGRlwHAABXRUJQVlA4IFAHAABwKQCdASqAAIAAPikUiEKhoSETzMy8GAKEoAx2QKETyuLo/jvwt0ayTOuD+D6NP8z7LPMF/TH9Veu55gP2X9aX0gegR/Rv+V1lvoAeW3+1Xwz/uH+2fs3XRzlzT9H85mbKxKvPeMXMu6LMbP4EKc5kFwq0oLryj1RmLxFP3aFYoJaitoPEQGNEEWPy0Te3BDXNjlY41ncNyJrD3HZLtmTYw8jLT0whcd4KtzCYhzKCzQSjWcDRf/lcDX8GRrFxmh9+a1rfx1rw25KeU9iueqJzXwPSROXCsi9ufpyT9lXO16Js3VW8LDrancHg3rRMtyAMSaKrO21xaf3f4KTaUxF3U29efH2aAQDtqBDCBogn0ildRg5wvUMlZiu7nKFYdMxkG5eU/pN4JzSw3jXky/DF4FF6wiW0LQ5eOVD6gtOBmv0Jha5yOJ+oHTJV7fxkgx3VnvAAAP7//iIaUGj4HbXxc6u11ygcRidPnaws0L15+XnOOY8SUR9Zj4AjX6HUB7b3uC3Vn5n80PEtH34WlpTBs/cSg3wzvSw6tAeVCAfSyCUKKlH3OyCd3ojEwbh1YA5DcaNfeSMRMnKzqYV7gkdPmYm1AQMggSQXgZxutgOO/GP6Y8uqguVguRpKAxK3SMN/QgVE7a2ShmOJtdYGbrsogkddunxbZlpRO82aJ8UqkYLEJlKVk2MbbfSNZ9SPTYVDIXiIEKAF9Ktqg+Aa1T3WQVyiKlCUajd0gcqTh0hIB9eXI9SlW3AJYyzkz/fw8y2f+DXciFmTzx6cW+1Qw0Py0hSUsYxDaAn6dfQP/coLhU6hA+tAERnD9Bd//0eQfpbW6pS0d8VIvPJmCJWdXawp+oT8NbRRe6YRitURTbBoUYvz6WZir9JWrHYsUPCpK8sPhRxIOheq+kifKH/Gcx4egQdw4SNpGXVFzMUzJe3tzgFPaD2GPAlp3WjztUosgRvh0z5OoAmzYf715+H470UQOpf7SAqZGx4HygomziTo1R4nUOETduqwbotK4sASxzdf5+3bi0i4Pbt9D73izqXY14OjtDgMfmaY46QVVEJspQHhQAKXGDDYDWzLTDuS0aqF34cvZnEHXq0pNaue7BzEBu2AyGUfXbwqjJyQiRfICfQ1DUejLVVI6pw7zmiMjSvwZDYyBHfgUbBPdpt3ZY/dw9i00FCFbWsBW8FImkIPA0XyOOY+qGQmgKAmjKN2Rfevd675sfJti9IQSxapaIb/BFf0DIu0ycOUJG74Guk6D3hvhedXYkXTN69ztZ1mUaNuJrmb/ES8pPCwPW4VxDbuxaQnm9jKVxFUfiBQWyvxM9PBEzKwV3de2wfCVOf5+QFw1QScxtBJ61xywP56svHt1lrfi3ez7LPfNcBCSDLUGnrIMAUEjX5j3BGQ108V46408Vp+RV/uf9WXQyQMyIaz65v3kPjnlV5QvJ8oF7S+9hOojcZC3h4hbaDMzu+Gc7mzWwgmk0LGWR0a7wzwKRFQ2HN6bIPgbBDQoPnuWWWKYgj6eV4ND7yhEh/xqU2/xYVdRR++rgtothXjrc4OECVGCigb3dbgmlpbWxkh1pSitxH7dU42TmsNwedyhg9Kc4efVDDtguq63w2eCpXoE3v829494fbA0YThI0dAwDEPTT6nj4SOTq8s3Skz4PM4nJxt6eVyI5B9187NdbFX84jDcCbaSfX7o4KC4no9mFLg7VB7PzAklqiqyDlAgaRbE3mUh3P/o9aDYk3DXyRL6awfhn7GBbofqrTVf8C49/no96AHUmHNFt2FY/75kiJHpUUvJ+JXywzWwINlOVbMuLnkObiza8yl9Cf5kOhu+IcgMzxU4q+GKzPyWz5YpG8So/IpdJBwkC8uGlcO55XCHt3eTxXtk+FC8KfecZzFVkg8+qi3faECFvZd3dWMhB1KQ1goDQ2o2cdGurH/dcsgeX+3BOlPBKEh4uboTtKT9UsLwhPL7n6aUK8Q81ClatvGAaO20Pn2QVfaWi5fidIJVxoZj0VNc2DDbgwpDYkkurHrYb/HP+Q7UJWIvTOgbP5yC/QVE6mOoUfio2cl0FDkrrjLkvRmdCOSlsgR/4hwYEbjwDzaYAzhGRfIE19b51f08q+yM80bx+gCUEhCsJ83FSD78+OVNX81vz3PgjnlDyHTSfImnbHv/8TonoHDFK86X/+oekumBKfnMggDRI5pgNHmheHiATrl1X18joBQBmQqGsqBJY3gd6Dd0SK0exrtQjrCDzdr2BxfRdRM8GqkQ3bSwyXckixB4OzuWJ+Wi++MLmpMiZc7lztbZ3TMDSPLj66AG0uepLwzro5898pqJ2dg9c0OioKkGLoj1zbDUi2SkPAUdlhzIcnPQJHeyyjlSqdKNAyp+y1TpN8bSfZ5mXHW+CkX39v0Yrondo48fVun0qwO+q+43mveD6BYUPnyLkqPzBtQsHhWrGLz12OR//U7g7YlC0oatVPId8YoJZWjwxIrs3drSX4C17ESwAYgAAA=" alt="Gravy Pass" width="128" height="128"></span>
     </div>
 
-    <div class="s3-head">
-      <h2>Your earning <span class="mint">instructions</span></h2>
-      <p>Follow these three steps in order to unlock your top-paying offers.</p>
+    <div class="statusbar">
+      <span class="sdot" aria-hidden="true"></span>
+      <p>Wallet pass active &bull; Complete tasks to unlock rewards</p>
     </div>
 
-    <ol class="steps">
-      <li><span class="num">1</span><span class="txt">Activate &amp; open your Gravy Pass</span></li>
-      <li><span class="num">2</span><span class="txt">Complete games &amp; tasks for money</span></li>
-      <li><span class="num">3</span><span class="txt">Complete 3 tasks to unlock top offers</span></li>
-    </ol>
+    <div class="howcard">
+      <h3>How to start earning</h3>
+      <ol class="steps">
+        <li>
+          <span class="num">1</span>
+          <span class="txt">
+            <b>Activate &amp; open your Gravy Pass</b>
+            <em>Tap <span class="hl">Activate Wallet Pass</span> below, then open your Gravy Pass in <span class="hl">Apple Wallet</span> to get started.</em>
+          </span>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <span class="txt">
+            <b>Complete games &amp; tasks for money</b>
+            <em>Follow the instructions in your pass and complete <span class="hl">games and tasks</span> to start earning real money.</em>
+          </span>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <span class="txt">
+            <b>Complete 3 tasks to unlock top offers</b>
+            <em>Complete <span class="hl">3 tasks</span> to unlock high-paying popular offers like <span class="hl">Paid to Scroll</span>, Roblox and more.</em>
+          </span>
+        </li>
+      </ol>
+    </div>
 
     <a class="cta offer-link" id="activateBtn" href="#" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="3"></rect><path d="M16.5 12h2"></path></svg>
       Activate Wallet Pass
     </a>
 
-    <div class="notice" style="margin-top:20px;">
-      <span class="bang">!</span>
-      <p>Top offers stay locked until your wallet pass is active and you&rsquo;ve completed <b class="keep">3 tasks</b>.</p>
+    <p class="retry">Didn&rsquo;t add it yet? <b>Tap above</b> to add your pass again.</p>
+
+    <div class="impbox">
+      <span class="impbadge">Important</span>
+      <div class="impinner">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.4" width="15" height="10.1" rx="2.4"></rect><path d="M8.2 10.4V7.7a3.8 3.8 0 0 1 7.6 0v2.7"></path></svg>
+        <div>
+          <h3>Activation Required to Unlock</h3>
+          <p>Top offers stay locked until your wallet pass is active and you&rsquo;ve completed <b>3 tasks</b>. Keep completing tasks in your Gravy Pass to unlock them.</p>
+        </div>
+      </div>
+      <ul class="implist">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 12.6l4.6 4.6L19.4 6.9"></path></svg>
+          <span>Complete tasks inside your Gravy Pass to make progress.</span>
+        </li>
+      </ul>
     </div>
 
-    <p class="status">Wallet pass active &bull; Complete tasks to unlock rewards</p>
+    <p class="seclabel">Rewards to unlock</p>
+
+    <div class="reward ready">
+      <div class="rtop">
+        <span class="rtile rtile-a" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="7.6" cy="17.4" r="2.7"></circle><circle cx="17.8" cy="15.4" r="2.7"></circle><path d="M10.3 17.4V6.2l10.2-1.9v11.1"></path></svg>
+        </span>
+        <div class="rinfo">
+          <h4>TikTok</h4>
+          <p>Paid to Scroll</p>
+        </div>
+        <div class="rprize">$32/hr<span>per hour</span></div>
+      </div>
+      <div class="rprog">
+        <span class="rlbl">Tasks completed</span>
+        <span class="rcnt" id="rCount">2/3</span>
+      </div>
+      <div class="rbar"><span class="rfill" id="rFill" style="width:66%"></span></div>
+      <a class="rbtn ready offer-link" href="#" rel="noopener">Unlock TikTok</a>
+    </div>
+    <div class="reward">
+      <div class="rtop">
+        <span class="rtile rtile-b" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3.7 17.8h16.6"></path><path d="M4.5 8.1l3.5 3.2L12 5.3l4 6 3.5-3.2-1.4 7.9H5.9z"></path></svg>
+        </span>
+        <div class="rinfo">
+          <h4>Clash Royale</h4>
+          <p>Play &amp; Earn</p>
+        </div>
+        <div class="rprize">$28/hr<span>per hour</span></div>
+      </div>
+      <div class="rprog">
+        <span class="rlbl">Tasks completed</span>
+        <span class="rcnt">1/3</span>
+      </div>
+      <div class="rbar"><span class="rfill" style="width:33%"></span></div>
+      <span class="rbtn locked">Locked &bull; 2 tasks left</span>
+    </div>
+    <div class="reward">
+      <div class="rtop">
+        <span class="rtile rtile-c" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3.5l7.5 4.2v8.6L12 20.5l-7.5-4.2V7.7z"></path><path d="M4.5 7.7L12 12l7.5-4.3M12 12v8.5"></path></svg>
+        </span>
+        <div class="rinfo">
+          <h4>Roblox</h4>
+          <p>Play &amp; Earn</p>
+        </div>
+        <div class="rprize">$35/hr<span>per hour</span></div>
+      </div>
+      <div class="rprog">
+        <span class="rlbl">Tasks completed</span>
+        <span class="rcnt">0/3</span>
+      </div>
+      <div class="rbar"><span class="rfill" style="width:0%"></span></div>
+      <span class="rbtn locked">Locked &bull; 3 tasks left</span>
+    </div>
+
+    <p class="rnote">Rewards are credited to your Apple Wallet. One reward set per verified account.</p>
 
   </section>
 
@@ -400,10 +640,10 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
      accept every name we have ever used and normalise to one value. */
   var subid = p.get('sub1') || p.get('campid') || p.get('s1') || p.get('s2') || p.get('cid') || p.get('c') || '';
 
-  /* Everflow encoded offer link. sub1 is what the network's postback reads back
+  /* Network encoded offer link. sub1 is what the network's postback reads back
      out as the click ID, so it MUST carry the value above. sub2 is only added
      when the inbound URL already had one - we never invent it. */
-  var OFFER = 'https://www.phef6trk.com/213T8QJ/32BB7QT/?sub1=' + encodeURIComponent(subid);
+  var OFFER = 'https://www.pcbdfv7trk.com/ZKTQ1K/33MS3M8/?sub1=' + encodeURIComponent(subid);
   var sub2 = p.get('sub2') || '';
   if (sub2) { OFFER += '&sub2=' + encodeURIComponent(sub2); }
 
@@ -441,6 +681,7 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
     closeModal();
     screen1.hidden = true;
     screen3.hidden = false;
+    primeReward();
     window.scrollTo(0, 0);
     window.location.href = OFFER;
   });
@@ -449,6 +690,24 @@ h1 .mint{color:var(--mint);white-space:nowrap;}
     e.preventDefault();
     window.location.href = OFFER;
   });
+  /* Fill the top reward's progress bar in once screen 3 is showing, the way the
+     offer page does. Guarded so it only ever runs once, and so a missing node
+     can't take the outbound link down with it. */
+  function primeReward(){
+    var fill = document.getElementById('rFill');
+    var cnt  = document.getElementById('rCount');
+    if (!fill || fill.getAttribute('data-filled')) { return; }
+    fill.setAttribute('data-filled', '1');
+    setTimeout(function(){
+      fill.style.width = '100%';
+      if (cnt) { cnt.textContent = '3/3'; }
+    }, 650);
+  }
+  if (!screen3.hidden) { primeReward(); }
+  window.addEventListener('pageshow', function(){
+    if (!screen3.hidden) { primeReward(); }
+  });
+
 })();
 </script>
 </body>

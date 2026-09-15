@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" data-geo="US">
+<head>
+<meta charset="UTF-8">
+<!-- No lander-level kicker on this funnel by design (removed 2026-09-12).
+     Nothing on this page breaks out of the TikTok in-app browser. -->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b0f0d">
+<meta name="robots" content="noindex, nofollow">
+<title>Gravy Pass | Quick Match Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0f0d;color:#f2f5f3;overflow-x:clip;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+:root{--mint:#6de6a9;--mint2:#3fbf83;--ink:#04231a;--card:#141a18;--line:#232b28;--mut:#8b9a93}
+
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 70% 45% at 50% -5%,rgba(109,230,169,.18),transparent 65%),radial-gradient(ellipse 50% 38% at 100% 100%,rgba(63,191,131,.11),transparent 60%),radial-gradient(ellipse 44% 30% at 0% 82%,rgba(109,230,169,.08),transparent 60%),#0b0f0d;animation:drift 16s ease-in-out infinite;will-change:transform}
+@keyframes drift{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.09) translateY(-14px)}}
+/* slow aurora sweep across the top */
+.bg::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 30%,rgba(109,230,169,.07) 50%,transparent 70%);background-size:260% 100%;animation:aurora 11s ease-in-out infinite}
+@keyframes aurora{0%,100%{background-position:120% 0}50%{background-position:-20% 0}}
+.sparks{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sparks i{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--mint);opacity:0;animation:up linear infinite;will-change:transform,opacity}
+@keyframes up{0%{opacity:0;transform:translateY(0) scale(.6)}12%{opacity:.45}70%{opacity:.28}100%{opacity:0;transform:translateY(-104vh) scale(1.1)}}
+
+.wrap{position:relative;z-index:1;max-width:440px;margin:0 auto;padding:22px 18px calc(30px + env(safe-area-inset-bottom))}
+.anim{opacity:0;animation:fade .55s cubic-bezier(.22,.9,.3,1) forwards}
+@keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sweep{0%{left:-60%}55%{left:130%}100%{left:130%}}
+
+.brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
+.brand img{width:46px;height:46px;border-radius:13px;box-shadow:0 0 22px rgba(109,230,169,.3);animation:glow 3.2s ease-in-out infinite,bob 4.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 18px rgba(109,230,169,.22)}50%{box-shadow:0 0 34px rgba(109,230,169,.46)}}
+.brand .x{color:rgba(255,255,255,.4);font-size:18px}
+.brand .nm{font-size:19px;font-weight:800;letter-spacing:-.02em}
+
+h1{font-size:31px;line-height:1.12;font-weight:900;letter-spacing:-.9px;text-align:center;margin-bottom:12px}
+.hl{background:linear-gradient(100deg,var(--mint) 0%,#b6ffdc 45%,var(--mint2) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--mint);animation:hue 6s ease-in-out infinite}
+@keyframes hue{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.sub{font-size:14px;line-height:1.55;color:var(--mut);text-align:center;margin-bottom:20px}
+
+.stats{display:flex;gap:9px;margin-bottom:20px}
+.stat{position:relative;overflow:hidden;flex:1;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 6px;text-align:center}
+.stat::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--mint),transparent);opacity:.3;animation:statLine 3.4s ease-in-out infinite}
+.stat:nth-child(2)::before{animation-delay:.5s}.stat:nth-child(3)::before{animation-delay:1s}
+@keyframes statLine{0%,100%{opacity:.2}50%{opacity:.95}}
+.stat b{display:block;font-size:16px;font-weight:900;color:var(--mint)}
+.stat span{font-size:10.5px;color:var(--mut);letter-spacing:.02em}
+
+/* locked "Block Blast" setting — real app icon in the tile, small lock badge on its
+   corner so it still reads as LOCKED, toggle nudges toward on then falls back */
+.unlockrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid rgba(109,230,169,.26);border-radius:14px;padding:12px 14px;margin-bottom:14px;position:relative;overflow:hidden}
+.unlockrow::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 35%,rgba(109,230,169,.12) 50%,transparent 65%);background-size:300% 100%;animation:sweep2 4.6s ease-in-out infinite}
+.ulk{position:relative;width:38px;height:38px;border-radius:11px;flex-shrink:0;
+  background-image:url('data:image/webp;base64,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');
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 2px 8px rgba(0,0,0,.45);
+  animation:nPop 3s ease-in-out infinite}
+/* dim the icon while it's locked, and badge it */
+.ulk::before{content:'';position:absolute;inset:0;border-radius:10px;background:rgba(6,10,9,.42)}
+.ulk::after{content:'';position:absolute;right:-3px;bottom:-3px;width:16px;height:16px;border-radius:50%;
+  background:#0b0f0d;border:1px solid rgba(109,230,169,.45);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236de6a9' stroke-width='2.6' stroke-linecap='round'%3E%3Crect x='5' y='11' width='14' height='9' rx='2.2'/%3E%3Cpath d='M8.2 11V7.6a3.8 3.8 0 0 1 7.6 0'/%3E%3C/svg%3E");
+  background-size:11px 11px;background-position:center;background-repeat:no-repeat}
+.utx{flex:1;min-width:0;position:relative;z-index:1}
+.utx b{display:block;font-size:13.5px;font-weight:800;letter-spacing:-.01em}
+.utx span{display:block;font-size:11px;color:var(--mut);margin-top:1px}
+.utg{width:42px;height:24px;border-radius:999px;flex-shrink:0;background:#1c2321;border:1px solid var(--line);position:relative;z-index:1}
+.utg i{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#4c5a55;animation:nudge 2.6s ease-in-out infinite}
+@keyframes nudge{
+  0%,58%,100%{transform:translateX(0);background:#4c5a55;box-shadow:none}
+  70%,84%{transform:translateX(11px);background:var(--mint);box-shadow:0 0 12px rgba(109,230,169,.8)}
+}
+.cta{display:block;width:100%;min-height:58px;padding:18px;border:none;border-radius:15px;background:linear-gradient(180deg,var(--mint),var(--mint2));color:var(--ink);font-family:inherit;font-size:16.5px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:transform .15s ease;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 28px rgba(109,230,169,.42),0 4px 16px rgba(0,0,0,.35)}50%{box-shadow:0 0 46px rgba(109,230,169,.7),0 4px 16px rgba(0,0,0,.35)}}
+.cta{position:relative;overflow:hidden}
+.cta::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:42%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);animation:sweep 2.9s ease-in-out .9s infinite;pointer-events:none}
+.cta:active{transform:scale(.98)}
+.cta-wrap{width:100%}
+
+.sec-h{font-size:11px;font-weight:800;letter-spacing:.2em;color:rgba(255,255,255,.45);margin:26px 0 13px;text-align:center}
+.steps{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px 16px}
+.stp{display:flex;gap:13px;padding-bottom:16px;position:relative}
+.stp:not(:last-child)::after{content:"";position:absolute;left:13px;top:29px;bottom:0;width:2px;background:var(--line)}
+.stp:last-child{padding-bottom:0}
+.stp .n{width:27px;height:27px;border-radius:50%;background:linear-gradient(140deg,#b6ffdc,var(--mint2));color:var(--ink);font-size:12.5px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;animation:nPop 3s ease-in-out infinite}
+.stp:nth-child(2) .n{animation-delay:.35s}.stp:nth-child(3) .n{animation-delay:.7s}
+@keyframes nPop{0%,100%{box-shadow:0 0 0 0 rgba(109,230,169,.5)}50%{box-shadow:0 0 0 6px rgba(109,230,169,0)}}
+.stp h4{font-size:14px;font-weight:700;margin-bottom:3px}
+.stp p{font-size:12px;color:var(--mut);line-height:1.45}
+.stp p b{color:var(--mint);font-weight:600}
+
+.act{position:relative;background:linear-gradient(rgba(255,193,7,.06),rgba(255,193,7,.06)),var(--card);border:1px solid rgba(255,193,7,.4);border-radius:15px;padding:17px 15px;margin-top:18px}
+/* NOTE: no overflow:hidden — .flag sits at top:-10px and would be clipped. Shine is
+   animated via background-position so nothing escapes the box. */
+.act::after{content:'';position:absolute;inset:0;border-radius:15px;pointer-events:none;background:linear-gradient(100deg,transparent 35%,rgba(255,193,7,.15) 50%,transparent 65%);background-size:300% 100%;animation:sweep2 5s ease-in-out infinite}
+@keyframes sweep2{0%{background-position:100% 0}60%,100%{background-position:-100% 0}}
+.act .flag,.act h4,.act p{position:relative;z-index:1}
+.act .flag{position:absolute;top:-10px;left:14px;background:#ffc107;color:#241c00;font-size:9.5px;font-weight:900;letter-spacing:.08em;padding:4px 9px;border-radius:6px}
+.act h4{font-size:14.5px;font-weight:800;margin:4px 0 6px}
+.act p{font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.5}
+.act p b{color:var(--mint);font-weight:700}
+.trust{font-size:11.5px;color:rgba(255,255,255,.32);text-align:center;margin-top:16px;line-height:1.45}
+
+/* ---------- QUIZ ---------- */
+#quiz{display:none}
+.qhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.qstep{font-size:10.5px;font-weight:800;letter-spacing:.16em;color:var(--mut)}
+.qtally{font-size:17px;font-weight:900;color:var(--mint);font-variant-numeric:tabular-nums}
+.qbar{position:relative;height:5px;border-radius:999px;background:#1c2321;overflow:hidden;margin-bottom:22px}
+.qbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#b6ffdc,var(--mint),var(--mint2));width:0;transition:width .45s cubic-bezier(.22,1,.36,1);box-shadow:0 0 12px rgba(109,230,169,.75)}
+.qbar::after{content:'';position:absolute;top:0;bottom:0;left:-40%;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:sweep 2.6s ease-in-out infinite;pointer-events:none}
+.q h2{font-size:22px;font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:16px;text-align:center}
+.opts{display:flex;flex-direction:column;gap:10px}
+/* options are rebuilt on every question, so this entrance replays each step */
+.opt{width:100%;min-height:56px;padding:16px;border-radius:13px;border:1.5px solid var(--line);background:var(--card);color:#f2f5f3;font-family:inherit;font-size:14.5px;font-weight:700;text-align:left;cursor:pointer;-webkit-appearance:none;appearance:none;transition:border-color .15s,background .15s,transform .12s;opacity:0;animation:optIn .42s cubic-bezier(.22,.9,.3,1) forwards}
+.opt:nth-child(1){animation-delay:.04s}.opt:nth-child(2){animation-delay:.12s}
+.opt:nth-child(3){animation-delay:.20s}.opt:nth-child(4){animation-delay:.28s}
+@keyframes optIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:var(--mint);background:rgba(109,230,169,.12);animation:optSel .5s ease}
+@keyframes optSel{0%{box-shadow:0 0 0 0 rgba(109,230,169,.55)}100%{box-shadow:0 0 0 14px rgba(109,230,169,0)}}
+
+/* ---------- RESULT ---------- */
+#result{display:none}
+.badge{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(109,230,169,.1);border:1px solid rgba(109,230,169,.34);border-radius:999px;padding:8px 15px;font-size:12px;font-weight:800;color:var(--mint);width:fit-content;margin:0 auto 16px}
+.badge::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-18deg);animation:sweep 3.2s ease-in-out infinite;pointer-events:none}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);animation:bl 1.7s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+/* the spinning conic must be SQUARE and centred — a 200%x200% rectangle on a wide,
+   short card leaves the left/right edges uncovered at most rotations */
+.est{position:relative;border-radius:17px;padding:2px;margin-bottom:16px;overflow:hidden}
+.est::before{content:'';position:absolute;top:50%;left:50%;width:190%;aspect-ratio:1;background:conic-gradient(#b6ffdc,var(--mint),var(--mint2),#b6ffdc);animation:spinC 6s linear infinite;will-change:transform}
+@keyframes spinC{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.est-in{position:relative;z-index:1;background:var(--card);border-radius:15px;padding:22px 18px;text-align:center}
+.est .lbl{font-size:10.5px;font-weight:800;letter-spacing:.16em;color:var(--mut);margin-bottom:8px}
+.est .big{font-size:39px;font-weight:900;letter-spacing:-1.6px;color:var(--mint);line-height:1;font-variant-numeric:tabular-nums;animation:estGlow 2.4s ease-in-out infinite}
+@keyframes estGlow{0%,100%{text-shadow:0 0 16px rgba(109,230,169,.4)}50%{text-shadow:0 0 36px rgba(109,230,169,.85)}}
+.est .cap{font-size:11.5px;color:var(--mut);margin-top:9px}
+.timer{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12.5px;font-weight:700;color:#ff9e6b;margin-bottom:16px;animation:tPulse 1.8s ease-in-out infinite}
+@keyframes tPulse{0%,100%{opacity:.78}50%{opacity:1}}
+.timer b{font-variant-numeric:tabular-nums}
+.live{font-size:12px;color:var(--mut);text-align:center;margin-top:13px}
+.live b{color:var(--mint);font-weight:700}
+.fine{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:11px}
+
+@media (max-height:680px){
+  .brand img{width:40px;height:40px}
+  h1{font-size:28px}
+  .sub{margin-bottom:14px}
+  .stat{padding:10px 5px}
+}
+@media (max-width:374px){
+  .unlockrow{padding:10px 12px;gap:10px}
+  .utx b{font-size:12.5px}.utx span{font-size:10.5px}
+  .wrap{padding:18px 14px calc(24px + env(safe-area-inset-bottom))}
+  h1{font-size:27px}.q h2{font-size:20px}.est .big{font-size:34px}
+  .stat b{font-size:14.5px}.stat span{font-size:9.5px}
+  .cta{font-size:15px;padding:16px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.anim,.opt{opacity:1}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="sparks" aria-hidden="true">
+  <i style="left:10%;animation-duration:16s;animation-delay:0s"></i>
+  <i style="left:28%;animation-duration:20s;animation-delay:3.5s"></i>
+  <i style="left:46%;animation-duration:14s;animation-delay:7s"></i>
+  <i style="left:64%;animation-duration:21s;animation-delay:1.5s"></i>
+  <i style="left:81%;animation-duration:17s;animation-delay:9s"></i>
+  <i style="left:93%;animation-duration:15s;animation-delay:5s"></i>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ SPLASH ============ -->
+  <section id="splash">
+    <div class="brand anim">
+      <img src="data:image/webp;base64,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" alt="TikTok" width="46" height="46">
+      <span class="x">×</span>
+      <img src="data:image/webp;base64,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" alt="Gravy Pass" width="46" height="46">
+    </div>
+
+    <h1 class="anim" style="animation-delay:.06s">Get Paid to Play Games &amp; <span class="hl">Complete Tasks</span>.</h1>
+    <p class="sub anim" style="animation-delay:.1s">Add your free Gravy Pass to <span class="wallet-name">Apple Wallet</span>, play games and finish quick tasks — then cash out real rewards straight to you.</p>
+
+    <div class="stats anim" style="animation-delay:.14s">
+      <div class="stat"><b>$1</b><span>signup bonus</span></div>
+      <div class="stat"><b>$10</b><span>min cashout</span></div>
+      <div class="stat"><b>4.5★</b><span>rated</span></div>
+    </div>
+
+    <div class="unlockrow anim" style="animation-delay:.16s">
+      <span class="ulk" role="img" aria-label="Block Blast"></span>
+      <div class="utx">
+        <b>Block Blast</b>
+        <span>Locked &middot; turns on after setup</span>
+      </div>
+      <span class="utg" aria-hidden="true"><i></i></span>
+    </div>
+
+    <div class="cta-wrap anim" style="animation-delay:.18s">
+      <button class="cta" id="startBtn">GET STARTED</button>
+    </div>
+
+    <div class="sec-h anim" style="animation-delay:.24s">HOW IT WORKS</div>
+    <div class="steps anim" style="animation-delay:.26s">
+      <div class="stp"><div class="n">1</div><div><h4>Add your free Gravy Pass</h4><p>No app download — works on <b>iPhone and Android</b>. It drops straight into <b class="wallet-name">Apple Wallet</b> in seconds.</p></div></div>
+      <div class="stp"><div class="n">2</div><div><h4>Play games &amp; finish tasks</h4><p>Open your pass, pick an offer, and hit milestones for <b>real credit</b>.</p></div></div>
+      <div class="stp"><div class="n">3</div><div><h4>Cash out your rewards</h4><p>Withdraw from <b>$10</b> — PayPal, gift cards or crypto.</p></div></div>
+    </div>
+
+    <div class="act anim" style="animation-delay:.3s">
+      <span class="flag">ACTIVATION REQUIRED</span>
+      <h4>One quick step to unlock full rewards</h4>
+      <p>Complete <b>2 qualifying tasks</b> after adding your pass to unlock the full earning experience and your <b>$1 bonus</b>.</p>
+    </div>
+
+    <p class="trust anim" style="animation-delay:.34s">Trusted by players cashing out rewards every day.</p>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz">
+    <div class="brand" style="margin-bottom:16px">
+      <img src="data:image/webp;base64,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" alt="Gravy Pass" width="46" height="46">
+      <span class="nm">Gravy Pass</span>
+    </div>
+    <div class="qhead">
+      <span class="qstep" id="qstep">STEP 1 OF 3</span>
+      <span class="qtally" id="qtally">+$0.00</span>
+    </div>
+    <div class="qbar"><i id="qbar"></i></div>
+    <div class="q">
+      <h2 id="qtitle"></h2>
+      <div class="opts" id="qopts"></div>
+    </div>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section id="result">
+    <div class="brand" style="margin-bottom:16px">
+      <img src="data:image/webp;base64,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" alt="Gravy Pass" width="46" height="46">
+      <span class="nm">Gravy Pass</span>
+    </div>
+    <div class="badge"><span class="dot"></span>YOU'RE PRE-QUALIFIED</div>
+    <h1 style="font-size:26px;margin-bottom:16px">Your Earnings <span class="hl">Estimate</span> Is Ready</h1>
+
+    <div class="est">
+      <div class="est-in">
+      <div class="lbl">ESTIMATED WEEKLY EARNINGS</div>
+      <div class="big" id="estVal">$0</div>
+      <div class="cap">Based on your answers · results vary by activity</div>
+    </div>
+    </div>
+
+    <div class="timer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 9v4l2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Offer held for <b id="clock">10:00</b>
+    </div>
+
+    <div class="act" style="margin-bottom:18px">
+      <span class="flag">HOW TO UNLOCK IT</span>
+      <h4>Finish 2 tasks to switch it on</h4>
+      <p>Add your Gravy Pass, then complete <b>2 qualifying tasks</b> inside it. That activates your account, releases your <b>$1 bonus</b>, and unlocks the higher-paying offers.</p>
+    </div>
+
+    <div class="cta-wrap">
+      <button class="cta" id="claimBtn">CLAIM MY SPOT</button>
+    </div>
+    <p class="live"><b id="liveN">1,240</b> people started earning this week</p>
+    <p class="fine">Free to join · No credit card · Takes 60 seconds</p>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+
+  /* Gravy Pass works on BOTH platforms — the pass lands in Apple Wallet on iOS and
+     Google Wallet on Android. Markup ships with "Apple Wallet" so a no-JS render still
+     reads correctly; Android gets swapped on load. */
+  (function(){
+    var name = /android/i.test(navigator.userAgent || '') ? 'Google Wallet' : 'Apple Wallet';
+    Array.prototype.forEach.call(document.querySelectorAll('.wallet-name'), function(el){
+      el.textContent = name;
+    });
+  })();
+
+  /* ---------- sub ID ---------- */
+  var QP = new URLSearchParams(location.search);
+  function subid(){
+    // BOT LAUNCH (TENX account, Mabac/Advertise): the Spartis launcher writes campid.
+    // s1/s2 are accepted only so a hand-built test link still resolves. sub1 is
+    // deliberately NOT read here — this page must emit ?campid=, never ?sub1=.
+    // No advertiser URL lives in this file: the real Mabac link
+    // (stw4c9hx.com/9P2WR9/TFLHSB/) and the Forward Param sit in the TENX Offer Links
+    // tab behind "gravypass-us-mbc-off-tenx", so the offer repoints without a redeploy.
+    return QP.get('campid') || QP.get('s1') || QP.get('s2') || '';
+  }
+
+  /* ---------- tracking beacon (first-party, px.trendhavenn.com) ---------- */
+  var TRACK='https://px.trendhavenn.com/t', PAGE='gp-bb-mbc-tenx';
+  /* Every step fires AT MOST ONCE per page view. Without this a second tap on the CTA
+     logs a second claim, which is why the live dashboard shows claim rates above 100%
+     (382 claims against 69 humans on one campid) — the percentages become meaningless
+     and drop-off can't be read at all. */
+  var sent = {};
+  function url(ev){ return TRACK+'?e='+ev+'&id='+encodeURIComponent(subid())+'&p='+PAGE; }
+  function hit(ev){
+    if(sent[ev]) return; sent[ev]=1;
+    try{ new Image().src = url(ev)+'&_='+Date.now(); }catch(e){}
+  }
+  function hitBeacon(ev){
+    if(sent[ev]) return; sent[ev]=1;
+    try{
+      if(navigator.sendBeacon){ navigator.sendBeacon(url(ev)); }
+      else { new Image().src = url(ev)+'&_='+Date.now(); }
+    }catch(e){}
+  }
+  hit('load');
+  ['scroll','touchstart','pointerdown','mousemove','keydown'].forEach(function(e){
+    window.addEventListener(e, function(){ hit('human'); }, {once:true, passive:true});
+  });
+
+  /* ---------- quiz ---------- */
+  var QUESTIONS = [
+    { t:'How much do you want to earn each week?',
+      o:[['$50 – $100',40],['$100 – $250',90],['$250+',150]] },
+    { t:'How much time can you give it a day?',
+      o:[['About 15 minutes',35],['Around 30 minutes',80],['An hour or more',140]] },
+    { t:'What sounds most fun to you?',
+      o:[['Puzzle &amp; casual games',60],['Action &amp; strategy games',75],['Quick tasks &amp; surveys',55]] }
+  ];
+  var idx=0, tally=0, answered=false;
+  var elStep=document.getElementById('qstep'), elTally=document.getElementById('qtally'),
+      elBar=document.getElementById('qbar'), elTitle=document.getElementById('qtitle'),
+      elOpts=document.getElementById('qopts');
+
+  function render(){
+    answered = false;
+    var q=QUESTIONS[idx];
+    elStep.textContent='STEP '+(idx+1)+' OF '+QUESTIONS.length;
+    elTitle.innerHTML=q.t;
+    elBar.style.width=((idx)/QUESTIONS.length*100)+'%';
+    elOpts.innerHTML='';
+    q.o.forEach(function(pair){
+      var b=document.createElement('button');
+      b.className='opt'; b.type='button'; b.innerHTML=pair[0];
+      b.addEventListener('click', function(){
+        if(answered) return;          // whole question locks, not just this button
+        answered = true;
+        b.classList.add('sel');
+        tally+=pair[1];
+        elTally.textContent='+$'+tally.toFixed(2);
+        elBar.style.width=((idx+1)/QUESTIONS.length*100)+'%';
+        hit('q'+(idx+1));                      // per-question drop-off
+        setTimeout(next, 260);
+      });
+      elOpts.appendChild(b);
+    });
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function next(){
+    idx++;
+    if(idx < QUESTIONS.length){ render(); return; }
+    showResult();
+  }
+
+  function showResult(){
+    document.getElementById('quiz').style.display='none';
+    var r=document.getElementById('result');
+    r.style.display='block';
+    hit('result');
+    // estimate scales with the answers, shown as a range
+    var lo=Math.round(tally*0.9/5)*5, hi=Math.round(tally*2.1/5)*5;
+    var el=document.getElementById('estVal'), cur=0, step=Math.max(1,Math.round(lo/28));
+    (function tick(){                            // count-up so the number lands, not appears
+      cur+=step;
+      if(cur>=lo){ el.textContent='$'+lo+'–$'+hi; return; }
+      el.textContent='$'+cur;
+      requestAnimationFrame(tick);
+    })();
+    startClock();
+    driftLive();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function startClock(){
+    var s=600, el=document.getElementById('clock');
+    setInterval(function(){
+      if(s<=0) return;
+      s--;
+      el.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+    },1000);
+  }
+  function driftLive(){
+    var el=document.getElementById('liveN'), n=1240;
+    setInterval(function(){ n+=Math.floor(Math.random()*3); el.textContent=n.toLocaleString('en-US'); },4200);
+  }
+
+  /* ---------- splash -> quiz ---------- */
+  document.getElementById('startBtn').addEventListener('click', function(){
+    hit('start');
+    document.getElementById('splash').style.display='none';
+    document.getElementById('quiz').style.display='block';
+    render();
+    window.scrollTo({top:0,behavior:'instant'});
+  });
+
+  /* ---------- final CTA: BOT LAUNCH via Spartis ---------- */
+  /* The CLAIM goes to the Spartis SHORT CODE, never straight to the network. The real
+     Prescott link and the Forward Param live in the Offer Links tab behind
+     "gravypass-us-off", so the offer can be repointed without a redeploy -- and so no
+     advertiser URL ever appears in this page's source. Emits ?campid=, never ?sub1=.
+     sendBeacon so the claim hit survives the navigation away. */
+  document.getElementById('claimBtn').addEventListener('click', function(){
+    hitBeacon('claim');
+    var href='https://buenohoodies.com/c/gravypass-us-mbc-off-tenx?campid='+encodeURIComponent(subid());
+    setTimeout(function(){ location.href=href; }, 180);
+  });
+})();
+</script>
+</body>
+</html>

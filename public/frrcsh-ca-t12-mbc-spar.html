@@ -471,6 +471,8 @@ function redirectToOffer() {
   // tab behind "frrcsh-ca-t12-mbc-off", so the offer can be repointed without a redeploy. This funnel
   // runs the Freecash TIER-12 offer, which is a DIFFERENT offer segment from the one behind
   // frrcsh-us-mbc-spar.html and frrcsh-4geo-mbc-spar-tenx.html — do not reuse their short codes.
+  // Both segments are GLOBAL links; they differ by payout tier, not by geo. The "ca" in this
+  // file's name is the traffic being bought, not a restriction the offer imposes.
   // Mabac runs on Everflow, so its sub ID is sub1 and its payout macro is
   // {payout_amount} — NOT the bare {payout} that Glitchy uses.
   // Emits ?campid= — never ?sub1=. campid first (that is what the launcher writes); the rest

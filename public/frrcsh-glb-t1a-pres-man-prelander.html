@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#050505">
+<meta name="robots" content="noindex, nofollow">
+<title>One more step</title>
+
+<!-- PRELANDER for frrcsh-glb-t1a-pres-man.html. Freecash / Prescott Tier 1A / TRAE.
+     MANUAL launch - no Spartis, no short code, no postback anywhere in this funnel.
+     THIS is the URL that goes in the ad - not the lander. You append the sub ID to it by hand.
+
+     Byte-identical to frrcsh-glb-t1a-pres-spar-prelander.html except for the DEST line and the
+     beacon tag. The palette already matches this lander because both landers are the same design,
+     so no retheme was needed.
+
+     Modelled on the reference prelander, with its breakout mechanics adopted because they are
+     better than the house template's (see the script at the bottom for what changed and why).
+     Rethemed to the lander's palette - #050505 / #00ff88 - rather than the reference's white and
+     Apple blue, so the two pages read as one site at the moment the visitor decides to continue.
+
+     DELIBERATELY BARE, and it is meant to stay that way:
+       - NO logo / app icon. An earlier version had the Freecash tile here; removed on request.
+         Branding on an interstitial makes it read as an ad rather than a step.
+       - NO monetary claim. An earlier version said "claim your $10 signup bonus"; removed on
+         request. A dollar figure on this page is a promise made before the offer page has said
+         anything, and it is the kind of claim that gets a page flagged.
+       - NO "open in your browser", no Safari/Chrome chips, no Secure lock, no external-link
+         arrow. The reference and the house template both carry those; your project instructions
+         ban all five.
+     Headline, one neutral sentence, one button. Nothing else belongs on this page.
+
+     Tap-gated only. There is deliberately NO on-load kicker here - an on-load breakout fires
+     before the visitor has intended anything, and on iOS it triggers Safari's "Open in Safari?"
+     system prompt outside a user gesture, which is the single biggest leak in this funnel shape. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #050505;
+  --card: #0f1014;
+  --line: #1e1f26;
+  --ink: #ffffff;
+  --muted: #888888;
+  --accent: #00ff88;
+  --accent-dim: #00d175;
+  --accent-glow: rgba(0, 255, 136, .45);
+  --on-accent: #050505;   /* a light/mint accent keeps a DARK label; see the setup doc */
+}
+*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -.022em;
+  min-height: 100vh; min-height: 100dvh;
+  -webkit-user-select: none; user-select: none;
+  overscroll-behavior: none;
+}
+
+/* the two drifting orbs the lander uses, so the background reads the same */
+.orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: .12; pointer-events: none; z-index: 0; }
+.orb1 { background: radial-gradient(circle, rgba(0,255,136,.4), rgba(0,0,0,0)); width: 400px; height: 400px; top: -120px; left: -110px; animation: float1 20s ease-in-out infinite; }
+.orb2 { background: radial-gradient(circle, rgba(0,213,117,.3), rgba(0,0,0,0)); width: 300px; height: 300px; bottom: -60px; right: -60px; animation: float2 15s ease-in-out infinite; }
+@keyframes float1 { 0%,100% { transform: translate(0) scale(1); } 50% { transform: translate(50px,50px) scale(1.1); } }
+@keyframes float2 { 0%,100% { transform: translate(0) scale(1); } 50% { transform: translate(-30px,-40px) scale(1.15); } }
+
+.wrap {
+  position: relative; z-index: 1;
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 22px calc(40px + env(safe-area-inset-bottom, 0px));
+}
+.container {
+  width: 100%; max-width: 420px; text-align: center;
+  animation: rise .6s cubic-bezier(.22,.61,.36,1) both;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+h1 { font-size: 27px; font-weight: 800; letter-spacing: -.03em; margin: 0 0 9px; line-height: 1.16; }
+h1 .hl { color: var(--accent); }
+.sub { font-size: 15px; color: var(--muted); line-height: 1.5; margin: 0 0 26px; }
+
+.cta {
+  -webkit-appearance: none; appearance: none; border: none; cursor: pointer;
+  display: block; width: 100%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  color: var(--on-accent);
+  font-family: inherit; font-size: 17px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .5px;
+  padding: 18px 20px; border-radius: 15px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,255,136,.3);
+  transition: transform .14s ease, filter .2s ease;
+  animation: ctaPulse 3s ease-in-out infinite;
+}
+@keyframes ctaPulse { 0%,100% { box-shadow: 0 12px 30px rgba(0,255,136,.3); } 50% { box-shadow: 0 16px 42px rgba(0,255,136,.62); } }
+/* the sheen is on ::after and loops, rather than the reference's hover-only ::before -
+   :hover never happens on a phone, which is the only device this page ever sees */
+.cta::after {
+  content: ''; position: absolute; top: -50%; left: -50%;
+  width: 42%; height: 200%; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.34), rgba(255,255,255,0));
+  animation: sheen 3.8s ease-in-out 1.2s infinite;
+}
+@keyframes sheen { 0% { transform: translateX(0) skewX(-20deg); } 40%,100% { transform: translateX(380%) skewX(-20deg); } }
+.cta:active { transform: scale(.98); }
+.cta .label { position: relative; z-index: 1; }
+
+
+@media (max-height: 640px) {
+  .wrap { padding: 26px 20px; }
+  h1 { font-size: 24px; }
+  .sub { font-size: 14px; margin-bottom: 20px; }
+  .cta { padding: 16px 18px; font-size: 16px; }
+}
+@media (max-width: 360px) {
+  h1 { font-size: 23px; }
+  .sub { font-size: 14px; }
+  .cta { font-size: 15px; padding: 16px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  /* `*` does not match pseudo-elements, so the sheen has to be named explicitly */
+  .cta::after { display: none; animation: none !important; }
+  .container { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<main class="wrap">
+  <div class="container">
+
+
+    <h1>One more <span class="hl">step</span></h1>
+    <p class="sub">Tap continue to load the next page.</p>
+
+    <button class="cta" type="button" id="goBtn"><span class="label">Continue</span></button>
+
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- where this page sends people ----------
+     Hardcoded rather than read from an ?rurl= param the way the reference page does it. The
+     reference is a shared service, so it has to be told its destination; this one serves a single
+     funnel, and hardcoding keeps the lander URL out of the ad's query string entirely. An ?rurl=
+     override is still honoured for testing, but it is never needed in production. */
+  var DEST = 'https://www.trendhavenn.com/frrcsh-glb-t1a-pres-man.html';
+
+  /* ---------- carry the click ID across the hop ----------
+     The ENTIRE inbound query string is forwarded untouched, so campid survives under whatever
+     name the ad used - and so does ttclid, which TikTok needs on its own side.
+     This is deliberately wider than the reference page, which forwards ONLY campid and silently
+     drops ttclid and everything else. */
+  function buildDest() {
+    var qp = new URLSearchParams(window.location.search);
+    var dest = qp.get('rurl') ? decodeURIComponent(qp.get('rurl')) : DEST;
+    qp.delete('rurl');
+    var qs = qp.toString();
+    if (qs) dest += (dest.indexOf('?') === -1 ? '?' : '&') + qs;
+    return dest;
+  }
+
+  function stripScheme(u) {
+    if (u.indexOf('https://') === 0) return u.slice(8);
+    if (u.indexOf('http://') === 0) return u.slice(7);
+    return u;
+  }
+
+  /* ---------- tracking beacon ----------
+     Tagged separately from the lander so the prelander's own drop-off is readable: if `load` is
+     high here and `load` on the lander is low, the breakout is failing rather than the offer. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'frrcsh-glb-t1a-pres-man-pre';
+  var sent = {};
+  function hit(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    var qp = new URLSearchParams(window.location.search);
+    var id = qp.get('sub1') || qp.get('campid') || qp.get('s1') || qp.get('s2')
+           || qp.get('cid') || qp.get('c') || '';
+    var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(id) + '&p=' + PAGE;
+    try {
+      if (ev === 'tap' && navigator.sendBeacon) { navigator.sendBeacon(u); }
+      else { new Image().src = u + '&_=' + Date.now(); }
+    } catch (e) {}
+  }
+  hit('load');
+  ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(function (e) {
+    window.addEventListener(e, function () { hit('human'); }, { once: true, passive: true });
+  });
+
+  /* ---------- the breakout. Tap-gated, never on load. ----------
+     Three things here are taken from the reference page rather than the house template, because
+     the reference's version is better:
+
+       1. Android names Chrome explicitly (package=com.android.chrome) and supplies
+          S.browser_fallback_url. The house template's bare `#Intent;scheme=https;end` dead-ends
+          on a device with no default handler; with the fallback URL the visitor still lands.
+       2. The Android fallback timer is 700ms, not the house template's 25ms. 25ms fires before
+          the intent has had a chance to resolve, so the page navigates twice and the second
+          navigation can cancel the first.
+       3. iOS gets NO fallback timer at all. If x-safari- worked the page is already gone; if it
+          did not, a timer would bounce the visitor inside the webview for no gain.
+
+     iOS also runs through (window.top || window), which matters when TikTok nests the page in a
+     frame - assigning to the inner frame's location does nothing there. */
+  var fired = false;
+  function go() {
+    if (fired) return; fired = true;
+    hit('tap');
+
+    var dest = buildDest();
+    var ua = navigator.userAgent || '';
+
+    if (/Android/i.test(ua)) {
+      window.location.href = 'intent://' + stripScheme(dest) +
+        '#Intent;scheme=https;package=com.android.chrome;' +
+        'S.browser_fallback_url=' + encodeURIComponent(dest) + ';end';
+      setTimeout(function () { window.location.href = dest; }, 700);
+      return;
+    }
+
+    if (/iPhone|iPad|iPod/i.test(ua)) {
+      var safari = 'x-safari-https://' + stripScheme(dest);
+      try { (window.top || window).location.href = safari; }
+      catch (e) { window.location.href = safari; }
+      return;
+    }
+
+    /* desktop, or any UA we do not recognise: just go. Nothing to break out of. */
+    window.location.href = dest;
+  }
+
+  document.getElementById('goBtn').addEventListener('click', go);
+})();
+</script>
+</body>
+</html>

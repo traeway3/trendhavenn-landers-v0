@@ -24,7 +24,10 @@
      hue family, deeper and more saturated - so the page reads as Playful, not as the reference.
 
      ADDED, per request (these four things are NOT in the reference):
-       1. the Playful Rewards logo at the top, inlined as base64 webp
+       1. the Playful Rewards logo at the top, and the REAL Block Blast icon on the game card -
+          both inlined as base64 webp, so the page still makes zero external image requests.
+          The Block Blast mark was cropped out of Manual/playful/'s own choose-your-game
+          screenshot rather than pulled off a store listing.
        2. the REWARD LADDER block - Level 1/2 unlocked, Level 3 "Paid to Scroll" LOCKED
        3. the unlock framing throughout: go deeper -> better offers
        4. the final-CTA popup, which is where the outbound actually fires
@@ -212,15 +215,17 @@ h1 .hl { color: var(--brand-2); }
 /* ---------- game card (reference: p-5, h-16 w-16 rounded-2xl icon, divider, how-it-works) ---------- */
 .game { margin-top: 16px; padding: 20px; }
 .grow { display: flex; align-items: center; gap: 16px; }
-/* CSS-drawn game tile - deliberately NOT a third-party app icon. See the setup doc. */
-.gtile { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 16px; position: relative; overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,.4); background: linear-gradient(145deg, #2b1263, #6701ea 55%, #9d4bff); }
-.gtile span { position: absolute; border-radius: 4px; }
-.gtile span:nth-child(1) { width: 17px; height: 17px; left: 11px; top: 11px; background: #ffd34d; animation: blk 3.6s ease-in-out infinite; }
-.gtile span:nth-child(2) { width: 17px; height: 17px; right: 11px; top: 11px; background: #4dd7ff; animation: blk 3.6s ease-in-out .45s infinite; }
-.gtile span:nth-child(3) { width: 17px; height: 17px; left: 11px; bottom: 11px; background: #ff6f9d; animation: blk 3.6s ease-in-out .9s infinite; }
-.gtile span:nth-child(4) { width: 17px; height: 17px; right: 11px; bottom: 11px; background: #7dffa8; animation: blk 3.6s ease-in-out 1.35s infinite; }
-@keyframes blk { 0%,100% { transform: scale(1); opacity: .95; } 50% { transform: scale(.82); opacity: .6; } }
+/* the REAL Block Blast icon, cropped out of the Playful choose-your-game lander in
+   Manual/playful/ and re-encoded to a 128px webp with alpha-rounded corners (3.4 KB).
+   Inlined, so still zero external image requests. */
+.gtilewrap { position: relative; flex: 0 0 64px; width: 64px; height: 64px; }
+.gtilewrap::before { content: ''; position: absolute; left: 50%; top: 50%; width: 92px; height: 92px;
+  transform: translate(-50%,-50%); border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(103,1,234,.40), transparent 68%); animation: gGlow 4.4s ease-in-out infinite; }
+@keyframes gGlow { 0%,100% { opacity: .45; transform: translate(-50%,-50%) scale(.88); } 50% { opacity: .95; transform: translate(-50%,-50%) scale(1.08); } }
+.gtile { position: relative; display: block; width: 64px; height: 64px; border-radius: 16px;
+  box-shadow: 0 4px 10px -1px rgba(0,0,0,.5); animation: gFloat 4.8s ease-in-out infinite; }
+@keyframes gFloat { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-2.2deg); } }
 .gname { font-size: 16px; font-weight: 700; }
 .gmeta { margin-top: 2px; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dim); }
 .gpay { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--success); }
@@ -354,6 +359,8 @@ h1 .hl { color: var(--brand-2); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .tier.lock::after, .bar::after, .store.play::after, .go::after { display: none; }
+  .gtilewrap::before { opacity: 1; transform: translate(-50%,-50%); }
+  .gtile { transform: none; }
   .iconwrap::before { opacity: 1; transform: translate(-50%,-50%); }
   .bar i { width: 34%; }
   .stars svg, .mini li, .toast div { opacity: 1; transform: none; }
@@ -426,7 +433,7 @@ h1 .hl { color: var(--brand-2); }
   <!-- ================= game card + how it works (reference 1:1) ================= -->
   <section class="card game rv">
     <div class="grow">
-      <span class="gtile" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+      <span class="gtilewrap"><img class="gtile" src="data:image/webp;base64,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" alt="Block Blast" width="64" height="64" decoding="async"></span>
       <div>
         <p class="gname">Block Blast</p>
         <p class="gmeta">

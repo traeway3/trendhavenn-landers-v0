@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-geo="UK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0d0d11">
+<meta name="robots" content="noindex, nofollow">
+<title>Get paid to play</title>
+
+<!-- Playful Rewards - UK traffic - Glitchy (offer 2691, "Playful Revshare") - Spartis bot launch, TRAE.
+     No prelander. Flow: ad -> Carrd /r -> this lander -> short code -> offer.
+
+     DESIGN: 1:1 port of the reference page's structure, spacing, type scale and colour ROLES.
+     The reference is a Tailwind/shadcn build; its design tokens were lifted from the live CSSOM
+     and rewritten here as plain custom properties, so this file is self-contained and has zero
+     external requests. Every reference block is present and in the same order:
+       toast strip -> hero card -> game card + how-it-works -> 3-col stats -> disclaimer ->
+       footer links -> fixed bottom store bar.
+
+     RETHEME: --brand moved from the reference's 258 90% 66% (#895af6) to Playful's own
+     #6701ea, sampled off the app icon in the existing playful-*-flu-spar.html landers. Same
+     hue family, deeper and more saturated - so the page reads as Playful, not as the reference.
+
+     ADDED, per request (these four things are NOT in the reference):
+       1. the Playful Rewards logo at the top, inlined as base64 webp
+       2. the REWARD LADDER block - Level 1/2 unlocked, Level 3 "Paid to Scroll" LOCKED
+       3. the unlock framing throughout: go deeper -> better offers
+       4. the final-CTA popup, which is where the outbound actually fires
+     A motion pass is fenced at the end of the stylesheet.
+
+     COMPLIANCE - READ THE SETUP DOC. Glitchy's own offer terms for 2691 say "No fake app store
+     reviews", "Don't promise rewards the app doesn't pay", "No false claims, made up
+     testimonials". Several 1:1 blocks below conflict with that; they are carried over verbatim
+     on instruction. Each one is tagged CLAIM: at the line where it appears so they are trivial
+     to find and change later. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- TikTok In-App Browser Breakout Script -->
+<script>
+(function () {
+  return; // DISABLED - remove this line to re-enable the in-app browser breakout.
+  // Matches the house convention: every playful-*-spar lander in this repo ships with the
+  // kicker present but off, because the Carrd /r hop sits in front on a bot launch. Left off
+  // here too rather than changed silently - see the setup doc for the switch.
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  if (!/tiktok|musical_ly|bytedance/i.test(ua)) return;
+  try {
+    if (sessionStorage.getItem('ttBreakout') === '1') return;
+    sessionStorage.setItem('ttBreakout', '1');
+  } catch (e) {}
+  var here = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if (isIOS) {
+    window.location.href = 'x-safari-' + here;
+    setTimeout(function () { window.location.href = here; }, 25);
+  } else if (isAndroid) {
+    window.location.href = 'intent://' + here.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    setTimeout(function () { window.location.href = here; }, 25);
+  }
+})();
+</script>
+
+<style>
+/* ===========================================================================
+   TOKENS - lifted from the reference's live CSSOM (hsl triples resolved to hex)
+   and rethemed to Playful purple. Role names kept so the port maps 1:1.
+   =========================================================================== */
+:root {
+  --bg:            #0d0d11;   /* reference 240 12% 6%  */
+  --card:          #151519;   /* reference 240 10% 9%  */
+  --border:        #2a2a32;   /* reference 240 8% 18%  */
+  --secondary:     #212127;   /* reference 240 8% 14%  */
+  --muted:         #2a2a30;   /* reference 240 8% 17%  */
+  --ink:           #fafafa;   /* reference 0 0% 98%    */
+  --dim:           #a0a0ab;   /* reference 240 6% 65%  */
+  --brand:         #6701ea;   /* RETHEMED - Playful, sampled off the app icon */
+  --brand-2:       #9d4bff;   /* gradient partner for the Play button + sweeps */
+  --brand-ink:     #ffffff;
+  --success:       #26d971;   /* reference 145 70% 50% */
+  --warn:          #ffb43a;   /* new - the locked tier's key colour */
+  --radius:        24px;
+}
+*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none; user-select: none;
+}
+
+/* the reference's container: max-w-md, px-4, pb-32, pt-3 */
+.shell { position: relative; z-index: 1; margin: 0 auto; width: 100%; max-width: 448px; padding: 12px 16px 148px; }
+
+/* ---------- ambient brand wash (added; the reference has only the hero's radial) ---------- */
+.wash { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.wash i { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .14; display: block; }
+.wash i:nth-child(1) { width: 320px; height: 320px; top: -110px; left: -90px;
+  background: radial-gradient(circle, rgba(103,1,234,.75), transparent 70%); animation: drift1 21s ease-in-out infinite; }
+.wash i:nth-child(2) { width: 260px; height: 260px; bottom: 40px; right: -80px;
+  background: radial-gradient(circle, rgba(157,75,255,.6), transparent 70%); animation: drift2 17s ease-in-out infinite; }
+@keyframes drift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(44px,52px) scale(1.12); } }
+@keyframes drift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-34px,-40px) scale(1.16); } }
+
+/* ---------- toast strip (reference: h-8 overflow-hidden text-center text-xs) ---------- */
+.toast { position: relative; height: 32px; overflow: hidden; text-align: center; font-size: 12px; color: var(--dim); padding: 8px 0; }
+.toast div { position: absolute; inset-inline: 0; animation: toastIn .55s cubic-bezier(.22,.61,.36,1) both; }
+.toast b { font-weight: 700; color: var(--ink); }
+.toast .amt { font-weight: 700; color: var(--success); }
+@keyframes toastIn { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ---------- cards (reference: rounded-3xl border border-border bg-card) ---------- */
+.card { border: 1px solid var(--border); background: var(--card); border-radius: var(--radius); }
+.hero { padding: 32px 24px; text-align: center; position: relative; overflow: hidden; }
+/* reference: absolute inset-x-0 top-0 h-40 radial-gradient(ellipse at top, brand/.22, transparent 70%) */
+.hero::before { content: ''; position: absolute; inset-inline: 0; top: 0; height: 160px; pointer-events: none;
+  background: radial-gradient(ellipse at top, rgba(103,1,234,.30), transparent 70%); }
+.hero > * { position: relative; }
+
+/* ---------- app icon (reference: h-20 w-20 rounded-[22px] + brand glow) ---------- */
+.appicon { display: block; margin: 0 auto; width: 80px; height: 80px; border-radius: 22px;
+  box-shadow: 0 12px 40px -8px rgba(103,1,234,.6); animation: iconFloat 5.5s ease-in-out infinite; }
+@keyframes iconFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.iconwrap { position: relative; display: block; width: 80px; margin: 0 auto; }
+/* added: a soft brand halo behind the icon, on its own loop */
+.iconwrap::before { content: ''; position: absolute; left: 50%; top: 50%; width: 132px; height: 132px;
+  transform: translate(-50%,-50%); border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(103,1,234,.34), transparent 68%); animation: halo 4s ease-in-out infinite; }
+@keyframes halo { 0%,100% { opacity: .5; transform: translate(-50%,-50%) scale(.9); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); } }
+
+/* ---------- rating pill (reference: rounded-full border bg-secondary px-3 py-1.5 text-xs) ---------- */
+.rate { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border); background: var(--secondary); border-radius: 9999px; padding: 6px 12px; font-size: 12px; }
+.stars { display: inline-flex; }
+.stars svg { width: 12px; height: 12px; fill: var(--brand-2); animation: starPop .38s cubic-bezier(.34,1.56,.64,1) both; }
+.stars svg:nth-child(1) { animation-delay: .20s } .stars svg:nth-child(2) { animation-delay: .27s }
+.stars svg:nth-child(3) { animation-delay: .34s } .stars svg:nth-child(4) { animation-delay: .41s }
+.stars svg:nth-child(5) { animation-delay: .48s }
+@keyframes starPop { from { opacity: 0; transform: scale(.3) rotate(-25deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+.rate .n { font-weight: 700; color: var(--ink); }
+.rate .s { color: var(--dim); }
+.rate .s2 { color: rgba(160,160,171,.7); }
+
+/* ---------- headline (reference: mt-4 text-4xl font-black leading-[1.05] tracking-tight) ---------- */
+h1 { margin: 16px 0 0; font-size: 36px; font-weight: 900; line-height: 1.05; letter-spacing: -.025em; }
+h1 .hl { color: var(--brand-2); }
+.sub { margin: 16px auto 0; max-width: 20rem; font-size: 14px; line-height: 1.625; color: var(--dim); }
+
+/* ---------- live counter (reference: rounded-full border-success/30 bg-success/10 px-4 py-2) ---------- */
+.live { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px;
+  border: 1px solid rgba(38,217,113,.3); background: rgba(38,217,113,.1); padding: 8px 16px; }
+.live .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: blip 2s cubic-bezier(.4,0,.6,1) infinite; }
+.live span { font-size: 12px; font-weight: 700; color: var(--success); }
+@keyframes blip { 50% { opacity: .35; transform: scale(1.5); } }
+
+/* =========================================================================
+   REWARD LADDER - added block. This is the unlock mechanic.
+   ========================================================================= */
+.ladder { margin-top: 16px; padding: 20px; }
+.eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--dim); }
+.tiers { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.tier { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px;
+  border: 1px solid var(--border); background: var(--secondary); }
+.tier .ic { flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.tier .ic svg { width: 17px; height: 17px; }
+.tier .tx { min-width: 0; flex: 1; }
+/* t1/t2 are spans, so they MUST be made block - left inline they render as one run-on
+   line ("Level 1 - Play partner gamesOpen on signup..."). Caught on the screenshot;
+   every DOM and overflow assertion passed while the page looked broken. */
+.tier .t1 { display: block; font-size: 13.5px; font-weight: 700; line-height: 1.25; }
+.tier .t2 { display: block; margin-top: 2px; font-size: 11px; color: var(--dim); line-height: 1.35; }
+.tier .tag { flex: 0 0 auto; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  padding: 4px 8px; border-radius: 9999px; }
+
+.tier.done .ic { background: rgba(38,217,113,.14); } .tier.done .ic svg { fill: var(--success); }
+.tier.done .tag { background: rgba(38,217,113,.14); color: var(--success); }
+
+/* the locked tier - the whole point of the block */
+.tier.lock { border-color: rgba(255,180,58,.34); background: linear-gradient(135deg, rgba(255,180,58,.09), rgba(103,1,234,.09)); position: relative; overflow: hidden; }
+.tier.lock .ic { background: rgba(255,180,58,.16); } .tier.lock .ic svg { fill: var(--warn); }
+.tier.lock .t1 { color: var(--warn); }
+.tier.lock .tag { background: rgba(255,180,58,.16); color: var(--warn); }
+.tier.lock::after { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.10), rgba(255,255,255,0));
+  animation: lockSweep 4.2s ease-in-out 1s infinite; }
+@keyframes lockSweep { 0% { transform: translateX(0) skewX(-18deg); } 45%,100% { transform: translateX(420%) skewX(-18deg); } }
+.tier.lock .ic svg { animation: lockNudge 3.4s ease-in-out .6s infinite; }
+@keyframes lockNudge { 0%,86%,100% { transform: rotate(0); } 90% { transform: rotate(-11deg); } 94% { transform: rotate(9deg); } }
+
+/* progress toward the unlock */
+.prog { margin-top: 16px; }
+.prog .row { display: flex; align-items: baseline; justify-content: space-between; font-size: 11px; color: var(--dim); }
+.prog .row b { color: var(--ink); font-weight: 700; }
+.bar { margin-top: 7px; height: 7px; border-radius: 9999px; background: var(--muted); overflow: hidden; position: relative; }
+.bar i { display: block; height: 100%; width: 0; border-radius: 9999px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2)); animation: fill 1.5s cubic-bezier(.22,.61,.36,1) .5s both; }
+@keyframes fill { from { width: 0; } to { width: 34%; } }
+.bar::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.26), rgba(255,255,255,0));
+  transform: translateX(-100%); animation: barSheen 2.6s ease-in-out 2s infinite; }
+@keyframes barSheen { 0% { transform: translateX(-100%); } 55%,100% { transform: translateX(240%); } }
+.nudge { margin: 14px 0 0; font-size: 12px; line-height: 1.5; color: var(--dim); }
+.nudge b { color: var(--ink); font-weight: 700; }
+
+/* ---------- game card (reference: p-5, h-16 w-16 rounded-2xl icon, divider, how-it-works) ---------- */
+.game { margin-top: 16px; padding: 20px; }
+.grow { display: flex; align-items: center; gap: 16px; }
+/* CSS-drawn game tile - deliberately NOT a third-party app icon. See the setup doc. */
+.gtile { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 16px; position: relative; overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,.4); background: linear-gradient(145deg, #2b1263, #6701ea 55%, #9d4bff); }
+.gtile span { position: absolute; border-radius: 4px; }
+.gtile span:nth-child(1) { width: 17px; height: 17px; left: 11px; top: 11px; background: #ffd34d; animation: blk 3.6s ease-in-out infinite; }
+.gtile span:nth-child(2) { width: 17px; height: 17px; right: 11px; top: 11px; background: #4dd7ff; animation: blk 3.6s ease-in-out .45s infinite; }
+.gtile span:nth-child(3) { width: 17px; height: 17px; left: 11px; bottom: 11px; background: #ff6f9d; animation: blk 3.6s ease-in-out .9s infinite; }
+.gtile span:nth-child(4) { width: 17px; height: 17px; right: 11px; bottom: 11px; background: #7dffa8; animation: blk 3.6s ease-in-out 1.35s infinite; }
+@keyframes blk { 0%,100% { transform: scale(1); opacity: .95; } 50% { transform: scale(.82); opacity: .6; } }
+.gname { font-size: 16px; font-weight: 700; }
+.gmeta { margin-top: 2px; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dim); }
+.gpay { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--success); }
+.rule { margin: 20px 0; height: 1px; background: var(--border); }
+.steps { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.steps li { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+.steps .n { flex: 0 0 24px; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  background: rgba(103,1,234,.15); color: var(--brand-2); font-size: 12px; font-weight: 700; }
+
+/* ---------- stats (reference: grid-cols-3 divide-x py-4) ---------- */
+.stats { margin-top: 16px; display: grid; grid-template-columns: repeat(3,1fr); padding: 16px 0; }
+.stats > div { text-align: center; }
+.stats > div + div { border-left: 1px solid var(--border); }
+.stats .v { font-size: 18px; font-weight: 900; }
+.stats .k { margin-top: 2px; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); }
+
+/* ---------- legal (reference: mt-5 px-2 text-[10px] + footer links) ---------- */
+.legal { margin: 20px 0 0; padding: 0 8px; text-align: center; font-size: 10px; line-height: 1.625; color: rgba(160,160,171,.6); }
+.flinks { margin-top: 12px; display: flex; justify-content: center; gap: 16px; font-size: 11px; }
+.flinks a { color: rgba(160,160,171,.7); text-decoration: none; }
+
+/* ---------- fixed bottom bar (reference: border-t bg-background/95 backdrop-blur-md pb-5 pt-3) ---------- */
+.dock { position: fixed; inset-inline: 0; bottom: 0; z-index: 20; border-top: 1px solid var(--border);
+  background: rgba(13,13,17,.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.dock .in { margin: 0 auto; width: 100%; max-width: 448px; padding: 12px 16px calc(20px + env(safe-area-inset-bottom, 0px)); }
+.avail { margin: 0 0 10px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; font-weight: 700; }
+.avail .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand-2); animation: blip 2s cubic-bezier(.4,0,.6,1) infinite; }
+.storerow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.store { -webkit-appearance: none; appearance: none; cursor: pointer; font-family: inherit;
+  display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; padding: 12px 8px; text-align: left;
+  border: 1px solid var(--border); background: var(--secondary); color: var(--ink);
+  transition: transform .14s ease, filter .2s ease; position: relative; overflow: hidden; }
+.store:active { transform: scale(.975); }
+.store svg { width: 20px; height: 20px; flex: 0 0 20px; }
+.store .l1 { display: block; font-size: 9px; color: var(--dim); }
+.store .l2 { display: block; font-size: 14px; font-weight: 700; }
+.store.play { border-color: transparent; background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  box-shadow: 0 10px 30px -10px rgba(103,1,234,.8); animation: playPulse 3s ease-in-out infinite; }
+.store.play .l1 { color: rgba(255,255,255,.8); } .store.play .l2 { color: #fff; }
+.store.play svg { fill: #fff; }
+@keyframes playPulse { 0%,100% { box-shadow: 0 10px 30px -10px rgba(103,1,234,.8); } 50% { box-shadow: 0 14px 40px -8px rgba(157,75,255,.95); } }
+.store.play::after { content: ''; position: absolute; top: -50%; left: -55%; width: 38%; height: 200%; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.34), rgba(255,255,255,0));
+  animation: storeSheen 3.6s ease-in-out 1.4s infinite; }
+@keyframes storeSheen { 0% { transform: translateX(0) skewX(-20deg); } 42%,100% { transform: translateX(420%) skewX(-20deg); } }
+.store .lbl { position: relative; z-index: 1; }
+
+/* =========================================================================
+   FINAL-CTA POPUP - added block. The outbound fires from in here.
+   ========================================================================= */
+.ovl { position: fixed; inset: 0; z-index: 60; display: none; align-items: center; justify-content: center;
+  padding: 20px; background: rgba(5,5,8,.74); -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); }
+.ovl.on { display: flex; animation: ovlIn .22s ease both; }
+@keyframes ovlIn { from { opacity: 0; } to { opacity: 1; } }
+.sheet { width: 100%; max-width: 372px; border: 1px solid var(--border); background: var(--card);
+  border-radius: 22px; padding: 24px 20px 20px; text-align: center; position: relative; overflow: hidden;
+  animation: sheetIn .34s cubic-bezier(.22,.61,.36,1) both; }
+@keyframes sheetIn { from { opacity: 0; transform: translateY(18px) scale(.965); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.sheet::before { content: ''; position: absolute; inset-inline: 0; top: 0; height: 130px; pointer-events: none;
+  background: radial-gradient(ellipse at top, rgba(103,1,234,.32), transparent 72%); }
+.sheet > * { position: relative; }
+.x { position: absolute; top: 12px; right: 12px; z-index: 2; width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--secondary); color: var(--dim);
+  font-size: 15px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.sheet .kick { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: var(--warn); }
+.sheet h2 { margin: 10px 0 0; font-size: 22px; font-weight: 900; line-height: 1.18; letter-spacing: -.02em; }
+.sheet h2 .hl { color: var(--brand-2); }
+.sheet p { margin: 10px 0 0; font-size: 13px; line-height: 1.55; color: var(--dim); }
+.mini { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; text-align: left; }
+.mini li { display: flex; align-items: center; gap: 9px; font-size: 12.5px; padding: 9px 11px; border-radius: 11px;
+  border: 1px solid var(--border); background: var(--secondary); animation: miniIn .4s cubic-bezier(.22,.61,.36,1) both; }
+.mini li:nth-child(1) { animation-delay: .10s } .mini li:nth-child(2) { animation-delay: .17s } .mini li:nth-child(3) { animation-delay: .24s }
+@keyframes miniIn { from { opacity: 0; transform: translateX(-9px); } to { opacity: 1; transform: translateX(0); } }
+.mini svg { width: 14px; height: 14px; flex: 0 0 14px; }
+.mini .ok svg { fill: var(--success); } .mini .no { border-color: rgba(255,180,58,.34); }
+.mini .no svg { fill: var(--warn); } .mini .no b { color: var(--warn); }
+.go { -webkit-appearance: none; appearance: none; border: none; cursor: pointer; font-family: inherit;
+  margin-top: 18px; display: block; width: 100%; padding: 16px 18px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff;
+  font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px;
+  box-shadow: 0 12px 30px -8px rgba(103,1,234,.8); position: relative; overflow: hidden;
+  transition: transform .14s ease; animation: goPulse 2.6s ease-in-out infinite; }
+.go:active { transform: scale(.98); }
+@keyframes goPulse { 0%,100% { box-shadow: 0 12px 30px -8px rgba(103,1,234,.8); } 50% { box-shadow: 0 16px 42px -6px rgba(157,75,255,.95); } }
+.go::after { content: ''; position: absolute; top: -50%; left: -55%; width: 40%; height: 200%; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.36), rgba(255,255,255,0));
+  animation: storeSheen 3.4s ease-in-out 1s infinite; }
+.go .lbl { position: relative; z-index: 1; }
+.fine { margin: 11px 0 0; font-size: 10px; color: rgba(160,160,171,.6); }
+
+/* ---------- scroll reveal (added) ---------- */
+.rv { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s cubic-bezier(.22,.61,.36,1); }
+.rv.in { opacity: 1; transform: translateY(0); }
+
+/* ---------- mobile ladder: 400 / 360 / 340 + short viewport ---------- */
+@media (max-width: 400px) {
+  h1 { font-size: 33px; }
+  .hero { padding: 28px 20px; }
+  .ladder, .game { padding: 18px; }
+  .rate { gap: 6px; padding: 6px 10px; font-size: 11.5px; }
+}
+@media (max-width: 360px) {
+  h1 { font-size: 30px; }
+  .sub { font-size: 13px; }
+  .rate .s2 { display: none; }           /* the reviews count is the first thing to go */
+  .tier .t2 { font-size: 10.5px; }
+  .store .l2 { font-size: 13px; }
+  .stats .v { font-size: 16px; }
+}
+@media (max-width: 340px) {
+  h1 { font-size: 27px; }
+  .shell { padding-inline: 12px; }
+  .tier { padding: 10px; gap: 10px; }
+  .tier .ic { flex-basis: 30px; width: 30px; height: 30px; }
+  .tier .tag { font-size: 9px; padding: 3px 6px; }
+  .gtile { flex-basis: 56px; width: 56px; height: 56px; }
+  .store { gap: 6px; padding: 11px 6px; }
+  .store .l2 { font-size: 12px; }
+}
+@media (max-height: 700px) {
+  .hero { padding-top: 24px; padding-bottom: 24px; }
+  .appicon, .iconwrap { width: 68px; }
+  .appicon { height: 68px; }
+  h1 { font-size: 31px; }
+  .sub { margin-top: 12px; }
+  .live { margin-top: 15px; }
+}
+
+/* ---------- reduced motion. `*` does NOT match pseudo-elements, so every animated
+             ::before / ::after has to be named explicitly. ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .tier.lock::after, .bar::after, .store.play::after, .go::after { display: none; }
+  .iconwrap::before { opacity: 1; transform: translate(-50%,-50%); }
+  .bar i { width: 34%; }
+  .stars svg, .mini li, .toast div { opacity: 1; transform: none; }
+  .rv { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wash" aria-hidden="true"><i></i><i></i></div>
+
+<div class="shell">
+
+  <!-- toast strip. CLAIM: invented member names + payout amounts, carried over from the reference. -->
+  <div class="toast" id="toast" aria-live="off"><div></div></div>
+
+  <section class="card hero rv">
+    <span class="iconwrap"><img class="appicon" src="data:image/webp;base64,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" alt="Playful Rewards" width="80" height="80"></span>
+
+    <!-- CLAIM: App Store rating + review count, carried over from the reference verbatim.
+         The real figures are 4.6 and 113,000 ratings - see the setup doc. -->
+    <div class="rate">
+      <span class="stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </span>
+      <span class="n">4.7</span><span class="s">· App Store</span><span class="s2">(50K+ reviews)</span>
+    </div>
+
+    <h1>Get paid<br><span class="hl">to play</span></h1>
+    <p class="sub">Earn real cash playing games, completing offers, and testing apps. Cash out anytime — no minimum.</p>
+
+    <div class="live"><span class="dot"></span><span id="liveN">2,017 people earning right now</span></div>
+  </section>
+
+  <!-- ================= REWARD LADDER (added) ================= -->
+  <section class="card ladder rv">
+    <p class="eyebrow" style="text-align:center">Your reward ladder</p>
+    <ul class="tiers">
+      <li class="tier done">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+        <span class="tx"><span class="t1">Level 1 · Play partner games</span><span class="t2">Open on signup. Coins on every session.</span></span>
+        <span class="tag">Open</span>
+      </li>
+      <li class="tier done">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+        <span class="tx"><span class="t1">Level 2 · Offers &amp; surveys</span><span class="t2">Higher coin rates than games alone.</span></span>
+        <span class="tag">Open</span>
+      </li>
+      <li class="tier lock">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm3 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg></span>
+        <span class="tx"><span class="t1">Level 3 · Paid to scroll</span><span class="t2">The top tier. Unlocks after your first 3 offers.</span></span>
+        <span class="tag">Locked</span>
+      </li>
+    </ul>
+
+    <div class="prog">
+      <div class="row"><span>Progress to <b>Paid to scroll</b></span><span><b>1</b> / 3 offers</span></div>
+      <div class="bar"><i></i></div>
+    </div>
+
+    <!-- CLAIM: this frames paid-to-scroll as a reward the app pays. See the setup doc - the
+         developer has publicly stated they do not pay for scrolling TikTok. -->
+    <p class="nudge">Members who clear <b>Level 2</b> unlock <b>Paid to scroll</b> — the highest-paying activity in the app. Start with a game, finish three offers, and it opens automatically.</p>
+  </section>
+
+  <!-- ================= game card + how it works (reference 1:1) ================= -->
+  <section class="card game rv">
+    <div class="grow">
+      <span class="gtile" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+      <div>
+        <p class="gname">Block Blast</p>
+        <p class="gmeta">
+          <span class="stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </span>4.8 · Top rated
+        </p>
+        <!-- CLAIM: hourly rate, carried over from the reference. Unverified against Glitchy. -->
+        <p class="gpay">Pay: <span class="cur">£</span>26/hr</p>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+
+    <p class="eyebrow">How it works</p>
+    <ol class="steps">
+      <li><span class="n">1</span><span>Sign up on Playful Rewards (select 21+)</span></li>
+      <li><span class="n">2</span><span>Play games &amp; complete offers</span></li>
+      <li><span class="n">3</span><span>Unlock paid to scroll, then withdraw</span></li>
+    </ol>
+  </section>
+
+  <!-- ================= stats (reference 1:1) ================= -->
+  <!-- CLAIM: all three figures carried over from the reference. Unverified against Glitchy. -->
+  <section class="card stats rv">
+    <div><p class="v"><span class="cur">£</span>50M+</p><p class="k">Paid out</p></div>
+    <div><p class="v">4.7★</p><p class="k">App rating</p></div>
+    <div><p class="v"><span class="cur">£</span>0</p><p class="k">To join</p></div>
+  </section>
+
+  <p class="legal">Availability, rewards, and eligibility may vary by user, location, and completed activity. Results are not guaranteed and are based on individual participation. Earnings vary by offer.</p>
+  <div class="flinks"><a href="#" id="pp">Privacy Policy</a><a href="#" id="tos">Terms of Service</a></div>
+</div>
+
+<!-- ================= fixed bottom store bar (reference 1:1) ================= -->
+<div class="dock">
+  <div class="in">
+    <p class="avail"><span class="dot"></span>Available now on iOS and Android</p>
+    <div class="storerow">
+      <button class="store" type="button" id="btnIos">
+        <svg viewBox="0 0 24 24" fill="#fafafa"><path d="M17.05 12.54a4.3 4.3 0 0 1 2.06-3.62 4.46 4.46 0 0 0-3.5-1.9c-1.5 0-2.1.71-3.16.71-1.09 0-1.9-.7-3.2-.7a4.74 4.74 0 0 0-4.02 2.45c-1.38 2.4-.36 5.95 1 7.9.66.95 1.45 2.02 2.49 1.98 1-.04 1.37-.64 2.57-.65 1.19 0 1.53.66 2.57.64 1.04-.02 1.76-.98 2.42-1.94a8.5 8.5 0 0 0 1.07-2.2 4.16 4.16 0 0 1-2.3-3.67zM14.6 5.63a4.2 4.2 0 0 0 .98-3 4.3 4.3 0 0 0-2.77 1.45 3.95 3.95 0 0 0-1 2.92 3.62 3.62 0 0 0 2.8-1.37z"/></svg>
+        <span class="lbl"><span class="l1">Download on the</span><span class="l2">App Store</span></span>
+      </button>
+      <button class="store play" type="button" id="btnAnd">
+        <svg viewBox="0 0 24 24"><path d="M4.2 2.6a1 1 0 0 0-.45.85v17.1a1 1 0 0 0 .45.85l9.2-9.4-9.2-9.4zm10.5 8.1 2.62-2.68-8.1-4.6 5.48 7.28zm0 2.6L9.22 20.6l8.1-4.62-2.62-2.68zm3.9-1.3 2.62-1.5a1 1 0 0 0 0-1.74l-2.6-1.48-2.42 2.35 2.4 2.37z"/></svg>
+        <span class="lbl"><span class="l1">Get it on</span><span class="l2">Google Play</span></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FINAL-CTA POPUP (added) ================= -->
+<div class="ovl" id="ovl" role="dialog" aria-modal="true" aria-labelledby="ovlH">
+  <div class="sheet">
+    <button class="x" type="button" id="ovlX" aria-label="Close">&times;</button>
+    <p class="kick">One last thing</p>
+    <h2 id="ovlH">Start with games to<br><span class="hl">unlock the good stuff</span></h2>
+    <p>Your account opens on Level 1. Finish your first three offers and the top tier opens on its own.</p>
+    <ul class="mini">
+      <li class="ok"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>Games &amp; app testing — <b>open now</b></span></li>
+      <li class="ok"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>Offers &amp; surveys — <b>open now</b></span></li>
+      <li class="no"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm3 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg><span>Paid to scroll — <b>3 offers away</b></span></li>
+    </ul>
+    <button class="go" type="button" id="goBtn"><span class="lbl">Continue</span></button>
+    <p class="fine">Free to join. Rewards vary by offer and location.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- sub ID ----------
+     BOT LAUNCH (Spartis, TRAE): the launcher writes campid onto the Carrd, the /r cloaker
+     forwards it here. s1/s2/sub1 are accepted only so a hand-built test link still resolves.
+     This page emits ?campid=, never ?source= - /c reads campid regardless of what the Offer
+     Links row displays. An empty sub stays empty; never substitute a placeholder. */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('campid') || QP.get('s1') || QP.get('s2') || QP.get('sub1') || '';
+  }
+
+  /* ---------- first-party beacon ---------- */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'plf-uk-rs-glt';
+  var sent = {};
+  function hit(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+    try {
+      if (ev === 'claim' && navigator.sendBeacon) navigator.sendBeacon(u);
+      else new Image().src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  hit('load');
+  ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(function (e) {
+    window.addEventListener(e, function () { hit('human'); }, { once: true, passive: true });
+  });
+
+  /* ---------- rotating toast. Geo-matched pool: GB flags + UK-shaped names. ---------- */
+  var POOL = [
+    ['Sarah M.', '45.00'], ['Liam O.', '15.00'], ['Chloe W.', '32.00'], ['Callum B.', '12.00'],
+    ['Aisha K.', '38.00'], ['Ollie T.', '18.00'], ['Megan H.', '25.00'], ['Ruby F.', '9.00'],
+    ['Harry P.', '27.00'], ['Nadia R.', '14.00'], ['Ellie J.', '22.00'], ['Josh D.', '20.00']
+  ];
+  var CUR = '£';
+  var host = document.getElementById('toast'), ti = Math.floor(Math.random() * POOL.length);
+  function toast() {
+    var e = POOL[ti % POOL.length]; ti++;
+    host.innerHTML = '<div>\u{1F1EC}\u{1F1E7} <b>' + e[0] + '</b> just earned <span class="amt">' +
+      CUR + e[1] + '</span> — paid instantly</div>';
+  }
+  toast();
+  setInterval(toast, 4200);
+
+  /* ---------- live counter drifts, so it never reads as a static figure ---------- */
+  var ln = document.getElementById('liveN'), lv = 1900 + Math.floor(Math.random() * 260);
+  function live() {
+    lv += Math.floor(Math.random() * 15) - 6;
+    if (lv < 1780) lv = 1780; if (lv > 2260) lv = 2260;
+    ln.textContent = lv.toLocaleString('en-GB') + ' people earning right now';
+  }
+  live();
+  setInterval(live, 3600);
+
+  /* ---------- scroll reveal ---------- */
+  var rv = [].slice.call(document.querySelectorAll('.rv'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .06 });
+    rv.forEach(function (el, i) { el.style.transitionDelay = Math.min(i * 70, 280) + 'ms'; io.observe(el); });
+  } else {
+    rv.forEach(function (el) { el.classList.add('in'); });
+  }
+  // depth signal once the ladder is on screen
+  var lad = document.querySelector('.ladder');
+  if (lad && 'IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { hit('ladder'); io2.disconnect(); }
+    }, { threshold: .4 });
+    io2.observe(lad);
+  }
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 420) hit('deep');
+  }, { passive: true });
+
+  /* ---------- the popup. Both store buttons open it; nothing navigates from them. ---------- */
+  var ovl = document.getElementById('ovl');
+  function open_() {
+    if (ovl.classList.contains('on')) return;
+    ovl.classList.add('on'); hit('cta');
+    document.body.style.overflow = 'hidden';
+  }
+  function close_() { ovl.classList.remove('on'); document.body.style.overflow = ''; }
+  document.getElementById('btnIos').addEventListener('click', open_);
+  document.getElementById('btnAnd').addEventListener('click', open_);
+  document.getElementById('ovlX').addEventListener('click', close_);
+  ovl.addEventListener('click', function (e) { if (e.target === ovl) close_(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close_(); });
+  document.getElementById('pp').addEventListener('click', function (e) { e.preventDefault(); });
+  document.getElementById('tos').addEventListener('click', function (e) { e.preventDefault(); });
+
+  /* ---------- CLAIM -> outbound. Spartis SHORT CODE, never a network URL.
+     The real Glitchy link and the Forward Param live in the Offer Links tab behind
+     "playful-uk-rs-glt-off", so the offer repoints without a redeploy and no advertiser URL
+     appears in this page's source. Emits ?campid=, never ?source=. ---------- */
+  var going = false;
+  document.getElementById('goBtn').addEventListener('click', function () {
+    if (going) return; going = true;
+    hit('claim');
+    var href = 'https://buenohoodies.com/c/playful-uk-rs-glt-off?campid=' + encodeURIComponent(subid());
+    setTimeout(function () { window.location.href = href; }, 180);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" data-geo="GLB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#050505">
+<meta name="robots" content="noindex, nofollow">
+<title>Freecash &ndash; Get Paid to Play Games</title>
+<!-- Inter. The reference gets this from its Next.js font bundle; served as a static file it has
+     to be fetched, and this is the same link every other lander in this repo uses. Without it the
+     type falls back to -apple-system, which is close on iOS and visibly wrong on Android - the
+     one thing that would stop this being a true 1:1 of the reference. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Freecash - Prescott, Tier 1A - Spartis launch WITHOUT a Carrd, TRAE account.
+     The offer link is GLOBAL, so nothing in this file names a country: the geo is chosen by ad
+     targeting, not baked into a filename or a short code. First test run is US.
+
+     FLOW (differs from every other -spar build here): ad -> PRELANDER -> this lander -> short
+     code -> offer. There is no Carrd in front; the prelander URL is what goes in the ad, and
+     Spartis writes campid onto it. The prelander forwards the whole query string here, this page
+     reads it and hands it to the short code. So it is shaped like a manual funnel but it is still
+     a Spartis launch, which means the short code and the postback both still apply.
+
+     The kicker below stays DISABLED because the PRELANDER does the breakout. See the setup doc
+     for when turning it on as a fallback is the better call.
+     Design is a 1:1 port of the reference page's markup and its .fc-* stylesheet, rebuilt as a
+     single self-contained file. Layout, copy, colour, spacing, type scale, all three mobile
+     breakpoints and every original animation are the reference's. What changed is plumbing, and
+     only plumbing - each change is commented at the line where it happens:
+       1. outbound goes to the Spartis SHORT CODE, never to a network URL
+       2. sub chain is campid || s1 || s2, and an empty sub stays empty (the reference defaulted
+          to a literal "k1", which sends a fake sub on every unparametered hit)
+       3. the geo-detect fetch and the 10-language i18n table are gone - UK was never in that
+          table, so English already WAS the UK copy; dropping it removes an external request
+       4. first-party beacon added, matching every other lander in this repo
+       5. kicker is present but DISABLED, same convention as the other Freecash landers here
+     A short, additive motion pass sits at the end of the stylesheet, clearly fenced. -->
+
+<!-- TikTok In-App Browser Breakout Script -->
+<script>
+(function () {
+  return; // DISABLED - remove this line to re-enable the in-app browser breakout.
+  // NOTE: the reference page runs this ON LOAD with no session guard, so a visitor who comes
+  // back in the same TikTok session gets kicked a second time. The ttBreakout guard below is
+  // the fix, and is why this block is not a byte-copy of the reference's version.
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  if (!/tiktok|musical_ly|bytedance/i.test(ua)) return;
+  try {
+    if (sessionStorage.getItem('ttBreakout') === '1') return;
+    sessionStorage.setItem('ttBreakout', '1');
+  } catch (e) {}
+  var here = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /android/i.test(ua);
+  if (isIOS) {
+    window.location.href = 'x-safari-' + here;
+    setTimeout(function () { window.location.href = here; }, 25);
+  } else if (isAndroid) {
+    window.location.href = 'intent://' + here.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    setTimeout(function () { window.location.href = here; }, 25);
+  }
+})();
+</script>
+
+<style>
+/* ===========================================================================
+   Ported verbatim from the reference page's .fc-* stylesheet. The three unused
+   logo-container variants (.fc-tiktok-, .fc-revolut-, .fc-prograd-) were dropped
+   because this design uses only .fc-blockblast-; nothing else was removed and
+   nothing renders differently. Chromium's serialised longhand was rewritten to
+   the author shorthand where that is lossless (background-clip, min() maths).
+   =========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+
+.fc-page {
+  color: #fff; letter-spacing: -0.022em; background-color: #050505; min-height: 100vh;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400; line-height: 1.47059; position: relative; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none; user-select: none; overscroll-behavior-y: none;
+}
+
+.fc-bg-orb { filter: blur(80px); opacity: .12; pointer-events: none; z-index: 0; border-radius: 50%; position: fixed; }
+.fc-orb1 { background: radial-gradient(circle, rgba(0,255,136,.4), rgba(0,0,0,0)); width: 400px; height: 400px; animation: fcFloat1 20s ease-in-out infinite; top: -100px; left: -100px; }
+.fc-orb2 { background: radial-gradient(circle, rgba(0,213,117,.3), rgba(0,0,0,0)); width: 300px; height: 300px; animation: fcFloat2 15s ease-in-out infinite; bottom: -50px; right: -50px; }
+@keyframes fcFloat1 { 0%,100% { transform: translate(0) scale(1); } 50% { transform: translate(50px,50px) scale(1.1); } }
+@keyframes fcFloat2 { 0%,100% { transform: translate(0) scale(1); } 50% { transform: translate(-30px,-40px) scale(1.15); } }
+
+.fc-notif-zone { z-index: 100; pointer-events: none; width: calc(100% - 56px); max-width: min(360px, 100vw - 56px); height: 70px; transition: opacity .25s; position: fixed; top: 16px; left: 50%; transform: translate(-50%); }
+.fc-notif-zone.fc-notif-hidden { opacity: 0; pointer-events: none; }
+.fc-notif-toast { -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); pointer-events: auto; background: #0f1014; border: 1px solid #1e1f26; border-radius: 16px; align-items: center; gap: 12px; padding: 14px 16px; animation: fcToastIn .4s cubic-bezier(.16,1,.3,1) both; display: flex; position: absolute; top: 0; left: 0; right: 0; box-shadow: 0 8px 32px rgba(0,0,0,.6), 0 0 20px rgba(0,255,136,.15); }
+@keyframes fcToastIn { 0% { opacity: 0; transform: translateY(-20px) scale(.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.fc-notif-icon { background: rgba(0,255,136,.12); border: 1px solid rgba(0,255,136,.2); border-radius: 10px; flex-shrink: 0; justify-content: center; align-items: center; width: 36px; height: 36px; display: flex; }
+.fc-notif-icon img { border-radius: 6px; width: 24px; height: 24px; }
+.fc-notif-body { flex: 1 1 0%; min-width: 0; }
+.fc-notif-title { color: #fff; white-space: nowrap; text-overflow: ellipsis; margin-bottom: 1px; font-size: 13px; font-weight: 700; overflow: hidden; }
+.fc-notif-desc { color: #888; white-space: nowrap; text-overflow: ellipsis; font-size: 12px; overflow: hidden; }
+.fc-notif-time { color: #888; opacity: .6; flex-shrink: 0; margin-left: 2px; font-size: 10px; }
+
+.fc-age-quiz { min-height: 100vh; padding: calc(96px + env(safe-area-inset-top,0px)) 20px 40px; justify-content: center; align-items: center; display: flex; }
+.fc-quiz-container { text-align: center; z-index: 1; flex-direction: column; align-items: stretch; width: 100%; max-width: min(480px,100%); animation: fcFadeIn .6s ease-out; display: flex; position: relative; }
+@keyframes fcFadeIn { 0% { opacity: 0; transform: scale(.95); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes fcSlideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+.fc-quiz-logo-wrapper { justify-content: center; align-items: center; gap: 16px; margin-bottom: 32px; animation: fcSlideUp .5s ease-out both; display: flex; }
+.fc-quiz-logo-container { background: rgba(0,255,136,.12); border: 1px solid rgba(0,255,136,.35); border-radius: 18px; justify-content: center; align-items: center; width: 72px; height: 72px; display: flex; overflow: hidden; box-shadow: 0 0 28px rgba(0,255,136,.45), 0 12px 40px rgba(0,255,136,.25); }
+.fc-quiz-logo { object-fit: cover; border-radius: 18px; width: 72px; height: 72px; }
+.fc-logo-x { color: #888; text-transform: lowercase; font-size: 24px; font-weight: 700; }
+.fc-blockblast-logo-container { background: #1a1a2e; border: 1px solid rgba(138,43,226,.35); box-shadow: 0 0 28px rgba(138,43,226,.3), 0 12px 40px rgba(0,0,0,.25); }
+.fc-blockblast-logo-container .fc-quiz-logo { object-fit: cover; border-radius: 18px; }
+
+.fc-bonus-sticker { letter-spacing: .14em; text-transform: uppercase; color: #00ff88; background: rgba(0,255,136,.05); border: 1px solid rgba(0,255,136,.09); border-radius: 999px; justify-content: center; align-items: center; gap: 8px; width: -moz-fit-content; width: fit-content; max-width: calc(100% - 8px); margin: 0 auto 16px; padding: 6px 14px 6px 11px; font-size: 10px; font-weight: 800; animation: fcSlideUp .5s ease-out 50ms both; display: flex; box-shadow: inset 0 1px rgba(255,255,255,.03); }
+.fc-bonus-sticker-dot { background: #00ff88; border-radius: 50%; flex-shrink: 0; width: 6px; height: 6px; box-shadow: 0 0 10px rgba(0,255,136,.45); }
+.fc-bonus-sticker-text { padding-top: 1px; line-height: 1.2; }
+
+.fc-hero-title { letter-spacing: -.03em; margin: 0 0 14px; padding: 0 8px; font-size: clamp(34px, 9.5vw, 50px); font-weight: 900; line-height: 1.05; animation: fcSlideUp .55s ease-out .12s both; }
+.fc-hero-line { display: block; }
+.fc-hero-line--white { color: #fff; }
+.fc-hero-line--green { margin-top: 4px; background: linear-gradient(90deg, #fff, #00ff88); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.fc-hero-sub { color: #888; max-width: min(400px,100%); margin: 0 auto 24px; padding: 0 12px; font-size: 15px; line-height: 1.55; animation: fcSlideUp .55s ease-out .2s both; }
+
+.fc-stats-bar { background: #0f1014; border: 1px solid #1e1f26; border-radius: 16px; justify-content: space-between; align-items: stretch; gap: 0; width: 100%; max-width: min(400px,100%); margin: 0 auto 12px; padding: 16px 8px; animation: fcSlideUp .5s ease-out .28s both; display: flex; }
+.fc-stat-div { opacity: .9; background: #1e1f26; flex-shrink: 0; align-self: stretch; width: 1px; }
+.fc-stat-col { text-align: center; flex: 1 1 0%; min-width: 0; padding: 0 4px; }
+.fc-stat-val { color: #00ff88; font-size: clamp(14px, 3.8vw, 17px); font-weight: 800; line-height: 1.15; }
+.fc-stat-label { color: #888; text-transform: uppercase; letter-spacing: .08em; margin-top: 6px; font-size: 9px; font-weight: 600; line-height: 1.2; }
+
+.fc-cta { text-transform: uppercase; letter-spacing: .5px; cursor: pointer; background: linear-gradient(135deg, #00ff88, #00d175); border: 0; border-radius: 16px; justify-content: center; align-items: center; gap: 12px; width: 100%; max-width: 100%; padding: 20px; font-size: 17px; font-weight: 800; text-decoration: none; transition: .3s; animation: fcPulse 3s ease-in-out infinite; display: flex; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,255,136,.25); color: #050505 !important; font-family: inherit; }
+/* FIXED, and this is a real bug in the reference, not a port artefact: .fc-cta sets
+   `animation: fcPulse 3s infinite`, then this rule - later, same specificity - set
+   `animation: fcSlideUp` and silently overwrote animation-name. On the live reference page
+   fcPulse is declared, assigned to the CTA, and never runs anywhere; the glow the CSS
+   plainly intends is dead. Comma-pairing both in one declaration is the fix: the entrance
+   plays once, then the pulse loops from .82s (= .32s delay + .5s entrance). */
+.fc-quiz-cta { width: 100%; max-width: min(420px,100%); margin: 8px auto 20px; padding: 16px; font-size: 15px; animation: fcSlideUp .5s ease-out .32s both, fcPulse 3s ease-in-out .82s infinite; }
+.fc-cta::before { content: ''; background: linear-gradient(90deg, rgba(0,0,0,0), rgba(255,255,255,.2), rgba(0,0,0,0)); width: 100%; height: 100%; transition: left .5s; position: absolute; top: 0; left: -100%; }
+.fc-cta:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(0,255,136,.5); }
+.fc-cta:hover::before { left: 100%; }
+.fc-cta:active { transform: scale(.98); }
+@keyframes fcPulse { 0%,100% { box-shadow: 0 10px 30px rgba(0,255,136,.25); } 50% { box-shadow: 0 15px 40px rgba(0,255,136,.6); } }
+
+.fc-how-card { text-align: left; background: #0f1014; border: 1px solid #1e1f26; border-radius: 16px; width: 100%; max-width: min(420px,100%); margin: 0 auto 28px; animation: fcSlideUp .5s ease-out .35s both; overflow: hidden; }
+.fc-li { text-align: left; border-bottom: 1px solid #1e1f26; align-items: flex-start; gap: 16px; padding: 18px; display: flex; }
+.fc-li:first-of-type { border-top: none; }
+.fc-li-last { border-bottom: none !important; }
+.fc-li b { color: #fff; margin-bottom: 4px; font-size: 16px; font-weight: 700; display: block; }
+.fc-muted-text { color: #888; font-size: 13px; line-height: 1.4; }
+.fc-check { color: #050505; background: #00ff88; border-radius: 50%; flex-shrink: 0; justify-content: center; align-items: center; width: 32px; height: 32px; font-size: 15px; font-weight: 800; display: inline-flex; box-shadow: 0 0 12px rgba(0,255,136,.35); }
+
+.fc-pre-go-overlay { z-index: 200; padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)); box-sizing: border-box; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); background: rgba(0,0,0,.72); justify-content: center; align-items: center; display: flex; position: fixed; inset: 0; }
+.fc-pre-go-card { text-align: center; background: #0b0e11; border: 1px solid rgba(255,255,255,.06); border-radius: 22px; width: 100%; max-width: min(360px, 100vw - 40px); padding: 28px 22px 22px; animation: fcModalIn .25s ease-out; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,.65); }
+@keyframes fcModalIn { 0% { opacity: 0; transform: translateY(16px) scale(.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.fc-pre-go-close { cursor: pointer; color: #888; background: rgba(255,255,255,.08); border: none; border-radius: 50%; justify-content: center; align-items: center; width: 32px; height: 32px; padding: 0; font-size: 20px; line-height: 1; transition: background .15s, color .15s; display: flex; position: absolute; top: 12px; right: 14px; font-family: inherit; }
+.fc-pre-go-close:hover { color: #fff; background: rgba(255,255,255,.14); }
+.fc-pre-go-kicker { letter-spacing: .14em; text-transform: uppercase; color: #00e676; margin: 0 0 14px; font-size: 11px; font-weight: 800; }
+.fc-pre-go-title { color: #fff; letter-spacing: -.02em; margin: 0 0 12px; font-size: clamp(20px, 5.2vw, 24px); font-weight: 800; line-height: 1.28; }
+.fc-pre-go-accent { color: #00ff88; }
+.fc-pre-go-desc { color: #888; margin: 0 0 22px; font-size: 14px; line-height: 1.5; }
+.fc-pre-go-btn { color: #050505; cursor: pointer; background: linear-gradient(135deg, #00ff88, #00d175); border: 0; border-radius: 999px; width: 100%; padding: 16px 22px; font-size: 16px; font-weight: 800; transition: transform .15s, box-shadow .15s; display: block; box-shadow: 0 8px 28px rgba(0,255,136,.35); font-family: inherit; }
+.fc-pre-go-btn:active { transform: scale(.98); }
+
+@media (max-width: 480px) {
+  .fc-age-quiz { min-height: 100dvh; padding: calc(96px + env(safe-area-inset-top,0px)) 16px 20px; justify-content: flex-start; align-items: flex-start; }
+  .fc-quiz-logo-wrapper { gap: 10px; margin-bottom: 10px; }
+  .fc-quiz-logo-container, .fc-quiz-logo { border-radius: 15px; width: 56px; height: 56px; }
+  .fc-bonus-sticker { gap: 7px; margin-bottom: 8px; padding: 5px 12px 5px 10px; font-size: 9px; }
+  .fc-bonus-sticker-dot { width: 5px; height: 5px; }
+  .fc-hero-title { margin-bottom: 6px; font-size: clamp(28px, 8.5vw, 40px); }
+  .fc-hero-line--green { margin-top: 2px; }
+  .fc-hero-sub { margin-bottom: 12px; font-size: 13px; line-height: 1.45; }
+  .fc-stats-bar { margin-bottom: 12px; padding: 10px 6px; }
+  .fc-stat-val { font-size: 13px; }
+  .fc-stat-label { letter-spacing: .06em; font-size: 8px; }
+  .fc-how-card { margin-bottom: 12px; }
+  .fc-li { gap: 10px; padding: 11px 12px; }
+  .fc-li b { font-size: 14px; }
+  .fc-muted-text { font-size: 11px; line-height: 1.35; }
+  .fc-check { width: 26px; height: 26px; font-size: 13px; }
+  .fc-quiz-cta { border-radius: 14px; padding: 14px 16px; }
+  .fc-notif-toast { border-radius: 14px; gap: 10px; padding: 12px 14px; }
+  .fc-notif-icon { border-radius: 8px; width: 32px; height: 32px; }
+  .fc-notif-icon img { border-radius: 5px; width: 20px; height: 20px; }
+  .fc-notif-title { font-size: 12px; }
+  .fc-notif-desc { font-size: 11px; }
+}
+@media (max-width: 375px) {
+  .fc-age-quiz { padding: calc(92px + env(safe-area-inset-top,0px)) 12px 14px; }
+  .fc-quiz-logo-wrapper { margin-bottom: 8px; }
+  .fc-quiz-logo-container, .fc-quiz-logo { border-radius: 14px; width: 52px; height: 52px; }
+  .fc-bonus-sticker { margin-bottom: 6px; padding: 4px 10px 4px 9px; font-size: 8px; }
+  .fc-hero-title { padding: 0 4px; font-size: clamp(24px, 8vw, 34px); }
+  .fc-hero-sub { padding: 0 4px; font-size: 12px; }
+  .fc-stats-bar { padding: 10px 4px; }
+  .fc-stat-val { font-size: 12px; }
+  .fc-stat-label { font-size: 7px; }
+  .fc-quiz-cta { padding: 14px; }
+  .fc-pre-go-card { padding: 22px 16px 18px; }
+  .fc-pre-go-title { font-size: clamp(18px, 5vw, 22px); }
+}
+@media (max-width: 340px) {
+  .fc-age-quiz { padding: calc(90px + env(safe-area-inset-top,0px)) 10px 12px; }
+  .fc-quiz-logo-container, .fc-quiz-logo { border-radius: 12px; width: 46px; height: 46px; }
+  .fc-hero-title { padding: 0 4px; font-size: clamp(24px, 8vw, 34px); }
+  .fc-hero-sub { padding: 0 4px; font-size: 12px; }
+  .fc-quiz-cta { letter-spacing: .2px; gap: 6px; padding: 14px 10px; font-size: 13px; }
+  .fc-li { gap: 8px; padding: 12px 10px; }
+  .fc-li b { font-size: 13px; }
+  .fc-muted-text { font-size: 10px; }
+  .fc-check { width: 18px; height: 18px; font-size: 10px; }
+}
+
+/* ===========================================================================
+   MOTION PASS - added on top of the reference, nothing above was edited.
+   Every addition is on a NEW pseudo-element or on a property the reference does
+   not animate, so no existing animation-name is overwritten. No keyframe touches
+   width/height/top/left, so nothing reflows. The reduced-motion block at the end
+   switches all of it off - including the pseudo-elements, which the universal
+   `*` selector does NOT match.
+   =========================================================================== */
+
+/* 1. The reference's CTA sheen only fires on :hover, which never happens on a
+      phone - so the nicest thing on the page is dead weight on mobile. Put it on
+      a loop. Kept as ::after so the reference's ::before hover rule still works
+      untouched on desktop. */
+.fc-cta::after { content: ''; position: absolute; top: -50%; left: -45%; width: 38%; height: 200%; pointer-events: none; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.38), rgba(255,255,255,0)); animation: fcCtaSweep 3.6s ease-in-out infinite; }
+@keyframes fcCtaSweep { 0% { transform: translateX(0) skewX(-22deg); } 46%,100% { transform: translateX(400%) skewX(-22deg); } }
+
+/* 2. the signup-bonus dot pulses a ring, same idiom as the rest of this repo */
+.fc-bonus-sticker-dot { animation: fcDot 2s ease-in-out infinite; }
+@keyframes fcDot { 0%,100% { box-shadow: 0 0 10px rgba(0,255,136,.45), 0 0 0 0 rgba(0,255,136,.45); } 50% { box-shadow: 0 0 10px rgba(0,255,136,.45), 0 0 0 5px rgba(0,255,136,0); } }
+
+/* 3. a light sweep travels through the hero's white-to-green gradient. The
+      reference already paints that gradient; this only moves it. */
+.fc-hero-line--green { background-size: 260% 100%; animation: fcSlideUp .55s ease-out .12s both, fcHeroSweep 5s ease-in-out .7s infinite; }
+@keyframes fcHeroSweep { 0% { background-position: 100% 0; } 48%,100% { background-position: 0 0; } }
+
+/* 4. the three stat numbers spring in, staggered, after the bar itself arrives.
+      Comma-paired with the bar's own fcSlideUp on the parent, not on these. */
+.fc-stat-val { animation: fcStatPop .5s cubic-bezier(.34,1.56,.64,1) .34s both; }
+.fc-stat-col:nth-child(3) .fc-stat-val { animation-delay: .42s; }
+.fc-stat-col:nth-child(5) .fc-stat-val { animation-delay: .5s; }
+@keyframes fcStatPop { 0% { opacity: 0; transform: translateY(8px) scale(.86); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* 5. the step numbers ring out 1 -> 2 -> 3 once the card has slid up */
+.fc-check { animation: fcCheckRing 2.4s ease-out .5s; }
+.fc-li:nth-of-type(2) .fc-check { animation-delay: .65s; }
+.fc-li:nth-of-type(3) .fc-check { animation-delay: .8s; }
+@keyframes fcCheckRing { 0% { box-shadow: 0 0 12px rgba(0,255,136,.35), 0 0 0 0 rgba(0,255,136,.5); } 60%,100% { box-shadow: 0 0 12px rgba(0,255,136,.35), 0 0 0 12px rgba(0,255,136,0); } }
+
+/* 6. the two logo tiles float, offset so they never bob in sync. Comma-paired
+      with the wrapper's entrance so that entrance is not clobbered. */
+.fc-quiz-logo-container { animation: fcTileFloat 4.4s ease-in-out infinite; }
+.fc-quiz-logo-wrapper .fc-quiz-logo-container:last-of-type { animation-delay: 1.3s; }
+@keyframes fcTileFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  /* `*` does not match pseudo-elements, so the sweep has to be named explicitly
+     or it keeps looping for someone who asked for no motion. */
+  .fc-cta::after { display: none; animation: none !important; }
+  .fc-cta::before { animation: none !important; }
+  /* park everything that animates in from a hidden state at its resting value */
+  .fc-quiz-container, .fc-quiz-logo-wrapper, .fc-bonus-sticker, .fc-hero-title,
+  .fc-hero-sub, .fc-stats-bar, .fc-quiz-cta, .fc-how-card, .fc-stat-val,
+  .fc-notif-toast, .fc-pre-go-card, .fc-quiz-logo-container { opacity: 1; transform: none; }
+  .fc-hero-line--green { background-position: 0 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="fc-page">
+  <div class="fc-bg-orb fc-orb1"></div>
+  <div class="fc-bg-orb fc-orb2"></div>
+
+  <div class="fc-notif-zone" id="notifZone"></div>
+
+  <div class="fc-age-quiz">
+    <div class="fc-quiz-container">
+
+      <div class="fc-quiz-logo-wrapper">
+        <div class="fc-quiz-logo-container fc-blockblast-logo-container">
+          <img class="fc-quiz-logo" alt="Block Blast logo" src="data:image/webp;base64,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">
+        </div>
+        <span class="fc-logo-x">x</span>
+        <div class="fc-quiz-logo-container">
+          <img class="fc-quiz-logo" alt="Freecash logo" src="data:image/webp;base64,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">
+        </div>
+      </div>
+
+      <p class="fc-bonus-sticker"><span class="fc-bonus-sticker-dot"></span><span class="fc-bonus-sticker-text">$10 signup bonus</span></p>
+
+      <h1 class="fc-hero-title"><span class="fc-hero-line fc-hero-line--white">Get Paid</span><span class="fc-hero-line fc-hero-line--green">to Play Games</span></h1>
+
+      <p class="fc-hero-sub">Real cash for playing games. $10 just for signing up. Instant PayPal cashout.</p>
+
+      <div class="fc-stats-bar">
+        <div class="fc-stat-col"><div class="fc-stat-val">$200&ndash;$500+</div><div class="fc-stat-label">Weekly earnings</div></div>
+        <div class="fc-stat-div"></div>
+        <div class="fc-stat-col"><div class="fc-stat-val">500K+</div><div class="fc-stat-label">Members</div></div>
+        <div class="fc-stat-div"></div>
+        <div class="fc-stat-col"><div class="fc-stat-val">4.7&#9733;</div><div class="fc-stat-label">App Store</div></div>
+      </div>
+
+      <a href="#" class="fc-cta fc-quiz-cta" id="startBtn">Start Earning Now</a>
+
+      <div class="fc-how-card">
+        <div class="fc-li"><span class="fc-check">1</span><div><b>Sign up &amp; select 21+</b><div class="fc-muted-text">Game rewards only unlock for 21+ members. Select it at signup to access everything.</div></div></div>
+        <div class="fc-li"><span class="fc-check">2</span><div><b>Complete 2 offers to activate gaming</b><div class="fc-muted-text">A quick game or survey. Activates game earning &amp; all high-paying offers. You earn doing them.</div></div></div>
+        <div class="fc-li fc-li-last"><span class="fc-check">3</span><div><b>Get paid</b><div class="fc-muted-text">Play games anytime. Cash out to PayPal, Visa or Crypto. No minimum.</div></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="fc-pre-go-overlay" id="preGo" style="display:none">
+    <div class="fc-pre-go-card">
+      <button type="button" class="fc-pre-go-close" id="preGoClose" aria-label="Close">&times;</button>
+      <p class="fc-pre-go-kicker">Quick tip</p>
+      <h2 class="fc-pre-go-title">Select <span class="fc-pre-go-accent">21+</span> when you sign up</h2>
+      <p class="fc-pre-go-desc">This unlocks the highest-paying game offers on Freecash. Don't skip this step.</p>
+      <button type="button" class="fc-pre-go-btn" id="preGoGo">Got it &rarr; Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- sub ID ---------- */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    // Spartis writes campid onto the PRELANDER, and the prelander forwards the entire query
+    // string to this page untouched - so campid arrives here under whatever name the ad used.
+    // s1/s2 are accepted so a hand-built test link still resolves. Emits ?campid=, never ?sub1=.
+    // CHANGED FROM THE REFERENCE, deliberately: that page read campid || subID || s2 and fell back
+    // to the literal string "k1", so every hit without a param reported a fabricated sub. Here an
+    // empty sub stays empty - unmatched is recoverable, a fake sub ID is not.
+    return QP.get('campid') || QP.get('s1') || QP.get('s2') || '';
+  }
+
+  /* ---------- tracking beacon (first-party, px.trendhavenn.com) ---------- */
+  /* Not in the reference. Every other lander in this repo carries it, and without it Spartis
+     click counts are the only signal - there is no way to see where UK traffic dies. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'frrcsh-glb-t1a-pres';
+  /* Every step fires AT MOST ONCE per page view. Without this guard a second tap on the CTA logs
+     a second claim, which is how a dashboard ends up reporting claim rates above 100%. */
+  var sent = {};
+  function u(ev) { return TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE; }
+  function hit(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try { new Image().src = u(ev) + '&_=' + Date.now(); } catch (e) {}
+  }
+  function hitBeacon(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      if (navigator.sendBeacon) { navigator.sendBeacon(u(ev)); }
+      else { new Image().src = u(ev) + '&_=' + Date.now(); }
+    } catch (e) {}
+  }
+  hit('load');
+  ['scroll', 'touchstart', 'pointerdown', 'mousemove', 'keydown'].forEach(function (e) {
+    window.addEventListener(e, function () { hit('human'); }, { once: true, passive: true });
+  });
+
+  /* ---------- rotating payout toast ----------
+     Pool, timings and copy are the reference's, unchanged: 12 entries cycled in order, 12 time
+     strings cycled alongside, first toast at 1.5s, then every 4-6s, each visible for 3.5s, and
+     the whole zone fades while the visitor is scrolling. */
+  var FEED = [
+    { n: 'Jake M.',   t: 'Played games',         a: '+$14.50' },
+    { n: 'Mia R.',    t: 'Completed level 50',   a: '+$8.20'  },
+    { n: 'Chris T.',  t: 'Achieved high score',  a: '+$5.75'  },
+    { n: 'Sara L.',   t: 'Played for 30 mins',   a: '+$22.00' },
+    { n: 'Alex P.',   t: 'Beat daily challenge', a: '+$11.30' },
+    { n: 'Jordan K.', t: 'Downloaded the app',   a: '+$6.00'  },
+    { n: 'Taylor W.', t: 'Reached level 100',    a: '+$3.50'  },
+    { n: 'Morgan B.', t: 'Played games',         a: '+$18.75' },
+    { n: 'Riley S.',  t: 'Completed puzzle set', a: '+$4.25'  },
+    { n: 'Casey D.',  t: 'Unlocked new mode',    a: '+$9.00'  },
+    { n: 'Avery H.',  t: 'Played games',         a: '+$7.80'  },
+    { n: 'Quinn F.',  t: 'Beat weekly challenge',a: '+$16.25' }
+  ];
+  var TIMES = ['just now','2s ago','5s ago','just now','1s ago','3s ago','just now','4s ago','2s ago','just now','1s ago','3s ago'];
+  var ICON = document.querySelector('.fc-blockblast-logo-container .fc-quiz-logo').src;
+  var zone = document.getElementById('notifZone');
+  var fi = 0, timer = null, tick = null;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' })[c]; }); }
+
+  function showToast() {
+    var e = FEED[fi % FEED.length], when = TIMES[fi % TIMES.length];
+    fi++;
+    zone.innerHTML =
+      '<div class="fc-notif-toast">' +
+        '<div class="fc-notif-icon"><img alt="Block Blast" src="' + ICON + '"></div>' +
+        '<div class="fc-notif-body">' +
+          '<div class="fc-notif-title">' + esc(e.n) + ' earned ' + esc(e.a) + '</div>' +
+          '<div class="fc-notif-desc">' + esc(e.t) + '</div>' +
+        '</div>' +
+        '<div class="fc-notif-time">' + esc(when) + '</div>' +
+      '</div>';
+    clearTimeout(timer);
+    timer = setTimeout(function () { zone.innerHTML = ''; }, 3500);
+  }
+  setTimeout(showToast, 1500);
+  (function loop() {
+    tick = setTimeout(function () { showToast(); loop(); }, 4000 + Math.random() * 2000);
+  })();
+
+  var hideT = null;
+  window.addEventListener('scroll', function () {
+    zone.classList.add('fc-notif-hidden');
+    clearTimeout(hideT);
+    hideT = setTimeout(function () { zone.classList.remove('fc-notif-hidden'); }, 800);
+  }, { passive: true });
+
+  /* ---------- CTA -> 21+ interstitial ---------- */
+  var overlay = document.getElementById('preGo');
+  function openModal(ev) {
+    if (ev) ev.preventDefault();
+    hit('cta');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('startBtn').addEventListener('click', openModal);
+  document.getElementById('preGoClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (ev) { if (ev.target === overlay) closeModal(); });
+
+  /* ---------- CLAIM: BOT LAUNCH via Spartis ---------- */
+  /* The claim goes to the Spartis SHORT CODE, never straight to the network. The real Prescott
+     link and the Forward Param live in the Offer Links tab behind "frrcsh-glb-t1a-pres-off", so the
+     offer repoints without a redeploy - and so no advertiser URL appears in this page's source.
+     The reference page hardcodes its own network URL here, under a DIFFERENT Prescott account
+     segment than this one; nothing from it was carried over. Emits ?campid=, never ?sub1=.
+     sendBeacon so the claim hit survives the navigation away. */
+  var going = false;
+  document.getElementById('preGoGo').addEventListener('click', function () {
+    if (going) return; going = true;
+    hitBeacon('claim');
+    var href = 'https://buenohoodies.com/c/frrcsh-glb-t1a-pres-off?campid=' + encodeURIComponent(subid());
+    setTimeout(function () { window.location.href = href; }, 180);
+  });
+})();
+</script>
+</body>
+</html>

@@ -259,6 +259,53 @@ ul.ms .mv{flex:0 0 auto;font-size:1.25rem;font-weight:800;color:var(--primary)}
   animation:ctaPulse 2.6s ease-in-out infinite;
 }
 .cta:active{opacity:.9;transform:translateY(1px)}
+
+/* ---------- 21+ modal (reference: Radix dialog behind the CTA) ---------- */
+.ovl{
+  position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.8);
+  display:flex;align-items:center;justify-content:center;
+  padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));
+  opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s;
+}
+.ovl.on{opacity:1;visibility:visible}
+.modal{
+  position:relative;width:100%;max-width:24rem;max-height:100%;overflow-y:auto;
+  border-radius:24px;border:1px solid var(--border);background:var(--card);
+  text-align:center;box-shadow:0 10px 15px -3px rgba(0,0,0,.5),0 4px 6px -4px rgba(0,0,0,.5);
+  transform:scale(.95);opacity:0;transition:transform .2s ease,opacity .2s ease;
+}
+.ovl.on .modal{transform:scale(1);opacity:1}
+.modal-in{padding:32px 24px 24px}
+.modal h2{
+  margin:0;font-size:.75rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--primary);
+}
+.modal .m1{margin:16px 0 0;font-size:1.5rem;font-weight:800;line-height:1.25;color:var(--fg)}
+.modal .m1 span{color:var(--primary)}
+.modal .m2{margin:12px 0 0;font-size:.875rem;color:var(--muted-fg)}
+.modal .mcta{
+  margin-top:24px;width:100%;border:0;border-radius:9999px;background:var(--primary);
+  padding:16px;font:inherit;font-size:1rem;font-weight:700;color:#f8f8f8;cursor:pointer;
+  transition:opacity .15s cubic-bezier(.4,0,.2,1);white-space:nowrap;
+}
+.modal .mcta:active{opacity:.9}
+.modal .mx{
+  position:absolute;right:16px;top:16px;width:32px;height:32px;padding:0;
+  display:flex;align-items:center;justify-content:center;
+  border:0;background:none;color:var(--fg);opacity:.7;cursor:pointer;border-radius:4px;
+  transition:opacity .15s cubic-bezier(.4,0,.2,1);
+}
+.modal .mx:active{opacity:1}
+.modal .mx svg{width:16px;height:16px}
+@media (max-width:360px){
+  .modal-in{padding:28px 18px 20px}
+  .modal .m1{font-size:1.35rem}
+  .modal .mcta{font-size:.95rem;padding:14px}
+}
+@media (max-width:340px){
+  .modal .m1{font-size:1.25rem}
+  .modal .mcta{font-size:.9rem}
+}
 @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(63,154,111,.45)}50%{box-shadow:0 0 0 12px rgba(63,154,111,0)}}
 
 /* ---------- mobile ladder ---------- */
@@ -454,7 +501,25 @@ ul.ms .mv{flex:0 0 auto;font-size:1.25rem;font-weight:800;color:var(--primary)}
 <div class="dock">
   <div class="dock-in">
     <div class="dock-note"><i></i>Available now on iOS and Android</div>
-    <button class="cta" id="cta" type="button" data-cta="1">Download now &mdash; Claim $5 bonus</button>
+    <button class="cta" id="cta" type="button">Download now &mdash; Claim $5 bonus</button>
+  </div>
+</div>
+
+<!-- 21+ modal. In the reference the CTA does not navigate: it opens this dialog, and only
+     "Got it" goes to the offer. Same copy, same two-step. -->
+<div class="ovl" id="ovl" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-describedby="mBody">
+  <div class="modal">
+    <div class="modal-in">
+      <h2 id="mTitle">Quick Tip</h2>
+      <div id="mBody">
+        <p class="m1">Select <span>21+</span> when you sign up</p>
+        <p class="m2">This unlocks the highest-paying game offers on Freecash. Don&rsquo;t skip this step.</p>
+      </div>
+      <button class="mcta" id="mGo" type="button" data-cta="1">Got it &rarr;</button>
+    </div>
+    <button class="mx" id="mX" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </button>
   </div>
 </div>
 
@@ -497,6 +562,40 @@ ul.ms .mv{flex:0 0 auto;font-size:1.25rem;font-weight:800;color:var(--primary)}
     var t = e.target && e.target.closest ? e.target.closest('[data-cta="1"]') : null;
     if (t) go(e);
   }, false);
+
+  /* ---------- 21+ modal ----------
+     Matches the reference: the dock CTA opens the dialog rather than navigating, and only
+     "Got it" leaves for the offer. The X, Escape and a tap on the backdrop just close it. */
+  (function () {
+    var ovl = document.getElementById('ovl'),
+        cta = document.getElementById('cta'),
+        mgo = document.getElementById('mGo'),
+        mx  = document.getElementById('mX');
+    if (!ovl || !cta) return;
+    var lastFocus = null;
+
+    function open(e) {
+      if (e) e.preventDefault();
+      lastFocus = document.activeElement;
+      ovl.classList.add('on');
+      document.body.style.overflow = 'hidden';
+      beacon('tip');
+      try { mgo.focus({ preventScroll: true }); } catch (err) {}
+    }
+    function close() {
+      ovl.classList.remove('on');
+      document.body.style.overflow = '';
+      try { if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); } catch (err) {}
+    }
+
+    cta.addEventListener('click', open, false);
+    if (mx) mx.addEventListener('click', close, false);
+    // backdrop only - a tap inside the card must not close it
+    ovl.addEventListener('click', function (e) { if (e.target === ovl) close(); }, false);
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.keyCode === 27) && ovl.classList.contains('on')) close();
+    }, false);
+  })();
 
   /* ================= live counter ================= */
   (function () {

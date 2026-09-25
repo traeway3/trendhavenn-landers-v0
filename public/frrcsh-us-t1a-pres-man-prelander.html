@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-geo="US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e12">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Get Started</title>
+<meta name="description" content="One quick step to continue.">
+
+<!--
+  frrcsh-us-t1a-pres-man-prelander.html  ->  https://www.trendhavenn.com/frrcsh-us-t1a-pres-man-prelander.html
+  Freecash - Prescott, US, Tier 1A. MANUAL launch: no Spartis, no Carrd, no short code
+  anywhere in this funnel. THIS is the page the ad URL points at. It hands off to the main
+  lander at /frrcsh-us-t1a-pres-man.html, which goes straight to Prescott.
+
+  THE KICKER IS THE ESCALATING ONE from the myrewardscorner reference (pre-lp-example.html),
+  not the single-shot kicker the earlier funnels shipped. The difference is the whole point
+  of this build:
+
+    iOS       1. x-safari-https://          Safari's own scheme
+              2. googlechromes://           +350ms, Chrome for iOS if installed
+    Android   1. intent:// ... package=com.android.chrome ... S.browser_fallback_url=...
+              2. intent:// ... S.browser_fallback_url=...        +350ms, default browser
+
+    - Chrome is named BY PACKAGE on the first Android attempt. An intent with no package
+      lets the system pick a handler, and inside an in-app browser the host app often IS
+      one - so the "escape" hands the URL straight back to the app it was escaping.
+    - S.browser_fallback_url on both Android attempts, so a device with no handler lands
+      on the lander instead of a dead page, on a click already paid for.
+    - The cancel listeners (pagehide / blur / visibilitychange) are registered BEFORE the
+      first jump, never after. Registering after leaves a window in which the app switch
+      completes before the listener exists, the cancel never runs, and the visitor is
+      forwarded TWICE - once into Safari and once inside the webview behind it.
+    - visibilitychange, not pagehide alone. x-safari-https:// opens Safari as a SEPARATE
+      APP, so this page is backgrounded rather than unloaded and pagehide may never fire.
+      A pagehide-only cancel would fire the rescue on every SUCCESSFUL breakout.
+    - The first attempt fires SYNCHRONOUSLY inside the tap. iOS only honours a scheme jump
+      while the user gesture is still active; anything deferred is already too late.
+    - If every scheme is refused, the page SAYS SO and re-enables the button rather than
+      sitting on "Opening..." forever. That hang is what the old single-shot kicker did to
+      a click that had already been paid for.
+
+  DESKTOP GATE: platform 'other' navigates to the plain URL. The reference has no such
+  gate and relies on its rescue timer; on desktop that means a dead button for ~1.6s.
+
+  ON-LOAD BREAKOUT: deliberately absent. Tap-triggered only, matching the reference and
+  matching every prelander currently shipped on this account.
+
+  Copy is neutral per the project instruction - no "Open in Browser", no Safari/Chrome/
+  Secure chips, no external-link icon. The reference carries all three; they are the
+  signals TikTok's classifiers flag, and they stay off this page.
+-->
+
+<style>
+  :root{
+    --bg:#0b0e12; --card:#12161d; --line:#242b36;
+    --ink:#f7f9fb; --dim:#8d97a6;
+    --grn:#20e37e; --grn-2:#12b765; --grn-soft:rgba(32,227,126,.10);
+    --vio:#7b5cff; --vio-2:#5a3fd6;
+    --r:18px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:400 16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh; min-height:-webkit-fill-available;
+    display:flex; align-items:center; justify-content:center;
+    overflow-x:hidden; position:relative;
+  }
+
+  /* --- subtle background movement: green/violet wash + drifting motes --- */
+  body::before{
+    content:''; position:fixed; inset:-20%; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(38% 28% at 22% 14%, rgba(32,227,126,.14) 0%, transparent 62%),
+      radial-gradient(42% 30% at 82% 88%, rgba(123,92,255,.13) 0%, transparent 64%);
+    animation:wash 17s ease-in-out infinite alternate;
+  }
+  @keyframes wash{ from{transform:translate3d(-2%,-1%,0) scale(1)} to{transform:translate3d(2%,2%,0) scale(1.06)} }
+
+  .fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .fx i{
+    position:absolute; bottom:-14px; width:5px; height:5px; border-radius:50%;
+    background:var(--grn); opacity:0; animation:rise linear infinite;
+  }
+  .fx i.lf{
+    width:9px;height:9px;border-radius:64% 36% 58% 42%/48% 56% 44% 52%;
+    background:linear-gradient(135deg,var(--vio),var(--vio-2));
+  }
+  @keyframes rise{
+    0%{opacity:0;transform:translate3d(0,0,0) rotate(0)}
+    12%{opacity:.5}
+    82%{opacity:.34}
+    100%{opacity:0;transform:translate3d(16px,-104vh,0) rotate(280deg)}
+  }
+
+  .wrap{
+    position:relative; z-index:1;
+    width:100%; max-width:420px; margin:0 auto;
+    padding:40px 24px calc(40px + env(safe-area-inset-bottom));
+    text-align:center;
+  }
+
+  /* --- staggered top-to-bottom entrance --- */
+  .up{opacity:0;transform:translateY(16px);animation:up .52s cubic-bezier(.22,.9,.3,1) forwards}
+  @keyframes up{to{opacity:1;transform:none}}
+  .d1{animation-delay:.05s} .d2{animation-delay:.16s} .d3{animation-delay:.27s} .d4{animation-delay:.38s}
+
+  .tile{
+    width:74px;height:74px;margin:0 auto 20px;border-radius:20px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--grn-soft); border:1px solid rgba(32,227,126,.20);
+  }
+  /* Both animations in ONE declaration. Declaring `animation` on .tile alone would
+     override the entrance animation .up provides, leaving the tile stuck at opacity:0 —
+     invisible but still holding its place in the layout. */
+  .tile.up{
+    animation:up .52s cubic-bezier(.22,.9,.3,1) .05s forwards,
+              tileGlow 3s ease-in-out .6s infinite;
+  }
+  @keyframes tileGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(32,227,126,0)}
+    50%{box-shadow:0 0 22px 2px rgba(32,227,126,.20)}
+  }
+  .tile svg{width:30px;height:30px;stroke:var(--grn);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+  h1{margin:0 0 12px;font-size:30px;font-weight:800;letter-spacing:-.6px;line-height:1.14}
+  h1 .hl{color:var(--grn)}
+  p.sub{margin:0 auto 26px;max-width:320px;font-size:15px;line-height:1.6;color:var(--dim)}
+  p.sub b{color:var(--ink);font-weight:700}
+
+  .cta{
+    display:block;width:100%;border:0;cursor:pointer;
+    padding:17px 24px;border-radius:14px;
+    background:linear-gradient(180deg,var(--grn) 0%,var(--grn-2) 100%);
+    color:#052012; font:800 15px/1 Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase;
+    animation:up .52s cubic-bezier(.22,.9,.3,1) .38s forwards, ctaPulse 1.9s ease-in-out .95s infinite;
+    opacity:0; transform:translateY(16px);
+  }
+  @keyframes ctaPulse{
+    0%,100%{box-shadow:0 8px 26px rgba(32,227,126,.24)}
+    50%{box-shadow:0 10px 38px rgba(32,227,126,.46)}
+  }
+  .cta:disabled{cursor:default;filter:saturate(.55) brightness(.82);animation:up .52s cubic-bezier(.22,.9,.3,1) .38s forwards}
+
+  .dots{display:inline-block;width:1.2em;text-align:left}
+  .dots::after{content:'';animation:dots 1.1s steps(4,end) infinite}
+  @keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+
+  .note{margin:16px 0 0;font-size:12px;color:#5f6877;min-height:16px}
+
+  @media (max-height:640px){
+    .wrap{padding:24px 22px}
+    .tile{width:62px;height:62px;margin-bottom:14px;border-radius:17px}
+    .tile svg{width:26px;height:26px}
+    h1{font-size:26px}
+    p.sub{margin-bottom:20px;font-size:14px}
+    .cta{padding:15px 22px}
+  }
+  @supports (padding:max(0px)){
+    .wrap{padding-bottom:max(40px, env(safe-area-inset-bottom))}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important}
+    .up,.cta{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="fx" aria-hidden="true">
+  <i style="left:11%;animation-duration:15s;animation-delay:0s"></i>
+  <i style="left:34%;animation-duration:19s;animation-delay:4s"></i>
+  <i style="left:57%;animation-duration:16s;animation-delay:8s"></i>
+  <i style="left:79%;animation-duration:21s;animation-delay:2s"></i>
+  <i class="lf" style="left:20%;animation-duration:24s;animation-delay:1s"></i>
+  <i class="lf" style="left:48%;animation-duration:27s;animation-delay:9s"></i>
+  <i class="lf" style="left:72%;animation-duration:22s;animation-delay:5s"></i>
+  <i class="lf" style="left:89%;animation-duration:29s;animation-delay:14s"></i>
+</div>
+
+<main class="wrap">
+  <div class="tile up" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
+  </div>
+  <h1 class="up d2">One quick <span class="hl">step</span></h1>
+  <p class="sub up d3" id="sub">Tap continue and we'll take you the rest of the way.</p>
+  <button class="cta" id="ctaBtn" type="button">Continue</button>
+  <p class="note" id="note"></p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= destination =================
+     The main lander, absolute. Both breakout transforms need an absolute https URL to
+     rewrite, so this cannot be a relative path. */
+  var DEST = 'https://www.trendhavenn.com/frrcsh-us-t1a-pres-man.html';
+
+  /* ================= sub ID =================
+     sub1 FIRST: on a manual build nothing upstream normalises the param name, and sub1 is
+     what Prescott reads. The chain stays wide because the ad URL is written by hand. */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('sub1') || QP.get('campid') || QP.get('s1') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+
+  /* ================= beacon (first-party, px.trendhavenn.com) =================
+     load -> human -> continue, plus `rescue`. `rescue` is new and it is the reason this
+     page exists in this form: it is the DIRECT count of how often the browser hand-off is
+     swallowed by the in-app webview. That number is hop 1 of the funnel, the one part of
+     the 60% drop nothing in the dashboard could see before. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'frrcsh-us-t1a-pres-man-pre', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon(u);
+      else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  function plat() {
+    var ua = navigator.userAgent || '';
+    return /iPad|iPhone|iPod/.test(ua) ? 'ios' : /android/i.test(ua) ? 'android' : 'other';
+  }
+
+  /* The ENTIRE inbound query string rides across, untouched, so the click ID survives
+     under whatever name the ad used. */
+  function out() {
+    var d = DEST, q = window.location.search;
+    if (q) d += (d.indexOf('?') === -1 ? '?' : '&') + q.slice(1);
+    return d;
+  }
+
+  var btn  = document.getElementById('ctaBtn');
+  var note = document.getElementById('note');
+  var sub  = document.getElementById('sub');
+  var tried = false;
+
+  function go() {
+    var dest = out();
+    var bare = dest.replace(/^https?:\/\//, '');
+    var p = plat();
+
+    /* Desktop has no in-app webview to escape and cannot resolve either scheme. Plain
+       navigation, immediately - no dead button, no rescue wait. */
+    if (p === 'other') { window.location.href = dest; return; }
+
+    var attempts = p === 'android'
+      ? [
+          'intent://' + bare + '#Intent;scheme=https;package=com.android.chrome;'
+            + 'S.browser_fallback_url=' + encodeURIComponent(dest) + ';end',
+          'intent://' + bare + '#Intent;scheme=https;'
+            + 'S.browser_fallback_url=' + encodeURIComponent(dest) + ';end'
+        ]
+      : [
+          dest.replace(/^https:\/\//, 'x-safari-https://'),
+          dest.replace(/^https:\/\//, 'googlechromes://')
+        ];
+
+    /* Cancel listeners FIRST, jump second. Reversing these two is the double-fire bug. */
+    var done = false, timers = [];
+    function cancel() {
+      if (done) return;
+      done = true;
+      timers.forEach(clearTimeout);
+    }
+    window.addEventListener('pagehide', cancel, { once: true });
+    window.addEventListener('blur', cancel, { once: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) cancel();
+    }, { once: true });
+
+    function jump(u) {
+      if (done) return;
+      try { (window.top || window).location.href = u; }
+      catch (e) { window.location.href = u; }
+    }
+
+    jump(attempts[0]);
+    for (var i = 1; i < attempts.length; i++) {
+      (function (u, n) { timers.push(setTimeout(function () { jump(u); }, 350 * n)); })(attempts[i], i);
+    }
+
+    /* Nothing took over -> every scheme was refused. Say so instead of hanging on
+       "Opening...". A visitor who is told to use the ••• menu can still convert; a visitor
+       staring at a disabled button is a click thrown away. */
+    timers.push(setTimeout(function () {
+      if (done) return;
+      cancel();
+      px('rescue');
+      if (sub) sub.innerHTML = 'Your app blocked the hand-off. Tap the <b>&#8226;&#8226;&#8226;</b> menu at the top of this screen and choose <b>Open in browser</b>.';
+      if (note) note.textContent = '';
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Continue anyway';
+        /* A second tap goes straight through in-app rather than retrying schemes that have
+           already been refused. Worse than the real browser, but not a dead end. */
+        btn.onclick = function (e) { e.preventDefault(); location.replace(dest); };
+      }
+    }, 350 * attempts.length + 900));
+  }
+
+  btn.addEventListener('click', function () {
+    if (tried) return;
+    tried = true;
+    btn.disabled = true;
+    btn.innerHTML = 'Opening<span class="dots"></span>';
+    if (note) note.textContent = 'One moment';
+    px('continue');   /* fired BEFORE go(), so it is sent even if the app switch is instant */
+    go();
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-geo="US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#020617">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Get Started</title>
+<meta name="description" content="One quick step to continue.">
+
+<!--
+  recosocial-us-pres-man-prelander.html
+    -> https://www.trendhavenn.com/recosocial-us-pres-man-prelander.html
+  Reco Social - Prescott, US. MANUAL launch: no Spartis, no Carrd, no short code anywhere in
+  this funnel. THIS is the page the ad URL points at. It hands off to the main lander at
+  /recosocial-us-pres-man.html, which goes straight to Prescott.
+
+  KICKER: identical to frrcsh-us-t1a-pres-man-prelander.html, which is the escalating kicker
+  from the myrewardscorner reference. Diffed script-to-script; the only differences are DEST
+  and the beacon PAGE tag.
+
+    iOS       1. x-safari-https://          2. googlechromes://            (+350ms)
+    Android   1. intent:// ... package=com.android.chrome ... S.browser_fallback_url=...
+              2. intent:// ... S.browser_fallback_url=...                  (+350ms)
+
+  The four things that must not be "improved":
+    - Chrome named BY PACKAGE first on Android, or the system can hand the URL back to the
+      in-app browser it was escaping.
+    - S.browser_fallback_url on both Android attempts.
+    - Cancel listeners (pagehide / blur / visibilitychange) registered BEFORE the first jump.
+      After, and a completed app switch beats the listener into existence and the visitor is
+      forwarded twice.
+    - The first attempt fires SYNCHRONOUSLY inside the tap. iOS only honours a scheme jump
+      while the gesture is still active.
+  If every scheme is refused the page says so and re-enables the button, and beacons `rescue`.
+
+  DESIGN: redesigned per Trae 2026-09-26 - gradient ring instead of the soft square tile, and
+  a Safari / Chrome / Secure chip row at the bottom.
+
+  ⚠️ THE CHIPS ARE A DELIBERATE OVERRIDE of the project instruction that says to keep
+  Safari/Chrome/Secure chips off a prelander (June split test: $0.53 vs $2.50 lead-form CPA).
+  Trae called it explicitly on 2026-09-26. Flagged in the setup .md and in
+  PROJECT-INSTRUCTIONS-proposed.txt; do not silently revert it.
+
+  NO on-load breakout. Tap-triggered only.
+-->
+
+<style>
+  :root{
+    --bg:#020617; --card:#0f172a; --line:rgba(255,255,255,.07);
+    --ink:#f4f5f8; --dim:#8b93a7; --dim-2:#5d6579;
+    --blue:#3b82f6; --vio:#8b5cf6; --pink:#ec4899;
+    --grad:linear-gradient(120deg,#3b82f6,#8b5cf6 48%,#ec4899);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:400 16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh; min-height:-webkit-fill-available;
+    display:flex; align-items:center; justify-content:center;
+    overflow-x:hidden; position:relative;
+  }
+
+  /* --- subtle background movement --- */
+  body::before{
+    content:''; position:fixed; inset:-20%; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(40% 28% at 24% 12%, rgba(59,130,246,.18) 0%, transparent 64%),
+      radial-gradient(44% 30% at 80% 86%, rgba(236,72,153,.15) 0%, transparent 64%);
+    animation:wash 18s ease-in-out infinite alternate;
+  }
+  @keyframes wash{ from{transform:translate3d(-2%,-1%,0) scale(1)} to{transform:translate3d(2%,2%,0) scale(1.07)} }
+
+  .fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .fx i{
+    position:absolute; bottom:-14px; width:5px; height:5px; border-radius:50%;
+    background:var(--blue); opacity:0; animation:drift linear infinite;
+  }
+  .fx i.p{width:7px;height:7px;background:var(--pink)}
+  @keyframes drift{
+    0%{opacity:0;transform:translate3d(0,0,0)}
+    14%{opacity:.46}
+    84%{opacity:.3}
+    100%{opacity:0;transform:translate3d(14px,-104vh,0)}
+  }
+
+  .wrap{
+    position:relative; z-index:1;
+    width:100%; max-width:400px; margin:0 auto;
+    padding:40px 26px calc(34px + env(safe-area-inset-bottom));
+    text-align:center;
+  }
+
+  /* --- staggered top-to-bottom entrance --- */
+  .up{opacity:0;transform:translateY(16px);animation:up .52s cubic-bezier(.22,.9,.3,1) forwards}
+  @keyframes up{to{opacity:1;transform:none}}
+  .d2{animation-delay:.14s} .d3{animation-delay:.25s} .d4{animation-delay:.48s}
+
+  /* --- gradient ring (redesign: replaces the square tile) --- */
+  .ring{
+    width:92px;height:92px;margin:0 auto 26px;border-radius:50%;
+    display:grid;place-items:center;
+    background:
+      linear-gradient(var(--bg),var(--bg)) padding-box,
+      var(--grad) border-box;
+    border:2px solid transparent;
+    position:relative;
+  }
+  /* Both animations in ONE declaration. Declaring `animation` on .ring alone would override
+     the entrance .up provides, leaving the ring stuck at opacity:0 — invisible but still
+     holding its place in the layout. */
+  .ring.up{
+    animation:up .52s cubic-bezier(.22,.9,.3,1) .04s forwards,
+              ringGlow 3.2s ease-in-out .7s infinite;
+  }
+  @keyframes ringGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0), 0 0 22px 0 rgba(59,130,246,.18)}
+    50%    {box-shadow:0 0 0 7px rgba(139,92,246,.07), 0 0 40px 2px rgba(236,72,153,.26)}
+  }
+  .ring svg{width:34px;height:34px;fill:none;stroke:url(#g);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+
+  h1{margin:0 0 12px;font-size:31px;font-weight:800;letter-spacing:-.7px;line-height:1.12}
+  h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  p.sub{margin:0 auto 30px;max-width:300px;font-size:15px;line-height:1.6;color:var(--dim)}
+  p.sub b{color:var(--ink);font-weight:700}
+
+  .cta{
+    display:block;width:100%;border:0;cursor:pointer;
+    padding:18px 24px;border-radius:15px;
+    background:var(--grad);
+    color:#fff; font:800 15px/1 Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase;
+    animation:up .52s cubic-bezier(.22,.9,.3,1) .36s forwards, ctaPulse 2s ease-in-out .95s infinite;
+    opacity:0; transform:translateY(16px);
+  }
+  @keyframes ctaPulse{
+    0%,100%{box-shadow:0 8px 26px rgba(59,130,246,.30)}
+    50%    {box-shadow:0 10px 40px rgba(236,72,153,.52)}
+  }
+  .cta:disabled{cursor:default;filter:saturate(.5) brightness(.8);animation:up .52s cubic-bezier(.22,.9,.3,1) .36s forwards}
+
+  .dots{display:inline-block;width:1.2em;text-align:left}
+  .dots::after{content:'';animation:dots 1.1s steps(4,end) infinite}
+  @keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+
+  .note{margin:14px 0 0;font-size:12px;color:var(--dim-2);min-height:16px}
+
+  /* --- chips (Trae's explicit call, 2026-09-26) --- */
+  .chips{
+    display:flex;align-items:center;justify-content:center;gap:13px;
+    margin-top:22px;font-size:12px;font-weight:700;color:var(--dim-2);letter-spacing:.3px;
+  }
+  .chips .dot{width:3px;height:3px;border-radius:50%;background:var(--dim-2);opacity:.55}
+
+  @media (max-height:660px){
+    .wrap{padding:24px 24px}
+    .ring{width:74px;height:74px;margin-bottom:18px}
+    .ring svg{width:28px;height:28px}
+    h1{font-size:26px}
+    p.sub{margin-bottom:22px;font-size:14px}
+    .cta{padding:16px 22px}
+    .chips{margin-top:16px}
+  }
+  @supports (padding:max(0px)){
+    .wrap{padding-bottom:max(34px, env(safe-area-inset-bottom))}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important}
+    .up,.cta{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#ec4899"/>
+  </linearGradient>
+</defs></svg>
+
+<div class="fx" aria-hidden="true">
+  <i style="left:13%;animation-duration:16s;animation-delay:0s"></i>
+  <i style="left:37%;animation-duration:20s;animation-delay:5s"></i>
+  <i style="left:63%;animation-duration:17s;animation-delay:9s"></i>
+  <i class="p" style="left:24%;animation-duration:25s;animation-delay:2s"></i>
+  <i class="p" style="left:81%;animation-duration:22s;animation-delay:6s"></i>
+</div>
+
+<main class="wrap">
+  <div class="ring up" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
+  </div>
+  <h1 class="up d2">Almost <span class="hl">there</span></h1>
+  <p class="sub up d3" id="sub">Tap continue and we'll take you the rest of the way.</p>
+  <button class="cta" id="ctaBtn" type="button">Continue</button>
+  <p class="note" id="note"></p>
+  <div class="chips up d4">
+    <span>Safari</span><span class="dot"></span><span>Chrome</span><span class="dot"></span><span>Secure</span>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= destination =================
+     Absolute: both breakout transforms rewrite the scheme and need a full https URL. */
+  var DEST = 'https://www.trendhavenn.com/recosocial-us-pres-man.html';
+
+  /* ================= sub ID =================
+     sub1 FIRST: on a manual build nothing upstream normalises the param name, and sub1 is
+     what Prescott reads. The chain stays wide because the ad URL is written by hand. */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('sub1') || QP.get('campid') || QP.get('s1') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+
+  /* ================= beacon (first-party, px.trendhavenn.com) =================
+     load -> human -> continue, plus `rescue` when every scheme is refused.
+     rescue ÷ continue is the in-app breakout failure rate — hop 1 of the funnel. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'recosocial-us-pres-man-pre', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon(u);
+      else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  function plat() {
+    var ua = navigator.userAgent || '';
+    return /iPad|iPhone|iPod/.test(ua) ? 'ios' : /android/i.test(ua) ? 'android' : 'other';
+  }
+
+  /* The ENTIRE inbound query string rides across, untouched. */
+  function out() {
+    var d = DEST, q = window.location.search;
+    if (q) d += (d.indexOf('?') === -1 ? '?' : '&') + q.slice(1);
+    return d;
+  }
+
+  var btn  = document.getElementById('ctaBtn');
+  var note = document.getElementById('note');
+  var sub  = document.getElementById('sub');
+  var tried = false;
+
+  function go() {
+    var dest = out();
+    var bare = dest.replace(/^https?:\/\//, '');
+    var p = plat();
+
+    /* Desktop has no in-app webview to escape and cannot resolve either scheme. */
+    if (p === 'other') { window.location.href = dest; return; }
+
+    var attempts = p === 'android'
+      ? [
+          'intent://' + bare + '#Intent;scheme=https;package=com.android.chrome;'
+            + 'S.browser_fallback_url=' + encodeURIComponent(dest) + ';end',
+          'intent://' + bare + '#Intent;scheme=https;'
+            + 'S.browser_fallback_url=' + encodeURIComponent(dest) + ';end'
+        ]
+      : [
+          dest.replace(/^https:\/\//, 'x-safari-https://'),
+          dest.replace(/^https:\/\//, 'googlechromes://')
+        ];
+
+    /* Cancel listeners FIRST, jump second. Reversing these two is the double-fire bug. */
+    var done = false, timers = [];
+    function cancel() {
+      if (done) return;
+      done = true;
+      timers.forEach(clearTimeout);
+    }
+    window.addEventListener('pagehide', cancel, { once: true });
+    window.addEventListener('blur', cancel, { once: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) cancel();
+    }, { once: true });
+
+    function jump(u) {
+      if (done) return;
+      try { (window.top || window).location.href = u; }
+      catch (e) { window.location.href = u; }
+    }
+
+    jump(attempts[0]);
+    for (var i = 1; i < attempts.length; i++) {
+      (function (u, n) { timers.push(setTimeout(function () { jump(u); }, 350 * n)); })(attempts[i], i);
+    }
+
+    timers.push(setTimeout(function () {
+      if (done) return;
+      cancel();
+      px('rescue');
+      if (sub) sub.innerHTML = 'Your app blocked the hand-off. Tap the <b>&#8226;&#8226;&#8226;</b> menu at the top of this screen and choose <b>Open in browser</b>.';
+      if (note) note.textContent = '';
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Continue anyway';
+        btn.onclick = function (e) { e.preventDefault(); location.replace(dest); };
+      }
+    }, 350 * attempts.length + 900));
+  }
+
+  btn.addEventListener('click', function () {
+    if (tried) return;
+    tried = true;
+    btn.disabled = true;
+    btn.innerHTML = 'Opening<span class="dots"></span>';
+    if (note) note.textContent = 'One moment';
+    px('continue');   /* fired BEFORE go(), so it is sent even if the app switch is instant */
+    go();
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" data-geo="US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#020617">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Reco Social &mdash; Start Earning</title>
+<meta name="description" content="Get paid for the time you already spend.">
+
+<!--
+  recosocial-us-pres-man.html -> https://www.trendhavenn.com/recosocial-us-pres-man.html
+  Reco Social - Prescott, US. MANUAL launch.
+
+  Built from the four landers in "Competitor Landers" (see its INDEX.md):
+    - qualify cards, game rate cards with the unlock rule, and the pre-CTA modal  <- comp 3
+      (Reco Social / myrewardscorner), the closest page to this offer
+    - the interactive earnings slider                                             <- comp 2
+      (Rewardable / go2rewardable), curve 25h + 1.6h^2 capped at 300
+    - how-it-works 3-step and the sticky single CTA                               <- comp 1 + 2
+
+  NOT carried over, on purpose (both named in Competitor Landers/INDEX.md; the literal strings
+  are deliberately kept out of this file so nothing scanning page source can match them):
+    - comp 2's third-party ad-platform pixel. This account is server-side/postback only.
+    - comp 4's fake platform-verification badge. It is a fabricated endorsement from a real
+      company. The trust row here makes claims about the offer instead.
+
+  OUR DIFFERENTIATOR (the project instruction that this is never a 1:1 copy): the qualify card
+  drives the slider. Picking Gaming vs Screentime changes both the earnings curve and the
+  readout, so the qualifier actually does something instead of decorating. No comp does this.
+
+  NO KICKER ON THIS PAGE. The prelander does the breakout - confirmed with Trae 2026-09-26.
+  BOTH PLATFORMS - no iOS gate, confirmed with Trae 2026-09-26.
+-->
+
+<style>
+  :root{
+    --bg:#020617; --card:#0f172a; --card-2:#141c2e; --line:rgba(255,255,255,.08);
+    --ink:#f4f5f8; --dim:#8b93a7; --dim-2:#5d6579;
+    --blue:#3b82f6; --vio:#8b5cf6; --pink:#ec4899;
+    --grad:linear-gradient(120deg,#3b82f6,#8b5cf6 48%,#ec4899);
+    --ok:#34d399;
+    --r:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:400 16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    padding-bottom:calc(120px + env(safe-area-inset-bottom));
+    overflow-x:hidden; position:relative;
+  }
+  body.lock{overflow:hidden}
+
+  body::before{
+    content:''; position:fixed; inset:-20%; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(38% 22% at 20% 6%, rgba(59,130,246,.16) 0%, transparent 64%),
+      radial-gradient(42% 26% at 84% 70%, rgba(236,72,153,.13) 0%, transparent 64%);
+    animation:wash 20s ease-in-out infinite alternate;
+  }
+  @keyframes wash{ from{transform:translate3d(-2%,-1%,0) scale(1)} to{transform:translate3d(2%,2%,0) scale(1.06)} }
+  .fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .fx i{position:absolute;bottom:-14px;width:5px;height:5px;border-radius:50%;background:var(--blue);opacity:0;animation:drift linear infinite}
+  .fx i.p{width:7px;height:7px;background:var(--pink)}
+  @keyframes drift{0%{opacity:0;transform:translate3d(0,0,0)}14%{opacity:.4}84%{opacity:.26}100%{opacity:0;transform:translate3d(14px,-104vh,0)}}
+
+  .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 14px}
+
+  /* Entrance. `.rise` is the ONLY place `animation` is declared for these elements — anything
+     needing a second animation declares BOTH in one rule (see .ring, .cta), or the second
+     declaration silently overrides the entrance and the element never leaves opacity:0. */
+  .rise{opacity:0;transform:translateY(16px);animation:rise .55s cubic-bezier(.22,.9,.3,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .r1{animation-delay:.04s} .r2{animation-delay:.12s} .r3{animation-delay:.20s} .r4{animation-delay:.28s}
+  .r5{animation-delay:.36s} .r6{animation-delay:.44s} .r7{animation-delay:.52s} .r8{animation-delay:.60s}
+
+  /* BRAND */
+  .brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:18px 0 0}
+  .brand img{height:42px;width:42px;border-radius:12px;object-fit:cover}
+  .brand .nm{font-size:19px;font-weight:800;letter-spacing:-.3px}
+  .brand .nm span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* HERO */
+  .hero{text-align:center;padding:14px 6px 8px}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid rgba(139,92,246,.42);background:rgba(139,92,246,.11);
+    border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:700;margin-bottom:14px;
+    letter-spacing:.4px;
+  }
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:blip 1.8s ease-in-out infinite}
+  @keyframes blip{0%,100%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}50%{box-shadow:0 0 0 6px rgba(52,211,153,0)}}
+  h1{font-size:31px;line-height:1.1;font-weight:800;letter-spacing:-.7px;margin-bottom:10px}
+  h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{color:var(--dim);font-size:15px;line-height:1.5;max-width:380px;margin:0 auto}
+  .lede b{color:var(--ink);font-weight:700}
+
+  /* QUALIFY CARDS */
+  .qual{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+  .q{
+    display:flex;flex-direction:column;align-items:flex-start;
+    text-align:left;border:1px solid var(--line);background:var(--card);
+    border-radius:16px;padding:14px 13px;cursor:pointer;color:inherit;font:inherit;
+    transition:border-color .2s, background .2s, transform .1s;
+    position:relative;
+  }
+  .q:active{transform:scale(.985)}
+  /* Every child is display:block. These are <span>s inside a <button>, so without this they
+     lay out inline and the title, description and tag run together as one paragraph. */
+  .q .qi{font-size:21px;line-height:1;margin-bottom:8px;display:block}
+  .q .qt{display:block;font-size:14.5px;font-weight:800;line-height:1.2}
+  .q .qd{display:block;font-size:12.5px;color:var(--dim);line-height:1.35;margin-top:3px}
+  /* margin-top:auto pins the tag to the bottom of the card, so the two cards' tags line up
+     even when one description wraps to more lines than the other. */
+  .q .qtag{
+    display:inline-block;margin-top:auto;padding:10px 0 0;font-size:11px;font-weight:800;
+    letter-spacing:.4px;border-radius:999px;color:var(--dim);
+  }
+  .q .qtag b{
+    display:inline-block;padding:4px 9px;border-radius:999px;
+    background:rgba(255,255,255,.06);font-weight:800;
+  }
+  .q[aria-pressed="true"]{border-color:transparent;background:
+     linear-gradient(var(--card),var(--card)) padding-box, var(--grad) border-box;
+     border:1px solid transparent;}
+  .q[aria-pressed="true"] .qtag b{background:var(--grad);color:#fff}
+
+  /* EARNINGS SLIDER */
+  .earn{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 16px;margin-top:12px}
+  .earn-top{display:flex;align-items:baseline;justify-content:center;gap:9px;flex-wrap:wrap;margin-bottom:4px}
+  .earn-amt{font-size:40px;font-weight:800;letter-spacing:-1.2px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;transition:transform .15s}
+  .earn-amt.pop{transform:scale(1.06)}
+  .earn-per{font-size:15px;color:var(--dim);font-weight:700}
+  .earn-sub{text-align:center;font-size:13.5px;color:var(--dim);margin-bottom:16px}
+  .earn-sub b{color:var(--ink)}
+  .slider-wrap{padding:0 2px}
+  #earnSlider{
+    -webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:999px;outline:none;
+    border:1px solid var(--line);
+    background:linear-gradient(90deg,#3b82f6 0%,#ec4899 var(--pct,14%),rgba(255,255,255,.07) var(--pct,14%));
+  }
+  #earnSlider::-webkit-slider-thumb{
+    -webkit-appearance:none;width:28px;height:28px;border-radius:50%;
+    background:#fff;border:3px solid var(--pink);cursor:pointer;
+    box-shadow:0 2px 10px rgba(0,0,0,.45);
+  }
+  #earnSlider::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--pink);cursor:pointer;
+  }
+  .slider-ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--dim-2);font-weight:700;margin-top:9px}
+
+  /* GAME REWARD CARDS */
+  .sec-h{font-size:12px;font-weight:800;letter-spacing:1.4px;color:var(--dim-2);text-align:center;margin:22px 0 12px}
+  .game{
+    display:flex;align-items:center;gap:13px;
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:13px;margin-bottom:10px;
+  }
+  /* Real app icons, inlined. Emoji stand-ins read as a fake page next to the competitors,
+     every one of which ships the actual store artwork. */
+  .game .gi{
+    width:46px;height:46px;flex-shrink:0;border-radius:13px;overflow:hidden;
+    border:1px solid var(--line);background:var(--card-2);
+  }
+  .game .gi img{width:100%;height:100%;object-fit:cover;display:block}
+  .game .gm{flex:1;min-width:0}
+  .game .gn{font-size:15px;font-weight:800;line-height:1.2}
+  .game .gu{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.35}
+  .game .gr{flex-shrink:0;text-align:right}
+  .game .gr .v{font-size:17px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  .game .gr .u{font-size:11px;color:var(--dim-2);font-weight:700}
+
+  /* HOW IT WORKS */
+  .steps{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 16px;margin-top:12px}
+  .steps-t{font-size:18px;font-weight:800;text-align:center;margin-bottom:16px}
+  .step{display:flex;gap:13px;align-items:flex-start;margin-bottom:14px}
+  .step:last-child{margin-bottom:0}
+  .step-n{width:30px;height:30px;flex-shrink:0;background:var(--grad);border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px}
+  .step p{font-size:14.5px;line-height:1.42;padding-top:4px;color:var(--dim)}
+  .step p b{color:var(--ink);font-weight:700}
+
+  /* TRUST ROW */
+  .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+  .trust div{
+    background:var(--card-2);border:1px solid var(--line);border-radius:13px;
+    padding:12px 6px;text-align:center;font-size:12px;font-weight:700;line-height:1.3;
+  }
+  .trust div span{display:block;font-size:18px;margin-bottom:5px}
+
+  .fine{margin-top:14px;text-align:center;font-size:11.5px;color:var(--dim-2);line-height:1.55;padding:0 6px}
+
+  /* STICKY FOOTER */
+  .footer{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:linear-gradient(rgba(2,6,23,0), var(--bg) 26%);
+    padding:22px 14px calc(14px + env(safe-area-inset-bottom));
+  }
+  .footer-in{max-width:520px;margin:0 auto}
+  .cta{
+    display:block;width:100%;border:0;cursor:pointer;border-radius:16px;padding:18px 12px;
+    background:var(--grad);color:#fff;font:800 17px/1.15 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;
+    opacity:0;transform:translateY(16px);
+    animation:rise .55s cubic-bezier(.22,.9,.3,1) .5s forwards,
+              ctaPulse 2s ease-in-out 1.1s infinite;
+  }
+  @keyframes ctaPulse{
+    0%,100%{box-shadow:0 8px 26px rgba(59,130,246,.30)}
+    50%    {box-shadow:0 10px 42px rgba(236,72,153,.52)}
+  }
+  .cta:active{transform:scale(.985)}
+  .cta-note{text-align:center;font-size:11.5px;color:var(--dim-2);margin-top:9px;font-weight:600}
+
+  /* MODAL */
+  .ov{
+    position:fixed;inset:0;z-index:100;background:rgba(2,6,23,.78);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    display:none;align-items:flex-end;justify-content:center;padding:16px;
+  }
+  .ov.on{display:flex;animation:fade .25s ease both}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .sheet{
+    width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);
+    border-radius:22px;padding:24px 20px calc(20px + env(safe-area-inset-bottom));
+    animation:sheetUp .3s cubic-bezier(.22,.9,.3,1) both;position:relative;
+  }
+  @keyframes sheetUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .sheet h2{font-size:22px;font-weight:800;letter-spacing:-.5px;text-align:center;margin-bottom:8px}
+  .sheet .sd{font-size:14px;color:var(--dim);text-align:center;line-height:1.5;margin-bottom:16px}
+  .warn{
+    display:flex;gap:11px;align-items:flex-start;
+    background:rgba(236,72,153,.09);border:1px solid rgba(236,72,153,.34);
+    border-radius:14px;padding:13px;margin-bottom:18px;
+  }
+  .warn .wi{
+    width:24px;height:24px;flex-shrink:0;border-radius:50%;background:var(--grad);
+    display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;
+  }
+  .warn p{font-size:13.5px;line-height:1.45;color:var(--ink)}
+  .warn p b{font-weight:800}
+  .sheet .go{
+    display:block;width:100%;border:0;cursor:pointer;border-radius:15px;padding:17px 12px;
+    background:var(--grad);color:#fff;font:800 15px/1.15 Inter,sans-serif;letter-spacing:.09em;text-transform:uppercase;
+  }
+  .sheet .go:disabled{filter:saturate(.5) brightness(.8);cursor:default}
+  .sheet .x{
+    position:absolute;top:13px;right:14px;width:30px;height:30px;border:0;border-radius:9px;
+    background:transparent;color:var(--dim-2);font-size:20px;line-height:1;cursor:pointer;
+  }
+  .spin{
+    display:inline-block;width:13px;height:13px;vertical-align:-2px;
+    border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;
+    animation:spin .7s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  @media (max-width:360px){
+    h1{font-size:28px}
+    .earn-amt{font-size:34px}
+    .q .qt{font-size:13.5px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important}
+    .rise,.cta{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="fx" aria-hidden="true">
+  <i style="left:11%;animation-duration:18s;animation-delay:0s"></i>
+  <i style="left:39%;animation-duration:22s;animation-delay:6s"></i>
+  <i style="left:68%;animation-duration:19s;animation-delay:10s"></i>
+  <i class="p" style="left:26%;animation-duration:27s;animation-delay:3s"></i>
+  <i class="p" style="left:83%;animation-duration:24s;animation-delay:8s"></i>
+</div>
+
+<div class="wrap">
+
+  <div class="brand rise r1">
+    <img src="data:image/png;base64,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" alt="Reco Social">
+    <div class="nm">Reco <span>Social</span></div>
+  </div>
+
+  <section class="hero">
+    <div class="pill rise r2"><span class="dot"></span><b id="liveN">2,317</b>&nbsp;EARNING NOW</div>
+    <h1 class="rise r2">Get paid for the time you <span class="grad">already spend</span></h1>
+    <p class="lede rise r3">Reco Social pays real money for playing games and completing app tasks. Free to start, cash out to <b>Cash App, PayPal or a gift card</b>.</p>
+  </section>
+
+  <!-- QUALIFY — drives the slider below -->
+  <div class="qual rise r4" id="qual">
+    <button class="q" type="button" data-mode="game" aria-pressed="true">
+      <span class="qi">&#127918;</span>
+      <span class="qt">Get Paid To Game</span>
+      <span class="qd">Play Roblox, Subway Surfers &amp; more</span>
+      <span class="qtag"><b>EARN $$$</b></span>
+    </button>
+    <button class="q" type="button" data-mode="screen" aria-pressed="false">
+      <span class="qi">&#128241;</span>
+      <span class="qt">Get Paid For Screentime</span>
+      <span class="qd">Earn while you scroll, no skills needed</span>
+      <span class="qtag"><b>EARN $$</b></span>
+    </button>
+  </div>
+
+  <!-- EARNINGS SLIDER -->
+  <section class="earn rise r5">
+    <div class="earn-top">
+      <div class="earn-amt" id="earnAmt">$55</div>
+      <div class="earn-per">per week</div>
+    </div>
+    <div class="earn-sub"><b id="earnHrs">2</b><span id="earnLbl"> hrs of gaming a day</span></div>
+    <div class="slider-wrap">
+      <input type="range" id="earnSlider" min="1" max="8" step="1" value="2" aria-label="Hours per day" style="--pct:14.28%">
+      <div class="slider-ends"><span>1 hr/day</span><span>8 hrs/day</span></div>
+    </div>
+  </section>
+
+  <!-- GAME REWARD CARDS -->
+  <div class="sec-h rise r6">REWARDS TO UNLOCK</div>
+  <div class="rise r6">
+    <div class="game">
+      <div class="gi"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD//gARTGF2YzU4LjEzNC4xMDAA/9sAQwAICgoLCgsNDQ0NDQ0QDxAQEBAQEBAQEBAQEhISFRUVEhISEBASEhQUFRUXFxcVFRUVFxcZGRkeHhwcIyMkKysz/8QAtwAAAgIDAQEAAAAAAAAAAAAABAUDBwYAAQIIAQABBQEBAQAAAAAAAAAAAAAGBwUDBAIBAAgQAAECAwMEDQoFBAMBAQAAAAECAwAEETESIZIFIhNxYXKxVJHRU0FRIxQWQtKywpMkczJSBjOzFaFiNJTh00Pww6JVEQACAAQCBQgFCgcBAQAAAAABAgARBAMxIUFxURITkRQyBbEiYUKBsqGSBnLBglNSFtIzFdHC4vFiIzTwc2P/wAARCABwAHADASIAAhEAAxEA/9oADAMBAAIRAxEAPwASTmJVmXbD0uhegmhCEV+XpqP3gzv2buCDIajHK9g1uU+jEV6GJrrhj3jie2FPWmtMoO7oHZGTmezdwMZDUY+xMB2fU6WWaavBu4m6Bfsst27YHKsIilD7wr4XrRpLjne7x6J0xh7FtCndGbDHOMu79m7ggyGo3v2buCDIajGCrE7JiZtIViVJA2yATEfGubT7Y2aeyomRL0wbnGdl1slDEshu8lV5RQitKWJoP3ip4sSZu0Okn5T5Q5YwMtna44IOqXLLd3icVxn4wI9eqgNgIB58PREEbElw7UbcO1D9MQMSMRR2JLh2o25sccemI9IxHHI90pHI7HIz5aqMNblPowNrB1iGTGY5qdabcS+xS6nRouqcLDyxN4XnOeYyXIB2sgk95cTp8YVEVe6AOG2QGOWiE98dYjsoe3V8P1ob+F5znmMlyMZntZm17Vhxt0lBSpSLwAobKnpiW1TlmKKVYspkJxBerUUC46sqoQSZThiXBeOItMWV9rNSy5J1bsuy97wvFbaFH5UWFQMUd3k/QOMxdf2gq9mpZs94c9FEUetKeoo6RrmaHeQAgjb4GGyp6wsVyrbTOTTOR2S0gRmuqzfwGW9k15kbqs38Bl/ZNeZENY2sBnPqz60xT4CbPaYUTbUquekQmVl0J1zgoGm8ewc+bRxh9qs3i2RlvZNeZCB4+/SXxnfyHIdKOJid6upFu0wuvNg085+do8bSFpSwA7Ik1Wb+Ay/smvMgaYbktWQiTlkkg46lrDDo0Y91gZ86PHvRBz2rORutLkjS2EmMo+ZHfmOyYiiZyt47JiPGFyTojVAs3SOuLJQ4ttlq6pSdFNhI8naje8vc65lq5YFKuwa3KfRiC9AA/SbWe2FaRQVXIYDsg8zL1D2rmWrljD844rb3J34yAqwjHp3FaNyd+HLqz/aTU3qmGbroSon8SvrCFoti7/tBQTmdZJAGvcxOHQiKSh9LZ8mpKXEu3qyi+pdFJJ0jTqUOqHXrmju1tJwrW7vb6nMyEhPXAVS3FtXN5shLXF9a9rnEZQjde1ziMoRRniWb+ljIPnxviWb+ljIPnwD/AHcrv/l7/wDLDxz2n2t7sW8tQVPyVDXtnbPgOQ3W82FEFaLfqEVNmXOc5nTOMsxrG2cXVBaW7xT2SgcCvqMWZ4edOP6g3/bp/wB0Vanq16fh2bly0rKpMt44M7S8saWotsS3ekchlsgvXtc4jKEDPuoUnRUk22EHojnh53/9Bv8At0/7oidzI6wkr/UEVoaAS4qcPjRSNGBnxrPK34IlF+2TkH92PnZdp2TEcTqGJ2TEZELQnQGqBZukdcZM5NpuNoSUmiU1NemlkD953HHFpSxlG5ZnWS7auzbxDaK/KLaiCNdm/gifZtckALXrIZpq2J2bYuffJ1yFORLL8waPoRUnedxxwvmlpUpGI+U9O3F1F/N/BEZDXJCSVU29nBaiyzTUYIuJugawbVu3FmlqrVq5xFRjuAmUwJ5RVqfig1ll7bWCMpz3wcCD9kRUtR1jjjdHrEXsXpAH+lR7Nvkjddm/gqfZt8kOX69b+pb3x+GGL9VX6s+8P2ihzd2o6AKCyLjzi/LFlSGpdtBKFVUUIrSnRQfvFQBIoMBZDtRVorQ5Cbm7LEznOfgIv01TzkMQu7KWmeMZd9pU/WJayx38pUXkbTFH/agpniW2HfylRdqjiYT74qWdcn/kvrNBRQj/AB+kx6gZ86PHvRLWBJg6PHvQHhJEHxEOQGcfOK6VOItMREjrEWtm6YlESjYXLhZoKm62a4bYgXOk8wpktsS7bd5KryyhFadSaDDbMfRFind0WWzH/jAQ9QFcjdOMsYZBfuzG4R6AiO/AiXRqGcQNBHoiPOsT9Q4xCYNbmzaz2wGv0m1ntgwqwOxAcgr3tXwPXEcLiaHSFnWIDk10mlfB9eJbaSW58kxLb6Nz5Jh2peJ2THL0Bl1NTpDjEc1ifqHGIg4UQR4nFaJ3Ct6K7SMBsCM4m1gpNDXQVvRhSbBsCCvqVd1Lutfngk6q6Fz6Pzw+zHONSE+zMPVCEBytATa2QLKm0xnCvuiWUSdfSvRqV4f/ADFVEYRHqz9USV/U1ivui7cNwEKF7pAEgSdKnbBRZqXsruhVOv8ArFtJ+5WVYJfUdhlfmx0/cEur53FkY/8ACserFa5vaKnVi95A34NLYqe0Ecs/BtFdthzcviZPmTQfkRHc63u22luJ7f3how92CEjqFeKyBZk1B3JiNshApeBjjqgpJx8k70KClpbNkKNA9MDbMXee0xkjOYZ2ZaaWH5elxFBdc0RdGES+GZ7npfJchmhxSZZi6ojs27DTyBHnXuc4vKPLCKtVXAzDdTE+XxhlN0gnuridHjC7wzPc9L5LkAN5rmTOKYRMS94NYqounz0u7MPy+5Q6a7PqPLAEgr3xXwP/AEESW6i4wcyTJT5Y2lwkP3VyU6I54Znuel8lyN8Mz3PS+S5DMvuVOmu36jyx517nOLyjyxDzu59leSI+Mdi8kJJrMU1KMrcW/LgXVYXXKqwsELZT7bfmmUOImWcUiourqmosMO55xSkG8onQXaSeiAWnFIabuqUnQTYSPJHVBp8OoapKgtIEcOUhLHexhzpLzqhKyEyJyHhHPCU3whnIXG+EpvhDOQuJO8O845lK5Y8qmHaHtHLD5SuWCvmf9w9sXuc3dvsEKmc2LROOSyJpitwAruru1vfKDW3bshx4Xm+eYyXIUyn9Qr4XrQ17w7zjmUrliXm53QFbITGecYa6xMzLAaI74Wm+eYyXIDm8yPSLKnHJhgYEBISuqzSwf9wgvvDvOuZSuWFs64pwaSlKolVpJ344KdhmX5BGeIdg5IyRK/d2Nwj0REd6Enf0pbaSkpNEJrU7Qjx3/cZUJGbDFj3Tie2GBrbljkcT2w9KsDsQHIr97V8H14W9/wBxlR4Ymm23lKKh+FS0W3rI2llgHyOamJERwHmD0TGSFWJ2Y83oQ9/3GVG9/wBxlRFzdtkRcK5sg6cVoncK3oEvUZa3KfRgV2aDiVVKRoqsO1A65oXG0pKTRKamu1ZBz8MysrU7+X5f8UOlKjcMiWcx2QfejhVgYVd4P8OP/Mb3g/x44MePa2nkMWuG+yD5X8dXw/WggqxMLWn0IcUokfh2VFt6yIzMknyOOMrdtquZxJwzjRRjLLQIa3oFfNQdyYE7wf48f+Y4XgoKqUjA9O1HmvWyCAc9UcCNMZR//9k=" alt="Block Blast"></div>
+      <div class="gm"><div class="gn">Block Blast</div><div class="gu">Unlocks after 3 tasks inside Reco Social</div></div>
+      <div class="gr"><div class="v">$32/hr</div><div class="u">per hour</div></div>
+    </div>
+    <div class="game">
+      <div class="gi"><img src="data:image/jpeg;base64,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" alt="Roblox"></div>
+      <div class="gm"><div class="gn">Roblox</div><div class="gu">Unlocks after 3 tasks inside Reco Social</div></div>
+      <div class="gr"><div class="v">$35/hr</div><div class="u">per hour</div></div>
+    </div>
+    <div class="game">
+      <div class="gi"><img src="data:image/jpeg;base64,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" alt="Subway Surfers"></div>
+      <div class="gm"><div class="gn">Subway Surfers</div><div class="gu">Unlocks after 3 tasks inside Reco Social</div></div>
+      <div class="gr"><div class="v">Varies</div><div class="u">per offer</div></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="steps rise r7">
+    <div class="steps-t">How it works</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <p><b>Activate your Reco Social pass.</b> Tap Continue and add your pass — about two minutes, costs nothing.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <p><b>Complete your first offer</b> to unlock games like Block Blast, Subway Surfers and more.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <p><b>Play and get paid.</b> Your balance builds as offers clear. Transfer via Cash App, PayPal or a gift card.</p>
+    </div>
+  </section>
+
+  <div class="trust rise r8">
+    <div><span>&#9889;</span>Fast Payouts</div>
+    <div><span>&#128176;</span>Real Rewards</div>
+    <div><span>&#127381;</span>Free to Join</div>
+  </div>
+
+  <p class="fine rise r8">Earnings depend on which games you play and how much you play. The figures above are an estimate from the rates shown, not a guarantee. Reco Social is not affiliated with any game publisher named on this page. Individual results vary.</p>
+
+</div>
+
+<div class="footer">
+  <div class="footer-in">
+    <button class="cta" id="ctaBtn" type="button">Continue</button>
+    <div class="cta-note">Free to start &bull; Cash out to Cash App, PayPal or a gift card</div>
+  </div>
+</div>
+
+<!-- PRE-CTA MODAL -->
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ovT">
+  <div class="sheet">
+    <button class="x" id="ovX" type="button" aria-label="Close">&times;</button>
+    <h2 id="ovT">Start Earning Now</h2>
+    <p class="sd">Activate your Reco Social pass and start earning from the apps and games you already use.</p>
+    <div class="warn">
+      <div class="wi">!</div>
+      <p>Use your <b>real details</b> when you sign up so your earnings can be paid out.</p>
+    </div>
+    <button class="go" id="goBtn" type="button">Continue to Reco Social</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= outbound =================
+     MANUAL launch: DIRECT to Prescott. No buenohoodies.com hop and no short code anywhere in
+     this file, because there is no Spartis in this funnel to append the sub ID - so this page
+     holds the advertiser link itself and appends sub1 itself.
+
+     ⚠️ THE BASE LINK TRAE SUPPLIED ENDS AT THE TRAILING SLASH, with no query at all:
+         https://www.pcbdfv7trk.com/ZKTQ1K/37CZBSR/
+     so this page adds `?sub1=` itself. That is the opposite of the Freecash Prescott link,
+     which already ended in `?sub1=` and only needed the value concatenated. Either way the
+     rule is the same and it is the one that has cost this account conversions three times:
+     EXACTLY ONE sub1 in the final URL. Never two, because the empty one wins.
+
+     Same affiliate segment (ZKTQ1K) as the Freecash manual build, different offer (37CZBSR).
+     pcbdfv7trk.com is a Prescott rotated tracking domain - expected, not a typo. */
+  var OUT = 'https://www.pcbdfv7trk.com/ZKTQ1K/37CZBSR/?sub1=';
+
+  /* Chain is ad URL -> prelander -> THIS PAGE -> offer. The prelander forwards the entire
+     query string untouched, so the sub arrives under whatever name the ad used. Wide chain,
+     sub1 first, because nothing upstream normalises the name on a manual build. An empty sub
+     stays empty - unmatched is recoverable, a fabricated sub ID is not. */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('sub1') || QP.get('campid') || QP.get('s1') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+
+  /* ================= beacon (first-party, px.trendhavenn.com) =================
+     This page has a modal between the CTA and the offer, so it uses the four-event vocabulary
+     the dashboard already reads: `claim` is the tap that OPENS the modal, `continue` is the
+     tap that actually navigates. The dashboard treats `continue` as the click-out where a page
+     fires it - on a modal page `claim` alone would overcount. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'recosocial-us-pres-man', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon(u);
+      else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  /* ================= qualify cards -> slider =================
+     Our differentiator. The card is not decoration: it swaps the earnings curve and the
+     readout, so the two paths give genuinely different numbers. */
+  var MODES = {
+    game:   { max: 300, curve: function (h) { return 25 * h + 1.6 * h * h; }, label: 'hrs of gaming a day' },
+    screen: { max: 220, curve: function (h) { return 18 * h + 1.2 * h * h; }, label: 'hrs on your phone a day' }
+  };
+  var mode = 'game';
+
+  var sl   = document.getElementById('earnSlider');
+  var amt  = document.getElementById('earnAmt');
+  var hrs  = document.getElementById('earnHrs');
+  var lbl  = document.getElementById('earnLbl');
+  var MAXH = 8;
+
+  function upd() {
+    var h = +sl.value, m = MODES[mode];
+    var v = Math.round(Math.min(m.max, m.curve(h)) / 5) * 5;
+    if (h === MAXH) v = m.max;
+    amt.textContent = '$' + v;
+    /* textContent on the two nodes, never innerHTML on their parent — rewriting the parent
+       would destroy #earnHrs and leave every cached reference pointing at a detached node. */
+    hrs.textContent = h;
+    lbl.textContent = ' ' + m.label;
+    sl.style.setProperty('--pct', ((h - 1) / (MAXH - 1) * 100) + '%');
+    amt.classList.add('pop');
+    window.setTimeout(function () { amt.classList.remove('pop'); }, 150);
+  }
+  sl.addEventListener('input', upd);
+  sl.addEventListener('change', upd);
+
+  var qs = [].slice.call(document.querySelectorAll('#qual .q'));
+  qs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      qs.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      mode = b.getAttribute('data-mode');
+      upd();
+    });
+  });
+  upd();
+
+  /* ================= live counter ================= */
+  var lEl = document.getElementById('liveN'), live = 2317;
+  window.setInterval(function () {
+    live += Math.floor(Math.random() * 9) - 3;
+    if (live < 2180) live = 2180 + Math.floor(Math.random() * 25);
+    if (live > 2560) live = 2560 - Math.floor(Math.random() * 25);
+    lEl.textContent = live.toLocaleString('en-US');
+  }, 2800);
+
+  /* ================= modal + outbound =================
+     The CTA OPENS the modal and navigates nothing - that separation is the whole point of the
+     reference's flow, and it is what puts the "use your real details" instruction in front of
+     the user at the last possible moment. */
+  var ov = document.getElementById('ov');
+  var goBtn = document.getElementById('goBtn');
+  var going = false;
+
+  document.getElementById('ctaBtn').addEventListener('click', function () {
+    px('claim');
+    ov.classList.add('on');
+    document.body.classList.add('lock');
+    goBtn.focus({ preventScroll: true });
+  });
+
+  function close() {
+    ov.classList.remove('on');
+    document.body.classList.remove('lock');
+  }
+  document.getElementById('ovX').addEventListener('click', close);
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+  goBtn.addEventListener('click', function () {
+    if (going) return;
+    going = true;
+    goBtn.disabled = true;
+    goBtn.innerHTML = 'Loading <span class="spin"></span>';
+    px('continue');
+    var href = OUT + encodeURIComponent(subid());
+    window.setTimeout(function () { window.location.href = href; }, 300);
+  });
+})();
+</script>
+
+</body>
+</html>

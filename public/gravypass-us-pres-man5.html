@@ -421,16 +421,19 @@
      MANUAL launch: DIRECT to Prescott. No buenohoodies.com hop and no short code anywhere in
      this file, because there is no Spartis in this funnel to append the sub ID.
 
-     ⚠️ OFFER ID 35KZJBX, confirmed 2026-09-26. Every OTHER Gravy Pass manual lander in the
-     vault (gravypass-us-pres-man / man2 / man3 / man4 / quiz-man) outbounds to a DIFFERENT
-     offer ID, one that disagrees with this file and with their own setup docs. That ID is
-     deliberately not written here, so a deploy-check search for it can only match a real
-     outbound - see GRAVYPASS-US-PRESCOTT-MAN5-SETUP.md, "Read these four first".
+     OFFER ID 33MS3M8 - the current Gravy Pass offer, correct for US, CA and every region
+     (confirmed 2026-09-27). It matches gravypass-us-pres-man / man2 / man3 / man4 / quiz-man,
+     which were right all along.
+
+     Two other IDs exist and are NOT this one: the Gravy Pass offer superseded on 2026-09-14,
+     and a different affiliate's under their own segment. Neither is written out here on
+     purpose - a search of this file for an offer path must only ever match the real outbound.
+     The full history is in GRAVYPASS-US-PRESCOTT-MAN5-SETUP.md.
 
      The base link ends in '?sub1=', so the sub concatenates straight onto it. Do NOT add a
      second '?sub1=' - a duplicated param is how the blank one wins and the click ID is lost.
      That bug has cost this account conversions three times. */
-  var OUT = 'https://www.pcbdfv7trk.com/ZKTQ1K/35KZJBX/?sub1=';
+  var OUT = 'https://www.pcbdfv7trk.com/ZKTQ1K/33MS3M8/?sub1=';
 
   /* Wide chain, sub1 first: nothing upstream normalises the param name on a manual build and
      sub1 is what Prescott reads. An empty sub stays empty - unmatched is recoverable, a

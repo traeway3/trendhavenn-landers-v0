@@ -13,16 +13,13 @@
   gravypass-uk-pres-spar.html -> https://www.trendhavenn.com/gravypass-uk-pres-spar.html
   Gravy Pass - Prescott, UK. SPARTIS launch. Design is gravypass-us-pres-man5.html, geo-swapped.
 
-  ⚠️ NO SHORT CODE, BY DESIGN. A normal Spartis build sends CLAIM to
-  buenohoodies.com/c/<code>?campid= and lets Spartis append the sub. Trae asked for the base
-  offer link in the page instead, so THIS page appends the sub itself - the same outbound
-  shape a manual build uses, inside a Spartis funnel. Do not "fix" this by adding a short
-  code. There is no Offer Links row for this lander.
+  STANDARD SPARTIS WIRING: CLAIM goes to the offer short code, never to the advertiser. The
+  advertiser URL appears NOWHERE in this file - that is the entire point of the offer cloak,
+  and it also means the offer can be repointed in Spartis without re-uploading this page.
 
-  WHAT STILL WORKS: the Carrd /r front, the campid, and Prescott's global postbacks. Spartis
-  mints the campid, this page writes it into sub1, and Prescott's postback returns campid={sub1}
-  - so Spartis still has a campid to match on. That is reasoning about the wiring, not something
-  observed live; confirm on the first real conversion.
+  Short code:  buenohoodies.com/c/gravypass-uk-off?campid=
+  Offer Links row: Destination = the real offer with NO trailing subid param,
+                   Forward Param = sub1 (Everflow/Prescott). Spartis appends &sub1=<campid>.
 
   NO KICKER anywhere on this page, and no prelander in this funnel - the Carrd is the front.
 
@@ -431,18 +428,16 @@
   'use strict';
 
   /* ================= outbound =================
-     SPARTIS launch, but DIRECT to Prescott: no buenohoodies.com/c/ hop and no short code
-     anywhere in this file, because Trae asked for the base offer link in the page. That means
-     this page appends the sub ID itself rather than letting Spartis do it.
+     SPARTIS launch: CLAIM targets the offer short code and Spartis appends the sub ID using
+     the Forward Param on that row. So this page emits '?campid=<value>' and NEVER '?sub1='.
 
-     ⚠️ SAME OFFER ID AS THE US BUILD (35KZJBX), as Trae specified. Prescott often issues a
-     separate offer ID per geo, so if UK traffic should be paying on its own ID this is the one
-     line to change - flagged in the setup doc.
+     ⚠️ THE DESTINATION ON THE SPARTIS ROW MUST NOT END IN '?sub1='. Spartis appends its own,
+     and leaving yours on produces '&sub1=&sub1=<campid>' where the EMPTY one wins and every
+     conversion comes back unmatched. That bug has hit this account three times (montrk,
+     Everflow, Monetise). The Destination is the bare offer path - see the setup doc.
 
-     The base link ends in '?sub1=', so the sub concatenates straight onto it. Do NOT add a
-     second '?sub1=' - a duplicated param is how the blank one wins and the click ID is lost.
-     That bug has cost this account conversions three times. */
-  var OUT = 'https://www.pcbdfv7trk.com/ZKTQ1K/35KZJBX/?sub1=';
+     The advertiser URL is deliberately absent from this file. */
+  var SHORT = 'https://buenohoodies.com/c/gravypass-uk-off?campid=';
 
   /* campid FIRST here, unlike the manual builds. On a Spartis launch the click ID arrives as
      ?campid= from the Carrd /r hop, so campid is the one that should win when more than one is
@@ -562,7 +557,7 @@
     main.disabled = true;
     main.innerHTML = 'Loading <span class="spin"></span>';
     px('claim');
-    var href = OUT + encodeURIComponent(subid());
+    var href = SHORT + encodeURIComponent(subid());
     window.setTimeout(function () { window.location.href = href; }, 300);
   }
   document.getElementById('ctaBtn').addEventListener('click', claim);

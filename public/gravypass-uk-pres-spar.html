@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-geo="US">
+<html lang="en-GB" data-geo="UK">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,14 +10,27 @@
 <meta name="description" content="Get paid for the scrolling you already do.">
 
 <!--
-  gravypass-us-pres-man5.html -> https://www.trendhavenn.com/gravypass-us-pres-man5.html
-  Gravy Pass - Prescott, US. MANUAL launch. Rev 2026-09-26b.
+  gravypass-uk-pres-spar.html -> https://www.trendhavenn.com/gravypass-uk-pres-spar.html
+  Gravy Pass - Prescott, UK. SPARTIS launch. Design is gravypass-us-pres-man5.html, geo-swapped.
+
+  ⚠️ NO SHORT CODE, BY DESIGN. A normal Spartis build sends CLAIM to
+  buenohoodies.com/c/<code>?campid= and lets Spartis append the sub. Trae asked for the base
+  offer link in the page instead, so THIS page appends the sub itself - the same outbound
+  shape a manual build uses, inside a Spartis funnel. Do not "fix" this by adding a short
+  code. There is no Offer Links row for this lander.
+
+  WHAT STILL WORKS: the Carrd /r front, the campid, and Prescott's global postbacks. Spartis
+  mints the campid, this page writes it into sub1, and Prescott's postback returns campid={sub1}
+  - so Spartis still has a campid to match on. That is reasoning about the wiring, not something
+  observed live; confirm on the first real conversion.
+
+  NO KICKER anywhere on this page, and no prelander in this funnel - the Carrd is the front.
 
   PALETTE IS SAMPLED FROM THE ACTUAL APP ICON, not guessed: cyan #5de2fd is 53.5% of the
   icon's pixels (its background) and gold #fddb43 is the coins. The first cut of this page
   used spar2's mint green, which is not a Gravy Pass colour at all.
 
-  STRUCTURE follows the competitor's: everything between the hero and "3 steps" lives in ONE
+  STRUCTURE (unchanged from the US build) follows the competitor's: everything between the hero and "3 steps" lives in ONE
   bordered unlock panel - gate line, locked app row, balance, scroll demo, CTA - so the page
   reads as a single thing to unlock rather than five stacked sections.
 
@@ -333,19 +346,19 @@
     <div class="balrow">
       <div>
         <div class="blab"><i></i>YOUR BALANCE</div>
-        <div class="bal" id="bal">$42.75<em>USD</em></div>
+        <div class="bal" id="bal">&pound;42.75<em>GBP</em></div>
       </div>
-      <span class="rate">&#9889; $0.25 / SCROLL</span>
+      <span class="rate">&#9889; &pound;0.25 / SCROLL</span>
     </div>
 
     <div class="demo">
       <div class="phone">
         <div class="reel" id="reel"></div>
-        <div class="coin">+$0.25</div>
+        <div class="coin">+&pound;0.25</div>
       </div>
       <div class="demotx">
         <h3>Every scroll <em>pays you.</em></h3>
-        <p>Swipe sponsored clips like you already do. Each one credits <b>$0.25</b> straight to your balance.</p>
+        <p>Swipe sponsored clips like you already do. Each one credits <b>&pound;0.25</b> straight to your balance.</p>
       </div>
     </div>
 
@@ -370,8 +383,8 @@
     </div>
     <div class="step rv d5">
       <span class="sn">3</span>
-      <div class="sb"><b>Cash out your way</b><span>Turn points into gift cards or cash. $1 welcome bonus, $10 minimum.</span>
-        <div class="payrow"><span>PayPal</span><span>Cash App</span><span>Venmo</span><span>Gift cards</span></div>
+      <div class="sb"><b>Cash out your way</b><span>Turn points into gift cards or cash. &pound;1 welcome bonus, &pound;10 minimum.</span>
+        <div class="payrow"><span>PayPal</span><span>Revolut</span><span>Monzo</span><span>Bank transfer</span><span>Gift cards</span></div>
       </div>
     </div>
   </div>
@@ -418,33 +431,33 @@
   'use strict';
 
   /* ================= outbound =================
-     MANUAL launch: DIRECT to Prescott. No buenohoodies.com hop and no short code anywhere in
-     this file, because there is no Spartis in this funnel to append the sub ID.
+     SPARTIS launch, but DIRECT to Prescott: no buenohoodies.com/c/ hop and no short code
+     anywhere in this file, because Trae asked for the base offer link in the page. That means
+     this page appends the sub ID itself rather than letting Spartis do it.
 
-     ⚠️ OFFER ID 35KZJBX, confirmed 2026-09-26. Every OTHER Gravy Pass manual lander in the
-     vault (gravypass-us-pres-man / man2 / man3 / man4 / quiz-man) outbounds to a DIFFERENT
-     offer ID, one that disagrees with this file and with their own setup docs. That ID is
-     deliberately not written here, so a deploy-check search for it can only match a real
-     outbound - see GRAVYPASS-US-PRESCOTT-MAN5-SETUP.md, "Read these four first".
+     ⚠️ SAME OFFER ID AS THE US BUILD (35KZJBX), as Trae specified. Prescott often issues a
+     separate offer ID per geo, so if UK traffic should be paying on its own ID this is the one
+     line to change - flagged in the setup doc.
 
      The base link ends in '?sub1=', so the sub concatenates straight onto it. Do NOT add a
      second '?sub1=' - a duplicated param is how the blank one wins and the click ID is lost.
      That bug has cost this account conversions three times. */
   var OUT = 'https://www.pcbdfv7trk.com/ZKTQ1K/35KZJBX/?sub1=';
 
-  /* Wide chain, sub1 first: nothing upstream normalises the param name on a manual build and
-     sub1 is what Prescott reads. An empty sub stays empty - unmatched is recoverable, a
-     fabricated sub ID is not. */
+  /* campid FIRST here, unlike the manual builds. On a Spartis launch the click ID arrives as
+     ?campid= from the Carrd /r hop, so campid is the one that should win when more than one is
+     present. The rest of the chain stays wide for hand-built test links. An empty sub stays
+     empty - unmatched is recoverable, a fabricated sub ID is not. */
   var QP = new URLSearchParams(window.location.search);
   function subid() {
-    return QP.get('sub1') || QP.get('campid') || QP.get('s1') ||
+    return QP.get('campid') || QP.get('sub1') || QP.get('s1') ||
            QP.get('s2') || QP.get('cid') || QP.get('c') || '';
   }
 
   /* ================= beacon (first-party, px.trendhavenn.com) =================
      No modal on this page, so the three the dashboard reads on gp-m4:
      load -> human -> claim. `claim` is the tap that leaves, and it is the click-out. */
-  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'gravypass-us-pres-man5', sent = {};
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'gravypass-uk-pres-spar', sent = {};
   function px(ev) {
     if (sent[ev]) return; sent[ev] = 1;
     var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
@@ -524,7 +537,7 @@
   var CLIP_MS = 12000 / CLIPS.length;   /* one tick per clip advance */
   window.setInterval(function () {
     bal += 0.25;
-    balEl.innerHTML = '$' + bal.toFixed(2) + '<em>USD</em>';
+    balEl.innerHTML = '\u00A3' + bal.toFixed(2) + '<em>GBP</em>';
     balEl.classList.add('pop');
     window.setTimeout(function () { balEl.classList.remove('pop'); }, 160);
   }, CLIP_MS);

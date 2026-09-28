@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ja" data-geo="JP">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e12">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Freecash &mdash; ゲームで稼ごう</title>
+<meta name="description" content="いつも遊んでいるゲームが、そのままお小遣いに。">
+
+<!--
+  frrcsh-jp-pres-spar.html -> https://www.trendhavenn.com/frrcsh-jp-pres-spar.html
+  Freecash - Prescott, JAPAN. SPARTIS launch.
+
+  Geo clone of frrcsh-us-pres-spar2.html. Structure, palette and the feed/balance mechanic are
+  carried over unchanged. What changed for Japan is listed below.
+
+  JAPANESE TYPESETTING (this is what makes it read native rather than translated):
+    - System JP font stack. Inter has no kana/kanji, so the US stack would have fallen back to
+      whatever the device picked and the page would have looked like a machine translation.
+    - font-feature-settings:'palt' - proportional CJK metrics. Without it kana sit on full-width
+      em boxes and the type reads loose and amateur. This is the single biggest quality tell.
+    - letter-spacing is 0 or slightly POSITIVE. The US h1 runs -1.2px, which collides kanji.
+    - line-break:strict + word-break:auto-phrase - proper kinsoku, and headings break at phrase
+      boundaries instead of mid-word (Japanese has no spaces, so the default breaks anywhere).
+    - font-weight tops out at 800. JP system faces have no 900; asking for it triggers synthetic
+      bolding, which smears dense kanji at small sizes.
+    - Small text is larger than the US build. Kanji carry far more strokes per em, so the 6.5px
+      feed labels on the US page would be unreadable here.
+
+  CURRENCY: yen has no subunit. Every figure is an integer with comma grouping and a trailing
+  円 - never a decimal. Amounts are the US figures converted at about 150 yen to the dollar.
+
+  OUR DIFFERENTIATOR vs the US build: the feed now drives the UNLOCK GATE as well as the balance.
+  Three tasks clear, three pips fill, and the locked games visibly open - then it resets and runs
+  again. The US page states the 3-offer gate in text and never shows it; this demonstrates the
+  exact post-install action the offer needs.
+
+  STANDARD SPARTIS WIRING: CLAIM goes to the offer short code, never to the advertiser. The
+  advertiser URL appears NOWHERE in this file - that is the point of the offer cloak, and it
+  means the offer can be repointed in Spartis without re-uploading this page.
+
+  Short code:  buenohoodies.com/c/frrcsh-jp-pres-off?campid=   <- NEW, must be created
+  Destination on that row must NOT end in a sub param. Forward Param: sub1.
+
+  NO PRELANDER and NO KICKER anywhere on this page - the Carrd /r front is the front.
+-->
+
+<style>
+  :root{
+    --bg:#0b0e12; --surf:#12161d; --surf2:#161b24;
+    --line:rgba(255,255,255,.08); --line2:rgba(32,227,126,.22);
+    --grn:#20e37e; --grn-2:#12b765; --grn-3:#5cf0a5;
+    --amb:#f0a136;
+    --ink:#f7f9fb; --muted:#8d97a6; --muted2:#68717f;
+    --grad:linear-gradient(120deg,#12b765,#20e37e 48%,#5cf0a5);
+    /* iOS -> Hiragino Sans. Android -> Noto Sans CJK JP. Windows -> Yu Gothic / Meiryo.
+       All system faces, so nothing is fetched and nothing can 404 mid-campaign. */
+    --jp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,"Noto Sans JP",
+         "Noto Sans CJK JP",Meiryo,system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:400 16px/1.7 var(--jp);
+    font-feature-settings:"palt" 1;
+    line-break:strict;
+    padding-bottom:calc(104px + env(safe-area-inset-bottom));
+    overflow-x:hidden; position:relative;
+  }
+  body::before{
+    content:''; position:fixed; inset:-20%; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(40% 24% at 16% 4%, rgba(32,227,126,.15) 0%, transparent 64%),
+      radial-gradient(42% 26% at 88% 66%, rgba(240,161,54,.09) 0%, transparent 64%);
+    animation:wash 20s ease-in-out infinite alternate;
+  }
+  @keyframes wash{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.06)}}
+  .fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .fx i{position:absolute;bottom:-14px;width:5px;height:5px;border-radius:50%;background:var(--grn);opacity:0;animation:drift linear infinite}
+  .fx i.g{width:7px;height:7px;background:var(--amb)}
+  @keyframes drift{0%{opacity:0;transform:translate3d(0,0,0)}14%{opacity:.36}84%{opacity:.22}100%{opacity:0;transform:translate3d(14px,-104vh,0)}}
+
+  .wrap{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 14px}
+
+  /* Entrance. `.rv` is the ONLY place `animation` is declared for these elements. Anything
+     needing a second animation declares BOTH in one rule (see .cta), or the second declaration
+     silently overrides the entrance and the element never leaves opacity:0. */
+  .rv{opacity:0;transform:translateY(14px);animation:rv .5s cubic-bezier(.22,.9,.3,1) forwards}
+  @keyframes rv{to{opacity:1;transform:none}}
+  .d1{animation-delay:.07s} .d2{animation-delay:.14s} .d3{animation-delay:.21s}
+  .d4{animation-delay:.28s} .d5{animation-delay:.35s} .d6{animation-delay:.42s}
+
+  /* HEADER */
+  .top{display:flex;align-items:center;gap:9px;padding:14px 0 2px}
+  .tile{width:34px;height:34px;border-radius:10px;overflow:hidden;flex-shrink:0;border:1px solid var(--line)}
+  .tile img{width:100%;height:100%;object-fit:cover;display:block}
+  .wordmark{font-size:17px;font-weight:800;letter-spacing:-.4px;font-family:Inter,system-ui,sans-serif}
+  .wordmark span{color:var(--grn)}
+  .live{
+    margin-left:auto;display:inline-flex;align-items:center;gap:6px;
+    background:rgba(32,227,126,.1);border:1px solid var(--line2);border-radius:999px;
+    padding:6px 10px;font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .live i{width:6px;height:6px;border-radius:50%;background:var(--grn);animation:blip 1.8s ease-in-out infinite;flex-shrink:0}
+  @keyframes blip{0%,100%{box-shadow:0 0 0 0 rgba(32,227,126,.55)}50%{box-shadow:0 0 0 5px rgba(32,227,126,0)}}
+  .live b{color:var(--ink);font-weight:800}
+
+  /* HERO */
+  .hero{padding:18px 0 4px;text-align:center}
+  /* letter-spacing 0, not the US build's -1.2px: negative tracking collides kanji.
+     auto-phrase keeps a Japanese headline breaking at phrase boundaries. */
+  h1{font-size:32px;line-height:1.28;font-weight:800;letter-spacing:0;word-break:auto-phrase}
+  h1 .a{display:block;color:var(--ink)}
+  h1 .b{display:block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{color:var(--muted);font-size:14px;line-height:1.72;margin:11px auto 0;max-width:330px;word-break:auto-phrase}
+  .lede b{color:var(--ink);font-weight:700}
+
+  /* THE UNLOCK PANEL */
+  .panel{
+    margin-top:16px;border-radius:22px;padding:16px 14px;
+    background:linear-gradient(170deg,rgba(32,227,126,.07),rgba(32,227,126,.02) 45%,transparent);
+    border:1px solid var(--line2);
+  }
+  .gate{text-align:center;font-size:14.5px;font-weight:700;line-height:1.6;padding:2px 2px 14px;word-break:auto-phrase}
+  /* nowrap: auto-phrase will otherwise break INSIDE this bold run, splitting the
+     offer-count phrase across two lines. It is the phrase the whole gate turns on. */
+  .gate b{color:var(--amb);font-weight:800;white-space:nowrap}
+
+  /* locked games */
+  .apps{display:flex;gap:9px;justify-content:center;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none}
+  .apps::-webkit-scrollbar{display:none}
+  .app{width:63px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .app .ic{position:relative;width:58px;height:58px;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:var(--surf2)}
+  .app .ic img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.55) brightness(.55);transition:filter .5s ease}
+  .app .ic::after{content:'';position:absolute;inset:0;background:rgba(11,14,18,.32);transition:opacity .5s ease}
+  .lk{
+    position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:26px;height:26px;border-radius:9px;
+    background:rgba(11,14,18,.82);border:1px solid rgba(255,255,255,.16);
+    display:grid;place-items:center;
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+    transition:opacity .5s ease,transform .5s ease;
+  }
+  .lk svg{width:13px;height:13px;fill:none;stroke:var(--grn-3);stroke-width:2.1;stroke-linecap:round}
+  /* the unlocked state - driven by the feed, see the meter block in JS */
+  .apps.open .ic img{filter:none}
+  .apps.open .ic::after{opacity:0}
+  .apps.open .lk{opacity:0;transform:translate(-50%,-50%) scale(.55)}
+  .app > span{font-size:10px;font-weight:700;color:var(--muted2);text-align:center;line-height:1.2;
+    font-family:Inter,system-ui,sans-serif}
+  .apps.open .app > span{color:var(--grn-3)}
+
+  /* THE UNLOCK METER — our differentiator. The feed fills it, so the 3-offer gate is
+     demonstrated rather than only stated. */
+  .meter{margin-top:13px;padding:10px 12px;border-radius:13px;background:var(--surf);border:1px solid var(--line)}
+  .mlab{font-size:11.5px;font-weight:700;color:var(--muted);letter-spacing:.02em;line-height:1.45}
+  .mlab b{color:var(--amb);font-weight:800;font-size:15px;margin:0 1px}
+  .meter.done .mlab{color:var(--grn-3);font-weight:800}
+  .pips{display:flex;gap:5px;margin-top:8px}
+  .pips i{flex:1;height:5px;border-radius:999px;background:rgba(255,255,255,.09);transition:background .35s ease}
+  .pips i.on{background:var(--grad)}
+
+  /* balance */
+  .balrow{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    margin-top:12px;padding:12px 13px;border-radius:15px;
+    background:var(--surf);border:1px solid var(--line);
+  }
+  .blab{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.04em;margin-bottom:4px}
+  .blab i{width:6px;height:6px;border-radius:50%;background:var(--grn);flex-shrink:0}
+  .bal{font-size:29px;font-weight:800;letter-spacing:-.4px;line-height:1;color:var(--grn);transition:transform .16s;white-space:nowrap}
+  .bal.pop{transform:scale(1.05)}
+  /* the yen sign is a SUFFIX in Japanese consumer copy - 5,760円, never ¥5,760.00 */
+  .bal em{font-style:normal;font-size:14px;font-weight:700;color:var(--grn);margin-left:2px}
+  .rate{
+    flex-shrink:0;display:inline-flex;align-items:center;gap:5px;
+    background:rgba(32,227,126,.12);border:1px solid var(--line2);
+    border-radius:999px;padding:7px 10px;font-size:10.5px;font-weight:700;color:var(--grn);white-space:nowrap;
+  }
+
+  /* LIVE TASK FEED */
+  .demo{display:flex;gap:13px;align-items:center;margin-top:14px}
+  .phone{
+    position:relative;width:126px;flex-shrink:0;aspect-ratio:9/16;border-radius:15px;overflow:hidden;
+    background:#080c10;border:1px solid var(--line);
+  }
+  .phhead{
+    position:absolute;top:0;left:0;right:0;z-index:2;height:20px;
+    display:flex;align-items:center;padding:0 7px;
+    font-size:7.5px;font-weight:800;letter-spacing:.04em;color:var(--muted2);
+    background:rgba(8,12,16,.92);border-bottom:1px solid var(--line);
+  }
+  /* top/left only — NOT inset:0. Clamping the strip to the phone box makes every row share one
+     phone-height and the feed renders as overlapping slivers. */
+  .feed{position:absolute;top:20px;left:0;width:100%;display:flex;flex-direction:column;animation:roll 16s infinite}
+  /* Hold, then advance — a task list settles between entries instead of gliding. 8 rows, so one
+     task is -12.5% and a pass through the first copy is -50%. */
+  @keyframes roll{
+    0%,19%   {transform:translateY(0)}
+    25%,44%  {transform:translateY(-12.5%)}
+    50%,69%  {transform:translateY(-25%)}
+    75%,94%  {transform:translateY(-37.5%)}
+    100%     {transform:translateY(-50%)}
+  }
+  .task{
+    position:relative;width:100%;flex-shrink:0;padding:8px 7px;
+    display:flex;flex-direction:column;gap:4px;justify-content:center;
+    border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .task .tk{display:flex;align-items:center;gap:5px}
+  .task .chk{
+    width:13px;height:13px;flex-shrink:0;border-radius:50%;background:var(--grad);
+    display:grid;place-items:center;
+  }
+  .task .chk svg{width:7px;height:7px;fill:none;stroke:#052012;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+  /* Bigger than the US build's 7.5/6.5px. Kanji at 6.5px is a grey smudge on a phone. */
+  .task .nm{font-size:9px;font-weight:700;color:#fff;line-height:1.3}
+  .task .gm{font-size:7.5px;font-weight:600;color:var(--muted2);padding-left:18px;line-height:1.3}
+  .task .amt{
+    align-self:flex-start;margin-left:18px;
+    font-size:9.5px;font-weight:800;color:var(--grn);
+    background:rgba(32,227,126,.12);border-radius:5px;padding:2px 5px;
+  }
+  .demotx{flex:1;min-width:0}
+  .demotx h3{font-size:17px;font-weight:800;letter-spacing:0;line-height:1.4;margin-bottom:7px;word-break:auto-phrase}
+  .demotx h3 em{font-style:normal;color:var(--grn)}
+  .demotx p{font-size:12.5px;line-height:1.62;color:var(--muted);word-break:auto-phrase}
+  .demotx p b{color:var(--grn);font-weight:700}
+
+  /* no text-transform - it does nothing to kana/kanji, and the US build's .09em tracking
+     spreads a Japanese button label apart. */
+  .panel .go{
+    display:block;width:100%;margin-top:14px;border:0;cursor:pointer;border-radius:14px;padding:16px 12px;
+    background:var(--grad);color:#052012;font:800 15px/1.4 var(--jp);letter-spacing:.04em;
+  }
+  .panel .go:active{transform:scale(.985)}
+
+  /* SECTIONS */
+  h2{font-size:23px;font-weight:800;letter-spacing:0;text-align:center;margin-bottom:15px;line-height:1.35;word-break:auto-phrase}
+  h2 em{font-style:normal;color:var(--grn)}
+  .sect{margin-top:26px}
+  .step{display:flex;gap:12px;align-items:flex-start;margin-bottom:11px}
+  .sn{width:28px;height:28px;flex-shrink:0;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:#052012;font-weight:800;font-size:13.5px;font-family:Inter,system-ui,sans-serif}
+  .sb{min-width:0;padding-top:1px}
+  .sb b{display:block;font-size:14.5px;font-weight:800;line-height:1.45}
+  /* DIRECT CHILD only. `.sb span` also matches the nested .wn and .nb spans and would make
+     each of them display:block, putting every inline run on its own line. Same bug as .pi. */
+  .sb > span{display:block;font-size:12.5px;color:var(--muted);line-height:1.68;margin-top:2px;word-break:auto-phrase}
+  .wn{color:var(--grn);font-weight:700}
+  /* Japanese has no spaces, so a wrap can land between a Latin word and the particle
+     that attaches to it, orphaning the particle on the next line. Bind those units. */
+  .nb{white-space:nowrap}
+  .payrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .payrow span{background:var(--surf2);border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:11px;font-weight:600;color:var(--muted)}
+
+  .pass{display:flex;align-items:center;gap:10px;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:10px 11px;margin:0 0 11px 40px}
+  .pass .tile{width:38px;height:38px;border-radius:11px}
+  .pi{flex:1;min-width:0}
+  .pi > b{display:block;font-size:13px;font-weight:800;font-family:Inter,system-ui,sans-serif}
+  /* DIRECT CHILD only. `.pi span` also matches the nested .stars and .wn spans and would make
+     them display:block, breaking the meta line into four. */
+  .pi > span{display:block;font-size:10.5px;color:var(--muted);margin-top:2px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stars{color:var(--amb);letter-spacing:.4px}
+  /* 入手 is literally what the Japanese App Store prints on the install button. */
+  .add{flex-shrink:0;border:0;cursor:pointer;background:var(--grad);color:#052012;font:800 11.5px/1 var(--jp);letter-spacing:.06em;padding:9px 15px;border-radius:999px}
+
+  .rank{display:flex;align-items:center;gap:11px;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px}
+  .rank .pill{
+    flex-shrink:0;display:inline-flex;align-items:center;gap:5px;
+    background:rgba(32,227,126,.11);border:1px solid var(--line2);color:var(--grn);
+    border-radius:999px;padding:6px 10px;font-size:10.5px;font-weight:800;letter-spacing:.03em;white-space:nowrap;
+  }
+  .rank.gold .pill{background:rgba(240,161,54,.11);border-color:rgba(240,161,54,.3);color:var(--amb)}
+  .rank .pill svg{width:11px;height:11px;flex-shrink:0}
+  .rtx{min-width:0}
+  .rtx b{display:block;font-size:13px;font-weight:800;line-height:1.35}
+  .rtx > span{display:block;font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:2px}
+
+  .closer{text-align:center;margin-top:28px}
+  .closer p{font-size:13.5px;color:var(--muted);line-height:1.72;margin-top:9px;word-break:auto-phrase}
+  .legal{margin-top:22px;font-size:10.5px;color:var(--muted2);line-height:1.8;text-align:center;word-break:auto-phrase}
+
+  /* STICKY FOOTER */
+  .footer{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:linear-gradient(rgba(11,14,18,0), var(--bg) 26%);
+    padding:20px 14px calc(12px + env(safe-area-inset-bottom));
+  }
+  .footer-in{max-width:480px;margin:0 auto}
+  .cta{
+    display:block;width:100%;border:0;cursor:pointer;border-radius:15px;padding:17px 12px;
+    background:var(--grad);color:#052012;
+    font:800 16px/1.4 var(--jp);letter-spacing:.04em;
+    opacity:0;transform:translateY(14px);
+    animation:rv .5s cubic-bezier(.22,.9,.3,1) .4s forwards,
+              ctaPulse 2s ease-in-out 1s infinite;
+  }
+  @keyframes ctaPulse{
+    0%,100%{box-shadow:0 8px 24px rgba(32,227,126,.26)}
+    50%    {box-shadow:0 10px 40px rgba(32,227,126,.5)}
+  }
+  .cta:active{transform:scale(.985)}
+  .cta:disabled{filter:saturate(.5) brightness(.85);cursor:default;animation:rv .5s cubic-bezier(.22,.9,.3,1) .4s forwards}
+  .cta-note{text-align:center;font-size:11px;color:var(--muted2);margin-top:7px;font-weight:600}
+  .spin{display:inline-block;width:12px;height:12px;vertical-align:-2px;border:2px solid rgba(5,32,18,.35);border-top-color:#052012;border-radius:50%;animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  @media (max-width:390px){
+    h1{font-size:29px}
+    .bal{font-size:26px}
+    .phone{width:114px}
+    .demotx h3{font-size:15.5px}
+    .pass{margin-left:0}
+    .live{font-size:10px;padding:6px 9px}
+  }
+  /* Below 345 the side-by-side demo squeezes the copy to three characters a line — stack it. */
+  @media (max-width:344px){
+    h1{font-size:26px}
+    .wrap{padding:0 11px}
+    .panel{padding:14px 11px}
+    .demo{flex-direction:column;gap:11px}
+    .phone{width:142px;align-self:center}
+    .demotx{text-align:center}
+    .bal{font-size:23px}
+    .app{width:57px}
+    .app .ic{width:52px;height:52px}
+    .rate{font-size:10px;padding:6px 9px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important}
+    .rv,.cta{opacity:1;transform:none}
+    .feed{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="fx" aria-hidden="true">
+  <i style="left:10%;animation-duration:18s;animation-delay:0s"></i>
+  <i style="left:36%;animation-duration:22s;animation-delay:5s"></i>
+  <i style="left:66%;animation-duration:19s;animation-delay:9s"></i>
+  <i class="g" style="left:24%;animation-duration:26s;animation-delay:3s"></i>
+  <i class="g" style="left:85%;animation-duration:24s;animation-delay:7s"></i>
+</div>
+
+<div class="wrap">
+
+  <header class="top rv">
+    <span class="tile"><img src="data:image/jpeg;base64,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" alt="Freecash"></span>
+    <span class="wordmark">Free<span>cash</span></span>
+    <span class="live"><i></i><b id="liveN">3,914</b>人が参加中</span>
+  </header>
+
+  <section class="hero">
+    <h1 class="rv d1"><span class="a">ゲームで遊んで</span><span class="b">現金をゲット</span></h1>
+    <p class="lede rv d2">いつも遊んでいるゲームが、そのままお小遣いに。<b>1,500円から換金できます</b>。課金は一切不要。</p>
+  </section>
+
+  <section class="panel rv d3">
+    <p class="gate">Freecash をダウンロードして<b>案件を3つ</b>クリアすると、高単価のゲームが解放されます。</p>
+    <div class="apps" id="apps"></div>
+
+    <div class="meter" id="meter">
+      <div class="mlab" id="mlab">解放まであと <b>3</b> 件</div>
+      <div class="pips" id="pips"><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="balrow">
+      <div>
+        <div class="blab"><i></i>現在の残高</div>
+        <div class="bal" id="bal">5,760<em>円</em></div>
+      </div>
+      <span class="rate">&#9889; 案件ごとに加算</span>
+    </div>
+
+    <div class="demo">
+      <div class="phone">
+        <div class="phhead">案件クリア中</div>
+        <div class="feed" id="feed"></div>
+      </div>
+      <div class="demotx">
+        <h3>どの案件も<em>お金になる。</em></h3>
+        <p>ゲームで遊んで、条件を達成するだけ。報酬はそのまま<b>残高</b>に入ります。</p>
+      </div>
+    </div>
+
+    <button type="button" class="go" data-go>今すぐ稼ぎはじめる</button>
+  </section>
+
+  <div class="sect">
+    <h2 class="rv d4">現金までの<em>3ステップ</em></h2>
+    <div class="step rv d4">
+      <span class="sn">1</span>
+      <div class="sb"><b>Freecash をダウンロード</b><span><span class="nb"><span class="wn">iPhone・Android</span>で無料。</span>登録は1分もかかりません。</span></div>
+    </div>
+    <div class="pass rv d5">
+      <span class="tile"><img src="data:image/jpeg;base64,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" alt="Freecash"></span>
+      <div class="pi"><b>Freecash</b><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.6 &middot; <span class="wn">App Store</span> &middot; 無料</span></div>
+      <button type="button" class="add" data-go>入手</button>
+    </div>
+    <div class="step rv d5">
+      <span class="sn">2</span>
+      <div class="sb"><b>案件を3つクリア</b><span>ゲームで遊ぶ、条件を達成する、かんたんな作業をする。どれも報酬になり、3つで高単価のゲームが解放されます。</span></div>
+    </div>
+    <div class="step rv d5">
+      <span class="sn">3</span>
+      <div class="sb"><b>好きな方法で受け取る</b><span>残高は現金やギフト券に交換できます。1,500円から、最短数時間で着金。</span>
+        <div class="payrow"><span>PayPal</span><span>PayPay</span><span>Amazonギフト券</span><span>銀行振込</span><span>ビットコイン</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sect">
+    <h2 class="rv d6"><em>ランク</em>を上げよう</h2>
+    <div class="rank rv d6">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c3.6 4 6.5 7.2 6.5 10.6a6.5 6.5 0 01-13 0C5.5 9.7 8.4 6.5 12 2.5z"/></svg>ルーキー</span>
+      <div class="rtx"><b>案件 0～3件</b><span>スタート案件が解放</span></div>
+    </div>
+    <div class="rank rv d6">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 2L4 13.5h6L9.5 22 20 10.5h-6.5L13.5 2z"/></svg>プロ</span>
+      <div class="rtx"><b>案件 3～10件</b><span>高単価の案件、報酬も大きく</span></div>
+    </div>
+    <div class="rank gold rv d6">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.2 6.6.9-4.8 4.7 1.2 6.7L12 17.3 6.1 20.5l1.2-6.7L2.5 9.1l6.6-.9L12 2z"/></svg>エリート</span>
+      <div class="rtx"><b>案件 10件以上</b><span>最高単価、新作ゲームに先行アクセス</span></div>
+    </div>
+  </div>
+
+  <section class="closer">
+    <h2 class="rv d6">まだ<em>タダ</em>で遊んでる？</h2>
+    <p class="rv d6">時間をムダにするのはもうやめよう。Freecash をダウンロードして、今夜から案件をクリアしよう。</p>
+  </section>
+
+  <p class="legal rv d6">
+    18歳以上限定。獲得できる金額はクリアした案件によって異なり、保証されるものではありません。Apple、Google、TikTok および表示されている各ブランドとは一切関係ありません。掲載しているゲームはイメージであり、現在の案件一覧に含まれていない場合があります。表示中の案件と残高はデモであり、実際のアカウントではありません。
+  </p>
+
+</div>
+
+<div class="footer">
+  <div class="footer-in">
+    <button class="cta" id="ctaBtn" type="button">今すぐ無料で稼ぐ</button>
+    <div class="cta-note">無料 &middot; カード登録なし &middot; iPhone &amp; Android &middot; 18歳以上</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= outbound =================
+     SPARTIS launch: CLAIM targets the offer short code and Spartis appends the sub ID using the
+     Forward Param on that row. So this page emits '?campid=<value>' and NEVER '?sub1='.
+
+     THE DESTINATION ON THE SPARTIS ROW MUST NOT END IN A SUB PARAM. Spartis appends its own, and
+     leaving yours on produces a doubled param where the EMPTY one wins and every conversion comes
+     back unmatched. That bug has hit this account three times.
+
+     frrcsh-jp-pres-off is NEW - it has to be created in the Offer Links tab before launch.
+     The advertiser URL is deliberately absent from this file. */
+  var SHORT = 'https://buenohoodies.com/c/frrcsh-jp-pres-off?campid=';
+
+  /* campid FIRST: on a Spartis launch the click ID arrives as ?campid= from the Carrd /r hop, so
+     campid is the one that should win when more than one is present. The rest of the chain stays
+     wide for hand-built test links. An empty sub stays empty - unmatched is recoverable, a
+     fabricated sub ID is not. */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('campid') || QP.get('sub1') || QP.get('s1') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+
+  /* ================= beacon (first-party, px.trendhavenn.com) ================= */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'frrcsh-jp-pres-spar', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon(u);
+      else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  /* ================= locked games =================
+     Real store artwork, dimmed under a padlock - these are things you unlock, so they have to
+     LOOK locked. Only games we hold real icons for: an invented tile would undo the point.
+     Titles stay in their Latin store form, which is how they are listed on the Japanese App
+     Store and how Japanese players write them - same convention as the Spanish build. */
+  var LOCK = '<span class="lk"><svg viewBox="0 0 24 24" aria-hidden="true">'
+           + '<rect x="4.5" y="10.5" width="15" height="10" rx="2.6"></rect>'
+           + '<path d="M8.2 10.5V7.2a3.8 3.8 0 017.6 0v3.3"></path></svg></span>';
+  var APPS = [
+    { n: 'Block Blast', k: '/9j/4AAQSkZJRgABAgAAAQABAAD//gARTGF2YzU4LjEzNC4xMDAA/9sAQwAICgoLCgsNDQ0NDQ0QDxAQEBAQEBAQEBAQEhISFRUVEhISEBASEhQUFRUXFxcVFRUVFxcZGRkeHhwcIyMkKysz/8QAsAAAAgMBAQEAAAAAAAAAAAAABAYCBQcDAQABAAIDAQEBAAAAAAAAAAAAAAcGBQMCAQQAEAABAwIBBQwHBwEJAQAAAAABAhEDBAASIQVBIjFRQlSRcbEGcpIU0hVhgTITshYjotFT02JSc2OzJDPDpKOCg6GTEQACAAMFBAgDBAsBAAAAAAACAQADEVEhMRIEEyJBBdFhwbFSIzIUoYGScnGRU9KywgYz8OGiVHNiNf/AABEIAGAAYAMBIgACEQADEQD/2gAMAwEAAhEDEQA/AA6arhggjSumil1UsWSDsG3VL2R5jS8Ci+x4LXlKaOLqjmF8sdwRTDRPeeL74KK08ppPKsF3Ra19fGuBSIqaKIqBdTJJZtg1Q3LZNNVwwQRJXTRS6qWLJB2Dbql7WJ1ap5Fc1nKU0cXUHML7nPJXM/Vb1RhSZe0Y5VTLX4ww+Y0vAovseC6+vro5IFIipoosQLqZJLNsGqG5bHo6aaslMcUUkqgnGUowuztvlJ03ZT5jzpIGTQ1Gw/h/mXlTJlVe+HFLtjzzS0cpkLIESWDcY9ftuh6H594DL2ovzLHHRXPKpVxCjkK0JSpScUbgKdj7eljbn7vTfnS/rHpgb7I/C4U7+ty+T8/cAl7UX5l/fJ+fuAS9qL8y++60350v6x6Y+2R+Fwm39dhW0NRm+ZUFRGY5Es6SQSHDj2SR/wC2DfoEhNIhaad6avTitpp0d0N8tWjDGkEHCkPlG1hkvh3oejtC3Smq4YII0rpopdVLHCkHYNuqXsjzGl4FF9jwWkNyav1Yvvgop6qiplpRUw7YQFTpUCMgyHSLLkqk4Y0hiyQ+Ubgtjr6+NcKkRU0URUC6sKSWbYNUNy3mAFyGk0svViSRMULXCtap9aiK1uvnaEgZAJOYnxpTLTqa4xr/AEQlx1s5GRqfd/qJvUPfy/vVeO9BMlXVfwD+0F6u9pPPJLka4pYkVEAXqqrd98R4zfd1nEKqTwxwusgr38v71XUUiz36qU5f3NPl0+1NZr3V0Z/vdV/DT/FNcRKzeZUiflulW3TeGNsUlgsVF/7+X96riqeVjrq2WM9xUdU8hujzPGf1PpjuzHwr8FGF9LC+dpepF8AtPtu6U5c6y9SL4Bam1mrlX/n6X/TL/VULWq/jzPtOH9Smji6o5hfLHYEtWjDGkEHCkPlG1hkvh3oejtC1UpRsnuvFwThnSUKTNYKDp1avqPNagBku/VOlQOwZDpF0QZtoth5QLEZtVS8e2FLnxCZyWLqqH+zDNmPO6c0LmWUKV7yMRjC2rrAvltj+b0blRxx/febHCdI47jhT6OO7NVybSaua5s0WyaSe8Sw6lEHL1U2UOUctOtVjS/m9G5Uccf33fZmr6nOq6pVHBlwQIUVyRoIYyHI7u7+q8XCU3rfQXVRXN/R5l3Bcz5Vo9Bo5s+XLbaQqjMsGY14x6pWqnTjQtjb6VDb3PPf4X+oi+6/O5Z7/AAf9+L7rYPeK/crjNxVIpjrK2HSbRfdyP8b+8umJLzvGP0xgPSVMic6SiVIQsJjcBQWPZGkZLV2tw6UZc7TdSL4BakW3RZe5W0Wg0zSS8oLlw3VbfC/qF50z7TjboZKeKnhxU0S3jRlwpG9H6TfTvNLwOLiR4Lp8f0YOon4RcMdo5bTMW8WL49cIBGWZ7zxfF2wVnCphMCkx00UZUlTqwpJZtGqG5bNgkp4qeHFTRLeNGXCkb0fpNrVYv6Z6qua7HH9GD+NPwi7Hn2S3irmtdkWMns06v1W9UXPeaXgcXEjwXXV9TCYFJjp4oypKnVhSSzaNUNy2JjsGrXqepXNeZe0zjUixtcZAmzV7xtjOQkMOS9X6EZEV3/T/AJl5YBkHILYs2Z6XmqOZCUBXvsDnEUkYMWQMk7Xtz5xp5mq0M2VKHMRZaKqWBJ4u6CDpiEJqZOivvjdHuKjqnkN4981SfhH/AOyvBZvzBMwOAZQ/+MvwWPB/dvmZ1yyK0/7D9KJl6zSjjMS+T6IuJJ4484VWOFMriL2myfTTupN1mcq9C4THFTxRYgrEoJSSzbBqhuW6s16qmeWQpCCsJdi/spA2sNrWNUF0+pXNZk5Poz0/L9OM4MphLEWq1o0qcLoTdbMGZqZhA6plVODTnCMIjSCFMhL6wGgXDzBO4nti3WGSnip4QqmiW8aMuFI3o/Sb696peBxcSPBYxKdJRPdPF8VbCy9lV3Fi7Iz6asRKkh0jIrfA6LJ8wjCI0ghTIS+sBoFs2cKmIwKTHTxRlSVOrCklm0aobls2CSnip4QqmiW8aMuFI3o/Sb25srZp5SpmtVkaez2auKmbqshK8wTuJ7YvhNWIkSQ6RkVvgdF6D3ql4HFxI8F1ucKmIwKTHTxRlSVOrCklm0aoblvgTpLJUEsbVHA2WZURY9UZOCGGUbBpv3VOkcYvSqSsihgjSunik1UsWSCzDbql7L8ypuBRfZ8FlF6SYuFf5++Gj3i8Hx/pGTkIY+zs9F3q5oWQAEFkhy42sLZ85ZwQuBSIqeKLEFOoBJLNsGqG5bKpayKGCNK6aKTVSxwpBZht1S9+mTKmyUWVKrpZWi+EUzZwzEqi1R2wlCoSNiUj/kL9M6VAgsMh0jct+8ypuBRfZ8F1ecc4IXAURU8UWIKxKASVM2waoblu7NqHc0qfLsiioWP8YPx/Rg6ifhFwx3Sd/QERpDKZCX1gNAuPmCdwdoWHnpybe68X3xAEB5nuvF98H1i/pnqq5rscf0YP40/CLWJqtMqSMgyK3wOiye/oCI0hlMhL6wGgXtyC2aVH6uyNsD2aWV1zdkXeOwatf0z1Vc1geYJ3B2hfCarTKkjIMit8DovISCRJ5XjGQA0Y1F4wRiaOLqjmFwx3Xrqk4UBLFkhy43BfLvPoHas1bWUrs0TrAqu6C6gug8iuazcTRx9UcwulVOFJILDIdPovuuqThQEsWSHLjcF5UyXUnmVKKPshUw4xYY7GqC6fUrmsPvPoHauJnCgQWGQ6fRfxTZbToV/zjmQrI//Z' },
+    { n: 'Roblox', k: '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' },
+    { n: 'Subway Surfers', k: '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' }
+  ];
+  var appsEl = document.getElementById('apps');
+  APPS.forEach(function (a) {
+    var d = document.createElement('div'); d.className = 'app';
+    var ic = document.createElement('div'); ic.className = 'ic';
+    var im = document.createElement('img');
+    im.src = 'data:image/jpeg;base64,' + a.k; im.alt = a.n;
+    ic.appendChild(im); ic.insertAdjacentHTML('beforeend', LOCK);
+    var s = document.createElement('span'); s.textContent = a.n;
+    d.appendChild(ic); d.appendChild(s); appsEl.appendChild(d);
+  });
+
+  /* ================= the live task feed =================
+     Real offer shapes, variable payouts, each row credited to the balance as it lands - which is
+     what an offerwall actually looks like clearing. Doubled so the -50% step loops seamlessly;
+     each row is one quarter of the visible strip.
+
+     Yen is an INTEGER currency - no decimals anywhere, comma grouping, 円 as a suffix. */
+  var CHK = '<span class="chk"><svg viewBox="0 0 24 24"><polyline points="5 13 10 18 19 6"></polyline></svg></span>';
+  var TASKS = [
+    ['レベル15に到達',   'Block Blast',    630],
+    ['チュートリアル完了', 'Roblox',         270],
+    ['30分プレイ',       'Subway Surfers', 375],
+    ['アンケートに回答', 'かんたん案件',     135]
+  ];
+  function yen(n) { return n.toLocaleString('ja-JP'); }
+
+  var feed = document.getElementById('feed');
+  function row(t) {
+    var d = document.createElement('div');
+    d.className = 'task';
+    d.style.height = (100 / (TASKS.length * 2)) + '%';
+    d.innerHTML = '<div class="tk">' + CHK + '<span class="nm">' + t[0] + '</span></div>'
+                + '<div class="gm">' + t[1] + '</div>'
+                + '<span class="amt">+' + yen(t[2]) + '円</span>';
+    return d;
+  }
+  TASKS.forEach(function (t) { feed.appendChild(row(t)); });
+  TASKS.forEach(function (t) { feed.appendChild(row(t)); });
+
+  /* ================= balance + UNLOCK METER, both wired to the feed =================
+     The balance half is carried over from the US build: each task credits ITS OWN amount, not a
+     flat figure, so it reads like real offers clearing rather than a slot machine.
+
+     THE METER IS THE JAPAN BUILD'S ADDITION. The gate asks for 3 offers, so three pips fill as
+     the feed clears and on the third the locked games visibly open - then it resets and runs
+     again. The US page states the gate in text and never demonstrates it; this shows the exact
+     post-install action the offer needs, which is the whole point of the gate copy. */
+  var balEl  = document.getElementById('bal');
+  var meter  = document.getElementById('meter');
+  var mlab   = document.getElementById('mlab');
+  var pips   = [].slice.call(document.getElementById('pips').children);
+  var GATE   = 3;
+  var bal = 5760, ti = 0;
+  var STEP_MS = 16000 / TASKS.length;   /* one tick per feed advance */
+
+  function setMeter(done) {
+    pips.forEach(function (p, i) { p.classList.toggle('on', i < done); });
+    if (done >= GATE) {
+      meter.classList.add('done');
+      appsEl.classList.add('open');
+      mlab.innerHTML = '高単価のゲームが解放されました！';
+    } else {
+      meter.classList.remove('done');
+      appsEl.classList.remove('open');
+      mlab.innerHTML = '解放まであと <b>' + (GATE - done) + '</b> 件';
+    }
+  }
+
+  window.setInterval(function () {
+    var amt = TASKS[ti % TASKS.length][2];
+    ti++;
+    bal += amt;
+    balEl.innerHTML = yen(bal) + '<em>円</em>';
+    balEl.classList.add('pop');
+    window.setTimeout(function () { balEl.classList.remove('pop'); }, 160);
+
+    /* 4 tasks, 3 to unlock: fill on 1-2-3, then the 4th resets and the cycle runs again. */
+    var step = ti % TASKS.length;        /* 1, 2, 3, 0 */
+    setMeter(step === 0 ? 0 : Math.min(step, GATE));
+  }, STEP_MS);
+
+  /* ================= live counter ================= */
+  var lEl = document.getElementById('liveN'), live = 3914;
+  window.setInterval(function () {
+    live += Math.floor(Math.random() * 9) - 3;
+    if (live < 3760) live = 3760 + Math.floor(Math.random() * 25);
+    if (live > 4180) live = 4180 - Math.floor(Math.random() * 25);
+    lEl.textContent = live.toLocaleString('ja-JP');
+  }, 2800);
+
+  /* ================= CTA =================
+     Every go target is the same action, fired from the user's tap, same tab. No breakout here -
+     there is no prelander and no kicker in this funnel. */
+  var going = false;
+  function claim() {
+    if (going) return;
+    going = true;
+    var main = document.getElementById('ctaBtn');
+    main.disabled = true;
+    main.innerHTML = '読み込み中 <span class="spin"></span>';
+    px('claim');
+    var href = SHORT + encodeURIComponent(subid());
+    window.setTimeout(function () { window.location.href = href; }, 300);
+  }
+  document.getElementById('ctaBtn').addEventListener('click', claim);
+  [].slice.call(document.querySelectorAll('[data-go]')).forEach(function (b) {
+    b.addEventListener('click', function (e) { e.preventDefault(); claim(); });
+  });
+})();
+</script>
+
+</body>
+</html>

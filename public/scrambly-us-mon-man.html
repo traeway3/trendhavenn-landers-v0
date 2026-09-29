@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" data-geo="US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0913">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Scrambly &mdash; Start Earning</title>
+<meta name="description" content="Play games, get paid, cash out from $1.">
+
+<!--
+  scrambly-us-mon-man.html -> https://www.trendhavenn.com/scrambly-us-mon-man.html
+  Scrambly - Monetise, US. MANUAL launch.
+
+  Structure is the recosocial-us-pres-man.html skeleton (qualify cards -> slider -> reward cards
+  -> how it works -> pre-CTA modal), rethemed to Scrambly.
+
+  PALETTE IS SAMPLED FROM THE MASCOT, not guessed. Across the opaque pixels of the supplied
+  artwork the orange family (#dc6420 / #eb852e / #eb9a47) is ~43% and the controller/chair purple
+  #954bdf is ~4%, so orange carries the page and purple is a discrete accent. That weighting is
+  deliberate - an even orange/purple split would not look like this brand.
+
+  TWO DIFFERENTIATORS (the project instruction that this is never a 1:1 copy):
+
+  1. THE FIRST-PAYOUT TRACKER. The advertiser's own site claims a ~6 minute average time to first
+     reward and a $1 minimum. So the page demonstrates that instead of asserting it: a compressed
+     clock runs the four steps to the first dollar and loops. Nothing in the competitor set shows
+     the one thing that actually kills this vertical, which is "I will never really get paid."
+
+  2. REWARD CARDS PAY PER MILESTONE, NOT PER HOUR. The reference page prices games at $X/hr.
+     Scrambly's model is small in-app milestones, so the cards name a milestone and its payout.
+     Truer to the offer, and structurally not the reference's element.
+
+  NOT carried over, on purpose (both named in Competitor Landers/INDEX.md; the literal strings are
+  deliberately kept out of this file so nothing scanning page source can match them):
+    - one competitor's third-party ad-platform pixel. This account tracks server-side only.
+    - another's fabricated platform-verification badge. The trust row makes checkable claims
+      about the offer instead.
+
+  NO KICKER ON THIS PAGE. The prelander does the breakout.
+
+  MANUAL WIRING: this page holds the advertiser link and appends the sub itself. There is no
+  short code, no Carrd and no Spartis anywhere in this funnel, so there is nothing for a
+  server-to-server callback to attribute against and none is configured - conversions are read
+  in Monetise's own dashboard, broken out by s1.
+-->
+
+<style>
+  :root{
+    --bg:#0c0913; --card:#171226; --card-2:#1e1830; --line:rgba(255,255,255,.08);
+    --ink:#f7f4fb; --dim:#9a92ab; --dim-2:#6b6380;
+    /* sampled from the mascot artwork */
+    --org:#f0862f; --org-2:#dc6420; --org-3:#ffb35c;
+    --pur:#954bdf; --pur-2:#b47af0;
+    --grad:linear-gradient(120deg,#dc6420,#f0862f 48%,#ffa947);
+    --grad2:linear-gradient(120deg,#f0862f,#954bdf);
+    --ok:#34d399;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:400 16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    padding-bottom:calc(120px + env(safe-area-inset-bottom));
+    overflow-x:hidden; position:relative;
+  }
+  body.lock{overflow:hidden}
+  body::before{
+    content:''; position:fixed; inset:-20%; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(38% 22% at 20% 6%, rgba(240,134,47,.17) 0%, transparent 64%),
+      radial-gradient(42% 26% at 84% 70%, rgba(149,75,223,.14) 0%, transparent 64%);
+    animation:wash 20s ease-in-out infinite alternate;
+  }
+  @keyframes wash{ from{transform:translate3d(-2%,-1%,0) scale(1)} to{transform:translate3d(2%,2%,0) scale(1.06)} }
+  .fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .fx i{position:absolute;bottom:-14px;width:5px;height:5px;border-radius:50%;background:var(--org);opacity:0;animation:drift linear infinite}
+  .fx i.p{width:7px;height:7px;background:var(--pur)}
+  @keyframes drift{0%{opacity:0;transform:translate3d(0,0,0)}14%{opacity:.4}84%{opacity:.26}100%{opacity:0;transform:translate3d(14px,-104vh,0)}}
+
+  .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 14px}
+
+  /* Entrance. `.rise` is the ONLY place `animation` is declared for these elements - anything
+     needing a second animation declares BOTH in one rule (see .cta), or the second declaration
+     silently overrides the entrance and the element never leaves opacity:0. */
+  .rise{opacity:0;transform:translateY(16px);animation:rise .55s cubic-bezier(.22,.9,.3,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .r1{animation-delay:.04s} .r2{animation-delay:.12s} .r3{animation-delay:.20s} .r4{animation-delay:.28s}
+  .r5{animation-delay:.36s} .r6{animation-delay:.44s} .r7{animation-delay:.52s} .r8{animation-delay:.60s}
+
+  /* BRAND */
+  .brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:18px 0 0}
+  .brand img{height:42px;width:42px;border-radius:12px;object-fit:cover;background:var(--card-2)}
+  .brand .nm{font-size:20px;font-weight:800;letter-spacing:-.4px}
+  .brand .nm span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* HERO */
+  .hero{text-align:center;padding:14px 6px 8px}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid rgba(149,75,223,.45);background:rgba(149,75,223,.12);
+    border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:700;margin-bottom:14px;
+    letter-spacing:.4px;
+  }
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:blip 1.8s ease-in-out infinite}
+  @keyframes blip{0%,100%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}50%{box-shadow:0 0 0 6px rgba(52,211,153,0)}}
+  h1{font-size:31px;line-height:1.1;font-weight:800;letter-spacing:-.7px;margin-bottom:10px}
+  h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{color:var(--dim);font-size:15px;line-height:1.5;max-width:380px;margin:0 auto}
+  .lede b{color:var(--ink);font-weight:700}
+
+  /* QUALIFY CARDS */
+  .qual{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+  .q{
+    display:flex;flex-direction:column;align-items:flex-start;
+    text-align:left;border:1px solid var(--line);background:var(--card);
+    border-radius:16px;padding:14px 13px;cursor:pointer;color:inherit;font:inherit;
+    transition:border-color .2s, background .2s, transform .1s;
+    position:relative;
+  }
+  .q:active{transform:scale(.985)}
+  /* Every child is display:block. These are <span>s inside a <button>, so without this they lay
+     out inline and the title, description and tag run together as one paragraph. */
+  .q .qi{font-size:21px;line-height:1;margin-bottom:8px;display:block}
+  .q .qt{display:block;font-size:14.5px;font-weight:800;line-height:1.2}
+  .q .qd{display:block;font-size:12.5px;color:var(--dim);line-height:1.35;margin-top:3px}
+  /* margin-top:auto pins the tag to the bottom so the two cards' tags line up even when one
+     description wraps to more lines than the other. */
+  .q .qtag{display:inline-block;margin-top:auto;padding:10px 0 0;font-size:11px;font-weight:800;
+    letter-spacing:.4px;border-radius:999px;color:var(--dim)}
+  .q .qtag b{display:inline-block;padding:4px 9px;border-radius:999px;
+    background:rgba(255,255,255,.06);font-weight:800}
+  .q[aria-pressed="true"]{border-color:transparent;background:
+     linear-gradient(var(--card),var(--card)) padding-box, var(--grad2) border-box;
+     border:1px solid transparent;}
+  .q[aria-pressed="true"] .qtag b{background:var(--grad);color:#2a1305}
+
+  /* EARNINGS SLIDER */
+  .earn{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 16px;margin-top:12px}
+  .earn-top{display:flex;align-items:baseline;justify-content:center;gap:9px;flex-wrap:wrap;margin-bottom:4px}
+  .earn-amt{font-size:40px;font-weight:800;letter-spacing:-1.2px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;transition:transform .15s}
+  .earn-amt.pop{transform:scale(1.06)}
+  .earn-per{font-size:15px;color:var(--dim);font-weight:700}
+  .earn-sub{text-align:center;font-size:13.5px;color:var(--dim);margin-bottom:16px}
+  .earn-sub b{color:var(--ink)}
+  .slider-wrap{padding:0 2px}
+  #earnSlider{
+    -webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:999px;outline:none;
+    border:1px solid var(--line);
+    background:linear-gradient(90deg,#dc6420 0%,#954bdf var(--pct,14%),rgba(255,255,255,.07) var(--pct,14%));
+  }
+  #earnSlider::-webkit-slider-thumb{
+    -webkit-appearance:none;width:28px;height:28px;border-radius:50%;
+    background:#fff;border:3px solid var(--org);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.5);
+  }
+  #earnSlider::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--org);cursor:pointer}
+  .slider-ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--dim-2);font-weight:700;margin-top:9px}
+
+  /* ===== FIRST-PAYOUT TRACKER - differentiator 1 ===== */
+  .track{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 16px;margin-top:12px}
+  .track-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .track-t{font-size:12px;font-weight:800;letter-spacing:1.3px;color:var(--dim-2)}
+  .track-clock{
+    font-size:13px;font-weight:800;color:var(--org-3);
+    background:rgba(240,134,47,.13);border:1px solid rgba(240,134,47,.3);
+    border-radius:999px;padding:4px 11px;font-variant-numeric:tabular-nums;
+  }
+  .track-bar{height:6px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+  .track-bar i{display:block;height:100%;width:0;border-radius:999px;background:var(--grad2);transition:width .28s linear}
+  .tsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:14px}
+  .ts{text-align:center;opacity:.34;transition:opacity .3s}
+  .ts.on{opacity:1}
+  .ts .tn{
+    display:grid;place-items:center;width:27px;height:27px;margin:0 auto 6px;border-radius:9px;
+    background:var(--card-2);border:1px solid var(--line);
+    font-size:12px;font-weight:800;color:var(--dim);transition:background .3s,color .3s,border-color .3s;
+  }
+  .ts.on .tn{background:var(--grad);color:#2a1305;border-color:transparent}
+  .ts.paid .tn{background:var(--ok);color:#04291c}
+  .ts .tl{display:block;font-size:10.5px;font-weight:700;line-height:1.25;color:var(--dim)}
+  .ts.on .tl{color:var(--ink)}
+  .track-foot{
+    margin-top:13px;text-align:center;font-size:12.5px;color:var(--dim);line-height:1.45;
+    min-height:17px;
+  }
+  .track-foot b{color:var(--ok);font-weight:800}
+
+  /* REWARD CARDS - differentiator 2: milestone payouts, not hourly rates */
+  .sec-h{font-size:12px;font-weight:800;letter-spacing:1.4px;color:var(--dim-2);text-align:center;margin:22px 0 5px}
+  /* The unlock rule is stated ONCE here rather than repeated on every card - repeated it
+     wrapped to two lines and stranded a single word on the second. */
+  .sec-sub{text-align:center;font-size:12.5px;color:var(--dim);margin:0 0 13px;line-height:1.4}
+  .sec-sub b{color:var(--org-3);font-weight:800}
+  .game{
+    display:flex;align-items:center;gap:13px;
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:13px;margin-bottom:10px;
+  }
+  /* Real app icons, inlined. Emoji stand-ins read as a fake page next to the competitors, every
+     one of which ships the actual store artwork. */
+  .game .gi{width:46px;height:46px;flex-shrink:0;border-radius:13px;overflow:hidden;
+    border:1px solid var(--line);background:var(--card-2)}
+  .game .gi img{width:100%;height:100%;object-fit:cover;display:block}
+  .game .gm{flex:1;min-width:0}
+  .game .gn{font-size:15px;font-weight:800;line-height:1.2}
+  .game .gu{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.35}
+  .game .gr{flex-shrink:0;text-align:right}
+  .game .gr .v{font-size:17px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  .game .gr .u{font-size:11px;color:var(--dim-2);font-weight:700}
+
+  /* HOW IT WORKS */
+  .steps{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 16px;margin-top:12px}
+  .steps-t{font-size:18px;font-weight:800;text-align:center;margin-bottom:16px}
+  .step{display:flex;gap:13px;align-items:flex-start;margin-bottom:14px}
+  .step:last-child{margin-bottom:0}
+  .step-n{width:30px;height:30px;flex-shrink:0;background:var(--grad);border-radius:10px;display:grid;place-items:center;color:#2a1305;font-weight:800;font-size:14px}
+  .step p{font-size:14.5px;line-height:1.42;padding-top:4px;color:var(--dim)}
+  .step p b{color:var(--ink);font-weight:700}
+
+  /* TRUST ROW */
+  .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+  .trust div{background:var(--card-2);border:1px solid var(--line);border-radius:13px;
+    padding:12px 6px;text-align:center;font-size:12px;font-weight:700;line-height:1.3}
+  .trust div span{display:block;font-size:17px;margin-bottom:5px;color:var(--org-3)}
+
+  .fine{margin-top:14px;text-align:center;font-size:11.5px;color:var(--dim-2);line-height:1.55;padding:0 6px}
+
+  /* STICKY FOOTER */
+  .footer{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:linear-gradient(rgba(12,9,19,0), var(--bg) 26%);
+    padding:22px 14px calc(14px + env(safe-area-inset-bottom));
+  }
+  .footer-in{max-width:520px;margin:0 auto}
+  .cta{
+    display:block;width:100%;border:0;cursor:pointer;border-radius:16px;padding:18px 12px;
+    background:var(--grad);color:#2a1305;font:800 17px/1.15 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;
+    opacity:0;transform:translateY(16px);
+    animation:rise .55s cubic-bezier(.22,.9,.3,1) .5s forwards,
+              ctaPulse 2s ease-in-out 1.1s infinite;
+  }
+  @keyframes ctaPulse{
+    0%,100%{box-shadow:0 8px 26px rgba(220,100,32,.32)}
+    50%    {box-shadow:0 10px 42px rgba(149,75,223,.5)}
+  }
+  .cta:active{transform:scale(.985)}
+  .cta-note{text-align:center;font-size:11.5px;color:var(--dim-2);margin-top:9px;font-weight:600}
+
+  /* MODAL */
+  .ov{
+    position:fixed;inset:0;z-index:100;background:rgba(12,9,19,.8);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    display:none;align-items:flex-end;justify-content:center;padding:16px;
+  }
+  .ov.on{display:flex;animation:fade .25s ease both}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .sheet{
+    width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);
+    border-radius:22px;padding:24px 20px calc(20px + env(safe-area-inset-bottom));
+    animation:sheetUp .3s cubic-bezier(.22,.9,.3,1) both;position:relative;
+  }
+  @keyframes sheetUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .sheet .mi{width:56px;height:56px;border-radius:16px;object-fit:cover;display:block;margin:0 auto 12px;background:var(--card-2)}
+  .sheet h2{font-size:22px;font-weight:800;letter-spacing:-.5px;text-align:center;margin-bottom:8px}
+  .sheet .sd{font-size:14px;color:var(--dim);text-align:center;line-height:1.5;margin-bottom:16px}
+  .warn{
+    display:flex;gap:11px;align-items:flex-start;
+    background:rgba(149,75,223,.1);border:1px solid rgba(149,75,223,.36);
+    border-radius:14px;padding:13px;margin-bottom:18px;
+  }
+  .warn .wi{width:24px;height:24px;flex-shrink:0;border-radius:50%;background:var(--grad2);
+    display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px}
+  .warn p{font-size:13.5px;line-height:1.45;color:var(--ink)}
+  .warn p b{font-weight:800}
+  .sheet .go{
+    display:block;width:100%;border:0;cursor:pointer;border-radius:15px;padding:17px 12px;
+    background:var(--grad);color:#2a1305;font:800 15px/1.15 Inter,sans-serif;letter-spacing:.09em;text-transform:uppercase;
+  }
+  .sheet .go:disabled{filter:saturate(.5) brightness(.8);cursor:default}
+  .sheet .x{position:absolute;top:13px;right:14px;width:30px;height:30px;border:0;border-radius:9px;
+    background:transparent;color:var(--dim-2);font-size:20px;line-height:1;cursor:pointer}
+  .spin{display:inline-block;width:13px;height:13px;vertical-align:-2px;
+    border:2px solid rgba(42,19,5,.4);border-top-color:#2a1305;border-radius:50%;
+    animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  @media (max-width:360px){
+    h1{font-size:28px}
+    .earn-amt{font-size:34px}
+    .q .qt{font-size:13.5px}
+    .ts .tl{font-size:9.5px}
+    .track-t{letter-spacing:.8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important}
+    .rise,.cta{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="fx" aria-hidden="true">
+  <i style="left:11%;animation-duration:18s;animation-delay:0s"></i>
+  <i style="left:39%;animation-duration:22s;animation-delay:6s"></i>
+  <i style="left:68%;animation-duration:19s;animation-delay:10s"></i>
+  <i class="p" style="left:26%;animation-duration:27s;animation-delay:3s"></i>
+  <i class="p" style="left:83%;animation-duration:24s;animation-delay:8s"></i>
+</div>
+
+<div class="wrap">
+
+  <div class="brand rise r1">
+    <img src="data:image/webp;base64,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" alt="Scrambly">
+    <div class="nm">Scram<span>bly</span></div>
+  </div>
+
+  <section class="hero">
+    <div class="pill rise r2"><span class="dot"></span><b id="liveN">2,846</b>&nbsp;EARNING NOW</div>
+    <h1 class="rise r2">Cash out your first <span class="grad">$1 today</span></h1>
+    <p class="lede rise r3">Scrambly pays real money for playing games and trying new apps. Free to start, and you can cash out at <b>just $1</b> &mdash; PayPal, Cash App or a gift card.</p>
+  </section>
+
+  <!-- QUALIFY - drives the slider below -->
+  <div class="qual rise r4" id="qual">
+    <button class="q" type="button" data-mode="game" aria-pressed="true">
+      <span class="qi">&#127918;</span>
+      <span class="qt">Get Paid To Game</span>
+      <span class="qd">Play Roblox, Clash Royale &amp; more</span>
+      <span class="qtag"><b>EARN $$$</b></span>
+    </button>
+    <button class="q" type="button" data-mode="apps" aria-pressed="false">
+      <span class="qi">&#128241;</span>
+      <span class="qt">Get Paid To Test Apps</span>
+      <span class="qd">Try new apps, hit quick milestones</span>
+      <span class="qtag"><b>EARN $$</b></span>
+    </button>
+  </div>
+
+  <!-- EARNINGS SLIDER -->
+  <section class="earn rise r5">
+    <div class="earn-top">
+      <div class="earn-amt" id="earnAmt">$55</div>
+      <div class="earn-per">per week</div>
+    </div>
+    <div class="earn-sub"><b id="earnHrs">2</b><span id="earnLbl"> hrs of gaming a day</span></div>
+    <div class="slider-wrap">
+      <input type="range" id="earnSlider" min="1" max="8" step="1" value="2" aria-label="Hours per day" style="--pct:14.28%">
+      <div class="slider-ends"><span>1 hr/day</span><span>8 hrs/day</span></div>
+    </div>
+  </section>
+
+  <!-- FIRST-PAYOUT TRACKER - our differentiator -->
+  <section class="track rise r6">
+    <div class="track-h">
+      <span class="track-t">YOUR FIRST PAYOUT</span>
+      <span class="track-clock" id="clk">0:00</span>
+    </div>
+    <div class="track-bar"><i id="bar"></i></div>
+    <div class="tsteps" id="tsteps">
+      <div class="ts"><span class="tn">1</span><span class="tl">Install</span></div>
+      <div class="ts"><span class="tn">2</span><span class="tl">Pick a game</span></div>
+      <div class="ts"><span class="tn">3</span><span class="tl">First milestone</span></div>
+      <div class="ts"><span class="tn">$</span><span class="tl">Cash out</span></div>
+    </div>
+    <p class="track-foot" id="tfoot">Most people reach their first payout in about 6 minutes.</p>
+  </section>
+
+  <!-- REWARD CARDS -->
+  <div class="sec-h rise r7">REWARDS TO UNLOCK</div>
+  <p class="sec-sub rise r7">Each one unlocks after <b>2 tasks</b> inside Scrambly.</p>
+  <div class="rise r7">
+    <div class="game">
+      <div class="gi"><img src="data:image/jpeg;base64,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" alt="Block Blast"></div>
+      <div class="gm"><div class="gn">Block Blast</div><div class="gu">Reach level 20 to claim</div></div>
+      <div class="gr"><div class="v">$12.40</div><div class="u">milestone</div></div>
+    </div>
+    <div class="game">
+      <div class="gi"><img src="data:image/jpeg;base64,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" alt="Roblox"></div>
+      <div class="gm"><div class="gn">Roblox</div><div class="gu">Play 3 days to claim</div></div>
+      <div class="gr"><div class="v">$18.75</div><div class="u">milestone</div></div>
+    </div>
+    <div class="game">
+      <div class="gi"><img src="data:image/webp;base64,UklGRt4PAABXRUJQVlA4INIPAACwOQCdASpwAHAAPk0gjEQioiEaesdIKATEtgBWGW9ce9l/E/8qvkOqX91/DfB80B5a3lf7D/xfuZ7T36d9gr9gv+F1JvMb+zP7Re69/mf2Z90n9c/wn7O/5X5AP5t/Y/S19kP+8f6P2BP5B/kv/P66/7X/CX/ZP+T+7ftQf/jCDeNX63wf8ifuiWf3lakHzL8P/xuK35HaiL3e0X78cU/2P80b/kcp7QC/Pnol6H/q32EOmCuCG9TYLh8/SKiu5bUJ/JknaVwzsFRtf8/r5LeeSSPYIOdWezyay06wA1bVbh1OeHhRQFWYT14PoX7Kb+55+CLy+crkOGva5iE0LtTBBmomqd8mHgXgA5OIGD/h27+crwqH83tevNBJ0Gsf9cE+TaIOv1OKuNbYcWxTRF+MfcCi0UvaVRFqgWBbbmjxUdsSoGK/1DQCb7sdv1sHw/hPvDw5rEDJnNnoIFCUhzxLv1D+f8fuT2QN1YMAE4fATrd0i47RyLaTkyPJd8l0Pn7aQHjdsog/Nx1w0rKXI6Xa9DfhiJZfOS8v3TOsONrcYKVqTZ0GmepmlyWEjdgb3h8S+IYJ/5FqnML+p1cx5J/tGRPj27vn88w7d9SUbOqyJ+J5L/BOAAD+9wGDfL3CzHultz262e52+3nVa7Ta3fShb6//2Rx/FIbWEoW+COYvzo//jaXhxE5kN9ujjZCHCceopwLqa2fJHL50jClU4Z+kr3KX9nVj1X4uso736aT5IuDL5E2B6KxKK9Ai0M5Kn1wAIEkh26c/mYDsMKW/+vKIdHsjoPFjxWdI5HTurcDIhBKdwV13MLeTFdqkADdrjpBbW7BeiCJybe/lgTBaNpLgj1507zxXu3lBtyNz6KnKPlQxcxRLXhgLdVRKdHLzYMWuputI9BRTcnjv80ZkTuPkZ7AADUPzCdSj7V4eLxwcqp106uScXfSVDIiG5R4UinnTx5K7Z1dY7HUPI9rKqAYZnthe/xoYqy1wvHmYa2RMDCIOlT3JSqjAbDPioGH+haWfJmnd0usCzVIF7XdqVSgeDNPymI0g4SSDWfwLmEw59xdngPS70LwImEjCeUoDzdw9IQfeyvmJYZnh6NYgQF3BE4qGnm9UTLbkMUhlO/gv7ryKpSuPSlUZUqqp6IdDstPDaxXSAruUST9DedVVWkxf3eFkb6QLHU0AtgkEZFa+As07CAkD8t7Gaxn4QPxJOaax0qlHpsTTxnI1ZEs6+VtmLCHFBK6jTBJ0ELu4O8jxKMOieUPiyaQf9iZ68mn29fBitQ9ybIQlkiN1W4gisBfx80nbhvatcwjFtWfsmvBZ3+kxeASIsrlOuLN0ha8CaybeJeSINL6IISE+sJvjHteCcurUHeBKYP6+FrymHILfR1iz4iSNDoEv6MVYVnHsUamjx2/WqtzYdDA1TdXxOwJmBQR9yL+19Fr3md4JDCOx0NFeDtqwwjbPTZZ7186T4OT07+KP/PbUoVafH/83PnvFyRp9MlEZ0CXj4U9BhE+X23EPGxQ/xPL4AzICem8x4soERzez+EY8uC6t/ecKtrEgTzjV6NGPVOyrVphESHc//S+QTD38tt3oirGaCH7zhc3fJ+UkpXDjrA585x8S4Pcnoy2NF7l3hayMWZ5F6s5YoarJPNf5nlNOOdF8rc5xeuyHwn72mXCMvq5NLc71XSfmoNuQgSpN4qt51pGbX3vVP/yKBNgdEFTT+/SLJZzRgf9aemTwjIG5ZK/Tfam5r/VL7ZJ/4sD9dFU88X4k5hM8ySTq3DFCdK0fNZOllv2TgkqLWRkDd4UgOEzUQSutUIzvoQRMKcZ/0Vhdghg0IBOe0/ZLe7LjMCeAX8HqAw4ljQGRmKwK0DKKvEJJ3f/7Gy5EN+lYEOODWdQ6f7SdT9f5uoGi2D5pNQtspgr3NU58zqwDBVsb+AohjUvJDzVyKVqGYyel/+FqpkBfbrdt7KmPIx/8GhmkOlcqAEIX/7SfXfG2FKgOIkDHl829br+vxO+qze9z8deN5oVeyzediuGp/5e4Ql1TNxzTlhcI9ArcjfSFI+gC3f/lbuFRDHDg3DTCTyoZBh3Dvlx+YnMcD8x3OWHODJYiVM44fnA8pRfwH2vLIWptIec1objRt1kzmd7o/fVJv5BzDS/rV9vGmbjtGo2ZWpIgfO/UnM6iK/GVMq/BZo2hQAodajlRRULQUbugplf6QxTN6tmRuhQJUc2knZPJSQm+Gfyu5iUSt5T9/UpbNgtrGEyd0Sf7uiofJ1CgxnNW7NFwm2P4Y5G/PyDziMf+aOdzQ7t5Jo6SXP+408AuPk0znwB7P7JNELwg47lc+c3bW4+n6RPosS+4CcFjdzsmn9LNHYXZGKAQSSi0us0SHCOR7/4qarjJKmbeD7yUcjSHrF4K8wk13wcapG6HZFDHOKURx7J3ysxDvIO6yFu8IhvHRrZo4yD/WUkeOpOnVkCQeMCEZlabcdMazSV7/5Ka740ZXGMnmYYaLSrqTQFk6G51UTzk7/XHLNOEs68UCTzN9IvsqMDvcNzmAgnPVTTljIvGqafZSRRTRr3AwNyS0bk3eQfIcf0m1H6swTiWOf4gTFuTlXtg1qF15DL8MLqVSKoBclu6r6nRfT+fM93Z0dv15EdUWIFOI4C0D0+THpW2GeRyp3ZZ0nGce5G6ROQ1Bq8/EzRFL6Vptpx3vN7n0xu6im2IZWMux8aNrLUBqSBcYc0LR/wo1stHu7bdOocQzUxNsx5oBSMfwcMTIegT8MZe1enW2g5ztE7OJ/sJyvjfZZlrNSaGjpbbtiKh2Hf+ng40UwybqesyebTUHQ47f5ZKNZzJu/smpgq05DjzeW3NZ+/ujN1zP/2n+28+94RbArFme6YMtOOTPi8/ialOxU/zlmvBJ4vXW/pvFuZX5MlNlCCvGcGCo0a9t8ACHoBdpxM8ve3ptTwW2VMHfDCQRmlmOjHW1LfP+9ftdvNHnnLMpYgFRXqJh98MfLbCPzhjeaX0bCf4rd2sGF9+aqsl4q2nr6ERv5B3riK8xQyMAOZGqPDv45gjjEa1AcCZe4v8+XKKgvGs2WGrQPoSCTECL7qJMgX0VRNx1FQvts2E7sTqoo8BtbgR5ScfD/68lP+h5sbV3zQKEznwGjRspsgjB3IGh/TI2Lx5Lf7K+cdiGRJbqOteyugqWzUx9XGZJOdpc/bL2TKLwma1Sn49ZKhbEQg6k8Jc2ard+ITr9BpqXfKZH7GYivresa5TCFP9GQmn+EnCxUcP+0ZA2FR6UbmkTydHwPP1aYYoKJ/1LQ+vBf9Itr/kif6nizOKybYsq3GSocdM53yeT7ITTOAPXdjUzbXfhfXLvnN/hniGKLSViFsz4bZ3YBPn0MSvWOEuHLl0vTRiabAMILILnRc3JGM86HoSmP2GzLAs+IUfqbNX1I5NXbkerLrA7g2kWXYq6GKcUb3/6lbF9otdkPZkMa2WPX8bDx4GrNywLpSP3BMg7yPWMZzwbvRPL5DUTfbej+cxOUyGTQP7Kub5uBWkcOzwIUIg5dfaPBSUIrcU8ng3czckEqhcO7xN+ZvMyzwQEhOfN2cjvf+/vPN7dWL7TEl+tunyAwuEzfjIYm3fa+9x58JKBG3OESm/pVeGM6UrPuiLY2RxY1q9hGHPfGbkmuPDbnKafYRum5W+Zg+YEYL0t2q6D7x1cvt8BHyL+2f7ue8SXxhdVAL95LecWrXABPQ2kdywvVPg1vnqxZrGfZ0HcavpMX3rq8wZMfl/P/IKLNo3bixzksS0Is5giBer6VI6yIawl6HSWbIdvWvrlLljBEy17cK686Xkb4qT9/RjMgEh7Z9R13lSCRVPBaL5O15UUXMMPaT+Pr8mIwxTygWX6S3u4umAAGIClqrBzpJYoWj5woF5y1Soq0EOiuESZsWPyS9C+SUAbzH9b6Yyh0Uucnm9zI/KQIIKg9eoplDl5i46lEkLHWCF66NK1h319NrOiQzdDTUYzy5F9SXeK1EgyyinHARcR0ZEklIeJcX/CcmerhUBWBjFAOa4NA7xorL16DUwGmBZuocn8wfWUNzMn0KlnrND/Md0scM/Dmbw+yul/OsUjxslDJ5ltIOZPVhWtF73TScC7jxddfyJ5oFVEjxEHphySRxAvpmBMfB/VH5mS977gAPXa2956m6W+sYVpG0+Cx7GK14gDHNHrkngv3pRgqx3oiWtqOWzvyuujLXzsuQYifGb4cnsrd+ms4x0rEp9oB7ECvhvf4ZbYLRdDEvsCRyjumuTvkFTUb9FSZIZUw3YfvdBFVhr1PygV17kX0gjgnhK2SrW1Ir/lxMccel+7ZeWBoxl/0HHVUEKNJOKziXPJN9IvZ3c4SH+XdKATYIy8Efh29hadJsCGbayb6jvvjSq+fHVplJFxoLuTkcMEC8g3WoXHB6lBBNEGNSmRLxXvGF5mLCuFwwQMIKhRrPrR51PTUDw2QeMo5FxOGmXtSq+nns4+Ow3rejuNg/pdwfauSTBdLsBtir/6nPjvLT3+7/2uePJrqL+ns0KY97H3/tuiE2inajUW3FIQMzmqqMZ1WonBtt7wkJMeARYJ0TN/+1ZKBjxoV2SLckq4QEbYvCdCFpfQiP23vUdyMCG7JBixcpXmSwfftJZkafqcKmahpLAaePZSz3Z92hONEb7D4v38Ob9j53f3CYdp78Yy+2XdH+ydpumZKLWb+aUT0PQVWqMejqO6fqM6rc2Jh7ZWvDiuiF/kiMjlYvVTF0PMVBqyaITPCeTc9XdVBWG5V/PQ7Kgxe4ElEWeiDP0H4RdQsz5ju40yEre6EsM7sWODAWw+x4sHo/74GtV/DbFv6jobCv8K4WV391cmMO5/kYCIF6dyBW2stxV1vfoNP5sw20wAwa6Xbo/t19WGzUul5a0N3NTe9pkOTcN7g8MDzN12a1m+OwfiThm9WDT7obFivPzv7xUxzZBzSWvZ8uBtPZznYxqgf9gWA8XYHHfVYecxUX63Kj2xDM4CcSfTyHEtQ4v6304teXqIcwDGZlL9d7RZ7Vy52FEhtWsPgtaxsGxegHe7yH81cXCZTshXAr9NSmjStTVyQF8/tiEuxrYGu/FUU4+mXB/WfZXY8yvVd6Dg7wEaU8i2kf98smCqZRlmr9RoIoirEqWX7hoYJ6p6/R4q4iSJTFdp7dsR5ZpKdob4Yip9uvuU/4x6eOvLh+jTfPJcI5KA4IXWDwAggOrd1sKJXCI2x3uuW1MlS/YytkuQ/can4Mngv5p7Kldj5ckCnlohJg0TAZfsOv506uUj8VROdnScO0nc7lPlqVtSjiYVs86BUoYxYB8XoBtBb9MYqLz9r7NqPkFk18pVjsGUQWqyGFDEsheAhzlCELDRYHFb61tx/kIfDgNssGjmwG78T57GWM7S2RAQD6s1xsAAAA=" alt="Clash Royale"></div>
+      <div class="gm"><div class="gn">Clash Royale</div><div class="gu">Reach arena 6 to claim</div></div>
+      <div class="gr"><div class="v">$24.00</div><div class="u">milestone</div></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="steps rise r8">
+    <div class="steps-t">How it works</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <p><b>Download Scrambly.</b> Free on iPhone and Android. Takes about a minute and costs nothing.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <p><b>Pick a game and hit the first milestone.</b> Most take under 10 minutes. Two tasks unlocks the bigger-paying games.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <p><b>Cash out at $1.</b> PayPal, Cash App, Visa or a gift card. No waiting to reach $10 first.</p>
+    </div>
+  </section>
+
+  <div class="trust rise r8">
+    <div><span>&#128176;</span>$1 minimum</div>
+    <div><span>&#127918;</span>150+ games</div>
+    <div><span>&#11088;</span>4.4 on Google Play</div>
+  </div>
+
+  <p class="fine rise r8">Earnings depend on which games you play and how much you play. The figures above are estimates from the rates shown, not a guarantee. Scrambly is not affiliated with any game publisher named on this page. The tracker shown is a demonstration, not your account. Individual results vary.</p>
+
+</div>
+
+<div class="footer">
+  <div class="footer-in">
+    <button class="cta" id="ctaBtn" type="button">Continue</button>
+    <div class="cta-note">Free to start &bull; Cash out from $1 &bull; iPhone &amp; Android</div>
+  </div>
+</div>
+
+<!-- PRE-CTA MODAL -->
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ovT">
+  <div class="sheet">
+    <button class="x" id="ovX" type="button" aria-label="Close">&times;</button>
+    <img class="mi" src="data:image/webp;base64,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" alt="Scrambly">
+    <h2 id="ovT">Start Earning Now</h2>
+    <p class="sd">Download Scrambly and start earning from the games and apps you already use.</p>
+    <div class="warn">
+      <div class="wi">!</div>
+      <p>Use your <b>real details</b> when you sign up so your earnings can be paid out.</p>
+    </div>
+    <button class="go" id="goBtn" type="button">Continue to Scrambly</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= outbound =================
+     MANUAL launch: DIRECT to Monetise. No short code and no cloaker hop anywhere in this file,
+     because there is no Spartis in this funnel to append the sub ID - so this page holds the
+     advertiser link itself and appends s1 itself.
+
+     THE SUPPLIED LINK ALREADY ENDS IN '&s1=', so this page only concatenates the VALUE. Do not
+     add a second s1: exactly one in the final URL, because when there are two the empty one wins
+     and every conversion comes back unmatched. That has cost this account conversions three times.
+
+     Monetise advertiser account a=26648 - the same account the competitor pages in the vault run
+     on. c=56532 is the Scrambly campaign. monetisetrk2.co.uk is a Monetise rotated tracking
+     domain: expected, not a typo. */
+  var OUT = 'https://monetisetrk2.co.uk/?a=26648&c=56532&s1=';
+
+  /* s1 FIRST, unlike the Prescott manual builds which lead with sub1. s1 is Monetise's own sub
+     param, so it is the name the ad URL will be written with. The chain stays wide because the
+     prelander forwards whatever the ad used, untouched. An empty sub stays empty - unmatched is
+     recoverable, a fabricated sub ID is not. */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('s1') || QP.get('sub1') || QP.get('campid') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+
+  /* ================= beacon (first-party, px.trendhavenn.com) =================
+     This page has a modal between the CTA and the offer, so it uses the four-event vocabulary the
+     dashboard already reads: `claim` is the tap that OPENS the modal, `continue` is the tap that
+     actually navigates. On a modal page `claim` alone would overcount the click-out. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'scrambly-us-mon-man', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    var u = TRACK + '?e=' + ev + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon(u);
+      else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  /* ================= qualify cards -> slider =================
+     The card is not decoration: it swaps the earnings curve and the readout, so the two paths
+     give genuinely different numbers. */
+  var MODES = {
+    game: { max: 300, curve: function (h) { return 25 * h + 1.6 * h * h; }, label: 'hrs of gaming a day' },
+    apps: { max: 210, curve: function (h) { return 17 * h + 1.1 * h * h; }, label: 'hrs of app testing a day' }
+  };
+  var mode = 'game';
+
+  var sl   = document.getElementById('earnSlider');
+  var amt  = document.getElementById('earnAmt');
+  var hrs  = document.getElementById('earnHrs');
+  var lbl  = document.getElementById('earnLbl');
+  var MAXH = 8;
+
+  function upd() {
+    var h = +sl.value, m = MODES[mode];
+    var v = Math.round(Math.min(m.max, m.curve(h)) / 5) * 5;
+    if (h === MAXH) v = m.max;
+    amt.textContent = '$' + v;
+    /* textContent on the two nodes, never innerHTML on their parent - rewriting the parent would
+       destroy #earnHrs and leave every cached reference pointing at a detached node. */
+    hrs.textContent = h;
+    lbl.textContent = ' ' + m.label;
+    sl.style.setProperty('--pct', ((h - 1) / (MAXH - 1) * 100) + '%');
+    amt.classList.add('pop');
+    window.setTimeout(function () { amt.classList.remove('pop'); }, 150);
+  }
+  sl.addEventListener('input', upd);
+  sl.addEventListener('change', upd);
+
+  var qs = [].slice.call(document.querySelectorAll('#qual .q'));
+  qs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      qs.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      mode = b.getAttribute('data-mode');
+      upd();
+    });
+  });
+  upd();
+
+  /* ================= first-payout tracker - OUR DIFFERENTIATOR =================
+     The advertiser claims a ~6 minute average time to first reward and a $1 minimum. Rather than
+     asserting that in copy, run it: a compressed clock walks the four steps to the first dollar,
+     lands on a paid state, holds, and loops. The competitor pages all sell how MUCH you can earn;
+     none of them addresses whether you ever actually get paid, which is the real objection. */
+  var TOTAL_S   = 360;      /* six minutes of story time */
+  var CYCLE_MS  = 9000;     /* compressed into nine real seconds */
+  var HOLD_MS   = 2200;
+  var TICK_MS   = 110;
+  var MARKS     = [0, 90, 240, 360];   /* 0:00 install, 1:30 pick, 4:00 milestone, 6:00 paid */
+
+  var clk   = document.getElementById('clk');
+  var bar   = document.getElementById('bar');
+  var tfoot = document.getElementById('tfoot');
+  var tss   = [].slice.call(document.getElementById('tsteps').children);
+  var t0 = null, holding = false;
+
+  function mmss(s) {
+    var m = Math.floor(s / 60), r = Math.floor(s % 60);
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+  function paint(sec) {
+    clk.textContent = mmss(sec);
+    bar.style.width = (sec / TOTAL_S * 100) + '%';
+    tss.forEach(function (el, i) {
+      var on = sec >= MARKS[i];
+      el.classList.toggle('on', on);
+      el.classList.toggle('paid', i === 3 && on);
+    });
+    if (sec >= TOTAL_S) {
+      tfoot.innerHTML = '<b>$1.00 sent to PayPal.</b> That is the whole first run.';
+    } else if (sec >= MARKS[2]) {
+      tfoot.textContent = 'Milestone cleared \u2014 balance is over the $1 minimum.';
+    } else if (sec >= MARKS[1]) {
+      tfoot.textContent = 'Playing the first game.';
+    } else {
+      tfoot.textContent = 'Most people reach their first payout in about 6 minutes.';
+    }
+  }
+  paint(0);
+  window.setInterval(function () {
+    var now = Date.now();
+    if (t0 === null) { t0 = now; return; }
+    if (holding) {
+      if (now - t0 >= CYCLE_MS + HOLD_MS) { holding = false; t0 = now; paint(0); }
+      return;
+    }
+    var p = (now - t0) / CYCLE_MS;
+    if (p >= 1) { paint(TOTAL_S); holding = true; return; }
+    paint(Math.floor(p * TOTAL_S));
+  }, TICK_MS);
+
+  /* ================= live counter ================= */
+  var lEl = document.getElementById('liveN'), live = 2846;
+  window.setInterval(function () {
+    live += Math.floor(Math.random() * 9) - 3;
+    if (live < 2690) live = 2690 + Math.floor(Math.random() * 25);
+    if (live > 3080) live = 3080 - Math.floor(Math.random() * 25);
+    lEl.textContent = live.toLocaleString('en-US');
+  }, 2800);
+
+  /* ================= modal + outbound =================
+     The CTA OPENS the modal and navigates nothing - that separation is what puts the "use your
+     real details" instruction in front of the user at the last possible moment, which is the
+     post-install behaviour the advertiser grades on. */
+  var ov = document.getElementById('ov');
+  var goBtn = document.getElementById('goBtn');
+  var going = false;
+
+  document.getElementById('ctaBtn').addEventListener('click', function () {
+    px('claim');
+    ov.classList.add('on');
+    document.body.classList.add('lock');
+    goBtn.focus({ preventScroll: true });
+  });
+
+  function close() {
+    ov.classList.remove('on');
+    document.body.classList.remove('lock');
+  }
+  document.getElementById('ovX').addEventListener('click', close);
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+  goBtn.addEventListener('click', function () {
+    if (going) return;
+    going = true;
+    goBtn.disabled = true;
+    goBtn.innerHTML = 'Loading <span class="spin"></span>';
+    px('continue');
+    var href = OUT + encodeURIComponent(subid());
+    window.setTimeout(function () { window.location.href = href; }, 300);
+  });
+})();
+</script>
+
+</body>
+</html>

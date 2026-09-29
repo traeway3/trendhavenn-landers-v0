@@ -27,7 +27,8 @@
 
   NOT carried over, on purpose (both named in Competitor Landers/INDEX.md; the literal strings
   are deliberately kept out of this file so nothing scanning page source can match them):
-    - comp 2's third-party ad-platform pixel. This account is server-side/postback only.
+    - comp 2's third-party ad-platform pixel. (SUPERSEDED for this file on 2026-09-29 - see
+      the pixel note below. The Prescott twin of this page still carries no pixel.)
     - comp 4's fake platform-verification badge. It is a fabricated endorsement from a real
       company. The trust row here makes claims about the offer instead.
 
@@ -36,8 +37,29 @@
   readout, so the qualifier actually does something instead of decorating. No comp does this.
 
   NO KICKER ON THIS PAGE. The prelander does the breakout - confirmed 2026-09-26.
+
+  TIKTOK PIXEL (sdkid DAU0JTBC77U88MSOCDEG), added 2026-09-29 ON EXPLICIT REQUEST. The standing
+  rule on this account is server-side/postback tracking only and no third-party ad-platform pixel
+  on a lander - this file is a deliberate exception, not an oversight, so do not strip it as one.
+  Two consequences follow: the page is no longer self-contained (it fetches analytics.tiktok.com
+  at runtime), and because the prelander breaks the visitor out to Safari/Chrome before they
+  reach this page, the pixel fires OUTSIDE the TikTok in-app browser. Both are in the setup doc.
   BOTH PLATFORMS - no iOS gate, confirmed 2026-09-26.
 -->
+
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('DAU0JTBC77U88MSOCDEG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
 
 <style>
   :root{

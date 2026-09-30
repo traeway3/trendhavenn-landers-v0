@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<!-- ============================================================================================
+     GRAVY PASS · US · MONETISE — MANUAL LAUNCH LANDER
+     /Manual/gravypass/gravypass-us-mon-man.html  ->  trendhavenn.com/gravypass-us-mon-man.html
+
+     Fed by gravypass-us-mon-man-prelander.html. MANUAL funnel: this page holds the network link
+     itself and appends the sub param itself, because no cloaker sits in front to do it. There is
+     no short code here and there must never be one.
+
+     No browser breakout on this page. The prelander does the hand-off exactly once; a second one
+     here would fight it.
+============================================================================================= -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f0d">
+<meta name="robots" content="noindex, nofollow">
+<title>Start Earning — Gravy Pass</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236de6a9'/%3E%3C/svg%3E">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#0b0f0d;
+  --card:#141917;
+  --card-2:#111614;
+  --sunk:#0d1210;
+  --line:#22302a;
+  --line-2:#1a241f;
+  --mint:#6de6a9;
+  --mint-br:#77fab7;
+  --mint-dp:#3fbf83;
+  --ink:#f2f6f4;
+  --mut:#8f9a95;
+  --mut-2:#6b7873;
+}
+
+html,body{height:100%;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.5;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Two slow mint blooms behind everything. Fixed + pointer-events:none, so they never
+   participate in layout and never widen the document. */
+body::before,body::after{
+  content:'';position:fixed;width:86vw;height:86vw;max-width:520px;max-height:520px;
+  border-radius:50%;pointer-events:none;z-index:0;filter:blur(26px);
+  background:radial-gradient(circle,rgba(109,230,169,.17) 0%,rgba(63,191,131,.07) 42%,rgba(109,230,169,0) 70%);
+  will-change:transform,opacity;
+}
+body::before{top:-28vw;right:-30vw;animation:bloomA 19s ease-in-out infinite alternate}
+body::after{bottom:-32vw;left:-32vw;animation:bloomB 24s ease-in-out infinite alternate}
+@keyframes bloomA{0%{transform:translate(0,0) scale(1);opacity:.6}50%{opacity:1}100%{transform:translate(-9vw,16vh) scale(1.12);opacity:.72}}
+@keyframes bloomB{0%{transform:translate(0,0) scale(1);opacity:.5}50%{opacity:.95}100%{transform:translate(8vw,-16vh) scale(1.1);opacity:.68}}
+
+/* The bottom padding clears the fixed CTA bar. */
+.wrap{position:relative;z-index:1;width:100%;max-width:470px;margin:0 auto;padding:22px 18px calc(128px + env(safe-area-inset-bottom, 0px));display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* ---- entrance ------------------------------------------------------------------------------
+   `.rise` is ENTRANCE ONLY. Never put a looping animation on an element that also carries it —
+   the second `animation` declaration silently replaces the first and the element is stranded at
+   opacity:0. Loops go on inner elements. */
+.rise{opacity:0;animation:rise .55s cubic-bezier(.22,.9,.3,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.r1{animation-delay:.04s}.r2{animation-delay:.1s}.r3{animation-delay:.17s}.r4{animation-delay:.24s}
+.r5{animation-delay:.31s}.r6{animation-delay:.38s}.r7{animation-delay:.45s}.r8{animation-delay:.52s}
+.r9{animation-delay:.59s}.r10{animation-delay:.66s}
+
+/* ---- brand lockup --------------------------------------------------------------------------
+   TikTok is the traffic source, not a partner — the lockup is a visual cue only, and the
+   disclaimer at the foot says so in words. */
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:15px}
+.brand i{width:50px;height:50px;border-radius:14px;display:block;background-size:cover;background-position:center;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.brand .bx{color:rgba(255,255,255,.4);font-size:19px;font-weight:500;font-style:normal}
+
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(109,230,169,.09);border:1px solid rgba(109,230,169,.34);color:var(--mint-br);font-size:11.5px;font-weight:800;letter-spacing:.09em;padding:7px 14px;border-radius:999px;margin-bottom:15px}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--mint-br);box-shadow:0 0 8px var(--mint-br);animation:blip 1.8s ease-in-out infinite;flex:none}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.3}}
+
+h1{font-size:clamp(1.55rem,6.4vw,2.05rem);font-weight:850;line-height:1.14;letter-spacing:-.02em;margin-bottom:9px;text-wrap:balance}
+h1 .grad{background:linear-gradient(180deg,var(--mint-br) 0%,var(--mint-dp) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--mut);font-size:14px;line-height:1.55;max-width:350px;margin-bottom:22px}
+.sub b{color:var(--mint);font-weight:700}
+
+/* ---- THE DIFFERENTIATOR: the wallet pass ---------------------------------------------------
+   Gravy Pass is not an app store download — it is a wallet pass. That is the one true thing
+   about this offer that no competitor page in the folder uses, so the page runs it rather than
+   asserting it: the pass drops into the wallet, the wallet confirms, the balance moves.
+   The wallet NAME swaps to Google Wallet on Android (both platforms are supported). */
+.pass{width:100%;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line);border-radius:20px;padding:18px 16px 16px;margin-bottom:18px}
+.nod{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.14em;color:var(--mint-br);background:rgba(109,230,169,.1);border:1px solid rgba(109,230,169,.3);padding:5px 11px;border-radius:999px;margin-bottom:10px}
+.pass h2{font-size:19px;font-weight:850;letter-spacing:-.01em;margin-bottom:5px}
+.pass > p{font-size:12.5px;color:var(--mut);line-height:1.5;max-width:320px;margin:0 auto 14px}
+.pass > p b{color:var(--ink);font-weight:700}
+
+/* Geometry note, because the first pass got it wrong and only a screenshot caught it: the tuck
+   distance and the wallet height have to leave most of the card ABOVE the lip. Swallow the card
+   entirely and all you see is a sliver of green gradient poking out below the wallet, which reads
+   as a rendering bug rather than a card going into a wallet. The barcode is the part that
+   disappears; the brand row and the balance must stay on screen the whole loop. */
+.stage{position:relative;height:172px;width:100%;max-width:290px;margin:0 auto;overflow:hidden}
+
+.pcard{
+  position:absolute;left:50%;top:4px;width:224px;margin-left:-112px;
+  background:linear-gradient(145deg,#79f9b7 0%,#49cf8d 52%,#28a66c 100%);
+  border-radius:15px;padding:12px 13px 11px;text-align:left;color:#07120d;
+  box-shadow:0 14px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.18) inset;
+  transform:translateY(0) scale(1);
+  transition:transform .62s cubic-bezier(.5,.02,.4,1),opacity .35s ease;
+  z-index:2;
+}
+.pcard.tuck{transform:translateY(40px) scale(.96)}
+.pc-top{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.pc-top i{width:26px;height:26px;border-radius:8px;display:block;background-size:cover;background-position:center;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.pc-top em{font-style:normal;font-size:12px;font-weight:900;letter-spacing:.08em}
+.pc-bal{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:11px}
+.pc-bal span{font-size:8.5px;font-weight:800;letter-spacing:.14em;opacity:.62}
+.pc-bal b{font-size:21px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pc-code{display:flex;gap:2px;height:19px;align-items:stretch;opacity:.5}
+.pc-code i{display:block;background:#07120d;border-radius:1px;flex:none}
+
+.slot{position:absolute;left:50%;bottom:0;width:252px;margin-left:-126px;height:48px;z-index:3;pointer-events:none}
+.slot .lip{position:absolute;inset:0;border-radius:16px;background:linear-gradient(180deg,#1b2b24 0%,#101a15 100%);border:1px solid var(--line);box-shadow:0 -8px 22px rgba(0,0,0,.55)}
+.slot .txt{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--mut-2);transition:color .3s ease}
+.slot .sheen{position:absolute;left:8px;right:8px;top:-1px;height:2px;border-radius:2px;background:var(--mint-br);opacity:0;box-shadow:0 0 14px var(--mint-br)}
+.slot.on .txt{color:var(--mint-br)}
+.slot.on .sheen{animation:sheen .85s ease-out}
+@keyframes sheen{0%{opacity:0;transform:scaleX(.3)}35%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+
+.pass-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 12px;margin-top:2px}
+.pass-foot > span{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:650;color:var(--mut);white-space:nowrap}
+.pass-foot svg{width:13px;height:13px;color:var(--mint);flex:none}
+
+/* ---- qualify cards (drive the slider) ------------------------------------------------------ */
+.sec-h{width:100%;text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.2em;color:var(--mut-2);margin-bottom:11px}
+.qual{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:18px}
+.qi{position:relative;display:flex;align-items:center;gap:13px;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line-2);border-radius:16px;padding:14px 14px 14px 16px;text-align:left;overflow:hidden;cursor:pointer;transition:border-color .2s ease,transform .12s ease}
+.qi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line);transition:background .2s ease}
+.qi:active{transform:scale(.99)}
+.qi.on{border-color:rgba(109,230,169,.42)}
+.qi.on::before{background:var(--mint)}
+.qi-ic{width:44px;height:44px;border-radius:12px;background:rgba(109,230,169,.1);border:1px solid rgba(109,230,169,.22);display:flex;align-items:center;justify-content:center;flex:none}
+.qi-ic svg{width:23px;height:23px;color:var(--mint)}
+.qi-tx{flex:1;min-width:0}
+.qi-tx h3{font-size:15.5px;font-weight:800;letter-spacing:-.01em;margin-bottom:2px}
+.qi-tx p{font-size:11.5px;color:var(--mut-2);line-height:1.35}
+.qi-bg{flex:none;font-size:11px;font-weight:900;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--line-2);color:var(--mut);transition:all .2s ease}
+.qi.on .qi-bg{background:rgba(109,230,169,.13);border-color:rgba(109,230,169,.34);color:var(--mint-br)}
+
+/* ---- earnings slider ------------------------------------------------------------------------ */
+.earn{width:100%;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line-2);border-radius:20px;padding:18px 16px 16px;margin-bottom:20px}
+.earn-k{font-size:10.5px;font-weight:800;letter-spacing:.18em;color:var(--mut-2);margin-bottom:6px}
+.earn-amt{font-size:42px;font-weight:900;letter-spacing:-.035em;line-height:1;color:var(--mint-br);font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(109,230,169,.3)}
+.earn-per{font-size:12px;font-weight:700;color:var(--mut);margin-top:5px}
+.earn-hrs{font-size:12.5px;color:var(--mut);margin-top:12px}
+.earn-hrs b{color:var(--ink);font-weight:800}
+.sld{margin-top:11px;padding:0 2px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--mint) 0%,var(--mint) var(--pct,14%),#202b26 var(--pct,14%),#202b26 100%);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid var(--mint-br);box-shadow:0 2px 10px rgba(0,0,0,.5);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--mint-br);box-shadow:0 2px 10px rgba(0,0,0,.5);cursor:pointer;border-color:var(--mint-br)}
+.sld-ends{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;color:var(--mut-2);margin-top:7px;letter-spacing:.04em}
+
+/* ---- reward cards ---------------------------------------------------------------------------
+   Real store artwork, inlined. Emoji stand-ins read as an unfinished page next to a
+   competitor that ships the real icons. */
+.rw{width:100%;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line-2);border-radius:16px;padding:14px;margin-bottom:10px;text-align:left}
+.rw-top{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.rw-top i{width:46px;height:46px;border-radius:12px;display:block;background-size:cover;background-position:center;flex:none;border:1px solid rgba(255,255,255,.1)}
+.rw-in{flex:1;min-width:0}
+.rw-in h4{font-size:15px;font-weight:850;letter-spacing:-.01em}
+.rw-in p{font-size:11.5px;color:var(--mut-2)}
+.rw-pz{flex:none;text-align:right;line-height:1.1}
+.rw-pz b{display:block;font-size:15px;font-weight:900;color:var(--mint-br)}
+.rw-pz span{display:block;font-size:9.5px;font-weight:650;color:var(--mut-2);margin-top:2px}
+.rw-req{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--mut-2);margin-bottom:11px;line-height:1.35}
+.rw-req svg{width:12px;height:12px;flex:none}
+.rw-btn{display:block;width:100%;font-family:inherit;padding:12px;border:none;border-radius:11px;font-size:12.5px;font-weight:900;letter-spacing:.04em;cursor:pointer;color:#07120d;background:linear-gradient(180deg,var(--mint-br),var(--mint-dp));box-shadow:0 0 18px rgba(109,230,169,.3);transition:transform .13s ease}
+.rw-btn:active{transform:scale(.985)}
+
+/* ---- how it works ---------------------------------------------------------------------------- */
+.how{width:100%;background:var(--card-2);border:1px solid var(--line-2);border-radius:18px;padding:18px 16px;margin-bottom:18px;text-align:left}
+.how > h3{text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.2em;color:var(--mut-2);margin-bottom:17px}
+.stp{position:relative;display:flex;gap:13px;padding-bottom:17px}
+.stp:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:1px;width:2px;background:var(--line-2)}
+.stp:last-child{padding-bottom:0}
+.stp .n{width:27px;height:27px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:900;color:#07120d;flex:none;position:relative;z-index:1}
+.stp h4{font-size:13.5px;font-weight:800;margin-bottom:3px}
+.stp p{font-size:12px;color:var(--mut);line-height:1.45}
+.stp p b{color:var(--mint);font-weight:700}
+
+/* ---- trust strip ----------------------------------------------------------------------------- */
+.trust{display:flex;width:100%;background:var(--sunk);border:1px solid var(--line-2);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.trust > div{flex:1;padding:13px 6px;text-align:center}
+.trust > div + div{border-left:1px solid var(--line-2)}
+.trust b{display:block;font-size:15px;font-weight:900;color:var(--mint-br);letter-spacing:-.01em}
+.trust span{display:block;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--mut-2);margin-top:3px}
+
+/* ---- sticky CTA --------------------------------------------------------------------------------
+   The page's one CTA, pinned to the bottom so it is tappable from anywhere without scrolling
+   back. The glow loop lives on `.cta` and the entrance lives on `.ctabar` — two `animation`
+   declarations on one element silently replace each other, which is how an element ends up
+   stranded at opacity:0.
+
+   The scrim fades the page out under the button rather than cutting it with a hard edge, and
+   `.wrap` carries matching bottom padding so the disclaimer and footer can still be read in full
+   instead of sitting behind the bar. */
+.ctabar{
+  position:fixed;left:0;right:0;bottom:0;z-index:15;
+  padding:16px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+  background:linear-gradient(180deg,rgba(11,15,13,0) 0%,rgba(11,15,13,.86) 32%,var(--bg) 64%);
+  -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+  animation:barUp .5s cubic-bezier(.22,.9,.3,1) .62s both;
+}
+.ctabar > div{max-width:434px;margin:0 auto}
+@keyframes barUp{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:translateY(0)}}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;font-family:inherit;padding:19px 24px;border:none;border-radius:16px;cursor:pointer;font-size:16px;font-weight:900;letter-spacing:.05em;color:#07120d;background:linear-gradient(180deg,var(--mint-br) 0%,var(--mint-dp) 100%);animation:ctaGlow 2.4s ease-in-out infinite;transition:transform .13s ease}
+.cta:active{transform:scale(.985)}
+.cta svg{width:19px;height:19px;flex:none}
+@keyframes ctaGlow{0%,100%{box-shadow:0 0 26px rgba(109,230,169,.42),0 6px 18px rgba(0,0,0,.4)}50%{box-shadow:0 0 52px rgba(109,230,169,.62),0 6px 18px rgba(0,0,0,.4)}}
+.reassure{font-size:11px;color:var(--mut-2);line-height:1.4;margin:9px auto 0;text-align:center}
+
+.note{font-size:11.5px;color:rgba(255,255,255,.62);line-height:1.65;margin-top:20px;text-align:center}
+.foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line-2);width:100%;font-size:10.5px;color:var(--mut-2);line-height:1.5}
+
+/* ---- pre-CTA modal ---------------------------------------------------------------------------
+   The strongest element on the competitor page: it names the exact post-install behaviour the
+   advertiser grades on, at the last moment before the click. */
+.ov{position:fixed;inset:0;z-index:20;background:rgba(5,9,7,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.ov.open{display:flex;animation:fadeIn .22s ease forwards}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.md{position:relative;width:100%;max-width:392px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 22px 22px;text-align:center;box-shadow:0 22px 60px rgba(0,0,0,.6);animation:pop .3s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.md-ic{width:60px;height:60px;border-radius:17px;background:rgba(109,230,169,.11);border:1px solid rgba(109,230,169,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.md-ic svg{width:30px;height:30px;color:var(--mint-br)}
+.md h2{font-size:20px;font-weight:850;letter-spacing:-.01em;margin-bottom:9px}
+.md .lead{font-size:13.5px;color:var(--mut);line-height:1.5;margin-bottom:18px}
+.md-note{display:flex;gap:11px;align-items:flex-start;text-align:left;background:var(--sunk);border:1px solid var(--line-2);border-radius:13px;padding:13px 14px;margin-bottom:12px}
+.md-note .n{width:23px;height:23px;border-radius:50%;background:var(--mint);color:#07120d;font-size:11.5px;font-weight:900;display:flex;align-items:center;justify-content:center;flex:none}
+.md-note p{font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.45}
+.md-note p b{color:var(--mint-br);font-weight:800}
+.md .go{display:block;width:100%;font-family:inherit;margin-top:18px;padding:18px;border:none;border-radius:14px;font-size:15px;font-weight:900;letter-spacing:.04em;cursor:pointer;color:#07120d;background:linear-gradient(180deg,var(--mint-br),var(--mint-dp));box-shadow:0 0 26px rgba(109,230,169,.4);transition:transform .13s ease}
+.md .go:active{transform:scale(.985)}
+.md .x{position:absolute;top:13px;right:13px;width:29px;height:29px;border-radius:50%;border:none;background:rgba(255,255,255,.07);color:var(--mut);font-size:18px;line-height:1;cursor:pointer;font-family:inherit}
+
+@media (max-width:360px){
+  .wrap{padding:18px 14px calc(124px + env(safe-area-inset-bottom, 0px))}
+  .ctabar{padding:14px 14px calc(12px + env(safe-area-inset-bottom, 0px))}
+  .stage{max-width:250px}
+  .pcard{width:200px;margin-left:-100px}
+  .slot{width:224px;margin-left:-112px}
+  .earn-amt{font-size:36px}
+  .brand i{width:44px;height:44px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .rise{opacity:1;animation:none;transform:none}
+  .ctabar{animation:none;opacity:1;transform:none}
+  body::before,body::after{animation:none;opacity:.6}
+  .cta{animation:none;box-shadow:0 0 26px rgba(109,230,169,.42),0 6px 18px rgba(0,0,0,.4)}
+  .pill .dot{animation:none}
+  .pcard{transition:none}
+  .slot.on .sheen{animation:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="brand rise r1" aria-hidden="true">
+    <i style="background-image:url(data:image/webp;base64,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)"></i>
+    <em class="bx">&times;</em>
+    <i style="background-image:url(data:image/webp;base64,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)"></i>
+  </div>
+
+  <div class="pill rise r1"><span class="dot"></span><b id="liveN">3,184</b>&nbsp;EARNING NOW</div>
+
+  <h1 class="rise r2">Get paid for the time you <span class="grad">already spend</span></h1>
+  <p class="sub rise r2">Gravy Pass pays real money for playing games and for screentime. Free to start, cash out from <b>$10</b>.</p>
+
+  <!-- THE DIFFERENTIATOR -->
+  <section class="pass rise r3">
+    <span class="nod">NO DOWNLOAD</span>
+    <h2>It's a pass, not an app</h2>
+    <p>Gravy Pass adds straight to your <b class="wname">Apple Wallet</b>. Nothing to install, nothing eating your storage.</p>
+
+    <div class="stage" aria-hidden="true">
+      <div class="pcard" id="pcard">
+        <div class="pc-top">
+          <i style="background-image:url(data:image/webp;base64,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)"></i>
+          <em>GRAVY PASS</em>
+        </div>
+        <div class="pc-bal"><span>BALANCE</span><b id="pbal">$0.00</b></div>
+        <div class="pc-code" id="pcode"></div>
+      </div>
+      <div class="slot" id="slot">
+        <span class="lip"></span>
+        <span class="sheen"></span>
+        <span class="txt" id="slotTxt">WALLET</span>
+      </div>
+    </div>
+
+    <div class="pass-foot">
+      <span><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Works on iPhone &amp; Android</span>
+      <span><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Free to add</span>
+    </div>
+  </section>
+
+  <!-- QUALIFY — the tapped card drives the slider below -->
+  <div class="sec-h rise r4">WHAT DO YOU WANT TO GET PAID FOR?</div>
+  <div class="qual rise r4" id="qual">
+    <div class="qi on" data-mode="game" role="button" tabindex="0">
+      <div class="qi-ic">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 11h4M8 9v4M15 11.5h.01M18 10h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6h-11A4.5 4.5 0 002 10.5v3A4.5 4.5 0 006.5 18c1.2 0 1.9-.5 2.7-1.2.6-.5 1.2-.8 2.8-.8s2.2.3 2.8.8c.8.7 1.5 1.2 2.7 1.2a4.5 4.5 0 004.5-4.5v-3A4.5 4.5 0 0017.5 6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="qi-tx"><h3>Playing games</h3><p>Roblox, Block Blast, Subway Surfers &amp; more</p></div>
+      <div class="qi-bg">Earn $$$</div>
+    </div>
+    <div class="qi" data-mode="screen" role="button" tabindex="0">
+      <div class="qi-ic">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2" width="12" height="20" rx="3" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 6.5h6M9 9.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="qi-tx"><h3>Screentime</h3><p>Earn while you scroll, no skill needed</p></div>
+      <div class="qi-bg">Earn $$$</div>
+    </div>
+  </div>
+
+  <!-- EARNINGS SLIDER -->
+  <div class="earn rise r5">
+    <div class="earn-k">YOU COULD EARN</div>
+    <div class="earn-amt" id="earnAmt">$55</div>
+    <div class="earn-per">per week</div>
+    <div class="earn-hrs"><b id="earnHrs">2</b><span id="earnLbl"> hrs of gaming a day</span></div>
+    <div class="sld">
+      <input type="range" id="earnSlider" min="1" max="8" step="1" value="2" aria-label="Hours per day" style="--pct:14.28%">
+      <div class="sld-ends"><span>1 HR</span><span>8 HRS</span></div>
+    </div>
+  </div>
+
+  <!-- REWARDS -->
+  <div class="sec-h rise r6">REWARDS TO UNLOCK</div>
+
+  <div class="rw rise r6">
+    <div class="rw-top">
+      <i style="background-image:url(data:image/webp;base64,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)"></i>
+      <div class="rw-in"><h4>Block Blast</h4><p>Play &amp; Earn</p></div>
+      <div class="rw-pz"><b>Top payer</b><span>per offer</span></div>
+    </div>
+    <div class="rw-req"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Unlocks after 3 tasks inside Gravy Pass</div>
+    <button class="rw-btn offer" type="button">UNLOCK BLOCK BLAST</button>
+  </div>
+
+  <div class="rw rise r7">
+    <div class="rw-top">
+      <i style="background-image:url(data:image/webp;base64,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)"></i>
+      <div class="rw-in"><h4>Roblox</h4><p>Play &amp; Earn</p></div>
+      <div class="rw-pz"><b>$35/hr</b><span>per hour</span></div>
+    </div>
+    <div class="rw-req"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Unlocks after 3 tasks inside Gravy Pass</div>
+    <button class="rw-btn offer" type="button">UNLOCK ROBLOX</button>
+  </div>
+
+  <div class="rw rise r7">
+    <div class="rw-top">
+      <i style="background-image:url(data:image/webp;base64,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)"></i>
+      <div class="rw-in"><h4>Clash Royale</h4><p>Play &amp; Earn</p></div>
+      <div class="rw-pz"><b>$28/hr</b><span>per hour</span></div>
+    </div>
+    <div class="rw-req"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Unlocks after 3 tasks inside Gravy Pass</div>
+    <button class="rw-btn offer" type="button">UNLOCK CLASH ROYALE</button>
+  </div>
+
+  <div class="rw rise r8">
+    <div class="rw-top">
+      <i style="background-image:url(data:image/webp;base64,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)"></i>
+      <div class="rw-in"><h4>Subway Surfers</h4><p>Play &amp; Earn</p></div>
+      <div class="rw-pz"><b>Varies</b><span>per offer</span></div>
+    </div>
+    <div class="rw-req"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Unlocks after 3 tasks inside Gravy Pass</div>
+    <button class="rw-btn offer" type="button">UNLOCK SUBWAY SURFERS</button>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how rise r8">
+    <h3>HOW IT WORKS</h3>
+    <div class="stp"><div class="n">1</div><div><h4>Add your Gravy Pass</h4><p>Tap below and add the pass to your <b class="wname">Apple Wallet</b>. Takes about two minutes and costs nothing.</p></div></div>
+    <div class="stp"><div class="n">2</div><div><h4>Complete 3 quick tasks</h4><p>Finish your first three offers to unlock the <b>bigger-paying games</b> and the full reward list.</p></div></div>
+    <div class="stp"><div class="n">3</div><div><h4>Play and get paid</h4><p>Your balance builds as offers clear. Cash out from <b>$10</b> to Cash App, PayPal, Zelle, Apple Cash or your bank.</p></div></div>
+  </div>
+
+  <div class="trust rise r9">
+    <div><b>$1M+</b><span>PAID OUT</span></div>
+    <div><b>4.5&#9733;</b><span>TRUSTPILOT</span></div>
+    <div><b>850+</b><span>REVIEWS</span></div>
+  </div>
+
+  <p class="note rise r10">Earnings depend on which games you play and how much you play. The figures above are an estimate from the rates shown, not a guarantee. Gravy Pass is not affiliated with any game publisher named on this page, and this page is not affiliated with, sponsored or endorsed by TikTok or Apple. Individual results vary.</p>
+
+  <div class="foot rise r10">&copy; 2026 &middot; Rewards availability varies by region and device.</div>
+</div>
+
+<!-- STICKY CTA — fixed to the bottom, so it is reachable from anywhere on the page. -->
+<div class="ctabar">
+  <div>
+    <button class="cta" id="ctaBtn" type="button">
+      ADD MY GRAVY PASS
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="reassure">Free to start &bull; No app download &bull; Cash out from $10</p>
+  </div>
+</div>
+
+<!-- PRE-CTA MODAL -->
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ovT">
+  <div class="md">
+    <button class="x" id="ovX" type="button" aria-label="Close">&times;</button>
+    <div class="md-ic">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M14.5 9.2c-.5-.8-1.4-1.2-2.5-1.2-1.5 0-2.5.8-2.5 1.9 0 1 .8 1.5 2.5 1.9 1.7.4 2.6.9 2.6 2 0 1.1-1.1 1.9-2.6 1.9-1.2 0-2.1-.4-2.6-1.3M12 6.5v11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2 id="ovT">Start Earning Now</h2>
+    <p class="lead">Add your Gravy Pass and start earning from the games you already play.</p>
+    <div class="md-note"><div class="n">!</div><p>Use your <b>real details</b> when you sign up so your earnings can actually be paid out.</p></div>
+    <div class="md-note"><div class="n">2</div><p>Complete <b>3 quick tasks</b> to activate your pass and unlock the bigger-paying games.</p></div>
+    <button class="go" id="goBtn" type="button">CONTINUE TO GRAVY PASS</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= the offer =================
+     MANUAL funnel: the network link lives here and this page appends the sub itself, because
+     there is no cloaker in front to do it.
+
+     The base ALREADY ENDS IN the sub param with an empty value — so the value is CONCATENATED
+     onto it, never appended as a second copy. Two of them and the network reads the empty first
+     one: every conversion comes back unmatched while the link looks perfectly healthy. That has
+     cost this account conversions three times.
+
+     The outbound param name follows the DESTINATION, not the offer. This destination family
+     reads s1..s5 and silently discards the Everflow-style name, so copying an Everflow lander's
+     builder onto this base would zero attribution with no visible error. */
+  var OUT = 'https://monetisetrk2.co.uk/?a=26648&c=56278&s1=';
+
+  var QP = new URLSearchParams(window.location.search);
+
+  /* s1 leads the chain: it is this network's own sub param, so it is the name the ad URL will
+     carry. The rest of the chain stays wide because a manual ad URL is written by hand. */
+  function subid() {
+    return QP.get('s1') || QP.get('sub1') || QP.get('campid') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+  function offerUrl() { return OUT + encodeURIComponent(subid()); }
+
+  /* ================= first-party beacon ================= */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'gravypass-us-mon-man', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      var u = TRACK + '?e=' + encodeURIComponent(ev) + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+      if (navigator.sendBeacon) navigator.sendBeacon(u); else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  /* ================= wallet name =================
+     Gravy Pass runs on BOTH platforms. Default in the markup is Apple Wallet so a no-JS render
+     still reads correctly; Android swaps it. Telling Android traffic to open Apple Wallet is
+     telling it to do something it cannot do. */
+  (function () {
+    var isA = /android/i.test(navigator.userAgent || '');
+    if (!isA) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.wname'), function (el) {
+      el.textContent = 'Google Wallet';
+    });
+  })();
+
+  /* ================= the pass animation =================
+     A four-beat loop: the pass hovers, tucks into the wallet, the wallet confirms, the balance
+     moves, then it resets. Driven in JS rather than pure CSS so the balance counter stays in
+     step with the card. */
+  (function () {
+    var card = document.getElementById('pcard');
+    var slot = document.getElementById('slot');
+    var txt  = document.getElementById('slotTxt');
+    var bal  = document.getElementById('pbal');
+    var code = document.getElementById('pcode');
+    if (!card || !slot || !txt || !bal || !code) return;
+
+    /* barcode strip — irregular bar widths so it reads as a code, not a pattern */
+    var widths = [3,1,2,1,1,4,1,2,3,1,1,2,4,1,3,1,2,1,1,3,2,1,4,1,1,2,3,1,2,1,1,4,2,1,3,1];
+    var frag = document.createDocumentFragment();
+    widths.forEach(function (w, i) {
+      var b = document.createElement('i');
+      b.style.width = w + 'px';
+      if (i % 2) b.style.opacity = '0';
+      frag.appendChild(b);
+    });
+    code.appendChild(frag);
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      card.classList.add('tuck'); slot.classList.add('on');
+      txt.textContent = 'ADDED'; bal.textContent = '$12.40';
+      return;
+    }
+
+    var TARGET = 12.40, timers = [];
+    function at(ms, fn) { timers.push(window.setTimeout(fn, ms)); }
+
+    function countTo(target, ms) {
+      var t0 = 0, steps = Math.round(ms / 60);
+      for (var i = 1; i <= steps; i++) {
+        (function (n) {
+          at(1 + n * 60, function () {
+            var v = target * (n / steps);
+            bal.textContent = '$' + v.toFixed(2);
+          });
+        })(i);
+      }
+      return t0;
+    }
+
+    function cycle() {
+      timers.forEach(clearTimeout); timers = [];
+      card.classList.remove('tuck');
+      slot.classList.remove('on');
+      txt.textContent = 'WALLET';
+      bal.textContent = '$0.00';
+
+      at(900,  function () { card.classList.add('tuck'); });
+      at(1480, function () { slot.classList.add('on'); txt.textContent = 'ADDED'; });
+      at(1700, function () { countTo(TARGET, 1200); });
+      at(4700, function () { cycle(); });
+    }
+    cycle();
+  })();
+
+  /* ================= live counter ================= */
+  (function () {
+    var el = document.getElementById('liveN');
+    if (!el) return;
+    var n = 3184;
+    window.setInterval(function () {
+      n += Math.floor(Math.random() * 5) - 1;
+      if (n < 3120) n = 3120;
+      if (n > 3320) n = 3320;
+      el.textContent = n.toLocaleString('en-US');
+    }, 2600);
+  })();
+
+  /* ================= qualify cards + slider =================
+     The tapped card genuinely changes the curve and the readout, not just the highlight. */
+  (function () {
+    var qual   = document.getElementById('qual');
+    var slider = document.getElementById('earnSlider');
+    var amt    = document.getElementById('earnAmt');
+    var hrsEl  = document.getElementById('earnHrs');
+    var lblEl  = document.getElementById('earnLbl');
+    if (!qual || !slider || !amt) return;
+
+    var MODE = 'game';
+    var CURVE = {
+      game:   { cap: 300, a: 25, b: 1.6, label: ' hrs of gaming a day' },
+      screen: { cap: 220, a: 18, b: 1.2, label: ' hrs of screentime a day' }
+    };
+
+    function paint() {
+      var h = Number(slider.value) || 1;
+      var c = CURVE[MODE];
+      var v = Math.round(Math.min(c.cap, c.a * h + c.b * h * h) / 5) * 5;
+      amt.textContent = '$' + v;
+      hrsEl.textContent = String(h);
+      lblEl.textContent = c.label;
+      slider.style.setProperty('--pct', (((h - 1) / 7) * 100).toFixed(2) + '%');
+    }
+
+    slider.addEventListener('input', paint);
+
+    function pick(el) {
+      Array.prototype.forEach.call(qual.querySelectorAll('.qi'), function (q) {
+        q.classList.toggle('on', q === el);
+      });
+      MODE = el.getAttribute('data-mode') || 'game';
+      paint();
+    }
+    Array.prototype.forEach.call(qual.querySelectorAll('.qi'), function (q) {
+      q.addEventListener('click', function () { pick(q); });
+      q.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(q); }
+      });
+    });
+    paint();
+  })();
+
+  /* ================= outbound =================
+     Every CTA opens the modal first. The modal's button is the ONLY thing that navigates, and it
+     opens a new tab from the tap with a same-tab fallback, so the page survives underneath. */
+  (function () {
+    var ov = document.getElementById('ov');
+    var fired = false;
+
+    function open()  { ov.classList.add('open'); px('claim'); }
+    function close() { ov.classList.remove('open'); }
+
+    document.getElementById('ctaBtn').addEventListener('click', open);
+    Array.prototype.forEach.call(document.querySelectorAll('.offer'), function (b) {
+      b.addEventListener('click', open);
+    });
+    document.getElementById('ovX').addEventListener('click', close);
+    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    document.getElementById('goBtn').addEventListener('click', function () {
+      if (fired) return;
+      fired = true;
+      px('continue');
+      var url = offerUrl(), w = null;
+      try { w = window.open(url, '_blank'); } catch (e) {}
+      if (!w || w.closed || typeof w.closed === 'undefined') { window.location.href = url; }
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>

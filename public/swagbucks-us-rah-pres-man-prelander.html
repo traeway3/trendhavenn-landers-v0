@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<!-- ============================================================================================
+     SWAGBUCKS · US · PRESCOTT (Rahul's segment) — PRELANDER (manual launch)
+     /Manual/swagbucks/swagbucks-us-rah-pres-man-prelander.html
+       ->  trendhavenn.com/swagbucks-us-rah-pres-man-prelander.html
+     THIS is the URL that goes in the ad.
+
+     Breakout is ON THE CTA ONLY — nothing fires on load. The ladder is wider than the earlier
+     builds on purpose: every visitor on a phone gets pushed at, and it keeps trying handlers
+     until one takes or there are none left.
+
+     Copy stays neutral: no browser name in the title or the headline, no external-link glyph.
+============================================================================================= -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex, nofollow">
+<title>Get Started</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233366f7'/%3E%3C/svg%3E">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+/* Same family as the last two prelanders — light page, one accent, centred, nothing to read.
+   What changed: the content now sits on a raised card instead of floating bare on the page, the
+   step marker is a compact pill above the headline rather than a rail below it, and the accent
+   is the Swagbucks blue sampled off the app icon. */
+:root{
+  --bg:#f5f7fc;
+  --card:#ffffff;
+  --blue:#3366f7;
+  --blue-dp:#1f4fe0;
+  --blue-lt:#9db6fd;
+  --ink:#121726;
+  --mut:#6b7488;
+  --glow:rgba(51,102,247,.3);
+}
+
+html,body{height:100%;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);
+  min-height:100vh;min-height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px 20px;overflow:hidden;position:relative;
+}
+
+body::before,body::after{
+  content:'';position:fixed;width:76vw;height:76vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(51,102,247,.26) 0%,rgba(51,102,247,.08) 42%,rgba(51,102,247,0) 70%);
+  filter:blur(24px);pointer-events:none;z-index:0;will-change:transform,opacity;
+}
+body::before{top:-24vw;right:-26vw;animation:arcA 18s ease-in-out infinite alternate,breathe 6.6s ease-in-out infinite}
+body::after{bottom:-26vw;left:-28vw;animation:arcB 23s ease-in-out infinite alternate,breathe 8.2s ease-in-out 2s infinite}
+@keyframes arcA{0%{transform:translate(0,0) scale(1)}35%{transform:translate(-11vw,10vh) scale(1.08)}100%{transform:translate(-5vw,30vh) scale(1.04)}}
+@keyframes arcB{0%{transform:translate(0,0) scale(1)}35%{transform:translate(11vw,-10vh) scale(1.08)}100%{transform:translate(5vw,-30vh) scale(1.04)}}
+@keyframes breathe{0%,100%{opacity:.45}50%{opacity:.9}}
+
+.wrap{position:relative;z-index:1;width:100%;max-width:400px;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* the card is the new bit */
+.card{
+  background:var(--card);
+  border:1px solid rgba(18,23,38,.07);
+  border-radius:22px;
+  padding:30px 24px 26px;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(18,23,38,.04),0 18px 48px rgba(18,23,38,.09);
+}
+
+.step{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:800;letter-spacing:.13em;
+  color:var(--blue-dp);background:rgba(51,102,247,.09);
+  border:1px solid rgba(51,102,247,.2);
+  padding:6px 13px;border-radius:999px;margin-bottom:16px;
+}
+.step i{width:6px;height:6px;border-radius:50%;background:var(--blue);display:block;flex:none;animation:blip 1.9s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.3}}
+
+h1{font-size:29px;font-weight:900;line-height:1.12;letter-spacing:-.9px;margin-bottom:10px}
+h1 .hl{color:var(--blue)}
+.lede{font-size:14.5px;line-height:1.5;color:var(--mut);max-width:280px;margin:0 auto}
+
+.cta{
+  display:block;width:100%;font-family:inherit;font-size:16px;font-weight:900;letter-spacing:.3px;
+  text-transform:uppercase;padding:19px 24px;border-radius:14px;border:none;text-align:center;cursor:pointer;
+  background:linear-gradient(180deg,var(--blue),var(--blue-dp));color:#fff;
+  margin-top:24px;-webkit-user-select:none;user-select:none;
+  animation:ctaPulse 2.5s ease-in-out infinite;
+  transition:transform .1s ease,opacity .2s ease;
+}
+.cta:active{transform:scale(.97)}
+.cta:disabled{animation:none;opacity:.72;cursor:default;box-shadow:0 6px 18px rgba(51,102,247,.22)}
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 28px var(--glow),0 6px 18px rgba(51,102,247,.22)}50%{box-shadow:0 0 50px var(--glow),0 6px 18px rgba(51,102,247,.22)}}
+
+.dots::after{content:'';animation:dots 1.2s steps(4,end) infinite}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+
+.note{min-height:16px;margin-top:11px;font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--mut)}
+
+.pts{list-style:none;margin:14px -6px 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 14px}
+.pts > li{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:650;color:var(--mut);line-height:1.2;white-space:nowrap}
+.pts svg{width:15px;height:15px;color:var(--blue);flex:none}
+
+/* The rescue line. Empty — and so hidden — until the watchdog fills it. */
+.sub{display:none;margin-top:16px;font-size:13px;font-weight:600;color:var(--mut);line-height:1.55}
+.sub:not(:empty){display:block}
+.sub b{color:var(--ink);font-weight:800}
+
+@media (max-height:640px){
+  .card{padding:24px 20px 22px}
+  h1{font-size:25px}
+  .cta{margin-top:18px}
+}
+@supports (padding-bottom:env(safe-area-inset-bottom)){
+  body{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .wrap{animation:none;opacity:1;transform:none}
+  body::before,body::after{animation:none;opacity:.6}
+  .cta{animation:none;box-shadow:0 6px 18px rgba(51,102,247,.22)}
+  .step i{animation:none}
+  .dots::after{animation:none;content:'...'}
+}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <span class="step"><i></i>STEP 1 OF 2</span>
+
+      <h1>You're <span class="hl">almost in</span></h1>
+      <p class="lede">One more tap and your rewards open up.</p>
+
+      <button type="button" class="cta" id="ctaBtn">Continue</button>
+      <div class="note" id="note"></div>
+
+      <ul class="pts">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Secure connection
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Takes 30 seconds
+        </li>
+      </ul>
+
+      <p class="sub" id="sub"></p>
+    </div>
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= destination ================= */
+  var DEST = 'https://www.trendhavenn.com/swagbucks-us-rah-pres-man.html';
+
+  /* ================= sub ID ================= */
+  var QP = new URLSearchParams(window.location.search);
+  function subid() {
+    return QP.get('sub1') || QP.get('campid') || QP.get('s1') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+
+  /* ================= first-party beacon =================
+     load -> human -> continue, plus `rescue`. rescue divided by continue, read per sub ID, is
+     the in-app breakout failure rate for hop 1. */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'swagbucks-us-rah-pres-man-pre', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      var u = TRACK + '?e=' + encodeURIComponent(ev) + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+      if (navigator.sendBeacon) navigator.sendBeacon(u); else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  /* ================= who are we looking at =================
+     Two separate questions, deliberately. `inApp` is only used to make sure an in-app visitor can
+     NEVER fall into the desktop branch; the breakout itself runs for every phone visitor whether
+     or not the UA names the app, because an in-app webview does not always say so and a scheme
+     jump is harmless in a real browser (it just opens the URL).
+
+     iPadOS 13+ reports a Macintosh UA. Without the touch-points test an iPad in the in-app
+     browser would be read as desktop and left exactly where we are trying not to leave it. */
+  function inApp() {
+    return /tiktok|musical_ly|bytedance|BytedanceWebview/i.test(navigator.userAgent || '');
+  }
+  function plat() {
+    var ua = navigator.userAgent || '';
+    if (/iPad|iPhone|iPod/.test(ua)) return 'ios';
+    if (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1) return 'ios';
+    if (/android/i.test(ua)) return 'android';
+    if (inApp()) return 'android';   /* in-app but unrecognised: intent carries its own fallback */
+    return 'other';
+  }
+
+  /* The ENTIRE inbound query string rides across untouched. */
+  function out() {
+    var d = DEST, q = window.location.search;
+    if (q) d += (d.indexOf('?') === -1 ? '?' : '&') + q.slice(1);
+    return d;
+  }
+
+  var btn  = document.getElementById('ctaBtn');
+  var note = document.getElementById('note');
+  var sub  = document.getElementById('sub');
+  var tried = false;
+
+  function go() {
+    var dest = out();
+    var bare = dest.replace(/^https?:\/\//, '');
+    var enc  = encodeURIComponent(dest);
+    var p = plat();
+
+    /* Desktop has no in-app webview to escape and resolves none of these schemes. Only reached
+       when the UA is not the app's — see plat(). */
+    if (p === 'other') { window.location.href = dest; return; }
+
+    /* ---- the ladder ------------------------------------------------------------------------
+       One scheme is not enough: a webview that refuses an unknown scheme drops the navigation on
+       the floor with no error at all. So every handler worth trying gets tried, ~350ms apart,
+       and the first one that takes cancels the rest.
+
+         iOS      Safari's own scheme
+                  Chrome for iOS
+                  Firefox for iOS
+         Android  an intent naming Chrome's package
+                  an intent naming Samsung Internet's package  (the default browser on a large
+                                                                share of Android handsets)
+                  an intent with no package at all             (system picks)
+
+       Naming a package matters: an intent with no package lets the SYSTEM choose a handler, and
+       inside an in-app browser the host app frequently is one — so the escape hands the URL
+       straight back to the app it was escaping. The unnamed intent is kept as the last rung for
+       handsets with neither Chrome nor Samsung Internet — there the system picking anything at
+       all is better than nothing.
+
+       ⚠️ Android gets INTENTS ONLY. A Chrome-scheme rung was tried here and removed: the
+       googlechrome:// family is registered by Chrome for **iOS**, not by Chrome on Android, so on
+       Android it is a no-op that only looks like extra coverage. Chromium refuses it outright as
+       a local resource. Intents are Android's escape hatch; don't re-add a scheme rung here.
+
+       The browser-fallback extra rides on EVERY Android intent, so a device with no handler at
+       all still lands on the lander rather than a dead page, on a click already paid for. */
+    var attempts = p === 'android'
+      ? [
+          'intent://' + bare + '#Intent;scheme=https;package=com.android.chrome;'
+            + 'S.browser_fallback_url=' + enc + ';end',
+          'intent://' + bare + '#Intent;scheme=https;package=com.sec.android.app.sbrowser;'
+            + 'S.browser_fallback_url=' + enc + ';end',
+          'intent://' + bare + '#Intent;scheme=https;'
+            + 'S.browser_fallback_url=' + enc + ';end'
+        ]
+      : [
+          dest.replace(/^https:\/\//, 'x-safari-https://'),
+          dest.replace(/^https:\/\//, 'googlechromes://'),
+          'firefox://open-url?url=' + enc
+        ];
+
+    /* ---- cancel listeners FIRST, jump second -------------------------------------------------
+       Arming these AFTER kicking off the navigation leaves a window in which the app switch
+       completes before the listener exists, so the cancel never runs and the visitor is forwarded
+       TWICE — once into the real browser and once inside the webview behind it.
+
+       visibilitychange, not pagehide alone: the Safari scheme opens Safari as a SEPARATE APP, so
+       this page is backgrounded rather than unloaded and pagehide may never fire. A pagehide-only
+       cancel fires the rescue on every SUCCESSFUL breakout. */
+    var done = false, timers = [];
+    function cancel() {
+      if (done) return;
+      done = true;
+      timers.forEach(clearTimeout);
+    }
+    window.addEventListener('pagehide', cancel, { once: true });
+    window.addEventListener('blur', cancel, { once: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) cancel();
+    }, { once: true });
+
+    function jump(u) {
+      if (done) return;
+      try { (window.top || window).location.href = u; }
+      catch (e) { window.location.href = u; }
+    }
+
+    /* The first attempt fires SYNCHRONOUSLY inside the tap. iOS only honours a scheme jump while
+       the user gesture is still active; anything deferred is already too late. */
+    jump(attempts[0]);
+    for (var i = 1; i < attempts.length; i++) {
+      (function (u, n) { timers.push(setTimeout(function () { jump(u); }, 350 * n)); })(attempts[i], i);
+    }
+
+    /* Every handler refused. No JavaScript can force a webview that blocks all of them, so say
+       what will work instead of hanging on "Opening…". A visitor who is told to use the ••• menu
+       can still convert; a visitor staring at a disabled button is a click thrown away. */
+    timers.push(setTimeout(function () {
+      if (done) return;
+      cancel();
+      px('rescue');
+      if (sub) sub.innerHTML = 'Your app blocked the hand-off. Tap the <b>&#8226;&#8226;&#8226;</b> menu at the top of this screen and choose <b>Open in browser</b>.';
+      if (note) note.textContent = '';
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Continue anyway';
+        btn.onclick = function (e) { e.preventDefault(); location.replace(dest); };
+      }
+    }, 350 * attempts.length + 900));
+  }
+
+  btn.addEventListener('click', function () {
+    if (tried) return;
+    tried = true;
+    btn.disabled = true;
+    btn.innerHTML = 'Opening<span class="dots"></span>';
+    if (note) note.textContent = 'One moment';
+    px('continue');   /* fired BEFORE go(), so it is sent even if the app switch is instant */
+    go();
+  });
+})();
+</script>
+</body>
+</html>

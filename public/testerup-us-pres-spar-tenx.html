@@ -3,21 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <!-- ============================================================================================
-     TESTERUP · US (global link) · PRESCOTT / EVERFLOW — MANUAL LAUNCH LANDER
-     /Manual/testerup/testerup-us-pres-man.html
-       ->  trendhavenn.com/testerup-us-pres-man.html
+     TESTERUP · US (global link) · PRESCOTT / EVERFLOW — SPARTIS BOT LANDER · TENX ACCOUNT
+     /Spartis/TENX/testerup/testerup-us-pres-spar-tenx.html
+       ->  trendhavenn.com/testerup-us-pres-spar-tenx.html
 
-     Fed by testerup-us-pres-man-prelander.html. MANUAL funnel: this page holds the network link
-     itself and appends the sub itself, because no cloaker sits in front to do it. There is no
-     short code here and there must never be one.
+     Same page as the manual build (testerup-us-pres-man.html) so the two arms stay comparable.
+     Only the outbound and the kicker differ.
 
-     No browser breakout on this page — the prelander does the hand-off exactly once.
+     BOT funnel: the CLAIM fires the Spartis short code and the advertiser URL appears NOWHERE in
+     this file — that is what lets the offer be repointed without a redeploy. No prelander: the
+     Carrd /r cloaker is the front, so the breakout lives on THIS page and fires on load.
 ============================================================================================= -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a0914">
 <meta name="robots" content="noindex, nofollow">
 <title>Start Testing — Testerup</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e01e2b'/%3E%3C/svg%3E">
+
+<!-- TikTok In-App Browser Breakout — kick out of the in-app webview into the real
+     browser (Safari / Chrome). Fires ONLY for TikTok's user-agent, once per session. -->
+<script>
+(function() {
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  if (!/tiktok|musical_ly|bytedance/i.test(ua)) return;
+  try {
+    if (sessionStorage.getItem('ttBreakout') === '1') return;
+    sessionStorage.setItem('ttBreakout', '1');
+  } catch (e) {}
+  var currentUrl = window.location.href;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  if (isIOS) {
+    window.location.href = 'x-safari-' + currentUrl;
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  } else if (/android/i.test(ua)) {
+    window.location.href = 'intent://' + currentUrl.replace(/https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+    setTimeout(function() { window.location.href = currentUrl; }, 25);
+  }
+})();
+</script>
+
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
@@ -438,35 +462,35 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   'use strict';
 
   /* ================= the offer =================
-     MANUAL funnel: the network link lives here and this page appends the sub itself, because
-     there is no cloaker in front to do it.
+     BOT funnel: the CLAIM target is the Spartis OFFER short code, never the advertiser. The real
+     destination is configured once in Spartis -> Offer Links and is deliberately absent from this
+     file — both so the offer can be repointed without re-uploading, and so view-source does not
+     hand a reviewer the advertiser. It is recorded in the setup doc, not here.
 
-     The base has NO query string, so the sub is appended with "?" — unlike the Monetise links,
-     which already end in their sub param and must only be concatenated onto. Getting that wrong
-     in either direction ships the param twice, and the network reads the empty first one while
-     the link still looks perfectly healthy.
+     ALWAYS emit `?campid=` here — never `?sub1=`. Spartis reads campid off the short code and
+     re-emits it under the Forward Param name (sub1 for Everflow) when it hands off to the network.
+     The Offer Links row DISPLAYS the link using the Forward Param name, which is misleading; the
+     param this page sends is campid.
 
-     This destination is Everflow (Prescott), which reads sub1. Affiliate segment ZKTQ1K is
-     Trae's; 2JSKXKP is the Testerup offer. Host pcbdfv7trk.com is one of Prescott's two tracker
-     domains — the Spartis build of this same offer sits on phef6trk.com, which is expected and
-     not a typo. */
-  var OUT = 'https://www.pcbdfv7trk.com/ZKTQ1K/2JSKXKP/';
+     The Destination in Spartis must NOT end in a sub param. If it ends `&sub1=`, Spartis appends
+     its own and the empty one wins — every conversion arrives with a blank campid and matches no
+     ad, silently. */
+  var OUT = 'https://buenohoodies.com/c/testerup-us-off-tenx';
 
   var QP = new URLSearchParams(window.location.search);
 
-  /* sub1 leads: it is this network's own param, so it is the name the ad URL will carry. The
-     rest of the chain stays wide because a manual ad URL is written by hand. */
+  /* campid leads: it is the param the Carrd /r cloaker hands this page. The rest of the chain
+     stays wide so a hand-built test URL still resolves. */
   function subid() {
-    return QP.get('sub1') || QP.get('campid') || QP.get('s1') ||
+    return QP.get('campid') || QP.get('sub1') || QP.get('s1') ||
            QP.get('s2') || QP.get('cid') || QP.get('c') || '';
   }
   function offerUrl() {
-    var s = subid();
-    return s ? OUT + '?sub1=' + encodeURIComponent(s) : OUT;
+    return OUT + '?campid=' + encodeURIComponent(subid());
   }
 
   /* ================= first-party beacon ================= */
-  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'testerup-us-pres-man', sent = {};
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'testerup-us-pres-spar-tenx', sent = {};
   function px(ev) {
     if (sent[ev]) return; sent[ev] = 1;
     try {

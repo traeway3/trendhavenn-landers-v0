@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<!-- ============================================================================================
+     TESTERUP · US (global link) · PRESCOTT / EVERFLOW — MANUAL LAUNCH LANDER
+     /Manual/testerup/testerup-us-pres-man.html
+       ->  trendhavenn.com/testerup-us-pres-man.html
+
+     Fed by testerup-us-pres-man-prelander.html. MANUAL funnel: this page holds the network link
+     itself and appends the sub itself, because no cloaker sits in front to do it. There is no
+     short code here and there must never be one.
+
+     No browser breakout on this page — the prelander does the hand-off exactly once.
+============================================================================================= -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0914">
+<meta name="robots" content="noindex, nofollow">
+<title>Start Testing — Testerup</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e01e2b'/%3E%3C/svg%3E">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+/* Palette sampled off the real Testerup mark: navy #181830 is 60% of the logo, red #d81818 the
+   check. The red is dark and saturated, so TYPE uses the lightened tints and every button label
+   is WHITE — a dark label on this accent is unreadable at any point on the gradient. */
+:root{
+  --bg:#0a0914;
+  --card:#1a1930;
+  --card-2:#141327;
+  --sunk:#0e0d1c;
+  --line:#2e2c4d;
+  --line-2:#232140;
+  --red:#e01e2b;
+  --red-dp:#b4131f;
+  --red-tn:#ff6f78;
+  --red-lt:#ff9ea4;
+  --ink:#f0eef6;
+  --mut:#9a94b0;
+  --mut-2:#746e8c;
+}
+
+html,body{height:100%;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden;position:relative;
+}
+
+body::before,body::after{
+  content:'';position:fixed;width:86vw;height:86vw;max-width:520px;max-height:520px;
+  border-radius:50%;pointer-events:none;z-index:0;filter:blur(26px);
+  background:radial-gradient(circle,rgba(224,30,43,.2) 0%,rgba(224,30,43,.08) 42%,rgba(224,30,43,0) 70%);
+  will-change:transform,opacity;
+}
+body::before{top:-28vw;right:-30vw;animation:bloomA 19s ease-in-out infinite alternate}
+body::after{bottom:-32vw;left:-32vw;animation:bloomB 24s ease-in-out infinite alternate}
+@keyframes bloomA{0%{transform:translate(0,0) scale(1);opacity:.6}50%{opacity:1}100%{transform:translate(-9vw,16vh) scale(1.12);opacity:.72}}
+@keyframes bloomB{0%{transform:translate(0,0) scale(1);opacity:.5}50%{opacity:.95}100%{transform:translate(8vw,-16vh) scale(1.1);opacity:.68}}
+
+/* The bottom padding clears the fixed CTA bar. */
+.wrap{position:relative;z-index:1;width:100%;max-width:470px;margin:0 auto;padding:22px 18px calc(142px + env(safe-area-inset-bottom, 0px));display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* `.rise` is ENTRANCE ONLY. A looping animation on an element that also carries it silently
+   replaces the entrance and strands the element at opacity:0. Loops go on inner elements. */
+.rise{opacity:0;animation:rise .55s cubic-bezier(.22,.9,.3,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.r1{animation-delay:.04s}.r2{animation-delay:.1s}.r3{animation-delay:.17s}.r4{animation-delay:.24s}
+.r5{animation-delay:.31s}.r6{animation-delay:.38s}.r7{animation-delay:.45s}.r8{animation-delay:.52s}
+.r9{animation-delay:.59s}.r10{animation-delay:.66s}.r11{animation-delay:.73s}
+
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:15px}
+.brand i{width:50px;height:50px;border-radius:14px;display:block;background-size:cover;background-position:center;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.brand .bx{color:rgba(255,255,255,.4);font-size:19px;font-weight:500;font-style:normal}
+
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(224,30,43,.14);border:1px solid rgba(255,111,120,.4);color:var(--red-lt);font-size:11.5px;font-weight:800;letter-spacing:.09em;padding:7px 14px;border-radius:999px;margin-bottom:15px}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--red-tn);box-shadow:0 0 8px var(--red-tn);animation:blip 1.8s ease-in-out infinite;flex:none}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.3}}
+
+h1{font-size:clamp(1.55rem,6.4vw,2.05rem);font-weight:850;line-height:1.14;letter-spacing:-.02em;margin-bottom:9px;text-wrap:balance}
+h1 .grad{background:linear-gradient(180deg,var(--red-lt) 0%,var(--red) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--mut);font-size:14px;line-height:1.55;max-width:352px;margin-bottom:22px}
+.sub b{color:var(--red-tn);font-weight:700}
+
+/* ---- THE DIFFERENTIATOR: the pass that is already worth something -------------------------
+   Every rewards lander in the folder starts the user at $0 and sells how much they could reach.
+   This one starts them at $10 and shows the pass switching on: the two things the offer actually
+   needs after the install — pick 21+, finish 2 tasks — are the things that light it up, so the
+   required steps read as unlocking money rather than as hurdles.
+
+   No per-game dollar figures anywhere on the page. The only numbers are the ones the other
+   landers in this folder already run. */
+.cash{width:100%;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line);border-radius:20px;padding:18px 16px 17px;margin-bottom:18px}
+.cash-k{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.14em;color:var(--red-lt);background:rgba(224,30,43,.14);border:1px solid rgba(255,111,120,.34);padding:5px 11px;border-radius:999px;margin-bottom:11px}
+.cash h2{font-size:19px;font-weight:850;letter-spacing:-.01em;margin-bottom:5px}
+.cash > p{font-size:12.5px;color:var(--mut);line-height:1.5;max-width:330px;margin:0 auto 16px}
+.cash > p b{color:var(--ink);font-weight:700}
+
+.bal{font-size:38px;font-weight:900;letter-spacing:-.035em;line-height:1;color:var(--red-lt);font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(224,30,43,.45);margin-bottom:13px}
+
+.track{position:relative;height:12px;border-radius:99px;background:#221f3a;overflow:hidden;margin-bottom:7px}
+.track .fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:99px;background:linear-gradient(90deg,var(--red-dp),var(--red-tn));transition:width .42s cubic-bezier(.3,.8,.4,1)}
+.track .mark{position:absolute;top:-3px;bottom:-3px;left:62%;width:2px;border-radius:2px;background:rgba(255,255,255,.42)}
+.scale{position:relative;height:15px;margin-bottom:14px}
+.scale .lab{position:absolute;left:62%;transform:translateX(-50%);font-size:10px;font-weight:900;letter-spacing:.08em;color:var(--mut-2);white-space:nowrap;transition:color .3s ease}
+.scale .lab.hit{color:var(--red-lt)}
+
+.srcs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.srcs > div{background:var(--sunk);border:1px solid var(--line-2);border-radius:11px;padding:9px 4px 8px;transition:border-color .3s ease,background .3s ease}
+.srcs > div.on{border-color:rgba(255,111,120,.5);background:rgba(224,30,43,.1)}
+.srcs svg{width:19px;height:19px;color:var(--mut-2);display:block;margin:0 auto 5px;transition:color .3s ease}
+.srcs > div.on svg{color:var(--red-tn)}
+.srcs b{display:block;font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--mut-2);transition:color .3s ease;line-height:1.25}
+.srcs > div.on b{color:var(--ink)}
+
+.cashpill{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:12px;font-weight:900;letter-spacing:.06em;color:#fff;background:linear-gradient(180deg,var(--red),var(--red-dp));padding:9px 16px;border-radius:999px;opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+.cashpill.show{opacity:1;transform:translateY(0)}
+.cashpill svg{width:14px;height:14px}
+
+/* ---- qualify cards ------------------------------------------------------------------------- */
+.sec-h{width:100%;text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.2em;color:var(--mut-2);margin-bottom:11px}
+.qual{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:18px}
+.qi{position:relative;display:flex;align-items:center;gap:13px;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line-2);border-radius:16px;padding:14px 14px 14px 16px;text-align:left;overflow:hidden;cursor:pointer;transition:border-color .2s ease,transform .12s ease}
+.qi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line)}
+.qi:active{transform:scale(.99)}
+.qi.on{border-color:rgba(255,111,120,.45)}
+.qi.on::before{background:var(--red)}
+.qi-ic{width:44px;height:44px;border-radius:12px;background:rgba(224,30,43,.13);border:1px solid rgba(255,111,120,.26);display:flex;align-items:center;justify-content:center;flex:none}
+.qi-ic svg{width:23px;height:23px;color:var(--red-tn)}
+.qi-tx{flex:1;min-width:0}
+.qi-tx h3{font-size:15.5px;font-weight:800;letter-spacing:-.01em;margin-bottom:2px}
+.qi-tx p{font-size:11.5px;color:var(--mut-2);line-height:1.35}
+.qi-bg{flex:none;font-size:11px;font-weight:900;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--line-2);color:var(--mut);transition:all .2s ease}
+.qi.on .qi-bg{background:rgba(224,30,43,.17);border-color:rgba(255,111,120,.4);color:var(--red-lt)}
+
+/* ---- slider -------------------------------------------------------------------------------- */
+.earn{width:100%;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line-2);border-radius:20px;padding:18px 16px 16px;margin-bottom:20px}
+.earn-k{font-size:10.5px;font-weight:800;letter-spacing:.18em;color:var(--mut-2);margin-bottom:6px}
+.earn-amt{font-size:42px;font-weight:900;letter-spacing:-.035em;line-height:1;color:var(--red-lt);font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(224,30,43,.4)}
+.earn-per{font-size:12px;font-weight:700;color:var(--mut);margin-top:5px}
+.earn-hrs{font-size:12.5px;color:var(--mut);margin-top:12px}
+.earn-hrs b{color:var(--ink);font-weight:800}
+.sld{margin-top:11px;padding:0 2px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--red) 0%,var(--red) var(--pct,14%),#221f3a var(--pct,14%),#221f3a 100%);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid var(--red);box-shadow:0 2px 10px rgba(0,0,0,.55);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--red);box-shadow:0 2px 10px rgba(0,0,0,.55);cursor:pointer}
+.sld-ends{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;color:var(--mut-2);margin-top:7px;letter-spacing:.04em}
+
+/* ---- ways to earn --------------------------------------------------------------------------- */
+.way{width:100%;background:linear-gradient(180deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--line-2);border-radius:16px;padding:14px;margin-bottom:10px;text-align:left}
+.way-top{display:flex;align-items:center;gap:12px}
+.way-ic{width:44px;height:44px;border-radius:12px;background:rgba(224,30,43,.12);border:1px solid rgba(255,111,120,.24);display:flex;align-items:center;justify-content:center;flex:none}
+.way-ic svg{width:22px;height:22px;color:var(--red-tn)}
+.way-in{flex:1;min-width:0}
+.way-in h4{font-size:15px;font-weight:850;letter-spacing:-.01em}
+.way-in p{font-size:11.5px;color:var(--mut-2);line-height:1.35}
+.way-pz{flex:none;text-align:right;line-height:1.1}
+.way-pz b{display:block;font-size:13.5px;font-weight:900;color:var(--red-lt)}
+.way-pz span{display:block;font-size:9.5px;font-weight:650;color:var(--mut-2);margin-top:2px}
+
+/* games row — real store artwork, no invented per-game rates */
+.games{display:flex;gap:9px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line-2)}
+.games > div{flex:1;text-align:center}
+.games i{width:100%;max-width:52px;aspect-ratio:1;border-radius:12px;display:block;margin:0 auto 6px;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,.1)}
+.games b{display:block;font-size:10px;font-weight:700;color:var(--mut-2);line-height:1.2}
+
+/* ---- payout proof ---------------------------------------------------------------------------
+   Same rows, names, cities, methods and amounts the current Testerup lander already runs. */
+.pay{width:100%;background:var(--card-2);border:1px solid var(--line-2);border-radius:18px;padding:6px 14px;margin-bottom:18px;overflow:hidden;position:relative;height:166px}
+.pay::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40px;pointer-events:none;background:linear-gradient(180deg,rgba(20,19,39,0),var(--card-2))}
+.pay-rail{animation:rail 22s linear infinite}
+@keyframes rail{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.pr{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line-2);text-align:left}
+.pr-ic{width:34px;height:34px;border-radius:10px;background:rgba(224,30,43,.12);border:1px solid rgba(255,111,120,.22);color:var(--red-tn);display:flex;align-items:center;justify-content:center;flex:none;font-size:13px;font-weight:900}
+.pr-tx{flex:1;min-width:0}
+.pr-tx b{display:block;font-size:12.5px;font-weight:800;letter-spacing:-.01em}
+.pr-tx span{display:block;font-size:10.5px;color:var(--mut-2);line-height:1.3}
+.pr-amt{flex:none;font-size:14px;font-weight:900;color:var(--red-lt);font-variant-numeric:tabular-nums}
+
+/* ---- how it works ---------------------------------------------------------------------------- */
+.how{width:100%;background:var(--card-2);border:1px solid var(--line-2);border-radius:18px;padding:18px 16px;margin-bottom:18px;text-align:left}
+.how > h3{text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.2em;color:var(--mut-2);margin-bottom:17px}
+.stp{position:relative;display:flex;gap:13px;padding-bottom:17px}
+.stp:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:1px;width:2px;background:var(--line-2)}
+.stp:last-child{padding-bottom:0}
+.stp .n{width:27px;height:27px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:900;color:#fff;flex:none;position:relative;z-index:1}
+.stp h4{font-size:13.5px;font-weight:800;margin-bottom:3px}
+.stp p{font-size:12px;color:var(--mut);line-height:1.45}
+.stp p b{color:var(--red-tn);font-weight:700}
+
+.trust{display:flex;width:100%;background:var(--sunk);border:1px solid var(--line-2);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.trust > div{flex:1;padding:13px 6px;text-align:center}
+.trust > div + div{border-left:1px solid var(--line-2)}
+.trust b{display:block;font-size:15px;font-weight:900;color:var(--red-lt);letter-spacing:-.01em}
+.trust span{display:block;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--mut-2);margin-top:3px}
+
+/* ---- sticky CTA ------------------------------------------------------------------------------
+   The page's one CTA, pinned so it is tappable from anywhere. The glow loop lives on `.cta` and
+   the entrance on `.ctabar` — never both on one element. The label is WHITE: this accent is too
+   dark for a dark label at any point on the gradient. */
+.ctabar{
+  position:fixed;left:0;right:0;bottom:0;z-index:15;
+  padding:16px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+  background:linear-gradient(180deg,rgba(10,9,20,0) 0%,rgba(10,9,20,.86) 32%,var(--bg) 64%);
+  -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+  animation:barUp .5s cubic-bezier(.22,.9,.3,1) .62s both;
+}
+.ctabar > div{max-width:434px;margin:0 auto}
+@keyframes barUp{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:translateY(0)}}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;font-family:inherit;padding:19px 24px;border:none;border-radius:16px;cursor:pointer;font-size:16px;font-weight:900;letter-spacing:.05em;color:#fff;background:linear-gradient(180deg,var(--red) 0%,var(--red-dp) 100%);animation:ctaGlow 2.4s ease-in-out infinite;transition:transform .13s ease}
+.cta:active{transform:scale(.985)}
+.cta svg{width:19px;height:19px;flex:none}
+@keyframes ctaGlow{0%,100%{box-shadow:0 0 26px rgba(224,30,43,.5),0 6px 18px rgba(0,0,0,.45)}50%{box-shadow:0 0 54px rgba(224,30,43,.72),0 6px 18px rgba(0,0,0,.45)}}
+.reassure{font-size:11px;color:var(--mut-2);line-height:1.4;margin:9px auto 0;text-align:center}
+.reassure b{color:var(--red-tn);font-weight:800;font-variant-numeric:tabular-nums}
+
+.note{font-size:11.5px;color:rgba(255,255,255,.62);line-height:1.65;margin-top:20px;text-align:center}
+.foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line-2);width:100%;font-size:10.5px;color:var(--mut-2);line-height:1.5}
+
+/* ---- pre-CTA modal --------------------------------------------------------------------------- */
+.ov{position:fixed;inset:0;z-index:20;background:rgba(4,4,10,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.ov.open{display:flex;animation:fadeIn .22s ease forwards}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.md{position:relative;width:100%;max-width:392px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 22px 22px;text-align:center;box-shadow:0 22px 60px rgba(0,0,0,.65);animation:pop .3s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.md-ic{width:60px;height:60px;border-radius:17px;background:rgba(224,30,43,.14);border:1px solid rgba(255,111,120,.34);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.md-ic svg{width:30px;height:30px;color:var(--red-lt)}
+.md h2{font-size:20px;font-weight:850;letter-spacing:-.01em;margin-bottom:9px}
+.md .lead{font-size:13.5px;color:var(--mut);line-height:1.5;margin-bottom:18px}
+.md-note{display:flex;gap:11px;align-items:flex-start;text-align:left;background:var(--sunk);border:1px solid var(--line-2);border-radius:13px;padding:13px 14px;margin-bottom:12px}
+.md-note .n{width:23px;height:23px;border-radius:50%;background:var(--red);color:#fff;font-size:11.5px;font-weight:900;display:flex;align-items:center;justify-content:center;flex:none}
+.md-note p{font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.45}
+.md-note p b{color:var(--red-lt);font-weight:800}
+.md .go{display:block;width:100%;font-family:inherit;margin-top:18px;padding:18px;border:none;border-radius:14px;font-size:15px;font-weight:900;letter-spacing:.04em;cursor:pointer;color:#fff;background:linear-gradient(180deg,var(--red),var(--red-dp));box-shadow:0 0 26px rgba(224,30,43,.46);transition:transform .13s ease}
+.md .go:active{transform:scale(.985)}
+.md .x{position:absolute;top:13px;right:13px;width:29px;height:29px;border-radius:50%;border:none;background:rgba(255,255,255,.07);color:var(--mut);font-size:18px;line-height:1;cursor:pointer;font-family:inherit}
+
+@media (max-width:360px){
+  .wrap{padding:18px 14px calc(138px + env(safe-area-inset-bottom, 0px))}
+  .ctabar{padding:14px 14px calc(12px + env(safe-area-inset-bottom, 0px))}
+  .earn-amt{font-size:36px}
+  .bal{font-size:33px}
+  .brand i{width:44px;height:44px}
+  .srcs{gap:5px}
+  .srcs b{font-size:8.5px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .rise{opacity:1;animation:none;transform:none}
+  .ctabar{animation:none;opacity:1;transform:none}
+  body::before,body::after{animation:none;opacity:.6}
+  .cta{animation:none;box-shadow:0 0 26px rgba(224,30,43,.5),0 6px 18px rgba(0,0,0,.45)}
+  .pill .dot{animation:none}
+  .pay-rail{animation:none}
+  .track .fill{transition:none}
+  .cashpill{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="brand rise r1" aria-hidden="true">
+    <i style="background-image:url(data:image/jpeg;base64,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)"></i>
+    <em class="bx">&times;</em>
+    <i style="background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAMAAADxPgR5AAAAwFBMVEX+/v4iHTPaHRYaFy0lIDfbIhwRDCXv6OhvbXsvLEHUODHTCgRGQlXXQTvV09bsq6pRTmC4t72UGxTx2triHhcLCBiyIiI5NEmzGhanpq1PGyOZIRm9vcPTtbRYVWSOCARaGBmbmaLWSEXGxcrkIBdoHSLZaWLddHBFJjNDPlNjIiJ3dYKTJCGZYGWPjZiTkZq5IxyycHDOKCLbVk/d3eDnuLcWICoyDhJiCg99IB9gXW11cn6eOjjCjYsAAAAAAAD/esP8AAAAQHRSTlP//////////////////////////////////////////////////////////////////////////////////wAAUV9MNgAAAoxJREFUeNrt2Gl3ojAUgGGSC5G6taIWXBDUOtN9nc4+//9vTRCtCaInCZgPPfftN085jwESCY6DYRiGYRiGYRj2KWsoVofVfZrdhGeKhW1/VE0dtYEx0Igx1+8ac8ubIRDXdYly/J+BwZ2h9wigg32ghIVLE88fEgNuTQL0TDxDLhe1x/hUwctEonnrdIFUyoXrl1hnhrSZW00k8DO5f/jXV/R6lT0C5D4IkuDvS6wCzmTQVUwWVxNekEQK3jf5CvL1Qyk+b8WjxgFvQt9UVjRpgCz01Zq5TPqiGUhpRwH8I4IwV/9V+S1901/c85TAC+E4NteZTm3hrMIqooqgcBicac1f8faGFVUHdxP4Qm/BEOfF88AmCOTyymCExBTkHh+fPXDr2QI/PEvg5vpZA3fjswMCibbjswIK59MKKJ5PG2DBszBC2Ts9GMkeB5snBRdckMHWwhBsnJf0XvgB7rS8vQH2NcHZ5rM4apX0VfaomSeB4RZMnr39JHFh6kmPGNtdQpxMIrqXIDbMPccXwTDfJbwnk6B4C67FL5uDyq6f6sP+XABdcO9GvIf0Nk0DelAsG19DY70QY8P8MZe3KhPfDtyfGpuZtvQMvXuOBxh7ZWPsV/Skcyo+vQOB2xJx/VfFc5wQykFeSkuq6hV2F6JIIPU8ejx9T54Z8raPb4u8Qe3e4T1wNsYxHdTuOY3wyFk9NkZDL9sGH3hRk4v1e9mrKEZK3kUdHWMVj2+9fcJXmP0tPv/k+/XrVe1ediXns3Bviz9c9yOiXu1evrIup1k9qWk8jZvV57te/YJ4aq8ont6TRRueKNrxdqItbyva83LRa3WseWuR2vS4+Nq06nHRsodhGIZhGIZ9xv4DdnU3OPB6uoUAAAAASUVORK5CYII=)"></i>
+  </div>
+
+  <div class="pill rise r1"><span class="dot"></span><b id="liveN">36,236</b>&nbsp;TESTING NOW</div>
+
+  <h1 class="rise r2">Block Blast players get <span class="grad">paid to test</span></h1>
+  <p class="sub rise r2">Testerup pays real cash to test new games. Your pass starts with a <b>$10 bonus</b> on it.</p>
+
+  <!-- THE DIFFERENTIATOR -->
+  <section class="cash rise r3">
+    <span class="cash-k">BLOCK BLAST COLLAB</span>
+    <h2>Your $10 Tester Pass</h2>
+    <p>Most apps start you at <b>$0</b>. Two quick steps switch your pass on with <b>$10</b> already there.</p>
+
+    <div class="bal" id="bal">$0.00</div>
+
+    <div class="track" aria-hidden="true">
+      <div class="fill" id="fill"></div>
+      <div class="mark"></div>
+    </div>
+    <div class="scale" aria-hidden="true"><span class="lab" id="lab">$10 &middot; PASS ON</span></div>
+
+    <div class="srcs" id="srcs" aria-hidden="true">
+      <div>
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4.5 20a7.5 7.5 0 0115 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <b>Sign up</b>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 13.5l2.5 2.5 4.5-5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b>Pick 21+</b>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.6" stroke="currentColor" stroke-width="2"/><rect x="13" y="4" width="7" height="7" rx="1.6" stroke="currentColor" stroke-width="2"/><rect x="4" y="13" width="7" height="7" rx="1.6" stroke="currentColor" stroke-width="2"/><path d="M14 16.5l2 2 4-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b>2 tasks</b>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.4 5.6 6.1.5-4.6 4 1.4 5.9L12 15.9 6.7 19l1.4-5.9-4.6-4 6.1-.5L12 3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <b>Test games</b>
+      </div>
+    </div>
+
+    <div class="cashpill" id="cashpill">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      TESTER PASS ON
+    </div>
+  </section>
+
+  <!-- QUALIFY -->
+  <div class="sec-h rise r4">WHAT DO YOU WANT TO TEST?</div>
+  <div class="qual rise r4" id="qual">
+    <div class="qi on" data-mode="puzzle" role="button" tabindex="0">
+      <div class="qi-ic">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.6" stroke="currentColor" stroke-width="2"/><rect x="13" y="4" width="7" height="7" rx="1.6" stroke="currentColor" stroke-width="2"/><rect x="4" y="13" width="7" height="7" rx="1.6" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="7" height="7" rx="1.6" stroke="currentColor" stroke-width="2"/></svg>
+      </div>
+      <div class="qi-tx"><h3>Puzzle &amp; merge</h3><p>Match, merge and block games</p></div>
+      <div class="qi-bg">Earn $$$</div>
+    </div>
+    <div class="qi" data-mode="arcade" role="button" tabindex="0">
+      <div class="qi-ic">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 11h3M8.5 9.5v3M15 11.5h.01M17.5 10h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M17.5 6.5h-11A4.5 4.5 0 002 11v2.5A4.5 4.5 0 006.5 18c1.2 0 1.9-.5 2.7-1.2.6-.5 1.2-.8 2.8-.8s2.2.3 2.8.8c.8.7 1.5 1.2 2.7 1.2a4.5 4.5 0 004.5-4.5V11a4.5 4.5 0 00-4.5-4.5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="qi-tx"><h3>Arcade &amp; board</h3><p>Dice, boards and quick rounds</p></div>
+      <div class="qi-bg">Earn $$$</div>
+    </div>
+  </div>
+
+  <!-- SLIDER -->
+  <div class="earn rise r5">
+    <div class="earn-k">YOU COULD EARN</div>
+    <div class="earn-amt" id="earnAmt">$200</div>
+    <div class="earn-per">per week</div>
+    <div class="earn-hrs"><b id="earnHrs">2</b><span id="earnLbl"> hrs of puzzle games a day</span></div>
+    <div class="sld">
+      <input type="range" id="earnSlider" min="1" max="8" step="1" value="2" aria-label="Hours per day" style="--pct:14.28%">
+      <div class="sld-ends"><span>1 HR</span><span>8 HRS</span></div>
+    </div>
+  </div>
+
+  <!-- WAYS TO EARN -->
+  <div class="sec-h rise r6">WAYS TO EARN</div>
+
+  <div class="way rise r6">
+    <div class="way-top">
+      <div class="way-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.4 5.6 6.1.5-4.6 4 1.4 5.9L12 15.9 6.7 19l1.4-5.9-4.6-4 6.1-.5L12 3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+      <div class="way-in"><h4>Hit goals in games</h4><p>Reach a level, get paid for it</p></div>
+      <div class="way-pz"><b>Varies</b><span>per game</span></div>
+    </div>
+    <div class="games">
+      <div><i style="background-image:url(data:image/jpeg;base64,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)"></i><b>Match Masters</b></div>
+      <div><i style="background-image:url(data:image/jpeg;base64,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)"></i><b>Merge Dragons</b></div>
+      <div><i style="background-image:url(data:image/jpeg;base64,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)"></i><b>Dice Dreams</b></div>
+    </div>
+  </div>
+
+  <div class="way rise r7">
+    <div class="way-top">
+      <div class="way-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="way-in"><h4>Quick tasks &amp; surveys</h4><p>Short ones that top up your balance</p></div>
+      <div class="way-pz"><b>Daily</b><span>new ones</span></div>
+    </div>
+  </div>
+
+  <div class="way rise r7">
+    <div class="way-top">
+      <div class="way-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/><path d="M7 14.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="way-in"><h4>Take your cash out</h4><p>PayPal, Cash App or Venmo</p></div>
+      <div class="way-pz"><b>No</b><span>fees</span></div>
+    </div>
+  </div>
+
+  <!-- PAYOUT PROOF -->
+  <div class="sec-h rise r8">REAL PAYOUTS THIS HOUR</div>
+  <div class="pay rise r8">
+    <div class="pay-rail" id="payRail"></div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how rise r9">
+    <h3>HOW IT WORKS</h3>
+    <div class="stp"><div class="n">1</div><div><h4>Make your free account</h4><p>Sign up and <b>select 21+</b>. Tester rewards only unlock for 21+ members.</p></div></div>
+    <div class="stp"><div class="n">2</div><div><h4>Finish 2 quick tasks</h4><p>A short task or survey. This <b>activates</b> testing and the high-paying games.</p></div></div>
+    <div class="stp"><div class="n">3</div><div><h4>Test games and cash out</h4><p>Play, hit the goals, then withdraw by <b>PayPal, Cash App or Venmo</b>.</p></div></div>
+  </div>
+
+  <div class="trust rise r10">
+    <div><b>2.5M+</b><span>TESTERS</span></div>
+    <div><b>4.3&#9733;</b><span>eKOMI</span></div>
+    <div><b>$10</b><span>SIGN-UP BONUS</span></div>
+  </div>
+
+  <p class="note rise r11">Earnings depend on which games and tasks are available to you and how many you finish. The figures above are an estimate, not a guarantee. This page is not affiliated with, sponsored or endorsed by any game publisher named on it, or by TikTok. Individual results vary.</p>
+
+  <div class="foot rise r11">&copy; 2026 &middot; Game and reward availability varies by region and device.</div>
+</div>
+
+<!-- STICKY CTA — fixed to the bottom, so it is reachable from anywhere on the page. -->
+<div class="ctabar">
+  <div>
+    <button class="cta" id="ctaBtn" type="button">
+      CLAIM $10 FREE
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="reassure">Free to join &bull; Bonus ends in <b id="cd">16:58</b></p>
+  </div>
+</div>
+
+<!-- PRE-CTA MODAL -->
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ovT">
+  <div class="md">
+    <button class="x" id="ovX" type="button" aria-label="Close">&times;</button>
+    <div class="md-ic">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M14.5 9.2c-.5-.8-1.4-1.2-2.5-1.2-1.5 0-2.5.8-2.5 1.9 0 1 .8 1.5 2.5 1.9 1.7.4 2.6.9 2.6 2 0 1.1-1.1 1.9-2.6 1.9-1.2 0-2.1-.4-2.6-1.3M12 6.5v11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2 id="ovT">Before you go</h2>
+    <p class="lead">Two things to do on the next screen so your $10 lands and your pass switches on.</p>
+    <div class="md-note"><div class="n">1</div><p>Pick <b>21+</b> when you sign up. Tester rewards only unlock for 21+ members.</p></div>
+    <div class="md-note"><div class="n">2</div><p>Finish <b>2 quick tasks</b> to activate testing and the high-paying games.</p></div>
+    <button class="go" id="goBtn" type="button">GOT IT &mdash; START EARNING $10</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= the offer =================
+     MANUAL funnel: the network link lives here and this page appends the sub itself, because
+     there is no cloaker in front to do it.
+
+     The base has NO query string, so the sub is appended with "?" — unlike the Monetise links,
+     which already end in their sub param and must only be concatenated onto. Getting that wrong
+     in either direction ships the param twice, and the network reads the empty first one while
+     the link still looks perfectly healthy.
+
+     This destination is Everflow (Prescott), which reads sub1. Affiliate segment ZKTQ1K is
+     Trae's; 2JSKXKP is the Testerup offer. Host pcbdfv7trk.com is one of Prescott's two tracker
+     domains — the Spartis build of this same offer sits on phef6trk.com, which is expected and
+     not a typo. */
+  var OUT = 'https://www.pcbdfv7trk.com/ZKTQ1K/2JSKXKP/';
+
+  var QP = new URLSearchParams(window.location.search);
+
+  /* sub1 leads: it is this network's own param, so it is the name the ad URL will carry. The
+     rest of the chain stays wide because a manual ad URL is written by hand. */
+  function subid() {
+    return QP.get('sub1') || QP.get('campid') || QP.get('s1') ||
+           QP.get('s2') || QP.get('cid') || QP.get('c') || '';
+  }
+  function offerUrl() {
+    var s = subid();
+    return s ? OUT + '?sub1=' + encodeURIComponent(s) : OUT;
+  }
+
+  /* ================= first-party beacon ================= */
+  var TRACK = 'https://px.trendhavenn.com/t', PAGE = 'testerup-us-pres-man', sent = {};
+  function px(ev) {
+    if (sent[ev]) return; sent[ev] = 1;
+    try {
+      var u = TRACK + '?e=' + encodeURIComponent(ev) + '&id=' + encodeURIComponent(subid()) + '&p=' + PAGE;
+      if (navigator.sendBeacon) navigator.sendBeacon(u); else (new Image()).src = u + '&_=' + Date.now();
+    } catch (e) {}
+  }
+  px('load');
+  ['touchstart', 'pointerdown', 'scroll', 'mousemove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { px('human'); }, { once: true, passive: true });
+  });
+
+  /* ================= the tester-pass loop =================
+     The two steps the offer actually needs after the install light up in turn and the balance
+     climbs past the $10 line on screen, so the requirements read as the thing that unlocks the
+     money rather than as hurdles in front of it. */
+  (function () {
+    var bal = document.getElementById('bal');
+    var fill = document.getElementById('fill');
+    var lab = document.getElementById('lab');
+    var pill = document.getElementById('cashpill');
+    var srcs = document.getElementById('srcs');
+    if (!bal || !fill || !lab || !pill || !srcs) return;
+    var cards = Array.prototype.slice.call(srcs.children);
+
+    /* END maps to 100% of the track, so the $10 goal lands at 10/13 = 77%. The CSS mark and its
+       label sit at 62%, which would not line up — so the mark is positioned from here instead, in
+       one place, rather than being guessed twice. */
+    var GOAL = 10.00, END = 13.00;
+    var MARK_PCT = (GOAL / END) * 100;
+    document.querySelector('.track .mark').style.left = MARK_PCT.toFixed(1) + '%';
+    lab.style.left = MARK_PCT.toFixed(1) + '%';
+
+    function paint(v) {
+      bal.textContent = '$' + v.toFixed(2);
+      fill.style.width = Math.min(100, (v / END) * 100).toFixed(1) + '%';
+      var hit = v >= GOAL - 0.0001;
+      lab.classList.toggle('hit', hit);
+      pill.classList.toggle('show', hit);
+    }
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      cards.forEach(function (c) { c.classList.add('on'); });
+      paint(END);
+      return;
+    }
+
+    var STEPS = [3.00, 3.50, 3.50, 3.00];   /* four steps, crossing the $10 line on the third */
+    var timers = [];
+    function at(ms, fn) { timers.push(window.setTimeout(fn, ms)); }
+
+    function ramp(from, to, ms) {
+      var n = Math.max(1, Math.round(ms / 55));
+      for (var i = 1; i <= n; i++) {
+        (function (k) { at(k * 55, function () { paint(from + (to - from) * (k / n)); }); })(i);
+      }
+    }
+
+    function cycle() {
+      timers.forEach(clearTimeout); timers = [];
+      cards.forEach(function (c) { c.classList.remove('on'); });
+      paint(0);
+
+      var acc = 0, t = 620;
+      STEPS.forEach(function (amt, i) {
+        var from = acc, to = acc + amt;
+        acc = to;
+        at(t, function () {
+          cards[i].classList.add('on');
+          ramp(from, to, 420);
+        });
+        t += 820;
+      });
+      at(t + 1500, cycle);
+    }
+    cycle();
+  })();
+
+  /* ================= live counter ================= */
+  (function () {
+    var el = document.getElementById('liveN');
+    if (!el) return;
+    var n = 36236;
+    window.setInterval(function () {
+      n += Math.floor(Math.random() * 9) - 3;
+      if (n < 36050) n = 36050;
+      if (n > 36480) n = 36480;
+      el.textContent = n.toLocaleString('en-US');
+    }, 2600);
+  })();
+
+  /* ================= countdown ================= */
+  (function () {
+    var el = document.getElementById('cd');
+    if (!el) return;
+    var left = 16 * 60 + 58;
+    window.setInterval(function () {
+      if (left > 0) left--;
+      var m = Math.floor(left / 60), s = left % 60;
+      el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
+  })();
+
+  /* ================= payout proof =================
+     Same rows the current Testerup lander runs. Built in JS and printed twice so the rail can
+     loop seamlessly without shipping the markup twice by hand. */
+  (function () {
+    var rail = document.getElementById('payRail');
+    if (!rail) return;
+    var ROWS = [
+      ['Cash App', 'Sarah',  'Miami, FL',     '11 min ago', 124],
+      ['PayPal',   'Mike',   'Austin, TX',    '27 min ago',  87],
+      ['Zelle',    'Tyler',  'Denver, CO',    '4 min ago',  203],
+      ['Cash App', 'Emma',   'Phoenix, AZ',   '19 min ago', 109],
+      ['ACH',      'Alex',   'Charlotte, NC', '8 min ago',  312],
+      ['Venmo',    'Jordan', 'Seattle, WA',   '33 min ago', 142]
+    ];
+    function row(r) {
+      var d = document.createElement('div');
+      d.className = 'pr';
+      var ic = document.createElement('div');
+      ic.className = 'pr-ic';
+      ic.textContent = r[1].charAt(0);
+      var tx = document.createElement('div');
+      tx.className = 'pr-tx';
+      var b = document.createElement('b');
+      b.textContent = r[0] + ' paid';
+      var s = document.createElement('span');
+      s.textContent = r[1] + ' · ' + r[2] + ' · ' + r[3];
+      tx.appendChild(b); tx.appendChild(s);
+      var amt = document.createElement('div');
+      amt.className = 'pr-amt';
+      amt.textContent = '$' + r[4];
+      d.appendChild(ic); d.appendChild(tx); d.appendChild(amt);
+      return d;
+    }
+    for (var pass = 0; pass < 2; pass++) {
+      for (var i = 0; i < ROWS.length; i++) rail.appendChild(row(ROWS[i]));
+    }
+  })();
+
+  /* ================= qualify cards + slider =================
+     Pinned to the $200-$500+ weekly range the current Testerup lander already states: the
+     default 2 hrs reads exactly $200 and the 8 hr end lands at $560, honouring the "+". The
+     quadratic term is NEGATIVE on purpose — earnings flatten as hours climb, which is both
+     truer and avoids the slider dead-ending on a cap halfway along its travel. */
+  (function () {
+    var qual = document.getElementById('qual');
+    var slider = document.getElementById('earnSlider');
+    var amt = document.getElementById('earnAmt');
+    var hrsEl = document.getElementById('earnHrs');
+    var lblEl = document.getElementById('earnLbl');
+    if (!qual || !slider || !amt) return;
+
+    var MODE = 'puzzle';
+    var CURVE = {
+      puzzle: { cap: 650, a: 110, b: -5.0, label: ' hrs of puzzle games a day' },
+      arcade: { cap: 650, a: 118, b: -5.2, label: ' hrs of arcade games a day' }
+    };
+
+    function paint() {
+      var h = Number(slider.value) || 1;
+      var c = CURVE[MODE];
+      var v = Math.round(Math.min(c.cap, c.a * h + c.b * h * h) / 5) * 5;
+      amt.textContent = '$' + v;
+      hrsEl.textContent = String(h);
+      lblEl.textContent = c.label;
+      slider.style.setProperty('--pct', (((h - 1) / 7) * 100).toFixed(2) + '%');
+    }
+    slider.addEventListener('input', paint);
+
+    function pick(el) {
+      Array.prototype.forEach.call(qual.querySelectorAll('.qi'), function (q) {
+        q.classList.toggle('on', q === el);
+      });
+      MODE = el.getAttribute('data-mode') || 'puzzle';
+      paint();
+    }
+    Array.prototype.forEach.call(qual.querySelectorAll('.qi'), function (q) {
+      q.addEventListener('click', function () { pick(q); });
+      q.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(q); }
+      });
+    });
+    paint();
+  })();
+
+  /* ================= outbound =================
+     The CTA opens the modal; the modal's button is the ONLY thing that navigates, and it opens a
+     new tab from the tap with a same-tab fallback so the page survives underneath. */
+  (function () {
+    var ov = document.getElementById('ov');
+    var fired = false;
+
+    function open()  { ov.classList.add('open'); px('claim'); }
+    function close() { ov.classList.remove('open'); }
+
+    document.getElementById('ctaBtn').addEventListener('click', open);
+    document.getElementById('ovX').addEventListener('click', close);
+    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    document.getElementById('goBtn').addEventListener('click', function () {
+      if (fired) return;
+      fired = true;
+      px('continue');
+      var url = offerUrl(), w = null;
+      try { w = window.open(url, '_blank'); } catch (e) {}
+      if (!w || w.closed || typeof w.closed === 'undefined') { window.location.href = url; }
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>

@@ -224,9 +224,11 @@ h1 .hl{color:var(--red)}
     var enc  = encodeURIComponent(dest);
     var p = plat();
 
-    /* Desktop has no in-app webview to escape and resolves none of these schemes. Only reached
-       when the UA is not the app's — see plat(). */
-    if (p === 'other') { window.location.href = dest; return; }
+    /* NO PLATFORM GATE. Removed 2026-10-06: a desktop early-return meant any visitor whose UA
+       was not iOS, Android or a named app webview tapped Continue and went straight through with
+       no breakout attempted at all. The reference prelander has no such branch — it runs the
+       ladder for everyone and lets the rescue timer below catch whoever it does not fit. A scheme
+       jump is harmless in a real browser (it just opens the URL), so there is nothing to gate. */
 
     /* ---- the ladder ------------------------------------------------------------------------
        One scheme is not enough: a webview that refuses an unknown scheme drops the navigation on

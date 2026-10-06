@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- ============================================================================================
-     SWAGBUCKS · US · PRESCOTT (Rahul's segment) — PRELANDER (manual launch)
+     SWAGBUCKS · US · PRESCOTT (partner RAH's segment) — PRELANDER (manual launch)
      /Manual/swagbucks/swagbucks-us-rah-pres-man-prelander.html
        ->  trendhavenn.com/swagbucks-us-rah-pres-man-prelander.html
      THIS is the URL that goes in the ad.
@@ -224,9 +224,11 @@ h1 .hl{color:var(--blue)}
     var enc  = encodeURIComponent(dest);
     var p = plat();
 
-    /* Desktop has no in-app webview to escape and resolves none of these schemes. Only reached
-       when the UA is not the app's — see plat(). */
-    if (p === 'other') { window.location.href = dest; return; }
+    /* NO PLATFORM GATE. Removed 2026-10-06: a desktop early-return meant any visitor whose UA
+       was not iOS, Android or a named app webview tapped the CTA and went straight through with
+       no breakout attempted at all. The reference prelander has no such branch — it runs the
+       ladder for everyone and lets the rescue timer below catch whoever it does not fit. A scheme
+       jump is harmless in a real browser (it just opens the URL), so there is nothing to gate. */
 
     /* ---- the ladder ------------------------------------------------------------------------
        One scheme is not enough: a webview that refuses an unknown scheme drops the navigation on

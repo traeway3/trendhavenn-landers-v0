@@ -259,8 +259,11 @@
     var bare = dest.replace(/^https?:\/\//, '');
     var p = plat();
 
-    /* Desktop has no in-app webview to escape and cannot resolve either scheme. */
-    if (p === 'other') { window.location.href = dest; return; }
+    /* NO PLATFORM GATE. Removed 2026-10-06: a desktop early-return meant any visitor whose UA
+       was not iOS, Android or a named app webview tapped the CTA and went straight through with
+       no breakout attempted at all. The reference prelander has no such branch — it runs the
+       ladder for everyone and lets the rescue timer below catch whoever it does not fit. A scheme
+       jump is harmless in a real browser (it just opens the URL), so there is nothing to gate. */
 
     var attempts = p === 'android'
       ? [
